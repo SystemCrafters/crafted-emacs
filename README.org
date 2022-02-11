@@ -67,14 +67,19 @@ You should even be able to use the configuration modules we provide with your ow
 
 Here is a list of the built-in modules that you may load.  Follow the links to each to get more information about how they can be configured!
 
-- rational-defaults: Sensible default settings for Emacs
-- rational-ui: Extra UI configuration for a better experience (mode line, etc)
-- rational-workspace: An improved workspace experience based on =tab-bar-mode=
-- rational-selection: A better selection framework configuration based on Vertico
+- [[modules/rational-ui.el][rational-defaults]]: Sensible default settings for Emacs
+- [[modules/rational-ui.el][rational-ui]]: Extra UI configuration for a better experience (mode line, etc)
+- [[modules/rational-completion.el][rational-completion]]: A better selection framework configuration based on Vertico
+- [[modules/rational-evil.el][rational-evil]]: An evil-mode configuration
+- [[modules/rational-windows.el][rational-windows]]: Window management configuration
+- [[modules/rational-use-package.el][rational-use-package]]: Configuration for use-package if you prefer it over straight.el
+
+Modules that we will be adding in the future:
+
 - rational-desktop: A desktop environment centered around EXWM
 - rational-present: Tools for giving presentations
 - rational-screencast: Tools for doing screencasts
-- rational-use-package: Configuration for use-package if you prefer it over straight.el
+- rational-workspace: An improved workspace experience based on =tab-bar-mode=
 
 * Customization
 
@@ -94,7 +99,8 @@ For example:
   (require 'rational-ui)
   (require 'rational-editing)
   (require 'rational-evil)
-  (require 'rational-selection)
+  (require 'rational-completion)
+  (require 'rational-windows)
 
   ;; Set further font and theme customizations
   (set-face-attribute 'default nil
