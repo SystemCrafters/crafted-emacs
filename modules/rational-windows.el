@@ -1,3 +1,5 @@
+;;; rational-windows.el -*- lexical-binding: t; -*-
+
 (defcustom rational-windows-evil-style nil
   "When t, window movement bindings will be evil-style.")
 
