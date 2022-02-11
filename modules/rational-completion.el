@@ -16,14 +16,12 @@ folder, otherwise delete a word"
     (backward-kill-word arg)))
 
 (require 'vertico)
+(require 'vertico-directory)
 
-;; TODO Should these bindings be moved to another module?
-(define-key vertico-map (kbd "C-j") 'vertico-next)
-(define-key vertico-map (kbd "C-k") 'vertico-previous)
-(define-key vertico-map (kbd "C-f") 'vertico-exit)
-
-;; Add a key binding for killing backward to go up parent directories, etc
-(define-key minibuffer-local-map (kbd "M-h") 'rational-completion/minibuffer-backward-kill)
+(with-eval-after-load 'evil
+  (define-key vertico-map (kbd "C-j") 'vertico-next)
+  (define-key vertico-map (kbd "C-k") 'vertico-previous)
+  (define-key vertico-map (kbd "M-h") 'vertico-directory-up))
 
 ;; Cycle back to top/bottom result when the edge is reached
 (setq vertico-cycle t)
@@ -48,8 +46,7 @@ folder, otherwise delete a word"
       completion-category-defaults nil
       completion-category-overrides '((file (styles . (partial-completion)))))
 
-;(global-set-key (kbd "C-S-a") 'embark-act)
-;(define-key minibuffer-local-map (kbd "C-d") 'embark-act)
+(global-set-key (kbd "C-.") 'embark-act)
 
 ;; Use Embark to show bindings in a key prefix with `C-h`
 (setq prefix-help-command #'embark-prefix-help-command)
