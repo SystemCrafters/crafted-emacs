@@ -80,6 +80,7 @@ Modules that we will be adding in the future:
 - rational-present: Tools for giving presentations
 - rational-screencast: Tools for doing screencasts
 - rational-workspace: An improved workspace experience based on =tab-bar-mode=
+- rational-shell: A starter configuration for =eshell= and =vterm=
 
 * Customization
 
