@@ -1,5 +1,5 @@
 ;; Define configuration variables
-(defvar rational-evil-discourage-arrow-keys t
+(defcustom rational-evil-discourage-arrow-keys nil
   "When t, prevent the use of arrow keys in normal state to
 encourage the use of Vim-style movement keys (hjkl).")
 
