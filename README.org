@@ -1,0 +1,122 @@
+#+title: Rational Emacs
+
+A sensible starting point for hacking your own Emacs configuration.
+
+* Quick Start
+
+Clone this repository to =~/.emacs.d= or =~/.config/emacs=:
+
+#+begin_src sh
+
+  git clone https://github.com/SystemCrafters/rational-emacs ~/.config/emacs
+
+#+end_src
+
+This will set up the minimal configuration.  If you'd like a more fully-configured experience, copy the example-config.el to =~/.rational-emacs/config.el= and restart Emacs.
+
+* Principles
+
+This configuration and all associated modules intend to follow the below priniciples.
+
+*NOTE:* Some of these may change over time as we learn from this process.
+
+** Minimal, modular configuration
+
+The core configuration only sets up Emacs to have a cleaner presentation with sensible defaults.  It is up to the user to decide which of the various =rational-*= modules to load and when to load them.
+
+Configuration modules should depend on other modules and the base configuration as little as possible.  When a configuration module needs to integrate with other functionality in Emacs, the standard extensibility points of each package should be used (instead of expecting our own configuration module).
+
+The implication is that someone should be able to install or copy code from a =rational-*= module into their own configuration /without/ using Rational Emacs.
+
+** Prioritize built-in Emacs functionality
+
+Where possible, we will leverage built-in Emacs functionality instead of external packages, for example:
+
+- project.el instead of Projectile
+- =tab-bar-mode= instead of Perspective.el, =persp-mode=, eyebrowse, etc
+- eglot instead of lsp-mode (because eglot prioritizes built-in functionality)
+- *Possibly* =vc-mode= by default
+
+** Works well in the terminal
+
+Some people prefer to use Emacs in the terminal instead of as a graphical program.  This configuration should work well in this case too!  This also enables the use of Emacs in Termux on Android.
+
+** Can be integrated with a Guix configuration
+
+It should be possible to customize aspects of the Rational Emacs configuration inside of a Guix Home configuration so that things like font sizes, themes, etc can be system-specific.
+
+It can also use packages installed via the Guix package manager instead of =straight.el=.
+
+** Works well with Chemacs2
+
+Chemacs2 is an excellent tool for enabling the use of multiple Emacs configurations simultaneously.  This configuration will behave well when used with Chemacs2 so that users can try and use different Emacs configurations as needed.
+
+** Helps you learn Emacs Lisp
+
+Instead of providing a higher-level configuration system out of the box like other Emacs configurations, we follow standard Emacs Lisp patterns so that you can learn by reading the configuration.
+
+* Why use it?
+
+Why choose this configuration over Doom Emacs, Spacemacs, Prelude, or others?
+
+The goal of this configuration is to make it easier to write your own Emacs configuration while using pre-made configuration parts maintained by the community.  Instead of using a monolithic, all-encompassing approach, we strive to ensure that all parts of this configuration are optional or interchangeable.
+
+You should even be able to use the configuration modules we provide with your own =init.el= file without using this base configuration repo!
+
+* Modules
+
+Here is a list of the built-in modules that you may load.  Follow the links to each to get more information about how they can be configured!
+
+- rational-defaults: Sensible default settings for Emacs
+- rational-ui: Extra UI configuration for a better experience (mode line, etc)
+- rational-workspace: An improved workspace experience based on =tab-bar-mode=
+- rational-selection: A better selection framework configuration based on Vertico
+- rational-desktop: A desktop environment centered around EXWM
+- rational-present: Tools for giving presentations
+- rational-screencast: Tools for doing screencasts
+
+* Customization
+
+To add your own customization to this configuration, create a configuraton file in one of the following places:
+
+- =~/.rational-emacs/config.el=
+- =~/.config/rational-emacs/config.el=
+
+In your configuration you can set any Emacs configuration variable, face attributes, themes, etc as you normally would.
+
+For example:
+
+#+begin_src emacs-lisp
+
+  (require 'rational-defaults)
+  (require 'rational-screencast)
+  (require 'rational-ui)
+  (require 'rational-editing)
+  (require 'rational-evil)
+  (require 'rational-selection)
+
+  ;; Set further font and theme customizations
+  (set-face-attribute 'default nil
+                    :font "JetBrains Mono"
+                    :weight 'light
+                    :height 185)
+
+  (load-theme 'doom-snazzy t)
+
+#+end_src
+
+* Using it with Chemacs2
+
+If you have the Chemacs2 configuration cloned to =~/.emacs.d= or =~/.config/emacs=, you can clone =rational-emacs= anywhere you like and add an entry to it in your =~/.emacs-profiles.el= file:
+
+#+begin_src emacs-lisp
+
+  (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs"))))
+
+#+end_src
+
+Then launch it with =emacs --with-profile rational=!
+
+* License
+
+This code is licensed under the MIT License.  Why?  So you can copy the code from this configuration!
