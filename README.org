@@ -74,6 +74,7 @@ Here is a list of the built-in modules that you may load.  Follow the links to e
 - rational-desktop: A desktop environment centered around EXWM
 - rational-present: Tools for giving presentations
 - rational-screencast: Tools for doing screencasts
+- rational-use-package: Configuration for use-package if you prefer it over straight.el
 
 * Customization
 
