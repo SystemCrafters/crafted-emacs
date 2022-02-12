@@ -12,6 +12,9 @@
 ;; Use "y" and "n" to confirm/negate prompt instead of "yes" and "no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Turn on recentf mode
+(recentf-mode 1)
+
 ;; Do not saves duplicates in kill-ring
 (setq kill-do-not-save-duplicates t)
 
