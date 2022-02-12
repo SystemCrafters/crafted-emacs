@@ -1,3 +1,5 @@
+;;; rational-screencast.el -*- lexical-binding: t; -*-
+
 (straight-use-package 'keycast)
 
 (setq keycast-remove-tail-elements nil)

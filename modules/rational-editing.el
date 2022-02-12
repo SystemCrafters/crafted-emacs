@@ -1,3 +1,5 @@
+;;; rational-editing.el -*- lexical-binding: t; -*-
+
 (straight-use-package 'ws-butler)
 (straight-use-package 'evil-nerd-commenter)
 

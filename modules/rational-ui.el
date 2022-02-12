@@ -1,3 +1,5 @@
+;;; rational-ui.el -*- lexical-binding: t; -*-
+
 (defcustom rational-ui-default-font nil
   "The configuration of the `default' face, uses a plist with
 the same key names as accepted by `set-face-attribute'")

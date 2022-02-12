@@ -1,3 +1,5 @@
+;;; init.el -*- lexical-binding: t; -*-
+
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
           (lambda ()

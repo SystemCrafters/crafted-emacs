@@ -1,3 +1,5 @@
+;;; rational-use-package.el -*- lexical-binding: t; -*-
+
 (straight-use-package 'use-package)
 
 (require 'package)
