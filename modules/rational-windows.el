@@ -17,3 +17,5 @@
 (define-key 'rational-windows-key-map (kbd "f") 'windmove-right)
 
 (global-set-key (kbd rational-windows-prefix-key) 'rational-windows-key-map)
+
+(provide 'rational-windows)
