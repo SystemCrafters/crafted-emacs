@@ -6,6 +6,11 @@
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 
+;;
+(setq large-file-warning-threshold 100000000) ;; change to ~100 MB
+(setq visible-bell 1)  ; turn off beeps, make them flash!
+(prefer-coding-system 'utf-8-unix)
+
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
