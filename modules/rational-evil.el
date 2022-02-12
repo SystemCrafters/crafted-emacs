@@ -1,3 +1,5 @@
+;;; rational-evil.el -*- lexical-binding: t; -*-
+
 ;; Define configuration variables
 (defcustom rational-evil-discourage-arrow-keys nil
   "When t, prevent the use of arrow keys in normal state to

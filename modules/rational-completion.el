@@ -1,3 +1,5 @@
+;;; rational-completion.el -*- lexical-binding: t; -*-
+
 (straight-use-package 'vertico)
 (straight-use-package 'consult)
 (straight-use-package 'orderless)
