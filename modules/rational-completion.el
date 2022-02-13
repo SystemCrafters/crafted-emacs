@@ -18,7 +18,7 @@ folder, otherwise delete a word"
     (backward-kill-word arg)))
 
 (require 'vertico)
-(require 'vertico-directory)
+(require 'vertico-directory "extensions/vertico-directory.el")
 
 (with-eval-after-load 'evil
   (define-key vertico-map (kbd "C-j") 'vertico-next)
