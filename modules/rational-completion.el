@@ -20,6 +20,8 @@ folder, otherwise delete a word"
 (require 'vertico)
 (require 'vertico-directory "extensions/vertico-directory.el")
 
+(require 'consult)
+
 (with-eval-after-load 'evil
   (define-key vertico-map (kbd "C-j") 'vertico-next)
   (define-key vertico-map (kbd "C-k") 'vertico-previous)
