@@ -11,6 +11,7 @@ the same key names as accepted by `set-face-attribute'")
 (straight-use-package 'doom-modeline)
 (straight-use-package 'doom-themes)
 (straight-use-package 'helpful)
+(straight-use-package 'elisp-demos)
 
 ;; Start up the modeline after initialization is finished
 (add-hook 'after-init-hook 'doom-modeline-init)
@@ -22,7 +23,7 @@ the same key names as accepted by `set-face-attribute'")
       doom-modeline-buffer-file-name-style 'truncate-except-project)
 
 ;; Make `describe-*' screens more helpful!
-(straight-use-package 'helpful)
+(require 'helpful)
 (global-set-key [remap describe-function] #'helpful-callable)
 (global-set-key [remap describe-variable] #'helpful-variable)
 (global-set-key [remap describe-key] #'helpful-key)
@@ -30,7 +31,7 @@ the same key names as accepted by `set-face-attribute'")
 (global-set-key (kbd "C-h C") #'helpful-command)
 
 ;; also add some examples
-(straight-use-package 'elisp-demos)
+(require 'elisp-demos)
 (advice-add 'helpful-update :after
 #'elisp-demos-advice-helpful-update)
 ;; add visual pulse when changing focus, like beacon but built-in
