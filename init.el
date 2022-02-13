@@ -7,6 +7,9 @@
                      (format "%.2f seconds"
                              (float-time
                               (time-subtract after-init-time before-init-time))))))
+;; Save customizing settings in a separate file
+(setq custom-file (locate-user-emacs-file "emacs-custom.el"))
+(load custom-file 'noerror)
 
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
