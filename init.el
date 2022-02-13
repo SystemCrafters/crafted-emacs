@@ -3,10 +3,8 @@
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (message "Rational Emacs loaded in %s."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract after-init-time before-init-time))))))
+            (message "Rational Emacs loaded in %s." (emacs-init-time))))
+
 ;; Save customizing settings in a separate file
 (setq custom-file (locate-user-emacs-file "emacs-custom.el"))
 (load custom-file 'noerror)
