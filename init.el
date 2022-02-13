@@ -42,8 +42,7 @@ straight.el or Guix depending on the value of
   "The user's configuration file.")
 
 ;; Load the user configuration file if it exists
-(when (file-exists-p rational-config-file)
-  (load rational-config-file nil 'nomessage))
+(load rational-config-file 'noerror 'nomessage)
 
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
