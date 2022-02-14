@@ -11,6 +11,7 @@ the same key names as accepted by `set-face-attribute'")
 (straight-use-package 'doom-modeline)
 (straight-use-package 'doom-themes)
 (straight-use-package 'helpful)
+(straight-use-package 'elisp-demos)
 
 ;; Start up the modeline after initialization is finished
 (add-hook 'after-init-hook 'doom-modeline-init)
@@ -28,5 +29,18 @@ the same key names as accepted by `set-face-attribute'")
 (global-set-key [remap describe-key] #'helpful-key)
 (global-set-key (kbd "C-h F") #'helpful-function)
 (global-set-key (kbd "C-h C") #'helpful-command)
+
+;; also add some examples
+(require 'elisp-demos)
+(advice-add 'helpful-update :after
+#'elisp-demos-advice-helpful-update)
+;; add visual pulse when changing focus, like beacon but built-in
+;; from from https://karthinks.com/software/batteries-included-with-emacs/
+(defun pulse-line (&rest _)
+  "Pulse the current line."
+  (pulse-momentary-highlight-one-line (point)))
+(dolist (command '(scroll-up-command scroll-down-command
+				     recenter-top-bottom other-window))
+  (advice-add command :after #'pulse-line))
 
 (provide 'rational-ui)
