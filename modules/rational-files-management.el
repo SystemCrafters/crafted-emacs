@@ -13,7 +13,8 @@
 (add-hook 'dired-mode-hook 'auto-revert-mode)
 
 ;; Display directories first
-(setq dired-listing-switches "-vAlahF --group-directories-first")
+(when ON-LINUX
+  (setq dired-listing-switches "-vlah --group-directories-first"))
 
 (provide 'rational-files-management)
 ;;; rational-files-management ends here
