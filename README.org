@@ -67,7 +67,7 @@ You should even be able to use the configuration modules we provide with your ow
 
 Here is a list of the built-in modules that you may load.  Follow the links to each to get more information about how they can be configured!
 
-- [[modules/rational-ui.el][rational-defaults]]: Sensible default settings for Emacs
+- [[modules/rational-defaults.el][rational-defaults]]: Sensible default settings for Emacs
 - [[modules/rational-ui.el][rational-ui]]: Extra UI configuration for a better experience (mode line, etc)
 - [[modules/rational-completion.el][rational-completion]]: A better selection framework configuration based on Vertico
 - [[modules/rational-evil.el][rational-evil]]: An evil-mode configuration
