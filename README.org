@@ -125,6 +125,14 @@ If you have the Chemacs2 configuration cloned to =~/.emacs.d= or =~/.config/emac
 
 Then launch it with =emacs --with-profile rational=!
 
+* Contributing
+[[http://makeapullrequest.com][https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square]]
+[[https://github.com/bbatsov/emacs-lisp-style-guide][https://img.shields.io/badge/elisp-style%20guide-purple?style=flat-square]]
+
+This is a community-run modular Emacs configuration, for which we appreciate feedback in the form of issues and pull requests. Feel free to open an issue prior to opening a pull request if you're not certain your idea is in the spirit of the [[*Principles][Principles]].
+
+If you enjoy crafting your computing experience, join the [[https://systemcrafters.net/][SystemCrafters]] community!
+
 * License
 
 This code is licensed under the MIT License.  Why?  So you can copy the code from this configuration!
