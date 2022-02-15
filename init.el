@@ -44,6 +44,16 @@ straight.el or Guix depending on the value of
 (defvar rational-config-file (expand-file-name "config.el" rational-config-path)
   "The user's configuration file.")
 
+;; Defines the user configuration var and etc folders
+;; and ensure they exists.
+(defvar rational-config-etc-directory (expand-file-name "etc/" rational-config-path)
+  "The user's configuration etc/ folder.")
+(defvar rational-config-var-directory (expand-file-name "var/" rational-config-path)
+  "The user's configuration var/ folder.")
+
+(mkdir rational-config-etc-directory t)
+(mkdir rational-config-var-directory t)
+
 ;; Load the user configuration file if it exists
 (when (file-exists-p rational-config-file)
   (load rational-config-file nil 'nomessage))

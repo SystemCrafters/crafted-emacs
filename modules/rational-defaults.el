@@ -12,6 +12,10 @@
 ;; Use "y" and "n" to confirm/negate prompt instead of "yes" and "no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Turn on recentf mode
+(recentf-mode 1)
+(setq recentf-save-file (expand-file-name "recentf" rational-config-var-directory))
+
 ;; Do not saves duplicates in kill-ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
 
