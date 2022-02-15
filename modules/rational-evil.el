@@ -14,12 +14,12 @@ encourage the use of Vim-style movement keys (hjkl).")
 (global-undo-tree-mode)
 
 ;; Set some variables that must be configured before loading the package
-(setq evil-want-integration t)
-(setq evil-want-keybinding nil)
-(setq evil-want-C-u-scroll t)
-(setq evil-want-C-i-jump nil)
-(setq evil-respect-visual-line-mode t)
-(setq evil-undo-system 'undo-tree)
+(customize-set-variable 'evil-want-integration t)
+(customize-set-variable 'evil-want-keybinding nil)
+(customize-set-variable 'evil-want-C-u-scroll t)
+(customize-set-variable 'evil-want-C-i-jump nil)
+(customize-set-variable 'evil-respect-visual-line-mode t)
+(customize-set-variable 'evil-undo-system 'undo-tree)
 
 ;; Load Evil and enable it globally
 (require 'evil)
