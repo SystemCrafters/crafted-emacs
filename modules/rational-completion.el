@@ -26,7 +26,7 @@ folder, otherwise delete a word"
   (define-key vertico-map (kbd "M-h") 'vertico-directory-up))
 
 ;; Cycle back to top/bottom result when the edge is reached
-(setq vertico-cycle t)
+(customize-set-variable 'vertico-cycle t)
 
 ;; Start Vertico
 (vertico-mode 1)
@@ -44,9 +44,9 @@ folder, otherwise delete a word"
 
 ;; Set up Orderless for better fuzzy matching
 (require 'orderless)
-(setq completion-styles '(orderless)
-      completion-category-defaults nil
-      completion-category-overrides '((file (styles . (partial-completion)))))
+(customize-set-variable 'completion-styles '(orderless))
+(customize-set-variable 'completion-category-overrides '((file (styles . (partial-completion)))))
+(setq completion-category-defaults nil)
 
 (global-set-key (kbd "C-.") 'embark-act)
 

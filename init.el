@@ -13,8 +13,8 @@
 
 ;; Set default coding system (especially for Windows)
 (set-default-coding-systems 'utf-8)
-(setq visible-bell 1)  ; turn off beeps, make them flash!
-(setq large-file-warning-threshold 100000000) ;; change to ~100 MB
+(customize-set-variable 'visible-bell 1)  ; turn off beeps, make them flash!
+(customize-set-variable 'large-file-warning-threshold 100000000) ;; change to ~100 MB
 
 
 ;; Initialize straight.el

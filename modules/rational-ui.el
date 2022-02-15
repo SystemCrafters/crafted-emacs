@@ -17,10 +17,10 @@ the same key names as accepted by `set-face-attribute'")
 (add-hook 'after-init-hook 'doom-modeline-init)
 
 ;; Configure `doom-modeline'
-(setq doom-modeline-height 15
-      doom-modeline-bar-width 6
-      doom-modeline-minor-modes t
-      doom-modeline-buffer-file-name-style 'truncate-except-project)
+(customize-set-variable 'doom-modeline-height 15)
+(customize-set-variable 'doom-modeline-bar-width 6)
+(customize-set-variable 'doom-modeline-minor-modes t)
+(customize-set-variable 'doom-modeline-buffer-file-name-style 'truncate-except-project)
 
 ;; Make `describe-*' screens more helpful!
 (require 'helpful)
