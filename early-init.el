@@ -35,10 +35,13 @@
 
 ;; Find the user configuration path
 (defvar rational-config-path
-  (let ((home-dir (getenv "HOME")))
+  (let ((home-dir (if (and (string-equal "windows-nt" (symbol-name system-type))
+                           (getenv "APPDATA"))
+                      (getenv "APPDATA")
+                    (getenv "HOME"))))
     (if (file-exists-p (expand-file-name ".rational-emacs" home-dir))
-      (expand-file-name ".rational-emacs" home-dir)
-    (expand-file-name ".config/rational-emacs" home-dir)))
+        (expand-file-name ".rational-emacs" home-dir)
+      (expand-file-name ".config/rational-emacs" home-dir)))
   "The user's rational-emacs configuration path.")
 
 (defvar rational-prefer-guix-packages nil
