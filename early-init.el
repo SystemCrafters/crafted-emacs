@@ -35,10 +35,16 @@
 
 ;; Find the user configuration path
 (defvar rational-config-path
-  (let ((home-dir (if (and (string-equal "windows-nt" (symbol-name system-type))
-                           (getenv "APPDATA"))
-                      (getenv "APPDATA")
-                    (getenv "HOME"))))
+  (let ((home-dir (if (getenv "HOME")
+                      (getenv "HOME")
+                    (if (and (string-equal "windows-nt" (symbol-name system-type))
+                             (getenv "APPDATA"))
+                        (getenv "APPDATA")
+                      ;; worst case fall back, we get here if there is
+                      ;; no HOME environment variable, we are on a MS
+                      ;; Windows machine and there is no APPDATA
+                      ;; environment variable either.
+                      (expand-file-name "../.." (file-name-directory (locate-user-emacs-file "init.el")))))))
     (if (file-exists-p (expand-file-name ".rational-emacs" home-dir))
         (expand-file-name ".rational-emacs" home-dir)
       (expand-file-name ".config/rational-emacs" home-dir)))
