@@ -44,7 +44,7 @@
                       ;; no HOME environment variable, we are on a MS
                       ;; Windows machine and there is no APPDATA
                       ;; environment variable either.
-                      (expand-file-name "../.." (file-name-directory (locate-user-emacs-file "init.el")))))))
+                      (expand-file-name "../" (file-name-directory (locate-user-emacs-file "init.el")))))))
     (if (file-exists-p (expand-file-name ".rational-emacs" home-dir))
         (expand-file-name ".rational-emacs" home-dir)
       (expand-file-name ".config/rational-emacs" home-dir)))
