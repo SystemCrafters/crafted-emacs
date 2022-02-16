@@ -35,10 +35,25 @@
 
 ;; Find the user configuration path
 (defvar rational-config-path
-  (let ((home-dir (getenv "HOME")))
+  (let ((home-dir (if (getenv "RATTIONAL_EMACS_HOME")
+                      (getenv "RATTIONAL_EMACS_HOME")
+                    (if (featurep 'chemacs)
+                        ;; if we are using chemacs2, we assume we need
+                        ;; to keep the rational-config-path within the
+                        ;; current profile, so use the current
+                        ;; `user-emacs-directory' as the "HOME"
+                        ;; environment variable.
+                        user-emacs-directory
+                      ;; Not using chemacs, and no RATIONAL_EMACS_HOME
+                      ;; environment var provided, so default to the
+                      ;; HOME environment variable.
+                      (getenv "HOME")))))
     (if (file-exists-p (expand-file-name ".rational-emacs" home-dir))
-      (expand-file-name ".rational-emacs" home-dir)
-    (expand-file-name ".config/rational-emacs" home-dir)))
+        (expand-file-name ".rational-emacs" home-dir)
+      (if (and (featurep 'chemacs)
+               (file-exists-p (expand-file-name "rational-emacs" home-dir)))
+          (expand-file-name "rational-emacs" home-dir)
+        (expand-file-name ".config/rational-emacs" home-dir))))
   "The user's rational-emacs configuration path.")
 
 (defvar rational-prefer-guix-packages nil

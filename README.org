@@ -91,6 +91,16 @@ To add your own customization to this configuration, create a configuraton file 
 
 In your configuration you can set any Emacs configuration variable, face attributes, themes, etc as you normally would.
 
+If you prefer to explicitly control where your =config.el= and
+=early-config.el= are found for rational-emacs, you may provide a
+value for the =RATIONAL_EMACS_HOME= environment variable, either on
+the command line or in your shell configuration. This variable should
+only contain the path to the =config.el= files, for example:
+
+#+begin_src shell
+  RATIONAL_EMACS_HOME=~/my-rational-emacs-config
+#+end_src
+
 For example:
 
 #+begin_src emacs-lisp
@@ -115,11 +125,30 @@ For example:
 
 * Using it with Chemacs2
 
-If you have the Chemacs2 configuration cloned to =~/.emacs.d= or =~/.config/emacs=, you can clone =rational-emacs= anywhere you like and add an entry to it in your =~/.emacs-profiles.el= file:
+If you have the Chemacs2 configuration cloned to =~/.emacs.d= or
+=~/.config/emacs=, you can clone =rational-emacs= anywhere you like
+and add an entry to it in your =~/.emacs-profiles.el= file:
+
+You can then put your =early-config.el= and =config.el= files in the
+subfolder =~/path/to/rational-emacs/rational-emacs=. So, for example
+if you installed rational-emacs to =~/.rational-emacs=, then your
+=early-config.el= and =config.el= files would be in the path
+=~/.rational-emacs/rational-emacs=.
 
 #+begin_src emacs-lisp
 
   (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs"))))
+
+#+end_src
+
+If you prefer to put your rational-emacs customizations elsewhere, you
+can specify the =RATTIONAL_EMACS_HOME= environment variable, for
+example like this:
+
+#+begin_src emacs-lisp
+
+    (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs")
+                    (env . (("RATIONAL_EMACS_HOME" . "~/my-rational-emacs-config"))))))
 
 #+end_src
 
