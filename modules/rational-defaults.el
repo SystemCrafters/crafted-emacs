@@ -13,7 +13,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Turn on recentf mode
-(recentf-mode 1)
+(add-hook 'after-init-hook #'recentf-mode)
 (setq recentf-save-file (expand-file-name "recentf" rational-config-var-directory))
 
 ;; Do not saves duplicates in kill-ring
