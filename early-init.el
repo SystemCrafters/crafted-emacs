@@ -34,27 +34,33 @@
 (setq initial-major-mode 'fundamental-mode)
 
 ;; Find the user configuration path
+;; In order do these checks:
+;; * using chemacs?
+;; ** yes, and have specified a location with the RATIONAL_EMACS_HOME
+;;    environment variable
+;; ** yes, but no environment variable, assume the rational-emacs
+;;    folder in the profile
+;; * use RATIONAL_EMACS_HOME environment variable
+;; * XDG_CONFIG_HOME or the path .config/rational-emacs
+;;   exists. XDG_CONFIG_HOME usually defaults to $HOME/.config/, so
+;;   these are the same thing
+;; * use HOME environment variable
 (defvar rational-config-path
-  (let ((home-dir (if (getenv "RATTIONAL_EMACS_HOME")
-                      (getenv "RATTIONAL_EMACS_HOME")
-                    (if (featurep 'chemacs)
-                        ;; if we are using chemacs2, we assume we need
-                        ;; to keep the rational-config-path within the
-                        ;; current profile, so use the current
-                        ;; `user-emacs-directory' as the "HOME"
-                        ;; environment variable.
-                        user-emacs-directory
-                      ;; Not using chemacs, and no RATIONAL_EMACS_HOME
-                      ;; environment var provided, so default to the
-                      ;; HOME environment variable.
-                      (getenv "HOME")))))
-    (if (file-exists-p (expand-file-name ".rational-emacs" home-dir))
-        (expand-file-name ".rational-emacs" home-dir)
-      (if (and (featurep 'chemacs)
-               (file-exists-p (expand-file-name "rational-emacs" home-dir)))
-          (expand-file-name "rational-emacs" home-dir)
-        (expand-file-name ".config/rational-emacs" home-dir))))
+  (cond
+   ((featurep 'chemacs)
+    (if (getenv  "RATIONAL_EMACS_HOME")
+        (expand-file-name (getenv "RATIONAL_EMACS_HOME"))
+      (expand-file-name "rational-emacs" user-emacs-directory)))
+   ((getenv "RATTIONAL_EMACS_HOME") (expand-file-name (getenv "RATIONAL_EMACS_HOME")))
+   ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
+    (if (getenv "XDG_CONFIG_HOME")
+	(expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
+      (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
+   ((getenv "HOME") (expand-file-name ".rational-emacs" (getenv "HOME"))))
   "The user's rational-emacs configuration path.")
+
+(unless (file-exists-p rational-config-path)
+  (mkdir rational-config-path t))
 
 (defvar rational-prefer-guix-packages nil
   "If t, expect packages to be installed via Guix by default.")
