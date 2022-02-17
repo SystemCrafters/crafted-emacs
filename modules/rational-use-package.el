@@ -1,5 +1,17 @@
 ;;; rational-use-package.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; Built-in `package.el' with `use-package' configuration, including
+;; elpas to search.
+
+;;; Code:
+
 (straight-use-package 'use-package)
 
 (require 'package)
@@ -18,3 +30,4 @@
   (package-refresh-contents))
 
 (provide 'rational-use-package)
+;;; rational-use-package.el ends here

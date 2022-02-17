@@ -1,5 +1,19 @@
 ;;; rational-completion.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; Setup completion packages. Completion in this sense is more like
+;; narrowing, allowing the user to find matches based on minimal
+;; inputs and "complete" the commands, variables, etc from the
+;; narrowed list of possible choices.
+
+;;; Code:
+
 (straight-use-package 'vertico)
 (straight-use-package 'consult)
 (straight-use-package 'orderless)
@@ -63,3 +77,4 @@ folder, otherwise delete a word"
 (setq prefix-help-command #'embark-prefix-help-command)
 
 (provide 'rational-completion)
+;;; rational-completion.el ends here

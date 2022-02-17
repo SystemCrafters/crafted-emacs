@@ -1,5 +1,16 @@
 ;;; rational-editing.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; Editing text configuration.
+
+;;; Code:
+
 (straight-use-package 'ws-butler)
 (straight-use-package 'evil-nerd-commenter)
 
@@ -15,3 +26,4 @@
 (show-paren-mode 1)    ; turn on paren match highlighting
 
 (provide 'rational-editing)
+;;; rational-editing.el ends here

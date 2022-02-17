@@ -1,5 +1,17 @@
 ;;; rational-ui.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; User interface customizations. Examples are the modeline and how
+;; help buffers are displayed.
+
+;;; Code:
+
 (straight-use-package 'all-the-icons)
 (straight-use-package 'doom-modeline)
 (straight-use-package 'doom-themes)
@@ -73,3 +85,4 @@ Use a plist with the same key names as accepted by `set-face-attribute'.")
   (advice-add command :after #'pulse-line))
 
 (provide 'rational-ui)
+;;; rational-ui.el ends here

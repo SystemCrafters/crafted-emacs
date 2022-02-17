@@ -1,5 +1,16 @@
 ;;; rational-windows.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; Emacs windows configuration.
+
+;;; Code:
+
 (defcustom rational-windows-evil-style nil
   "When t, window movement bindings will be evil-style.")
 
@@ -19,3 +30,4 @@
 (global-set-key (kbd rational-windows-prefix-key) 'rational-windows-key-map)
 
 (provide 'rational-windows)
+;;; rational-windows.el ends here

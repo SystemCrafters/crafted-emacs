@@ -1,5 +1,16 @@
 ;;; rational-defaults.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; General sane defaults
+
+;;; Code:
+
 ;; Revert Dired and other buffers
 (customize-set-variable 'global-auto-revert-non-file-buffers t)
 
@@ -35,3 +46,4 @@
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
 (provide 'rational-defaults)
+;;; rational-defaults.el ends here
