@@ -101,7 +101,32 @@ only contain the path to the =config.el= files, for example:
   RATIONAL_EMACS_HOME=~/my-rational-emacs-config
 #+end_src
 
-For example:
+** How the rational config file is found
+
+The rational config files (=config.el= and =early-config.el=) are
+found in the =rational-config-path=. That path will match exactly one
+of the following scenarios, in the order specified:
+
+- Using chemacs2 (See below for more on this)
+  - The environment variable =RATIONAL_EMACS_HOME= is used if provided
+    in the profile definition.
+  - The profile directory is used when no environment variable is
+    provided in the profile definition.
+- Use the value found in the =RATTIONAL_EMACS_HOME= environment
+  variable.
+- The environment variable =XDG_CONFIG_HOME= is present or the path
+  =$HOME/.config/rational-emacs= exists.
+  - These normally resolve to the same file, so build the path from
+    the =XDG_CONFIG_HOME= environment variable or the explicit path
+    =~/.config/rational-emacs=
+- Use the =HOME= environment variable to make the path, which expands
+  to =$HOME/.rational-emacs=.
+
+Once the =rational-config-path= is determined, if it does not exist in
+the filesystem, it is created. However, just the path is created, the
+files =config.el= and =early-config.el= must be created by you.
+
+** Example Configuration:
 
 #+begin_src emacs-lisp
 
