@@ -72,7 +72,7 @@ straight.el or Guix depending on the value of
 ;; Copyright (C) " (format-time-string "%Y") "
 ;; SPDX-License-Identifier: MIT
 
-;; Author: SystemCrafters Community
+;; Author: System Crafters Community
 
 ;; Commentary
 
