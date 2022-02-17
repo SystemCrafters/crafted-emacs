@@ -58,5 +58,32 @@ straight.el or Guix depending on the value of
 (when (file-exists-p rational-config-file)
   (load rational-config-file nil 'nomessage))
 
+;; when writing rational-modules, insert header from skeleton
+(auto-insert-mode)
+(with-eval-after-load "autoinsert"
+  (define-auto-insert
+    (cons "rational-.*\\.el" "Rational Emacs Lisp Skeleton")
+    '("Rational Emacs Module Description: "
+      ";;;; " (file-name-nondirectory (buffer-file-name)) " --- " str
+      (make-string (max 2 (- 80 (current-column) 27)) ?\s)
+      "-*- lexical-binding: t; -*-" '(setq lexical-binding t)
+      "
+
+;; Copyright (C) " (format-time-string "%Y") "
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; " _ "
+
+;;; Code:
+
+(provide '"
+      (file-name-base (buffer-file-name))
+      ")
+;;; " (file-name-nondirectory (buffer-file-name)) " ends here\n")))
+
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
