@@ -36,6 +36,21 @@ Use a plist with the same key names as accepted by `set-face-attribute'.")
 (global-set-key (kbd "C-h F") #'helpful-function)
 (global-set-key (kbd "C-h C") #'helpful-command)
 
+;;;; Line Numbers
+
+(defcustom rational-ui-display-line-numbers nil
+  "Whether line numbers should be enabled."
+  :type 'boolean)
+
+(when rational-ui-display-line-numbers
+  (add-hook 'conf-mode-hook #'display-line-numbers-mode)
+  (add-hook 'prog-mode-hook #'display-line-numbers-mode)
+  (add-hook 'text-mode-hook #'display-line-numbers-mode)
+  (setq-default
+   display-line-numbers-grow-only t
+   display-line-numbers-type t
+   display-line-numbers-width 2))
+
 ;;;; Elisp-Demos
 
 ;; also add some examples
