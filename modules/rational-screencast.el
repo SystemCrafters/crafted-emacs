@@ -1,5 +1,16 @@
 ;;; rational-screencast.el -*- lexical-binding: t; -*-
 
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; Screencast configuration
+
+;;; Code:
+
 (straight-use-package 'keycast)
 
 (customize-set-variable 'keycast-remove-tail-elements nil)
@@ -7,3 +18,4 @@
 (keycast-mode)
 
 (provide 'rational-screencast)
+;;; rational-screencast.el ends here
