@@ -30,9 +30,8 @@ Use a plist with the same key names as accepted by `set-face-attribute'.")
 
 
 (defcustom rational-ui-use-doom-modeline t
-  "weather or not to use doom-modeline, on by default"
-:type 'boolean
-  )
+  "Wether to use doom-modeline."
+  :type 'boolean)
 
 (when rational-ui-use-doom-modeline
   (straight-use-package 'doom-modeline)
