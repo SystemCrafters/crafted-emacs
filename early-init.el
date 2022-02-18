@@ -51,7 +51,7 @@
     (if (getenv  "RATIONAL_EMACS_HOME")
         (expand-file-name (getenv "RATIONAL_EMACS_HOME"))
       (expand-file-name "rational-emacs" user-emacs-directory)))
-   ((getenv "RATTIONAL_EMACS_HOME") (expand-file-name (getenv "RATIONAL_EMACS_HOME")))
+   ((getenv "RATIONAL_EMACS_HOME") (expand-file-name (getenv "RATIONAL_EMACS_HOME")))
    ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
     (if (getenv "XDG_CONFIG_HOME")
 	(expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
