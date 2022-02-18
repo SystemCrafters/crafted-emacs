@@ -64,8 +64,9 @@ configuration repository."
       ("no" (message "You can always check the latest commits by running M-x rational-updates-show-latest."))
       ("log" (rational-updates-show-latest)))))
 
-(defvar rational-updates-fetch-interval "24 hours"
-  "The interval at which `rational-updates-mode' will check for updates.")
+(defcustom rational-updates-fetch-interval "24 hours"
+  "The interval at which `rational-updates-mode' will check for updates."
+  :group 'rational)
 
 (defun rational-updates--do-automatic-fetch ()
   (when rational-updates-mode
@@ -80,6 +81,7 @@ configuration repository."
 Emacs.  When enabled, it will automatically check for updates at
 the specified `rational-updates-fetch-interval'."
   :global t
+  :group 'rational
   (when rational-updates-mode
     (rational-updates--schedule-fetch)))
 
