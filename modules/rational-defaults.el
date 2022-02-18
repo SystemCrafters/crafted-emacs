@@ -21,7 +21,9 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Use "y" and "n" to confirm/negate prompt instead of "yes" and "no"
-(fset 'yes-or-no-p 'y-or-n-p)
+(if (boundp 'use-short-answers)
+    (setq use-short-answers t)
+  (fset 'yes-or-no-p 'y-or-n-p))
 
 ;; Turn on recentf mode
 (add-hook 'after-init-hook #'recentf-mode)
