@@ -71,5 +71,7 @@ encourage the use of Vim-style movement keys (hjkl).")
                 term-mode))
   (add-to-list 'evil-emacs-state-modes mode))
 
+(evil-collection-init)
+
 (provide 'rational-evil)
 ;;; rational-evil.el ends here
