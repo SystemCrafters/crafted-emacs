@@ -32,7 +32,7 @@
         'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+  (load bootstrap-file 'noerror 'nomessage))
 
 (defun rational-ensure-package (package &optional args)
   "Ensure that PACKAGE is installed on the system, either via
