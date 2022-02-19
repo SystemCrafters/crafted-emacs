@@ -1,5 +1,10 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+;; Don't save customize variables in `init.el', save them in
+;; "emacs-custom.el" instead. Don't bail out if file doesn't exist.
+(setq custom-file (locate-user-emacs-file "emacs-custom.el"))
+(load custom-file 'noerror)
+
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
           (lambda ()
