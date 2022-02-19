@@ -60,8 +60,7 @@ straight.el or Guix depending on the value of
 (mkdir rational-config-var-directory t)
 
 ;; Load the user configuration file if it exists
-(when (file-exists-p rational-config-file)
-  (load rational-config-file nil 'nomessage))
+(load rational-config-file 'noerror 'nomessage)
 
 ;; when writing rational-modules, insert header from skeleton
 (auto-insert-mode)
