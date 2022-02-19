@@ -56,7 +56,7 @@ Use a plist with the same key names as accepted by `set-face-attribute'.")
 ;;;; Line Numbers
 
 (defcustom rational-ui-line-numbers-enabled-modes
-  '(conf-mode prog-mode text-mode)
+  '(conf-mode prog-mode)
   "Modes which should display line numbers."
   :type 'list
   :group 'rational)
