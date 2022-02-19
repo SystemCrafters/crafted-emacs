@@ -45,5 +45,8 @@
 ;; Make shebang (#!) file executable when saved
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
+;; Enable savehist-mode for an command history
+(savehist-mode 1)
+
 (provide 'rational-defaults)
 ;;; rational-defaults.el ends here

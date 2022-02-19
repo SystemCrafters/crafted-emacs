@@ -2,132 +2,176 @@
 
 A sensible starting point for hacking your own Emacs configuration.
 
+*Please note*: =rational-emacs= is under active development. While the intent
+of this project is to provide a stable Emacs configuration for use by
+anyone, it is not yet stable enough for everyday or production use.  The
+rapid pace of changes could cause your configuration to break on your next
+pull of the repository. If you are not expecting or prepared to encounter
+such issues, we would recommend you wait for things to stabilize a bit
+before using.
+
 * Quick Start
 
 Clone this repository to =~/.emacs.d= or =~/.config/emacs=:
 
+#+caption: Command to clone System Crafters Rational Emacs =git= repository.
+#+name: li#git_clone
 #+begin_src sh
 
   git clone https://github.com/SystemCrafters/rational-emacs ~/.config/emacs
 
 #+end_src
 
-This will set up the minimal configuration.  If you'd like a more fully-configured experience, copy the example-config.el to =~/.rational-emacs/config.el= and restart Emacs.
+This will set up the minimal configuration. If you'd like a more
+fully-configured experience, copy the example-config.el to
+=~/.rational-emacs/config.el= and restart Emacs.
 
 * Principles
 
-This configuration and all associated modules intend to follow the below priniciples.
+This configuration and all associated modules intend to follow the below
+priniciples.
 
 *NOTE:* Some of these may change over time as we learn from this process.
 
 ** Minimal, modular configuration
 
-The core configuration only sets up Emacs to have a cleaner presentation with sensible defaults.  It is up to the user to decide which of the various =rational-*= modules to load and when to load them.
+The core configuration only sets up Emacs to have a cleaner presentation with
+sensible defaults. It is up to the user to decide which of the various
+=rational-*= modules to load and when to load them.
 
-Configuration modules should depend on other modules and the base configuration as little as possible.  When a configuration module needs to integrate with other functionality in Emacs, the standard extensibility points of each package should be used (instead of expecting our own configuration module).
+Configuration modules should depend on other modules and the base configuration
+as little as possible. When a configuration module needs to integrate with other
+functionality in Emacs, the standard extensibility points of each package should
+be used (instead of expecting our own configuration module).
 
-The implication is that someone should be able to install or copy code from a =rational-*= module into their own configuration /without/ using Rational Emacs.
+The implication is that someone should be able to install or copy code from a
+=rational-*= module into their own configuration /without/ using Rational Emacs.
 
 ** Prioritize built-in Emacs functionality
 
-Where possible, we will leverage built-in Emacs functionality instead of external packages, for example:
+Where possible, we will leverage built-in Emacs functionality instead of
+external packages, for example:
 
-- project.el instead of Projectile
-- =tab-bar-mode= instead of Perspective.el, =persp-mode=, eyebrowse, etc
-- eglot instead of lsp-mode (because eglot prioritizes built-in functionality)
+- =project.el= instead of =Projectile=
+- =tab-bar-mode= instead of =Perspective.el=, =persp-mode=, =eyebrowse=, etc
+- =eglot= instead of =lsp-mode= (because =eglot= prioritizes built-in
+  functionality)
 - *Possibly* =vc-mode= by default
 
 ** Works well in the terminal
 
-Some people prefer to use Emacs in the terminal instead of as a graphical program.  This configuration should work well in this case too!  This also enables the use of Emacs in Termux on Android.
+Some people prefer to use Emacs in the terminal instead of as a graphical
+program. This configuration should work well in this case too! This also enables
+the use of Emacs in Termux on Android.
 
 ** Can be integrated with a Guix configuration
 
-It should be possible to customize aspects of the Rational Emacs configuration inside of a Guix Home configuration so that things like font sizes, themes, etc can be system-specific.
+It should be possible to customize aspects of the Rational Emacs configuration
+inside of a Guix Home configuration so that things like font sizes, themes, etc
+can be system-specific.
 
-It can also use packages installed via the Guix package manager instead of =straight.el=.
+It can also use packages installed via the Guix package manager instead of
+=straight.el=.
 
-** Works well with Chemacs2
+** Works well with =Chemacs2=
 
-Chemacs2 is an excellent tool for enabling the use of multiple Emacs configurations simultaneously.  This configuration will behave well when used with Chemacs2 so that users can try and use different Emacs configurations as needed.
+=Chemacs2= is an excellent tool for enabling the use of multiple Emacs
+configurations simultaneously. This configuration will behave well when used
+with =Chemacs2= so that users can try and use different Emacs configurations as
+needed.
 
 ** Helps you learn Emacs Lisp
 
-Instead of providing a higher-level configuration system out of the box like other Emacs configurations, we follow standard Emacs Lisp patterns so that you can learn by reading the configuration.
+Instead of providing a higher-level configuration system out of the box like
+other Emacs configurations, we follow standard Emacs Lisp patterns so that you
+can learn by reading the configuration.
 
 * Why use it?
 
-Why choose this configuration over Doom Emacs, Spacemacs, Prelude, or others?
+Why choose this configuration over /Doom Emacs/, /Spacemacs/, /Prelude/, or
+others?
 
-The goal of this configuration is to make it easier to write your own Emacs configuration while using pre-made configuration parts maintained by the community.  Instead of using a monolithic, all-encompassing approach, we strive to ensure that all parts of this configuration are optional or interchangeable.
+The goal of this configuration is to make it easier to write your own Emacs
+configuration while using pre-made configuration parts maintained by the
+community. Instead of using a monolithic, all-encompassing approach, we strive
+to ensure that all parts of this configuration are optional or interchangeable.
 
-You should even be able to use the configuration modules we provide with your own =init.el= file without using this base configuration repo!
+You should even be able to use the configuration modules we provide with your
+own =init.el= file without using this base configuration repo!
 
 * Modules
 
-Here is a list of the built-in modules that you may load.  Follow the links to each to get more information about how they can be configured!
+Here is a list of the built-in modules that you may load. They are located in
+directory =$RATIONAL_EMACS_HOME/modules=, which are in the directory your =git=
+clone from listing [[li#git_clone]]. Follow the links to each to get more
+information about how they can be configured!
 
-- [[modules/rational-defaults.el][rational-defaults]]: Sensible default settings for Emacs
-- [[modules/rational-ui.el][rational-ui]]: Extra UI configuration for a better experience (mode line, etc)
-- [[modules/rational-completion.el][rational-completion]]: A better selection framework configuration based on Vertico
-- [[modules/rational-evil.el][rational-evil]]: An evil-mode configuration
-- [[modules/rational-windows.el][rational-windows]]: Window management configuration
-- [[modules/rational-use-package.el][rational-use-package]]: Configuration for use-package if you prefer it over straight.el
+- [[file:modules/rational-defaults.el][rational-defaults]] :: Sensible default settings for Emacs
+- [[file:modules/rational-ui.el][rational-ui]] :: Extra UI configuration for a better experience (mode line, etc)
+- [[file:modules/rational-completion.el][rational-completion]] :: A better selection framework configuration based on
+  =Vertico=
+- [[file:modules/rational-evil.el][rational-evil]] :: An =evil-mode= configuration
+- [[file:modules/rational-windows.el][rational-windows]] :: Window management configuration
+- [[file:modules/rational-use-package.el][rational-use-package]] :: Configuration for =use-package= if you prefer it over
+  =straight.el=
 
 Modules that we will be adding in the future:
 
-- rational-desktop: A desktop environment centered around EXWM
-- rational-present: Tools for giving presentations
-- rational-screencast: Tools for doing screencasts
-- rational-workspace: An improved workspace experience based on =tab-bar-mode=
-- rational-shell: A starter configuration for =eshell= and =vterm=
+- rational-desktop :: A desktop environment centered around =EXWM=
+- rational-present :: Tools for giving presentations
+- rational-screencast :: Tools for doing screencasts
+- rational-workspace :: An improved workspace experience based on =tab-bar-mode=
+- rational-shell :: A starter configuration for =eshell= and =vterm=
 
 * Customization
 
-To add your own customization to this configuration, create a configuraton file in one of the following places:
+To add your own customization to this configuration, create a configuraton file
+in one of the following places:
 
 - =~/.rational-emacs/config.el=
 - =~/.config/rational-emacs/config.el=
 
-In your configuration you can set any Emacs configuration variable, face attributes, themes, etc as you normally would.
+In your configuration you can set any Emacs configuration variable, face
+attributes, themes, etc as you normally would.
 
-If you prefer to explicitly control where your =config.el= and
-=early-config.el= are found for rational-emacs, you may provide a
-value for the =RATIONAL_EMACS_HOME= environment variable, either on
-the command line or in your shell configuration. This variable should
-only contain the path to the =config.el= files, for example:
+If you prefer to explicitly control where your =config.el= and =early-config.el=
+are found for Rational Emacs, you may provide a value for the
+=RATIONAL_EMACS_HOME= environment variable, either on the command line or in
+your shell configuration. This variable should only contain the path to the
+=config.el= files, for example:
 
+#+caption: Set environment variable =RATIONAL_EMACS_HOME= to the path of the configuration directory.
 #+begin_src shell
   RATIONAL_EMACS_HOME=~/my-rational-emacs-config
 #+end_src
 
 ** How the rational config file is found
 
-The rational config files (=config.el= and =early-config.el=) are
-found in the =rational-config-path=. That path will match exactly one
-of the following scenarios, in the order specified:
+The rational config files (=config.el= and =early-config.el=) are found in the
+=rational-config-path=. That path will match exactly one of the following
+scenarios, in the order specified:
 
-- Using chemacs2 (See below for more on this)
-  - The environment variable =RATIONAL_EMACS_HOME= is used if provided
-    in the profile definition.
-  - The profile directory is used when no environment variable is
-    provided in the profile definition.
-- Use the value found in the =RATIONAL_EMACS_HOME= environment
-  variable.
+- Using =Chemacs2= (See below for more on this)
+  - The environment variable =RATIONAL_EMACS_HOME= is used if provided in the
+    profile definition.
+  - The profile directory is used when no environment variable is provided in
+    the profile definition.
+- Use the value found in the =RATIONAL_EMACS_HOME= environment variable.
 - The environment variable =XDG_CONFIG_HOME= is present or the path
   =$HOME/.config/rational-emacs= exists.
-  - These normally resolve to the same file, so build the path from
-    the =XDG_CONFIG_HOME= environment variable or the explicit path
+  - These normally resolve to the same file, so build the path from the
+    =XDG_CONFIG_HOME= environment variable or the explicit path
     =~/.config/rational-emacs=
-- Use the =HOME= environment variable to make the path, which expands
-  to =$HOME/.rational-emacs=.
+- Use the =HOME= environment variable to make the path, which expands to
+  =$HOME/.rational-emacs=.
 
-Once the =rational-config-path= is determined, if it does not exist in
-the filesystem, it is created. However, just the path is created, the
-files =config.el= and =early-config.el= must be created by you.
+Once the =rational-config-path= is determined, if it does not exist in the
+filesystem, it is created. However, just the path is created, the files
+=config.el= and =early-config.el= must be created by you.
 
 ** Example Configuration:
 
+#+caption: Example of user created Rational Emacs =config.el= file.
 #+begin_src emacs-lisp
 
   (require 'rational-defaults)
@@ -148,30 +192,31 @@ files =config.el= and =early-config.el= must be created by you.
 
 #+end_src
 
-* Using it with Chemacs2
+* Using it with =Chemacs2=
 
-If you have the Chemacs2 configuration cloned to =~/.emacs.d= or
-=~/.config/emacs=, you can clone =rational-emacs= anywhere you like
-and add an entry to it in your =~/.emacs-profiles.el= file:
+If you have the =Chemacs2= configuration cloned to =~/.emacs.d= or
+=~/.config/emacs=, you can clone =rational-emacs= anywhere you like and add an
+entry to it in your =~/.emacs-profiles.el= file:
 
-You can then put your =early-config.el= and =config.el= files in the
-subfolder =~/path/to/rational-emacs/rational-emacs=. So, for example
-if you installed rational-emacs to =~/.rational-emacs=, then your
-=early-config.el= and =config.el= files would be in the path
-=~/.rational-emacs/rational-emacs=. This is the default path, but you
-can change the name to something else, see below for examples.
+You can then put your =early-config.el= and =config.el= files in the subfolder
+=~/path/to/rational-emacs/rational-emacs=. So, for example if you installed
+Rational Emacs to =~/.rational-emacs=, then your =early-config.el= and
+=config.el= files would be in the path =~/.rational-emacs/rational-emacs=. This
+is the default path, but you can change the name to something else, see below
+for examples.
 
+#+caption: Example of a =Chemacs2= user profile file in =~/.emacs-profiles.el=.
 #+begin_src emacs-lisp
 
   (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs"))))
 
 #+end_src
 
-If you prefer to put your rational-emacs customizations elsewhere (for
-example in a folder called `config` or maybe `personal`), you can
-specify the =RATIONAL_EMACS_HOME= environment variable, for example
-like this:
+If you prefer to put your Rational Emacs customizations elsewhere (for example
+in a folder called `config` or maybe `personal`), you can specify the
+=RATIONAL_EMACS_HOME= environment variable, for example like this:
 
+#+caption: User =Chemacs2= profile file =~/.emacs-profiles.el= with environment variable.
 #+begin_src emacs-lisp
 
     (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs")
@@ -181,6 +226,7 @@ like this:
 
 Or some place completely different:
 
+#+caption: User =Chemacs2= profile file =~/.emacs-profiles.el= with Rational Emacs config files set to another path.
 #+begin_src emacs-lisp
 
     (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs")
@@ -195,10 +241,21 @@ Then launch it with =emacs --with-profile rational=!
 [[http://makeapullrequest.com][https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square]]
 [[https://github.com/bbatsov/emacs-lisp-style-guide][https://img.shields.io/badge/elisp-style%20guide-purple.svg?style=flat-square]]
 
-This is a community-run modular Emacs configuration, for which we appreciate feedback in the form of issues and pull requests. Feel free to open an issue prior to opening a pull request if you're not certain your idea is in the spirit of the [[https://github.com/SystemCrafters/rational-emacs/blob/master/README.org#Principles][Principles]].
+This is a community-run modular Emacs configuration, for which we appreciate
+feedback in the form of issues and pull requests. Feel free to open an issue
+prior to opening a pull request if you're not certain your idea is in the spirit
+of the [[https://github.com/SystemCrafters/rational-emacs/blob/master/README.org#Principles][Principles]].
 
-If you enjoy crafting your computing experience, join the [[https://systemcrafters.net/][SystemCrafters]] community!
+If you enjoy crafting your computing experience, join the [[https://systemcrafters.net/][SystemCrafters]]
+community!
 
 * License
 
-This code is licensed under the MIT License.  Why?  So you can copy the code from this configuration!
+This code is licensed under the MIT License. Why? So you can copy the code from
+this configuration!
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:
