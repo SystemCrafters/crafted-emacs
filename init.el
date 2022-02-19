@@ -3,7 +3,7 @@
 ;; Don't save customize variables in `init.el', save them in
 ;; "emacs-custom.el" instead. Don't bail out if file doesn't exist.
 (setq custom-file (locate-user-emacs-file "emacs-custom.el"))
-(load custom-file 'noerror)
+(load custom-file 'noerror 'nomessage)
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
