@@ -54,15 +54,27 @@ Rational Emacs."
   (with-current-buffer (find-file-noselect (expand-file-name "init.el" user-emacs-directory))
     (vc-pull)))
 
-(defun rational-updates-pull-latest ()
-  "Pulls the latest updates to Rational Emacs into the local
-configuration repository."
-  (interactive)
-  (let ((prompt-answer (read-string "This will update your Rational Emacs configuration, are you sure?  [yes/no/Log]: ")))
-    (pcase (downcase prompt-answer)
-      ("yes" (rational-updates--pull-commits))
-      ("no" (message "You can always check the latest commits by running M-x rational-updates-show-latest."))
-      ("log" (rational-updates-show-latest)))))
+(defun rational-updates-pull-latest (do-pull)
+  "Pull the latest Rational Emacs version into the local repository.
+
+If DO-PULL is nil then only the latest updates will be shown,
+otherwise the local repository will get updated to the GitHub
+version.
+
+Interactively, the default if you just type RET is to show recent
+changes as if you called `rational-updates-show-latest'.
+
+With a `\\[universal-argument]' prefix immediately pull changes
+and don't prompt for confirmation."
+  (interactive
+   (list
+    (or current-prefix-arg
+        (pcase (completing-read "Rational Update Action: " '("Show Log" "Update") nil t nil nil "Show Log")
+          ("Show Log" nil)
+          ("Update" t)))))
+  (if do-pull
+      (rational-updates--pull-commits)
+    (rational-updates-show-latest)))
 
 (defcustom rational-updates-fetch-interval "24 hours"
   "The interval at which `rational-updates-mode' will check for updates."
