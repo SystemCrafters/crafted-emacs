@@ -68,7 +68,7 @@
               (equal system-type 'windows-nt))
     ;; Since there is no windows implementation of guix
     (string-prefix-p "/gnu/store/"
-                     (file-chase-links
+                     (file-truename
                       (executable-find
                        (car command-line-args))))))
 
