@@ -67,5 +67,4 @@
 
 ;; Load the early config file if it exists
 (let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
-  (when (file-exists-p early-config-path)
-    (load early-config-path nil 'nomessage)))
+  (load early-config-path 'noerror 'nomessage)))
