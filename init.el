@@ -1,10 +1,17 @@
 ;;; init.el -*- lexical-binding: t; -*-
 
+;; Don't save customize variables in `init.el', save them in
+;; "emacs-custom.el" instead. Don't bail out if file doesn't exist.
+(setq custom-file (locate-user-emacs-file "emacs-custom.el"))
+(load custom-file 'noerror)
+
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
           (lambda ()
             (message "Rational Emacs loaded in %s."
-                     (emacs-init-time))))
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract after-init-time before-init-time))))))
 
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
@@ -53,8 +60,7 @@ straight.el or Guix depending on the value of
 (mkdir rational-config-var-directory t)
 
 ;; Load the user configuration file if it exists
-(when (file-exists-p rational-config-file)
-  (load rational-config-file nil 'nomessage))
+(load rational-config-file 'noerror 'nomessage)
 
 ;; when writing rational-modules, insert header from skeleton
 (auto-insert-mode)
