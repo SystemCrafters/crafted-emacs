@@ -84,8 +84,8 @@ patterns so that you can learn by reading the configuration.
 
 * Why use it?
 
-Why choose this configuration over =Doom Emacs=, =Spacemacs=,
-=Prelude=, or others?
+Why choose this configuration over /Doom Emacs/, /Spacemacs/,
+/Prelude/, or others?
 
 The goal of this configuration is to make it easier to write your own
 Emacs configuration while using pre-made configuration parts
