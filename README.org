@@ -2,6 +2,14 @@
 
 A sensible starting point for hacking your own Emacs configuration.
 
+*Please note*: =rational-emacs= is under active development. While the intent
+of this project is to provide a stable Emacs configuration for use by
+anyone, it is not yet stable enough for everyday or production use.  The
+rapid pace of changes could cause your configuration to break on your next
+pull of the repository. If you are not expecting or prepared to encounter
+such issues, we would recommend you wait for things to stabilize a bit
+before using.
+
 * Quick Start
 
 Clone this repository to =~/.emacs.d= or =~/.config/emacs=:
