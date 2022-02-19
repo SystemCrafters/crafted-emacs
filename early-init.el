@@ -62,7 +62,17 @@
 (unless (file-exists-p rational-config-path)
   (mkdir rational-config-path t))
 
-(defvar rational-prefer-guix-packages nil
+(defun rational-runs-guix-emacs-p ()
+  "Verifies if the running emacs executable is under the `/gnu/store/' path."
+  (unless (or (equal system-type 'ms-dos)
+              (equal system-type 'windows-nt))
+    ;; Since there is no windows implementation of guix
+    (string-prefix-p "/gnu/store/"
+                     (shell-command-to-string
+                      (format "which `realpath '%s`'"
+                              (car command-line-args))))))
+
+(defvar rational-prefer-guix-packages (rational-runs-guix-emacs-p)
   "If t, expect packages to be installed via Guix by default.")
 
 ;; Load the early config file if it exists
