@@ -68,9 +68,9 @@
               (equal system-type 'windows-nt))
     ;; Since there is no windows implementation of guix
     (string-prefix-p "/gnu/store/"
-                     (shell-command-to-string
-                      (format "which `realpath '%s`'"
-                              (car command-line-args))))))
+                     (file-chase-links
+                      (executable-find
+                       (car command-line-args))))))
 
 (defvar rational-prefer-guix-packages (rational-runs-guix-emacs-p)
   "If t, expect packages to be installed via Guix by default.")
@@ -79,3 +79,4 @@
 (let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
   (when (file-exists-p early-config-path)
     (load early-config-path nil 'nomessage)))
+(executable-find (car command-line-args))
