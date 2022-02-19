@@ -86,11 +86,9 @@ Used as hook for modes which should not display line numebrs."
   (if rational-ui-display-line-numbers
       (progn
         (dolist (mode rational-ui-line-numbers-enabled-modes)
-          (message "enabling line numbers for %s" mode)
           (add-hook (intern (format "%s-hook" mode))
                     #'rational-ui--enable-line-numbers-mode))
         (dolist (mode rational-ui-line-numbers-disabled-modes)
-          (message "disabling line numbers for %s" mode)
           (add-hook (intern (format "%s-hook" mode))
                     #'rational-ui--disable-line-numbers-mode))
         (setq-default
