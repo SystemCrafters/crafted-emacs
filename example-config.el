@@ -2,7 +2,7 @@
 
 ;;; Commentary:
 ;;
-;; Rational Emacs supports user customization throug a `config.el' file
+;; Rational Emacs supports user customization through a `config.el' file
 ;; similar to this one.  You can copy this file as `config.el' to your
 ;; Rational Emacs configuration directory as an example.
 ;;
