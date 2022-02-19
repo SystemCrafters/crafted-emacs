@@ -79,4 +79,3 @@
 (let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
   (when (file-exists-p early-config-path)
     (load early-config-path nil 'nomessage)))
-(executable-find (car command-line-args))
