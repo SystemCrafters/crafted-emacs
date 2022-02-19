@@ -64,7 +64,8 @@ Use a plist with the same key names as accepted by `set-face-attribute'.")
 (defcustom rational-ui-line-numbers-disabled-modes
   '(org-mode)
   "Modes which should not display line numbers.
-Modes deriverd from the modes defined in `rational-ui-line-number-enabled-modes', but should not display line numbers."
+Modes deriverd from the modes defined in
+`rational-ui-line-number-enabled-modes', but should not display line numbers."
   :type 'list
   :group 'rational)
 
