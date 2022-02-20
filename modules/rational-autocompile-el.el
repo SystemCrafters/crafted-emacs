@@ -66,7 +66,7 @@ directory will be compiled, but not it's subdirectories."
   "Compiles (native or byte-code) the file of buffer B."
   (when b
     (unless (bufferp b)
-      return nil))
+      (cl-return nil))
   (let ((file (buffer-file-name b)))
     (when file
       (rational-autocompile-el-file file))))
