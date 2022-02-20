@@ -12,8 +12,8 @@
 ;;; Code:
 
 (let ((user-projects (expand-file-name "projects" rational-config-path)))
-(when (file-exists-p user-projects)
-  (setq project-list-file user-projects)))
+  (when (file-exists-p user-projects)
+    (setq project-list-file user-projects)))
 
 (provide 'rational-project)
 ;;; rational-project.el ends here
