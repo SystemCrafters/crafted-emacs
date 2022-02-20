@@ -74,7 +74,7 @@ straight.el or Guix depending on the value of
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
 ;; " _ "
 
