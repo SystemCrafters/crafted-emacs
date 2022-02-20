@@ -25,7 +25,8 @@
 
 ;; Turn on recentf mode
 (add-hook 'after-init-hook #'recentf-mode)
-(setq recentf-save-file (expand-file-name "recentf" rational-config-var-directory))
+(defvar rational-emacs-config-var-directory)
+(setq recentf-save-file (expand-file-name "recentf" rational-emacs-config-var-directory))
 
 ;; Do not saves duplicates in kill-ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
