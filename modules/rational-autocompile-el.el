@@ -69,7 +69,7 @@ directory will be compiled, but not it's subdirectories."
       (cl-return nil))
   (let ((file (buffer-file-name b)))
     (when file
-      (rational-autocompile-el-file file))))
+      (rational-autocompile-el-file file)))))
 
 ;; A function to compile a specific directory
 (defun rational-autocompile-el-directory (d)
