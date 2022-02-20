@@ -5,7 +5,7 @@
 
 ;; Author: System Crafters Community
 
-;; Commentary:
+;;; Commentary:
 
 ;; A sensible starting point for hacking your own Emacs configuration
 ;;
