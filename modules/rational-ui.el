@@ -127,11 +127,5 @@ Used as hook for modes which should not display line numebrs."
 				                     recenter-top-bottom other-window))
   (advice-add command :after #'pulse-line))
 
-;; Italic comments and keywords in server-mode
-(set-face-attribute 'font-lock-comment-face nil
-  :slant 'italic)
-(set-face-attribute 'font-lock-keyword-face nil
-  :slant 'italic)
-
 (provide 'rational-ui)
 ;;; rational-ui.el ends here
