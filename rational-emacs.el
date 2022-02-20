@@ -96,7 +96,7 @@ When writing rational-modules, insert header from skeleton."
 
 ;; Author: System Crafters Community
 
-;; Commentary:
+;;; Commentary:
 
 ;; " _ "
 
