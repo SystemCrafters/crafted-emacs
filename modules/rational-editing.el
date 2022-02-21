@@ -25,11 +25,5 @@
 (electric-pair-mode 1) ; auto-insert matching bracket
 (show-paren-mode 1)    ; turn on paren match highlighting
 
-;; When text is selected, overwrite it by typing
-(delete-selection-mode 1)
-
-;; easilyNavigateCamelCase
-(global-subword-mode 1)
-
 (provide 'rational-editing)
 ;;; rational-editing.el ends here
