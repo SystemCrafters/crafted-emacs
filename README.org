@@ -114,6 +114,7 @@ information about how they can be configured!
 - [[file:modules/rational-windows.el][rational-windows]] :: Window management configuration
 - [[file:modules/rational-use-package.el][rational-use-package]] :: Configuration for =use-package= if you prefer it over
   =straight.el=
+- [[file:modules/rational-persistence.el][rational-persistence]] :: Making emacs persist some things between sessions
 
 Modules that we will be adding in the future:
 

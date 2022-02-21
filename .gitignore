@@ -3,3 +3,6 @@ straight/
 transient/
 eshell/
 projects
+.DS_Store
+history
+places
