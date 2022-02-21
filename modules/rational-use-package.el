@@ -5,14 +5,12 @@
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
 ;; Built-in `package.el' with `use-package' configuration, including
 ;; elpas to search.
 
 ;;; Code:
-
-(straight-use-package 'use-package)
 
 (require 'package)
 
@@ -25,9 +23,21 @@
 ;; Always add melpa to `package-archives'
 (add-to-list 'package-archives (cons "melpa" "https://melpa.org/packages/"))
 
-(package-initialize)
+;; prefer gnu and nongnu elpas over melpa
+(customize-set-variable 'package-archive-priorities
+                        '(("gnu"    . 99)
+                          ("nongnu" . 80)
+                          ("melpa"  . 0)))
+
+;; don't automatically activate all the installed packages, allow
+;; use-package, require or autoloads to do so when the user provides
+;; appropriate configuration.
+(package-initialize t)
 (unless package-archive-contents
   (package-refresh-contents))
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
 (provide 'rational-use-package)
 ;;; rational-use-package.el ends here
