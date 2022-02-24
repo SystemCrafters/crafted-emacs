@@ -19,11 +19,11 @@
 
 (require 'corfu)
 
-(defcustom ycm-style nil
-  "Make corfu act closer to YouCompleteMe of Vim fame"
+(defcustom rational-code-completion-ycm-style nil
+  "Make corfu act closer to YouCompleteMe of Vim fame."
   :type 'boolean)
 
-(when ycm-style
+(when rational-code-completion-ycm-style
   (setq corfu-quit-at-boundary nil
         corfu-preselect-first nil)
   (define-key corfu-map (kbd "RET") nil) ;; Don't overwrite the enter key
@@ -55,7 +55,7 @@
 (add-to-list 'completion-at-point-functions #'cape-file)
 (add-to-list 'completion-at-point-functions #'cape-dabbrev)
 (require 'cape)
-;; Silence thenn pcomplete capf, no errors or messages!
+;; Silence the pcomplete capf, no errors or messages!
 (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-silent)
 
 ;; Ensure that pcomplete does not write to the buffer
