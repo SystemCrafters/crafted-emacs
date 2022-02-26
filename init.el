@@ -62,7 +62,8 @@ straight.el or Guix depending on the value of
 (auto-insert-mode)
 (with-eval-after-load "autoinsert"
   (define-auto-insert
-    (cons "rational-.*\\.el" "Rational Emacs Lisp Skeleton")
+    (cons (concat (expand-file-name user-emacs-directory) "modules/rational-.*\\.el")
+          "Rational Emacs Lisp Skeleton")
     '("Rational Emacs Module Description: "
       ";;;; " (file-name-nondirectory (buffer-file-name)) " --- " str
       (make-string (max 2 (- 80 (current-column) 27)) ?\s)
