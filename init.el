@@ -4,7 +4,7 @@
 (add-hook 'emacs-startup-hook
           (lambda ()
             (message "Rational Emacs loaded in %s."
-                     (format "%.2f seconds" (emacs-init-time)))))
+                     (emacs-init-time))))
 
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
