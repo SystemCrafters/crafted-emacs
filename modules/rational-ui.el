@@ -13,7 +13,6 @@
 ;;; Code:
 
 (straight-use-package 'all-the-icons)
-(straight-use-package 'doom-modeline)
 (straight-use-package 'doom-themes)
 (straight-use-package 'elisp-demos)
 (straight-use-package 'helpful)
@@ -29,14 +28,18 @@ Use a plist with the same key names as accepted by `set-face-attribute'.")
 
 ;;;; Mode-Line
 
-;; Start up the modeline after initialization is finished
-(add-hook 'after-init-hook 'doom-modeline-init)
 
-;; Configure `doom-modeline'
-(customize-set-variable 'doom-modeline-height 15)
-(customize-set-variable 'doom-modeline-bar-width 6)
-(customize-set-variable 'doom-modeline-minor-modes t)
-(customize-set-variable 'doom-modeline-buffer-file-name-style 'truncate-except-project)
+(defcustom rational-ui-use-doom-modeline t
+  "Wether to use doom-modeline."
+  :type 'boolean)
+
+(when rational-ui-use-doom-modeline
+  (straight-use-package 'doom-modeline)
+  (add-hook 'after-init-hook 'doom-modeline-init)
+  (customize-set-variable 'doom-modeline-bar-width 6)
+  (customize-set-variable 'doom-modeline-buffer-file-name-style 'truncate-except-project)
+  (customize-set-variable 'doom-modeline-height 15)
+  (customize-set-variable 'doom-modeline-minor-modes t))
 
 ;;;; Help Buffers
 
