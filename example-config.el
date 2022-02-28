@@ -15,6 +15,13 @@
 (require 'rational-defaults)
 (require 'rational-screencast)
 (require 'rational-ui)
+
+
+;;remove this if you want a different modeline, default is "doom",
+;; you could also set it to "GNU" but that does nothing for now
+(setq rational-modeline/type "telephone")
+(require 'rational-modeline)
+
 (require 'rational-editing)
 (require 'rational-evil)
 (require 'rational-completion)
