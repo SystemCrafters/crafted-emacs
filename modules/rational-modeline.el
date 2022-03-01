@@ -13,11 +13,13 @@
 
 (defcustom rational-modeline/type "doom"
   "one of 'GNU' 'doom' 'telephone' ";;'space WIP' "
+  :group 'rational
   )
 
 
 (when (string-equal rational-modeline/type "GNU")
   ;;TODO make it look as good as possible without external packages
+  :group 'rational
   )
 
 
@@ -100,21 +102,8 @@
 
   (defcustom rational-modeline/telephoneline-style 'telephoneline-examples-cubed
     "function to run before enabling telephone-line-mode"
+  :group 'rational
     )
-
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; (defun test ()            ;;
-  ;;   (message "hello world") ;;
-  ;;   )                       ;;
-  ;;                           ;;
-  ;;   (setq a 'test)          ;;
-  ;;                           ;;
-  ;;                           ;;
-  ;;                           ;;
-  ;; (funcall a)               ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 
 
