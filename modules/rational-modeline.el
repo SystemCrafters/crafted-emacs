@@ -11,13 +11,13 @@
 
 ;;; Code:
 
-(defcustom rational-modeline/type "doom"
+(defcustom rational-modeline-type "doom"
   "one of 'GNU' 'doom' 'telephone' ";;'space WIP' "
   :group 'rational
   )
 
 
-(when (string-equal rational-modeline/type "GNU")
+(when (string-equal rational-modeline-type "GNU")
   ;;TODO make it look as good as possible without external packages
   :group 'rational
   )
@@ -25,7 +25,7 @@
 
 
 
-(when (string-equal rational-modeline/type "doom")
+(when (string-equal rational-modeline-type "doom")
   (straight-use-package 'doom-modeline)
   (add-hook 'after-init-hook 'doom-modeline-init)
   (customize-set-variable 'doom-modeline-bar-width 6)
@@ -39,7 +39,7 @@
 
 
 
-(when (string-equal rational-modeline/type "telephone")
+(when (string-equal rational-modeline-type "telephone")
   ;;(or "telephoneline" "telephone-line" "phone-line" "phoneline" "telephone"))
 
 
@@ -100,7 +100,7 @@
   (straight-use-package 'telephone-line)
 
 
-  (defcustom rational-modeline/telephoneline-style 'telephoneline-examples-cubed
+  (defcustom rational-modeline-telephoneline-style 'telephoneline-examples-cubed
     "function to run before enabling telephone-line-mode"
   :group 'rational
     )
@@ -108,7 +108,7 @@
 
 
 
-  (funcall rational-modeline/telephoneline-style)
+  (funcall rational-modeline-telephoneline-style)
   ;; TODO allow for mode customization
   ;;(telephoneline-examples-cubed)
 
