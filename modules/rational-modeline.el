@@ -11,34 +11,37 @@
 
 ;;; Code:
 
-(defcustom rational-modeline-type "telephone"
-  "one of 'GNU' 'doom' 'telephone' ";;'space WIP' "
+(defcustom test 'nil
+  "something here"
+  :group 'rational
+  :set (lambda (sym val)
+         (set-default sym val)
+         (when (equal test t)
+           (counsel-find-file)
+           )
+         )
   )
 
 
-(when (string-equal rational-modeline-type "GNU")
-  ;;TODO make it look as good as possible without external packages
-  )
+;;(when (string-equal rational-modeline-type "GNU")
+;;TODO make it look as good as possible without external packages
+;;  )
 
 
 
 
-(when (string-equal rational-modeline-type "doom")
+(defun doom-modeline-type ()
   (straight-use-package 'doom-modeline)
   (add-hook 'after-init-hook 'doom-modeline-init)
   (customize-set-variable 'doom-modeline-bar-width 6)
   (customize-set-variable 'doom-modeline-buffer-file-name-style 'truncate-except-project)
   (customize-set-variable 'doom-modeline-height 15)
   (customize-set-variable 'doom-modeline-minor-modes t)
+
   )
 
 
 
-
-
-
-(when (string-equal rational-modeline-type "telephone")
-  ;;(or "telephoneline" "telephone-line" "phone-line" "phoneline" "telephone"))
 
 
   (defun telephoneline-examples-abs ()
@@ -95,6 +98,7 @@
 
 
 
+(defun telephone-modeline-style ()
   (straight-use-package 'telephone-line)
 
 
@@ -110,9 +114,43 @@
   ;;(telephoneline-examples-cubed)
 
   ;; Start up the modeline after initialization is finished
-  (add-hook 'after-init-hook (telephone-line-mode t))
+  ;;  (add-hook 'after-init-hook )
+  (telephone-line-mode t)
 
 
+  )
+
+
+(defcustom rational-modeline-type "telephone"
+  "one of 'GNU' 'doom' 'telephone' ";;'space WIP' "
+  :group 'rational
+  :set
+  (lambda (sym val)
+    (interactive)
+    (set-default sym val)
+    (when (string-equal val "doom")
+      (doom-modeline-type)
+      (doom-modeline-mode t)
+      )
+    (when (string-equal val "telephone")
+      ;;(or "telephoneline" "telephone-line" "phone-line" "phoneline" "telephone"))
+      (with-eval-after-load "doom-modeline"
+        (call-interactively 'doom-modeline-mode)
+        )
+      (telephone-modeline-style)
+
+      )
+    )
+  )
+
+
+(when (string-equal rational-modeline-type "doom")
+  ;;  (telephone-line-mode 'nil)
+  (doom-modeline-type)
+  )
+(when (string-equal rational-modeline-type "telephone")
+  ;;(or "telephoneline" "telephone-line" "phone-line" "phoneline" "telephone"))
+  (telephone-modeline-style)
   )
 
 
