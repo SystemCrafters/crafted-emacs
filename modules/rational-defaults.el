@@ -62,6 +62,7 @@
 ;; ibuffer configuration
 (add-hook 'ibuffer-hook
           (lambda ()
+            (require 'ibuf-ext) ; provides `ibuffer-filter-groups', fixes compiler warning
             (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
             (unless (eq ibuffer-sorting-mode 'project-file-relative)
               (ibuffer-do-sort-by-project-file-relative))))
