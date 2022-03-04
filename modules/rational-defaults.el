@@ -11,6 +11,8 @@
 
 ;;; Code:
 
+(straight-use-package 'ibuffer-project)
+
 ;; Revert Dired and other buffers
 (customize-set-variable 'global-auto-revert-non-file-buffers t)
 
@@ -47,6 +49,23 @@
 
 ;; Enable savehist-mode for an command history
 (savehist-mode 1)
+
+;; whitespace
+(customize-set-variable 'whitespace-style
+                        '(face tabs empty trailing tab-mark))
+(customize-set-variable 'whitespace-action '(cleanup auto-cleanup))
+(global-whitespace-mode)
+
+;; use ibuffer as a buffer switcher
+(define-key global-map [remap list-buffers] #'ibuffer)
+
+;; ibuffer configuration
+(add-hook 'ibuffer-hook
+          (lambda ()
+            (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+            (unless (eq ibuffer-sorting-mode 'project-file-relative)
+              (ibuffer-do-sort-by-project-file-relative))))
+
 
 (provide 'rational-defaults)
 ;;; rational-defaults.el ends here
