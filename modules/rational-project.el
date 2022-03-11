@@ -7,13 +7,11 @@
 
 ;;; Commentary
 
-;;
+;; Provides default settings for project management with project.el
 
 ;;; Code:
 
-(let ((user-projects (expand-file-name "projects" rational-config-path)))
-  (when (file-exists-p user-projects)
-    (setq project-list-file user-projects)))
+(customize-set-variable 'project-list-file (expand-file-name "projects" rational-config-var-directory))
 
 (provide 'rational-project)
 ;;; rational-project.el ends here
