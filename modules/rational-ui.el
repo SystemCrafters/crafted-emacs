@@ -20,12 +20,28 @@
 
 ;;;; Font
 
+(defun rational-ui--set-default-font (spec)
+  "Set the default font based on SPEC.
+
+SPEC is expected to be a plist with the same key names
+as accepted by `set-face-attribute'."
+  (when spec
+    (apply 'set-face-attribute 'default nil spec)))
+
+
 (defcustom rational-ui-default-font nil
   "The configuration of the `default' face.
-Use a plist with the same key names as accepted by `set-face-attribute'.")
-
-(when rational-ui-default-font
-  (apply 'set-face-attribute 'default nil (cons :font rational-ui-default-font)))
+Use a plist with the same key names as accepted by `set-face-attribute'."
+  :group 'rational
+  :type '(plist :key-type: symbol)
+  :tag "Default font"
+  :set (lambda (sym val)
+         (let ((prev-val (if (boundp 'rational-ui-default-font)
+                             rational-ui-default-font
+                         nil)))
+         (set-default sym val)
+         (when (and val (not (eq val prev-val)))
+           (rational-ui--set-default-font val)))))
 
 ;;;; Mode-Line
 
