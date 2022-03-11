@@ -1,6 +1,16 @@
 ;;; rational-org.el  -*- lexical-binding: t; -*-
 
-(straight-use-package 'org)
+;; Copyright (C) 2022
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
+
+;; Commentary
+
+;; Provides basic configuration for Org Mode.
+
+;;; Code:
+
 (straight-use-package 'org-appear)
 
 ;; Return or left-click with mouse follows link
