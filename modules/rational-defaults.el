@@ -21,7 +21,14 @@
 (setq-default indent-tabs-mode nil)
 
 ;; Use "y" and "n" to confirm/negate prompt instead of "yes" and "no"
-(fset 'yes-or-no-p 'y-or-n-p)
+;; Using `advice' here to make it easy to reverse in custom
+;; configurations with `(advice-remove 'yes-or-no-p #'y-or-n-p)'
+;;
+;; N.B. Emacs 28 has a variable for using short answers, which should
+;; be preferred if using that version or higher.
+(if (boundp 'use-short-answers)
+    (setq use-short-answers t)
+  (advice-add 'yes-or-no-p :override #'y-or-n-p))
 
 ;; Turn on recentf mode
 (add-hook 'after-init-hook #'recentf-mode)
