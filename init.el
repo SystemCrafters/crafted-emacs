@@ -51,7 +51,7 @@ straight.el or Guix depending on the value of
   "The user's configuration file.")
 
 ;; Defines the user configuration var and etc folders
-;; and ensure they exists.
+;; and ensure they exist.
 (defvar rational-config-etc-directory (expand-file-name "etc/" rational-config-path)
   "The user's configuration etc/ folder.")
 (defvar rational-config-var-directory (expand-file-name "var/" rational-config-path)
@@ -64,7 +64,7 @@ straight.el or Guix depending on the value of
 (when (file-exists-p rational-config-file)
   (load rational-config-file nil 'nomessage))
 
-;; when writing rational-modules, insert header from skeleton
+;; When writing rational-modules, insert header from skeleton
 (auto-insert-mode)
 (with-eval-after-load "autoinsert"
   (define-auto-insert
