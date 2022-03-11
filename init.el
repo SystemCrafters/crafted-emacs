@@ -40,6 +40,12 @@ straight.el or Guix depending on the value of
         (message "Package '%s' does not appear to be installed by Guix!"))
     (straight-use-package package)))
 
+;; Check the system used
+(defconst ON-LINUX   (eq system-type 'gnu/linux))
+(defconst ON-MAC     (eq system-type 'darwin))
+(defconst ON-BSD     (or ON-MAC (eq system-type 'berkeley-unix)))
+(defconst ON-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
+
 ;; Find the user configuration file
 (defvar rational-config-file (expand-file-name "config.el" rational-config-path)
   "The user's configuration file.")
