@@ -12,7 +12,11 @@
 
 ;;; Code:
 
-(straight-use-package 'all-the-icons)
+(straight-use-package '(all-the-icons
+			:post-build ((when ON-WINDOWS
+				       (warn
+					"%s"
+					"Read the commentary for `rational-ui.el'; on Windows, `all-the-icons-install-fonts' only downloads fonts, they must be installed manually.")))))
 (straight-use-package 'doom-modeline)
 (straight-use-package 'doom-themes)
 (straight-use-package 'elisp-demos)
