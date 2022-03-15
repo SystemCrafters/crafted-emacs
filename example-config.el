@@ -23,7 +23,7 @@
 ;; Set further font and theme customizations
 (custom-set-variables
    '(rational-ui-default-font
-     '(:font "JetBrains Mono" :weight 'light :height 185)))
+     '(:font "JetBrains Mono" :weight light :height 185)))
 
 (load-theme 'doom-snazzy t)
 
