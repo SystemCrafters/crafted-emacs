@@ -161,5 +161,12 @@ Used as hook for modes which should not display line numebrs."
 				                     recenter-top-bottom other-window))
   (advice-add command :after #'pulse-line))
 
+
+;;;; Make the titlebar on macOS transparent
+
+(when (eq system-type 'darwin) (progn
+                                 (straight-use-package 'ns-auto-titlebar)
+                                 (ns-auto-titlebar-mode)))
+
 (provide 'rational-ui)
 ;;; rational-ui.el ends here
