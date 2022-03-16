@@ -10,9 +10,27 @@
 ;; User interface customizations. Examples are the modeline and how
 ;; help buffers are displayed.
 
+;; This package provides a basic, customized appearance for
+;; Emacs. Specifically, it uses: Helpful to customize the information
+;; and visual display of help buffers, such as that created by M-x
+;; `describe-function'; Doom Modeline and Themes, to customize the
+;; appearance of buffers, text, et cetera; All-the-icons, to provide
+;; Doom Modeline with font-based icons (rather than raster or vector
+;; images); and includes some Emacs Lisp demonstrations.
+
+;;  Run `all-the-icons-install-fonts' to ensure the fonts necessary
+;; for ALL THE ICONS are available on your system. You must run this
+;; function if the "stop" icon at the beginning of this paragraph is
+;; not displayed properly (it appears as a box with some numbers
+;; and/or letters inside it).
+
 ;;; Code:
 
-(straight-use-package 'all-the-icons)
+(straight-use-package '(all-the-icons
+			:post-build ((when ON-WINDOWS
+				       (warn
+					"%s"
+					"Read the documentation for `all-the-icons'; on Windows, `all-the-icons-install-fonts' only downloads fonts, they must be installed manually. This is necessary if icons are not displaying properly.")))))
 (straight-use-package 'doom-modeline)
 (straight-use-package 'doom-themes)
 (straight-use-package 'elisp-demos)
@@ -20,12 +38,28 @@
 
 ;;;; Font
 
+(defun rational-ui--set-default-font (spec)
+  "Set the default font based on SPEC.
+
+SPEC is expected to be a plist with the same key names
+as accepted by `set-face-attribute'."
+  (when spec
+    (apply 'set-face-attribute 'default nil spec)))
+
+
 (defcustom rational-ui-default-font nil
   "The configuration of the `default' face.
-Use a plist with the same key names as accepted by `set-face-attribute'.")
-
-(when rational-ui-default-font
-  (apply 'set-face-attribute 'default nil (cons :font rational-ui-default-font)))
+Use a plist with the same key names as accepted by `set-face-attribute'."
+  :group 'rational
+  :type '(plist :key-type: symbol)
+  :tag "Default font"
+  :set (lambda (sym val)
+         (let ((prev-val (if (boundp 'rational-ui-default-font)
+                             rational-ui-default-font
+                         nil)))
+         (set-default sym val)
+         (when (and val (not (eq val prev-val)))
+           (rational-ui--set-default-font val)))))
 
 ;;;; Mode-Line
 
