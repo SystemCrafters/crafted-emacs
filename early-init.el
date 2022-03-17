@@ -60,6 +60,10 @@
    ((getenv "HOME") (expand-file-name ".rational-emacs" (getenv "HOME"))))
   "The user's rational-emacs configuration path.")
 
+;; make sure the rational-config-path is on the load path so the user
+;; can load "custom.el" from there if desired.
+(add-to-list 'load-path (expand-file-name rational-config-path))
+
 (unless (file-exists-p rational-config-path)
   (mkdir rational-config-path t))
 
