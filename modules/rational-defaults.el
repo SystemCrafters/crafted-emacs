@@ -55,5 +55,11 @@
 ;; Enable savehist-mode for an command history
 (savehist-mode 1)
 
+;; whitespace
+(customize-set-variable 'whitespace-style
+                        '(face tabs empty trailing tab-mark))
+(customize-set-variable 'whitespace-action '(cleanup auto-cleanup))
+(global-whitespace-mode)
+
 (provide 'rational-defaults)
 ;;; rational-defaults.el ends here
