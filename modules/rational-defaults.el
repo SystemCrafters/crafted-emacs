@@ -57,6 +57,7 @@
 
 ;; whitespace
 (customize-set-variable 'whitespace-style
+
                         '(face tabs empty trailing tab-mark indentation::space))
 (customize-set-variable 'whitespace-action '(cleanup auto-cleanup))
 (global-whitespace-mode)
