@@ -28,7 +28,7 @@
    ((getenv "RATIONAL_EMACS_HOME") (expand-file-name (getenv "RATIONAL_EMACS_HOME")))
    ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
     (if (getenv "XDG_CONFIG_HOME")
-	    (expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
+	(expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
       (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
    ((getenv "HOME") (expand-file-name ".rational-emacs" (getenv "HOME"))))
   "The user's rational-emacs configuration path.")
