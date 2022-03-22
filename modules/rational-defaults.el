@@ -32,7 +32,8 @@
 
 ;; Turn on recentf mode
 (add-hook 'after-init-hook #'recentf-mode)
-(setq recentf-save-file (expand-file-name "recentf" rational-config-var-directory))
+(customize-set-variable 'recentf-save-file
+                        (expand-file-name "recentf" rational-config-var-directory))
 
 ;; Do not saves duplicates in kill-ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
@@ -50,10 +51,12 @@
 (global-so-long-mode 1)
 
 ;; Make shebang (#!) file executable when saved
-(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+(add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
 
 ;; Enable savehist-mode for an command history
 (savehist-mode 1)
+(customize-set-variable 'savehist-file
+                        (expand-file-name "history" rational-config-var-directory))
 
 (provide 'rational-defaults)
 ;;; rational-defaults.el ends here
