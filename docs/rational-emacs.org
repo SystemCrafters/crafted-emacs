@@ -1,0 +1,454 @@
+#+title: Rational Emacs
+#+author: System Crafters Community
+#+description: A sensible starting point for hacking your own Emacs configuration.
+#+subtitle: A sensible starting point for hacking your own Emacs configuration.
+#+texinfo_dir_category: Emacs
+#+texinfo_dir_title: Rational Emacs: (rational-emacs)
+#+texinfo_dir_desc: A sensible starting point for hacking your own Emacs configuration.
+
+Hacking one's Emacs configuration is, for some, an ongoing
+endeavor. For others, it just needs to work. Other configuration
+packages attempt to be a complete, canned, working configuration,
+while Rational attempts to provide the bare minimum to get you
+started. More like a framework than a complete solution, Rational
+Emacs intends to provide a sensible place to start configuring your
+Emacs to your needs.
+
+Defaults provided here were provided by a community of volunteers and
+ideally represent sane defaults from which to start. We expect you to
+have different opinions than ours and we expect you to implement those
+differences in your own configuration. Our intent is to provide
+something you might find useful to get your started on your own
+Emacs configuration journey.
+
+* Principles
+
+  This configuration and all associated modules intend to follow these
+  principles:
+
+  - Minimal, modular configuration
+
+    + The core configuration only sets up Emacs to have a cleaner
+      presentation with sensible defaults. It is up to the user to
+      decide which modules to load and when to load them.
+
+    + Modules should not depend on other modules as much as
+      possible. When a module needs to integrate with other
+      functionality in Emacs, the standard extensibility points of
+      each package should be used. The implication is someone should
+      be able to copy code from a module into their own configuration
+      /without/ using Rational Emacs.
+
+  - Prioritize built-in Emacs functionality
+
+    Where possible, we will leverage built-in Emacs functionality
+    instead of external packages.
+
+    Some of the packages we prefer:
+
+    + =project.el= for project management.
+
+    + =tab-bar-mode= for organizing groups of buffers.
+
+    + =whitespace.el= to cleanup whitespace, like tabs, newlines or
+      additioanal space added to the end of lines.
+
+    + =pulse.el= to flash the current line under certain conditions.
+
+    + And others...
+
+    This is not to take away from the amazing work package providers
+    have contributed to the Emacs community. By prioriting built-in
+    features, we can highlight less known packages, have a more stable
+    product, and reduce the amount of network load just to get
+    started. Indeed, if you do not pull in any of the modules we
+    provide, you may not even need a network (other than to clone the
+    repo from GitHub).
+
+  - Works well in the terminal
+
+    Not everyone uses a windowing environment, and the terminal is
+    popular for remote sessions as well as command line
+    utilities. Working well in the terminal also enables the use of
+    Emacs in Termux on Android!
+
+  - Can be integrated with a Guix configuration
+
+    GNU Guix is a functional package manager and GNU Linux
+    distribution. This integration enables setting things like font
+    sizes, themes, etc in a system-specific and repeatable way.
+
+  - Works well with =Chemacs2=
+
+    Having multiple configurations available allows for testing
+    individual package combinations or configurations from
+    others. =Chemacs2= allows for having multiple configurations
+    simultaneously and Rational Emacs should work well in this
+    environment also.
+
+  - Helps you learn Emacs Lisp
+
+    Instead of providing a higher-level configuration system out of
+    the box like other Emacs configurations (like Doom or Spacemacs
+    for example), we follow standard Emacs Lisp patterns so you can
+    learn by reading the configuration. This means we don't provide
+    macro wrappers around packaging and configuration tools. No
+    complex framework exists.
+
+* Why use it?
+
+  Why choose this configuration over /Doom Emacs/, /Spacemacs/,
+  /Prelude/, or others?
+
+  The goal of this configuration is to make it easier to write your
+  own Emacs configuration while using pre-made configuration parts
+  maintained by the community. Instead of using a monolithic,
+  all-encompassing approach, we strive to ensure that all parts of
+  this configuration are optional or interchangeable.
+
+  You should even be able to use the configuration modules we provide
+  with your own =init.el= file without using this base configuration
+  repo!
+
+* Customization
+
+  To add your own customization to this configuration, create a
+  configuraton file in one of the following places:
+
+  - =~/.rational-emacs/=
+  - =~/.config/rational-emacs/=
+
+  In your configuration you can set any Emacs configuration variable,
+  face attributes, themes, etc as you normally would.
+
+  If you prefer to explicitly control where your =config.el= and
+  =early-config.el= are found for Rational Emacs, you may provide a
+  value for the =RATIONAL_EMACS_HOME= environment variable, either on
+  the command line or in your shell configuration. This variable
+  should only contain the path to the =config.el= files, for example:
+
+  #+caption: Set environment variable @@texinfo:@code{RATIONAL_EMACS_HOME}@@ to the path of the configuration directory.
+  #+begin_src shell
+    RATIONAL_EMACS_HOME=~/my-rational-emacs-config
+  #+end_src
+
+** How the rational config file is found
+
+   The rational config files (=config.el= and =early-config.el=) are
+   found in the =rational-config-path=. That path will match exactly
+   one of the following scenarios, in the order specified:
+
+  - Using =Chemacs2= (See below for more on this)
+    - The environment variable =RATIONAL_EMACS_HOME= is used if provided in the
+      profile definition.
+    - The profile directory is used when no environment variable is provided in
+      the profile definition.
+  - Use the value found in the =RATIONAL_EMACS_HOME= environment variable.
+  - The environment variable =XDG_CONFIG_HOME= is present or the path
+    =$HOME/.config/rational-emacs= exists.
+    - These normally resolve to the same file, so build the path from the
+      =XDG_CONFIG_HOME= environment variable or the explicit path
+      =~/.config/rational-emacs=
+  - Use the =HOME= environment variable to make the path, which expands to
+    =$HOME/.rational-emacs=.
+
+  Once the =rational-config-path= is determined, if it does not exist in the filesystem, it is created. However, just the path is created, the files =config.el= and =early-config.el= must be created by you.
+
+** Example Configuration:
+
+  #+caption: Example of user created Rational Emacs @@texinfo:@code{config.el}@@ file.
+  #+begin_src emacs-lisp
+
+    (require 'rational-defaults)
+    (require 'rational-screencast)
+    (require 'rational-ui)
+    (require 'rational-editing)
+    (require 'rational-evil)
+    (require 'rational-completion)
+    (require 'rational-windows)
+
+    ;; Set further font and theme customizations
+    (custom-set-variables
+     '(rational-ui-default-font
+       '(:font "JetBrains Mono" :weight light :height 185)))
+
+    (load-theme 'doom-snazzy t)
+
+  #+end_src
+
+** The =custom.el= file
+
+   The =custom.el= file will hold the auto-generated code from the Emacs
+   Customization UI.
+
+*** Simplified overview of how Emacs Customization works
+
+    Customizable values are defined with the =defcustom= form, and can be
+    customized using the Easy Customization UI. A complete discussion is out of
+    scope for this document, instead see the Emacs Manual for more information.
+
+    There are several states a value can be in, for our purposes, we will only
+    consider two of them: the default state and the changed state. These are not
+    the "official" names but easily convey the concepts of the variable. If a
+    value is in the default state, looking in the Customization UI, the state
+    will be listed as =STANDARD=. Rational Emacs takes the approach of using the
+    =customize-set-variable= to update the values defined with
+    =defcustom=. This will show the values as =SET for current session only= in
+    the Customization UI. This is normal since the values are set each time
+    emacs starts. They are technically "SAVED" since they exist as emacs-lisp
+    code, but since they are not in a =custom-set-variables= form the
+    Customization UI only sees them as "SET for the current session only".
+
+    A =SAVED and set= value means the Customization code has written the
+    configuration to disk to be loaded again the next time Emacs starts. When
+    Emacs saves the configuration from the Customization UI, it simply adds a
+    couple of forms to the end of your initialization file (typically
+    =init.el=), with comments warning about having more than one form with the
+    same name (see example below).
+
+*** Loading the =custom.el= file
+
+    This is important because if you, the user, wish to use the Customization
+    UI to configure Emacs, the customizations will (by default) be written to
+    the bottom of the =init.el= file in a form called =custom-set-variables= and
+    =custom-set-faces=. These are loaded usually at the end of the init cycle
+    (which is why they are listed at the bottom of the =init.el= file) and
+    allows restoring values set by the Customization UI rather than through
+    code.
+
+    This configuration sets the =custom-file= to exist in the
+    =rational-config-path= (see above) as a file known as =custom.el=. This file
+    is *not* automatically loaded by Rational Emacs configuration. You may, if
+    you choose, load this file yourself with the following code in your
+    =config.el= file.
+
+    #+begin_src emacs-lisp
+      (load "custom")
+    #+end_src
+
+    It is important to load this file last to make sure it overrides any values
+    previously set while Emacs was starting.
+
+    If you are using something like the example provided above, you might have
+    something that looks more like this:
+
+    #+name: config.el
+    #+caption: Example @@texinfo:@samp{config.el}@@ loading the @@texinfo:@code{custom.el}@@ file.
+    #+begin_src emacs-lisp
+      (require 'rational-defaults)
+      (require 'rational-screencast)
+      (require 'rational-ui)
+      (require 'rational-editing)
+      (require 'rational-evil)
+      (require 'rational-completion)
+      (require 'rational-windows)
+
+      (load-theme 'doom-snazzy t)
+
+      (load "custom")
+      ;;; example-config.el ends here
+    #+end_src
+
+    And then in =custom.el= you would have something like the following which
+    is auto-generated by Emacs:
+
+    #+name: custom.el
+    #+caption: Example auto-generated @@texinfo:@code{custom.el}@@ file.
+    #+begin_src emacs-lisp
+      (custom-set-variables
+       ;; custom-set-variables was added by Custom.
+       ;; If you edit it by hand, you could mess it up, so be careful.
+       ;; Your init file should contain only one such instance.
+       ;; If there is more than one, they won't work right.
+       '(rational-ui-default-font '(:font "JetBrains Mono" :weight light :height 185))
+       '(rational-ui-display-line-numbers t))
+      (custom-set-faces
+       ;; custom-set-faces was added by Custom.
+       ;; If you edit it by hand, you could mess it up, so be careful.
+       ;; Your init file should contain only one such instance.
+       ;; If there is more than one, they won't work right.
+       )
+    #+end_src
+
+
+*** Not loading the =custom.el= file
+
+    You may choose not to load the =custom.el= file if you are writing your own
+    configuration with Emacs-Lisp. Using =customize-set-variable= has the same
+    effect as using the Customization UI, with the primary difference, the
+    customization is not written later as if you had used the Customization
+    UI. If you choose to follow this pattern, you will not need to load the
+    =custom.el= file ever. Our example (see above) could imply the use of the
+    Customization UI, as our example uses the =custom-set-variables= form to set
+    a list of customizable values all at once. Here is the same example written
+    differently.
+
+    #+caption: Example @@texinfo:@samp{config.el}@@ setting customization variables directly.
+    #+begin_src emacs-lisp
+      (require 'rational-defaults)
+      (require 'rational-screencast)
+      (require 'rational-ui)
+      (require 'rational-editing)
+      (require 'rational-evil)
+      (require 'rational-completion)
+      (require 'rational-windows)
+
+      (customize-set-variable 'rational-ui-default-font
+                              '(:font "JetBrains Mono" :weight light :height 185))
+      (customize-set-variable 'rational-ui-display-line-numbers t)
+
+      (load-theme 'doom-snazzy t)
+    #+end_src
+
+*** Caveat on the timing of loading =custom.el=
+
+    Even if you are using emacs-lisp to customize Emacs, you may still choose to
+    load the =custom.el= file. Keep in mind, if you use =customize-set-variable=
+    or =setq= to set the value for a =defcustom= option and then load the
+    =custom.el= file which might have the same variable set with a different
+    value, the last thing to set that value wins.
+
+    Here is an example, first a =config.el= snippet:
+
+    #+name: config.el
+    #+caption: @@texinfo:@samp{config.el}@@ snippet loading @@texinfo:@code{custom.el}@@ last
+    #+begin_src emacs-lisp
+      ;; ... some customization before
+      (customize-set-variable 'display-line-numbers-type 'relative)
+      ;; ... some more customization
+
+      (load "custom")
+    #+end_src
+
+    and the =custom.el= snippet
+
+    #+name: custom.el
+    #+caption: @@texinfo:@code{custom.el}@@ snippet.
+    #+begin_src emacs-lisp
+      (custom-set-variables
+       '(display-line-numbers-type t))
+    #+end_src
+
+    The value of the =display-line-numbers-type= will be =t=. Since the
+    =custom.el= file is loaded _last_ the first value of the
+    =display-line-numbers-type= is overwritten. The fix is to make sure you set
+    the value only once in your configuration with either
+    =customize-set-variable= or with =custom-set-variables= either in your
+    =config.el= or loaded from =custom.el=
+
+* Using it with =Chemacs2=
+
+  If you have the =Chemacs2= configuration cloned to =~/.emacs.d= or
+  =~/.config/emacs=, you can clone =rational-emacs= anywhere you like
+  and add an entry to it in your =~/.emacs-profiles.el= file:
+
+  You can then put your =early-config.el= and =config.el= files in the
+  subfolder =~/path/to/rational-emacs/rational-emacs=. So, for example
+  if you installed Rational Emacs to =~/.rational-emacs=, then your
+  =early-config.el= and =config.el= files would be in the path
+  =~/.rational-emacs/rational-emacs=. This is the default path, but
+  you can change the name to something else, see below for examples.
+
+  #+caption: Example of a @@texinfo:@samp{Chemacs2}@@ user profile file in @@texinfo:@code{~/.emacs-profiles.el}@@.
+  #+begin_src emacs-lisp
+
+    (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs"))))
+
+  #+end_src
+
+  If you prefer to put your Rational Emacs customizations elsewhere
+  (for example in a folder called `config` or maybe `personal`), you
+  can specify the =RATIONAL_EMACS_HOME= environment variable, for
+  example like this:
+
+  #+caption: User @@texinfo:@samp{Chemacs2}@@ profile file @@texinfo:@code{~/.emacs-profiles.el}@@ with environment variable.
+  #+begin_src emacs-lisp
+
+      (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs")
+                      (env . (("RATIONAL_EMACS_HOME" . "~/path/to/rational-emacs/personal"))))))
+
+  #+end_src
+
+  Or some place completely different:
+
+  #+caption: User @@texinfo:@samp{Chemacs2}@@ profile file @@texinfo:@code{~/.emacs-profiles.el}@@ with Rational Emacs config files set to another path.
+  #+begin_src emacs-lisp
+
+      (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs")
+                      (env . (("RATIONAL_EMACS_HOME" . "~/rational-config/personal"))))))
+
+  #+end_src
+
+
+  Then launch it with =emacs --with-profile rational=!
+
+* Contributing
+
+  Follow the [[https://github.com/bbatsov/emacs-lisp-style-guide][Elisp Style Guide]] when submitting pull requests.
+
+  This is a community-run modular Emacs configuration, for which we
+  appreciate feedback in the form of issues and pull requests. Feel
+  free to open an issue prior to opening a pull request if you're not
+  certain your idea is in the spirit of the [[Principles][Principles]].
+
+  If you enjoy crafting your computing experience, join the
+  [[https://systemcrafters.net/][SystemCrafters]] community!
+
+* Modules
+
+  Rational Emacs includes a number of modules to further configure
+  Emacs. These are intended to be stand-alone in the sense that no
+  module requires the use of any other module.
+
+  The modules are written to support various themes: mini-buffer
+  selection (completion), editing, ui, etc. To use these modules,
+  simply =require= them in your =config.el=, or copy the relevant
+  portions to your =config.el= and modify them to suit your needs.
+
+  In most cases, you can =require= the module, and then adjust the
+  configuration for specific parts by overriding the settings provided
+  by the module by additional code in your =config.el=.
+
+  While the intent here is to document each module as completely as
+  reasonably possible, the best-practice is to simply read the code
+  for the module of interest to understand it best.
+
+  #+include: rational-defaults.org
+  #+include: rational-editing.org
+
+* License
+  :PROPERTIES:
+  :COPYING:  t
+  :END:
+
+  Copyright \copy 2022 System Crafters Community
+
+  #+caption: MIT License
+  #+begin_quote
+  Permission is hereby granted, free of charge, to any person
+  obtaining a copy of this software and associated documentation files
+  (the "Software"), to deal in the Software without restriction,
+  including without limitation the rights to use, copy, modify, merge,
+  publish, distribute, sublicense, and/or sell copies of the Software,
+  and to permit persons to whom the Software is furnished to do so,
+  subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be
+  included in all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+  EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+  MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+  NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+  BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+  ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  SOFTWARE.
+  #+end_quote
+
+* MIT License
+  :properties:
+  :appendix: t
+  :end:
+
+  #+include: mit.org

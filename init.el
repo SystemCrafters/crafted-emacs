@@ -95,3 +95,9 @@ straight.el or Guix depending on the value of
 
 (customize-set-variable 'custom-file
                         (expand-file-name "custom.el" rational-config-path))
+
+(let ((rational-info-dir (expand-file-name "docs/dir" user-emacs-directory)))
+  (when (file-exists-p rational-info-dir)
+    (require 'info)
+    (info-initialize)
+    (push (file-name-directory rational-info-dir) Info-directory-list)))
