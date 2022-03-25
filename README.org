@@ -154,8 +154,8 @@ scenarios, in the order specified:
 - Using =Chemacs2= (See below for more on this)
   - The environment variable =RATIONAL_EMACS_HOME= is used if provided in the
     profile definition.
-  - The profile directory is used when no environment variable is provided in
-    the profile definition.
+  - The =rational-emacs= subdirectory of the profile is used when no environment
+    variable is provided in the profile definition.
 - Use the value found in the =RATIONAL_EMACS_HOME= environment variable.
 - The environment variable =XDG_CONFIG_HOME= is present or the path
   =$HOME/.config/rational-emacs= exists.
