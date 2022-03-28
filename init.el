@@ -58,6 +58,23 @@ straight.el or Guix depending on the value of
 (mkdir rational-config-etc-directory t)
 (mkdir rational-config-var-directory t)
 
+;; The custom file
+(customize-set-variable 'custom-file
+                        (expand-file-name "custom.el" rational-config-path))
+
+(defun rational-load-custom-file ()
+  "Load the `custom-file' after saving customized values.
+
+Customized values set during the initialization process are
+saved, other values set through the Customization UI or via
+certain workflows are not lost in this process. The `custom-file'
+is loaded last."
+
+  (customize-save-customized)
+  (load custom-file t))
+
+(add-hook 'after-init-hook #'rational-load-custom-file)
+
 ;; Load the user configuration file if it exists
 (when (file-exists-p rational-config-file)
   (load rational-config-file nil 'nomessage))
@@ -93,18 +110,4 @@ straight.el or Guix depending on the value of
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
-(customize-set-variable 'custom-file
-                        (expand-file-name "custom.el" rational-config-path))
 
-(defun rational-load-custom-file ()
-  "Load the `custom-file' after saving customized values.
-
-Customized values set during the initialization process are
-saved, other values set through the Customization UI or via
-certain workflows are not lost in this process. The `custom-file'
-is loaded last."
-
-  (customize-save-customized)
-  (load custom-file t))
-
-(add-hook 'after-init-hook #'rational-load-custom-file)
