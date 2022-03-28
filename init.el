@@ -95,3 +95,16 @@ straight.el or Guix depending on the value of
 
 (customize-set-variable 'custom-file
                         (expand-file-name "custom.el" rational-config-path))
+
+(defun rational-load-custom-file ()
+  "Load the `custom-file' after saving customized values.
+
+Customized values set during the initialization process are
+saved, other values set through the Customization UI or via
+certain workflows are not lost in this process. The `custom-file'
+is loaded last."
+
+  (customize-save-customized)
+  (load custom-file t))
+
+(add-hook 'after-init-hook #'rational-load-custom-file)
