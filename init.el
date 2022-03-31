@@ -58,22 +58,21 @@ straight.el or Guix depending on the value of
 (mkdir rational-config-etc-directory t)
 (mkdir rational-config-var-directory t)
 
-;; The custom file
-(customize-set-variable 'custom-file
-                        (expand-file-name "custom.el" rational-config-path))
-
-(defun rational-load-custom-file ()
-  "Load the `custom-file' after saving customized values.
-
-Customized values set during the initialization process are
-saved, other values set through the Customization UI or via
-certain workflows are not lost in this process. The `custom-file'
-is loaded last."
-
-  (customize-save-customized)
-  (load custom-file t))
-
-(add-hook 'after-init-hook #'rational-load-custom-file)
+;; Here the `custom.el' file is used by the Customization UI to store
+;; value-setting forms in a customization file, rather than at the end
+;; of the `init.el' file. The file is loaded after this `init.el'
+;; file, after the user `config.el' has been loaded. This means that
+;; any set variables in the user `config.el' will be overridden with
+;; the values set with the Customization UI. Rather than expanding the
+;; `custom-file' variable when adding the hook, the return value of
+;; the form that sets `custom.el' is used.
+(add-hook 'after-init-hook
+          (lambda ()
+            (load
+             (customize-set-variable
+              'custom-file
+              (expand-file-name "custom.el" rational-config-path))
+             t)))
 
 ;; Load the user configuration file if it exists
 (when (file-exists-p rational-config-file)
@@ -109,5 +108,3 @@ is loaded last."
 
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
-
-

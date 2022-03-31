@@ -212,7 +212,7 @@ filesystem, it is created. However, just the path is created, the files
     the Customization UI. This is normal since the values are set each time
     emacs starts. They are technically "SAVED" since they exist as emacs-lisp
     code, but since they are not in a =custom-set-variables= form the
-    Customization UI only sees them as "SET for the current session only". 
+    Customization UI only sees them as "SET for the current session only".
 
     A =SAVED and set= value means the Customization code has written the
     configuration to disk to be loaded again the next time Emacs starts. When
@@ -242,14 +242,16 @@ filesystem, it is created. However, just the path is created, the files
 
 *** Loading the =custom.el= file
 
-    Rational Emacs loads the =custom.el= file during the initialization
-    process. As noted in the previous section, the =custom-set-variables= values
-    are in the =SET for current session only= state. Those values are saved to
-    the =custom.el= file just before the file is loaded after the initialization
-    process is finished. Any values set through the Customization UI or through
-    the other work flows, for example using the =org-agenda-to-front= or
-    =org-remove-file= which write to the =custom-set-variables= form, are
-    preserved as well.
+    The =custom.el= file is loaded /after/ the initialization process, including
+    after the user =config.el= is loaded.
+
+    The =custom-set-variables= values (as set by =early-init.el= and =init.el=) are in
+    the =SET for current session only= state, unless altered by a saved
+    customization loaded from =custom.el=. Any values set through the
+    Customization UI or other work flows, for example by using the
+    =org-agenda-to-front= or =org-remove-file= functions, which write to the
+    =custom-set-variables= form, are preserved in the =custom.el= file if they are
+    saved for future sessions (as by the Customization UI widget, or by code).
 
 *** Not loading the =custom.el= file
 
@@ -268,7 +270,7 @@ filesystem, it is created. However, just the path is created, the files
     #+begin_src emacs-lisp
       (remove-hook 'after-init-hook #'rational-load-custom-file)
     #+end_src
-    
+
 * Using it with =Chemacs2=
 
 If you have the =Chemacs2= configuration cloned to =~/.emacs.d= or
