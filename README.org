@@ -258,7 +258,7 @@ filesystem, it is created. However, just the path is created, the files
 
 *** Not loading the =custom.el= file
 
-    To not load the =custom file, change the value for the
+    To not load the =custom file=, change the value for the
     ~rational-load-custom-file~  to =nil= in your =config.el=.
 
     Using =customize-set-variable= in Emacs Lisp has the same effect as using
