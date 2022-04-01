@@ -88,6 +88,16 @@
 (defvar rational-prefer-guix-packages (rational-using-guix-emacs-p)
   "If t, expect packages to be installed via Guix by default.")
 
+(defcustom rational-load-custom-file nil
+  "When non-nil, load `custom.el`.
+
+The custom file is found in the `rational-config-path'. It
+contains customizations of variables and faces that are made by
+the user through the Customization UI, as well as any
+customizations made by packages."
+  :group 'rational
+  :type 'boolean)
+
 ;; Load the early config file if it exists
 (let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
   (when (file-exists-p early-config-path)

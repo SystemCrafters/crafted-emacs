@@ -58,22 +58,6 @@ straight.el or Guix depending on the value of
 (mkdir rational-config-etc-directory t)
 (mkdir rational-config-var-directory t)
 
-;; Here the `custom.el' file is used by the Customization UI to store
-;; value-setting forms in a customization file, rather than at the end
-;; of the `init.el' file. The file is loaded after this `init.el'
-;; file, after the user `config.el' has been loaded. This means that
-;; any set variables in the user `config.el' will be overridden with
-;; the values set with the Customization UI. Rather than expanding the
-;; `custom-file' variable when adding the hook, the return value of
-;; the form that sets `custom.el' is used.
-(add-hook 'after-init-hook
-          (lambda ()
-            (load
-             (customize-set-variable
-              'custom-file
-              (expand-file-name "custom.el" rational-config-path))
-             t)))
-
 ;; Load the user configuration file if it exists
 (when (file-exists-p rational-config-file)
   (load rational-config-file nil 'nomessage))
@@ -105,6 +89,21 @@ straight.el or Guix depending on the value of
       (file-name-base (buffer-file-name))
       ")
 ;;; " (file-name-nondirectory (buffer-file-name)) " ends here\n")))
+
+;;     Here the `custom.el' file is used by the Customization UI to
+;;store value-setting forms in a customization file, rather than at
+;; the end of the `init.el' file. The file is loaded after this
+;; `init.el' file, and after the user `config.el' has been loaded.
+;;     Any values set variables in the user `config.el' will be
+;; overridden with the values set with the Customization UI. Rather
+;; than expanding the `custom-file' variable when adding the hook, the
+;; return value of the form that sets `custom.el' is used.
+;;     The `rational-load-custom-file' variable must be `non-nil'
+;; in the user `config.el' file to load the custom file.
+(customize-set-variable 'custom-file
+  (expand-file-name "custom.el" rational-config-path))
+(when rational-load-custom-file
+  (load custom-file t))
 
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
