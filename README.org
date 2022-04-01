@@ -244,9 +244,9 @@ filesystem, it is created. However, just the path is created, the files
 
 *** Loading the =custom.el= file
 
-    When ~rational-load-custom-file~ is non-nil, the =custom.el= file is loaded
-    /after/ the initialization process, including after the user =config.el= is
-    loaded. By default, no custom file is loaded.
+    When ~rational-load-custom-file~ is non-nil (the default), the =custom.el= 
+    file is loaded /after/ the initialization process, including after the user
+    =config.el= is loaded. 
 
     The customization variable values (as set in =init.el= with
     =customize-set-variables=) are in the =SET for current session only= state,
@@ -258,11 +258,8 @@ filesystem, it is created. However, just the path is created, the files
 
 *** Not loading the =custom.el= file
 
-    By default, no custom file is loaded, but any saved customizations are saved
-    to =custom.el= so you may load them manually, or opt to load them
-    automatically every time Emacs starts by customizing
-    ~rational-load-custom-file~ and toggling the option on, or by setting a
-    non-nil value in your =config.el= like exampled in =example-config.el=.
+    To not load the =custom file, change the value for the
+    ~rational-load-custom-file~  to =nil= in your =config.el=.
 
     Using =customize-set-variable= in Emacs Lisp has the same effect as using
     the Customization UI, except the customization is not saved to =custom.el=
