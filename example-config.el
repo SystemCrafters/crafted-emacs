@@ -27,7 +27,7 @@
 
 (load-theme 'doom-snazzy t)
 
-;; Opt-in to load `custom.el' after `config.el'; you may also
-;; customize the option using the customization UI.
+;; To not load `custom.el' after `config.el', uncomment this line.
 ;; (setq rational-load-custom-file t)
+
 ;;; example-config.el ends here

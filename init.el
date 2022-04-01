@@ -90,18 +90,18 @@ straight.el or Guix depending on the value of
       ")
 ;;; " (file-name-nondirectory (buffer-file-name)) " ends here\n")))
 
-;;     Here the `custom.el' file is used by the Customization UI to
-;;store value-setting forms in a customization file, rather than at
-;; the end of the `init.el' file. The file is loaded after this
-;; `init.el' file, and after the user `config.el' has been loaded.
-;;     Any values set variables in the user `config.el' will be
-;; overridden with the values set with the Customization UI. Rather
-;; than expanding the `custom-file' variable when adding the hook, the
-;; return value of the form that sets `custom.el' is used.
-;;     The `rational-load-custom-file' variable must be `non-nil'
-;; in the user `config.el' file to load the custom file.
+;;   The file used by the Customization UI to store value-setting
+;; forms in a customization file, rather than at the end of the
+;; `init.el' file, is called `custom.el' in Rational Emacs. The file
+;; is loaded after this `init.el' file, and after the user `config.el'
+;; file has been loaded. Any variable values set in the user
+;; `config.el' will be overridden with the values set with the
+;; Customization UI and saved in the custom file.
 (customize-set-variable 'custom-file
   (expand-file-name "custom.el" rational-config-path))
+
+;; The custom file will only be loaded if `rational-load-custom-file'
+;; is set to a non-nil value in the user's `config.el'.
 (when rational-load-custom-file
   (load custom-file t))
 

@@ -173,7 +173,6 @@ filesystem, it is created. However, just the path is created, the files
 
 #+caption: Example of user created Rational Emacs =config.el= file.
 #+begin_src emacs-lisp
-
   (require 'rational-defaults)
   (require 'rational-screencast)
   (require 'rational-ui)
@@ -189,8 +188,7 @@ filesystem, it is created. However, just the path is created, the files
 
   (load-theme 'doom-snazzy t)
 
-  ;; Opt-in to load `custom.el' after `config.el'; you may also
-  ;; customize the option using the customization UI.
+  ;; To not load `custom.el' after `config.el', uncomment this line.
   ;; (setq rational-load-custom-file t)
 #+end_src
 
@@ -250,13 +248,13 @@ filesystem, it is created. However, just the path is created, the files
     /after/ the initialization process, including after the user =config.el= is
     loaded. By default, no custom file is loaded.
 
-    The =custom-set-variables= values (as set in =init.el=) are in the =SET for
-    current session only= state, unless altered by a saved customization loaded
-    from =custom.el=. Any values set through the Customization UI or other work
-    flows, for example by using the =org-agenda-to-front= or =org-remove-file=
-    functions, which write to the =custom-set-variables= form, are preserved in
-    the =custom.el= file if they are saved for future sessions (as by the
-    Customization UI widget, or by code).
+    The customization variable values (as set in =init.el= with
+    =customize-set-variables=) are in the =SET for current session only= state,
+    unless altered by a saved customization loaded from =custom.el=. Any values
+    set through the Customization UI or other work flows, for example by using
+    the =org-agenda-to-front= or =org-remove-file= functions, which write to the
+    =custom-set-variables= form, are preserved in the =custom.el= file if they are
+    saved for future sessions (as by the Customization UI widget, or by code).
 
 *** Not loading the =custom.el= file
 
