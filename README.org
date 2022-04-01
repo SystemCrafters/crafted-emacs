@@ -189,7 +189,7 @@ filesystem, it is created. However, just the path is created, the files
   (load-theme 'doom-snazzy t)
 
   ;; To not load `custom.el' after `config.el', uncomment this line.
-  ;; (setq rational-load-custom-file t)
+  ;; (setq rational-load-custom-file nil)
 #+end_src
 
 ** The =custom.el= file
