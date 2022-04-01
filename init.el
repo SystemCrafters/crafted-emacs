@@ -58,23 +58,6 @@ straight.el or Guix depending on the value of
 (mkdir rational-config-etc-directory t)
 (mkdir rational-config-var-directory t)
 
-;; The custom file
-(customize-set-variable 'custom-file
-                        (expand-file-name "custom.el" rational-config-path))
-
-(defun rational-load-custom-file ()
-  "Load the `custom-file' after saving customized values.
-
-Customized values set during the initialization process are
-saved, other values set through the Customization UI or via
-certain workflows are not lost in this process. The `custom-file'
-is loaded last."
-
-  (customize-save-customized)
-  (load custom-file t))
-
-(add-hook 'after-init-hook #'rational-load-custom-file)
-
 ;; Load the user configuration file if it exists
 (when (file-exists-p rational-config-file)
   (load rational-config-file nil 'nomessage))
@@ -107,7 +90,20 @@ is loaded last."
       ")
 ;;; " (file-name-nondirectory (buffer-file-name)) " ends here\n")))
 
+;;   The file used by the Customization UI to store value-setting
+;; forms in a customization file, rather than at the end of the
+;; `init.el' file, is called `custom.el' in Rational Emacs. The file
+;; is loaded after this `init.el' file, and after the user `config.el'
+;; file has been loaded. Any variable values set in the user
+;; `config.el' will be overridden with the values set with the
+;; Customization UI and saved in the custom file.
+(customize-set-variable 'custom-file
+  (expand-file-name "custom.el" rational-config-path))
+
+;; The custom file will only be loaded if `rational-load-custom-file'
+;; is set to a non-nil value in the user's `config.el'.
+(when rational-load-custom-file
+  (load custom-file t))
+
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
-
-

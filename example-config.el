@@ -27,4 +27,7 @@
 
 (load-theme 'doom-snazzy t)
 
+;; To not load `custom.el' after `config.el', uncomment this line.
+;; (setq rational-load-custom-file nil)
+
 ;;; example-config.el ends here

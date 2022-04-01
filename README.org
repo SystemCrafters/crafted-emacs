@@ -173,7 +173,6 @@ filesystem, it is created. However, just the path is created, the files
 
 #+caption: Example of user created Rational Emacs =config.el= file.
 #+begin_src emacs-lisp
-
   (require 'rational-defaults)
   (require 'rational-screencast)
   (require 'rational-ui)
@@ -189,12 +188,15 @@ filesystem, it is created. However, just the path is created, the files
 
   (load-theme 'doom-snazzy t)
 
+  ;; To not load `custom.el' after `config.el', uncomment this line.
+  ;; (setq rational-load-custom-file nil)
 #+end_src
 
 ** The =custom.el= file
 
    The =custom.el= file will hold the auto-generated code from the Emacs
-   Customization UI.
+   Customization UI, and other packages that similarly add code to the variables
+   and faces form in the =init.el= file.
 
 *** Simplified overview of how Emacs Customization works
 
@@ -212,7 +214,7 @@ filesystem, it is created. However, just the path is created, the files
     the Customization UI. This is normal since the values are set each time
     emacs starts. They are technically "SAVED" since they exist as emacs-lisp
     code, but since they are not in a =custom-set-variables= form the
-    Customization UI only sees them as "SET for the current session only". 
+    Customization UI only sees them as "SET for the current session only".
 
     A =SAVED and set= value means the Customization code has written the
     configuration to disk to be loaded again the next time Emacs starts. When
@@ -242,33 +244,38 @@ filesystem, it is created. However, just the path is created, the files
 
 *** Loading the =custom.el= file
 
-    Rational Emacs loads the =custom.el= file during the initialization
-    process. As noted in the previous section, the =custom-set-variables= values
-    are in the =SET for current session only= state. Those values are saved to
-    the =custom.el= file just before the file is loaded after the initialization
-    process is finished. Any values set through the Customization UI or through
-    the other work flows, for example using the =org-agenda-to-front= or
-    =org-remove-file= which write to the =custom-set-variables= form, are
-    preserved as well.
+    When ~rational-load-custom-file~ is non-nil, the =custom.el= file is loaded
+    /after/ the initialization process, including after the user =config.el= is
+    loaded. By default, no custom file is loaded.
+
+    The customization variable values (as set in =init.el= with
+    =customize-set-variables=) are in the =SET for current session only= state,
+    unless altered by a saved customization loaded from =custom.el=. Any values
+    set through the Customization UI or other work flows, for example by using
+    the =org-agenda-to-front= or =org-remove-file= functions, which write to the
+    =custom-set-variables= form, are preserved in the =custom.el= file if they are
+    saved for future sessions (as by the Customization UI widget, or by code).
 
 *** Not loading the =custom.el= file
 
-    You may choose not to load the =custom.el= file. Using
-    =customize-set-variable= has the same effect as using the Customization UI,
-    with the primary difference, the customization is not written later as if
-    you had used the Customization UI. If you choose to follow this pattern, you
-    may not need to load the =custom.el= file ever. There are some caveats to
-    that statement: notably, using certain work flows with Org Agenda files or
-    risky variables in =.dir-locals.el= which write to the =custom.el=
-    file. Those workflows will update the =custom.el= file, but if it is not
-    loaded, those changes will never be applied, even though they are saved.
+    By default, no custom file is loaded, but any saved customizations are saved
+    to =custom.el= so you may load them manually, or opt to load them
+    automatically every time Emacs starts by customizing
+    ~rational-load-custom-file~ and toggling the option on, or by setting a
+    non-nil value in your =config.el= like exampled in =example-config.el=.
 
-    To not load the =custom.el= file, add the following code to your =config.el=
+    Using =customize-set-variable= in Emacs Lisp has the same effect as using
+    the Customization UI, except the customization is not saved to =custom.el=
+    as if you had used the Customization UI *and* used the widget to save the
+    customizations for future sessions.
 
-    #+begin_src emacs-lisp
-      (remove-hook 'after-init-hook #'rational-load-custom-file)
-    #+end_src
-    
+    If you choose to follow this pattern, customizing variables in your
+    =config.el= only (not using the UI) then you may never need to load
+    =custom.el=. However, there are some caveats: using certain work flows with
+    Org Agenda files or risky variables in =.dir-locals.el= which write to the
+    =custom.el= file will never be applied, even though they are saved in the
+    custom file.
+
 * Using it with =Chemacs2=
 
 If you have the =Chemacs2= configuration cloned to =~/.emacs.d= or

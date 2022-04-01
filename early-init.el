@@ -28,7 +28,7 @@
    ((getenv "RATIONAL_EMACS_HOME") (expand-file-name (getenv "RATIONAL_EMACS_HOME")))
    ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
     (if (getenv "XDG_CONFIG_HOME")
-	(expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
+        (expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
       (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
    ((getenv "HOME") (expand-file-name ".rational-emacs" (getenv "HOME"))))
   "The user's rational-emacs configuration path.")
@@ -87,6 +87,14 @@
 
 (defvar rational-prefer-guix-packages (rational-using-guix-emacs-p)
   "If t, expect packages to be installed via Guix by default.")
+
+(defvar rational-load-custom-file t
+  "When non-nil, load `custom.el' after `config.el'.
+
+The custom file is found in the `rational-config-path'. It
+contains customizations of variables and faces that are made by
+the user through the Customization UI, as well as any
+customizations made by packages.")
 
 ;; Load the early config file if it exists
 (let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
