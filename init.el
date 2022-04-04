@@ -6,6 +6,13 @@
             (message "Rational Emacs loaded in %s."
                      (emacs-init-time))))
 
+;; Define customization group for Rational Emacs.
+(defgroup rational '()
+  "A sensible starting point for hacking your own Emacs configuration."
+  :tag "Rational Emacs"
+  :link '(url-link "https://github.com/SystemCrafters/rational-emacs")
+  :group 'emacs)
+
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
 
