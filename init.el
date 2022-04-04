@@ -13,6 +13,50 @@
   :link '(url-link "https://github.com/SystemCrafters/rational-emacs")
   :group 'emacs)
 
+;;; package configuration
+(defun rational-package-archives-stale-p ()
+  "Check on-disk archives last modified date to see if it is stale.
+
+Return non-nil if the on-disk cache is older than one day or
+`nil' otherwise."
+  (let ((today (time-to-days (current-time)))
+        result)
+   (dolist (archive package-archives result)
+     (let* ((archive-name (expand-file-name (format "archives/%s/archive-contents" archive)
+                                            package-user-dir))
+            (archive-modified-date (time-to-days
+                                    (file-attribute-modification-time
+                                     (file-attributes archive-name)))))
+       (when (time-less-p archive-modified-date today)
+         (setq result t))))))
+
+(defmacro rational-install-package (package)
+  "Use `package.el' when it is enabled. Switch to using
+`straight.el' if it is not."
+  (if package-enable-at-startup
+      `(unless (package-installed-p ,package) (package-install ,package))
+    `(straight-use-package ,package)))
+
+;; Only use package.el if it is enabled. The user may have turned it
+;; off in their `early-config.el' file, so respect their wishes if so.
+(when package-enable-at-startup
+ ;; initialize package, but don't activate any packages, use `require'
+ ;; to load them manually to avoid activating unused but installed
+ ;; packages.
+ (package-initialize t)
+
+ (require 'seq)
+ ;; Only refresh package contents once per day on startup, or if the
+ ;; `package-archive-contents' has not been initialized. If Emacs has
+ ;; been running for a while, user will need to manually run
+ ;; `package-refresh-contents' before calling `package-install'.
+ (when (or (seq-empty-p package-archive-contents)
+           (rational-package-archives-stale-p))
+   (package-refresh-contents)))
+
+;; FIXME: temporary hack while migrating from straight
+(defalias 'straight-use-package #'package-install)
+
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
 
@@ -22,28 +66,14 @@
 (customize-set-variable 'large-file-warning-threshold 100000000) ;; change to ~100 MB
 
 
-;; Initialize straight.el
-(defvar bootstrap-version)
-(let ((bootstrap-file
-      (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-        "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-        'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
-
 (defun rational-ensure-package (package &optional args)
   "Ensure that PACKAGE is installed on the system, either via
-straight.el or Guix depending on the value of
+package.el or Guix depending on the value of
 `rational-prefer-guix-packages'."
   (if rational-prefer-guix-packages
       (unless (featurep package)
         (message "Package '%s' does not appear to be installed by Guix!"))
-    (straight-use-package package)))
+    (rational-install-package package)))
 
 ;; Check the system used
 (defconst ON-LINUX   (eq system-type 'gnu/linux))

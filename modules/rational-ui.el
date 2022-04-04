@@ -24,20 +24,20 @@
 ;; not displayed properly (it appears as a box with some numbers
 ;; and/or letters inside it).
 
+;; Read the documentation for `all-the-icons'; on Windows,
+;; `all-the-icons-install-fonts' only downloads fonts, they must be
+;; installed manually. This is necessary if icons are not displaying
+;; properly.
+
 ;;; Code:
 
-(straight-use-package '(all-the-icons
-			:post-build ((when ON-WINDOWS
-				       (warn
-					"%s"
-					"Read the documentation for `all-the-icons'; on Windows, `all-the-icons-install-fonts' only downloads fonts, they must be installed manually. This is necessary if icons are not displaying properly.")))))
-(straight-use-package 'doom-modeline)
-(straight-use-package 'doom-themes)
-(straight-use-package 'elisp-demos)
-(straight-use-package 'helpful)
+(rational-install-package 'all-the-icons)
+(rational-install-package 'doom-modeline)
+(rational-install-package 'doom-themes)
+(rational-install-package 'elisp-demos)
+(rational-install-package 'helpful)
 
 ;;;; Font
-
 (defun rational-ui--set-default-font (spec)
   "Set the default font based on SPEC.
 
@@ -158,7 +158,7 @@ Used as hook for modes which should not display line numebrs."
   (pulse-momentary-highlight-one-line (point)))
 
 (dolist (command '(scroll-up-command scroll-down-command
-				                     recenter-top-bottom other-window))
+                                     recenter-top-bottom other-window))
   (advice-add command :after #'pulse-line))
 
 (provide 'rational-ui)

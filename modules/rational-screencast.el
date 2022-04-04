@@ -11,7 +11,7 @@
 
 ;;; Code:
 
-(straight-use-package 'keycast)
+(rational-install-package 'keycast)
 
 (customize-set-variable 'keycast-remove-tail-elements nil)
 (customize-set-variable 'keycast-insert-after 'mode-line-misc-info)
