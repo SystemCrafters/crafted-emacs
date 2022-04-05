@@ -12,6 +12,8 @@ before using.
 
 * Quick Start
 
+Install emacs >= 27.2 from your distribution's repositories.
+
 Clone this repository to =~/.emacs.d= or =~/.config/emacs=:
 
 #+caption: Command to clone System Crafters Rational Emacs =git= repository.
