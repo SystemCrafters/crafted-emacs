@@ -54,9 +54,6 @@ Return non-nil if the on-disk cache is older than one day or
            (rational-package-archives-stale-p))
    (package-refresh-contents)))
 
-;; FIXME: temporary hack while migrating from straight
-(defalias 'straight-use-package #'package-install)
-
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
 
