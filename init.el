@@ -43,7 +43,14 @@ Return non-nil if the on-disk cache is older than one day or
  ;; initialize package, but don't activate any packages, use `require'
  ;; to load them manually to avoid activating unused but installed
  ;; packages.
- (package-initialize t)
+  (cond
+   ((eq system-type 'darwin)
+    ;; For some reason, on a Mac, the load-path is not initialized
+    ;; with installed packages unless packages are also activated in
+    ;; Emacs 28.
+    (package-initialize))
+   (t
+    (package-initialize)))
 
  (require 'seq)
  ;; Only refresh package contents once per day on startup, or if the
