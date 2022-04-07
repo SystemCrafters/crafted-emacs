@@ -47,7 +47,7 @@ Return non-nil if the on-disk cache is older than one day or
     ;; Emacs 28.
     (package-initialize))
    (t
-    (package-initialize)))
+    (package-initialize t)))
 
  (require 'seq)
  ;; Only refresh package contents once per day on startup, or if the
