@@ -30,12 +30,9 @@ Return non-nil if the on-disk cache is older than one day or
        (when (time-less-p archive-modified-date today)
          (setq result t))))))
 
-(defmacro rational-install-package (package)
-  "Use `package.el' when it is enabled. Switch to using
-`straight.el' if it is not."
-  (if package-enable-at-startup
-      `(unless (package-installed-p ,package) (package-install ,package))
-    `(straight-use-package ,package)))
+(defmacro rational-package-install-package (package)
+  "Only install the package if it is not already installed."
+  `(unless (package-installed-p ,package) (package-install ,package)))
 
 ;; Only use package.el if it is enabled. The user may have turned it
 ;; off in their `early-config.el' file, so respect their wishes if so.
