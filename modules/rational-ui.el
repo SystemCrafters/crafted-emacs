@@ -31,11 +31,11 @@
 
 ;;; Code:
 
-(rational-install-package 'all-the-icons)
-(rational-install-package 'doom-modeline)
-(rational-install-package 'doom-themes)
-(rational-install-package 'elisp-demos)
-(rational-install-package 'helpful)
+(rational-package-install-package 'all-the-icons)
+(rational-package-install-package 'doom-modeline)
+(rational-package-install-package 'doom-themes)
+(rational-package-install-package 'elisp-demos)
+(rational-package-install-package 'helpful)
 
 ;;;; Font
 (defun rational-ui--set-default-font (spec)

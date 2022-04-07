@@ -74,7 +74,7 @@ package.el or Guix depending on the value of
   (if rational-prefer-guix-packages
       (unless (featurep package)
         (message "Package '%s' does not appear to be installed by Guix!"))
-    (rational-install-package package)))
+    (rational-package-install-package package)))
 
 ;; Check the system used
 (defconst ON-LINUX   (eq system-type 'gnu/linux))

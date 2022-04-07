@@ -14,11 +14,11 @@
 
 ;;; Code:
 
-(rational-install-package 'vertico)
-(rational-install-package 'consult)
-(rational-install-package 'orderless)
-(rational-install-package 'marginalia)
-(rational-install-package 'embark)
+(rational-package-install-package 'vertico)
+(rational-package-install-package 'consult)
+(rational-package-install-package 'orderless)
+(rational-package-install-package 'marginalia)
+(rational-package-install-package 'embark)
 
 (defun rational-completion/minibuffer-backward-kill (arg)
   "When minibuffer is completing a file name delete up to parent

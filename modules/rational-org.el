@@ -11,7 +11,7 @@
 
 ;;; Code:
 
-(rational-install-package 'org-appear)
+(rational-package-install-package 'org-appear)
 
 ;; Return or left-click with mouse follows link
 (customize-set-variable 'org-return-follows-link t)

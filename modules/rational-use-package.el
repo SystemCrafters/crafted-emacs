@@ -12,7 +12,7 @@
 
 ;;; Code:
 
-(rational-install-package 'use-package)
+(rational-package-install-package 'use-package)
 
 ;; we are possibly here because `straight.el' is preferred, so only
 ;; configure package in that case. This work has already been done if
