@@ -22,7 +22,7 @@
 
 ;; Hide markup markers
 (customize-set-variable 'org-hide-emphasis-markers t)
-(add-hook 'org-mode 'org-appear-mode)
+(add-hook 'org-mode-hook 'org-appear-mode)
 
 (provide 'rational-org)
 ;;; rational-org.el ends here
