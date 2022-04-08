@@ -11,7 +11,7 @@
 
 ;;; Code:
 
-(straight-use-package 'evil-nerd-commenter)
+(rational-package-install-package 'evil-nerd-commenter)
 
 ;; Set a global binding for better line commenting/uncommenting
 (define-key global-map [remap comment-dwim] #'evilnc-comment-or-uncomment-lines)

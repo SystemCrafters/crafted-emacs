@@ -73,7 +73,7 @@ inside of a Guix Home configuration so that things like font sizes, themes, etc
 can be system-specific.
 
 It can also use packages installed via the Guix package manager instead of
-=straight.el=.
+=package.el=.
 
 ** Works well with =Chemacs2=
 
@@ -114,8 +114,7 @@ information about how they can be configured!
   =Vertico=
 - [[file:modules/rational-evil.el][rational-evil]] :: An =evil-mode= configuration
 - [[file:modules/rational-windows.el][rational-windows]] :: Window management configuration
-- [[file:modules/rational-use-package.el][rational-use-package]] :: Configuration for =use-package= if you prefer it over
-  =straight.el=
+- [[file:modules/rational-use-package.el][rational-use-package]] :: Configuration for =use-package= 
 
 Modules that we will be adding in the future:
 

@@ -14,11 +14,11 @@
 
 ;;; Code:
 
-(straight-use-package 'vertico)
-(straight-use-package 'consult)
-(straight-use-package 'orderless)
-(straight-use-package 'marginalia)
-(straight-use-package 'embark)
+(rational-package-install-package 'vertico)
+(rational-package-install-package 'consult)
+(rational-package-install-package 'orderless)
+(rational-package-install-package 'marginalia)
+(rational-package-install-package 'embark)
 
 (defun rational-completion/minibuffer-backward-kill (arg)
   "When minibuffer is completing a file name delete up to parent
@@ -34,7 +34,7 @@ folder, otherwise delete a word"
 ;;;; Vertico
 
 (require 'vertico)
-(require 'vertico-directory "extensions/vertico-directory.el")
+(require 'vertico-directory)
 
 (with-eval-after-load 'evil
   (define-key vertico-map (kbd "C-j") 'vertico-next)
@@ -51,7 +51,7 @@ folder, otherwise delete a word"
 
 ;; Configure Marginalia
 (require 'marginalia)
-(setq marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
+(customize-set-variable 'marginalia-annotators '(marginalia-annotators-heavy marginalia-annotators-light nil))
 (marginalia-mode 1)
 
 ;; Set some consult bindings
