@@ -1,0 +1,13 @@
+* Using =straight.el=
+
+Early in the lifetime of this project, the project used =straight.el=
+to install packages. However, after a discussion, the community
+decided to move to using =package.el= instead as it lined up with the
+principles of the project more than =straight.el=; notably, it is
+built in and one of the principles specifically states "Prioritize
+built-in Emacs functionality".
+
+However, as many people who started with this project preferred to use
+=straight.el=, the move to =package.el= was suboptimal. This directory
+contains an example configuration switching back to using
+=straight.el= with *Rational Emacs*. 

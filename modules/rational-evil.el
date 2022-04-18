@@ -17,9 +17,9 @@
 encourage the use of Vim-style movement keys (hjkl).")
 
 ;; Install dependencies
-(straight-use-package 'evil)
-(straight-use-package 'undo-tree)
-(straight-use-package 'evil-collection)
+(rational-package-install-package 'evil)
+(rational-package-install-package 'undo-tree)
+(rational-package-install-package 'evil-collection)
 
 ;; Turn on undo-tree globally
 (global-undo-tree-mode)
