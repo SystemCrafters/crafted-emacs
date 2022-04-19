@@ -1,0 +1,39 @@
+* Contributing documentation
+
+  The documentation provided here is written in Org mode files. The
+  primary file is the =rational-emacs.org= file. Each module has it's
+  own Org file as well, but each is included in the primary file.
+
+  To export the org file to an info file, run the following command:
+  =M-x org-texinfo-export-to-info RET=. To use the org export
+  interface to reach this function, make sure to first run:
+
+  #+begin_src emacs-lisp
+    (require 'ox-texinfo)
+  #+end_src
+
+  Then you can use =C-c C-e i= to export to info.
+  
+* Documenting a Rational Emacs module
+
+  Add an Org file named for the module. Once you are ready to include
+  it in the =rational-emacs.org= file, add it to the modules section
+  following the pattern provided there, here is an example:
+
+  #+begin_example
+    ,#+include: rational-defaults.org
+  #+end_example
+
+  Once you have added the module documentation, export the info file
+  and submit a PR for inclusion. 
+
+* Guidelines
+
+  + Make sure your grammar is correct.
+  + Spellcheck your work.
+  + Preview the info document in Emacs to make sure the formatting
+    works.
+  + Use =@@texinfo:@code{}@@= or =@@texinfo:@samp{}@@= tags in
+    headers, captions, or other places where org formatting does not
+    directly translate correctly.
+  + Provide examples.
