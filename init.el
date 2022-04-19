@@ -135,3 +135,9 @@ package.el or Guix depending on the value of
 
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
+
+(let ((rational-info-dir (expand-file-name "docs/dir" user-emacs-directory)))
+  (when (file-exists-p rational-info-dir)
+    (require 'info)
+    (info-initialize)
+    (push (file-name-directory rational-info-dir) Info-directory-list)))

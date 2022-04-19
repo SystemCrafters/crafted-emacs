@@ -88,6 +88,11 @@ Instead of providing a higher-level configuration system out of the box like
 other Emacs configurations, we follow standard Emacs Lisp patterns so that you
 can learn by reading the configuration.
 
+** Reversible
+
+   Not everyone will agree with our decisions, so each customization should be
+   easily reversible in the users =config.el= file. 
+
 * Why use it?
 
 Why choose this configuration over /Doom Emacs/, /Spacemacs/, /Prelude/, or
@@ -330,6 +335,44 @@ of the [[https://github.com/SystemCrafters/rational-emacs/blob/master/README.org
 
 If you enjoy crafting your computing experience, join the [[https://systemcrafters.net/][SystemCrafters]]
 community!
+
+** Contributing Tips for Elisp
+
+   + Prefer =customize-set-variable= instead of =setq= for =defcustom=
+     values. This helps make sure constructors or setters attached to the
+     variable are run when the value is set.
+   + Provide =defcustom= variables for things we expect the user to modify and
+     make sure it is in the appropriate group.
+   + Provide verbose doc-strings for =defvar=, =defcustom=, =defun=, =defmacro=,
+     etc to clearly document what is going on.
+   + Make sure to follow doc-string guidelines (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html][Documentation Tips]] or [[info:elisp#Documentation
+     Tips][elisp#Documentation Tips]])
+   + Add comments for blocks of code, especially to describe /why/ the code is
+     present, or the intention. These comments serve as documentation when
+     reading the code where a doc-string is not an option.
+   + Add or update documentation in the /docs/ folder. Especially for new
+     modules, please provide the info file with your PR. (see [[file:docs/CONTRIBUTING.org][Contributing Documentation]])
+   + If your PR addresses an issue, whether it closes or fixes the issue, or is
+     just related to it, please add the issue number in your commit message or
+     the description of your PR so they can be linked together. 
+
+** Contributing Tips for Issues
+
+   We welcome your questions and ideas, please open an issue if you have one!
+
+   + If you feel there is a defect with what we provide, please provide the
+     steps necessary to reproduce the issue. A minimal configuration, a link to
+     your configuration, or a gist/pastebin link or similar is appreciated to
+     help us work toward a solution together.
+   + If you feel there is a missing feature, please describe your feature in as
+     much detail as possible so we understand your request.
+   + If you have a question, be as specific as possible so we can understand how
+     to help you as best we can.
+   + PRs to address any of the issues you might raise are appreciated and
+     encouraged! If you don't provide one, please be patient with us, it may
+     take longer to fix an issue or provide a missing feature. That being said,
+     please feel free to check on the status of issues from time to time if it
+     has been a while since the last activity.
 
 * License
 
