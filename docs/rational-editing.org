@@ -1,0 +1,146 @@
+* Rational Emacs Editing Module
+
+  To use this module, simply require it in your config.
+
+  #+begin_src emacs-lisp
+    (require 'rational-editing)
+  #+end_src
+
+  - =evil-nerd-commenter=
+
+    This module installs the =evil-nerd-commenter= package to provide
+    a few more features when commenting code; for example, you can
+    provide a number of lines to comment and press a key to do the
+    commenting without having select a region. See the [[https://github.com/redguardtoo/evil-nerd-commenter][website]] for
+    more information. To change the configuration, add this code to
+    =config.el=
+
+    #+begin_src emacs-lisp
+      (define-key global-map [remap evilnc-comment-or-uncomment-lines] #'comment-dwim)
+    #+end_src
+
+  - Whitespace
+
+    Keeping a file reasonably clean of dangling or other useless
+    whitespace is the focus of the next bit of configuration.
+
+    See [[info:emacs#Useless Whitespace][the Emacs manual]] for more information.
+
+  - =whitespace-style= : =(face tabs empty trailing tab-mark
+    indentation::space)=
+
+    This configures the types of whitespace to visualize and
+    cleanup, there are several options:
+
+    - =face=: enable all visualization via faces (see below).
+
+    - =tabs=: TABs are visualized via faces. It has effect only if
+      face (see above) is present in whitespace-style.
+
+    - =empty=: empty lines at beginning and/or end of buffer are
+      visualized via faces. It has effect only if face (see above)
+      is present in whitespace-style.
+
+    - =trailing=: trailing blanks are visualized via faces. It has
+      effect only if face (see above) is present in
+      whitespace-style.
+
+    - =tab-mark=: TABs are visualized via display table
+
+    - =indentation::space=: TABs at beginning of line are visualized
+      via faces. It has effect only if face (see above) is present
+      in whitespace-style.
+
+    See the commentary for this variable (=C-h v whitespace-style
+    RET=) for more options. This variable can be changed through the
+    Customization UI or by adding to =config.el=
+
+    #+begin_src emacs-lisp
+      ;; change the list of options to be what you wish based on the values
+      ;; mentioned in the commentary for this variable
+      ;; (C-h v whitespace-style RET)
+      (customize-set-variable 'whitespace-style
+                              '(face tabs empty trailing tab-mark
+                                     indentation::space))
+    #+end_src
+
+  - =whitespace-action= : =(cleanup auto-cleanup)=
+
+    This specifies what action to take when a buffer is visited or
+    written.
+
+    - =cleanup=: cleanup any bogus whitespace always when local
+      whitespace is turned on. See whitespace-cleanup and
+      whitespace-cleanup-region.
+
+    - =auto-cleanup=: cleanup any bogus whitespace when buffer is
+      written. See whitespace-cleanup and whitespace-cleanup-region.
+
+    See the commentary for this variable (=C-h v whitespace-action
+    RET=) for more options. This variable can be changed through the
+    Customization UI or by adding to =config.el=
+
+    #+begin_src emacs-lisp
+      ;; change the list of options to be what you wish based on the values
+      ;; mentioned in the commentary for this variable
+      ;; (C-h v whitespace-action RET)
+      (customize-set-variable 'whitespace-action '(cleanup auto-cleanup))
+    #+end_src
+
+  - =whitespace-mode=
+
+    This minor mode is added to `prog-mode' and `text-mode' via
+    hooks. To change this, add code similar to the following to
+    =config.el=
+
+    #+begin_src emacs-lisp
+      (remove-hook 'prog-mode-hook #'whitespace-mode)
+    #+end_src
+
+  - =electric-pair-mode=
+
+    This minor mode will automatically insert balanced characters
+    when the opening character is inserted. This applies to
+
+    - =()=
+    - ={}=
+    - =[]=
+    - =""=
+    - =<>=
+
+    This can be turned off by adding this code to =config.el=
+
+    #+begin_src emacs-lisp
+      (electric-pair-mode -1)
+    #+end_src
+
+    Alternatively, if this should only apply to certain modes,
+    programming language modes for example, this code would be used:
+
+    #+begin_src emacs-lisp
+      (electric-pair-mode -1)                         ; turn off globally
+
+      (add-hook 'prog-mode-hook #'electric-pair-mode) ; turn on only for
+                                                      ; programming modes
+    #+end_src
+
+  - =show-paren-mode=
+
+    This minor mode highlights matching parens =()=, including
+    braces ={}=, square brackets =[]=, and angle brackets =<>=.
+
+    This can be turned off by adding this code to =config.el=
+
+    #+begin_src emacs-lisp
+      (show-paren-mode -1)
+    #+end_src
+
+    Alternatively, if this should only apply to certain modes,
+    programming language modes for example, this code would be used:
+
+    #+begin_src emacs-lisp
+      (show-paren-mode -1)                         ; turn off globally
+
+      (add-hook 'prog-mode-hook #'show-paren-mode) ; turn on only for
+                                                   ; programming modes
+    #+end_src
