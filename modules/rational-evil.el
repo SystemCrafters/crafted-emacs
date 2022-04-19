@@ -17,9 +17,9 @@
 encourage the use of Vim-style movement keys (hjkl).")
 
 ;; Install dependencies
-(straight-use-package 'evil)
-(straight-use-package 'undo-tree)
-(straight-use-package 'evil-collection)
+(rational-package-install-package 'evil)
+(rational-package-install-package 'undo-tree)
+(rational-package-install-package 'evil-collection)
 
 ;; Turn on undo-tree globally
 (global-undo-tree-mode)
@@ -27,7 +27,6 @@ encourage the use of Vim-style movement keys (hjkl).")
 ;; Set some variables that must be configured before loading the package
 (customize-set-variable 'evil-want-integration t)
 (customize-set-variable 'evil-want-keybinding nil)
-(customize-set-variable 'evil-want-C-u-scroll t)
 (customize-set-variable 'evil-want-C-i-jump nil)
 (customize-set-variable 'evil-respect-visual-line-mode t)
 (customize-set-variable 'evil-undo-system 'undo-tree)

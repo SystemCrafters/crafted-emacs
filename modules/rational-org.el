@@ -11,18 +11,18 @@
 
 ;;; Code:
 
-(straight-use-package 'org-appear)
+(rational-package-install-package 'org-appear)
 
 ;; Return or left-click with mouse follows link
-(setq org-return-follows-link t)
-(setq org-mouse-1-follows-link t)
+(customize-set-variable 'org-return-follows-link t)
+(customize-set-variable 'org-mouse-1-follows-link t)
 
 ;; Display links as the description provided
-(setq org-descriptive-links t)
+(customize-set-variable 'org-descriptive-links t)
 
 ;; Hide markup markers
-(setq org-hide-emphasis-markers t)
-(add-hook 'org-mode 'org-appear-mode)
+(customize-set-variable 'org-hide-emphasis-markers t)
+(add-hook 'org-mode-hook 'org-appear-mode)
 
 (provide 'rational-org)
 ;;; rational-org.el ends here

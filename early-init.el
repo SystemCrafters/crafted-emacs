@@ -5,7 +5,27 @@
 (setq gc-cons-threshold (* 50 1000 1000))
 
 ;; Prefer loading newest compiled .el file
-(setq load-prefer-newer noninteractive)
+(customize-set-variable 'load-prefer-newer noninteractive)
+
+;;; package configuration
+(require 'package)
+
+;; Emacs 27.x has gnu elpa as the default
+;; Emacs 28.x adds the nongnu elpa to the list by default, so only
+;; need to add nongnu when this isn't Emacs 28+
+(when (version< emacs-version "28")
+  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
+(add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+(customize-set-variable 'package-archive-priorities
+                        '(("gnu"    . 99)   ; prefer GNU packages
+                          ("nongnu" . 80)   ; use non-gnu packages if
+                                            ; not found in GNU elpa
+                          ("stable" . 70)   ; prefer "released" versions
+                                            ; from melpa
+                          ("melpa"  . 0)))  ; if all else fails, get it
+                                            ; from melpa
 
 ;; Find the user configuration path
 ;; In order do these checks:
@@ -28,7 +48,7 @@
    ((getenv "RATIONAL_EMACS_HOME") (expand-file-name (getenv "RATIONAL_EMACS_HOME")))
    ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
     (if (getenv "XDG_CONFIG_HOME")
-	(expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
+        (expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
       (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
    ((getenv "HOME") (expand-file-name ".rational-emacs" (getenv "HOME"))))
   "The user's rational-emacs configuration path.")
@@ -57,9 +77,6 @@
 
   (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory)))
 
-;; Don't use package.el, we'll use straight.el instead
-(setq package-enable-at-startup nil)
-
 ;; Remove some unneeded UI elements (the user can turn back on anything they wish)
 (setq inhibit-startup-message t)
 (push '(tool-bar-lines . 0) default-frame-alist)
@@ -71,9 +88,7 @@
 (load-theme 'deeper-blue t)
 
 ;; Make the initial buffer load faster by setting its mode to fundamental-mode
-(setq initial-major-mode 'fundamental-mode)
-
-
+(customize-set-variable 'initial-major-mode 'fundamental-mode)
 
 (defun rational-using-guix-emacs-p ()
   "Verifies if the running emacs executable is under the `/gnu/store/' path."
@@ -87,6 +102,14 @@
 
 (defvar rational-prefer-guix-packages (rational-using-guix-emacs-p)
   "If t, expect packages to be installed via Guix by default.")
+
+(defvar rational-load-custom-file t
+  "When non-nil, load `custom.el' after `config.el'.
+
+The custom file is found in the `rational-config-path'. It
+contains customizations of variables and faces that are made by
+the user through the Customization UI, as well as any
+customizations made by packages.")
 
 ;; Load the early config file if it exists
 (let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
