@@ -51,7 +51,7 @@ Emacs configuration journey.
     + =tab-bar-mode= for organizing groups of buffers.
 
     + =whitespace.el= to cleanup whitespace, like tabs, newlines or
-      additioanal space added to the end of lines.
+      additional space added to the end of lines.
 
     + =pulse.el= to flash the current line under certain conditions.
 
@@ -113,7 +113,7 @@ Emacs configuration journey.
 * Customization
 
   To add your own customization to this configuration, create a
-  configuraton file in one of the following places:
+  configuration file in one of the following places:
 
   - =~/.rational-emacs/=
   - =~/.config/rational-emacs/=
@@ -152,7 +152,7 @@ Emacs configuration journey.
   - Use the =HOME= environment variable to make the path, which expands to
     =$HOME/.rational-emacs=.
 
-  Once the =rational-config-path= is determined, if it does not exist in the filesystem, it is created. However, just the path is created, the files =config.el= and =early-config.el= must be created by you.
+  Once the =rational-config-path= is determined, if it does not exist in the file system, it is created. However, just the path is created, the files =config.el= and =early-config.el= must be created by you.
 
 ** Example Configuration:
 
@@ -195,7 +195,7 @@ Emacs configuration journey.
     =customize-set-variable= to update the values defined with
     =defcustom=. This will show the values as =SET for current session only= in
     the Customization UI. This is normal since the values are set each time
-    emacs starts. They are technically "SAVED" since they exist as emacs-lisp
+    Emacs starts. They are technically "SAVED" since they exist as emacs-lisp
     code, but since they are not in a =custom-set-variables= form the
     Customization UI only sees them as "SET for the current session only".
 
@@ -343,7 +343,7 @@ Emacs configuration journey.
   and add an entry to it in your =~/.emacs-profiles.el= file:
 
   You can then put your =early-config.el= and =config.el= files in the
-  subfolder =~/path/to/rational-emacs/rational-emacs=. So, for example
+  sub-folder =~/path/to/rational-emacs/rational-emacs=. So, for example
   if you installed Rational Emacs to =~/.rational-emacs=, then your
   =early-config.el= and =config.el= files would be in the path
   =~/.rational-emacs/rational-emacs=. This is the default path, but
