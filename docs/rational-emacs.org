@@ -58,7 +58,7 @@ Emacs configuration journey.
     + And others...
 
     This is not to take away from the amazing work package providers
-    have contributed to the Emacs community. By prioriting built-in
+    have contributed to the Emacs community. By prioritizing built-in
     features, we can highlight less known packages, have a more stable
     product, and reduce the amount of network load just to get
     started. Indeed, if you do not pull in any of the modules we
