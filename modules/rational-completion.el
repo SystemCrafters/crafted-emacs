@@ -76,5 +76,11 @@ folder, otherwise delete a word"
 ;; Use Embark to show bindings in a key prefix with `C-h`
 (setq prefix-help-command #'embark-prefix-help-command)
 
+;; disable auto-pairing of "<" in org-mode
+(add-hook 'org-mode-hook (lambda ()
+    (setq-local electric-pair-inhibit-predicate
+    `(lambda (c)
+        (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
+
 (provide 'rational-completion)
 ;;; rational-completion.el ends here
