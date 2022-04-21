@@ -1,4 +1,4 @@
-;;;; rational-autocompile.el --- Autocompile emacs-lisp code  -*- lexical-binding: t; -*-
+;;;; rational-compile.el --- Autocompile emacs-lisp code  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -8,8 +8,8 @@
 
 ;;; Commentary:
 
-;; This module defines variables, modules and hooks to enable
-;; automatic compilation of emacs-lisp source files.
+;; This module defines variables, functions and hooks to enable
+;; automatic compilation of some emacs-lisp source files.
 
 ;; This could be activated for the `modules' subdirectory under your
 ;; `user-emacs-directory', your files under `rational-config-path', or
@@ -23,28 +23,28 @@
 
 ;;;; Variables:
 ;; We define a variable to enable/disable modules autocompilation.
-(defvar rational-autocompile-modules t
+(defvar rational-compile-modules t
   "When non-nil, autocompile emacs lisp sources for the modules on startup.")
 
-(defvar rational-autocompile-user-configuration t
+(defvar rational-compile-user-configuration t
   "When non-nil, autocompile emacs lisp sources for the modules on startup.")
 
-(defvar rational-autocompile-init-files nil
+(defvar rational-compile-init-files nil
   "When non-nil, autocompile init files on startup.")
 
-(defvar rational-autocompile-on-save nil
+(defvar rational-compile-on-save nil
   "When non-nil, autocompile the file after saving it.")
 
-(defvar rational-autocompile-extra-directories-list nil
+(defvar rational-compile-extra-directories-list nil
   "List of extra directories to autocompile.")
 
-(defvar rational-autocompile-init-files-list
+(defvar rational-compile-init-files-list
   '("early-init.el" "init.el")
   "List of initialization file names.")
 
 ;;;; Functions:
 ;; A function to compile a specific file
-(defun rational-autocompile-file (f)
+(defun rational-compile-file (f)
   "Compiles (native or byte-code) the file F.
 
 F could be a single file or a list of files.
@@ -62,17 +62,17 @@ directory will be compiled, but not it's subdirectories."
           (byte-recompile-file source nil 0))))))
 
 ;; A function to compile the buffer's file
-(defun rational-autocompile-buffer (&optional b)
+(defun rational-compile-buffer (&optional b)
   "Compiles (native or byte-code) the file of buffer B."
-  (when b
-    (unless (bufferp b)
-      (cl-return nil))
+  (when (and b ;; Let's be sure it is not nil
+             (not (bufferp b)))
+    (cl-return nil))
   (let ((file (buffer-file-name b)))
     (when file
-      (rational-autocompile-file file)))))
+      (rational-compile-file file))))
 
 ;; A function to compile a specific directory
-(defun rational-autocompile-directory (d)
+(defun rational-compile-directory (d)
   "Compiles (native or byte-ocde) the files within directory D.
 
 D could be a single directory or a list of directories."
@@ -84,71 +84,71 @@ D could be a single directory or a list of directories."
       (byte-recompile-directory source 0))))
 
 ;; A function to get the list of modules directories with full path:
-(defun rational-autocompile--config-dirs-list ()
+(defun rational-compile--config-dirs-list ()
   "Returns a list of configured directories to autocompile."
-  (flatten-list `(,(and rational-autocompile-modules
+  (flatten-list `(,(and rational-compile-modules
                         (expand-file-name "modules/" user-emacs-directory))
-                  ,(and rational-autocompile-user-configuration
+                  ,(and rational-compile-user-configuration
                         (expand-file-name "./" rational-config-path))
-                  ,rational-autocompile-extra-directories-list)))
+                  ,rational-compile-extra-directories-list)))
 
 ;; A function to get the list of init files with full path:
-(defun rational-autocompile--init-files-list ()
+(defun rational-compile--init-files-list ()
   "Returns a list of the init files."
   (mapcar (lambda (f)
             (expand-file-name f user-emacs-directory))
-          rational-autocompile-init-files-list))
+          rational-compile-init-files-list))
 
 ;; A function to execute the compilation of the modules directory:
-(defun rational-autocompile-modules ()
+(defun rational-compile-modules ()
   "Compile (native or byte-code) the modules' source code for faster startups."
   (interactive)
-  (rational-autocompile-directory
-   (rational-autocompile--config-dirs-list)))
+  (rational-compile-directory
+   (rational-compile--config-dirs-list)))
 
 ;; A funciton to execute the compilation of the init files:
-(defun rational-autocompile-init ()
+(defun rational-compile-init ()
   "Compile (native or byte-code) the initialization files.
 
 The files to be compiled is defined in
-`rational-autocompile-init-files-list'."
+`rational-compile-init-files-list'."
   (interactive)
-  (rational-autocompile-file (rational-autocompile--init-files-list)))
+  (rational-compile-file (rational-compile--init-files-list)))
 
 ;;;; Hooks:
 
 ;;;;; Modules
 ;; To autocompile modules.  This could be toggled by setting
-;; `rational-autocompile-modules' or
-;; `rational-autocompile-user-configuration' either to `nil' or
+;; `rational-compile-modules' or
+;; `rational-compile-user-configuration' either to `nil' or
 ;; `t'.
 (add-hook 'emacs-startup-hook ;; or kill-emacs-hook?
           (lambda ()
-            (when (or rational-autocompile-modules
-                      rational-autocompile-user-configuration)
-              (rational-autocompile-modules))))
+            (when (or rational-compile-modules
+                      rational-compile-user-configuration)
+              (rational-compile-modules))))
 
 ;;;;; Init files
 ;; To autocompile init files.  This could be toggled by setting
-;; `rational-autocompile-init-files' or
-;; `rational-autocompile-user-configuration' either to `nil' or
+;; `rational-compile-init-files' or
+;; `rational-compile-user-configuration' either to `nil' or
 ;; `t'.
 (add-hook 'emacs-startup-hook ;; or kill-emacs-hook?
           (lambda ()
-            (when (or rational-autocompile-init-files
-                      rational-autocompile-user-configuration)
-              (rational-autocompile-init))))
+            (when (or rational-compile-init-files
+                      rational-compile-user-configuration)
+              (rational-compile-init))))
 
 ;;;;; On save files
 ;; To auto compile after saving the file.  This could be toggled by
-;; seting `rational-autocompile-on-save' to `nil' or `t'
+;; seting `rational-compile-on-save' to `nil' or `t'
 (add-hook 'after-save-hook
           (lambda ()
-            (when (and rational-autocompile-on-save
+            (when (and rational-compile-on-save
                        (string-equal major-mode "emacs-lisp-mode"))
-              (rational-autocompile-buffer))))
+              (rational-compile-buffer))))
 
 
 ;;; Package:
-(provide 'rational-autocompile)
-;;; rational-autocompile.el ends here
+(provide 'rational-compile)
+;;; rational-compile.el ends here
