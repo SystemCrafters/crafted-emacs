@@ -172,7 +172,7 @@ Emacs configuration journey.
      '(rational-ui-default-font
        '(:font "JetBrains Mono" :weight light :height 185)))
 
-    (load-theme 'doom-snazzy t)
+    (load-theme 'doom-one t)
 
   #+end_src
 
@@ -243,7 +243,7 @@ Emacs configuration journey.
       (require 'rational-completion)
       (require 'rational-windows)
 
-      (load-theme 'doom-snazzy t)
+      (load-theme 'doom-one t)
 
       (load "custom")
       ;;; example-config.el ends here
@@ -297,7 +297,7 @@ Emacs configuration journey.
                               '(:font "JetBrains Mono" :weight light :height 185))
       (customize-set-variable 'rational-ui-display-line-numbers t)
 
-      (load-theme 'doom-snazzy t)
+      (load-theme 'doom-one t)
     #+end_src
 
 *** Caveat on the timing of loading =custom.el=
