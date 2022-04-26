@@ -14,21 +14,27 @@
   :group 'emacs)
 
 ;;; package configuration
-(defun rational-package-archives-stale-p ()
-  "Check on-disk archives last modified date to see if it is stale.
+(defun rational-package-archive-stale-p (archive)
+  "Return `t' if ARCHIVE is stale.
 
-Return non-nil if the on-disk cache is older than one day or
-`nil' otherwise."
+ARCHIVE is stale if the on-disk cache is older than 1 day"
   (let ((today (time-to-days (current-time)))
-        result)
-   (dolist (archive package-archives result)
-     (let* ((archive-name (expand-file-name (format "archives/%s/archive-contents" (car archive))
-                                            package-user-dir))
-            (archive-modified-date (time-to-days
-                                    (file-attribute-modification-time
-                                     (file-attributes archive-name)))))
-       (when (time-less-p archive-modified-date today)
-         (setq result t))))))
+        (archive-name (expand-file-name
+                       (format "archives/%s/archive-contents" archive)
+                       package-user-dir)))
+    (time-less-p (time-to-days (file-attribute-modification-time
+                                (file-attributes archive-name)))
+                 today)))
+
+(defun rational-package-archives-stale-p ()
+  "Return `t' if any PACKAGE-ARHIVES cache is out of date.
+
+Check each archive listed in PACKAGE-ARCHIVES, if the on-disk
+cache is older than 1 day, return a non-nil value. Fails fast,
+will return `t' for the first stale archive found or `nil' if
+they are all up-to-date."
+  (interactive)
+  (cl-some #'rational-package-archive-stale-p (mapcar #'car package-archives)))
 
 (defmacro rational-package-install-package (package)
   "Only install the package if it is not already installed."
