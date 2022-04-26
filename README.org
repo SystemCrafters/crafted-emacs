@@ -192,6 +192,8 @@ filesystem, it is created. However, just the path is created, the files
    '(rational-ui-default-font
      '(:font "JetBrains Mono" :weight light :height 185)))
 
+  ;; Install and load your theme
+  (rational-package-install-package 'doom-themes)
   (load-theme 'doom-one t)
 
   ;; To not load `custom.el' after `config.el', uncomment this line.
