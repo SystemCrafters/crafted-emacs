@@ -57,6 +57,18 @@ Return non-nil if the on-disk cache is older than one day or
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
 
+;; Add the user's custom-modules to the top of the load-path
+;; so any user custom-modules take precedence.
+(when (file-directory-p (expand-file-name "custom-modules/" rational-config-path))
+  (setq load-path
+        (append (let ((load-path (list))
+                      (default-directory (expand-file-name "custom-modules/" rational-config-path)))
+                  (add-to-list 'load-path (expand-file-name "custom-modules/" rational-config-path))
+                  ;;(normal-top-level-add-to-load-path '("."))
+                  (normal-top-level-add-subdirs-to-load-path)
+                  load-path)
+                load-path)))
+
 ;; Set default coding system (especially for Windows)
 (set-default-coding-systems 'utf-8)
 (customize-set-variable 'visible-bell 1)  ; turn off beeps, make them flash!
