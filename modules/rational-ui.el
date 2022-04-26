@@ -33,7 +33,6 @@
 
 (rational-package-install-package 'all-the-icons)
 (rational-package-install-package 'doom-modeline)
-(rational-package-install-package 'doom-themes)
 (rational-package-install-package 'elisp-demos)
 (rational-package-install-package 'helpful)
 
