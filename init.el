@@ -22,7 +22,7 @@ Return non-nil if the on-disk cache is older than one day or
   (let ((today (time-to-days (current-time)))
         result)
    (dolist (archive package-archives result)
-     (let* ((archive-name (expand-file-name (format "archives/%s/archive-contents" archive)
+     (let* ((archive-name (expand-file-name (format "archives/%s/archive-contents" (car archive))
                                             package-user-dir))
             (archive-modified-date (time-to-days
                                     (file-attribute-modification-time
