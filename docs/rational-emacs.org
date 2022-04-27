@@ -172,6 +172,7 @@ Emacs configuration journey.
      '(rational-ui-default-font
        '(:font "JetBrains Mono" :weight light :height 185)))
 
+    (rational-package-install-package 'doom-themes)
     (load-theme 'doom-one t)
 
   #+end_src
@@ -243,6 +244,7 @@ Emacs configuration journey.
       (require 'rational-completion)
       (require 'rational-windows)
 
+      (rational-package-install-package 'doom-themes)
       (load-theme 'doom-one t)
 
       (load "custom")
@@ -294,9 +296,10 @@ Emacs configuration journey.
       (require 'rational-windows)
 
       (customize-set-variable 'rational-ui-default-font
-                              '(:font "JetBrains Mono" :weight light :height 185))
+			      '(:font "JetBrains Mono" :weight light :height 185))
       (customize-set-variable 'rational-ui-display-line-numbers t)
 
+      (rational-package-install-package 'doom-themes)
       (load-theme 'doom-one t)
     #+end_src
 

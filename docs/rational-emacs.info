@@ -256,6 +256,7 @@ File: rational-emacs.info,  Node: Example Configuration,  Next: The customel fil
       '(rational-ui-default-font
         '(:font "JetBrains Mono" :weight light :height 185)))
 
+     (rational-package-install-package 'doom-themes)
      (load-theme 'doom-one t)
 
 
@@ -345,6 +346,7 @@ have something that looks more like this:
      (require 'rational-completion)
      (require 'rational-windows)
 
+     (rational-package-install-package 'doom-themes)
      (load-theme 'doom-one t)
 
      (load "custom")
@@ -401,6 +403,7 @@ once.  Here is the same example written differently.
                              '(:font "JetBrains Mono" :weight light :height 185))
      (customize-set-variable 'rational-ui-display-line-numbers t)
 
+     (rational-package-install-package 'doom-themes)
      (load-theme 'doom-one t)
 
 

@@ -25,6 +25,7 @@
    '(rational-ui-default-font
      '(:font "JetBrains Mono" :weight light :height 185)))
 
+(rational-package-install-package 'doom-themes)
 (load-theme 'doom-one t)
 
 ;; To not load `custom.el' after `config.el', uncomment this line.
