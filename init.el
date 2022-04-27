@@ -44,9 +44,15 @@ Return non-nil if the on-disk cache is older than one day or
  ;; `package-archive-contents' has not been initialized. If Emacs has
  ;; been running for a while, user will need to manually run
  ;; `package-refresh-contents' before calling `package-install'.
- (when (or (seq-empty-p package-archive-contents)
-           (rational-package-archives-stale-p))
-   (package-refresh-contents)))
+ (cond ((seq-empty-p package-archive-contents)
+        (progn
+          (message "rational-init: package archives empty, initializing")
+          (package-refresh-contents)))
+       ((rational-package-archives-stale-p)
+        (progn
+          (message "rational-init: package archives stale, refreshing in the background")
+          (package-refresh-contents t))))
+ )
 
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
