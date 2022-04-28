@@ -747,18 +747,6 @@ To use this module, simply require it in your config.
 
      (require 'rational-editing)
 
-   • ‘evil-nerd-commenter’
-
-     This module installs the ‘evil-nerd-commenter’ package to provide a
-     few more features when commenting code; for example, you can
-     provide a number of lines to comment and press a key to do the
-     commenting without having select a region.  See the website
-     (https://github.com/redguardtoo/evil-nerd-commenter) for more
-     information.  To change the configuration, add this code to
-     ‘config.el’
-
-          (define-key global-map [remap evilnc-comment-or-uncomment-lines] #'comment-dwim)
-
    • Whitespace
 
      Keeping a file reasonably clean of dangling or other useless
@@ -905,29 +893,29 @@ Node: Top1412
 Node: Principles2990
 Node: Why use it?6057
 Node: Customization6733
-Ref: orge3cb1417537
+Ref: org11ad4407537
 Node: How the rational config file is found7825
 Node: Example Configuration9281
-Ref: orgf5ed9599487
-Node: The customel file10003
-Node: Simplified overview of how Emacs Customization works10550
-Node: Loading the customel file12270
-Ref: configel13574
-Ref: customel14081
-Node: Not loading the customel file14813
-Ref: org59d29fe15697
-Node: Caveat on the timing of loading customel16247
-Ref: configel (1)16914
-Ref: customel (1)17182
-Node: Using it with Chemacs217689
-Ref: org679539218510
-Ref: org4eeac5718913
-Ref: orgb43526219227
-Node: Contributing19582
-Node: Modules20220
-Node: Rational Emacs Defaults Module21251
-Node: Rational Emacs Editing Module28358
-Node: MIT License33573
+Ref: orgb86d75e9487
+Node: The customel file10000
+Node: Simplified overview of how Emacs Customization works10547
+Node: Loading the customel file12267
+Ref: configel13571
+Ref: customel14075
+Node: Not loading the customel file14807
+Ref: orgf0a0b2a15691
+Node: Caveat on the timing of loading customel16238
+Ref: configel (1)16905
+Ref: customel (1)17173
+Node: Using it with Chemacs217680
+Ref: orgf4b356418501
+Ref: orga10fd1f18904
+Ref: orgbf447ba19218
+Node: Contributing19573
+Node: Modules20211
+Node: Rational Emacs Defaults Module21242
+Node: Rational Emacs Editing Module28349
+Node: MIT License33008
 
 End Tag Table
 
