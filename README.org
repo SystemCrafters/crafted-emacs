@@ -25,8 +25,7 @@ Clone this repository to =~/.emacs.d= or =~/.config/emacs=:
 #+end_src
 
 This will set up the minimal configuration. If you'd like a more
-fully-configured experience, copy the example-config.el to
-=~/.rational-emacs/config.el= and restart Emacs.
+fully-configured experience, see [[#customization][Customization]].
 
 * Principles
 
@@ -91,7 +90,7 @@ can learn by reading the configuration.
 ** Reversible
 
    Not everyone will agree with our decisions, so each customization should be
-   easily reversible in the users =config.el= file. 
+   easily reversible in the users =config.el= file.
 
 * Why use it?
 
@@ -114,31 +113,44 @@ clone from listing [[li#git_clone]]. Follow the links to each to get more
 information about how they can be configured!
 
 - [[file:modules/rational-defaults.el][rational-defaults]] :: Sensible default settings for Emacs
-- [[file:modules/rational-ui.el][rational-ui]] :: Extra UI configuration for a better experience (mode line, etc)
+- [[file:modules/rational-use-package.el][rational-use-package]] :: Configuration for =use-package=
+- [[file:modules/rational-updates.el][rational-updates]] :: Tools to upgrade Rational Emacs
 - [[file:modules/rational-completion.el][rational-completion]] :: A better selection framework configuration based on
   =Vertico=
-- [[file:modules/rational-evil.el][rational-evil]] :: An =evil-mode= configuration
+- [[file:modules/rational-ui.el][rational-ui]] :: Extra UI configuration for a better experience (mode line, etc)
 - [[file:modules/rational-windows.el][rational-windows]] :: Window management configuration
-- [[file:modules/rational-use-package.el][rational-use-package]] :: Configuration for =use-package= 
+- [[file:modules/rational-editing.el][rational-editing]] :: Settings for the editing component (whitespace trimming etc.)
+- [[file:modules/rational-evil.el][rational-evil]] :: An =evil-mode= configuration
+- [[file:modules/rational-org.el][rational-org]] :: A few tweaks to Org-mode (org-appear, clickable hyperlinks
+  etc.)
+- [[file:modules/rational-project.el][rational-project]] :: Built in project management alternative to =projectile=
+- [[file:modules/rational-speedbar.el][rational-speedbar]] :: A file-tree
+- [[file:modules/rational-screencast.el][rational-screencast]] :: Tools for doing screencasts
 
-Modules that we will be adding in the future:
+** Modules that we will be adding in the future:
 
 - rational-desktop :: A desktop environment centered around =EXWM=
 - rational-present :: Tools for giving presentations
-- rational-screencast :: Tools for doing screencasts
 - rational-workspace :: An improved workspace experience based on =tab-bar-mode=
 - rational-shell :: A starter configuration for =eshell= and =vterm=
 
 * Customization
 
 To add your own customization to this configuration, create a configuraton file
-in one of the following places:
+in one of the following directories:
 
-- =~/.rational-emacs/config.el=
-- =~/.config/rational-emacs/config.el=
+- =~/.rational-emacs/=
+- =~/.config/rational-emacs/=
 
-In your configuration you can set any Emacs configuration variable, face
-attributes, themes, etc as you normally would.
+Rational Emacs looks out for two configuration files in one of those places:
+
+1. =config.el= – General configuration. Here you can set any Emacs configuration
+   variables, face attributes, themes, etc. In short: anything that would
+   normally go into =init.el= goes here.
+2. =early-config.el= – Configuration that needs to happen early during Emacs
+   startup (see [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html]["The Early Init File"]] in the Emacs Manual for details), like
+   customizing the process of initializing the package system etc. In short:
+   anything, that would normally go into =early-init.el= goes here.
 
 If you prefer to explicitly control where your =config.el= and =early-config.el=
 are found for Rational Emacs, you may provide a value for the
@@ -177,28 +189,36 @@ filesystem, it is created. However, just the path is created, the files
 
 ** Example Configuration:
 
-#+caption: Example of user created Rational Emacs =config.el= file.
+To make use of the sensible defaults that Rational Emacs aims to provide,
+the first thing in your user configuration is to choose, which of the modules
+you want to use.
+
+Let's say for example, you want to have a look at all the modules, but you
+don't want to use =evil-mode= and you have no use for the screencasting module.
+Also, you need the advanced project management features of projectile, so you
+don't want built-in project management either. In that case, your example
+config might begin like this:
+
+#+caption: Example of basic Rational Emacs =config.el= file.
 #+begin_src emacs-lisp
-  (require 'rational-defaults)
-  (require 'rational-screencast)
-  (require 'rational-ui)
-  (require 'rational-editing)
-  (require 'rational-evil)
-  (require 'rational-completion)
-  (require 'rational-windows)
+  (require 'rational-defaults)    ; Sensible default settings for Emacs
+  (require 'rational-use-package) ; Configuration for `use-package`
+  (require 'rational-updates)     ; Tools to upgrade Rational Emacs
+  (require 'rational-completion)  ; selection framework based on `vertico`
+  (require 'rational-ui)          ; Better UI experience (modeline etc.)
+  (require 'rational-windows)     ; Window management configuration
+  (require 'rational-editing)     ; Whitspace trimming, auto parens etc.
+  ;(require 'rational-evil)        ; An `evil-mode` configuration
+  (require 'rational-org)         ; org-appear, clickable hyperlinks etc.
+  ;(require 'rational-project)     ; built-in alternative to projectile
+  (require 'rational-speedbar)    ; built-in file-tree
+  ;(require 'rational-screencast)  ; show current command and binding in modeline
 
-  ;; Set further font and theme customizations
-  (custom-set-variables
-   '(rational-ui-default-font
-     '(:font "JetBrains Mono" :weight light :height 185)))
-
-  ;; Install and load your theme
-  (rational-package-install-package 'doom-themes)
-  (load-theme 'doom-one t)
-
-  ;; To not load `custom.el' after `config.el', uncomment this line.
-  ;; (setq rational-load-custom-file nil)
+  ;; Further settings and customizations follow here...
+  ;; ...
 #+end_src
+
+More detailled example config files can be found in the folder =examples=.
 
 ** The =custom.el= file
 
@@ -252,9 +272,9 @@ filesystem, it is created. However, just the path is created, the files
 
 *** Loading the =custom.el= file
 
-    When ~rational-load-custom-file~ is non-nil (the default), the =custom.el= 
+    When ~rational-load-custom-file~ is non-nil (the default), the =custom.el=
     file is loaded /after/ the initialization process, including after the user
-    =config.el= is loaded. 
+    =config.el= is loaded.
 
     The customization variable values (as set in =init.el= with
     =customize-set-variables=) are in the =SET for current session only= state,
@@ -356,7 +376,7 @@ community!
      modules, please provide the info file with your PR. (see [[file:docs/CONTRIBUTING.org][Contributing Documentation]])
    + If your PR addresses an issue, whether it closes or fixes the issue, or is
      just related to it, please add the issue number in your commit message or
-     the description of your PR so they can be linked together. 
+     the description of your PR so they can be linked together.
 
 ** Contributing Tips for Issues
 
