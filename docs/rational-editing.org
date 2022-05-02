@@ -6,19 +6,6 @@
     (require 'rational-editing)
   #+end_src
 
-  - =evil-nerd-commenter=
-
-    This module installs the =evil-nerd-commenter= package to provide
-    a few more features when commenting code; for example, you can
-    provide a number of lines to comment and press a key to do the
-    commenting without having select a region. See the [[https://github.com/redguardtoo/evil-nerd-commenter][website]] for
-    more information. To change the configuration, add this code to
-    =config.el=
-
-    #+begin_src emacs-lisp
-      (define-key global-map [remap evilnc-comment-or-uncomment-lines] #'comment-dwim)
-    #+end_src
-
   - Whitespace
 
     Keeping a file reasonably clean of dangling or other useless

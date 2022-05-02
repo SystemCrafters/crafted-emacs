@@ -20,6 +20,7 @@ encourage the use of Vim-style movement keys (hjkl).")
 (rational-package-install-package 'evil)
 (rational-package-install-package 'undo-tree)
 (rational-package-install-package 'evil-collection)
+(rational-package-install-package 'evil-nerd-commenter)
 
 ;; Turn on undo-tree globally
 (global-undo-tree-mode)
@@ -34,6 +35,9 @@ encourage the use of Vim-style movement keys (hjkl).")
 ;; Load Evil and enable it globally
 (require 'evil)
 (evil-mode 1)
+
+;; Turn on Evil Nerd Commenter
+(evilnc-default-hotkeys)
 
 ;; Make C-g revert to normal state
 (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)

@@ -14,21 +14,27 @@
   :group 'emacs)
 
 ;;; package configuration
-(defun rational-package-archives-stale-p ()
-  "Check on-disk archives last modified date to see if it is stale.
+(defun rational-package-archive-stale-p (archive)
+  "Return `t' if ARCHIVE is stale.
 
-Return non-nil if the on-disk cache is older than one day or
-`nil' otherwise."
+ARCHIVE is stale if the on-disk cache is older than 1 day"
   (let ((today (time-to-days (current-time)))
-        result)
-   (dolist (archive package-archives result)
-     (let* ((archive-name (expand-file-name (format "archives/%s/archive-contents" (car archive))
-                                            package-user-dir))
-            (archive-modified-date (time-to-days
-                                    (file-attribute-modification-time
-                                     (file-attributes archive-name)))))
-       (when (time-less-p archive-modified-date today)
-         (setq result t))))))
+        (archive-name (expand-file-name
+                       (format "archives/%s/archive-contents" archive)
+                       package-user-dir)))
+    (time-less-p (time-to-days (file-attribute-modification-time
+                                (file-attributes archive-name)))
+                 today)))
+
+(defun rational-package-archives-stale-p ()
+  "Return `t' if any PACKAGE-ARHIVES cache is out of date.
+
+Check each archive listed in PACKAGE-ARCHIVES, if the on-disk
+cache is older than 1 day, return a non-nil value. Fails fast,
+will return `t' for the first stale archive found or `nil' if
+they are all up-to-date."
+  (interactive)
+  (cl-some #'rational-package-archive-stale-p (mapcar #'car package-archives)))
 
 (defmacro rational-package-install-package (package)
   "Only install the package if it is not already installed."
@@ -44,12 +50,30 @@ Return non-nil if the on-disk cache is older than one day or
  ;; `package-archive-contents' has not been initialized. If Emacs has
  ;; been running for a while, user will need to manually run
  ;; `package-refresh-contents' before calling `package-install'.
- (when (or (seq-empty-p package-archive-contents)
-           (rational-package-archives-stale-p))
-   (package-refresh-contents)))
+ (cond ((seq-empty-p package-archive-contents)
+        (progn
+          (message "rational-init: package archives empty, initializing")
+          (package-refresh-contents)))
+       ((rational-package-archives-stale-p)
+        (progn
+          (message "rational-init: package archives stale, refreshing in the background")
+          (package-refresh-contents t))))
+ )
 
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
+
+;; Add the user's custom-modules to the top of the load-path
+;; so any user custom-modules take precedence.
+(when (file-directory-p (expand-file-name "custom-modules/" rational-config-path))
+  (setq load-path
+        (append (let ((load-path (list))
+                      (default-directory (expand-file-name "custom-modules/" rational-config-path)))
+                  (add-to-list 'load-path (expand-file-name "custom-modules/" rational-config-path))
+                  ;;(normal-top-level-add-to-load-path '("."))
+                  (normal-top-level-add-subdirs-to-load-path)
+                  load-path)
+                load-path)))
 
 ;; Set default coding system (especially for Windows)
 (set-default-coding-systems 'utf-8)
