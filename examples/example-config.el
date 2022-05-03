@@ -30,6 +30,7 @@
 (require 'rational-project)     ; built-in alternative to projectile
 (require 'rational-speedbar)    ; built-in file-tree
 (require 'rational-screencast)  ; show current command and binding in modeline
+(require 'rational-compile)     ; automatically compile some emacs lisp files
 
 ;; Set further font and theme customizations
 (custom-set-variables

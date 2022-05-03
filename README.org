@@ -126,6 +126,7 @@ information about how they can be configured!
 - [[file:modules/rational-project.el][rational-project]] :: Built in project management alternative to =projectile=
 - [[file:modules/rational-speedbar.el][rational-speedbar]] :: A file-tree
 - [[file:modules/rational-screencast.el][rational-screencast]] :: Tools for doing screencasts
+- [[file:modules/rational-compile.el][rational-compile]] :: Set up automatic compilation for some emacs-lisp files
 
 ** Modules that we will be adding in the future:
 
