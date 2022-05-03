@@ -219,7 +219,7 @@ config might begin like this:
   ;; ...
 #+end_src
 
-More detailled example config files can be found in the folder =examples=.
+More detailed example config files can be found in the folder =examples=.
 
 ** The =custom.el= file
 
