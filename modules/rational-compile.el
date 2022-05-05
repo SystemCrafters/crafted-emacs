@@ -86,8 +86,7 @@ nil."
                          (or path
                              (flatten-list `(,rational-compile-modules-path
                                              ,rational-compile-extra-directories-list)))))))
-      (when (file-exists-p file)
-        file)))
+        file))
 
 ;; A function to compile a specific file
 (defun rational-compile-file (f)
