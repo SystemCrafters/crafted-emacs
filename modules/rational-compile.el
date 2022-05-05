@@ -35,7 +35,7 @@
   "A list of modules to compile.")
 
 (defvar rational-compile-modules-path
-  `(,(expand-file-name "modules" rational-config-path)
+  `(,(expand-file-name "custom-modules" rational-config-path)
     ,(expand-file-name "modules" user-emacs-directory))
   "Path where to locate modules.")
 
@@ -49,7 +49,10 @@
   "When non-nil, compile the file after saving it.")
 
 (defvar rational-compile-extra-directories-list nil
-  "List of extra directories to compile.")
+  "List of extra directories to search for source-files.
+
+This could be another directory added to `load-path', that is not
+standard, nor is it part of rational-emacs.")
 
 (defvar rational-compile-init-files-list
   '("early-init.el" "init.el")
@@ -63,16 +66,28 @@
 ;;;; Functions:
 ;; A function to locate a module's source file:
 (defun rational-locate-module-file (module &optional path)
-  (setq-local module-path nil)
-  (dolist (dir (or path
-                   (flatten-list `(,rational-compile-modules-path
-                                   ,rational-compile-extra-directories-list))))
-    (let ((file (expand-file-name (format "%s.el" (symbol-name module)) dir)))
-      (when (and (file-exists-p file)
-                 (not module-path))
-        (setq-local module-path file))))
-  module-path)
+  "Locates the source-file for the MODULE.
 
+MODULE must be a symbol.
+
+If the optional argument PATH is non-nil, it asumes it is a list
+containing the name of the directories to search for the
+source-file.  If it is ommited or nil, it will search in the
+directories defined in `rational-compile-modules-path' and
+`rational-compile-extra-directories-list'.
+
+It returns the first source-file that matches for the MODULE in
+the order specified search path.  If it finds none, it retorns
+nil."
+  (let ((file (expand-file-name
+               (format "%s.el" (symbol-name module))
+               (seq-find (lambda (dir)
+                           (file-exists-p (expand-file-name (format "%s.el" (symbol-name module)) dir)))
+                         (or path
+                             (flatten-list `(,rational-compile-modules-path
+                                             ,rational-compile-extra-directories-list)))))))
+      (when (file-exists-p file)
+        file)))
 
 ;; A function to compile a specific file
 (defun rational-compile-file (f)
@@ -120,7 +135,7 @@ D could be a single directory or a list of directories."
   (flatten-list `(,(and rational-compile-modules
                         (expand-file-name "modules/" user-emacs-directory))
                   ,(and rational-compile-user-modules
-                        (expand-file-name "modules/" rational-config-path))
+                        (expand-file-name "custom-modules/" rational-config-path))
                   ,rational-compile-extra-directories-list)))
 
 ;; A function to get the list of init files with full path:
@@ -179,7 +194,7 @@ specified, then it is ignored without a warning."
   (when rational-compile-user-modules
     (dolist (module rational-compile-module-list)
       (let ((module-src (rational-locate-module-file module
-                                                     `(,(expand-file-name "modules/" rational-config-path)))))
+                                                     `(,(expand-file-name "custom-modules/" rational-config-path)))))
         (when module-src
           (rational-compile-file module-src))))))
 
