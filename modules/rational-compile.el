@@ -79,13 +79,13 @@ directories defined in `rational-compile-modules-path' and
 It returns the first source-file that matches for the MODULE in
 the order specified search path.  If it finds none, it retorns
 nil."
-  (expand-file-name
-   (format "%s.el" (symbol-name module))
-   (seq-find (lambda (dir)
+  (let ((dir (seq-find (lambda (dir)
                (file-exists-p (expand-file-name (format "%s.el" (symbol-name module)) dir)))
              (or path
                  (flatten-list `(,rational-compile-modules-path
                                  ,rational-compile-extra-directories-list))))))
+    (when dir
+      (expand-file-name (format "%s.el" (symbol-name module)) dir))))
 
 ;; A function to compile a specific file
 (defun rational-compile-file (f)
