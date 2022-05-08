@@ -85,5 +85,5 @@ variable to =nil=:
 If you need to make settings to =early-config.el=, you can do that from here, too.
 Just begin the source code block with:
 #+begin_src org
-  #+begin_src emacs-lisp :tangle ./early-config.el
+  ,#+begin_src emacs-lisp :tangle ./early-config.el
 #+end_src
