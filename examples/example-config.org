@@ -1,10 +1,19 @@
 #+title: Example Rational Emacs User Configuration File
 #+PROPERTY: header-args:emacs-lisp :tangle ./config.el :mkdirp yes
 
-Rational Emacs supports user customization through a =config.org= file
-similar to this one. If you edit it in Emacs and save it, it generates a
-file =config.el= in the same directory. Copy both to your Rational Emacs
-configuration directory to get you started. See the [[https://orgmode.org/manual/Extracting-Source-Code.html][Org Manual]] for details.
+Rational Emacs supports user customization through a =config.org= file similar to
+this one.
+
+To get you started, copy both example files to your Rational Emacs configuration
+directory, e.g.:
+- copy =examples/example-config.el= to =~/.rational-emacs/config.el=
+- copy =examples/example-config.org= to =~/.rational-emacs/config.org=
+- restart Emacs
+
+After that, whenever you edit =config.org= in Emacs and save it, it updates
+=config.el= in the same directory.
+
+See the [[https://orgmode.org/manual/Extracting-Source-Code.html][Org Manual]] for details and alternatives.
 
 #+begin_src emacs-lisp
   ;;; config.el -- Example Rational Emacs user customization file -*- lexical-binding: t; -*-
@@ -74,7 +83,7 @@ variable to =nil=:
 
 * Tangling to early-config.el
 If you need to make settings to =early-config.el=, you can do that from here, too.
-Just add begin the source code block with:
+Just begin the source code block with:
 #+begin_src org
-  #+begin_src emacs-lisp :tangle ./early-config.el
+  ,#+begin_src emacs-lisp :tangle ./early-config.el
 #+end_src
