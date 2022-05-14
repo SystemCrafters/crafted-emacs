@@ -186,9 +186,9 @@ specified, then it is ignored without a warning."
       (let ((module-src (rational-locate-module-file module
                                                      (flatten-list
                                                       `(,(expand-file-name "modules/" user-emacs-directory)
-                                                        ,rational-compile-extra-directories-list))))
+                                                        ,rational-compile-extra-directories-list)))))
         (when module-src
-          (rational-compile-file module-src))))))
+          (rational-compile-file module-src)))))
   (when rational-compile-user-modules
     (dolist (module rational-compile-module-list)
       (let ((module-src (rational-locate-module-file module
