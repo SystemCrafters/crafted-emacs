@@ -212,7 +212,7 @@ The files to be compiled is defined in
 The files to be compiled is defined in
 `rational-compile-config-files-list'."
   (interactive)
-  (rational-compile-file (rational-compile--init-config-list)))
+  (rational-compile-file (rational-compile--config-files-list)))
 
 
 ;;;; Hooks:
