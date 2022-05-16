@@ -177,6 +177,9 @@ Emacs configuration journey.
 
   #+end_src
 
+  See the =examples= folder in the git-repo for more up to date and comprehensive
+  examples.
+
 ** The =custom.el= file
 
    The =custom.el= file will hold the auto-generated code from the Emacs
@@ -296,7 +299,7 @@ Emacs configuration journey.
       (require 'rational-windows)
 
       (customize-set-variable 'rational-ui-default-font
-			      '(:font "JetBrains Mono" :weight light :height 185))
+                              '(:font "JetBrains Mono" :weight light :height 185))
       (customize-set-variable 'rational-ui-display-line-numbers t)
 
       (rational-package-install-package 'doom-themes)
@@ -418,6 +421,7 @@ Emacs configuration journey.
 
   #+include: rational-defaults.org
   #+include: rational-editing.org
+  #+include: rational-completion.org
 
 * License
   :PROPERTIES:
@@ -454,4 +458,4 @@ Emacs configuration journey.
   :appendix: t
   :end:
 
-  #+include: mit.org
+  #+include: mit-license.org
