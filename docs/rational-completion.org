@@ -150,7 +150,7 @@
       right-clicking on something.
 
       But =embark-act= can be used for much more, have a look at the video
-      [[https://youtu.be/watch?v=qk2Is_sC8Lk][The Many Uses of Embark]] in the System Crafters Channel.
+      [[https://youtu.be/qk2Is_sC8Lk][The Many Uses of Embark]] in the System Crafters Channel.
 
     - =embark-bindings= & =embark-prefix-help-command=
 
