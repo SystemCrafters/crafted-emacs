@@ -418,6 +418,7 @@ Emacs configuration journey.
 
   #+include: rational-defaults.org
   #+include: rational-editing.org
+  #+include: rational-project.org
 
 * License
   :PROPERTIES:

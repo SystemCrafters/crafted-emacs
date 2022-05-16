@@ -77,6 +77,7 @@ Modules
 
 * Rational Emacs Defaults Module::
 * Rational Emacs Editing Module::
+* Rational Emacs Project Module::
 
 
 
@@ -546,6 +547,7 @@ the module of interest to understand it best.
 
 * Rational Emacs Defaults Module::
 * Rational Emacs Editing Module::
+* Rational Emacs Project Module::
 
 
 File: rational-emacs.info,  Node: Rational Emacs Defaults Module,  Next: Rational Emacs Editing Module,  Up: Modules
@@ -738,7 +740,7 @@ To use this module, simply require it in your config.
           (savehist-mode -1)
 
 
-File: rational-emacs.info,  Node: Rational Emacs Editing Module,  Prev: Rational Emacs Defaults Module,  Up: Modules
+File: rational-emacs.info,  Node: Rational Emacs Editing Module,  Next: Rational Emacs Project Module,  Prev: Rational Emacs Defaults Module,  Up: Modules
 
 6.2 Rational Emacs Editing Module
 =================================
@@ -861,6 +863,37 @@ To use this module, simply require it in your config.
                                                        ; programming modes
 
 
+File: rational-emacs.info,  Node: Rational Emacs Project Module,  Prev: Rational Emacs Editing Module,  Up: Modules
+
+6.3 Rational Emacs Project Module
+=================================
+
+To use this module, simply require it in your config.
+
+     (require 'rational-project)
+
+   This module uses Emacs’ built-in project backend (often referred to
+as ‘project.el’).
+
+   Most of the default keybindings are prefixed by "C-x p".  See the
+Emacs Manual
+(https://www.gnu.org/software/emacs/manual/html_node/emacs/Projects.html)
+for details.
+
+   • Project List File
+
+     The project backend uses a list of known projects.  In Rational
+     Emacs, it is called called ‘projects’ by default and resides in the
+     ‘var’ directory of your user config directory, e.g.
+
+        • ‘~/.rational-emacs/var/projects’
+        • ‘~/.config/rational-emacs/var/projects’
+
+     You can edit this file if necessary, but probably the most usual
+     use case would be to remove a project from the list.  For that, you
+     can also run the ‘project-forget-project’ function.
+
+
 File: rational-emacs.info,  Node: MIT License,  Prev: Modules,  Up: Top
 
 Appendix A MIT License
@@ -890,32 +923,33 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1412
-Node: Principles2990
-Node: Why use it?6057
-Node: Customization6733
-Ref: org11ad4407537
-Node: How the rational config file is found7825
-Node: Example Configuration9281
-Ref: orgb86d75e9487
-Node: The customel file10000
-Node: Simplified overview of how Emacs Customization works10547
-Node: Loading the customel file12267
-Ref: configel13571
-Ref: customel14075
-Node: Not loading the customel file14807
-Ref: orgf0a0b2a15691
-Node: Caveat on the timing of loading customel16238
-Ref: configel (1)16905
-Ref: customel (1)17173
-Node: Using it with Chemacs217680
-Ref: orgf4b356418501
-Ref: orga10fd1f18904
-Ref: orgbf447ba19218
-Node: Contributing19573
-Node: Modules20211
-Node: Rational Emacs Defaults Module21242
-Node: Rational Emacs Editing Module28349
-Node: MIT License33008
+Node: Principles3024
+Node: Why use it?6091
+Node: Customization6767
+Ref: org048a9c37571
+Node: How the rational config file is found7859
+Node: Example Configuration9315
+Ref: org9c956f29521
+Node: The customel file10087
+Node: Simplified overview of how Emacs Customization works10634
+Node: Loading the customel file12354
+Ref: configel13658
+Ref: customel14215
+Node: Not loading the customel file14947
+Ref: org7ffd2ef15831
+Node: Caveat on the timing of loading customel16431
+Ref: configel (1)17098
+Ref: customel (1)17366
+Node: Using it with Chemacs217873
+Ref: org08bea7818694
+Ref: orga8d594c19097
+Ref: org82f52ea19411
+Node: Contributing19766
+Node: Modules20404
+Node: Rational Emacs Defaults Module21469
+Node: Rational Emacs Editing Module28576
+Node: Rational Emacs Project Module33273
+Node: MIT License34361
 
 End Tag Table
 
