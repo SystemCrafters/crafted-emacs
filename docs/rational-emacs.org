@@ -421,6 +421,7 @@ Emacs configuration journey.
 
   #+include: rational-defaults.org
   #+include: rational-editing.org
+  #+include: rational-project.org
   #+include: rational-completion.org
 
 * License
