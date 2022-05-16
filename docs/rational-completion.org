@@ -1,0 +1,170 @@
+* Rational Emacs Completion Module
+
+  To use this module, simply require it in your config.
+
+  #+begin_src emacs-lisp
+    (require 'rational-completion)
+  #+end_src
+
+  This module installs and sets up a set of completion-related packages that
+  work together to achieve a functionality that you might know from packages
+  like =helm= or =ivy=. They are much more modular than those packages and also
+  strive to rely on built-in functionality. With that, they fit perfectly into
+  the Rational Emacs principles. But if you prefer an all-in-one approach, you
+  can just leave this module off and use one of the more established completion
+  frameworks. Give it a try, though. In concert, these packages might deliver
+  just the experience you want.
+
+  | [[https://github.com/minad/vertico][vertico]]    | minimalistic vertical completion UI based on the default completion system |
+  | [[https://github.com/oantolin/orderless][orderless]]  | completion style that matches candidates in any order                      |
+  | [[https://github.com/minad/consult][consult]]    | provides practical commands based on the Emacs completion function         |
+  | [[https://github.com/minad/marginalia/][marginalia]] | adds info to the minibuffer completions on the side (in the marginalia)    |
+  | [[https://github.com/oantolin/embark/][embark]]     | provides a set of possible actions for a given context                     |
+
+  To explain what the packages do and how they interact, it's best to go
+  through them step by step.
+  For each step, imagine you want to switch buffers but you neither remember the
+  binding nor the command to do that. Neither do you remember that the command
+  starts with "switch". But you're sure it was something with buffers, so you
+  hit "M-x" and type =buf=.
+
+  A fresh Emacs install would actually be pretty helpful for that already. After
+  =buf= you could hit <SPC> or <TAB> to complete to =buffer-= and after trying
+  several continutations without success, you'd hit <TAB> repeatedly to find out
+  that the command you're looking for apparently doesn't start with "buffer".
+
+  [[./img/01-vanilla.png]]
+
+  So you'd try something else, you'd eventually start typing with =swi= and arrive
+  at =switch-to-buffer= rather quickly, via completion. Emacs would even show you
+  that there are more than one command that start with that and present you with
+  the keybindings.
+
+  [[./img/02-vanilla.png]]
+
+  That's OK, but there's a lot of room for improvement. That's where the five
+  packages come in.
+
+  - Vertico
+
+    Vertico is a "minimalistic vertical completion UI" which means that when
+    Emacs has a list of candidates that could be completed, it offers a list of
+    them in a vertical arrangement.
+
+    If you hit "M-x" and start typing =buf= with vertico installed, Emacs shows
+    you a list of all available commands that start with "buf". No need to
+    trigger any completions, it's just there.
+
+    [[./img/03-vertico.png]]
+
+    So this time, you immediately see that no commands with "change" or "switch"
+    is in the list and that you have to start with something else. You will
+    probably arrive at the command you're looking for much easier and
+    quicker.
+
+  - Orderless
+
+    Orderless splits your search string and gives you candidates that match them
+    regardless of the order. So with vertico *and* orderless installed, it doesn't
+    matter anymore that you started to type =buf=. No need to go back and start
+    with =swi=. With =buf= <SPC> =swi= you'll see all commands that contain both
+    components of your search.
+
+    [[./img/04-vertico-orderless.png]]
+
+    This time, you achieved your goal at the first try. And Emacs still showed
+    you the other commands and their keybindings. You might go and check out
+    what they might do, but wouldn't it be nice if Emacs had already told you?
+    Time for marginalia.
+
+  - Marginalia
+
+    Marginalia offers helpful information in the minibuffer when completions are
+    offered. So with vertico, orderless and marginalia installed, your search
+    for =buf= <SPC> =swi= shows you a list of all matching commands with a short
+    info on what they're doing.
+
+    [[./img/05-vertico-orderless-marginalia.png]]
+
+  - Consult
+
+    Consult provides a set of practical commands. A lot of them are
+    [[https://github.com/minad/consult#available-commands][replacements for built-in everyday functions]]. (For example, try replacing
+    =switch-to-buffer= with =consult-buffer=. Or replace =yank-pop= with
+    =consult-yank-pop=). However, Rational Emacs leaves most of that
+    untouched. It's up to you as the user.  The module =rational-completion= sets
+    three consult functions for you that fit into the completion behaviour
+    described above.
+
+    - Search-/filtering candidates and bind "C-s" to =consult-line=
+
+      Whenever you're presented with candidates for completions, consult
+      provides a filtering search function which updates not only the list
+      of candidates in the minibuffer, but also the active buffer in a
+      sort of live preview (if applicable). Rational Emacs also replaces
+      =isearch= with =consult-line=, so that searching through your buffer
+      gives you the same behaviour. Essentially, =isearch-backward= becomes
+      obsolete, because consult shows you the forward matches first and
+      next the backward matches and you can cycle through them.
+
+      [[./img/06-consult-line.png]]
+
+    - Bind "C-r" in the minibuffer to =consult-history=
+
+      Whenever you're presented with candidates for completions in a minibuffer,
+      =consult= automatically sorts your most recently used candidates to the
+      top. Also it is searchable like with =consult-line=. Inside a minibuffer,
+      you can also hit "C-r" to show *only* the candidates you have used before.
+
+      [[./img/07-consult-history.png]]
+
+    - Use =consult-completion-in-region= as completion function
+
+      Completion not only comes into effect in the minibuffer, but also
+      (depending on other settings – like major mode) within your main
+      buffer. E.g. completing function or variable names etc.
+
+      *Without* =consult=, triggering a completion gives you a static list of
+      candidates if there is more than one.
+
+      [[./img/08-completion-without-consult.png]]
+
+      *With* =consult=, the list of candidates is dynamic as you type and updates
+      the current selection in the buffer.
+
+      [[./img/09-completion-with-consult.png]]
+
+  - Embark
+
+    Embark is very versatile package that does far more than can be described
+    here. We highly recommend to read through the [[https://github.com/oantolin/embark][packages documentation]].
+
+    As it's set up in this module, Embark offers two main features:
+
+    - =embark-act=
+
+      The =embark-act= function (bound to "C-.") offers you a lot of possible
+      actions that can be applied to the element of the buffer (or minibuffer)
+      in which your cursor is positioned. You can think of this as a context
+      menu, similar to what you achieve in many user interfaces by
+      right-clicking on something.
+
+      But =embark-act= can be used for much more, have a look at the video
+      [[https://youtu.be/watch?v=qk2Is_sC8Lk][The Many Uses of Embark]] in the System Crafters Channel.
+
+    - =embark-bindings= & =embark-prefix-help-command=
+
+      Rational Emacs replaces =describe-bindings= and =prefix-help-command= with
+      their Embark-alternatives to provide a functionality similar to packages
+      like =which-key=: It shows you available options and commands, but with all
+      the goodies provided by the other packages above.
+
+      For one last time, imagine you want so switch buffers and have forgotten
+      how. But this time, you also remember that there was a binding for it,
+      probably starting with "C-x".
+
+      You can hit "C-x C-h" to see a list of possible bindings after the "C-x"
+      prefix. But you don't need to cycle through them, you can fuzzy-filter
+      them. Type "buf" to see only the bindings that relate to buffers.
+
+      [[./img/10-filtered-describe-bindings.png]]

@@ -13,7 +13,7 @@
   #+end_src
 
   Then you can use =C-c C-e i= to export to info.
-  
+
 * Documenting a Rational Emacs module
 
   Add an Org file named for the module. Once you are ready to include
@@ -25,7 +25,7 @@
   #+end_example
 
   Once you have added the module documentation, export the info file
-  and submit a PR for inclusion. 
+  and submit a PR for inclusion.
 
 * Guidelines
 
