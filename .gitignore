@@ -1,3 +1,4 @@
+*.elc
 eln-cache/
 straight/
 transient/
