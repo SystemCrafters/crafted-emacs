@@ -19,6 +19,7 @@
 (rational-package-install-package 'orderless)
 (rational-package-install-package 'marginalia)
 (rational-package-install-package 'embark)
+(rational-package-install-package 'embark-consult)
 
 (defun rational-completion/minibuffer-backward-kill (arg)
   "When minibuffer is completing a file name delete up to parent
@@ -69,12 +70,17 @@ folder, otherwise delete a word"
 (setq completion-category-defaults nil)
 
 ;;;; Embark
+(require 'embark)
+(require 'embark-consult)
 
 (global-set-key [remap describe-bindings] #'embark-bindings)
 (global-set-key (kbd "C-.") 'embark-act)
 
 ;; Use Embark to show bindings in a key prefix with `C-h`
 (setq prefix-help-command #'embark-prefix-help-command)
+
+(with-eval-after-load 'embark-consult
+  (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))
 
 (provide 'rational-completion)
 ;;; rational-completion.el ends here
