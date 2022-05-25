@@ -419,10 +419,11 @@ Emacs configuration journey.
   reasonably possible, the best-practice is to simply read the code
   for the module of interest to understand it best.
 
+  #+include: rational-completion.org
   #+include: rational-defaults.org
   #+include: rational-editing.org
   #+include: rational-project.org
-  #+include: rational-completion.org
+  #+include: rational-python.org
 
 * License
   :PROPERTIES:
