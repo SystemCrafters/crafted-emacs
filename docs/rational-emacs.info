@@ -56,6 +56,7 @@ configuration journey.
 * Using it with Chemacs2::
 * Contributing::
 * Modules::
+* Troubleshooting::
 * MIT License::
 
 — The Detailed Node Listing —
@@ -86,6 +87,10 @@ Rational Emacs Python Module
 * Packages Installed::
 * Provided configuration::
 * Suggested keybindings::
+
+Troubleshooting
+
+* A package (suddenly?) fails to work::
 
 
 
@@ -532,7 +537,7 @@ your idea is in the spirit of the *note Principles::.
 SystemCrafters (https://systemcrafters.net/) community!
 
 
-File: rational-emacs.info,  Node: Modules,  Next: MIT License,  Prev: Contributing,  Up: Top
+File: rational-emacs.info,  Node: Modules,  Next: Troubleshooting,  Prev: Contributing,  Up: Top
 
 6 Modules
 *********
@@ -1198,7 +1203,95 @@ until the module is loaded (either "python" or "pyvenv" in this case).
        (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
 
 
-File: rational-emacs.info,  Node: MIT License,  Prev: Modules,  Up: Top
+File: rational-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
+
+7 Troubleshooting
+*****************
+
+Some tips when things don’t seem to work right.
+
+* Menu:
+
+* A package (suddenly?) fails to work::
+
+
+File: rational-emacs.info,  Node: A package (suddenly?) fails to work,  Up: Troubleshooting
+
+7.1 A package (suddenly?) fails to work
+=======================================
+
+This scenario happened frequently when upgading to Emacs 28.  It also
+may occur in other scenarios as well.  Usually, you will see some
+message indicating some symbol is void or some function or command does
+not exist.  More often than not, the package maintainer is using a
+feature from another package which has not yet been released.  The new
+feature is available in the development version of the package however.
+
+   Here are some example issues where things went wrong:
+   • Wrong number of arguments error
+     (https://github.com/SystemCrafters/rational-emacs/issues/126)
+   • Example config doesn’t start
+     (https://github.com/SystemCrafters/rational-emacs/issues/132)
+   • there are some bugs in package "helpful"
+     (https://github.com/SystemCrafters/rational-emacs/issues/140)
+
+   Here are some strategies:
+
+   • Check the code on the package source control page (ie GitHub,
+     GitLab or whatever), and make sure the missing code is present on
+     the ‘master’ branch.
+   • Look at the code associated with the released version (you need to
+     look at the most recent tag for this).  If the code is missing
+     there, ask the maintainer for a new release.  Often, there are
+     years between releases of Emacs packages, but that depends
+     completely on the package maintainer.  Some of them release more
+     frequently, others only on request.
+
+   Once you have done the steps above, you can choose to take one of
+these actions in your configuration:
+
+   • Option 1
+        • Use ‘M-x package-list-packages’ to display the list of
+          packages.
+        • Find the package in the list which doesn’t work for you, it
+          will have either the _installed_ or _dependency_ status.
+        • Press the ‘enter’ key to get more details on the package an
+          look near the bottom of the metadata, you should see a line
+          with "Other Versions".  Choose the development version - it
+          will have a version number that looks like a date and the text
+          ‘(melpa)’ next to it.  Press ‘enter’ on this version.
+        • Following the step above will take you to the same package but
+          from the MELPA repository, and you’ll see a button at the top
+          labeled ‘Install’.  Click this button.
+        • *Optionally* you can go back to the list of packages, find
+          previous installed version, press the letter ’D’ and then the
+          letter ’X’ to uninstall that version.
+        • Restart Emacs
+   • Option 2
+        • Edit your ‘early-config.el’ file.
+        • Near the bottom, add a line similar to this to pin the
+          offending package to MELPA (make sure to replace
+          _package-name_ with the name of the actual package):
+
+               (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
+
+        • Use ‘M-x package-list-packages’ to display the list of
+          packages.
+        • Find the package in the list, press the letter ’D’ and the
+          letter ’X’ to uninstall that package.
+        • Restart Emacs, the package should be installed from MELPA thus
+          using the development version of the package instead of the
+          released version.
+
+   Regardless, always feel free to open an issue here and we can help
+you out.  Please be as complete as possible in your description of the
+problem.  Include any stack traces Emacs provides (ie start Emacs with:
+‘emacs --debug-init’), mention the version number of the package you are
+installing, and anything you might have tried but which didn’t work for
+you.
+
+
+File: rational-emacs.info,  Node: MIT License,  Prev: Troubleshooting,  Up: Top
 
 Appendix A MIT License
 **********************
@@ -1227,38 +1320,40 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1412
-Node: Principles3201
-Node: Why use it?6268
-Node: Customization6944
-Ref: org8d42e4c7748
-Node: How the rational config file is found8036
-Node: Example Configuration9492
-Ref: org4f76d4b9698
-Node: The customel file10359
-Node: Simplified overview of how Emacs Customization works10906
-Node: Loading the customel file12626
-Ref: configel13930
-Ref: customel14487
-Node: Not loading the customel file15219
-Ref: orgbb0d4b516103
-Node: Caveat on the timing of loading customel16703
-Ref: configel (1)17370
-Ref: customel (1)17638
-Node: Using it with Chemacs218145
-Ref: org4978de118966
-Ref: org03a76c419369
-Ref: org07046e619683
-Node: Contributing20038
-Node: Modules20676
-Node: Rational Emacs Completion Module21811
-Node: Rational Emacs Defaults Module30550
-Node: Rational Emacs Editing Module37698
-Node: Rational Emacs Project Module42395
-Node: Rational Emacs Python Module43520
-Node: Packages Installed44039
-Node: Provided configuration45033
-Node: Suggested keybindings45904
-Node: MIT License46821
+Node: Principles3279
+Node: Why use it?6346
+Node: Customization7022
+Ref: org155b2437826
+Node: How the rational config file is found8114
+Node: Example Configuration9570
+Ref: orgb7de1099776
+Node: The customel file10437
+Node: Simplified overview of how Emacs Customization works10984
+Node: Loading the customel file12704
+Ref: configel14008
+Ref: customel14565
+Node: Not loading the customel file15297
+Ref: org6472f8316181
+Node: Caveat on the timing of loading customel16781
+Ref: configel (1)17448
+Ref: customel (1)17716
+Node: Using it with Chemacs218223
+Ref: orga142a1119044
+Ref: org26187ee19447
+Ref: org5cba6e019761
+Node: Contributing20116
+Node: Modules20754
+Node: Rational Emacs Completion Module21893
+Node: Rational Emacs Defaults Module30632
+Node: Rational Emacs Editing Module37780
+Node: Rational Emacs Project Module42477
+Node: Rational Emacs Python Module43602
+Node: Packages Installed44121
+Node: Provided configuration45115
+Node: Suggested keybindings45986
+Node: Troubleshooting46903
+Node: A package (suddenly?) fails to work47140
+Node: MIT License50950
 
 End Tag Table
 

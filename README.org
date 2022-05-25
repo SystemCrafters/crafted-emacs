@@ -397,6 +397,75 @@ community!
      please feel free to check on the status of issues from time to time if it
      has been a while since the last activity.
 
+* Troubleshooting
+
+  Some tips when things don't seem to work right.
+
+** A package (suddenly?) fails to work
+
+   This scenario happened frequently when upgading to Emacs 28. It also may
+   occur in other scenarios as well. Usually, you will see some message
+   indicating some symbol is void or some function or command does not
+   exist. More often than not, the package maintainer is using a feature from
+   another package which has not yet been released. The new feature is available
+   in the development version of the package however.
+
+   Here are some example issues where things went wrong:
+   - [[https://github.com/SystemCrafters/rational-emacs/issues/126][Wrong number of arguments error]]
+   - [[https://github.com/SystemCrafters/rational-emacs/issues/132][Example config doesn't start]]
+   - [[https://github.com/SystemCrafters/rational-emacs/issues/140][there are some bugs in package "helpful"]]
+
+   Here are some strategies:
+
+   - Check the code on the package source control page (ie GitHub, GitLab or
+     whatever), and make sure the missing code is present on the =master=
+     branch.
+   - Look at the code associated with the released version (you need to look at
+     the most recent tag for this). If the code is missing there, ask the
+     maintainer for a new release. Often, there are years between releases of
+     Emacs packages, but that depends completely on the package maintainer. Some
+     of them release more frequently, others only on request.
+
+   Once you have done the steps above, you can choose to take one of these
+   actions in your configuration:
+
+   - Option 1
+     + Use =M-x package-list-packages= to display the list of packages.
+     + Find the package in the list which doesn't work for you, it will have
+       either the /installed/ or /dependency/ status.
+     + Press the =enter= key to get more details on the package an look near the
+       bottom of the metadata, you should see a line with "Other Versions". Choose
+       the development version - it will have a version number that looks like a
+       date and the text =(melpa)= next to it. Press =enter= on this version.
+     + Following the step above will take you to the same package but from the
+       MELPA repository, and you'll see a button at the top labeled
+       =Install=. Click this button.
+     + *Optionally* you can go back to the list of packages, find previous
+       installed version, press the letter 'D' and then the letter 'X' to
+       uninstall that version.
+     + Restart Emacs
+   - Option 2
+     + Edit your =early-config.el= file.
+     + Near the bottom, add a line similar to this to pin the offending package
+       to MELPA (make sure to replace /package-name/ with the name of the actual
+       package):
+
+       #+begin_src emacs-lisp
+         (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
+       #+end_src
+
+     + Use =M-x package-list-packages= to display the list of packages.
+     + Find the package in the list, press the letter 'D' and the letter 'X' to
+       uninstall that package.
+     + Restart Emacs, the package should be installed from MELPA thus using the
+       development version of the package instead of the released version.
+
+   Regardless, always feel free to open an issue here and we can help you
+   out. Please be as complete as possible in your description of the
+   problem. Include any stack traces Emacs provides (ie start Emacs with: =emacs
+   --debug-init=), mention the version number of the package you are installing,
+   and anything you might have tried but which didn't work for you.
+
 * License
 
 This code is licensed under the MIT License. Why? So you can copy the code from
