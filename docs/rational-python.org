@@ -44,6 +44,15 @@
 
 ** Provided configuration
 
+   =anaconda-mode-installation-directory= is set to the
+   =rational-config-var-directory=. This is where anaconda-mode will
+   install the python files it uses for completion and documentation.
+
+   =anaconda-mode-use-posframe-show-doc= is set to =t= when the
+   =posframe= package is installed and =posframe= has been turned
+   on. The assumption is you prefer to use =posframe= for popups, so
+   enable it with anaconda-mode.
+
    =pyvenv-restart-python= is added to the
    =pyvenv-post-activate-hooks= to enable restarting the Python
    interpreter when switching buffers to another project.

@@ -59,6 +59,19 @@
 (add-hook 'python-mode-hook #'pyvenv-tracking-mode)
 
 
+;;; anaconda
+;; move anaconda python installation directory to
+;; `rational-config-var-directory'
+(customize-set-variable
+ 'anaconda-mode-installation-directory
+ (expand-file-name "anaconda-mode" rational-config-var-directory))
+
+;; for those who use posframe, use it to show docs
+(when (and (package-installed-p 'posframe)
+           (featurep 'posframe))
+  (customize-set-variable 'anaconda-mode-use-posframe-show-doc t))
+
+
 ;;; pyvenv
 ;; restart python when the virtual environment changes
 (add-hook 'pyvenv-post-activate-hooks #'pyvenv-restart-python)

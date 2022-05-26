@@ -1165,8 +1165,17 @@ File: rational-emacs.info,  Node: Provided configuration,  Next: Suggested keybi
 6.5.2 Provided configuration
 ----------------------------
 
-‘pyvenv-restart-python’ is added to the ‘pyvenv-post-activate-hooks’ to
-enable restarting the Python interpreter when switching buffers to
+‘anaconda-mode-installation-directory’ is set to the
+‘rational-config-var-directory’.  This is where anaconda-mode will
+install the python files it uses for completion and documentation
+
+   ‘anaconda-mode-use-posframe-show-doc’ is set to ‘t’ when the
+‘posframe’ package is installed and ‘posframe’ has been turned on.  The
+assumption is you prefer to use ‘posframe’ for popups, so enable it with
+anaconda-mode.
+
+   ‘pyvenv-restart-python’ is added to the ‘pyvenv-post-activate-hooks’
+to enable restarting the Python interpreter when switching buffers to
 another project.
 
    ‘python-indent-guess-indent-offset-verbose’ is set to ‘nil’ which
@@ -1323,24 +1332,24 @@ Node: Top1412
 Node: Principles3279
 Node: Why use it?6346
 Node: Customization7022
-Ref: org155b2437826
+Ref: orgb6b5a5d7826
 Node: How the rational config file is found8114
 Node: Example Configuration9570
-Ref: orgb7de1099776
+Ref: org07290b59776
 Node: The customel file10437
 Node: Simplified overview of how Emacs Customization works10984
 Node: Loading the customel file12704
 Ref: configel14008
 Ref: customel14565
 Node: Not loading the customel file15297
-Ref: org6472f8316181
+Ref: orgc81e1fa16181
 Node: Caveat on the timing of loading customel16781
 Ref: configel (1)17448
 Ref: customel (1)17716
 Node: Using it with Chemacs218223
-Ref: orga142a1119044
-Ref: org26187ee19447
-Ref: org5cba6e019761
+Ref: org06901be19044
+Ref: orgc56e2b419447
+Ref: orgb21bc5619761
 Node: Contributing20116
 Node: Modules20754
 Node: Rational Emacs Completion Module21893
@@ -1350,10 +1359,10 @@ Node: Rational Emacs Project Module42477
 Node: Rational Emacs Python Module43602
 Node: Packages Installed44121
 Node: Provided configuration45115
-Node: Suggested keybindings45986
-Node: Troubleshooting46903
-Node: A package (suddenly?) fails to work47140
-Node: MIT License50950
+Node: Suggested keybindings46429
+Node: Troubleshooting47346
+Node: A package (suddenly?) fails to work47583
+Node: MIT License51393
 
 End Tag Table
 
