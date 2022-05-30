@@ -79,13 +79,18 @@ Modules
 * Rational Emacs Completion Module::
 * Rational Emacs Defaults Module::
 * Rational Emacs Editing Module::
+* Rational Emacs IDE Module::
 * Rational Emacs Project Module::
 * Rational Emacs Python Module::
+
+Rational Emacs IDE Module
+
+* Provided configuration::
 
 Rational Emacs Python Module
 
 * Packages Installed::
-* Provided configuration::
+* Provided configuration: Provided configuration (1).
 * Suggested keybindings::
 
 Troubleshooting
@@ -564,6 +569,7 @@ the module of interest to understand it best.
 * Rational Emacs Completion Module::
 * Rational Emacs Defaults Module::
 * Rational Emacs Editing Module::
+* Rational Emacs IDE Module::
 * Rational Emacs Project Module::
 * Rational Emacs Python Module::
 
@@ -953,7 +959,7 @@ To use this module, simply require it in your config.
           (savehist-mode -1)
 
 
-File: rational-emacs.info,  Node: Rational Emacs Editing Module,  Next: Rational Emacs Project Module,  Prev: Rational Emacs Defaults Module,  Up: Modules
+File: rational-emacs.info,  Node: Rational Emacs Editing Module,  Next: Rational Emacs IDE Module,  Prev: Rational Emacs Defaults Module,  Up: Modules
 
 6.3 Rational Emacs Editing Module
 =================================
@@ -1076,9 +1082,36 @@ To use this module, simply require it in your config.
                                                        ; programming modes
 
 
-File: rational-emacs.info,  Node: Rational Emacs Project Module,  Next: Rational Emacs Python Module,  Prev: Rational Emacs Editing Module,  Up: Modules
+File: rational-emacs.info,  Node: Rational Emacs IDE Module,  Next: Rational Emacs Project Module,  Prev: Rational Emacs Editing Module,  Up: Modules
 
-6.4 Rational Emacs Project Module
+6.4 Rational Emacs IDE Module
+=============================
+
+This module is a generic module which installs and configures Eglot for
+programming modes.  This package adds ‘eglot-ensure’ to existing loaded
+programming modes.  To use this module, simply require it in your
+config.
+
+* Menu:
+
+* Provided configuration::
+
+
+File: rational-emacs.info,  Node: Provided configuration,  Up: Rational Emacs IDE Module
+
+6.4.1 Provided configuration
+----------------------------
+
+‘eglot-autoshutdown’ is set to ‘t’ to cause Eglot to shutdown the
+language server(s) in use when the last buffer using one is killed.  Set
+this to ‘nil’ to keep the LSP servers running.
+
+     (customize-set-variable 'eglot-autoshutdown nil)
+
+
+File: rational-emacs.info,  Node: Rational Emacs Project Module,  Next: Rational Emacs Python Module,  Prev: Rational Emacs IDE Module,  Up: Modules
+
+6.5 Rational Emacs Project Module
 =================================
 
 To use this module, simply require it in your config.
@@ -1109,7 +1142,7 @@ for details.
 
 File: rational-emacs.info,  Node: Rational Emacs Python Module,  Prev: Rational Emacs Project Module,  Up: Modules
 
-6.5 Rational Emacs Python Module
+6.6 Rational Emacs Python Module
 ================================
 
 This module installs a few additional packages to configure an IDE-like
@@ -1120,13 +1153,13 @@ module, simply require it in your config.
 * Menu:
 
 * Packages Installed::
-* Provided configuration::
+* Provided configuration: Provided configuration (1).
 * Suggested keybindings::
 
 
-File: rational-emacs.info,  Node: Packages Installed,  Next: Provided configuration,  Up: Rational Emacs Python Module
+File: rational-emacs.info,  Node: Packages Installed,  Next: Provided configuration (1),  Up: Rational Emacs Python Module
 
-6.5.1 Packages Installed
+6.6.1 Packages Installed
 ------------------------
 
    • ‘anaconda-mode’
@@ -1160,14 +1193,14 @@ File: rational-emacs.info,  Node: Packages Installed,  Next: Provided configurat
      activate specific environments for each Python project.
 
 
-File: rational-emacs.info,  Node: Provided configuration,  Next: Suggested keybindings,  Prev: Packages Installed,  Up: Rational Emacs Python Module
+File: rational-emacs.info,  Node: Provided configuration (1),  Next: Suggested keybindings,  Prev: Packages Installed,  Up: Rational Emacs Python Module
 
-6.5.2 Provided configuration
+6.6.2 Provided configuration
 ----------------------------
 
 ‘anaconda-mode-installation-directory’ is set to the
 ‘rational-config-var-directory’.  This is where anaconda-mode will
-install the python files it uses for completion and documentation
+install the python files it uses for completion and documentation.
 
    ‘anaconda-mode-use-posframe-show-doc’ is set to ‘t’ when the
 ‘posframe’ package is installed and ‘posframe’ has been turned on.  The
@@ -1191,9 +1224,9 @@ Long description" block when creating the template.
 with each variable.
 
 
-File: rational-emacs.info,  Node: Suggested keybindings,  Prev: Provided configuration,  Up: Rational Emacs Python Module
+File: rational-emacs.info,  Node: Suggested keybindings,  Prev: Provided configuration (1),  Up: Rational Emacs Python Module
 
-6.5.3 Suggested keybindings
+6.6.3 Suggested keybindings
 ---------------------------
 
 No keybindings are provided, but we do offer the following suggestions.
@@ -1329,40 +1362,42 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1412
-Node: Principles3279
-Node: Why use it?6346
-Node: Customization7022
-Ref: orgb6b5a5d7826
-Node: How the rational config file is found8114
-Node: Example Configuration9570
-Ref: org07290b59776
-Node: The customel file10437
-Node: Simplified overview of how Emacs Customization works10984
-Node: Loading the customel file12704
-Ref: configel14008
-Ref: customel14565
-Node: Not loading the customel file15297
-Ref: orgc81e1fa16181
-Node: Caveat on the timing of loading customel16781
-Ref: configel (1)17448
-Ref: customel (1)17716
-Node: Using it with Chemacs218223
-Ref: org06901be19044
-Ref: orgc56e2b419447
-Ref: orgb21bc5619761
-Node: Contributing20116
-Node: Modules20754
-Node: Rational Emacs Completion Module21893
-Node: Rational Emacs Defaults Module30632
-Node: Rational Emacs Editing Module37780
-Node: Rational Emacs Project Module42477
-Node: Rational Emacs Python Module43602
-Node: Packages Installed44121
-Node: Provided configuration45115
-Node: Suggested keybindings46429
-Node: Troubleshooting47346
-Node: A package (suddenly?) fails to work47583
-Node: MIT License51393
+Node: Principles3391
+Node: Why use it?6458
+Node: Customization7134
+Ref: org5bf6e3b7938
+Node: How the rational config file is found8226
+Node: Example Configuration9682
+Ref: orgf10d8f29888
+Node: The customel file10549
+Node: Simplified overview of how Emacs Customization works11096
+Node: Loading the customel file12816
+Ref: configel14120
+Ref: customel14677
+Node: Not loading the customel file15409
+Ref: org0ac4f5216293
+Node: Caveat on the timing of loading customel16893
+Ref: configel (1)17560
+Ref: customel (1)17828
+Node: Using it with Chemacs218335
+Ref: orgc6e529319156
+Ref: org6b1825b19559
+Ref: org5c01a4519873
+Node: Contributing20228
+Node: Modules20866
+Node: Rational Emacs Completion Module22035
+Node: Rational Emacs Defaults Module30774
+Node: Rational Emacs Editing Module37922
+Node: Rational Emacs IDE Module42615
+Node: Provided configuration43089
+Node: Rational Emacs Project Module43494
+Node: Rational Emacs Python Module44615
+Node: Packages Installed45161
+Node: Provided configuration (1)46159
+Node: Suggested keybindings47478
+Node: Troubleshooting48399
+Node: A package (suddenly?) fails to work48636
+Node: MIT License52446
 
 End Tag Table
 
