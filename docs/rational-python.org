@@ -1,0 +1,93 @@
+* Rational Emacs Python Module
+
+  This module installs a few additional packages to configure an
+  IDE-like environment for Python development. In addition to the
+  packages installed, you must also install a few Python modules. To
+  use this module, simply require it in your config.
+
+** Packages Installed
+
+   - =anaconda-mode=
+
+     This mode provides code navigation, documentation and
+     completion.
+
+   - =blacken=
+
+     This mode is used to format your Python code on-save. You also
+     need to install the =black= package with =pip=:
+
+     #+begin_src shell
+       pip install black
+     #+end_src
+
+   - =eglot=
+
+     This is the language server provider, it will connect to an
+     installed language server for completions, refactoring and other
+     features. You also need to install the =pyright= package with
+     =pip=:
+
+     #+begin_src shell
+       pip install pyright
+     #+end_src
+
+   - =numpydoc=
+
+     This package provides templates for creating Python documentation
+     (aka pydoc).
+
+   - =pyvenv=
+
+     This package wraps Python virtual environments. It is used to
+     activate specific environments for each Python project.
+
+** Provided configuration
+
+   =anaconda-mode-installation-directory= is set to the
+   =rational-config-var-directory=. This is where anaconda-mode will
+   install the python files it uses for completion and documentation.
+
+   =anaconda-mode-use-posframe-show-doc= is set to =t= when the
+   =posframe= package is installed and =posframe= has been turned
+   on. The assumption is you prefer to use =posframe= for popups, so
+   enable it with anaconda-mode.
+
+   =pyvenv-restart-python= is added to the
+   =pyvenv-post-activate-hooks= to enable restarting the Python
+   interpreter when switching buffers to another project.
+
+   =python-indent-guess-indent-offset-verbose= is set to =nil= which
+   turns off emitting a warning when indentation guessing fails.
+
+   =numpydoc-insert-examples-block= is set to =nil= to turn off adding
+   an "Examples" block when creating the template.
+
+   =numpydoc-template-long= is set to =nil= to turn off adding a
+   "FIXME: Long description" block when creating the template.
+
+   For more information on each of these, you can review the
+   docstrings with each variable.
+
+** Suggested keybindings
+
+   No keybindings are provided, but we do offer the following
+   suggestions.
+
+   Using the =with-eval-after-load= form defers loading the
+   keybindings until the module is loaded (either "python" or "pyvenv"
+   in this case).
+
+   #+begin_src emacs-lisp
+     (with-eval-after-load "python"
+       (define-key python-mode-map (kbd "C-c C-n") #'numpydoc-generate)
+       (define-key python-mode-map (kbd "C-c e n") #'flymake-goto-next-error)
+       (define-key python-mode-map (kbd "C-c e p") #'flymake-goto-prev-error))
+   #+end_src
+
+   #+begin_src emacs-lisp
+     (with-eval-after-load "pyvenv"
+       (define-key pyvenv-mode-map (kbd "C-c p a") #'pyvenv-activate)
+       (define-key pyvenv-mode-map (kbd "C-c p d") #'pyvenv-deactivate)
+       (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
+   #+end_src
