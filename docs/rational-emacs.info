@@ -598,6 +598,7 @@ orderless (https://github.com/oantolin/orderless)      completion style that mat
 consult (https://github.com/minad/consult)             provides practical commands based on the Emacs completion function
 marginalia (https://github.com/minad/marginalia/)      adds info to the minibuffer completions on the side (in the marginalia)
 embark (https://github.com/oantolin/embark/)           provides a set of possible actions for a given context
+corfu (https://github.com/minad/corfu/)                provides a completion overlay for completions while typing
 
    To explain what the packages do and how they interact, it’s best to
 go through them step by step.  For each step, imagine you want to switch
@@ -766,6 +767,20 @@ the five packages come in.
           bindings that relate to buffers.
 
  [image src="img/10-filtered-describe-bindings.png" ]
+
+
+   • Corfu and Corfu-Doc
+
+     Corfu provides a completion overlay while you are typing similar to
+     how other IDEs popup completions.  Corfu-Doc adds a documentation
+     overlay next to the completion overlay which shows some
+     documentation about the function or variable being completed.
+
+     Use ‘C-n’ or ‘C-p’ to move the next or previous completion in the
+     list.  To read more of the documentation, use ‘M-n’ or ‘M-p’ to
+     scroll the documentation overlay.
+
+ [image src="img/11-corfu-and-doc.png" ]
 
 
 
@@ -1365,39 +1380,39 @@ Node: Top1412
 Node: Principles3391
 Node: Why use it?6458
 Node: Customization7134
-Ref: org5bf6e3b7938
+Ref: org45721dc7938
 Node: How the rational config file is found8226
 Node: Example Configuration9682
-Ref: orgf10d8f29888
+Ref: org40f80159888
 Node: The customel file10549
 Node: Simplified overview of how Emacs Customization works11096
 Node: Loading the customel file12816
 Ref: configel14120
 Ref: customel14677
 Node: Not loading the customel file15409
-Ref: org0ac4f5216293
+Ref: org6872d7216293
 Node: Caveat on the timing of loading customel16893
 Ref: configel (1)17560
 Ref: customel (1)17828
 Node: Using it with Chemacs218335
-Ref: orgc6e529319156
-Ref: org6b1825b19559
-Ref: org5c01a4519873
+Ref: org9dbeef919156
+Ref: orgbf5bab919559
+Ref: org6de777419873
 Node: Contributing20228
 Node: Modules20866
 Node: Rational Emacs Completion Module22035
-Node: Rational Emacs Defaults Module30774
-Node: Rational Emacs Editing Module37922
-Node: Rational Emacs IDE Module42615
-Node: Provided configuration43089
-Node: Rational Emacs Project Module43494
-Node: Rational Emacs Python Module44615
-Node: Packages Installed45161
-Node: Provided configuration (1)46159
-Node: Suggested keybindings47478
-Node: Troubleshooting48399
-Node: A package (suddenly?) fails to work48636
-Node: MIT License52446
+Node: Rational Emacs Defaults Module31430
+Node: Rational Emacs Editing Module38578
+Node: Rational Emacs IDE Module43271
+Node: Provided configuration43745
+Node: Rational Emacs Project Module44150
+Node: Rational Emacs Python Module45271
+Node: Packages Installed45817
+Node: Provided configuration (1)46815
+Node: Suggested keybindings48134
+Node: Troubleshooting49055
+Node: A package (suddenly?) fails to work49292
+Node: MIT License53102
 
 End Tag Table
 
