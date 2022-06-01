@@ -1,0 +1,16 @@
+* Rational Emacs IDE Module
+
+  This module is a generic module which installs and configures Eglot
+  for programming modes. This package adds =eglot-ensure= to existing
+  loaded programming modes. To use this module, simply require it in
+  your config.
+
+** Provided configuration
+
+   =eglot-autoshutdown= is set to =t= to cause Eglot to shutdown the
+   language server(s) in use when the last buffer using one is
+   killed. Set this to =nil= to keep the LSP servers running.
+
+   #+begin_src emacs-lisp
+     (customize-set-variable 'eglot-autoshutdown nil)
+   #+end_src

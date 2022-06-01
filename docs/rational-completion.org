@@ -20,6 +20,7 @@
   | [[https://github.com/minad/consult][consult]]    | provides practical commands based on the Emacs completion function         |
   | [[https://github.com/minad/marginalia/][marginalia]] | adds info to the minibuffer completions on the side (in the marginalia)    |
   | [[https://github.com/oantolin/embark/][embark]]     | provides a set of possible actions for a given context                     |
+  | [[https://github.com/minad/corfu/][corfu]]      | provides a completion overlay for completions while typing                 |
 
   To explain what the packages do and how they interact, it's best to go
   through them step by step.
@@ -168,3 +169,17 @@
       them. Type "buf" to see only the bindings that relate to buffers.
 
       [[./img/10-filtered-describe-bindings.png]]
+
+  - Corfu and Corfu-Doc
+
+    Corfu provides a completion overlay while you are typing similar
+    to how other IDEs popup completions. Corfu-Doc adds a
+    documentation overlay next to the completion overlay which shows
+    some documentation about the function or variable being
+    completed.
+
+    Use =C-n= or =C-p= to move the next or previous completion in the
+    list. To read more of the documentation, use =M-n= or =M-p= to
+    scroll the documentation overlay.
+
+    [[./img/11-corfu-and-doc.png]]
