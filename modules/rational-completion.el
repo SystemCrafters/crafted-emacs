@@ -16,7 +16,6 @@
 
 (rational-package-install-package 'cape)
 (rational-package-install-package 'consult)
-(rational-package-install-package 'corfu-doc)
 (rational-package-install-package 'corfu)
 (rational-package-install-package 'embark)
 (rational-package-install-package 'embark-consult)
