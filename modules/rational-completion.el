@@ -97,7 +97,7 @@ folder, otherwise delete a word"
 (customize-set-variable 'corfu-auto-delay 0.0) ; No delay for completion
 (customize-set-variable 'corfu-echo-documentation 0.25) ; Echo docs for current completion option
 
-(global-corfu-mode 1)
+(corfu-global-mode 1)
 
 (add-hook 'corfu-mode-hook #'corfu-doc-mode)
 (define-key corfu-map (kbd "M-p") #'corfu-doc-scroll-down)
