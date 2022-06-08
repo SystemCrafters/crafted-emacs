@@ -89,7 +89,7 @@ folder, otherwise delete a word"
 
 
 ;;; Corfu
-
+(require 'corfu)
 ;; Setup corfu for popup like completion
 (customize-set-variable 'corfu-cycle t) ; Allows cycling through candidates
 (customize-set-variable 'corfu-auto t)  ; Enable auto completion
