@@ -12,10 +12,14 @@
 ;;; Code:
 
 (defcustom rational-windows-evil-style nil
-  "When t, window movement bindings will be evil-style.")
+  "When non-nil, window movement will use evil-style bindings."
+  :group 'rational
+  :type 'boolean)
 
 (defcustom rational-windows-prefix-key "C-c w"
-  "Configure the prefix key for `rational-windows' bindings.")
+  "Configure the prefix key for `rational-windows' bindings."
+  :group 'rational
+  :type 'key)
 
 (winner-mode 1)
 

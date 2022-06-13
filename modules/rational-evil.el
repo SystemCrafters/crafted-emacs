@@ -13,8 +13,9 @@
 
 ;; Define configuration variables
 (defcustom rational-evil-discourage-arrow-keys nil
-  "When t, prevent the use of arrow keys in normal state to
-encourage the use of Vim-style movement keys (hjkl).")
+  "When non-nil, prevent navigation with the arrow keys in Normal state."
+  :group 'rational
+  :type 'boolean)
 
 ;; Install dependencies
 (rational-package-install-package 'evil)
