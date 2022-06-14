@@ -76,8 +76,14 @@ and don't prompt for confirmation."
       (rational-updates--pull-commits)
     (rational-updates-show-latest)))
 
+;; TODO: use a derived type to check that the value is something `run-at-time'
+;; will accept
 (defcustom rational-updates-fetch-interval "24 hours"
-  "The interval at which `rational-updates-mode' will check for updates."
+  "The interval at which `rational-updates-mode' will check for updates.
+
+The interval is scheduled with `run-at-time', so the value of
+this variable must conform to a format accepted by
+`run-at-time'."
   :group 'rational)
 
 (defun rational-updates--do-automatic-fetch ()
