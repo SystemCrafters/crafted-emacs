@@ -14,7 +14,7 @@
 ;; Customization group for the Rational Editing module.
 (defgroup rational-editing '()
   "Editing related configuration for Rational Emacs."
-  :tag "Editing"
+  :tag "Rational Editing"
   :group 'rational)
 
 (defun rational-editing--prefer-tabs (enable)
