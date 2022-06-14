@@ -46,10 +46,15 @@ as accepted by `set-face-attribute'."
     (apply 'set-face-attribute 'default nil spec)))
 
 
+(defgroup rational-ui '()
+  "User interface related configuration for Rational Emacs."
+  :tag "Rational UI"
+  :group 'rational)
+
 (defcustom rational-ui-default-font nil
   "The configuration of the `default' face.
 Use a plist with the same key names as accepted by `set-face-attribute'."
-  :group 'rational
+  :group 'rational-ui
   :type '(plist :key-type: symbol)
   :tag "Default font"
   :set (lambda (sym val)
@@ -92,7 +97,7 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
   '(conf-mode prog-mode)
   "Modes which should display line numbers."
   :type 'list
-  :group 'rational)
+  :group 'rational-ui)
 
 (defcustom rational-ui-line-numbers-disabled-modes
   '(org-mode)
@@ -100,7 +105,7 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
 Modes derived from the modes defined in
 `rational-ui-line-number-enabled-modes', but should not display line numbers."
   :type 'list
-  :group 'rational)
+  :group 'rational-ui)
 
 (defun rational-ui--enable-line-numbers-mode ()
   "Turn on line numbers mode.
@@ -139,7 +144,7 @@ Used as hook for modes which should not display line numebrs."
 (defcustom rational-ui-display-line-numbers nil
   "Whether line numbers should be enabled."
   :type 'boolean
-  :group 'rational
+  :group 'rational-ui
   :set (lambda (sym val)
          (set-default sym val)
          (rational-ui--update-line-numbers-display)))

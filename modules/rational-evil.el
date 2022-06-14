@@ -1,20 +1,26 @@
-;;; rational-evil.el -*- lexical-binding: t; -*-
+;;; rational-evil.el --- Evil mode configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
 ;; Evil mode configuration, for those who prefer `vi' keybindings.
 
 ;;; Code:
 
+(defgroup rational-evil '()
+  "Vim-like related configuration for Rational Emacs."
+  :tag "Rational Evil"
+  :group 'rational)
+
 ;; Define configuration variables
 (defcustom rational-evil-discourage-arrow-keys nil
-  "When t, prevent the use of arrow keys in normal state to
-encourage the use of Vim-style movement keys (hjkl).")
+  "When non-nil, prevent navigation with the arrow keys in Normal state."
+  :group 'rational-evil
+  :type 'boolean)
 
 ;; Install dependencies
 (rational-package-install-package 'evil)
