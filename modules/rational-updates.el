@@ -76,6 +76,11 @@ and don't prompt for confirmation."
       (rational-updates--pull-commits)
     (rational-updates-show-latest)))
 
+(defgroup rational-updates '()
+  "Configuration for keeping Rational Emacs up-to-date."
+  :tag "Rational Updates"
+  :group 'rational)
+
 ;; TODO: use a derived type to check that the value is something `run-at-time'
 ;; will accept
 (defcustom rational-updates-fetch-interval "24 hours"
@@ -84,7 +89,7 @@ and don't prompt for confirmation."
 The interval is scheduled with `run-at-time', so the value of
 this variable must conform to a format accepted by
 `run-at-time'."
-  :group 'rational)
+  :group 'rational-updates)
 
 (defun rational-updates--do-automatic-fetch ()
   (when rational-updates-mode
@@ -99,7 +104,7 @@ this variable must conform to a format accepted by
 Emacs.  When enabled, it will automatically check for updates at
 the specified `rational-updates-fetch-interval'."
   :global t
-  :group 'rational
+  :group 'rational-updates
   (when rational-updates-mode
     (rational-updates--schedule-fetch)))
 
