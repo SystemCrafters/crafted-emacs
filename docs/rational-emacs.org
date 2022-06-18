@@ -422,6 +422,7 @@ Emacs configuration journey.
   #+include: rational-completion.org
   #+include: rational-defaults.org
   #+include: rational-editing.org
+  #+include: rational-lisp.org
   #+include: rational-ide.org
   #+include: rational-project.org
   #+include: rational-python.org
