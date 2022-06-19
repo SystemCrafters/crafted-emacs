@@ -231,3 +231,35 @@
     #+begin_src emacs-lisp
       (savehist-mode -1)
     #+end_src
+
+  - =crafted-folders= : =t=
+
+    Enables the use of a modern folder structure, as explained below.
+
+    You can turn this off by adding this code to =config.el= (or
+    through the Customization UI):
+
+    #+begin_src emacs-lisp
+      (customize-set-variable 'crafted-folders nil)
+    #+end_src
+
+** Sensible path defaults
+
+Loading this module will make your Emacs, by default, save
+several runtime and/or configuration files inside Rational Emacs
+=var= directory as explained in [[file:crafted-emacs.org#folder-structure][the documentation]].
+
+This behaviour can be disabled by customizing =crafted-folders=
+as explained above.
+
+The list of paths being updated is growing as we aim to have
+all state, runtime and/or configuration files stored following
+modern practices. What is currently altered is:
+
+- [[help:bookmark-default-file][bookmark-default-file]]
+- [[help:nsm-settings-file][nsm-settings-file]]
+- [[help:org-id-locations-file][org-id-locations-file]]
+- [[help:project-list-file][project-list-file]]
+- [[help:savehist-file][savehist-file]]
+- [[help:save-place-file][save-place-file]]
+- [[help:tramp-persistency-file-name][tramp-persistency-file-name]]
