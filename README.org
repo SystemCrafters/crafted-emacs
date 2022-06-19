@@ -59,6 +59,17 @@ external packages, for example:
   functionality)
 - *Possibly* =vc-mode= by default
 
+** Sensible folder layout
+
+While Emacs tends to keep everything (code, configuration, state files, ...)
+inside `user-emacs-directory` modern computer systems tend to keep those
+separated.
+
+Rational Emacs tries to maintain some balance between those two paradigms by
+bringing just the right amount of order to it.
+
+See [[file:docs/rational-emacs.org#folder-structure][Folder structure]] in the documentation for more details.
+
 ** Works well in the terminal
 
 Some people prefer to use Emacs in the terminal instead of as a graphical
