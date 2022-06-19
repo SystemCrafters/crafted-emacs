@@ -136,6 +136,9 @@ information about how they can be configured!
 - rational-shell :: A starter configuration for =eshell= and =vterm=
 
 * Customization
+:PROPERTIES:
+:CUSTOM_ID: customization
+:END:
 
 To add your own customization to this configuration, create a configuraton file
 in one of the following directories:
