@@ -68,7 +68,7 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
 ;;;; Mode-Line
 
 ;; Start up the modeline after initialization is finished
-(add-hook 'after-init-hook 'doom-modeline-init)
+(add-hook 'after-init-hook 'doom-modeline-mode)
 
 ;; Configure `doom-modeline'
 (customize-set-variable 'doom-modeline-height 15)
