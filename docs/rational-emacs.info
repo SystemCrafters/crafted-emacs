@@ -79,9 +79,18 @@ Modules
 * Rational Emacs Completion Module::
 * Rational Emacs Defaults Module::
 * Rational Emacs Editing Module::
+* Rational Emacs Lisp Module::
 * Rational Emacs IDE Module::
 * Rational Emacs Project Module::
 * Rational Emacs Python Module::
+
+Rational Emacs Lisp Module
+
+* Packages Installed::
+* Common::
+* Common Lisp::
+* Clojure::
+* Scheme/Racket::
 
 Rational Emacs IDE Module
 
@@ -89,7 +98,7 @@ Rational Emacs IDE Module
 
 Rational Emacs Python Module
 
-* Packages Installed::
+* Packages Installed: Packages Installed (1).
 * Provided configuration: Provided configuration (1).
 * Suggested keybindings::
 
@@ -569,6 +578,7 @@ the module of interest to understand it best.
 * Rational Emacs Completion Module::
 * Rational Emacs Defaults Module::
 * Rational Emacs Editing Module::
+* Rational Emacs Lisp Module::
 * Rational Emacs IDE Module::
 * Rational Emacs Project Module::
 * Rational Emacs Python Module::
@@ -974,7 +984,7 @@ To use this module, simply require it in your config.
           (savehist-mode -1)
 
 
-File: rational-emacs.info,  Node: Rational Emacs Editing Module,  Next: Rational Emacs IDE Module,  Prev: Rational Emacs Defaults Module,  Up: Modules
+File: rational-emacs.info,  Node: Rational Emacs Editing Module,  Next: Rational Emacs Lisp Module,  Prev: Rational Emacs Defaults Module,  Up: Modules
 
 6.3 Rational Emacs Editing Module
 =================================
@@ -1097,9 +1107,170 @@ To use this module, simply require it in your config.
                                                        ; programming modes
 
 
-File: rational-emacs.info,  Node: Rational Emacs IDE Module,  Next: Rational Emacs Project Module,  Prev: Rational Emacs Editing Module,  Up: Modules
+File: rational-emacs.info,  Node: Rational Emacs Lisp Module,  Next: Rational Emacs IDE Module,  Prev: Rational Emacs Editing Module,  Up: Modules
 
-6.4 Rational Emacs IDE Module
+6.4 Rational Emacs Lisp Module
+==============================
+
+This module installs and configures a few additonal packages to provide
+a configuration for the Lisp family of languages including Common Lisp,
+Clojure, Scheme, and Racket.
+
+   • Prerequisites:
+
+     Obviously, an implementation of one of the languages mentioned
+     above would need to be installed.  Examples would be (a
+     non-exhaustive list):
+
+        • Common Lisp:
+             • CLISP (GNU Common Lisp) <https://clisp.sourceforge.io>
+
+               GNU’s implementation, cross platform, a good choice for
+               people who need to target Microsoft Windows, Mac OS,
+               and/or Linux.
+
+             • CMUCL (Carnegie-Mellon Common Lisp) <https://cmucl.org>
+
+               An implementation from Carnegie-Mellon university.  Known
+               to be fairly fast with a native compiler.  Runs on most
+               Unix platforms.
+
+             • SBCL (Steel-Bank Common Lisp) <http://sbcl.org>
+
+               A fork of CMUCL and ostensibly the most popular
+               implementation, though there aren’t many user visible
+               differences between SBCL and CMUCL.
+
+        • Clojure <https://clojure.org>
+
+        • Scheme:
+             • GNU Guile <https://www.gnu.org/software/guile>
+
+               The GNU Ubiquitious Intelligent Language for Extensions,
+               can be combined with C/C++ programs as an extension
+               language or can be used stand-alone and features a
+               compiler and vitual machine.  Popularly used with the GNU
+               Guix package manager used natively by the GNU Guix Linux
+               distribution, although it can be used with other Linux
+               distributions as well.
+
+             • Chez <https://cisco.github.io/ChezScheme>
+
+               Known to be extremely fast, with a native compiler
+               providing binaries on par with compiled C code.
+
+             • Gauche <https://practical-scheme.net/gauche>
+
+               Built to start start nearly instantly, targeted as a
+               shell scripting tool.
+
+        • Racket <https://racket-lang.org>
+
+          Promoted as a language for language developers, is cross
+          platform with a few pedagogical books to help beginners learn
+          to write software, as well as many advanced features.
+
+* Menu:
+
+* Packages Installed::
+* Common::
+* Common Lisp::
+* Clojure::
+* Scheme/Racket::
+
+
+File: rational-emacs.info,  Node: Packages Installed,  Next: Common,  Up: Rational Emacs Lisp Module
+
+6.4.1 Packages Installed
+------------------------
+
+   • Common
+        • ‘aggressive-indent’
+   • Common Lisp
+        • ‘sly’
+        • ‘sly-asdf’
+        • ‘sly-quicklisp’
+        • ‘sly-repl-ansi-color’
+   • Clojure
+        • ‘cider’
+        • ‘clj-refactor’
+        • ‘clojure-mode’
+        • ‘flycheck-clojure’
+   • Scheme/Racket
+        • ‘geiser’
+        • ‘geiser-guile’
+        • ‘geiser-racket’
+
+
+File: rational-emacs.info,  Node: Common,  Next: Common Lisp,  Prev: Packages Installed,  Up: Rational Emacs Lisp Module
+
+6.4.2 Common
+------------
+
+Aggressive indent mode is added to each of the other lisp family
+configurations.  It provides automatic indentation, even when pasting
+code or adding structure.  It is added on each mode hook, to turn this
+feature off, remove the hook.  For example:
+
+     (remove-hook 'lisp-mode-hook #'aggressive-indent-mode)
+
+   • Hooks ‘aggressive-mode’ is added to:
+        • ‘lisp-mode-hook’
+        • ‘scheme-mode-hook’
+        • ‘clojure-mode-hook’
+
+
+File: rational-emacs.info,  Node: Common Lisp,  Next: Clojure,  Prev: Common,  Up: Rational Emacs Lisp Module
+
+6.4.3 Common Lisp
+-----------------
+
+The configuration for Common Lisp features Sylvester the cat’s Common
+Lisp IDE for Emacs.  It provides a debugger, inspecter, xref,
+completion, integration with ASDF and Quicklsp system definition tools.
+
+
+File: rational-emacs.info,  Node: Clojure,  Next: Scheme/Racket,  Prev: Common Lisp,  Up: Rational Emacs Lisp Module
+
+6.4.4 Clojure
+-------------
+
+The configuration for Clojure is based on CIDER and adds ‘clj-refactor’
+a refactoring layer built on top of CIDER.  The refactoring keybinding
+prefix is set to ‘C-c r’ to avoid conflicts with CIDER.  To change this
+to something else (for example ‘C-c C-m’ as mentioned on the github
+page) use the following snippet:
+
+     (clj-add-keybindings-with-prefix "C-c C-m")
+
+
+File: rational-emacs.info,  Node: Scheme/Racket,  Prev: Clojure,  Up: Rational Emacs Lisp Module
+
+6.4.5 Scheme/Racket
+-------------------
+
+Geiser provides a modular package for the Scheme family of languages
+including Racket.  There are several modules availble for Geiser.  We
+provide the configuration for Guile and Racket, but others can be added,
+see the Commentary section for this module to see a list of other
+modules, or look for them by running ‘M-x list-packages’ and seaching
+for ‘geiser’.
+
+   When visiting a scheme file, use ‘M-x gieser-run’ to start a REPL.
+Alternatively, you can use ‘M-x geiser-guile’ or ‘M-x
+geiser-racket-connect’.
+
+   If you have installed multiple scheme implementations, you may wish
+to set the ‘scheme-program-name’ variable, which we default to "guile"
+to match the configuration for that implementation.  To change this to
+‘scheme’ for example, use this snippet:
+
+     (customize-set-variable 'scheme-program-name "scheme")
+
+
+File: rational-emacs.info,  Node: Rational Emacs IDE Module,  Next: Rational Emacs Project Module,  Prev: Rational Emacs Lisp Module,  Up: Modules
+
+6.5 Rational Emacs IDE Module
 =============================
 
 This module is a generic module which installs and configures Eglot for
@@ -1114,7 +1285,7 @@ config.
 
 File: rational-emacs.info,  Node: Provided configuration,  Up: Rational Emacs IDE Module
 
-6.4.1 Provided configuration
+6.5.1 Provided configuration
 ----------------------------
 
 ‘eglot-autoshutdown’ is set to ‘t’ to cause Eglot to shutdown the
@@ -1126,7 +1297,7 @@ this to ‘nil’ to keep the LSP servers running.
 
 File: rational-emacs.info,  Node: Rational Emacs Project Module,  Next: Rational Emacs Python Module,  Prev: Rational Emacs IDE Module,  Up: Modules
 
-6.5 Rational Emacs Project Module
+6.6 Rational Emacs Project Module
 =================================
 
 To use this module, simply require it in your config.
@@ -1157,7 +1328,7 @@ for details.
 
 File: rational-emacs.info,  Node: Rational Emacs Python Module,  Prev: Rational Emacs Project Module,  Up: Modules
 
-6.6 Rational Emacs Python Module
+6.7 Rational Emacs Python Module
 ================================
 
 This module installs a few additional packages to configure an IDE-like
@@ -1167,14 +1338,14 @@ module, simply require it in your config.
 
 * Menu:
 
-* Packages Installed::
+* Packages Installed: Packages Installed (1).
 * Provided configuration: Provided configuration (1).
 * Suggested keybindings::
 
 
-File: rational-emacs.info,  Node: Packages Installed,  Next: Provided configuration (1),  Up: Rational Emacs Python Module
+File: rational-emacs.info,  Node: Packages Installed (1),  Next: Provided configuration (1),  Up: Rational Emacs Python Module
 
-6.6.1 Packages Installed
+6.7.1 Packages Installed
 ------------------------
 
    • ‘anaconda-mode’
@@ -1208,9 +1379,9 @@ File: rational-emacs.info,  Node: Packages Installed,  Next: Provided configurat
      activate specific environments for each Python project.
 
 
-File: rational-emacs.info,  Node: Provided configuration (1),  Next: Suggested keybindings,  Prev: Packages Installed,  Up: Rational Emacs Python Module
+File: rational-emacs.info,  Node: Provided configuration (1),  Next: Suggested keybindings,  Prev: Packages Installed (1),  Up: Rational Emacs Python Module
 
-6.6.2 Provided configuration
+6.7.2 Provided configuration
 ----------------------------
 
 ‘anaconda-mode-installation-directory’ is set to the
@@ -1241,7 +1412,7 @@ with each variable.
 
 File: rational-emacs.info,  Node: Suggested keybindings,  Prev: Provided configuration (1),  Up: Rational Emacs Python Module
 
-6.6.3 Suggested keybindings
+6.7.3 Suggested keybindings
 ---------------------------
 
 No keybindings are provided, but we do offer the following suggestions.
@@ -1377,42 +1548,48 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1412
-Node: Principles3391
-Node: Why use it?6458
-Node: Customization7134
-Ref: org45721dc7938
-Node: How the rational config file is found8226
-Node: Example Configuration9682
-Ref: org40f80159888
-Node: The customel file10549
-Node: Simplified overview of how Emacs Customization works11096
-Node: Loading the customel file12816
-Ref: configel14120
-Ref: customel14677
-Node: Not loading the customel file15409
-Ref: org6872d7216293
-Node: Caveat on the timing of loading customel16893
-Ref: configel (1)17560
-Ref: customel (1)17828
-Node: Using it with Chemacs218335
-Ref: org9dbeef919156
-Ref: orgbf5bab919559
-Ref: org6de777419873
-Node: Contributing20228
-Node: Modules20866
-Node: Rational Emacs Completion Module22035
-Node: Rational Emacs Defaults Module31430
-Node: Rational Emacs Editing Module38578
-Node: Rational Emacs IDE Module43271
-Node: Provided configuration43745
-Node: Rational Emacs Project Module44150
-Node: Rational Emacs Python Module45271
-Node: Packages Installed45817
-Node: Provided configuration (1)46815
-Node: Suggested keybindings48134
-Node: Troubleshooting49055
-Node: A package (suddenly?) fails to work49292
-Node: MIT License53102
+Node: Principles3554
+Node: Why use it?6621
+Node: Customization7297
+Ref: org43c131e8101
+Node: How the rational config file is found8389
+Node: Example Configuration9845
+Ref: org2f82ab910051
+Node: The customel file10712
+Node: Simplified overview of how Emacs Customization works11259
+Node: Loading the customel file12979
+Ref: configel14283
+Ref: customel14840
+Node: Not loading the customel file15572
+Ref: org680c7dc16456
+Node: Caveat on the timing of loading customel17056
+Ref: configel (1)17723
+Ref: customel (1)17991
+Node: Using it with Chemacs218498
+Ref: org00661c519319
+Ref: org81acaf319722
+Ref: orgaead2f120036
+Node: Contributing20391
+Node: Modules21029
+Node: Rational Emacs Completion Module22229
+Node: Rational Emacs Defaults Module31624
+Node: Rational Emacs Editing Module38772
+Node: Rational Emacs Lisp Module43466
+Node: Packages Installed46090
+Node: Common46679
+Node: Common Lisp47295
+Node: Clojure47652
+Node: Scheme/Racket48180
+Node: Rational Emacs IDE Module49176
+Node: Provided configuration49647
+Node: Rational Emacs Project Module50052
+Node: Rational Emacs Python Module51173
+Node: Packages Installed (1)51742
+Node: Provided configuration (1)52744
+Node: Suggested keybindings54067
+Node: Troubleshooting54988
+Node: A package (suddenly?) fails to work55225
+Node: MIT License59035
 
 End Tag Table
 
