@@ -7,7 +7,7 @@
 
 ;;; Commentary:
 
-;; Evil mode configuration, for those who prefer `vi' keybindings.
+;; Evil mode configuration, for those who prefer `Vim' keybindings.
 
 ;;; Code:
 
@@ -19,6 +19,11 @@
 ;; Define configuration variables
 (defcustom rational-evil-discourage-arrow-keys nil
   "When non-nil, prevent navigation with the arrow keys in Normal state."
+  :group 'rational-evil
+  :type 'boolean)
+
+(defcustom rational-evil-vim-muscle-memory nil
+  "When non-nil, let take evil mode some of the default keybindings, in order to make a more familiar Vim experience."
   :group 'rational-evil
   :type 'boolean)
 
@@ -37,6 +42,11 @@
 (customize-set-variable 'evil-want-C-i-jump nil)
 (customize-set-variable 'evil-respect-visual-line-mode t)
 (customize-set-variable 'evil-undo-system 'undo-tree)
+
+(when rational-evil-vim-muscle-memory
+    (customize-set-variable 'evil-want-C-i-jump t)
+    (customize-set-variable 'evil-want-Y-yank-to-eol t)
+    (customize-set-variable 'evil-want-fine-undo t))
 
 ;; Load Evil and enable it globally
 (require 'evil)

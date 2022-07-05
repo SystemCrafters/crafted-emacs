@@ -127,6 +127,7 @@ information about how they can be configured!
 - [[file:modules/rational-speedbar.el][rational-speedbar]] :: A file-tree
 - [[file:modules/rational-screencast.el][rational-screencast]] :: Tools for doing screencasts
 - [[file:modules/rational-compile.el][rational-compile]] :: Set up automatic compilation for some emacs-lisp files
+- [[file:modules/rational-osx.el][rational-osx]] :: Set up some conviniences to work in a Mac OS/OSX enviroment
 
 ** Modules that we will be adding in the future:
 
