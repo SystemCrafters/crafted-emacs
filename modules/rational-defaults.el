@@ -17,6 +17,10 @@
 ;; Revert buffers when the underlying file has changed
 (global-auto-revert-mode 1)
 
+;; Typed text replaces the selection if the selection is active,
+;; pressing delete or backspace deletes the selection.
+(delete-selection-mode)
+
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 

@@ -823,6 +823,14 @@ To use this module, simply require it in your config.
 
           (global-auto-revert-mode -1)
 
+   • ‘delete-selection-mode’
+
+     Typed text replaces the selection if the selection is active,
+     pressing delete or backspace deletes the selection.  To turn this
+     off, add this code to your ‘config.el’
+
+          (delete-selection-mode -1)
+
    • ‘indent-tabs-mode’ : ‘nil’
 
      Only indent using spaces.
@@ -1551,45 +1559,45 @@ Node: Top1412
 Node: Principles3554
 Node: Why use it?6621
 Node: Customization7297
-Ref: org43c131e8101
+Ref: org82d60388101
 Node: How the rational config file is found8389
 Node: Example Configuration9845
-Ref: org2f82ab910051
+Ref: org7d01f1610051
 Node: The customel file10712
 Node: Simplified overview of how Emacs Customization works11259
 Node: Loading the customel file12979
 Ref: configel14283
 Ref: customel14840
 Node: Not loading the customel file15572
-Ref: org680c7dc16456
+Ref: orgc646b5216456
 Node: Caveat on the timing of loading customel17056
 Ref: configel (1)17723
 Ref: customel (1)17991
 Node: Using it with Chemacs218498
-Ref: org00661c519319
-Ref: org81acaf319722
-Ref: orgaead2f120036
+Ref: orgfcf387f19319
+Ref: org3f862c219722
+Ref: org65804e520036
 Node: Contributing20391
 Node: Modules21029
 Node: Rational Emacs Completion Module22229
 Node: Rational Emacs Defaults Module31624
-Node: Rational Emacs Editing Module38772
-Node: Rational Emacs Lisp Module43466
-Node: Packages Installed46090
-Node: Common46679
-Node: Common Lisp47295
-Node: Clojure47652
-Node: Scheme/Racket48180
-Node: Rational Emacs IDE Module49176
-Node: Provided configuration49647
-Node: Rational Emacs Project Module50052
-Node: Rational Emacs Python Module51173
-Node: Packages Installed (1)51742
-Node: Provided configuration (1)52744
-Node: Suggested keybindings54067
-Node: Troubleshooting54988
-Node: A package (suddenly?) fails to work55225
-Node: MIT License59035
+Node: Rational Emacs Editing Module39033
+Node: Rational Emacs Lisp Module43727
+Node: Packages Installed46351
+Node: Common46940
+Node: Common Lisp47556
+Node: Clojure47913
+Node: Scheme/Racket48441
+Node: Rational Emacs IDE Module49437
+Node: Provided configuration49908
+Node: Rational Emacs Project Module50313
+Node: Rational Emacs Python Module51434
+Node: Packages Installed (1)52003
+Node: Provided configuration (1)53005
+Node: Suggested keybindings54328
+Node: Troubleshooting55249
+Node: A package (suddenly?) fails to work55486
+Node: MIT License59296
 
 End Tag Table
 
