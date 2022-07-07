@@ -53,7 +53,10 @@ For your convenience, the following settings have been set by default.
   + term-mode
 + The following keybindings have been added
 
-  | Key-Chord | Function           |
-  |-----------+--------------------|
-  | C-g       | 'evil-normal-state |
-  |           |                    |
+  | Key-Chord | Function                             | Keymap                  |
+  |-----------+--------------------------------------+-------------------------|
+  | =C-g=     | =evil-normal-state=                  | =evil-insert-state-map= |
+  | =C-M-u=   | =universal-argument=                 | =current-global-map=    |
+  | =C-h=     | =evil-delete-backward-char-and-join= | =evil-insert-state-map= |
+  | =j=       | =evil-next-visual-line=              | =evil-motion-state-map= |
+  | =k=       | =evil-previous-visual-line=          | =evil-motion-state-map= |

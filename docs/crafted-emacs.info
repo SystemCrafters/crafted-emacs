@@ -1743,24 +1743,24 @@ Node: Top1408
 Node: Principles3809
 Node: Why use it?6873
 Node: Customization7548
-Ref: org1b5c1668347
+Ref: org19617518347
 Node: How the crafted config file is found8631
 Node: Example Configuration10075
-Ref: orgd1b6c8e10279
+Ref: org4fac64a10279
 Node: The customel file10930
 Node: Simplified overview of how Emacs Customization works11476
 Node: Loading the customel file13194
 Ref: configel14495
 Ref: customel15044
 Node: Not loading the customel file15774
-Ref: org416467b16657
+Ref: orga1f6c5816657
 Node: Caveat on the timing of loading customel17247
 Ref: configel (1)17913
 Ref: customel (1)18181
 Node: Using it with Chemacs218688
-Ref: org5ff3c1719501
-Ref: org4c6c23119900
-Ref: org9f6489720210
+Ref: orgdad547219501
+Ref: org1d891d019900
+Ref: org19daa6420210
 Node: Contributing20559
 Node: Modules21196
 Node: Crafted Emacs Completion Module22450
