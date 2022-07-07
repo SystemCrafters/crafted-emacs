@@ -18,7 +18,7 @@
 (customize-set-variable 'org-mouse-1-follows-link t)
 
 ;; Display links as the description provided
-(customize-set-variable 'org-descriptive-links t)
+(customize-set-variable 'org-link-descriptive t)
 
 ;; Hide markup markers
 (customize-set-variable 'org-hide-emphasis-markers t)
