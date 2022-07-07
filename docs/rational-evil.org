@@ -1,0 +1,31 @@
+* Rational Emacs Evil Module
+
+** Installation
+
+To use this module, simply require it in your config.
+
+#+begin_src emacs-lisp
+(require 'rational-evil)
+#+end_src
+
+** Description
+
+This module installs and sets up four packages to emulate [[https://www.vim.org/][Vim's]] modal editing
+model.
+
++ [[https://github.com/emacs-evil/evil][Evil]]: Adds Vim-like modal editing, visual selection, and text objects to
+Emacs
++ [[https://github.com/emacs-evil/evil-collection][Evil-collection]]:  Vim-like bindings for modes not covered by default in Evil
++ [[https://elpa.gnu.org/packages/undo-tree.html#:~:text=The%20%60undo%2Dtree%2Dmode,of%20never%20losing%20any%20history][Undo-tree]]: Visualizes changes made in your file as a tree
++ [[https://github.com/redguardtoo/evil-nerd-commenter][Evil-nerd-commenter]]: Allows easy commenting of code for many different file
+types.
+
+More information can be found about each of these packages on their pages linked
+above.
+
+** Customization
+
+This module 
+
+
+
