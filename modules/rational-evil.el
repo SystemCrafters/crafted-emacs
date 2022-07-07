@@ -55,6 +55,9 @@
 (require 'evil)
 (evil-mode 1)
 
+;; Make evil search more like vim
+(evil-select-search-module 'evil-search-module 'evil-search)
+
 ;; Turn on Evil Nerd Commenter
 (evilnc-default-hotkeys)
 
