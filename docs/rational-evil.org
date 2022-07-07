@@ -10,7 +10,7 @@ To use this module, simply require it in your config.
                                                  
 ** Description
 
-This module installs and sets up four packages to emulate [[https://www.vim.org/][Vim's]] modal editing model.
+This module installs and sets up four packages to emulate and extend [[https://www.vim.org/][Vim's]] modal editing model.
 
 + [[https://github.com/emacs-evil/evil][Evil]]: Adds Vim-like modal editing, visual selection, and text objects to Emacs
 + [[https://github.com/emacs-evil/evil-collection][Evil-collection]]:  Vim-like bindings for modes not covered by default in Evil
