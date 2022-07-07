@@ -7,7 +7,7 @@ To use this module, simply require it in your config.
 #+begin_src emacs-lisp
 (require 'rational-evil)
 #+end_src
-
+                                                 
 ** Description
 
 This module installs and sets up four packages to emulate [[https://www.vim.org/][Vim's]] modal editing model.
@@ -28,7 +28,12 @@ This module provides two customizable variables
 
 When =rational-evil-discourage-arrow-keys= is true, arrow keys are disabled in normal and visual mode. When you attempt to use the arrow keys a message will pop up reminding you to use the =HJKL= keys instead.
 
-When =rational-evil-vim-muscle-memory= is true, the variables =evil-want-C-i-jump=, =evil-want-Y-yank-to-eol=, and =evil-want-fine-undo= are all set to true. By default, they are nil. =evil-want-C-i-jump= 
+When =rational-evil-vim-muscle-memory= is true, the variables =evil-want-C-i-jump=, =evil-want-Y-yank-to-eol=, and =evil-want-fine-undo= are all set to true. By default, they are nil. Setting these to true allows Evil to overwrite some of the default Emacs keybindings to allow for a more Vim-like experience.
 
+Setting =evil-want-C-i-jump= to true sets =C-i= to jump forward, as in Vim. The default behavior is to insert a tab character.
 
+When =evil-want-Y-yank-to-eol= is true =Y= yanks to the end of the line. The default behavior if to yank the whole line.
 
+Finally, setting =evil-want-fine-undo= to true allows an action, such as an insert, to be broken into separate steps. For example, if, while in the insert state, you performed a delete operation after a change operation setting this variable to true would allow it to be undone in multiple steps. If it is set to nil then an action, like the one described above, will be undone all at once. 
+
+Each package this module installs might have additional variables that can be modified to change its behavior. Please refer to the documentation for those packages for more information.
