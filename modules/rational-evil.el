@@ -23,7 +23,7 @@
   :type 'boolean)
 
 (defcustom rational-evil-vim-muscle-memory nil
-  "When non-nil, let take evil mode some of the default keybindings, in order to make a more familiar Vim experience."
+  "When non-nil, let evil mode take some of the default keybindings, in order to make a more familiar Vim experience."
   :group 'rational-evil
   :type 'boolean)
 
