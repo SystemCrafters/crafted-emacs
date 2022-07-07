@@ -5,7 +5,8 @@
 To use this module, simply require it in your config.
 
 #+begin_src emacs-lisp
-(require 'rational-evil) #+end_src
+(require 'rational-evil)
+#+end_src
 
 ** Description
 
