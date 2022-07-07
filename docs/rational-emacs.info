@@ -83,6 +83,7 @@ Modules
 * Rational Emacs IDE Module::
 * Rational Emacs Project Module::
 * Rational Emacs Python Module::
+* Rational Emacs Evil Module::
 
 Rational Emacs Lisp Module
 
@@ -101,6 +102,13 @@ Rational Emacs Python Module
 * Packages Installed: Packages Installed (1).
 * Provided configuration: Provided configuration (1).
 * Suggested keybindings::
+
+Rational Emacs Evil Module
+
+* Installation::
+* Description::
+* Customization Variables::
+* Some default settings::
 
 Troubleshooting
 
@@ -582,6 +590,7 @@ the module of interest to understand it best.
 * Rational Emacs IDE Module::
 * Rational Emacs Project Module::
 * Rational Emacs Python Module::
+* Rational Emacs Evil Module::
 
 
 File: rational-emacs.info,  Node: Rational Emacs Completion Module,  Next: Rational Emacs Defaults Module,  Up: Modules
@@ -1334,7 +1343,7 @@ for details.
      can also run the ‘project-forget-project’ function.
 
 
-File: rational-emacs.info,  Node: Rational Emacs Python Module,  Prev: Rational Emacs Project Module,  Up: Modules
+File: rational-emacs.info,  Node: Rational Emacs Python Module,  Next: Rational Emacs Evil Module,  Prev: Rational Emacs Project Module,  Up: Modules
 
 6.7 Rational Emacs Python Module
 ================================
@@ -1437,6 +1446,121 @@ until the module is loaded (either "python" or "pyvenv" in this case).
        (define-key pyvenv-mode-map (kbd "C-c p a") #'pyvenv-activate)
        (define-key pyvenv-mode-map (kbd "C-c p d") #'pyvenv-deactivate)
        (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
+
+
+File: rational-emacs.info,  Node: Rational Emacs Evil Module,  Prev: Rational Emacs Python Module,  Up: Modules
+
+6.8 Rational Emacs Evil Module
+==============================
+
+* Menu:
+
+* Installation::
+* Description::
+* Customization Variables::
+* Some default settings::
+
+
+File: rational-emacs.info,  Node: Installation,  Next: Description,  Up: Rational Emacs Evil Module
+
+6.8.1 Installation
+------------------
+
+To use this module, simply require it in your config.
+
+     (require 'rational-evil)
+
+
+File: rational-emacs.info,  Node: Description,  Next: Customization Variables,  Prev: Installation,  Up: Rational Emacs Evil Module
+
+6.8.2 Description
+-----------------
+
+This module installs and sets up four packages to emulate and extend
+Vim’s (https://www.vim.org/) modal editing model.
+
+   • Evil (https://github.com/emacs-evil/evil): A minor mode that adds
+     Vim-like modal editing, visual selection, and text objects to Emacs
+   • Evil-collection (https://github.com/emacs-evil/evil-collection):
+     Vim-like bindings for modes not covered by default in Evil
+   • Undo-tree: Visualizes changes made in your file as a tree
+   • Evil-nerd-commenter
+     (https://github.com/redguardtoo/evil-nerd-commenter): Allows easy
+     commenting of code for many different file types.
+
+   More information can be found about each of these packages on their
+respective pages linked above.
+
+   If this module is included in your configuration file, evil-mode,
+along with evil-collection and evil-nerd-commenter will be enabled by
+default.  To toggle evil-mode on or off run ‘M-x evil-mode’.
+
+   The undo history of a file can be visualized using ‘M-x
+undo-tree-visualize’ which is bound by default to ‘C-x u’.  The history
+can then be navigated through using the arrow keys.
+
+
+File: rational-emacs.info,  Node: Customization Variables,  Next: Some default settings,  Prev: Description,  Up: Rational Emacs Evil Module
+
+6.8.3 Customization Variables
+-----------------------------
+
+This module provides two customizable variables
+
+   • ‘rational-evil-discourage-arrow-keys’
+   • ‘rational-evil-vim-muscle-memory’.
+
+   When ‘rational-evil-discourage-arrow-keys’ is true, arrow keys are
+disabled in normal and visual mode.  When you attempt to use the arrow
+keys a message will pop up reminding you to use the ‘HJKL’ keys instead.
+
+   When ‘rational-evil-vim-muscle-memory’ is true, the variables
+‘evil-want-C-i-jump’, ‘evil-want-Y-yank-to-eol’, and
+‘evil-want-fine-undo’ are all set to true.  By default, they are nil.
+Setting these to true allows Evil to overwrite some of the default Emacs
+keybindings to allow for a more Vim-like experience.
+
+   Setting ‘evil-want-C-i-jump’ to true sets ‘C-i’ to jump forward, as
+in Vim.  The default behavior is to insert a tab character.
+
+   When ‘evil-want-Y-yank-to-eol’ is true ‘Y’ yanks to the end of the
+line.  The default behavior if to yank the whole line.
+
+   Finally, setting ‘evil-want-fine-undo’ to true allows an action, such
+as an insert, to be broken into separate steps.  For example, if, while
+in the insert state, you performed a delete operation after a change
+operation setting this variable to true would allow it to be undone in
+multiple steps.  If it is set to nil then an action, like the one
+described above, will be undone all at once.
+
+   Each package this module installs might have additional variables
+that can be modified to change its behavior.  Please refer to the
+documentation for those packages for more information.
+
+
+File: rational-emacs.info,  Node: Some default settings,  Prev: Customization Variables,  Up: Rational Emacs Evil Module
+
+6.8.4 Some default settings
+---------------------------
+
+For your convenience, the following settings have been set by default.
+
+   • ‘evil-respect-visual-line-mode’ is set to t, causing Evil’s motion
+     commands to act on visual lines rather than logical lines.
+   • The following modes are set to open up in Emacs state (using Emacs’
+     default keybindings) when they start
+        • custom-mode
+        • eshell-mode
+        • term-mode
+   • The following keybindings have been added
+
+     Key-Chord   Function                               Keymap
+     -----------------------------------------------------------------------------
+     ‘C-g’       ‘evil-normal-state’                    ‘evil-insert-state-map’
+     ‘C-M-u’     ‘universal-argument’                   ‘current-global-map’
+     ‘C-h’       ‘evil-delete-backward-char-and-join’   ‘evil-insert-state-map’
+     ‘j’         ‘evil-next-visual-line’                ‘evil-motion-state-map’
+     ‘k’         ‘evil-previous-visual-line’            ‘evil-motion-state-map’
 
 
 File: rational-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
@@ -1556,48 +1680,53 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1412
-Node: Principles3554
-Node: Why use it?6621
-Node: Customization7297
-Ref: org82d60388101
-Node: How the rational config file is found8389
-Node: Example Configuration9845
-Ref: org7d01f1610051
-Node: The customel file10712
-Node: Simplified overview of how Emacs Customization works11259
-Node: Loading the customel file12979
-Ref: configel14283
-Ref: customel14840
-Node: Not loading the customel file15572
-Ref: orgc646b5216456
-Node: Caveat on the timing of loading customel17056
-Ref: configel (1)17723
-Ref: customel (1)17991
-Node: Using it with Chemacs218498
-Ref: orgfcf387f19319
-Ref: org3f862c219722
-Ref: org65804e520036
-Node: Contributing20391
-Node: Modules21029
-Node: Rational Emacs Completion Module22229
-Node: Rational Emacs Defaults Module31624
-Node: Rational Emacs Editing Module39033
-Node: Rational Emacs Lisp Module43727
-Node: Packages Installed46351
-Node: Common46940
-Node: Common Lisp47556
-Node: Clojure47913
-Node: Scheme/Racket48441
-Node: Rational Emacs IDE Module49437
-Node: Provided configuration49908
-Node: Rational Emacs Project Module50313
-Node: Rational Emacs Python Module51434
-Node: Packages Installed (1)52003
-Node: Provided configuration (1)53005
-Node: Suggested keybindings54328
-Node: Troubleshooting55249
-Node: A package (suddenly?) fails to work55486
-Node: MIT License59296
+Node: Principles3701
+Node: Why use it?6768
+Node: Customization7444
+Ref: org4b6e0768248
+Node: How the rational config file is found8536
+Node: Example Configuration9992
+Ref: org635a8d410198
+Node: The customel file10859
+Node: Simplified overview of how Emacs Customization works11406
+Node: Loading the customel file13126
+Ref: configel14430
+Ref: customel14987
+Node: Not loading the customel file15719
+Ref: org9d9f3ea16603
+Node: Caveat on the timing of loading customel17203
+Ref: configel (1)17870
+Ref: customel (1)18138
+Node: Using it with Chemacs218645
+Ref: orgccca7ab19466
+Ref: org1093f7719869
+Ref: org7869ec120183
+Node: Contributing20538
+Node: Modules21176
+Node: Rational Emacs Completion Module22407
+Node: Rational Emacs Defaults Module31802
+Node: Rational Emacs Editing Module39211
+Node: Rational Emacs Lisp Module43905
+Node: Packages Installed46529
+Node: Common47118
+Node: Common Lisp47734
+Node: Clojure48091
+Node: Scheme/Racket48619
+Node: Rational Emacs IDE Module49615
+Node: Provided configuration50086
+Node: Rational Emacs Project Module50491
+Node: Rational Emacs Python Module51612
+Node: Packages Installed (1)52216
+Node: Provided configuration (1)53218
+Node: Suggested keybindings54541
+Node: Rational Emacs Evil Module55462
+Node: Installation55737
+Node: Description55965
+Node: Customization Variables57260
+Node: Some default settings59030
+Node: Troubleshooting60270
+Node: A package (suddenly?) fails to work60507
+Node: MIT License64317
 
 End Tag Table
 
