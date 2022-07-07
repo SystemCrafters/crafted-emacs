@@ -53,7 +53,7 @@ For your convenience, the following settings have been set by default.
   + term-mode
 + The following keybindings have been added
 
-  | ** Key-Chord ** | ** Function **  |
+  | * Key-Chord * | * Function *       |
   |---------------+--------------------|
   | C-g           | 'evil-normal-state |
   |               |                    |
