@@ -98,7 +98,12 @@ directory will be compiled, but not it's subdirectories."
   (setq f (flatten-list (list f)))
   (message "Compiling file(s): %s" f)
   (if (featurep 'native-compile)
-      (native-compile-async f)
+    (dolist (source f)
+      (if (file-newer-than-file-p
+             (rational-compile-locate-eln-file (file-name-base source))
+             source)
+          (native-compile-async f)
+        (message "Skipping compilation of file %s" source)))
     (dolist (source f)
       (when (file-exists-p source)
         (if (file-directory-p source)
@@ -238,6 +243,23 @@ The files to be compiled is defined in
             (when (and rational-compile-on-save
                        (string-equal major-mode "emacs-lisp-mode"))
               (rational-compile-buffer))))
+
+(defun rational-compile-locate-eln-file (library)
+  ""
+  (let ((return nil))
+    (dolist (dir (mapcar (lambda (path)
+                           (expand-file-name comp-native-version-dir path))
+                         native-comp-eln-load-path))
+      (when (and (not return)
+                 (file-exists-p dir))
+        (let ((prefix (expand-file-name library dir)))
+          (dolist (file-base (directory-files dir))
+            (let ((file (expand-file-name file-base dir)))
+              (when (and (not return)
+                         (string-prefix-p prefix file)
+                         (string-suffix-p ".eln" file))
+                (setq return (expand-file-name file-base dir))))))))
+    return))
 
 
 ;;; Package:
