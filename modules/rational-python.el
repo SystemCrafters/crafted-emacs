@@ -67,7 +67,7 @@
  (expand-file-name "anaconda-mode" rational-config-var-directory))
 
 ;; for those who use posframe, use it to show docs
-(when (and (rational-packageinstalled-p 'posframe)
+(when (and (rational-package-installed-p 'posframe)
            (featurep 'posframe))
   (customize-set-variable 'anaconda-mode-use-posframe-show-doc t))
 
