@@ -113,8 +113,8 @@ Rational Emacs Evil Module
 
 Rational Emacs Windows Module
 
-* Installation::
-* Description::
+* Installation: Installation (1).
+* Description: Description (1).
 
 Troubleshooting
 
@@ -1351,7 +1351,6 @@ for details.
 
 
 File: rational-emacs.info,  Node: Rational Emacs Python Module,  Next: Rational Emacs Evil Module,  Prev: Rational Emacs Project Module,  Up: Modules
-File: rational-emacs.info,  Node: Rational Emacs Python Module,  Next: Rational Emacs Windows Module,  Prev: Rational Emacs Project Module,  Up: Modules
 
 6.7 Rational Emacs Python Module
 ================================
@@ -1456,15 +1455,10 @@ until the module is loaded (either "python" or "pyvenv" in this case).
        (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
 
 
-File: rational-emacs.info,  Node: Rational Emacs Evil Module,  Prev: Rational Emacs Python Module,  Up: Modules
+File: rational-emacs.info,  Node: Rational Emacs Evil Module,  Next: Rational Emacs Windows Module,  Prev: Rational Emacs Python Module,  Up: Modules
 
 6.8 Rational Emacs Evil Module
 ==============================
-File: rational-emacs.info,  Node: Rational Emacs Windows Module,  Prev: Rational Emacs Python Module,  Up: Modules
-
-6.8 Rational Emacs Windows Module
-=================================
-
 
 * Menu:
 
@@ -1476,10 +1470,6 @@ File: rational-emacs.info,  Node: Rational Emacs Windows Module,  Prev: Rational
 
 File: rational-emacs.info,  Node: Installation,  Next: Description,  Up: Rational Emacs Evil Module
 
-
-
-File: rational-emacs.info,  Node: Installation,  Next: Description,  Up: Rational Emacs Windows Module
-
 6.8.1 Installation
 ------------------
 
@@ -1489,11 +1479,9 @@ To use this module, simply require it in your config.
 
 
 File: rational-emacs.info,  Node: Description,  Next: Customization Variables,  Prev: Installation,  Up: Rational Emacs Evil Module
-File: rational-emacs.info,  Node: Description,  Prev: Installation,  Up: Rational Emacs Windows Module
 
 6.8.2 Description
 -----------------
-
 
 This module installs and sets up four packages to emulate and extend
 Vim’s (https://www.vim.org/) modal editing model.
@@ -1580,6 +1568,34 @@ For your convenience, the following settings have been set by default.
      ‘C-h’       ‘evil-delete-backward-char-and-join’   ‘evil-insert-state-map’
      ‘j’         ‘evil-next-visual-line’                ‘evil-motion-state-map’
      ‘k’         ‘evil-previous-visual-line’            ‘evil-motion-state-map’
+
+
+File: rational-emacs.info,  Node: Rational Emacs Windows Module,  Prev: Rational Emacs Evil Module,  Up: Modules
+
+6.9 Rational Emacs Windows Module
+=================================
+
+* Menu:
+
+* Installation: Installation (1).
+* Description: Description (1).
+
+
+File: rational-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Rational Emacs Windows Module
+
+6.9.1 Installation
+------------------
+
+To use this module, simply require it in your config.
+
+     (require 'rational-evil)
+
+
+File: rational-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Rational Emacs Windows Module
+
+6.9.2 Description
+-----------------
+
 This module enables winner-mode
 (https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html)
 and provides a set of keybindings that help you navigate through
@@ -1606,7 +1622,6 @@ C-c w n     windmove-down    Moves point to window below
 C-c w p     windmove-up      Moves point to window above
 C-c w b     windmove-left    Moves point to window to the left
 C-c w f     windmove-right   Moves point to window to the right
-
 
 
 File: rational-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
@@ -1726,99 +1741,56 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1412
-Node: Principles3701
-Node: Why use it?6768
-Node: Customization7444
-Ref: org4b6e0768248
-Node: How the rational config file is found8536
-Node: Example Configuration9992
-Ref: org635a8d410198
-Node: The customel file10859
-Node: Simplified overview of how Emacs Customization works11406
-Node: Loading the customel file13126
-Ref: configel14430
-Ref: customel14987
-Node: Not loading the customel file15719
-Ref: org9d9f3ea16603
-Node: Caveat on the timing of loading customel17203
-Ref: configel (1)17870
-Ref: customel (1)18138
-Node: Using it with Chemacs218645
-Ref: orgccca7ab19466
-Ref: org1093f7719869
-Ref: org7869ec120183
-Node: Contributing20538
-Node: Modules21176
-Node: Rational Emacs Completion Module22407
-Node: Rational Emacs Defaults Module31802
-Node: Rational Emacs Editing Module39211
-Node: Rational Emacs Lisp Module43905
-Node: Packages Installed46529
-Node: Common47118
-Node: Common Lisp47734
-Node: Clojure48091
-Node: Scheme/Racket48619
-Node: Rational Emacs IDE Module49615
-Node: Provided configuration50086
-Node: Rational Emacs Project Module50491
-Node: Rational Emacs Python Module51612
-Node: Packages Installed (1)52216
-Node: Provided configuration (1)53218
-Node: Suggested keybindings54541
-Node: Rational Emacs Evil Module55462
-Node: Installation55737
-Node: Description55965
-Node: Customization Variables57260
-Node: Some default settings59030
-Node: Troubleshooting60270
-Node: A package (suddenly?) fails to work60507
-Node: MIT License64317
-Node: Principles3653
-Node: Why use it?6720
-Node: Customization7396
-Ref: org038e1fc8200
-Node: How the rational config file is found8488
-Node: Example Configuration9944
-Ref: org915cec010150
-Node: The customel file10811
-Node: Simplified overview of how Emacs Customization works11358
-Node: Loading the customel file13078
-Ref: configel14382
-Ref: customel14939
-Node: Not loading the customel file15671
-Ref: org23a6c2316555
-Node: Caveat on the timing of loading customel17155
-Ref: configel (1)17822
-Ref: customel (1)18090
-Node: Using it with Chemacs218597
-Ref: org0631f6319418
-Ref: org7891ab719821
-Ref: org29f762120135
-Node: Contributing20490
-Node: Modules21128
-Node: Rational Emacs Completion Module22362
-Node: Rational Emacs Defaults Module31757
-Node: Rational Emacs Editing Module39166
-Node: Rational Emacs Lisp Module43860
-Node: Packages Installed46484
-Node: Common47073
-Node: Common Lisp47689
-Node: Clojure48046
-Node: Scheme/Racket48574
-Node: Rational Emacs IDE Module49570
-Node: Provided configuration50041
-Node: Rational Emacs Project Module50446
-Node: Rational Emacs Python Module51567
-Node: Packages Installed (1)52174
-Node: Provided configuration (1)53176
-Node: Suggested keybindings54499
-Node: Rational Emacs Windows Module55420
-Node: Installation55650
-Node: Description55881
-Node: Troubleshooting57321
-Node: A package (suddenly?) fails to work57558
-Node: MIT License61368
-
+Node: Principles3833
+Node: Why use it?6900
+Node: Customization7576
+Ref: orgcddd3188380
+Node: How the rational config file is found8668
+Node: Example Configuration10124
+Ref: org879e2be10330
+Node: The customel file10991
+Node: Simplified overview of how Emacs Customization works11538
+Node: Loading the customel file13258
+Ref: configel14562
+Ref: customel15119
+Node: Not loading the customel file15851
+Ref: org03cc73f16735
+Node: Caveat on the timing of loading customel17335
+Ref: configel (1)18002
+Ref: customel (1)18270
+Node: Using it with Chemacs218777
+Ref: orged7352919598
+Ref: orgb9958cd20001
+Ref: org3e4759a20315
+Node: Contributing20670
+Node: Modules21308
+Node: Rational Emacs Completion Module22573
+Node: Rational Emacs Defaults Module31968
+Node: Rational Emacs Editing Module39377
+Node: Rational Emacs Lisp Module44071
+Node: Packages Installed46695
+Node: Common47284
+Node: Common Lisp47900
+Node: Clojure48257
+Node: Scheme/Racket48785
+Node: Rational Emacs IDE Module49781
+Node: Provided configuration50252
+Node: Rational Emacs Project Module50657
+Node: Rational Emacs Python Module51778
+Node: Packages Installed (1)52382
+Node: Provided configuration (1)53384
+Node: Suggested keybindings54707
+Node: Rational Emacs Evil Module55628
+Node: Installation55941
+Node: Description56169
+Node: Customization Variables57464
+Node: Some default settings59234
+Node: Rational Emacs Windows Module60474
+Node: Installation (1)60735
+Node: Description (1)60974
+Node: Troubleshooting62422
+Node: A package (suddenly?) fails to work62659
+Node: MIT License66469
 
 End Tag Table
 
