@@ -7,26 +7,6 @@
 ;; Prefer loading newest compiled .el file
 (customize-set-variable 'load-prefer-newer noninteractive)
 
-;;; package configuration
-(require 'package)
-
-;; Emacs 27.x has gnu elpa as the default
-;; Emacs 28.x adds the nongnu elpa to the list by default, so only
-;; need to add nongnu when this isn't Emacs 28+
-(when (version< emacs-version "28")
-  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-(add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-
-(customize-set-variable 'package-archive-priorities
-                        '(("gnu"    . 99)   ; prefer GNU packages
-                          ("nongnu" . 80)   ; use non-gnu packages if
-                                            ; not found in GNU elpa
-                          ("stable" . 70)   ; prefer "released" versions
-                                            ; from melpa
-                          ("melpa"  . 0)))  ; if all else fails, get it
-                                            ; from melpa
-
 ;; Find the user configuration path
 ;; In order do these checks:
 ;; * using chemacs?
@@ -115,3 +95,7 @@ customizations made by packages.")
 (let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
   (when (file-exists-p early-config-path)
     (load early-config-path nil 'nomessage)))
+
+;; Load the package-system.  If needed, the user could customize the
+;; system to use in `early-config.el'.
+(require 'rational-packages)

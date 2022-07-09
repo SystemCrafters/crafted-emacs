@@ -13,52 +13,7 @@
   :link '(url-link "https://github.com/SystemCrafters/rational-emacs")
   :group 'emacs)
 
-;;; package configuration
-(defun rational-package-archive-stale-p (archive)
-  "Return `t' if ARCHIVE is stale.
-
-ARCHIVE is stale if the on-disk cache is older than 1 day"
-  (let ((today (time-to-days (current-time)))
-        (archive-name (expand-file-name
-                       (format "archives/%s/archive-contents" archive)
-                       package-user-dir)))
-    (time-less-p (time-to-days (file-attribute-modification-time
-                                (file-attributes archive-name)))
-                 today)))
-
-(defun rational-package-archives-stale-p ()
-  "Return `t' if any PACKAGE-ARHIVES cache is out of date.
-
-Check each archive listed in PACKAGE-ARCHIVES, if the on-disk
-cache is older than 1 day, return a non-nil value. Fails fast,
-will return `t' for the first stale archive found or `nil' if
-they are all up-to-date."
-  (interactive)
-  (cl-some #'rational-package-archive-stale-p (mapcar #'car package-archives)))
-
-(defmacro rational-package-install-package (package)
-  "Only install the package if it is not already installed."
-  `(unless (package-installed-p ,package) (package-install ,package)))
-
-;; Only use package.el if it is enabled. The user may have turned it
-;; off in their `early-config.el' file, so respect their wishes if so.
-(when package-enable-at-startup
- (package-initialize)
-
- (require 'seq)
- ;; Only refresh package contents once per day on startup, or if the
- ;; `package-archive-contents' has not been initialized. If Emacs has
- ;; been running for a while, user will need to manually run
- ;; `package-refresh-contents' before calling `package-install'.
- (cond ((seq-empty-p package-archive-contents)
-        (progn
-          (message "rational-init: package archives empty, initializing")
-          (package-refresh-contents)))
-       ((rational-package-archives-stale-p)
-        (progn
-          (message "rational-init: package archives stale, refreshing in the background")
-          (package-refresh-contents t))))
- )
+(rational-package-initialize)
 
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
