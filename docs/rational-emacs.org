@@ -427,6 +427,7 @@ Emacs configuration journey.
   #+include: rational-project.org
   #+include: rational-python.org
   #+include: rational-evil.org
+  #+include: rational-windows.org
 
 * Troubleshooting
 
