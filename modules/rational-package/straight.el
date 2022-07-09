@@ -7,7 +7,12 @@
 
 ;;; Commentary:
 
-;;
+;; This code loads the bootstrap code for `straight.el', according as
+;; described in <https://github.com/radian-software/straight.el>.
+
+;; It also adds a couple of macros to make an abstraction of the API:
+;; `rational-package-install-package' and
+;; `rational-package-installed-p'.
 
 ;;; Code:
 

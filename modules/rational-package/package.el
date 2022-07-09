@@ -7,7 +7,14 @@
 
 ;;; Commentary:
 
-;;
+;; Most of this code was already in `early-init.el' and `init.el'. I
+;; Just moved here.
+
+;; I added the macro `rational-package-installed-p', to abstract the
+;; verification of installed packages.
+
+;; It still need to implement the checking of packages installed via
+;; `guix'.
 
 ;;; Code:
 
