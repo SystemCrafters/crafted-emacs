@@ -157,6 +157,10 @@ package.el or Guix depending on the value of
 (when rational-load-custom-file
   (load custom-file t))
 
+(require 'rational-startup)
+(unless rational-startup-inhibit-splash
+  (add-hook 'after-init-hook #'rational-startup-screen t))
+
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
