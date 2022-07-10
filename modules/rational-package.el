@@ -16,6 +16,12 @@
 
 ;; Other backends could be added.
 
+;; This still needs to manage packages installed using `guix' (or
+;; other system-wide methods).
+
+;; For `guix' see Androew Tropin's video on the theme:
+;; <https://youtu.be/gqmZjovuomc>
+
 ;;; Code:
 
 (defvar rational-package-system 'package
