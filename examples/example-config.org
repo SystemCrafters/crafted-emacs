@@ -1,13 +1,13 @@
-#+title: Example Rational Emacs User Configuration File
+#+title: Example Crafted Emacs User Configuration File
 #+PROPERTY: header-args:emacs-lisp :tangle ./config.el :mkdirp yes
 
-Rational Emacs supports user customization through a =config.org= file similar to
+Crafted Emacs supports user customization through a =config.org= file similar to
 this one.
 
-To get you started, copy both example files to your Rational Emacs configuration
+To get you started, copy both example files to your Crafted Emacs configuration
 directory, e.g.:
-- copy =examples/example-config.el= to =~/.rational-emacs/config.el=
-- copy =examples/example-config.org= to =~/.rational-emacs/config.org=
+- copy =examples/example-config.el= to =~/.crafted-emacs/config.el=
+- copy =examples/example-config.org= to =~/.crafted-emacs/config.org=
 - restart Emacs
 
 After that, whenever you edit =config.org= in Emacs and save it, it updates
@@ -16,14 +16,14 @@ After that, whenever you edit =config.org= in Emacs and save it, it updates
 See the [[https://orgmode.org/manual/Extracting-Source-Code.html][Org Manual]] for details and alternatives.
 
 #+begin_src emacs-lisp
-  ;;; config.el -- Example Rational Emacs user customization file -*- lexical-binding: t; -*-
+  ;;; config.el -- Example Crafted Emacs user customization file -*- lexical-binding: t; -*-
   ;; This file is generated from config.org. If you want to edit the
   ;; configuration, DO NOT edit config.el, edit config.org, instead.
 
   ;; Tangle the code blocks to config.el on save.
   (defun org-babel-tangle-config ()
     (when (string-equal (buffer-file-name)
-                        (expand-file-name "config.org" rational-config-path))
+                        (expand-file-name "config.org" crafted-config-path))
       ;; Dynamic scoping to the rescue
       (let ((org-confirm-babel-evaluate nil))
         (org-babel-tangle))))
@@ -37,48 +37,48 @@ In your configuration you can set any Emacs configuration variable, face
 attributes, themes, etc as you normally would.
 See the README.org file in this repository for additional information.
 
-* Rational Modules
+* Crafted Modules
 
-At the moment, Rational Emacs offers the following modules. Comment out
+At the moment, Crafted Emacs offers the following modules. Comment out
 everything you don't want to use.
 At the very least, you should decide whether or not you want to use [[https://github.com/emacs-evil/evil][evil-mode]],
 as it will greatly change how you interact with Emacs. So, if you prefer
 Vim-style keybindings over vanilla Emacs keybindings remove the comment
-in the line about =rational-evil= below.
+in the line about =crafted-evil= below.
 #+begin_src emacs-lisp
-  (require 'rational-defaults)    ; Sensible default settings for Emacs
-  (require 'rational-use-package) ; Configuration for `use-package`
-  (require 'rational-updates)     ; Tools to upgrade Rational Emacs
-  (require 'rational-completion)  ; selection framework based on `vertico`
-  (require 'rational-ui)          ; Better UI experience (modeline etc.)
-  (require 'rational-windows)     ; Window management configuration
-  (require 'rational-editing)     ; Whitspace trimming, auto parens etc.
-  ;(require 'rational-evil)        ; An `evil-mode` configuration
-  (require 'rational-org)         ; org-appear, clickable hyperlinks etc.
-  (require 'rational-project)     ; built-in alternative to projectile
-  (require 'rational-speedbar)    ; built-in file-tree
-  (require 'rational-screencast)  ; show current command and binding in modeline
-  (require 'rational-compile)     ; automatically compile some emacs lisp files
+  (require 'crafted-defaults)    ; Sensible default settings for Emacs
+  (require 'crafted-use-package) ; Configuration for `use-package`
+  (require 'crafted-updates)     ; Tools to upgrade Crafted Emacs
+  (require 'crafted-completion)  ; selection framework based on `vertico`
+  (require 'crafted-ui)          ; Better UI experience (modeline etc.)
+  (require 'crafted-windows)     ; Window management configuration
+  (require 'crafted-editing)     ; Whitspace trimming, auto parens etc.
+  ;(require 'crafted-evil)        ; An `evil-mode` configuration
+  (require 'crafted-org)         ; org-appear, clickable hyperlinks etc.
+  (require 'crafted-project)     ; built-in alternative to projectile
+  (require 'crafted-speedbar)    ; built-in file-tree
+  (require 'crafted-screencast)  ; show current command and binding in modeline
+  (require 'crafted-compile)     ; automatically compile some emacs lisp files
 #+end_src
 
 * Font and theme settings
 #+begin_src emacs-lisp
   (custom-set-variables
-     '(rational-ui-default-font
+     '(crafted-ui-default-font
        '(:font "JetBrains Mono" :weight light :height 185)))
 
-  (rational-package-install-package 'doom-themes)
+  (crafted-package-install-package 'doom-themes)
   (load-theme 'doom-one t)
 #+end_src
 
 * Custom.el
-By default, Rational Emacs keeps your config file clean. All the customization
+By default, Crafted Emacs keeps your config file clean. All the customization
 settings that Emacs normally automatically adds to your config.el go into
 the file =custom.el= instead. If you don't want this, set the respective
 variable to =nil=:
 #+begin_src emacs-lisp
   ;; To not load `custom.el' after `config.el', uncomment this line.
-  ;; (setq rational-load-custom-file nil)
+  ;; (setq crafted-load-custom-file nil)
 #+end_src
 
 * Tangling to early-config.el

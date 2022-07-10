@@ -1,11 +1,11 @@
-* Rational Emacs Evil Module
+* Crafted Emacs Evil Module
 
 ** Installation
 
 To use this module, simply require it in your config.
 
 #+begin_src emacs-lisp
-(require 'rational-evil)
+(require 'crafted-evil)
 #+end_src
                                                  
 ** Description
@@ -27,12 +27,12 @@ The undo history of a file can be visualized using =M-x undo-tree-visualize= whi
 
 This module provides two customizable variables
 
-+ =rational-evil-discourage-arrow-keys=
-+ =rational-evil-vim-muscle-memory=.
++ =crafted-evil-discourage-arrow-keys=
++ =crafted-evil-vim-muscle-memory=.
 
-When =rational-evil-discourage-arrow-keys= is true, arrow keys are disabled in normal and visual mode. When you attempt to use the arrow keys a message will pop up reminding you to use the =HJKL= keys instead.
+When =crafted-evil-discourage-arrow-keys= is true, arrow keys are disabled in normal and visual mode. When you attempt to use the arrow keys a message will pop up reminding you to use the =HJKL= keys instead.
 
-When =rational-evil-vim-muscle-memory= is true, the variables =evil-want-C-i-jump=, =evil-want-Y-yank-to-eol=, and =evil-want-fine-undo= are all set to true. By default, they are nil. Setting these to true allows Evil to overwrite some of the default Emacs keybindings to allow for a more Vim-like experience.
+When =crafted-evil-vim-muscle-memory= is true, the variables =evil-want-C-i-jump=, =evil-want-Y-yank-to-eol=, and =evil-want-fine-undo= are all set to true. By default, they are nil. Setting these to true allows Evil to overwrite some of the default Emacs keybindings to allow for a more Vim-like experience.
 
 Setting =evil-want-C-i-jump= to true sets =C-i= to jump forward, as in Vim. The default behavior is to insert a tab character.
 

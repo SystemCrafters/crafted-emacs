@@ -1,4 +1,4 @@
-;;; rational-use-package.el -*- lexical-binding: t; -*-
+;;; crafted-use-package.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -12,7 +12,7 @@
 
 ;;; Code:
 
-(rational-package-install-package 'use-package)
+(crafted-package-install-package 'use-package)
 
 ;; we are possibly here because `straight.el' is preferred, so only
 ;; configure package in that case. This work has already been done if
@@ -33,5 +33,5 @@
  (unless package-archive-contents
    (package-refresh-contents)))
 
-(provide 'rational-use-package)
-;;; rational-use-package.el ends here
+(provide 'crafted-use-package)
+;;; crafted-use-package.el ends here

@@ -1,4 +1,4 @@
-* Rational Emacs Lisp Module
+* Crafted Emacs Lisp Module
 
   This module installs and configures a few additonal packages to
   provide a configuration for the Lisp family of languages including

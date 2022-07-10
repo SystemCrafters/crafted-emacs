@@ -1,11 +1,11 @@
-* Rational Emacs Windows Module
+* Crafted Emacs Windows Module
 
 ** Installation
 
 To use this module, simply require it in your config.
 
 #+begin_src emacs-lisp
-(require 'rational-evil)
+(require 'crafted-evil)
 #+end_src
 
 ** Description
@@ -14,7 +14,7 @@ This module enables [[https://www.gnu.org/software/emacs/manual/html_node/emacs/
 
 =winner-mode= is a minor mode that, when activated, allows you to revert to a prior windows arrangement. It provides two functions to allow this: =winner-undo= and =winner-redo=. These take you to earlier and later windows arrangements respectively. 
 
-To store the keybindings associated with this module, a new keymap is created: =rational-windows-key-map=, Additionally, this module defines a custom variable, =rational-windows-prefix-key=, which allows you to set the prefix key to the keymap. By default, this is set to =C-c w=, but you are free to change it.
+To store the keybindings associated with this module, a new keymap is created: =crafted-windows-key-map=, Additionally, this module defines a custom variable, =crafted-windows-prefix-key=, which allows you to set the prefix key to the keymap. By default, this is set to =C-c w=, but you are free to change it.
 
 Using the default prefix-key, the keybindings defined in this module are
 

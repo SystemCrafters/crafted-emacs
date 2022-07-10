@@ -1,4 +1,4 @@
-;;; rational-ui.el -*- lexical-binding: t; -*-
+;;; crafted-ui.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -31,13 +31,13 @@
 
 ;;; Code:
 
-(rational-package-install-package 'all-the-icons)
-(rational-package-install-package 'doom-modeline)
-(rational-package-install-package 'elisp-demos)
-(rational-package-install-package 'helpful)
+(crafted-package-install-package 'all-the-icons)
+(crafted-package-install-package 'doom-modeline)
+(crafted-package-install-package 'elisp-demos)
+(crafted-package-install-package 'helpful)
 
 ;;;; Font
-(defun rational-ui--set-default-font (spec)
+(defun crafted-ui--set-default-font (spec)
   "Set the default font based on SPEC.
 
 SPEC is expected to be a plist with the same key names
@@ -46,24 +46,24 @@ as accepted by `set-face-attribute'."
     (apply 'set-face-attribute 'default nil spec)))
 
 
-(defgroup rational-ui '()
-  "User interface related configuration for Rational Emacs."
-  :tag "Rational UI"
-  :group 'rational)
+(defgroup crafted-ui '()
+  "User interface related configuration for Crafted Emacs."
+  :tag "Crafted UI"
+  :group 'crafted)
 
-(defcustom rational-ui-default-font nil
+(defcustom crafted-ui-default-font nil
   "The configuration of the `default' face.
 Use a plist with the same key names as accepted by `set-face-attribute'."
-  :group 'rational-ui
+  :group 'crafted-ui
   :type '(plist :key-type: symbol)
   :tag "Default font"
   :set (lambda (sym val)
-         (let ((prev-val (if (boundp 'rational-ui-default-font)
-                             rational-ui-default-font
+         (let ((prev-val (if (boundp 'crafted-ui-default-font)
+                             crafted-ui-default-font
                          nil)))
          (set-default sym val)
          (when (and val (not (eq val prev-val)))
-           (rational-ui--set-default-font val)))))
+           (crafted-ui--set-default-font val)))))
 
 ;;;; Mode-Line
 
@@ -93,61 +93,61 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
 
 ;;;; Line Numbers
 
-(defcustom rational-ui-line-numbers-enabled-modes
+(defcustom crafted-ui-line-numbers-enabled-modes
   '(conf-mode prog-mode)
   "Modes which should display line numbers."
   :type 'list
-  :group 'rational-ui)
+  :group 'crafted-ui)
 
-(defcustom rational-ui-line-numbers-disabled-modes
+(defcustom crafted-ui-line-numbers-disabled-modes
   '(org-mode)
   "Modes which should not display line numbers.
 Modes derived from the modes defined in
-`rational-ui-line-number-enabled-modes', but should not display line numbers."
+`crafted-ui-line-number-enabled-modes', but should not display line numbers."
   :type 'list
-  :group 'rational-ui)
+  :group 'crafted-ui)
 
-(defun rational-ui--enable-line-numbers-mode ()
+(defun crafted-ui--enable-line-numbers-mode ()
   "Turn on line numbers mode.
 
 Used as hook for modes which should display line numbers."
   (display-line-numbers-mode 1))
 
-(defun rational-ui--disable-line-numbers-mode ()
+(defun crafted-ui--disable-line-numbers-mode ()
   "Turn off line numbers mode.
 
 Used as hook for modes which should not display line numebrs."
   (display-line-numbers-mode -1))
 
-(defun rational-ui--update-line-numbers-display ()
+(defun crafted-ui--update-line-numbers-display ()
   "Update configuration for line numbers display."
-  (if rational-ui-display-line-numbers
+  (if crafted-ui-display-line-numbers
       (progn
-        (dolist (mode rational-ui-line-numbers-enabled-modes)
+        (dolist (mode crafted-ui-line-numbers-enabled-modes)
           (add-hook (intern (format "%s-hook" mode))
-                    #'rational-ui--enable-line-numbers-mode))
-        (dolist (mode rational-ui-line-numbers-disabled-modes)
+                    #'crafted-ui--enable-line-numbers-mode))
+        (dolist (mode crafted-ui-line-numbers-disabled-modes)
           (add-hook (intern (format "%s-hook" mode))
-                    #'rational-ui--disable-line-numbers-mode))
+                    #'crafted-ui--disable-line-numbers-mode))
         (setq-default
          display-line-numbers-grow-only t
          display-line-numbers-type t
          display-line-numbers-width 2))
      (progn
-       (dolist (mode rational-ui-line-numbers-enabled-modes)
+       (dolist (mode crafted-ui-line-numbers-enabled-modes)
          (remove-hook (intern (format "%s-hook" mode))
-                      #'rational-ui--enable-line-numbers-mode))
-       (dolist (mode rational-ui-line-numbers-disabled-modes)
+                      #'crafted-ui--enable-line-numbers-mode))
+       (dolist (mode crafted-ui-line-numbers-disabled-modes)
          (remove-hook (intern (format "%s-hook" mode))
-                      #'rational-ui--disable-line-numbers-mode)))))
+                      #'crafted-ui--disable-line-numbers-mode)))))
 
-(defcustom rational-ui-display-line-numbers nil
+(defcustom crafted-ui-display-line-numbers nil
   "Whether line numbers should be enabled."
   :type 'boolean
-  :group 'rational-ui
+  :group 'crafted-ui
   :set (lambda (sym val)
          (set-default sym val)
-         (rational-ui--update-line-numbers-display)))
+         (crafted-ui--update-line-numbers-display)))
 
 ;;;; Elisp-Demos
 
@@ -165,5 +165,5 @@ Used as hook for modes which should not display line numebrs."
                                      recenter-top-bottom other-window))
   (advice-add command :after #'pulse-line))
 
-(provide 'rational-ui)
-;;; rational-ui.el ends here
+(provide 'crafted-ui)
+;;; crafted-ui.el ends here

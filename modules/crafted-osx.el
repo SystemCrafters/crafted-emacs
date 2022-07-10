@@ -1,6 +1,6 @@
-;;; rational-osx.el --- osx specific config -*- lexical-binding: t -*-
+;;; crafted-osx.el --- osx specific config -*- lexical-binding: t -*-
 
-;; Copyright (C) 2022 
+;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -11,20 +11,20 @@
 
 ;;; Code:
 
-  (defgroup rational-osx '()
-    "Osx specific configurations for Rational Emacs."
-    :tag "Rational Osx"
-    :group 'rational)
+  (defgroup crafted-osx '()
+    "Osx specific configurations for Crafted Emacs."
+    :tag "Crafted Osx"
+    :group 'crafted)
 
   ;; Define configuration variables
-  (defcustom rational-osx-transparent-titlebar nil
+  (defcustom crafted-osx-transparent-titlebar nil
     "When set the osx title bar will become the same color as the emacs frame"
-    :group 'rational-osx
+    :group 'crafted-osx
     :type 'boolean)
 
 ;; titlebar
 
-  (when rational-osx-transparent-titlebar
+  (when crafted-osx-transparent-titlebar
     (customize-set-variable frame-resize-pixelwise t)
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(selected-frame) 'name nil)
@@ -62,5 +62,5 @@
     (when (display-graphic-p)
       (ns-raise-emacs)))
 
-(provide 'rational-osx)
-;;; rational-osx.el ends here
+(provide 'crafted-osx)
+;;; crafted-osx.el ends here
