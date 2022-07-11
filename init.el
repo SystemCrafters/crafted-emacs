@@ -159,7 +159,7 @@ package.el or Guix depending on the value of
 
 (require 'crafted-startup)
 (unless crafted-startup-inhibit-splash
-  (add-hook 'after-init-hook #'crafted-startup-screen t))
+  (setq initial-buffer-choice #'crafted-startup-screen))
 
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
