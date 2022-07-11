@@ -159,9 +159,7 @@ package.el or Guix depending on the value of
 
 (require 'rational-startup)
 (unless rational-startup-inhibit-splash
-  (setq initial-buffer-choice
-        (lambda ()
-          (rational-startup-screen))))
+  (setq initial-buffer-choice #'rational-startup-screen))
 
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
