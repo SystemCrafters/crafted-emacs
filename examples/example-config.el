@@ -32,13 +32,31 @@
 (require 'rational-screencast)  ; show current command and binding in modeline
 (require 'rational-compile)     ; automatically compile some emacs lisp files
 
-;; Set further font and theme customizations
-(custom-set-variables
-   '(rational-ui-default-font
-     '(:font "JetBrains Mono" :weight light :height 185)))
+;; Set the default face. The default face is the basis for most other
+;; faces used in Emacs. A "face" is a configuration including font,
+;; font size, foreground and background colors and other attributes.
+;; The fixed-pitch and fixed-pitch-serif faces are monospace faces
+;; generally used as the default face for code. The variable-pitch
+;; face is used when `variable-pitch-mode' is turned on, generally
+;; whenever a non-monospace face is preferred.
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (custom-set-faces
+             `(default ((t (:font "JetBrains Mono Light 18"))))
+             `(fixed-pitch ((t (:inherit (default)))))
+             `(fixed-pitch-serif ((t (:inherit (default)))))
+             `(variable-pitch ((t (:font "Arial 18")))))))
 
+;; Themes are color customization packages which coordinate the
+;; various colors, and in some cases, font-sizes for various aspects
+;; of text editing within Emacs, toolbars, tabbars and
+;; modeline. Several themes are built-in to Emacs, by default,
+;; Rational Emacs uses the `deeper-blue' theme. Here is an example of
+;; loading a different theme from the venerable Doom Emacs project.
 (rational-package-install-package 'doom-themes)
-(load-theme 'doom-one t)
+(progn
+  (disable-theme 'deeper-blue)          ; first turn off the deeper-blue theme
+  (load-theme 'doom-palenight t))       ; load the doom-palenight theme
 
 ;; To not load `custom.el' after `config.el', uncomment this line.
 ;; (setq rational-load-custom-file nil)
