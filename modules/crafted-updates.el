@@ -83,6 +83,10 @@ and don't prompt for confirmation."
 
 ;; TODO: use a derived type to check that the value is something `run-at-time'
 ;; will accept
+(define-obsolete-variable-alias
+  'rational-updates-fetch-interval
+  'crafted-updates-fetch-interval
+  "1")
 (defcustom crafted-updates-fetch-interval "24 hours"
   "The interval at which `crafted-updates-mode' will check for updates.
 

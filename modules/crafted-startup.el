@@ -17,11 +17,19 @@
   :tag "Crafted Startup"
   :group 'crafted)
 
+(define-obsolete-variable-alias
+  'rational-startup-inhibit-splash
+  'crafted-startup-inhibit-splash
+  "1")
 (defcustom crafted-startup-inhibit-splash nil
   "Disable the Crafted Emacs Splash screen"
   :type 'boolean
   :group 'crafted-startup)
 
+(define-obsolete-variable-alias
+  'rational-startup-recentf-count
+  'crafted-startup-recentf-count
+  "1")
 (defcustom crafted-startup-recentf-count 10
   "The number of recent files to display on the splash screen"
   :type 'number

@@ -51,6 +51,10 @@ as accepted by `set-face-attribute'."
   :tag "Crafted UI"
   :group 'crafted)
 
+(define-obsolete-variable-alias
+  'rational-ui-default-font
+  'crafted-ui-default-font
+  "1")
 (defcustom crafted-ui-default-font nil
   "The configuration of the `default' face.
 Use a plist with the same key names as accepted by `set-face-attribute'."
@@ -92,13 +96,20 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
 (global-set-key (kbd "C-h K") #'describe-keymap)
 
 ;;;; Line Numbers
-
+(define-obsolete-variable-alias
+  'rational-ui-line-numbers-enabled-modes
+  'crafted-ui-line-numbers-enabled-modes
+  "1")
 (defcustom crafted-ui-line-numbers-enabled-modes
   '(conf-mode prog-mode)
   "Modes which should display line numbers."
   :type 'list
   :group 'crafted-ui)
 
+(define-obsolete-variable-alias
+  'rational-ui-line-numbers-disabled-modes
+  'crafted-ui-line-numbers-disabled-modes
+  "1")
 (defcustom crafted-ui-line-numbers-disabled-modes
   '(org-mode)
   "Modes which should not display line numbers.
@@ -141,6 +152,10 @@ Used as hook for modes which should not display line numebrs."
          (remove-hook (intern (format "%s-hook" mode))
                       #'crafted-ui--disable-line-numbers-mode)))))
 
+(define-obsolete-variable-alias
+  'rational-ui-display-line-numbers
+  'crafted-ui-display-line-numbers
+  "1")
 (defcustom crafted-ui-display-line-numbers nil
   "Whether line numbers should be enabled."
   :type 'boolean

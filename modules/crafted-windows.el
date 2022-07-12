@@ -16,11 +16,19 @@
   :tag "Crafted Windows"
   :group 'crafted)
 
+(define-obsolete-variable-alias
+  'rational-windows-evil-style
+  'crafted-windows-evil-style
+  "1")
 (defcustom crafted-windows-evil-style nil
   "When non-nil, window movement will use evil-style bindings."
   :group 'crafted-windows
   :type 'boolean)
 
+(define-obsolete-variable-alias
+  'rational-windows-prefix-key
+  'crafted-windows-prefix-key
+  "1")
 (defcustom crafted-windows-prefix-key "C-c w"
   "Configure the prefix key for `crafted-windows' bindings."
   :group 'crafted-windows

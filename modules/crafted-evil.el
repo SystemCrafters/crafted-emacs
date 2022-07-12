@@ -17,11 +17,19 @@
   :group 'crafted)
 
 ;; Define configuration variables
+(define-obsolete-variable-alias
+  'rational-evil-discourage-arrow-keys
+  'crafted-evil-discourage-arrow-keys
+  "1")
 (defcustom crafted-evil-discourage-arrow-keys nil
   "When non-nil, prevent navigation with the arrow keys in Normal state."
   :group 'crafted-evil
   :type 'boolean)
 
+(define-obsolete-variable-alias
+  'rational-evil-vim-muscle-memory
+  'crafted-evil-vim-muscle-memory
+  "1")
 (defcustom crafted-evil-vim-muscle-memory nil
   "When non-nil, let evil mode take some of the default keybindings, in order to make a more familiar Vim experience."
   :group 'crafted-evil
