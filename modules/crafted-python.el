@@ -1,4 +1,4 @@
-;;; rational-python.el --- python configuration      -*- lexical-binding: t; -*-
+;;; crafted-python.el --- python configuration      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -44,11 +44,11 @@
 
 ;;; Code:
 
-(rational-package-install-package 'anaconda-mode)
-(rational-package-install-package 'blacken)
-(rational-package-install-package 'eglot)
-(rational-package-install-package 'numpydoc)
-(rational-package-install-package 'pyvenv)
+(crafted-package-install-package 'anaconda-mode)
+(crafted-package-install-package 'blacken)
+(crafted-package-install-package 'eglot)
+(crafted-package-install-package 'numpydoc)
+(crafted-package-install-package 'pyvenv)
 
 ;; Hooks
 (add-hook 'python-mode-hook #'anaconda-mode)
@@ -61,13 +61,13 @@
 
 ;;; anaconda
 ;; move anaconda python installation directory to
-;; `rational-config-var-directory'
+;; `crafted-config-var-directory'
 (customize-set-variable
  'anaconda-mode-installation-directory
- (expand-file-name "anaconda-mode" rational-config-var-directory))
+ (expand-file-name "anaconda-mode" crafted-config-var-directory))
 
 ;; for those who use posframe, use it to show docs
-(when (and (rational-package-installed-p 'posframe)
+(when (and (crafted-package-installed-p 'posframe)
            (featurep 'posframe))
   (customize-set-variable 'anaconda-mode-use-posframe-show-doc t))
 
@@ -90,5 +90,5 @@
 (customize-set-variable 'numpydoc-insert-examples-block nil)
 (customize-set-variable 'numpydoc-template-long nil)
 
-(provide 'rational-python)
-;;; rational-python.el ends here
+(provide 'crafted-python)
+;;; crafted-python.el ends here

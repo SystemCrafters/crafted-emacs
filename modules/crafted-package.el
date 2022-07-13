@@ -1,4 +1,4 @@
-;;;; rational-package.el --- Configuration to use `package.el'.  -*- lexical-binding: t; -*-
+;;;; crafted-package.el --- Configuration to use `package.el'.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -8,7 +8,7 @@
 ;;; Commentary:
 
 ;; This library helps to the user to select a package manager backend
-;; for `rational-emacs'.
+;; for `crafted-emacs'.
 
 ;; So far, it has two backends:
 ;; - `package.el' -- The default.
@@ -24,21 +24,21 @@
 
 ;;; Code:
 
-(defvar rational-package-system 'package
+(defvar crafted-package-system 'package
   "What package system to use.
 
 By default, it uses 'package for `package.el'.  Another option is
 'straight for `staright.el'.")
 
-(defun rational-package-initialize (&optional system)
+(defun crafted-package-initialize (&optional system)
   "Loads the configuration and defaults to the selected package.
 
 This will check for the value of the variable
-`rational-package-system', but could be overriden with the
+`crafted-package-system', but could be overriden with the
 optional parameter SYSTEM."
-  (let ((module (make-symbol (format "rational-package/%s"
+  (let ((module (make-symbol (format "crafted-package/%s"
                                 (symbol-name (or system
-                                                 rational-package-system
+                                                 crafted-package-system
                                                  ;; In case both above are nil
                                                  'package))))))
     (if (locate-library (symbol-name module))
@@ -46,5 +46,5 @@ optional parameter SYSTEM."
       (error "Could not find module %s" module)
       )))
 
-(provide 'rational-package)
-;;; rational-packages.el ends here
+(provide 'crafted-package)
+;;; crafted-packages.el ends here
