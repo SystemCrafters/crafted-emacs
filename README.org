@@ -10,6 +10,41 @@ pull of the repository. If you are not expecting or prepared to encounter
 such issues, we would recommend you wait for things to stabilize a bit
 before using.
 
+* =TRANSTION FROM AN EXISTING RATIONAL EMACS CONFIGURATION INSTRUCTIONS=
+
+This project was originally called _Rational Emacs_. However, we chose to rename
+to _Crafted Emacs_ to better represent our ideas and fit better with the System
+Crafters goals and messaging.
+
+If you were previously using *rationa-emacs*, please follow these instructions:
+
+1. Shutdown Emacs, including killing any running server instances. 
+2. Pull the recent changes from this repo: =git pull= (from where you cloned
+   =rational-emacs= originally, most likely you're =.config/emacs= folder in
+   your home filesystem). This will convert the *code* from =rational-emacs= to
+   be =crafted-emacs= instead.
+   - You can optionally move the rational code out of the way and clone this
+     repo directly this way:
+     1. =cd ~/.config/=
+     2. =mv emacs emacs_rational=
+     3. =git clone https://github.com/SystemCrafters/crafted-emacs emacs=
+   - N.B. on MS Windows, the path "~/.config" is likely
+     =C:\Users\%USERPROFILE%\AppData\Roaming\.config=, you can also just clone
+     to the =.emacs.d/= folder, thus from the
+     =C:\Users\%USERPROFILE%\AppData\Roaming\= folder, your git command would
+     be:
+
+     =git clone https://github.com/SystemCrafters/crafted-emacs .emacs.d=
+3. From the location where you cloned this repo (=~/.config/emacs= for example),
+   run this command to transition your existing =rational-emacs= configuration
+   to =crafted-emacs=:
+
+   =emacs -Q --batch -l rational2crafted.el=
+4. Start Emacs. There might still be some errors (hopefully not!) you'll have to
+   work through (submit an issue if you get really stuck, or reach out on
+   Discord in the SystemCrafters #rational-emacs channel).
+
+
 * Quick Start
 
 Install emacs >= 27.2 from your distribution's repositories.
