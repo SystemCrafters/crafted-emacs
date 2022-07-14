@@ -17,7 +17,7 @@ to _Crafted Emacs_ to better represent our ideas and fit better with the System
 Crafters goals and messaging.
 
 If you were previously using *rational-emacs*, please follow the instructions
-[[#Transitioning from Rational Emacs to Crafted Emacs][below]].
+[[#transitioning-from-rational-emacs-to-crafted-emacs][below]].
 
 * Quick Start
 
