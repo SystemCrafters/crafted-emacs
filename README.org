@@ -10,7 +10,7 @@ pull of the repository. If you are not expecting or prepared to encounter
 such issues, we would recommend you wait for things to stabilize a bit
 before using.
 
-* =TRANSTION FROM AN EXISTING RATIONAL EMACS CONFIGURATION INSTRUCTIONS=
+* Transtion from an existing Rational Emacs configuration
 
 This project was originally called _Rational Emacs_. However, we chose to rename
 to _Crafted Emacs_ to better represent our ideas and fit better with the System
