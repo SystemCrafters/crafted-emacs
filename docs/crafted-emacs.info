@@ -1469,6 +1469,10 @@ File: crafted-emacs.info,  Node: Crafted Emacs Evil Module,  Next: Crafted Emacs
 
 File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Evil Module
 
+
+
+File: rational-emacs.info,  Node: Installation,  Next: Description,  Up: Rational Emacs Windows Module
+
 6.8.1 Installation
 ------------------
 
@@ -1481,6 +1485,7 @@ File: crafted-emacs.info,  Node: Description,  Next: Customization Variables,  P
 
 6.8.2 Description
 -----------------
+
 
 This module installs and sets up four packages to emulate and extend
 Vim’s (https://www.vim.org/) modal editing model.
@@ -1567,6 +1572,33 @@ For your convenience, the following settings have been set by default.
      ‘C-h’       ‘evil-delete-backward-char-and-join’   ‘evil-insert-state-map’
      ‘j’         ‘evil-next-visual-line’                ‘evil-motion-state-map’
      ‘k’         ‘evil-previous-visual-line’            ‘evil-motion-state-map’
+This module enables winner-mode
+(https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html)
+and provides a set of keybindings that help you navigate through
+multiple windows.
+
+   ‘winner-mode’ is a minor mode that, when activated, allows you to
+revert to a prior windows arrangement.  It provides two functions to
+allow this: ‘winner-undo’ and ‘winner-redo’.  These take you to earlier
+and later windows arrangements respectively.
+
+   A new keymap is created, ‘rational-windows-key-map’, to store the
+keybindings associated with this module.  Additionally, this module
+defines a custom variable, ‘rational-windows-prefix-key’, which allows
+you to set the prefix key to the keymap.  By default, this is set to
+‘C-c w’, but you are free to change it.
+
+   Using the default prefix-key, the keybindings defined in this module
+are
+
+Key Chord   Function         Description
+----------------------------------------------------------------------
+C-c w u     winner-undo      Reverts to the previous windows layout
+C-c w n     windmove-down    Moves point to window below
+C-c w p     windmove-up      Moves point to window above
+C-c w b     windmove-left    Moves point to window to the left
+C-c w f     windmove-right   Moves point to window to the right
+
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Emacs Evil Module,  Up: Modules
