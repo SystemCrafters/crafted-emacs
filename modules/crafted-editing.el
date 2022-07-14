@@ -11,7 +11,32 @@
 
 ;;; Code:
 
-;; Customization group for the Crafted Editing module.
+;;; Helpers for defcustom variables
+
+(defun crafted-editing--prefer-tabs (enable)
+  "Adjust whitespace configuration to support tabs based on ENABLE."
+  (if enable
+      (customize-set-variable 'whitespace-style
+                              '(face empty trailing indentation::tab
+                                     space-after-tab::tab
+                                     space-before-tab::tab))
+    (customize-set-variable 'whitespace-style
+                            '(face empty trailing tab-mark
+                                   indentation::space))))
+
+(defun crafted-editing--enable-whitespace-modes (modes)
+  "Enable whitespace-mode for each mode specified by MODES."
+  (dolist (mode modes)
+    (add-hook (intern (format "%s-hook" mode))
+              #'whitespace-mode)))
+
+(defun crafted-editing--disable-whitespace-modes (modes)
+  "Do not enable whitespace-mode for each mode specified by MODES."
+  (dolist (mode modes)
+    (remove-hook (intern (format "%s-hook" mode))
+                 #'whitespace-mode)))
+
+;;; Customization group for the Crafted Editing module.
 (defgroup crafted-editing '()
   "Editing related configuration for Crafted Emacs."
   :tag "Crafted Editing"
@@ -62,34 +87,10 @@
          (set-default sym val)
          (crafted-editing--disable-whitespace-modes val)))
 
-(defun crafted-editing--prefer-tabs (enable)
-  "Adjust whitespace configuration to support tabs based on ENABLE."
-  (if enable
-      (customize-set-variable 'whitespace-style
-                              '(face empty trailing indentation::tab
-                                     space-after-tab::tab
-                                     space-before-tab::tab))
-    (customize-set-variable 'whitespace-style
-                            '(face empty trailing tab-mark
-                                   indentation::space))))
-
-(defun crafted-editing--enable-whitespace-modes (modes)
-  "Enable whitespace-mode for each mode specified by MODES."
-  (dolist (mode modes)
-    (add-hook (intern (format "%s-hook" mode))
-              #'whitespace-mode)))
-
-(defun crafted-editing--disable-whitespace-modes (modes)
-  "Do not enable whitespace-mode for each mode specified by MODES."
-  (dolist (mode modes)
-    (remove-hook (intern (format "%s-hook" mode))
-                 #'whitespace-mode)))
-
-
-;; cleanup whitespace
+;;; cleanup whitespace
 (customize-set-variable 'whitespace-action '(cleanup auto-cleanup))
 
-;; parentheses
+;;; parentheses
 (electric-pair-mode 1) ; auto-insert matching bracket
 (show-paren-mode 1)    ; turn on paren match highlighting
 
