@@ -1,4 +1,4 @@
-;;; rational-module.el -*- mode: emacs-lisp; mode: outline-minor; lexical-binding: t; -*-
+;;; crafted-module.el -*- mode: emacs-lisp; mode: outline-minor; lexical-binding: t; -*-
 
 ;;; License
 ;; Copyright (C) 2022
@@ -6,13 +6,13 @@
 
 ;; Author: Erik Lundstedt, System Crafters Community
 ;; history:
-;;;: https://gitlab.com/Erik.Lundstedt/rational-speedbar
+;;;: https://gitlab.com/Erik.Lundstedt/crafted-speedbar
 ;;; Commentary:
 
 ;; this file was made with outline-minor-mode in mind
 ;; and therefore have ";;;+"-comments as headders.
 
-;; rational-moodule to setup "rational defaults" for speedbar
+;; crafted-moodule to setup "crafted defaults" for speedbar
 ;; speedbar is a file-tree (and more) that comes builtin to emacs
 ;; it also has integreation with some packages like Rmail and projectile
 
@@ -118,5 +118,5 @@
 (setq-default speedbar-use-images nil)
 ;; this can be set back to use icons by simply doing
 ;;`(setq-default speedbar-use-images t)` in your own config
-(provide 'rational-speedbar)
-;;; rational-speedbar.el ends here
+(provide 'crafted-speedbar)
+;;; crafted-speedbar.el ends here
