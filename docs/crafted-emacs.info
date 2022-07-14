@@ -1569,60 +1569,6 @@ For your convenience, the following settings have been set by default.
      ‘k’         ‘evil-previous-visual-line’            ‘evil-motion-state-map’
 
 
-File: rational-emacs.info,  Node: Rational Emacs Windows Module,  Prev: Rational Emacs Evil Module,  Up: Modules
-
-6.9 Rational Emacs Windows Module
-=================================
-
-* Menu:
-
-* Installation: Installation (1).
-* Description: Description (1).
-
-
-File: rational-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Rational Emacs Windows Module
-
-6.9.1 Installation
-------------------
-
-To use this module, simply require it in your config.
-
-     (require 'rational-evil)
-
-
-File: rational-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Rational Emacs Windows Module
-
-6.9.2 Description
------------------
-
-This module enables winner-mode
-(https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html)
-and provides a set of keybindings that help you navigate through
-multiple windows.
-
-   ‘winner-mode’ is a minor mode that, when activated, allows you to
-revert to a prior windows arrangement.  It provides two functions to
-allow this: ‘winner-undo’ and ‘winner-redo’.  These take you to earlier
-and later windows arrangements respectively.
-
-   A new keymap is created, ‘rational-windows-key-map’, to store the
-keybindings associated with this module.  Additionally, this module
-defines a custom variable, ‘rational-windows-prefix-key’, which allows
-you to set the prefix key to the keymap.  By default, this is set to
-‘C-c w’, but you are free to change it.
-
-   Using the default prefix-key, the keybindings defined in this module
-are
-
-Key Chord   Function         Description
-----------------------------------------------------------------------
-C-c w u     winner-undo      Reverts to the previous windows layout
-C-c w n     windmove-down    Moves point to window below
-C-c w p     windmove-up      Moves point to window above
-C-c w b     windmove-left    Moves point to window to the left
-C-c w f     windmove-right   Moves point to window to the right
-
-
 File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Emacs Evil Module,  Up: Modules
 
 6.9 Crafted Emacs Windows Module
@@ -1797,24 +1743,24 @@ Node: Top1408
 Node: Principles3809
 Node: Why use it?6873
 Node: Customization7548
-Ref: org19617518347
+Ref: orgc5c5c208347
 Node: How the crafted config file is found8631
 Node: Example Configuration10075
-Ref: org4fac64a10279
+Ref: orgbc824ec10279
 Node: The customel file10930
 Node: Simplified overview of how Emacs Customization works11476
 Node: Loading the customel file13194
 Ref: configel14495
 Ref: customel15044
 Node: Not loading the customel file15774
-Ref: orga1f6c5816657
+Ref: org7392fd816657
 Node: Caveat on the timing of loading customel17247
 Ref: configel (1)17913
 Ref: customel (1)18181
 Node: Using it with Chemacs218688
-Ref: orgdad547219501
-Ref: org1d891d019900
-Ref: org19daa6420210
+Ref: org88d437d19501
+Ref: orga8de87119900
+Ref: orgc0d2c8f20210
 Node: Contributing20559
 Node: Modules21196
 Node: Crafted Emacs Completion Module22450
