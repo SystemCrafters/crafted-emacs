@@ -3,18 +3,18 @@
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
           (lambda ()
-            (message "Rational Emacs loaded in %s."
+            (message "Crafted Emacs loaded in %s."
                      (emacs-init-time))))
 
-;; Define customization group for Rational Emacs.
-(defgroup rational '()
+;; Define customization group for Crafted Emacs.
+(defgroup crafted '()
   "A sensible starting point for hacking your own Emacs configuration."
-  :tag "Rational Emacs"
-  :link '(url-link "https://github.com/SystemCrafters/rational-emacs")
+  :tag "Crafted Emacs"
+  :link '(url-link "https://github.com/SystemCrafters/crafted-emacs")
   :group 'emacs)
 
 ;;; package configuration
-(defun rational-package-archive-stale-p (archive)
+(defun crafted-package-archive-stale-p (archive)
   "Return `t' if ARCHIVE is stale.
 
 ARCHIVE is stale if the on-disk cache is older than 1 day"
@@ -26,7 +26,7 @@ ARCHIVE is stale if the on-disk cache is older than 1 day"
                                 (file-attributes archive-name)))
                  today)))
 
-(defun rational-package-archives-stale-p ()
+(defun crafted-package-archives-stale-p ()
   "Return `t' if any PACKAGE-ARHIVES cache is out of date.
 
 Check each archive listed in PACKAGE-ARCHIVES, if the on-disk
@@ -34,9 +34,9 @@ cache is older than 1 day, return a non-nil value. Fails fast,
 will return `t' for the first stale archive found or `nil' if
 they are all up-to-date."
   (interactive)
-  (cl-some #'rational-package-archive-stale-p (mapcar #'car package-archives)))
+  (cl-some #'crafted-package-archive-stale-p (mapcar #'car package-archives)))
 
-(defmacro rational-package-install-package (package)
+(defmacro crafted-package-install-package (package)
   "Only install the package if it is not already installed."
   `(unless (package-installed-p ,package) (package-install ,package)))
 
@@ -52,11 +52,11 @@ they are all up-to-date."
  ;; `package-refresh-contents' before calling `package-install'.
  (cond ((seq-empty-p package-archive-contents)
         (progn
-          (message "rational-init: package archives empty, initializing")
+          (message "crafted-init: package archives empty, initializing")
           (package-refresh-contents)))
-       ((rational-package-archives-stale-p)
+       ((crafted-package-archives-stale-p)
         (progn
-          (message "rational-init: package archives stale, refreshing in the background")
+          (message "crafted-init: package archives stale, refreshing in the background")
           (package-refresh-contents t))))
  )
 
@@ -65,11 +65,11 @@ they are all up-to-date."
 
 ;; Add the user's custom-modules to the top of the load-path
 ;; so any user custom-modules take precedence.
-(when (file-directory-p (expand-file-name "custom-modules/" rational-config-path))
+(when (file-directory-p (expand-file-name "custom-modules/" crafted-config-path))
   (setq load-path
         (append (let ((load-path (list))
-                      (default-directory (expand-file-name "custom-modules/" rational-config-path)))
-                  (add-to-list 'load-path (expand-file-name "custom-modules/" rational-config-path))
+                      (default-directory (expand-file-name "custom-modules/" crafted-config-path)))
+                  (add-to-list 'load-path (expand-file-name "custom-modules/" crafted-config-path))
                   ;;(normal-top-level-add-to-load-path '("."))
                   (normal-top-level-add-subdirs-to-load-path)
                   load-path)
@@ -81,14 +81,14 @@ they are all up-to-date."
 (customize-set-variable 'large-file-warning-threshold 100000000) ;; change to ~100 MB
 
 
-(defun rational-ensure-package (package &optional args)
+(defun crafted-ensure-package (package &optional args)
   "Ensure that PACKAGE is installed on the system, either via
 package.el or Guix depending on the value of
-`rational-prefer-guix-packages'."
-  (if rational-prefer-guix-packages
+`crafted-prefer-guix-packages'."
+  (if crafted-prefer-guix-packages
       (unless (featurep package)
         (message "Package '%s' does not appear to be installed by Guix!"))
-    (rational-package-install-package package)))
+    (crafted-package-install-package package)))
 
 ;; Check the system used
 (defconst ON-LINUX   (eq system-type 'gnu/linux))
@@ -97,30 +97,30 @@ package.el or Guix depending on the value of
 (defconst ON-WINDOWS (memq system-type '(cygwin windows-nt ms-dos)))
 
 ;; Find the user configuration file
-(defvar rational-config-file (expand-file-name "config.el" rational-config-path)
+(defvar crafted-config-file (expand-file-name "config.el" crafted-config-path)
   "The user's configuration file.")
 
 ;; Defines the user configuration var and etc folders
 ;; and ensure they exist.
-(defvar rational-config-etc-directory (expand-file-name "etc/" rational-config-path)
+(defvar crafted-config-etc-directory (expand-file-name "etc/" crafted-config-path)
   "The user's configuration etc/ folder.")
-(defvar rational-config-var-directory (expand-file-name "var/" rational-config-path)
+(defvar crafted-config-var-directory (expand-file-name "var/" crafted-config-path)
   "The user's configuration var/ folder.")
 
-(mkdir rational-config-etc-directory t)
-(mkdir rational-config-var-directory t)
+(mkdir crafted-config-etc-directory t)
+(mkdir crafted-config-var-directory t)
 
 ;; Load the user configuration file if it exists
-(when (file-exists-p rational-config-file)
-  (load rational-config-file nil 'nomessage))
+(when (file-exists-p crafted-config-file)
+  (load crafted-config-file nil 'nomessage))
 
-;; When writing rational-modules, insert header from skeleton
+;; When writing crafted-modules, insert header from skeleton
 (auto-insert-mode)
 (with-eval-after-load "autoinsert"
   (define-auto-insert
-    (cons (concat (expand-file-name user-emacs-directory) "modules/rational-.*\\.el")
-          "Rational Emacs Lisp Skeleton")
-    '("Rational Emacs Module Description: "
+    (cons (concat (expand-file-name user-emacs-directory) "modules/crafted-.*\\.el")
+          "Crafted Emacs Lisp Skeleton")
+    '("Crafted Emacs Module Description: "
       ";;;; " (file-name-nondirectory (buffer-file-name)) " --- " str
       (make-string (max 2 (- 80 (current-column) 27)) ?\s)
       "-*- lexical-binding: t; -*-" '(setq lexical-binding t)
@@ -144,28 +144,28 @@ package.el or Guix depending on the value of
 
 ;;   The file used by the Customization UI to store value-setting
 ;; forms in a customization file, rather than at the end of the
-;; `init.el' file, is called `custom.el' in Rational Emacs. The file
+;; `init.el' file, is called `custom.el' in Crafted Emacs. The file
 ;; is loaded after this `init.el' file, and after the user `config.el'
 ;; file has been loaded. Any variable values set in the user
 ;; `config.el' will be overridden with the values set with the
 ;; Customization UI and saved in the custom file.
 (customize-set-variable 'custom-file
-  (expand-file-name "custom.el" rational-config-path))
+  (expand-file-name "custom.el" crafted-config-path))
 
-;; The custom file will only be loaded if `rational-load-custom-file'
+;; The custom file will only be loaded if `crafted-load-custom-file'
 ;; is set to a non-nil value in the user's `config.el'.
-(when rational-load-custom-file
+(when crafted-load-custom-file
   (load custom-file t))
 
-(require 'rational-startup)
-(unless rational-startup-inhibit-splash
-  (setq initial-buffer-choice #'rational-startup-screen))
+(require 'crafted-startup)
+(unless crafted-startup-inhibit-splash
+  (setq initial-buffer-choice #'crafted-startup-screen))
 
 ;; Make GC pauses faster by decreasing the threshold.
 (setq gc-cons-threshold (* 2 1000 1000))
 
-(let ((rational-info-dir (expand-file-name "docs/dir" user-emacs-directory)))
-  (when (file-exists-p rational-info-dir)
+(let ((crafted-info-dir (expand-file-name "docs/dir" user-emacs-directory)))
+  (when (file-exists-p crafted-info-dir)
     (require 'info)
     (info-initialize)
-    (push (file-name-directory rational-info-dir) Info-directory-list)))
+    (push (file-name-directory crafted-info-dir) Info-directory-list)))

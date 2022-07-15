@@ -1,4 +1,4 @@
-* Rational Emacs IDE Module
+* Crafted Emacs IDE Module
 
   This module is a generic module which installs and configures Eglot
   for programming modes. This package adds =eglot-ensure= to existing

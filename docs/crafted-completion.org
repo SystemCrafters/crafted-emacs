@@ -1,16 +1,16 @@
-* Rational Emacs Completion Module
+* Crafted Emacs Completion Module
 
   To use this module, simply require it in your config.
 
   #+begin_src emacs-lisp
-    (require 'rational-completion)
+    (require 'crafted-completion)
   #+end_src
 
   This module installs and sets up a set of completion-related packages that
   work together to achieve a functionality that you might know from packages
   like =helm= or =ivy=. They are much more modular than those packages and also
   strive to rely on built-in functionality. With that, they fit perfectly into
-  the Rational Emacs principles. But if you prefer an all-in-one approach, you
+  the Crafted Emacs principles. But if you prefer an all-in-one approach, you
   can just leave this module off and use one of the more established completion
   frameworks. Give it a try, though. In concert, these packages might deliver
   just the experience you want.
@@ -92,8 +92,8 @@
     Consult provides a set of practical commands. A lot of them are
     [[https://github.com/minad/consult#available-commands][replacements for built-in everyday functions]]. (For example, try replacing
     =switch-to-buffer= with =consult-buffer=. Or replace =yank-pop= with
-    =consult-yank-pop=). However, Rational Emacs leaves most of that
-    untouched. It's up to you as the user.  The module =rational-completion= sets
+    =consult-yank-pop=). However, Crafted Emacs leaves most of that
+    untouched. It's up to you as the user.  The module =crafted-completion= sets
     three consult functions for you that fit into the completion behaviour
     described above.
 
@@ -102,7 +102,7 @@
       Whenever you're presented with candidates for completions, consult
       provides a filtering search function which updates not only the list
       of candidates in the minibuffer, but also the active buffer in a
-      sort of live preview (if applicable). Rational Emacs also replaces
+      sort of live preview (if applicable). Crafted Emacs also replaces
       =isearch= with =consult-line=, so that searching through your buffer
       gives you the same behaviour. Essentially, =isearch-backward= becomes
       obsolete, because consult shows you the forward matches first and
@@ -155,7 +155,7 @@
 
     - =embark-bindings= & =embark-prefix-help-command=
 
-      Rational Emacs replaces =describe-bindings= and =prefix-help-command= with
+      Crafted Emacs replaces =describe-bindings= and =prefix-help-command= with
       their Embark-alternatives to provide a functionality similar to packages
       like =which-key=: It shows you available options and commands, but with all
       the goodies provided by the other packages above.

@@ -1,4 +1,4 @@
-;; rational-ide.el -*- lexical-binding: t; -*-
+;; crafted-ide.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -18,10 +18,10 @@
 
 
 ;; Install dependencies
-(rational-package-install-package 'eglot)
+(crafted-package-install-package 'eglot)
 
 ;;; hooks
-(defun rational-ide--add-eglot-hooks (mode-list)
+(defun crafted-ide--add-eglot-hooks (mode-list)
   "Iterates over MODE-LIST recursively to add eglot-ensure to
 existing mode hooks.
 
@@ -34,7 +34,7 @@ manually with something like this:
   (dolist (mode-def mode-list)
     (let ((mode (if (listp mode-def) (car mode-def) mode-def)))
       (cond
-       ((listp mode) (rational-ide--add-eglot-hooks mode))
+       ((listp mode) (crafted-ide--add-eglot-hooks mode))
        (t
         (when (and (fboundp mode)
                    (not (eq 'clojure-mode mode))  ; prefer cider
@@ -47,11 +47,11 @@ manually with something like this:
 
 ;; add eglot to existing programming modes when eglot is loaded.
 (with-eval-after-load "eglot"
-  (rational-ide--add-eglot-hooks eglot-server-programs))
+  (crafted-ide--add-eglot-hooks eglot-server-programs))
 
 ;;; customization
 ;; Shutdown server when last managed buffer is killed
 (customize-set-variable 'eglot-autoshutdown t)
 
-(provide 'rational-ide)
-;;; rational-ide.el ends here
+(provide 'crafted-ide)
+;;; crafted-ide.el ends here

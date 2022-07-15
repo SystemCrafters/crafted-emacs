@@ -2,11 +2,11 @@
 
 * Example Configurations
 
-Rational Emacs supports user customization through a =config.el= file
+Crafted Emacs supports user customization through a =config.el= file
 in one of the following directories.
 
-- =~/.rational-emacs/=
-- =~/.config/rational-emacs/=
+- =~/.crafted-emacs/=
+- =~/.config/crafted-emacs/=
 
 You can either edit =config.el= directly or tangle it from =config.org= via
 [[https://orgmode.org/worg/org-contrib/babel/intro.html][Org-Babel]]. You'll find an example of both variants in this directory:
@@ -20,7 +20,7 @@ directories as =config.el= or =config.org=, respectively.
 * Back in Time – Using =straight.el=
 
 Early in the lifetime of this project, the project used =straight.el=
-to install packages. However, after a [[https://github.com/SystemCrafters/rational-emacs/issues/94][discussion]], the community
+to install packages. However, after a [[https://github.com/SystemCrafters/crafted-emacs/issues/94][discussion]], the community
 decided to move to using =package.el= instead as it lined up with the
 principles of the project more than =straight.el=; notably, it is
 built in and one of the principles specifically states "Prioritize
@@ -39,7 +39,7 @@ Disable =package.el= during startup:
 #+end_src
 
 ** config.el
-Overwrite the function =rational-package-install-package= using straight.el
+Overwrite the function =crafted-package-install-package= using straight.el
 instead of package.el:
 #+begin_src emacs-lisp :tangle ./config.el
   (defvar bootstrap-version)
@@ -55,7 +55,7 @@ instead of package.el:
         (eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
 
-  (defmacro rational-package-install-package (package)
+  (defmacro crafted-package-install-package (package)
     "Install PACKAGE using straight"
     `(straight-use-package ,package))
 #+end_src

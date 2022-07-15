@@ -1,4 +1,4 @@
-;;; rational-defaults.el -*- lexical-binding: t; -*-
+;;; crafted-defaults.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -37,7 +37,7 @@
 ;; Turn on recentf mode
 (add-hook 'after-init-hook #'recentf-mode)
 (customize-set-variable 'recentf-save-file
-                        (expand-file-name "recentf" rational-config-var-directory))
+                        (expand-file-name "recentf" crafted-config-var-directory))
 
 ;; Do not saves duplicates in kill-ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
@@ -60,7 +60,7 @@
 ;; Enable savehist-mode for an command history
 (savehist-mode 1)
 (customize-set-variable 'savehist-file
-                        (expand-file-name "history" rational-config-var-directory))
+                        (expand-file-name "history" crafted-config-var-directory))
 
-(provide 'rational-defaults)
-;;; rational-defaults.el ends here
+(provide 'crafted-defaults)
+;;; crafted-defaults.el ends here
