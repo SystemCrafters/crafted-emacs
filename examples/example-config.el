@@ -51,9 +51,9 @@
 ;; various colors, and in some cases, font-sizes for various aspects
 ;; of text editing within Emacs, toolbars, tabbars and
 ;; modeline. Several themes are built-in to Emacs, by default,
-;; Rational Emacs uses the `deeper-blue' theme. Here is an example of
+;; Crafted Emacs uses the `deeper-blue' theme. Here is an example of
 ;; loading a different theme from the venerable Doom Emacs project.
-(rational-package-install-package 'doom-themes)
+(crafted-package-install-package 'doom-themes)
 (progn
   (disable-theme 'deeper-blue)          ; first turn off the deeper-blue theme
   (load-theme 'doom-palenight t))       ; load the doom-palenight theme
