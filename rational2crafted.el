@@ -112,16 +112,21 @@ ORIGINAL-FILE will be renamed to RENAMED-FILE. ORIGINAL-FILE will be removed."
   ;; `crafted' instead, so rename any files with the word `rational' to
   ;; have the word `crafted' instead.
   (when (file-exists-p (expand-file-name "custom-modules" crafted-config-path))
-      (let ((files (mapcar (lambda (f)        ; get a list of custom module file names, fully path qualified
-                         (let ((p (expand-file-name "custom-modules" crafted-config-path)))
-                           (expand-file-name f p)))
-                       (seq-drop (directory-files (expand-file-name "custom-modules" crafted-config-path)) 2))))
-    (let ((crafted-file-names (mapcar (lambda (f) (string-replace "rational" "crafted" f)) ; crafted file names
-                                      files)))
-      (seq-do-indexed (lambda (file-name i)
-                        (let ((crafted-name (seq-elt crafted-file-names i)))
-                          (r2c-transition-file-2 file-name crafted-name)))
-                      files)))))
+    (let ((files (mapcar (lambda (f)        ; get a list of custom module file names, fully path qualified
+                           (let ((p (expand-file-name "custom-modules" crafted-config-path)))
+                             (expand-file-name f p)))
+                         (seq-drop (directory-files (expand-file-name "custom-modules" crafted-config-path)) 2))))
+      (let ((crafted-file-names (mapcar (lambda (f) (or (and (string-match-p "rational" f)
+                                                             (string-replace "rational" "crafted" f))
+                                                        f)) ; crafted file names
+                                        files)))
+        (seq-do-indexed (lambda (file-name i)
+                          (let ((crafted-name (seq-elt crafted-file-names i)))
+                            (if (string= file-name crafted-name)
+                                (r2c-transition-file-1 file-name)
+                              (r2c-transition-file-2 file-name crafted-name))))
+                        files)))))
+
 (when (or (featurep 'chemacs)
           (file-exists-p (expand-file-name "~/.emacs-profiles.el")))
   (print "Migration for chemacs based profiles is not supported.")
