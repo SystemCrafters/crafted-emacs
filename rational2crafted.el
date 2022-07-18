@@ -32,6 +32,13 @@
 (require 'files)
 (require 'seq)
 
+(when (version< emacs-version "28")
+  ;; `string-replace' was introduced in Emacs 28. This was identified
+  ;; in issue #198. This code is to support Emacs 27 users.
+  (defun string-replace (from-string to-string in-string)
+    (and (string-match from-string in-string)
+         (replace-match to-string nil nil in-string nil))))
+
 ;; Find the rational-config-path.  This will be used as the basis for
 ;; the crafted-config-path.  We find the the `rational-config-path'
 ;; the same way the `early-init.el' file does.
