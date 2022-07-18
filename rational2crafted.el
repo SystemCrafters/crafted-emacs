@@ -44,8 +44,8 @@
 ;; the same way the `early-init.el' file does.
 (defvar rational-config-path
   (cond
-   ((or (file-exists-p (xdg-config-home))
-        (file-exists-p (expand-file-name "rational-emacs" (xdg-config-home))))
+   ((and (file-exists-p (xdg-config-home))
+         (file-exists-p (expand-file-name "rational-emacs" (xdg-config-home))))
     (expand-file-name "rational-emacs" (xdg-config-home)))
    ((getenv "HOME") (expand-file-name ".rational-emacs" (getenv "HOME"))))
   "The user's rational-emacs configuration path.")
