@@ -139,7 +139,7 @@ Each element in the list should be a list of strings or pairs
   "Display fancy startup screen.
 If CONCISE is non-nil, display a concise version of the
 splash screen in another window."
-  (message "Loaing Crafted Startup Screen")
+  (message "Loading Crafted Startup Screen")
   (let ((splash-buffer (get-buffer-create "*Crafted Emacs*")))
     (with-current-buffer splash-buffer
       (let ((inhibit-read-only t))
