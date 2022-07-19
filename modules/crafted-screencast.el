@@ -1,4 +1,4 @@
-;;; rational-screencast.el -*- lexical-binding: t; -*-
+;;; crafted-screencast.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -11,11 +11,11 @@
 
 ;;; Code:
 
-(rational-package-install-package 'keycast)
+(crafted-package-install-package 'keycast)
 
 (customize-set-variable 'keycast-remove-tail-elements nil)
 (customize-set-variable 'keycast-insert-after 'mode-line-misc-info)
 (keycast-mode)
 
-(provide 'rational-screencast)
-;;; rational-screencast.el ends here
+(provide 'crafted-screencast)
+;;; crafted-screencast.el ends here

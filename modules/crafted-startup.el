@@ -1,4 +1,4 @@
-;;; rational-startup.el --- Rational Emacs splash screen on startup  -*- lexical-binding: t; -*-
+;;; crafted-startup.el --- Crafted Emacs splash screen on startup  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -12,24 +12,32 @@
 
 ;;; Code:
 
-(defgroup rational-startup '()
-  "Startup configuration for Rational Emacs"
-  :tag "Rational Startup"
-  :group 'rational)
+(defgroup crafted-startup '()
+  "Startup configuration for Crafted Emacs"
+  :tag "Crafted Startup"
+  :group 'crafted)
 
-(defcustom rational-startup-inhibit-splash nil
-  "Disable the Rational Emacs Splash screen"
+(define-obsolete-variable-alias
+  'rational-startup-inhibit-splash
+  'crafted-startup-inhibit-splash
+  "1")
+(defcustom crafted-startup-inhibit-splash nil
+  "Disable the Crafted Emacs Splash screen"
   :type 'boolean
-  :group 'rational-startup)
+  :group 'crafted-startup)
 
-(defcustom rational-startup-recentf-count 10
+(define-obsolete-variable-alias
+  'rational-startup-recentf-count
+  'crafted-startup-recentf-count
+  "1")
+(defcustom crafted-startup-recentf-count 10
   "The number of recent files to display on the splash screen"
   :type 'number
-  :group 'rational-startup)
+  :group 'crafted-startup)
 
-(defconst rational-startup-text
+(defconst crafted-startup-text
   `((:face (variable-pitch font-lock-comment-face (:height 1.5) bold)
-           ,(let* ((welcome-text "Welcome to Rational Emacs!\n\n")
+           ,(let* ((welcome-text "Welcome to Crafted Emacs!\n\n")
                    (welcome-len (length welcome-text))
                    (welcome-mid (/ welcome-len 2)))
               (concat
@@ -38,16 +46,16 @@
                             ? )
                welcome-text))
            :face variable-pitch
-           :link ("View Rational Emacs Manual" ,(lambda (_button) (info "rational-emacs")))
-           "\tView the Rational Emacs manual using Info\n"
+           :link ("View Crafted Emacs Manual" ,(lambda (_button) (info "crafted-emacs")))
+           "\tView the Crafted Emacs manual using Info\n"
            "\n"))
   "A list of texts to show in the middle part of splash screens.
 Each element in the list should be a list of strings or pairs
 `:face FACE', like `fancy-splash-insert' accepts them.")
 
-(defvar rational-startup-screen-inhibit-startup-screen nil)
+(defvar crafted-startup-screen-inhibit-startup-screen nil)
 
-(defun rational-startup-tail (&optional concise)
+(defun crafted-startup-tail (&optional concise)
   "Insert the tail part of the splash screen into the current buffer."
   (fancy-splash-insert
    :face 'variable-pitch
@@ -60,8 +68,8 @@ Each element in the list should be a list of strings or pairs
            ,(lambda (_button) (dired "~"))
            "Open your home directory, to operate on its files")
    "     "
-   :link `("Customize Rational Emacs"
-           ,(lambda (_button) (customize-group 'rational))
+   :link `("Customize Crafted Emacs"
+           ,(lambda (_button) (customize-group 'crafted))
            "Change initialization settings including this screen")
    "\n")
 
@@ -69,20 +77,20 @@ Each element in the list should be a list of strings or pairs
    :face '(variable-pitch (:height 0.7))
    "\n\nTurn this screen off by adding:\n"
    :face '(default font-lock-keyword-face)
-   "`(customize-set-variable 'rational-startup-inhibit-splash t)'\n"
+   "`(customize-set-variable 'crafted-startup-inhibit-splash t)'\n"
    :face '(variable-pitch (:height 0.7))
-   " to your " rational-config-file "\n"
+   " to your " crafted-config-file "\n"
    "Or check the box and click the link below, which will do the same thing.")
 
   (fancy-splash-insert
    :face 'variable-pitch "\n"
    :link `("Dismiss this startup screen"
            ,(lambda (_button)
-              (when rational-startup-screen-inhibit-startup-screen
-                (customize-set-variable 'rational-startup-inhibit-splash t)
-                (customize-mark-to-save 'rational-startup-inhibit-splash)
+              (when crafted-startup-screen-inhibit-startup-screen
+                (customize-set-variable 'crafted-startup-inhibit-splash t)
+                (customize-mark-to-save 'crafted-startup-inhibit-splash)
                 (custom-save-all))
-              (quit-windows-on "*Rational Emacs*" t)))
+              (quit-windows-on "*Crafted Emacs*" t)))
    "  ")
    (when custom-file
      (let ((checked (create-image "checked.xpm"
@@ -99,16 +107,16 @@ Each element in the list should be a list of strings or pairs
                       (progn (overlay-put button 'checked nil)
                              (overlay-put button 'display
                                           (overlay-get button :off-glyph))
-                             (setq rational-startup-screen-inhibit-startup-screen
+                             (setq crafted-startup-screen-inhibit-startup-screen
                                    nil))
                     (overlay-put button 'checked t)
                     (overlay-put button 'display
                                  (overlay-get button :on-glyph))
-                    (setq rational-startup-screen-inhibit-startup-screen t))))))
+                    (setq crafted-startup-screen-inhibit-startup-screen t))))))
   (fancy-splash-insert :face '(variable-pitch (:height 0.9))
                        " Never show it again."))
 
-(defun rational-startup-recentf ()
+(defun crafted-startup-recentf ()
   (message "Showing recents on splash screen")
   (fancy-splash-insert
    :face '(variable-pitch font-lock-string-face italic)
@@ -119,7 +127,7 @@ Each element in the list should be a list of strings or pairs
      (error "\n")))
   (condition-case recentf-list
       (if (not (seq-empty-p recentf-list))
-          (dolist (file (seq-take recentf-list rational-startup-recentf-count))
+          (dolist (file (seq-take recentf-list crafted-startup-recentf-count))
             (fancy-splash-insert
              :face 'default
              :link `(,file ,(lambda (_button) (find-file file)))
@@ -127,32 +135,32 @@ Each element in the list should be a list of strings or pairs
         "\n")
     (error "\n")))
 
-(defun rational-startup-screen (&optional concise)
+(defun crafted-startup-screen (&optional concise)
   "Display fancy startup screen.
 If CONCISE is non-nil, display a concise version of the
 splash screen in another window."
-  (message "Loaing Rational Startup Screen")
-  (let ((splash-buffer (get-buffer-create "*Rational Emacs*")))
+  (message "Loading Crafted Startup Screen")
+  (let ((splash-buffer (get-buffer-create "*Crafted Emacs*")))
     (with-current-buffer splash-buffer
       (let ((inhibit-read-only t))
         (erase-buffer)
         (setq default-directory command-line-default-directory)
-        (make-local-variable 'rational-startup-screen-inhibit-startup-screen)
+        (make-local-variable 'crafted-startup-screen-inhibit-startup-screen)
         (if pure-space-overflow
             (insert pure-space-overflow-message))
         ;; (unless concise
         ;;   (fancy-splash-head))
-        (dolist (text rational-startup-text)
+        (dolist (text crafted-startup-text)
           (apply #'fancy-splash-insert text)
           (insert "\n"))
         ;; (skip-chars-backward "\n")
         ;; (delete-region (point) (point-max))
         ;; (insert "\n")
-        (rational-startup-recentf)
+        (crafted-startup-recentf)
         (skip-chars-backward "\n")
         (delete-region (point) (point-max))
         (insert "\n")
-        (rational-startup-tail concise))
+        (crafted-startup-tail concise))
       (use-local-map splash-screen-keymap)
       (setq-local browse-url-browser-function 'eww-browse-url)
       (setq tab-width 22
@@ -173,5 +181,5 @@ splash screen in another window."
                 (fit-window-to-buffer window))))
       (switch-to-buffer splash-buffer))))
 
-(provide 'rational-startup)
-;;; rational-startup.el ends here
+(provide 'crafted-startup)
+;;; crafted-startup.el ends here
