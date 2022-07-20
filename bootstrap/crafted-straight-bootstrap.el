@@ -21,6 +21,8 @@
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" crafted-config-path))
       (bootstrap-version 5))
+  ;; moves the straight install directory to the users crafted
+  ;; configuration folder rather than the `user-emacs-directory'
   (setq straight-base-dir crafted-config-path)
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
