@@ -67,7 +67,7 @@
  (expand-file-name "anaconda-mode" crafted-config-var-directory))
 
 ;; for those who use posframe, use it to show docs
-(when (and (crafted-package-installed-p 'posframe)
+(when (and (package-installed-p 'posframe)
            (featurep 'posframe))
   (customize-set-variable 'anaconda-mode-use-posframe-show-doc t))
 
