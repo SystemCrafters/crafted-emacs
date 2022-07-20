@@ -37,8 +37,17 @@ folder, otherwise delete a word"
 
 
 ;;; Vertico
-
 (require 'vertico)
+
+;; Straight and Package bundle the vertico package differently. When
+;; using `package.el', the extensions are built into the package and
+;; available on the load-path. When using `straight.el', the
+;; extensions are not built into the package, so have to add that path
+;; to the load-path manually to enable the following require.
+(when (eq crafted-package-system 'straight)
+  (add-to-list 'load-path
+               (expand-file-name "straight/build/vertico/extensions"
+                                 straight-base-dir)))
 (require 'vertico-directory)
 
 (with-eval-after-load 'evil
