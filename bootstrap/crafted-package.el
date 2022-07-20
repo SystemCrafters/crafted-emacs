@@ -36,7 +36,7 @@ By default, it uses 'package for `package.el'.  Another option is
 This will check for the value of the variable
 `crafted-package-system', but could be overriden with the
 optional parameter SYSTEM."
-  (let* ((module (make-symbol (format "%s-bootstrap.el"
+  (let* ((module (make-symbol (format "crafted-%s-bootstrap.el"
                                       (symbol-name (or system
                                                        crafted-package-system
                                                        ;; In case both above are nil
