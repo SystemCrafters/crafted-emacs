@@ -68,6 +68,17 @@ external packages, for example:
   functionality)
 - *Possibly* =vc-mode= by default
 
+** Sensible folder layout
+
+While Emacs tends to keep everything (code, configuration, state files, ...)
+inside `user-emacs-directory` modern computer systems tend to keep those
+separated.
+
+Crafted Emacs tries to maintain some balance between those two paradigms by
+bringing just the right amount of order to it.
+
+See [[file:docs/crafted-emacs.org#folder-structure][Folder structure]] in the documentation for more details.
+
 ** Works well in the terminal
 
 Some people prefer to use Emacs in the terminal instead of as a graphical
@@ -146,6 +157,9 @@ information about how they can be configured!
 - crafted-shell :: A starter configuration for =eshell= and =vterm=
 
 * Customization
+:PROPERTIES:
+:CUSTOM_ID: customization
+:END:
 
 To add your own customization to this configuration, create a configuraton file
 in one of the following directories:

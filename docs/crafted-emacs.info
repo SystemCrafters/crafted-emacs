@@ -52,6 +52,7 @@ configuration journey.
 
 * Principles::
 * Why use it?::
+* Folder structure::
 * Customization::
 * Using it with Chemacs2::
 * Contributing::
@@ -85,6 +86,10 @@ Modules
 * Crafted Emacs Python Module::
 * Crafted Emacs Evil Module::
 * Crafted Emacs Windows Module::
+
+Crafted Emacs Defaults Module
+
+* Sensible path defaults::
 
 Crafted Emacs Lisp Module
 
@@ -199,7 +204,7 @@ principles:
      framework exists.
 
 
-File: crafted-emacs.info,  Node: Why use it?,  Next: Customization,  Prev: Principles,  Up: Top
+File: crafted-emacs.info,  Node: Why use it?,  Next: Folder structure,  Prev: Principles,  Up: Top
 
 2 Why use it?
 *************
@@ -217,9 +222,36 @@ optional or interchangeable.
 with your own ‘init.el’ file without using this base configuration repo!
 
 
-File: crafted-emacs.info,  Node: Customization,  Next: Using it with Chemacs2,  Prev: Why use it?,  Up: Top
+File: crafted-emacs.info,  Node: Folder structure,  Next: Customization,  Prev: Why use it?,  Up: Top
 
-3 Customization
+3 Folder structure
+******************
+
+There are two primary folders for working with Rational Emacs:
+
+   • ‘user-emacs-directory‘ (ie: ‘~/.config/emacs‘) where Emacs, by
+     default, searches for its configuration, packages, etc.
+   • ‘crafted-config-path‘ (ie: ‘~/.config/crafted-emacs‘, see below)
+     where Rational Emacs searches for everything except packages.
+
+   By default Crafted Emacs does not do much regarding those paths
+except for customizations as introduced below.
+
+   The ‘crafted-config-path‘ layout is designed following current common
+practices to help you keep configuration and runtime data separatedly
+(inside ‘etc/‘ and ‘var/‘ respectively).
+
+   Moreover, the crafted-defaults
+(crafted-defaults.org#sensible-path-defaults) module sets several common
+default paths to sensible new defaults following such practices.
+
+   We do not, yet, provide a cache path here as that needs further
+thought (most OS expect caches in specific places).
+
+
+File: crafted-emacs.info,  Node: Customization,  Next: Using it with Chemacs2,  Prev: Folder structure,  Up: Top
+
+4 Customization
 ***************
 
 To add your own customization to this configuration, create a
@@ -237,10 +269,10 @@ for the ‘CRAFTED_EMACS_HOME’ environment variable, either on the command
 line or in your shell configuration.  This variable should only contain
 the path to the ‘config.el’ files, for example:
 
-     CRAFTED_EMACS_HOME=~/my-crafted-emacs-config
+         CRAFTED_EMACS_HOME=~/my-crafted-emacs-config
 
 
-Listing 3.1: Set environment variable ‘CRAFTED_EMACS_HOME’ to the path
+Listing 4.1: Set environment variable ‘CRAFTED_EMACS_HOME’ to the path
 of the configuration directory.
 
 * Menu:
@@ -252,7 +284,7 @@ of the configuration directory.
 
 File: crafted-emacs.info,  Node: How the crafted config file is found,  Next: Example Configuration,  Up: Customization
 
-3.1 How the crafted config file is found
+4.1 How the crafted config file is found
 ========================================
 
 The crafted config files (‘config.el’ and ‘early-config.el’) are found
@@ -281,29 +313,29 @@ files ‘config.el’ and ‘early-config.el’ must be created by you.
 
 File: crafted-emacs.info,  Node: Example Configuration,  Next: The customel file,  Prev: How the crafted config file is found,  Up: Customization
 
-3.2 Example Configuration:
+4.2 Example Configuration:
 ==========================
 
 
-     (require 'crafted-defaults)
-     (require 'crafted-screencast)
-     (require 'crafted-ui)
-     (require 'crafted-editing)
-     (require 'crafted-evil)
-     (require 'crafted-completion)
-     (require 'crafted-windows)
+         (require 'crafted-defaults)
+         (require 'crafted-screencast)
+         (require 'crafted-ui)
+         (require 'crafted-editing)
+         (require 'crafted-evil)
+         (require 'crafted-completion)
+         (require 'crafted-windows)
 
-     ;; Set further font and theme customizations
-     (custom-set-variables
-      '(crafted-ui-default-font
-        '(:font "JetBrains Mono" :weight light :height 185)))
+         ;; Set further font and theme customizations
+         (custom-set-variables
+          '(crafted-ui-default-font
+            '(:font "JetBrains Mono" :weight light :height 185)))
 
-     (crafted-package-install-package 'doom-themes)
-     (load-theme 'doom-one t)
+         (crafted-package-install-package 'doom-themes)
+         (load-theme 'doom-one t)
 
 
 
-Listing 3.2: Example of user created Crafted Emacs ‘config.el’ file.
+Listing 4.2: Example of user created Crafted Emacs ‘config.el’ file.
 
 See the ‘examples’ folder in the git-repo for more up to date and
 comprehensive examples.
@@ -311,7 +343,7 @@ comprehensive examples.
 
 File: crafted-emacs.info,  Node: The customel file,  Prev: Example Configuration,  Up: Customization
 
-3.3 The ‘custom.el’ file
+4.3 The ‘custom.el’ file
 ========================
 
 The ‘custom.el’ file will hold the auto-generated code from the Emacs
@@ -327,7 +359,7 @@ Customization UI.
 
 File: crafted-emacs.info,  Node: Simplified overview of how Emacs Customization works,  Next: Loading the customel file,  Up: The customel file
 
-3.3.1 Simplified overview of how Emacs Customization works
+4.3.1 Simplified overview of how Emacs Customization works
 ----------------------------------------------------------
 
 Customizable values are defined with the ‘defcustom’ form, and can be
@@ -358,7 +390,7 @@ the same name (see example below).
 
 File: crafted-emacs.info,  Node: Loading the customel file,  Next: Not loading the customel file,  Prev: Simplified overview of how Emacs Customization works,  Up: The customel file
 
-3.3.2 Loading the ‘custom.el’ file
+4.3.2 Loading the ‘custom.el’ file
 ----------------------------------
 
 This is important because if you, the user, wish to use the
@@ -375,7 +407,7 @@ file is *not* automatically loaded by Crafted Emacs configuration.  You
 may, if you choose, load this file yourself with the following code in
 your ‘config.el’ file.
 
-     (load "custom")
+           (load "custom")
 
    It is important to load this file last to make sure it overrides any
 values previously set while Emacs was starting.
@@ -383,47 +415,47 @@ values previously set while Emacs was starting.
    If you are using something like the example provided above, you might
 have something that looks more like this:
 
-     (require 'crafted-defaults)
-     (require 'crafted-screencast)
-     (require 'crafted-ui)
-     (require 'crafted-editing)
-     (require 'crafted-evil)
-     (require 'crafted-completion)
-     (require 'crafted-windows)
+           (require 'crafted-defaults)
+           (require 'crafted-screencast)
+           (require 'crafted-ui)
+           (require 'crafted-editing)
+           (require 'crafted-evil)
+           (require 'crafted-completion)
+           (require 'crafted-windows)
 
-     (crafted-package-install-package 'doom-themes)
-     (load-theme 'doom-one t)
+           (crafted-package-install-package 'doom-themes)
+           (load-theme 'doom-one t)
 
-     (load "custom")
-     ;;; example-config.el ends here
+           (load "custom")
+           ;;; example-config.el ends here
 
 
-Listing 3.3: Example ‘config.el’ loading the ‘custom.el’ file.
+Listing 4.3: Example ‘config.el’ loading the ‘custom.el’ file.
 
    And then in ‘custom.el’ you would have something like the following
 which is auto-generated by Emacs:
 
-     (custom-set-variables
-      ;; custom-set-variables was added by Custom.
-      ;; If you edit it by hand, you could mess it up, so be careful.
-      ;; Your init file should contain only one such instance.
-      ;; If there is more than one, they won't work right.
-      '(crafted-ui-default-font '(:font "JetBrains Mono" :weight light :height 185))
-      '(crafted-ui-display-line-numbers t))
-     (custom-set-faces
-      ;; custom-set-faces was added by Custom.
-      ;; If you edit it by hand, you could mess it up, so be careful.
-      ;; Your init file should contain only one such instance.
-      ;; If there is more than one, they won't work right.
-      )
+           (custom-set-variables
+            ;; custom-set-variables was added by Custom.
+            ;; If you edit it by hand, you could mess it up, so be careful.
+            ;; Your init file should contain only one such instance.
+            ;; If there is more than one, they won't work right.
+            '(crafted-ui-default-font '(:font "JetBrains Mono" :weight light :height 185))
+            '(crafted-ui-display-line-numbers t))
+           (custom-set-faces
+            ;; custom-set-faces was added by Custom.
+            ;; If you edit it by hand, you could mess it up, so be careful.
+            ;; Your init file should contain only one such instance.
+            ;; If there is more than one, they won't work right.
+            )
 
 
-Listing 3.4: Example auto-generated ‘custom.el’ file.
+Listing 4.4: Example auto-generated ‘custom.el’ file.
 
 
 File: crafted-emacs.info,  Node: Not loading the customel file,  Next: Caveat on the timing of loading customel,  Prev: Loading the customel file,  Up: The customel file
 
-3.3.3 Not loading the ‘custom.el’ file
+4.3.3 Not loading the ‘custom.el’ file
 --------------------------------------
 
 You may choose not to load the ‘custom.el’ file if you are writing your
@@ -436,29 +468,29 @@ could imply the use of the Customization UI, as our example uses the
 ‘custom-set-variables’ form to set a list of customizable values all at
 once.  Here is the same example written differently.
 
-     (require 'crafted-defaults)
-     (require 'crafted-screencast)
-     (require 'crafted-ui)
-     (require 'crafted-editing)
-     (require 'crafted-evil)
-     (require 'crafted-completion)
-     (require 'crafted-windows)
+           (require 'crafted-defaults)
+           (require 'crafted-screencast)
+           (require 'crafted-ui)
+           (require 'crafted-editing)
+           (require 'crafted-evil)
+           (require 'crafted-completion)
+           (require 'crafted-windows)
 
-     (customize-set-variable 'crafted-ui-default-font
-                             '(:font "JetBrains Mono" :weight light :height 185))
-     (customize-set-variable 'crafted-ui-display-line-numbers t)
+           (customize-set-variable 'crafted-ui-default-font
+                                   '(:font "JetBrains Mono" :weight light :height 185))
+           (customize-set-variable 'crafted-ui-display-line-numbers t)
 
-     (crafted-package-install-package 'doom-themes)
-     (load-theme 'doom-one t)
+           (crafted-package-install-package 'doom-themes)
+           (load-theme 'doom-one t)
 
 
-Listing 3.5: Example ‘config.el’ setting customization variables
+Listing 4.5: Example ‘config.el’ setting customization variables
 directly.
 
 
 File: crafted-emacs.info,  Node: Caveat on the timing of loading customel,  Prev: Not loading the customel file,  Up: The customel file
 
-3.3.4 Caveat on the timing of loading ‘custom.el’
+4.3.4 Caveat on the timing of loading ‘custom.el’
 -------------------------------------------------
 
 Even if you are using emacs-lisp to customize Emacs, you may still
@@ -470,22 +502,22 @@ wins.
 
    Here is an example, first a ‘config.el’ snippet:
 
-     ;; ... some customization before
-     (customize-set-variable 'display-line-numbers-type 'relative)
-     ;; ... some more customization
+           ;; ... some customization before
+           (customize-set-variable 'display-line-numbers-type 'relative)
+           ;; ... some more customization
 
-     (load "custom")
+           (load "custom")
 
 
-Listing 3.6: ‘config.el’ snippet loading ‘custom.el’ last
+Listing 4.6: ‘config.el’ snippet loading ‘custom.el’ last
 
    and the ‘custom.el’ snippet
 
-     (custom-set-variables
-      '(display-line-numbers-type t))
+           (custom-set-variables
+            '(display-line-numbers-type t))
 
 
-Listing 3.7: ‘custom.el’ snippet.
+Listing 4.7: ‘custom.el’ snippet.
 
    The value of the ‘display-line-numbers-type’ will be ‘t’.  Since the
 ‘custom.el’ file is loaded last the first value of the
@@ -497,7 +529,7 @@ set the value only once in your configuration with either
 
 File: crafted-emacs.info,  Node: Using it with Chemacs2,  Next: Contributing,  Prev: Customization,  Up: Top
 
-4 Using it with ‘Chemacs2’
+5 Using it with ‘Chemacs2’
 **************************
 
 If you have the ‘Chemacs2’ configuration cloned to ‘~/.emacs.d’ or
@@ -512,11 +544,11 @@ you installed Crafted Emacs to ‘~/.crafted-emacs’, then your
 change the name to something else, see below for examples.
 
 
-     (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs"))))
+         (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs"))))
 
 
 
-Listing 4.1: Example of a ‘Chemacs2’ user profile file in
+Listing 5.1: Example of a ‘Chemacs2’ user profile file in
 ‘~/.emacs-profiles.el’.
 
    If you prefer to put your Crafted Emacs customizations elsewhere (for
@@ -525,23 +557,23 @@ specify the ‘CRAFTED_EMACS_HOME’ environment variable, for example like
 this:
 
 
-     (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
-                     (env . (("CRAFTED_EMACS_HOME" . "~/path/to/crafted-emacs/personal"))))))
+           (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
+                           (env . (("CRAFTED_EMACS_HOME" . "~/path/to/crafted-emacs/personal"))))))
 
 
 
-Listing 4.2: User ‘Chemacs2’ profile file ‘~/.emacs-profiles.el’ with
+Listing 5.2: User ‘Chemacs2’ profile file ‘~/.emacs-profiles.el’ with
 environment variable.
 
    Or some place completely different:
 
 
-     (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
-                     (env . (("CRAFTED_EMACS_HOME" . "~/crafted-config/personal"))))))
+           (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
+                           (env . (("CRAFTED_EMACS_HOME" . "~/crafted-config/personal"))))))
 
 
 
-Listing 4.3: User ‘Chemacs2’ profile file ‘~/.emacs-profiles.el’ with
+Listing 5.3: User ‘Chemacs2’ profile file ‘~/.emacs-profiles.el’ with
 Crafted Emacs config files set to another path.
 
    Then launch it with ‘emacs --with-profile crafted’!
@@ -549,7 +581,7 @@ Crafted Emacs config files set to another path.
 
 File: crafted-emacs.info,  Node: Contributing,  Next: Modules,  Prev: Using it with Chemacs2,  Up: Top
 
-5 Contributing
+6 Contributing
 **************
 
 Follow the Elisp Style Guide
@@ -567,7 +599,7 @@ SystemCrafters (https://systemcrafters.net/) community!
 
 File: crafted-emacs.info,  Node: Modules,  Next: Troubleshooting,  Prev: Contributing,  Up: Top
 
-6 Modules
+7 Modules
 *********
 
 Crafted Emacs includes a number of modules to further configure Emacs.
@@ -602,12 +634,12 @@ the module of interest to understand it best.
 
 File: crafted-emacs.info,  Node: Crafted Emacs Completion Module,  Next: Crafted Emacs Defaults Module,  Up: Modules
 
-6.1 Crafted Emacs Completion Module
+7.1 Crafted Emacs Completion Module
 ===================================
 
 To use this module, simply require it in your config.
 
-     (require 'crafted-completion)
+         (require 'crafted-completion)
 
    This module installs and sets up a set of completion-related packages
 that work together to achieve a functionality that you might know from
@@ -811,12 +843,12 @@ the five packages come in.
 
 File: crafted-emacs.info,  Node: Crafted Emacs Defaults Module,  Next: Crafted Emacs Editing Module,  Prev: Crafted Emacs Completion Module,  Up: Modules
 
-6.2 Crafted Emacs Defaults Module
+7.2 Crafted Emacs Defaults Module
 =================================
 
 To use this module, simply require it in your config.
 
-     (require 'crafted-defaults)
+         (require 'crafted-defaults)
 
    • ‘global-auto-revert-non-file-buffers’ : ‘t’
 
@@ -827,7 +859,7 @@ To use this module, simply require it in your config.
      Change this setting either by finding it in the Customization UI or
      by adding this code to your ‘config.el’
 
-          (customize-set-variable 'global-auto-revert-non-file-buffers nil)
+                (customize-set-variable 'global-auto-revert-non-file-buffers nil)
 
    • ‘global-auto-revert-mode’
 
@@ -836,7 +868,7 @@ To use this module, simply require it in your config.
 
      Turn this off by adding this code to your ‘config.el’
 
-          (global-auto-revert-mode -1)
+                (global-auto-revert-mode -1)
 
    • ‘delete-selection-mode’
 
@@ -844,7 +876,7 @@ To use this module, simply require it in your config.
      pressing delete or backspace deletes the selection.  To turn this
      off, add this code to your ‘config.el’
 
-          (delete-selection-mode -1)
+                (delete-selection-mode -1)
 
    • ‘indent-tabs-mode’ : ‘nil’
 
@@ -853,7 +885,7 @@ To use this module, simply require it in your config.
      Change this setting either by finding it in the Customization UI or
      by adding this code to your ‘config.el’
 
-          (customize-set-variable 'indent-tabs-mode t)
+                (customize-set-variable 'indent-tabs-mode t)
 
    • ‘y-or-n-p’
 
@@ -861,7 +893,7 @@ To use this module, simply require it in your config.
      This is managed by Emacs advice functionality.  It can be reverted
      in your ‘config.el’ by adding the code:
 
-          (advice-remove 'yes-or-no-p #'y-or-n-p)
+                (advice-remove 'yes-or-no-p #'y-or-n-p)
 
      In Emacs versions beginning with 28, use the ‘use-short-answers’
      variable set to ‘t’ instead to accomplish the same thing.
@@ -888,7 +920,7 @@ To use this module, simply require it in your config.
      by adding this code to your ‘config.el’ (make sure to set the path
      correctly)
 
-          (customize-set-variable 'recentf-save-file "/some/path/to/recentf")
+                (customize-set-variable 'recentf-save-file "/some/path/to/recentf")
 
    • ‘kill-do-not-save-duplicates’ : ‘t’
 
@@ -899,7 +931,7 @@ To use this module, simply require it in your config.
      Change this setting either by finding it in the Customization UI or
      by adding this code to your ‘config.el’
 
-          (customize-set-variable 'kill-do-not-save-duplicates nil)
+                (customize-set-variable 'kill-do-not-save-duplicates nil)
 
    • ‘auto-window-vscroll’ : ‘nil’
 
@@ -908,7 +940,7 @@ To use this module, simply require it in your config.
 
      Change this by adding this code to your ‘config.el’
 
-          (setq auto-window-vscroll t)
+                (setq auto-window-vscroll t)
 
    • ‘fast-but-imprecise-scrolling’ : ‘t’
 
@@ -919,7 +951,7 @@ To use this module, simply require it in your config.
      Change this setting either by finding it in the Customization UI or
      by adding this code to your ‘config.el’
 
-          (customize-set-variable 'fast-but-imprecise-scrolling nil)
+                (customize-set-variable 'fast-but-imprecise-scrolling nil)
 
    • ‘scroll-conservatively’ : ‘101’
 
@@ -932,7 +964,7 @@ To use this module, simply require it in your config.
      code to your ‘config.el’ where ‘nnn’ is some number of lines to
      scroll.
 
-          (customize-set-variable 'scroll-conservatively nnn)
+                (customize-set-variable 'scroll-conservatively nnn)
 
    • ‘scroll-margin’ : ‘0’
 
@@ -943,7 +975,7 @@ To use this module, simply require it in your config.
      your ‘custom.el’ where ‘nn’ is some number of lines at the top or
      bottom of a buffer where scrolling should start (for example: 5)
 
-          (customize-set-variable 'scroll-margin nn)
+                (customize-set-variable 'scroll-margin nn)
 
    • ‘scroll-preserve-screen-position’ : ‘t’
 
@@ -957,7 +989,7 @@ To use this module, simply require it in your config.
      Change this value in the Customization UI or by adding this code to
      ‘custom.el’
 
-          (customize-set-variable 'scroll-preserve-screen-position nil)
+                (customize-set-variable 'scroll-preserve-screen-position nil)
 
    • ‘bidi-paragraph-direction’ : ‘left-to-right’
 
@@ -967,7 +999,7 @@ To use this module, simply require it in your config.
      You can change this through the Customization UI or by addding the
      following code in ‘config.el’
 
-          (customize-set-variable 'bidi-paragraph-direction 'right-to-left)
+                (customize-set-variable 'bidi-paragraph-direction 'right-to-left)
 
    • ‘bidi-inhibit-bpa’ : ‘t’
 
@@ -975,14 +1007,14 @@ To use this module, simply require it in your config.
      which makes redisplay faster.  You can change the value of this
      variable by adding this code to ‘custom.el’
 
-          (setq bidi-inhibit-bpa nil)
+                (setq bidi-inhibit-bpa nil)
 
    • ‘global-so-long-mode’
 
      Improves performance for files with excessively long lines.  This
      can minor mode can be turned off in ‘config.el’ by adding:
 
-          (global-so-long-mode -1)
+                (global-so-long-mode -1)
 
    • ‘executable-make-buffer-file-executable-if-script-p’
 
@@ -990,7 +1022,7 @@ To use this module, simply require it in your config.
      saving the file.  To remove this behavior add the following to
      ‘config.el’
 
-          (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+                (remove-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
    • ‘savehist-mode’
 
@@ -999,22 +1031,60 @@ To use this module, simply require it in your config.
      You can change where the file should live with the Customization UI
      or by adding the following to ‘config.el’
 
-          (customize-set-variable 'savehist-file
-                                  "/path/to/minibuffer/history/file")
+                (customize-set-variable 'savehist-file
+                                        "/path/to/minibuffer/history/file")
 
      You can turn off this mode by adding this code to ‘config.el’
 
-          (savehist-mode -1)
+                (savehist-mode -1)
+
+   • ‘crafted-folders’ : ‘t’
+
+     Enables the use of a modern folder structure, as explained below.
+
+     You can turn this off by adding this code to ‘config.el’ (or
+     through the Customization UI):
+
+                (customize-set-variable 'crafted-folders nil)
+
+* Menu:
+
+* Sensible path defaults::
+
+
+File: crafted-emacs.info,  Node: Sensible path defaults,  Up: Crafted Emacs Defaults Module
+
+7.2.1 Sensible path defaults
+----------------------------
+
+Loading this module will make your Emacs, by default, save several
+runtime and/or configuration files inside Rational Emacs ‘var’ directory
+as explained in the documentation (crafted-emacs.org#folder-structure).
+
+   This behaviour can be disabled by customizing ‘crafted-folders’ as
+explained above.
+
+   The list of paths being updated is growing as we aim to have all
+state, runtime and/or configuration files stored following modern
+practices.  What is currently altered is:
+
+   • bookmark-default-file (bookmark-default-file)
+   • nsm-settings-file (nsm-settings-file)
+   • org-id-locations-file (org-id-locations-file)
+   • project-list-file (project-list-file)
+   • savehist-file (savehist-file)
+   • save-place-file (save-place-file)
+   • tramp-persistency-file-name (tramp-persistency-file-name)
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Editing Module,  Next: Crafted Emacs Lisp Module,  Prev: Crafted Emacs Defaults Module,  Up: Modules
 
-6.3 Crafted Emacs Editing Module
+7.3 Crafted Emacs Editing Module
 ================================
 
 To use this module, simply require it in your config.
 
-     (require 'crafted-editing)
+         (require 'crafted-editing)
 
    • Whitespace
 
@@ -1053,12 +1123,12 @@ To use this module, simply require it in your config.
      for more options.  This variable can be changed through the
      Customization UI or by adding to ‘config.el’
 
-          ;; change the list of options to be what you wish based on the values
-          ;; mentioned in the commentary for this variable
-          ;; (C-h v whitespace-style RET)
-          (customize-set-variable 'whitespace-style
-                                  '(face tabs empty trailing tab-mark
-                                         indentation::space))
+                ;; change the list of options to be what you wish based on the values
+                ;; mentioned in the commentary for this variable
+                ;; (C-h v whitespace-style RET)
+                (customize-set-variable 'whitespace-style
+                                        '(face tabs empty trailing tab-mark
+                                               indentation::space))
 
    • ‘whitespace-action’ : ‘(cleanup auto-cleanup)’
 
@@ -1077,17 +1147,17 @@ To use this module, simply require it in your config.
      RET’) for more options.  This variable can be changed through the
      Customization UI or by adding to ‘config.el’
 
-          ;; change the list of options to be what you wish based on the values
-          ;; mentioned in the commentary for this variable
-          ;; (C-h v whitespace-action RET)
-          (customize-set-variable 'whitespace-action '(cleanup auto-cleanup))
+                ;; change the list of options to be what you wish based on the values
+                ;; mentioned in the commentary for this variable
+                ;; (C-h v whitespace-action RET)
+                (customize-set-variable 'whitespace-action '(cleanup auto-cleanup))
 
    • ‘whitespace-mode’
 
      This minor mode is added to ‘prog-mode’ and ‘text-mode’ via hooks.
      To change this, add code similar to the following to ‘config.el’
 
-          (remove-hook 'prog-mode-hook #'whitespace-mode)
+                (remove-hook 'prog-mode-hook #'whitespace-mode)
 
    • ‘electric-pair-mode’
 
@@ -1102,15 +1172,15 @@ To use this module, simply require it in your config.
 
      This can be turned off by adding this code to ‘config.el’
 
-          (electric-pair-mode -1)
+                (electric-pair-mode -1)
 
      Alternatively, if this should only apply to certain modes,
      programming language modes for example, this code would be used:
 
-          (electric-pair-mode -1)                         ; turn off globally
+                (electric-pair-mode -1)                         ; turn off globally
 
-          (add-hook 'prog-mode-hook #'electric-pair-mode) ; turn on only for
-                                                          ; programming modes
+                (add-hook 'prog-mode-hook #'electric-pair-mode) ; turn on only for
+                                                                ; programming modes
 
    • ‘show-paren-mode’
 
@@ -1119,20 +1189,20 @@ To use this module, simply require it in your config.
 
      This can be turned off by adding this code to ‘config.el’
 
-          (show-paren-mode -1)
+                (show-paren-mode -1)
 
      Alternatively, if this should only apply to certain modes,
      programming language modes for example, this code would be used:
 
-          (show-paren-mode -1)                         ; turn off globally
+                (show-paren-mode -1)                         ; turn off globally
 
-          (add-hook 'prog-mode-hook #'show-paren-mode) ; turn on only for
-                                                       ; programming modes
+                (add-hook 'prog-mode-hook #'show-paren-mode) ; turn on only for
+                                                             ; programming modes
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs IDE Module,  Prev: Crafted Emacs Editing Module,  Up: Modules
 
-6.4 Crafted Emacs Lisp Module
+7.4 Crafted Emacs Lisp Module
 =============================
 
 This module installs and configures a few additonal packages to provide
@@ -1204,7 +1274,7 @@ Clojure, Scheme, and Racket.
 
 File: crafted-emacs.info,  Node: Packages Installed,  Next: Common,  Up: Crafted Emacs Lisp Module
 
-6.4.1 Packages Installed
+7.4.1 Packages Installed
 ------------------------
 
    • Common
@@ -1227,7 +1297,7 @@ File: crafted-emacs.info,  Node: Packages Installed,  Next: Common,  Up: Crafted
 
 File: crafted-emacs.info,  Node: Common,  Next: Common Lisp,  Prev: Packages Installed,  Up: Crafted Emacs Lisp Module
 
-6.4.2 Common
+7.4.2 Common
 ------------
 
 Aggressive indent mode is added to each of the other lisp family
@@ -1235,7 +1305,7 @@ configurations.  It provides automatic indentation, even when pasting
 code or adding structure.  It is added on each mode hook, to turn this
 feature off, remove the hook.  For example:
 
-     (remove-hook 'lisp-mode-hook #'aggressive-indent-mode)
+          (remove-hook 'lisp-mode-hook #'aggressive-indent-mode)
 
    • Hooks ‘aggressive-mode’ is added to:
         • ‘lisp-mode-hook’
@@ -1245,7 +1315,7 @@ feature off, remove the hook.  For example:
 
 File: crafted-emacs.info,  Node: Common Lisp,  Next: Clojure,  Prev: Common,  Up: Crafted Emacs Lisp Module
 
-6.4.3 Common Lisp
+7.4.3 Common Lisp
 -----------------
 
 The configuration for Common Lisp features Sylvester the cat’s Common
@@ -1255,7 +1325,7 @@ completion, integration with ASDF and Quicklsp system definition tools.
 
 File: crafted-emacs.info,  Node: Clojure,  Next: Scheme/Racket,  Prev: Common Lisp,  Up: Crafted Emacs Lisp Module
 
-6.4.4 Clojure
+7.4.4 Clojure
 -------------
 
 The configuration for Clojure is based on CIDER and adds ‘clj-refactor’
@@ -1264,12 +1334,12 @@ prefix is set to ‘C-c r’ to avoid conflicts with CIDER.  To change this
 to something else (for example ‘C-c C-m’ as mentioned on the github
 page) use the following snippet:
 
-     (clj-add-keybindings-with-prefix "C-c C-m")
+          (clj-add-keybindings-with-prefix "C-c C-m")
 
 
 File: crafted-emacs.info,  Node: Scheme/Racket,  Prev: Clojure,  Up: Crafted Emacs Lisp Module
 
-6.4.5 Scheme/Racket
+7.4.5 Scheme/Racket
 -------------------
 
 Geiser provides a modular package for the Scheme family of languages
@@ -1288,12 +1358,12 @@ to set the ‘scheme-program-name’ variable, which we default to "guile"
 to match the configuration for that implementation.  To change this to
 ‘scheme’ for example, use this snippet:
 
-     (customize-set-variable 'scheme-program-name "scheme")
+          (customize-set-variable 'scheme-program-name "scheme")
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs IDE Module,  Next: Crafted Emacs Project Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
 
-6.5 Crafted Emacs IDE Module
+7.5 Crafted Emacs IDE Module
 ============================
 
 This module is a generic module which installs and configures Eglot for
@@ -1308,24 +1378,24 @@ config.
 
 File: crafted-emacs.info,  Node: Provided configuration,  Up: Crafted Emacs IDE Module
 
-6.5.1 Provided configuration
+7.5.1 Provided configuration
 ----------------------------
 
 ‘eglot-autoshutdown’ is set to ‘t’ to cause Eglot to shutdown the
 language server(s) in use when the last buffer using one is killed.  Set
 this to ‘nil’ to keep the LSP servers running.
 
-     (customize-set-variable 'eglot-autoshutdown nil)
+          (customize-set-variable 'eglot-autoshutdown nil)
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Project Module,  Next: Crafted Emacs Python Module,  Prev: Crafted Emacs IDE Module,  Up: Modules
 
-6.6 Crafted Emacs Project Module
+7.6 Crafted Emacs Project Module
 ================================
 
 To use this module, simply require it in your config.
 
-     (require 'crafted-project)
+         (require 'crafted-project)
 
    This module uses Emacs’ built-in project backend (often referred to
 as ‘project.el’).
@@ -1351,7 +1421,7 @@ for details.
 
 File: crafted-emacs.info,  Node: Crafted Emacs Python Module,  Next: Crafted Emacs Evil Module,  Prev: Crafted Emacs Project Module,  Up: Modules
 
-6.7 Crafted Emacs Python Module
+7.7 Crafted Emacs Python Module
 ===============================
 
 This module installs a few additional packages to configure an IDE-like
@@ -1368,7 +1438,7 @@ module, simply require it in your config.
 
 File: crafted-emacs.info,  Node: Packages Installed (1),  Next: Provided configuration (1),  Up: Crafted Emacs Python Module
 
-6.7.1 Packages Installed
+7.7.1 Packages Installed
 ------------------------
 
    • ‘anaconda-mode’
@@ -1380,7 +1450,7 @@ File: crafted-emacs.info,  Node: Packages Installed (1),  Next: Provided configu
      This mode is used to format your Python code on-save.  You also
      need to install the ‘black’ package with ‘pip’:
 
-          pip install black
+                 pip install black
 
    • ‘eglot’
 
@@ -1389,7 +1459,7 @@ File: crafted-emacs.info,  Node: Packages Installed (1),  Next: Provided configu
      features.  You also need to install the ‘pyright’ package with
      ‘pip’:
 
-          pip install pyright
+                 pip install pyright
 
    • ‘numpydoc’
 
@@ -1404,7 +1474,7 @@ File: crafted-emacs.info,  Node: Packages Installed (1),  Next: Provided configu
 
 File: crafted-emacs.info,  Node: Provided configuration (1),  Next: Suggested keybindings,  Prev: Packages Installed (1),  Up: Crafted Emacs Python Module
 
-6.7.2 Provided configuration
+7.7.2 Provided configuration
 ----------------------------
 
 ‘anaconda-mode-installation-directory’ is set to the
@@ -1435,7 +1505,7 @@ with each variable.
 
 File: crafted-emacs.info,  Node: Suggested keybindings,  Prev: Provided configuration (1),  Up: Crafted Emacs Python Module
 
-6.7.3 Suggested keybindings
+7.7.3 Suggested keybindings
 ---------------------------
 
 No keybindings are provided, but we do offer the following suggestions.
@@ -1443,20 +1513,20 @@ No keybindings are provided, but we do offer the following suggestions.
    Using the ‘with-eval-after-load’ form defers loading the keybindings
 until the module is loaded (either "python" or "pyvenv" in this case).
 
-     (with-eval-after-load "python"
-       (define-key python-mode-map (kbd "C-c C-n") #'numpydoc-generate)
-       (define-key python-mode-map (kbd "C-c e n") #'flymake-goto-next-error)
-       (define-key python-mode-map (kbd "C-c e p") #'flymake-goto-prev-error))
+          (with-eval-after-load "python"
+            (define-key python-mode-map (kbd "C-c C-n") #'numpydoc-generate)
+            (define-key python-mode-map (kbd "C-c e n") #'flymake-goto-next-error)
+            (define-key python-mode-map (kbd "C-c e p") #'flymake-goto-prev-error))
 
-     (with-eval-after-load "pyvenv"
-       (define-key pyvenv-mode-map (kbd "C-c p a") #'pyvenv-activate)
-       (define-key pyvenv-mode-map (kbd "C-c p d") #'pyvenv-deactivate)
-       (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
+          (with-eval-after-load "pyvenv"
+            (define-key pyvenv-mode-map (kbd "C-c p a") #'pyvenv-activate)
+            (define-key pyvenv-mode-map (kbd "C-c p d") #'pyvenv-deactivate)
+            (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Evil Module,  Next: Crafted Emacs Windows Module,  Prev: Crafted Emacs Python Module,  Up: Modules
 
-6.8 Crafted Emacs Evil Module
+7.8 Crafted Emacs Evil Module
 =============================
 
 * Menu:
@@ -1469,7 +1539,7 @@ File: crafted-emacs.info,  Node: Crafted Emacs Evil Module,  Next: Crafted Emacs
 
 File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Evil Module
 
-6.8.1 Installation
+7.8.1 Installation
 ------------------
 
 To use this module, simply require it in your config.
@@ -1479,7 +1549,7 @@ To use this module, simply require it in your config.
 
 File: crafted-emacs.info,  Node: Description,  Next: Customization Variables,  Prev: Installation,  Up: Crafted Emacs Evil Module
 
-6.8.2 Description
+7.8.2 Description
 -----------------
 
 This module installs and sets up four packages to emulate and extend
@@ -1508,7 +1578,7 @@ can then be navigated through using the arrow keys.
 
 File: crafted-emacs.info,  Node: Customization Variables,  Next: Some default settings,  Prev: Description,  Up: Crafted Emacs Evil Module
 
-6.8.3 Customization Variables
+7.8.3 Customization Variables
 -----------------------------
 
 This module provides two customizable variables
@@ -1546,7 +1616,7 @@ documentation for those packages for more information.
 
 File: crafted-emacs.info,  Node: Some default settings,  Prev: Customization Variables,  Up: Crafted Emacs Evil Module
 
-6.8.4 Some default settings
+7.8.4 Some default settings
 ---------------------------
 
 For your convenience, the following settings have been set by default.
@@ -1571,7 +1641,7 @@ For your convenience, the following settings have been set by default.
 
 File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Emacs Evil Module,  Up: Modules
 
-6.9 Crafted Emacs Windows Module
+7.9 Crafted Emacs Windows Module
 ================================
 
 * Menu:
@@ -1582,7 +1652,7 @@ File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Em
 
 File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Windows Module
 
-6.9.1 Installation
+7.9.1 Installation
 ------------------
 
 To use this module, simply require it in your config.
@@ -1592,7 +1662,7 @@ To use this module, simply require it in your config.
 
 File: crafted-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Crafted Emacs Windows Module
 
-6.9.2 Description
+7.9.2 Description
 -----------------
 
 This module enables winner-mode
@@ -1625,7 +1695,7 @@ C-c w f     windmove-right   Moves point to window to the right
 
 File: crafted-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
 
-7 Troubleshooting
+8 Troubleshooting
 *****************
 
 Some tips when things don’t seem to work right.
@@ -1637,7 +1707,7 @@ Some tips when things don’t seem to work right.
 
 File: crafted-emacs.info,  Node: A package (suddenly?) fails to work,  Up: Troubleshooting
 
-7.1 A package (suddenly?) fails to work
+8.1 A package (suddenly?) fails to work
 =======================================
 
 This scenario happened frequently when upgading to Emacs 28.  It also
@@ -1693,7 +1763,7 @@ these actions in your configuration:
           offending package to MELPA (make sure to replace
           _package-name_ with the name of the actual package):
 
-               (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
+                        (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
 
         • Use ‘M-x package-list-packages’ to display the list of
           packages.
@@ -1740,56 +1810,58 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1408
-Node: Principles3809
-Node: Why use it?6873
-Node: Customization7548
-Ref: orgc5c5c208347
-Node: How the crafted config file is found8631
-Node: Example Configuration10075
-Ref: orgbc824ec10279
-Node: The customel file10930
-Node: Simplified overview of how Emacs Customization works11476
-Node: Loading the customel file13194
-Ref: configel14495
-Ref: customel15044
-Node: Not loading the customel file15774
-Ref: org7392fd816657
-Node: Caveat on the timing of loading customel17247
-Ref: configel (1)17913
-Ref: customel (1)18181
-Node: Using it with Chemacs218688
-Ref: org88d437d19501
-Ref: orga8de87119900
-Ref: orgc0d2c8f20210
-Node: Contributing20559
-Node: Modules21196
-Node: Crafted Emacs Completion Module22450
-Node: Crafted Emacs Defaults Module31833
-Node: Crafted Emacs Editing Module39230
-Node: Crafted Emacs Lisp Module43917
-Node: Packages Installed46535
-Node: Common47122
-Node: Common Lisp47736
-Node: Clojure48091
-Node: Scheme/Racket48617
-Node: Crafted Emacs IDE Module49611
-Node: Provided configuration50076
-Node: Crafted Emacs Project Module50479
-Node: Crafted Emacs Python Module51590
-Node: Packages Installed (1)52188
-Node: Provided configuration (1)53188
-Node: Suggested keybindings54508
-Node: Crafted Emacs Evil Module55427
-Node: Installation55734
-Node: Description55959
-Node: Customization Variables57252
-Node: Some default settings59016
-Node: Crafted Emacs Windows Module60254
-Node: Installation (1)60510
-Node: Description (1)60746
-Node: Troubleshooting62189
-Node: A package (suddenly?) fails to work62425
-Node: MIT License66231
+Node: Principles3889
+Node: Why use it?6953
+Node: Folder structure7631
+Node: Customization8731
+Ref: org802d1bc9535
+Node: How the crafted config file is found9823
+Node: Example Configuration11267
+Ref: org2b9a63711471
+Node: The customel file12174
+Node: Simplified overview of how Emacs Customization works12720
+Node: Loading the customel file14438
+Ref: configel15745
+Ref: customel16360
+Node: Not loading the customel file17168
+Ref: orgee1e58c18051
+Node: Caveat on the timing of loading customel18713
+Ref: configel (1)19379
+Ref: customel (1)19671
+Node: Using it with Chemacs220190
+Ref: org7b2e0e421003
+Ref: org77b732121406
+Ref: org3be93fd21728
+Node: Contributing22089
+Node: Modules22726
+Node: Crafted Emacs Completion Module23980
+Node: Crafted Emacs Defaults Module33367
+Node: Sensible path defaults41201
+Node: Crafted Emacs Editing Module42181
+Node: Crafted Emacs Lisp Module46986
+Node: Packages Installed49604
+Node: Common50191
+Node: Common Lisp50810
+Node: Clojure51165
+Node: Scheme/Racket51696
+Node: Crafted Emacs IDE Module52695
+Node: Provided configuration53160
+Node: Crafted Emacs Project Module53568
+Node: Crafted Emacs Python Module54683
+Node: Packages Installed (1)55281
+Node: Provided configuration (1)56295
+Node: Suggested keybindings57615
+Node: Crafted Emacs Evil Module58574
+Node: Installation58881
+Node: Description59106
+Node: Customization Variables60399
+Node: Some default settings62163
+Node: Crafted Emacs Windows Module63401
+Node: Installation (1)63657
+Node: Description (1)63893
+Node: Troubleshooting65336
+Node: A package (suddenly?) fails to work65572
+Node: MIT License69387
 
 End Tag Table
 
