@@ -59,8 +59,68 @@
 
 ;; Enable savehist-mode for an command history
 (savehist-mode 1)
-(customize-set-variable 'savehist-file
-                        (expand-file-name "history" crafted-config-var-directory))
+
+;; Keep state files in `crafted-config-var-directory' by default
+;; we use `with-eval-after-load' to only affect what is being used.
+;;
+;; Note that this can introduce issues depending on how each module
+;; works. Like, for example, if the module reads those files during
+;; load it may happen that it reads the file on its default location
+;; before the path is changed (because this code runs after-load,
+;; and user customization is run after all of crafted-emacs is loaded)
+;;
+;; So, each variable needs some thought on how/when to set it,
+;; while also trying to not set variables for modules the user
+;; is not loading / using.
+
+;; Enable the sensible path defaults
+(defcustom crafted-folders t
+  "Non-nil enabled 'sensible folder layout' behaviour."
+  :type 'boolean
+  :group 'crafted)
+
+(defun crafted-defaults--sensible-path
+    (root varname name)
+  "Sets the VARNAME to a path named NAME inside ROOT.
+   But only if `crafted-folders' is enabled (`t').
+
+  For example (crafted-config-var-directory 'savehist-file \"history\")
+  Will set `savehist-file' to, ie, ~/.config/crafted-emacs/var/history"
+  (if-let ((path (expand-file-name name root))
+           (crafted-folders))
+      (customize-set-variable varname path)
+    ))
+
+(crafted-defaults--sensible-path crafted-config-var-directory
+                                 'savehist-file "history")
+
+(with-eval-after-load 'saveplace
+  (crafted-defaults--sensible-path crafted-config-var-directory
+                                    'save-place-file "places"))
+
+(with-eval-after-load 'bookmark
+  (crafted-defaults--sensible-path crafted-config-var-directory
+                                    'bookmark-default-file "bookmarks"))
+
+(with-eval-after-load 'tramp
+  (crafted-defaults--sensible-path crafted-config-var-directory
+                                    'tramp-persistency-file-name
+                                    "tramp"))
+
+(with-eval-after-load 'org-id
+  (crafted-defaults--sensible-path crafted-config-var-directory
+                                    'org-id-locations-file
+                                    "org-id-locations"))
+
+(with-eval-after-load 'nsm
+  (crafted-defaults--sensible-path crafted-config-var-directory
+                                    'nsm-settings-file
+                                    "network-security.data"))
+
+(with-eval-after-load 'project
+  (crafted-defaults--sensible-path crafted-config-var-directory
+                                    'project-list-file
+                                    "projects"))
 
 (provide 'crafted-defaults)
 ;;; crafted-defaults.el ends here
