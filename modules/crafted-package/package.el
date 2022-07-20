@@ -1,4 +1,4 @@
-;;;; rational-package/package.el --- Configuration to use `package.el'.  -*- lexical-binding: t; -*-
+;;;; crafted-package/package.el --- Configuration to use `package.el'.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -10,7 +10,7 @@
 ;; Most of this code was already in `early-init.el' and `init.el'. I
 ;; Just moved here.
 
-;; I added the macro `rational-package-installed-p', to abstract the
+;; I added the macro `crafted-package-installed-p', to abstract the
 ;; verification of installed packages.
 
 ;; It still need to implement the checking of packages installed via
@@ -38,7 +38,7 @@
                           ("melpa"  . 0)))  ; if all else fails, get it
                                             ; from melpa
 ;;; package configuration
-(defun rational-package-archive-stale-p (archive)
+(defun crafted-package-archive-stale-p (archive)
   "Return `t' if ARCHIVE is stale.
 
 ARCHIVE is stale if the on-disk cache is older than 1 day"
@@ -50,7 +50,7 @@ ARCHIVE is stale if the on-disk cache is older than 1 day"
                                 (file-attributes archive-name)))
                  today)))
 
-(defun rational-package-archives-stale-p ()
+(defun crafted-package-archives-stale-p ()
   "Return `t' if any PACKAGE-ARHIVES cache is out of date.
 
 Check each archive listed in PACKAGE-ARCHIVES, if the on-disk
@@ -58,13 +58,13 @@ cache is older than 1 day, return a non-nil value. Fails fast,
 will return `t' for the first stale archive found or `nil' if
 they are all up-to-date."
   (interactive)
-  (cl-some #'rational-package-archive-stale-p (mapcar #'car package-archives)))
+  (cl-some #'crafted-package-archive-stale-p (mapcar #'car package-archives)))
 
-(defmacro rational-package-install-package (package)
+(defmacro crafted-package-install-package (package)
   "Only install the package if it is not already installed."
   `(unless (package-installed-p ,package) (package-install ,package)))
 
-(defmacro rational-package-installed-p (package)
+(defmacro crafted-package-installed-p (package)
   `(package-installed-p ,package))
 
 ;; Only use package.el if it is enabled. The user may have turned it
@@ -79,13 +79,13 @@ they are all up-to-date."
  ;; `package-refresh-contents' before calling `package-install'.
  (cond ((seq-empty-p package-archive-contents)
         (progn
-          (message "rational-init: package archives empty, initializing")
+          (message "crafted-init: package archives empty, initializing")
           (package-refresh-contents)))
-       ((rational-package-archives-stale-p)
+       ((crafted-package-archives-stale-p)
         (progn
-          (message "rational-init: package archives stale, refreshing in the background")
+          (message "crafted-init: package archives stale, refreshing in the background")
           (package-refresh-contents t))))
  )
 
-(provide 'rational-package/package)
-;;; rational-package/package.el ends here
+(provide 'crafted-package/package)
+;;; crafted-package/package.el ends here
