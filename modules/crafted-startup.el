@@ -48,6 +48,14 @@
            :face variable-pitch
            :link ("View Crafted Emacs Manual" ,(lambda (_button) (info "crafted-emacs")))
            "\tView the Crafted Emacs manual using Info\n"
+           "\n"
+           :face (variable-pitch font-lock-keyword-face bold)
+           ,(if (> (crafted-updates--get-new-commit-count) 0)
+                (progn
+                  (format "%s : " (crafted-updates-status-message))
+                  :link (" Show Updates ", (lambda (_button) (crafted-updates-show-latest)))
+                  :link (" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest))))
+              (crafted-updates-status-message))
            "\n"))
   "A list of texts to show in the middle part of splash screens.
 Each element in the list should be a list of strings or pairs
