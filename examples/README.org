@@ -30,34 +30,14 @@ However, as many people who started with this project preferred to use
 =straight.el=, the move to =package.el= was suboptimal.
 
 If you prefer to use =straight.el= instead of =package.el= under the hood, put the
-following two snippets into your configuration files:
+following snippet into your early configuration file:
 
 ** early-config.el
 Disable =package.el= during startup:
 #+begin_src emacs-lisp :tangle ./early-config.el
   (setq package-enable-at-startup nil)
-#+end_src
-
-** config.el
-Overwrite the function =crafted-package-install-package= using straight.el
-instead of package.el:
-#+begin_src emacs-lisp :tangle ./config.el
-  (defvar bootstrap-version)
-  (let ((bootstrap-file
-         (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-        (bootstrap-version 5))
-    (unless (file-exists-p bootstrap-file)
-      (with-current-buffer
-          (url-retrieve-synchronously
-           "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-           'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
-    (load bootstrap-file nil 'nomessage))
-
-  (defmacro crafted-package-install-package (package)
-    "Install PACKAGE using straight"
-    `(straight-use-package ,package))
+  (setq crafted-package-system 'straight)
+  (crafted-package-bootstrap crafted-package-system)
 #+end_src
 
 -----
