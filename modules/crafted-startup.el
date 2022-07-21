@@ -158,16 +158,16 @@ splash screen in another window."
             (progn
               (fancy-splash-insert
                :face '(variable-pitch font-lock-keyword-face bold)
-               (crafted-updates-status-message) " : "
+               (format "%s : " (crafted-updates-status-message))
                :face '(variable-pitch font-lock-keyword-face)
                :link `(" Show Updates " ,(lambda (_button) (crafted-updates-show-latest)))
                :face '(variable-pitch font-lock-keyword-face)
-               :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest t)))))
+               :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest t))))
+              "\n")
           (fancy-splash-insert
            :face '(variable-pitch font-lock-keyword-face bold)
-           (crafted-updates-status-message))
-          "\n")
-        (insert "\n")
+           (format "%s\n" (crafted-updates-status-message))))
+        (insert "\n\n")
         ;; (skip-chars-backward "\n")
         ;; (delete-region (point) (point-max))
         ;; (insert "\n")
