@@ -154,15 +154,19 @@ splash screen in another window."
         (dolist (text crafted-startup-text)
           (apply #'fancy-splash-insert text)
           (insert "\n"))
-        (fancy-splash-insert
+        (if (> (crafted-updates--get-new-commit-count) 0)
+            (progn
+              (fancy-splash-insert
+               :face '(variable-pitch font-lock-keyword-face bold)
+               (crafted-updates-status-message) " : "
+               :face '(variable-pitch font-lock-keyword-face)
+               :link `(" Show Updates " ,(lambda (_button) (crafted-updates-show-latest)))
+               :face '(variable-pitch font-lock-keyword-face)
+               :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest)))))
+          (fancy-splash-insert
            :face '(variable-pitch font-lock-keyword-face bold)
-           (if (> (crafted-updates--get-new-commit-count) 0)
-               (progn
-                 (format "%s : " (crafted-updates-status-message))
-                 :link `(" Show Updates " ,(lambda (_button) (crafted-updates-show-latest)))
-                 :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest))))
-             (crafted-updates-status-message))
-           "\n")
+           (crafted-updates-status-message))
+          "\n")
         (insert "\n")
         ;; (skip-chars-backward "\n")
         ;; (delete-region (point) (point-max))
