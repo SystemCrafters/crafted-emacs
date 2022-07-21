@@ -162,7 +162,7 @@ splash screen in another window."
                :face '(variable-pitch font-lock-keyword-face)
                :link `(" Show Updates " ,(lambda (_button) (crafted-updates-show-latest)))
                :face '(variable-pitch font-lock-keyword-face)
-               :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest))))
+               :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest t))))
               "\n")
           (fancy-splash-insert
            :face '(variable-pitch font-lock-keyword-face bold)
