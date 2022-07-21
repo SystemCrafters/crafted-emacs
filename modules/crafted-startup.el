@@ -163,6 +163,7 @@ splash screen in another window."
                  :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest))))
              (crafted-updates-status-message))
            "\n")
+        (insert "\n")
         ;; (skip-chars-backward "\n")
         ;; (delete-region (point) (point-max))
         ;; (insert "\n")
