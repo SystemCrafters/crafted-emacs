@@ -19,10 +19,14 @@
 (defun crafted-updates--get-new-commit-count ()
   (string-to-number (crafted-updates--call-git "rev-list" "--count" "master..origin/master")))
 
-(defun crafted-updates--notify-of-updates ()
+(defun crafted-updates-status-message ()
+  "Status message indicating availble updates or not."
   (if (> (crafted-updates--get-new-commit-count) 0)
-      (message "Crafted Emacs updates are available!")
-    (message "Crafted Emacs is up to date!")))
+      "Crafted Emacs updates are available!"
+    "Crafted Emacs is up to date!"))
+
+(defun crafted-updates--notify-of-updates ()
+  (message (crafted-updates-status-message)))
 
 (defun crafted-updates--poll-git-fetch-status (process)
   (if (eql (process-status process) 'exit)
