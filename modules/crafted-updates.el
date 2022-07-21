@@ -8,7 +8,7 @@
 ;; Commentary
 
 ;;; Code:
-
+(autoload 'vc-git--out-ok "vc-git")
 (defun crafted-updates--call-git (&rest args)
   (let ((default-directory user-emacs-directory))
     (with-temp-buffer
