@@ -1,13 +1,19 @@
 ;;; early-init.el -*- lexical-binding: t; -*-
 
+;;; Garbage collection
 ;; Increase the GC threshold for faster startup
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
+;;; Emacs lisp source/compiled preference
 ;; Prefer loading newest compiled .el file
 (customize-set-variable 'load-prefer-newer noninteractive)
 
-;; Find the user configuration path
+;;; Crafted Config Path
+;;
+;; Find the user configuration path. This needs to be done very early
+;; so later configuration can make use of this variable.
+;;
 ;; In order do these checks:
 ;; * using chemacs?
 ;; ** yes, and have specified a location with the CRAFTED_EMACS_HOME
@@ -33,6 +39,7 @@
    ((getenv "HOME") (expand-file-name ".crafted-emacs" (getenv "HOME"))))
   "The user's crafted-emacs configuration path.")
 
+;;; Load Path
 ;; make sure the crafted-config-path is on the load path so the user
 ;; can load "custom.el" from there if desired.
 (add-to-list 'load-path (expand-file-name crafted-config-path))
@@ -40,7 +47,7 @@
 (unless (file-exists-p crafted-config-path)
   (mkdir crafted-config-path t))
 
-;; Native compilation settings
+;;; Native compilation settings
 (when (featurep 'native-compile)
   ;; Silence compiler warnings as they can be pretty disruptive
   (setq native-comp-async-report-warnings-errors nil)
@@ -57,6 +64,7 @@
 
   (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory)))
 
+;;; UI configuration
 ;; Remove some unneeded UI elements (the user can turn back on anything they wish)
 (setq inhibit-startup-message t)
 (push '(tool-bar-lines . 0) default-frame-alist)
@@ -91,6 +99,7 @@ contains customizations of variables and faces that are made by
 the user through the Customization UI, as well as any
 customizations made by packages.")
 
+;;; Package system
 ;; Load the package-system.  If needed, the user could customize the
 ;; system to use in `early-config.el'.
 (defvar crafted-boostrap-directory (expand-file-name "bootstrap/" user-emacs-directory)
@@ -101,7 +110,7 @@ customizations made by packages.")
 ;; (setq crafted-package-system 'package)
 (crafted-package-bootstrap crafted-package-system)
 
-;; Load the early config file if it exists
+;;; Load the early config file if it exists
 (let ((early-config-path (expand-file-name "early-config.el" crafted-config-path)))
   (when (file-exists-p early-config-path)
     (load early-config-path nil 'nomessage)))
