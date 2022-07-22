@@ -69,6 +69,10 @@ Each element in the list should be a list of strings or pairs
            ,(lambda (_button) (dired "~"))
            "Open your home directory, to operate on its files")
    "     "
+   :link `("Open Crafted Config Directory"
+           ,(lambda (_button) (dired crafted-config-path))
+           "Open the Crafted Emacs configuration directory, to operate on its files")
+   "     "
    :link `("Customize Crafted Emacs"
            ,(lambda (_button) (customize-group 'crafted))
            "Change initialization settings including this screen")
