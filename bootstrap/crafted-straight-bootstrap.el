@@ -10,9 +10,17 @@
 ;; This code loads the bootstrap code for `straight.el', according as
 ;; described in <https://github.com/radian-software/straight.el>.
 
-;; It also adds a couple of macros to make an abstraction of the API:
-;; `crafted-package-install-package' and
-;; `crafted-package-installed-p'.
+;; Bootstrap `straight.el' configuration, as described in
+;; <https://github.com/radian-software/straight.el>.  Code provided
+;; herein is intended for internal use, the user is not expected to
+;; use the interface provided here to manage their packages.  In fact,
+;; should the user prefer to use `use-package' in their configuration,
+;; that should work seamlessly with this configuration. The user will
+;; need to install `use-package', of course.  That being said, the
+;; user is welcome to use the macros presented here.  They provide
+;; `crafted-emacs' a standard way to install packages in the modules
+;; provided as we can't predict if the user will choose to use
+;; `straight.el' or some other tool.
 
 ;;; Code:
 
@@ -34,10 +42,14 @@
   (load bootstrap-file nil 'nomessage))
 
 (defmacro crafted-package-install-package (package)
-  "Only install the package if it is not already installed."
+  "Crafted Emacs interface to install packages.
+
+Only install the package if it is not already installed using
+straight.el."
   `(straight-use-package ,package))
 
 (defmacro crafted-package-installed-p (package)
+  "Crafted Emacs interface to check if a package is installed."
   `(straight--installed-p ,package))
 
 (provide 'crafted-package/straight)

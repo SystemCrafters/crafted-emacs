@@ -7,14 +7,17 @@
 
 ;;; Commentary:
 
-;; Most of this code was already in `early-init.el' and `init.el'. I
-;; Just moved here.
-
-;; I added the macro `crafted-package-installed-p', to abstract the
-;; verification of installed packages.
-
-;; It still need to implement the checking of packages installed via
-;; `guix'.
+;; Bootstrap `package.el' configuration.  This is the default package
+;; manager for Crafted Emacs.  Code provided herein is intended for
+;; internal use, the user is not expected to use the interface
+;; provided here to manage their packages.  In fact, should the user
+;; prefer to use `use-package' in their configuration, that should
+;; work seamlessly with this configuration. The user will need to
+;; install `use-package', of course.  That being said, the user is
+;; welcome to use the macros presented here.  They provide
+;; `crafted-emacs' a standard way to install packages in the modules
+;; provided as we can't predict if the user will choose to use
+;; `package.el' or some other tool.
 
 ;;; Code:
 
