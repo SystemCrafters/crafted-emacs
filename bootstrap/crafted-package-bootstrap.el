@@ -37,6 +37,9 @@
                                             ; from melpa
                           ("melpa"  . 0)))  ; if all else fails, get it
                                             ; from melpa
+(customize-set-variable 'package-user-dir
+                        (expand-file-name "elpa/" crafted-config-path))
+
 ;;; package configuration
 (defun crafted-package-archive-stale-p (archive)
   "Return `t' if ARCHIVE is stale.
