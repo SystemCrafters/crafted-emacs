@@ -7,20 +7,33 @@
 
 ;;; Commentary:
 
-;; This library helps to the user to select a package manager backend
-;; for `crafted-emacs'.
+;; This library provides a package related interface for
+;; `crafted-emacs'.
 
 ;; So far, it has two backends:
 ;; - `package.el' -- The default.
 ;; - `straight.el' -- A popular option.
 
-;; Other backends could be added.
-
-;; This still needs to manage packages installed using `guix' (or
-;; other system-wide methods).
-
-;; For `guix' see Androew Tropin's video on the theme:
-;; <https://youtu.be/gqmZjovuomc>
+;; Other backends could be added.  To add a backend, add the name to
+;; the list above, provide a bootstrap file (the name must match
+;; `crafted-%s-bootstrap.el' or it will fail to be loaded with this
+;; code), and make sure to implement the following macros (at a
+;; minimum):
+;;
+;; `crafted-package-install-package' which should receive a package to
+;; install and perform the appropriate operations to install that
+;; package.
+;;
+;; `crafted-package-installed-p' which should identify if a package is
+;; installed (ie, it should return `t' if the package is installed and
+;; `nil' otherwise)
+;;
+;; See the bootstrap files in this directory for examples.  The macros
+;; mentioned above are intended to provide a consistent interface for
+;; the modules to use when installing packages.  The user is not
+;; expected to use them in their own configuration, but they may if
+;; they choose.  Or they may choose a different interface, like
+;; `use-package' or `leaf'.
 
 ;;; Code:
 
@@ -35,7 +48,9 @@ By default, it uses 'package for `package.el'.  Another option is
 
 This will check for the value of the variable
 `crafted-package-system', but could be overriden with the
-optional parameter SYSTEM."
+optional parameter SYSTEM.
+
+This is called when `early-init.el' runs."
   (let* ((module (make-symbol (format "crafted-%s-bootstrap.el"
                                       (symbol-name (or system
                                                        crafted-package-system
