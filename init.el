@@ -43,7 +43,7 @@ package.el or Guix depending on the value of
 `crafted-prefer-guix-packages'."
   (if crafted-prefer-guix-packages
       (unless (featurep package)
-        (message "Package '%s' does not appear to be installed by Guix!"))
+        (message "Package '%s' does not appear to be installed by Guix: " package))
     (crafted-package-install-package package)))
 
 ;; Check the system used
