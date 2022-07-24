@@ -17,18 +17,21 @@
   :group 'crafted)
 
 (defcustom crafted-latex-latexp (executable-find "latex")
-  "is the latex executable found"
+  "Fully qualified path to the `latex' executable"
+  :tag "`latex' executable location"
   :group 'crafted-latex
   :type 'string)
 
 (defcustom crafted-latex-latexmkp (executable-find "latexmk")
-  "is the latexmk executable found"
+  "Fully qualified path to the `latexmk' executable"
+  :tag "`latexmk' executable location"
   :group 'crafted-latex
   :type 'string)
 
 (defcustom crafted-latex-use-pdf-tools nil
-  "use pdf-tools as the pdf reader
+  "Use pdf-tools as the pdf reader
    (this is automatic if you load `crafted-pdf-reader')"
+  :tag "Use pdf-tools as pdf reader"
   :group 'crafted-latex
   :type 'boolean)
 
@@ -45,6 +48,7 @@ If you encounter the bug, you keep this package inhibited. You can install
 a fix (not on melpa) with the following recipe, and the configuration in this file
 will still work
 '(auctex-latexmk :fetcher git :host github :repo \"wang1zhen/auctex-latexmk\")"
+  :tag "Inhibit using `latexmk' command"
   :group 'crafted-latex
   :type 'boolean)
 
