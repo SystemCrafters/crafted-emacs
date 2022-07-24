@@ -7,7 +7,9 @@
 
 ;; Commentary
 
-;; Sane defaults for LaTeX editing
+;; Configure AUCTEX for editing LaTeX files.  Provides customization
+;; for various environments to provide some useful additions related
+;; to drawing graphs and mathematical diagrams, and code listings.
 
 ;;; Code:
 
@@ -43,12 +45,11 @@ This package contains a bug which might make it crash during loading
 (with a bug related to tex-buf) on newer systems. For this reason, we inhibit
 the installation of this package by default.
 
-
 If you encounter the bug, you keep this package inhibited. You can install
 a fix (not on melpa) with the following recipe, and the configuration in this file
 will still work
 '(auctex-latexmk :fetcher git :host github :repo \"wang1zhen/auctex-latexmk\")"
-  :tag "Inhibit using `latexmk' command"
+  :tag "Inhibit using `latexmk' command from auxtex-latexmk"
   :group 'crafted-latex
   :type 'boolean)
 
@@ -101,13 +102,11 @@ will still work
     (customize-set-variable 'reftex-plug-into-AUCTeX t)
 
     ;; to have the buffer refresh after compilation
-    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-    ))
+    (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)))
 
 ;; message the user if the latex executable is not found
 (add-hook 'tex-mode-hook
           (lambda () (unless crafted-latex-latexp (message "latex executable not found"))))
-
 
 ;; The following is to use auctex with latexmk.
 (defun crafted-latex--install-latexmk ()
