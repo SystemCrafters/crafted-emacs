@@ -16,26 +16,23 @@
   :tag "Crafted LaTeX"
   :group 'crafted)
 
-(defvar crafted-latex-latexp
+(defcustom crafted-latex-latexp (executable-find "latex")
   "is the latex executable found"
   :group 'crafted-latex
-  :type 'string
-  :set (executable-find "latex"))
+  :type 'string)
 
-(defvar crafted-latex-latexmkp
+(defcustom crafted-latex-latexmkp (executable-find "latexmk")
   "is the latexmk executable found"
   :group 'crafted-latex
-  :type 'string
-  :set (executable-find "latexmk"))
+  :type 'string)
 
-(defcustom crafted-latex-use-pdf-tools
+(defcustom crafted-latex-use-pdf-tools nil
   "use pdf-tools as the pdf reader
    (this is automatic if you load `crafted-pdf-reader')"
   :group 'crafted-latex
-  :type 'boolean
-  :set nil)
+  :type 'boolean)
 
-(defcustom crafted-latex-inhibit-latexmk
+(defcustom crafted-latex-inhibit-latexmk t
   "When set to `nil', the package auctex-latexmk gets installed if the
 latex and latexmk executable are found
 
@@ -49,8 +46,7 @@ a fix (not on melpa) with the following recipe, and the configuration in this fi
 will still work
 '(auctex-latexmk :fetcher git :host github :repo \"wang1zhen/auctex-latexmk\")"
   :group 'crafted-latex
-  :type 'boolean
-  :set t)
+  :type 'boolean)
 
 
 ;; only install and load auctex when the latex executable is found,
@@ -135,3 +131,4 @@ are found (see `crafted-latex-inhibit-latexmk' )"
           (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))))
 
 (provide 'crafted-latex)
+;;; crafted-latex.el ends here

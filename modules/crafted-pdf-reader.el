@@ -11,7 +11,7 @@
 
 ;;; Code:
 
-(crafted-package-install-package '(pdf-tools))
+(crafted-package-install-package 'pdf-tools)
 
 (add-hook 'doc-view-mode-hook (lambda () (require 'pdf-tools)))
 
