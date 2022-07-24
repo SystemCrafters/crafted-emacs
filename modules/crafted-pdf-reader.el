@@ -23,3 +23,4 @@
   (customize-set-variable 'crafted-latex-use-pdf-tools t))
 
 (provide 'crafted-pdf-reader)
+;;; crafted-pdf-reader.el ends here
