@@ -1,7 +1,7 @@
 * Contributing documentation
 
   The documentation provided here is written in Org mode files. The
-  primary file is the =rational-emacs.org= file. Each module has it's
+  primary file is the =crafted-emacs.org= file. Each module has it's
   own Org file as well, but each is included in the primary file.
 
   To export the org file to an info file, run the following command:
@@ -14,14 +14,14 @@
 
   Then you can use =C-c C-e i= to export to info.
 
-* Documenting a Rational Emacs module
+* Documenting a Crafted Emacs module
 
   Add an Org file named for the module. Once you are ready to include
-  it in the =rational-emacs.org= file, add it to the modules section
+  it in the =crafted-emacs.org= file, add it to the modules section
   following the pattern provided there, here is an example:
 
   #+begin_example
-    ,#+include: rational-defaults.org
+    ,#+include: crafted-defaults.org
   #+end_example
 
   Once you have added the module documentation, export the info file

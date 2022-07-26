@@ -1,9 +1,9 @@
-* Rational Emacs Project Module
+* Crafted Emacs Project Module
 
   To use this module, simply require it in your config.
 
   #+begin_src emacs-lisp
-    (require 'rational-project)
+    (require 'crafted-project)
   #+end_src
 
   This module uses Emacs' built-in project backend (often referred to as
@@ -14,12 +14,12 @@
   
   - Project List File
 
-    The project backend uses a list of known projects. In Rational Emacs, it is
+    The project backend uses a list of known projects. In Crafted Emacs, it is
     called called =projects= by default and resides in the =var= directory of your
     user config directory, e.g.
 
-    - =~/.rational-emacs/var/projects=
-    - =~/.config/rational-emacs/var/projects=
+    - =~/.crafted-emacs/var/projects=
+    - =~/.config/crafted-emacs/var/projects=
 
     You can edit this file if necessary, but probably the most usual use case
     would be to remove a project from the list. For that, you can also run

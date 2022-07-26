@@ -1,4 +1,4 @@
-;;; rational-org.el  -*- lexical-binding: t; -*-
+;;; crafted-org.el  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -11,14 +11,14 @@
 
 ;;; Code:
 
-(rational-package-install-package 'org-appear)
+(crafted-package-install-package 'org-appear)
 
 ;; Return or left-click with mouse follows link
 (customize-set-variable 'org-return-follows-link t)
 (customize-set-variable 'org-mouse-1-follows-link t)
 
 ;; Display links as the description provided
-(customize-set-variable 'org-descriptive-links t)
+(customize-set-variable 'org-link-descriptive t)
 
 ;; Hide markup markers
 (customize-set-variable 'org-hide-emphasis-markers t)
@@ -30,5 +30,5 @@
     `(lambda (c)
         (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 
-(provide 'rational-org)
-;;; rational-org.el ends here
+(provide 'crafted-org)
+;;; crafted-org.el ends here

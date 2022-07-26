@@ -1,4 +1,4 @@
-;;; rational-completion.el -*- lexical-binding: t; -*-
+;;; crafted-completion.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -14,17 +14,17 @@
 
 ;;; Code:
 
-(rational-package-install-package 'cape)
-(rational-package-install-package 'consult)
-(rational-package-install-package 'corfu-doc)
-(rational-package-install-package 'corfu)
-(rational-package-install-package 'embark)
-(rational-package-install-package 'embark-consult)
-(rational-package-install-package 'marginalia)
-(rational-package-install-package 'orderless)
-(rational-package-install-package 'vertico)
+(crafted-package-install-package 'cape)
+(crafted-package-install-package 'consult)
+(crafted-package-install-package 'corfu-doc)
+(crafted-package-install-package 'corfu)
+(crafted-package-install-package 'embark)
+(crafted-package-install-package 'embark-consult)
+(crafted-package-install-package 'marginalia)
+(crafted-package-install-package 'orderless)
+(crafted-package-install-package 'vertico)
 
-(defun rational-completion/minibuffer-backward-kill (arg)
+(defun crafted-completion/minibuffer-backward-kill (arg)
   "When minibuffer is completing a file name delete up to parent
 folder, otherwise delete a word"
   (interactive "p")
@@ -37,8 +37,17 @@ folder, otherwise delete a word"
 
 
 ;;; Vertico
-
 (require 'vertico)
+
+;; Straight and Package bundle the vertico package differently. When
+;; using `package.el', the extensions are built into the package and
+;; available on the load-path. When using `straight.el', the
+;; extensions are not built into the package, so have to add that path
+;; to the load-path manually to enable the following require.
+(when (eq crafted-package-system 'straight)
+  (add-to-list 'load-path
+               (expand-file-name "straight/build/vertico/extensions"
+                                 straight-base-dir)))
 (require 'vertico-directory)
 
 (with-eval-after-load 'evil
@@ -128,5 +137,5 @@ folder, otherwise delete a word"
                             corfu-auto nil)
             (corfu-mode)))
 
-(provide 'rational-completion)
-;;; rational-completion.el ends here
+(provide 'crafted-completion)
+;;; crafted-completion.el ends here

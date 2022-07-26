@@ -1,4 +1,4 @@
-* Rational Emacs Python Module
+* Crafted Emacs Python Module
 
   This module installs a few additional packages to configure an
   IDE-like environment for Python development. In addition to the
@@ -45,7 +45,7 @@
 ** Provided configuration
 
    =anaconda-mode-installation-directory= is set to the
-   =rational-config-var-directory=. This is where anaconda-mode will
+   =crafted-config-var-directory=. This is where anaconda-mode will
    install the python files it uses for completion and documentation.
 
    =anaconda-mode-use-posframe-show-doc= is set to =t= when the

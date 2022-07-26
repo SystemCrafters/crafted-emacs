@@ -1,9 +1,9 @@
-* Rational Emacs Editing Module
+* Crafted Emacs Editing Module
 
   To use this module, simply require it in your config.
 
   #+begin_src emacs-lisp
-    (require 'rational-editing)
+    (require 'crafted-editing)
   #+end_src
 
   - Whitespace
