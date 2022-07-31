@@ -133,7 +133,6 @@ clone from listing [[li#git_clone]]. Follow the links to each to get more
 information about how they can be configured!
 
 - [[file:modules/crafted-defaults.el][crafted-defaults]] :: Sensible default settings for Emacs
-- [[file:modules/crafted-use-package.el][crafted-use-package]] :: Configuration for =use-package=
 - [[file:modules/crafted-updates.el][crafted-updates]] :: Tools to upgrade Crafted Emacs
 - [[file:modules/crafted-completion.el][crafted-completion]] :: A better selection framework configuration based on
   =Vertico=
@@ -227,7 +226,6 @@ config might begin like this:
 #+caption: Example of basic Crafted Emacs =config.el= file.
 #+begin_src emacs-lisp
   (require 'crafted-defaults)    ; Sensible default settings for Emacs
-  (require 'crafted-use-package) ; Configuration for `use-package`
   (require 'crafted-updates)     ; Tools to upgrade Crafted Emacs
   (require 'crafted-completion)  ; selection framework based on `vertico`
   (require 'crafted-ui)          ; Better UI experience (modeline etc.)
