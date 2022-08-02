@@ -226,7 +226,6 @@ config might begin like this:
 #+caption: Example of basic Crafted Emacs =config.el= file.
 #+begin_src emacs-lisp
   (require 'crafted-defaults)    ; Sensible default settings for Emacs
-  (require 'crafted-use-package) ; Configuration for `use-package`
   (require 'crafted-updates)     ; Tools to upgrade Crafted Emacs
   (require 'crafted-completion)  ; selection framework based on `vertico`
   (require 'crafted-ui)          ; Better UI experience (modeline etc.)
