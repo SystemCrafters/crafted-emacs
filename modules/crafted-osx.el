@@ -35,9 +35,10 @@
   (add-to-list 'default-frame-alist '(ns-appearance . dark))) ;; assuming a dark theme is in use
 
 ;; Special keys
-(customize-set-variable mac-right-option-modifier nil)
-(customize-set-variable mac-command-modifier 'super)
-(customize-set-variable ns-function-modifier 'hyper)
+(when (featurep 'ns)
+  (customize-set-variable mac-right-option-modifier nil)
+  (customize-set-variable mac-command-modifier 'super)
+  (customize-set-variable ns-function-modifier 'hyper))
 
 ;; Keybinds
 
