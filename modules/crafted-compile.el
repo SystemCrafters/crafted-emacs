@@ -87,6 +87,24 @@ nil."
     (when dir
       (expand-file-name (format "%s.el" (symbol-name module)) dir))))
 
+;; A function to locate native compiled files.
+(defun crafted-compile-locate-eln-file (library)
+  "Locates the native-compiled file for LIBRARY."
+  (let ((return nil))
+    (dolist (dir (mapcar (lambda (path)
+                           (expand-file-name comp-native-version-dir path))
+                         native-comp-eln-load-path))
+      (when (and (not return)
+                 (file-exists-p dir))
+        (let ((prefix (expand-file-name library dir)))
+          (dolist (file-base (directory-files dir))
+            (let ((file (expand-file-name file-base dir)))
+              (when (and (not return)
+                         (string-prefix-p prefix file)
+                         (string-suffix-p ".eln" file))
+                (setq return (expand-file-name file-base dir))))))))
+    return))
+
 ;; A function to compile a specific file
 (defun crafted-compile-file (f)
   "Compiles (native or byte-code) the file F.
@@ -244,23 +262,6 @@ The files to be compiled is defined in
             (when (and crafted-compile-on-save
                        (string-equal major-mode "emacs-lisp-mode"))
               (crafted-compile-buffer))))
-
-(defun crafted-compile-locate-eln-file (library)
-  "Locates the native-compiled file for LIBRARY."
-  (let ((return nil))
-    (dolist (dir (mapcar (lambda (path)
-                           (expand-file-name comp-native-version-dir path))
-                         native-comp-eln-load-path))
-      (when (and (not return)
-                 (file-exists-p dir))
-        (let ((prefix (expand-file-name library dir)))
-          (dolist (file-base (directory-files dir))
-            (let ((file (expand-file-name file-base dir)))
-              (when (and (not return)
-                         (string-prefix-p prefix file)
-                         (string-suffix-p ".eln" file))
-                (setq return (expand-file-name file-base dir))))))))
-    return))
 
 ;;; Package:
 (provide 'crafted-compile)
