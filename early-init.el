@@ -1,66 +1,53 @@
 ;;; early-init.el -*- lexical-binding: t; -*-
 
+;;; Garbage collection
 ;; Increase the GC threshold for faster startup
 ;; The default is 800 kilobytes.  Measured in bytes.
 (setq gc-cons-threshold (* 50 1000 1000))
 
+;;; Emacs lisp source/compiled preference
 ;; Prefer loading newest compiled .el file
 (customize-set-variable 'load-prefer-newer noninteractive)
 
-;;; package configuration
-(require 'package)
-
-;; Emacs 27.x has gnu elpa as the default
-;; Emacs 28.x adds the nongnu elpa to the list by default, so only
-;; need to add nongnu when this isn't Emacs 28+
-(when (version< emacs-version "28")
-  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
-(add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-
-(customize-set-variable 'package-archive-priorities
-                        '(("gnu"    . 99)   ; prefer GNU packages
-                          ("nongnu" . 80)   ; use non-gnu packages if
-                                            ; not found in GNU elpa
-                          ("stable" . 70)   ; prefer "released" versions
-                                            ; from melpa
-                          ("melpa"  . 0)))  ; if all else fails, get it
-                                            ; from melpa
-
-;; Find the user configuration path
+;;; Crafted Config Path
+;;
+;; Find the user configuration path. This needs to be done very early
+;; so later configuration can make use of this variable.
+;;
 ;; In order do these checks:
 ;; * using chemacs?
-;; ** yes, and have specified a location with the RATIONAL_EMACS_HOME
+;; ** yes, and have specified a location with the CRAFTED_EMACS_HOME
 ;;    environment variable
-;; ** yes, but no environment variable, assume the rational-emacs
+;; ** yes, but no environment variable, assume the crafted-emacs
 ;;    folder in the profile
-;; * use RATIONAL_EMACS_HOME environment variable
-;; * XDG_CONFIG_HOME or the path .config/rational-emacs
+;; * use CRAFTED_EMACS_HOME environment variable
+;; * XDG_CONFIG_HOME or the path .config/crafted-emacs
 ;;   exists. XDG_CONFIG_HOME usually defaults to $HOME/.config/, so
 ;;   these are the same thing
 ;; * use HOME environment variable
-(defvar rational-config-path
+(defvar crafted-config-path
   (cond
    ((featurep 'chemacs)
-    (if (getenv  "RATIONAL_EMACS_HOME")
-        (expand-file-name (getenv "RATIONAL_EMACS_HOME"))
-      (expand-file-name "rational-emacs" user-emacs-directory)))
-   ((getenv "RATIONAL_EMACS_HOME") (expand-file-name (getenv "RATIONAL_EMACS_HOME")))
-   ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
+    (if (getenv  "CRAFTED_EMACS_HOME")
+        (expand-file-name (getenv "CRAFTED_EMACS_HOME"))
+      (expand-file-name "crafted-emacs" user-emacs-directory)))
+   ((getenv "CRAFTED_EMACS_HOME") (expand-file-name (getenv "CRAFTED_EMACS_HOME")))
+   ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/crafted-emacs" (getenv "HOME"))))
     (if (getenv "XDG_CONFIG_HOME")
-        (expand-file-name "rational-emacs" (getenv "XDG_CONFIG_HOME"))
-      (expand-file-name ".config/rational-emacs" (getenv "HOME"))))
-   ((getenv "HOME") (expand-file-name ".rational-emacs" (getenv "HOME"))))
-  "The user's rational-emacs configuration path.")
+        (expand-file-name "crafted-emacs" (getenv "XDG_CONFIG_HOME"))
+      (expand-file-name ".config/crafted-emacs" (getenv "HOME"))))
+   ((getenv "HOME") (expand-file-name ".crafted-emacs" (getenv "HOME"))))
+  "The user's crafted-emacs configuration path.")
 
-;; make sure the rational-config-path is on the load path so the user
+;;; Load Path
+;; make sure the crafted-config-path is on the load path so the user
 ;; can load "custom.el" from there if desired.
-(add-to-list 'load-path (expand-file-name rational-config-path))
+(add-to-list 'load-path (expand-file-name crafted-config-path))
 
-(unless (file-exists-p rational-config-path)
-  (mkdir rational-config-path t))
+(unless (file-exists-p crafted-config-path)
+  (mkdir crafted-config-path t))
 
-;; Native compilation settings
+;;; Native compilation settings
 (when (featurep 'native-compile)
   ;; Silence compiler warnings as they can be pretty disruptive
   (setq native-comp-async-report-warnings-errors nil)
@@ -77,6 +64,7 @@
 
   (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory)))
 
+;;; UI configuration
 ;; Remove some unneeded UI elements (the user can turn back on anything they wish)
 (setq inhibit-startup-message t)
 (push '(tool-bar-lines . 0) default-frame-alist)
@@ -90,7 +78,7 @@
 ;; Make the initial buffer load faster by setting its mode to fundamental-mode
 (customize-set-variable 'initial-major-mode 'fundamental-mode)
 
-(defun rational-using-guix-emacs-p ()
+(defun crafted-using-guix-emacs-p ()
   "Verifies if the running emacs executable is under the `/gnu/store/' path."
   (unless (or (equal system-type 'ms-dos)
               (equal system-type 'windows-nt))
@@ -100,18 +88,29 @@
                       (executable-find
                        (car command-line-args))))))
 
-(defvar rational-prefer-guix-packages (rational-using-guix-emacs-p)
+(defvar crafted-prefer-guix-packages (crafted-using-guix-emacs-p)
   "If t, expect packages to be installed via Guix by default.")
 
-(defvar rational-load-custom-file t
+(defvar crafted-load-custom-file t
   "When non-nil, load `custom.el' after `config.el'.
 
-The custom file is found in the `rational-config-path'. It
+The custom file is found in the `crafted-config-path'. It
 contains customizations of variables and faces that are made by
 the user through the Customization UI, as well as any
 customizations made by packages.")
 
-;; Load the early config file if it exists
-(let ((early-config-path (expand-file-name "early-config.el" rational-config-path)))
+;;; Package system
+;; Load the package-system.  If needed, the user could customize the
+;; system to use in `early-config.el'.
+(defvar crafted-boostrap-directory (expand-file-name "bootstrap/" user-emacs-directory)
+  "Package system bootstrap configuration.")
+
+(load (expand-file-name "crafted-package.el" crafted-boostrap-directory))
+;; this is the default
+;; (setq crafted-package-system 'package)
+(crafted-package-bootstrap crafted-package-system)
+
+;;; Load the early config file if it exists
+(let ((early-config-path (expand-file-name "early-config.el" crafted-config-path)))
   (when (file-exists-p early-config-path)
     (load early-config-path nil 'nomessage)))

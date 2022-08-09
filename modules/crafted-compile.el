@@ -104,6 +104,7 @@ directory will be compiled, but not it's subdirectories."
              source)
           (native-compile-async f)
         (message "Skipping compilation of file %s" source)))
+
     (dolist (source f)
       (when (file-exists-p source)
         (if (file-directory-p source)
@@ -261,7 +262,6 @@ The files to be compiled is defined in
                 (setq return (expand-file-name file-base dir))))))))
     return))
 
-
 ;;; Package:
 (provide 'crafted-compile)
 ;;; crafted-compile.el ends here

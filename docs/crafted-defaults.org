@@ -1,9 +1,9 @@
-* Rational Emacs Defaults Module
+* Crafted Emacs Defaults Module
 
   To use this module, simply require it in your config.
 
   #+begin_src emacs-lisp
-    (require 'rational-defaults)
+    (require 'crafted-defaults)
   #+end_src
 
   - =global-auto-revert-non-file-buffers= : =t=
@@ -73,14 +73,14 @@
     which runs when Emacs is starting but after the initialization
     files have completed running.
 
-  - =recentf-save-file= : =/path/to/rational-emacs/var/recentf=
+  - =recentf-save-file= : =/path/to/crafted-emacs/var/recentf=
 
     This is the file which will hold the list of recent files. It is
-    located in the =var= folder where your Rational Emacs
+    located in the =var= folder where your Crafted Emacs
     configuration files reside. You can find that path by using the
     =describe-variable= function, which is also bound to the =C-h v=
     keybinding, and then providing the variable name
-    =rational-config-var-directory=.
+    =crafted-config-var-directory=.
 
     Change this setting either by finding it in the Customization UI
     or by adding this code to your =config.el= (make sure to set the
@@ -175,7 +175,7 @@
 
   - =bidi-paragraph-direction= : =left-to-right=
 
-    Forces directionality of text paragraphs in the buffer. Rational
+    Forces directionality of text paragraphs in the buffer. Crafted
     Emacs sets the defualt value as =left-to-right=, which means for
     buffers which don't have their own value, this one will be
     used. You can change this through the Customization UI or by
@@ -217,7 +217,7 @@
   - =savehist-mode=
 
     This minor mode saves minibuffer history in the =history= file
-    usually found in your Rational Emacs configuration =var=
+    usually found in your Crafted Emacs configuration =var=
     folder. You can change where the file should live with the
     Customization UI or by adding the following to =config.el=
 
@@ -231,3 +231,35 @@
     #+begin_src emacs-lisp
       (savehist-mode -1)
     #+end_src
+
+  - =crafted-folders= : =t=
+
+    Enables the use of a modern folder structure, as explained below.
+
+    You can turn this off by adding this code to =config.el= (or
+    through the Customization UI):
+
+    #+begin_src emacs-lisp
+      (customize-set-variable 'crafted-folders nil)
+    #+end_src
+
+** Sensible path defaults
+
+Loading this module will make your Emacs, by default, save
+several runtime and/or configuration files inside Rational Emacs
+=var= directory as explained in [[file:crafted-emacs.org#folder-structure][the documentation]].
+
+This behaviour can be disabled by customizing =crafted-folders=
+as explained above.
+
+The list of paths being updated is growing as we aim to have
+all state, runtime and/or configuration files stored following
+modern practices. What is currently altered is:
+
+- [[help:bookmark-default-file][bookmark-default-file]]
+- [[help:nsm-settings-file][nsm-settings-file]]
+- [[help:org-id-locations-file][org-id-locations-file]]
+- [[help:project-list-file][project-list-file]]
+- [[help:savehist-file][savehist-file]]
+- [[help:save-place-file][save-place-file]]
+- [[help:tramp-persistency-file-name][tramp-persistency-file-name]]

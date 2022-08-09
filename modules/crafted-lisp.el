@@ -1,4 +1,4 @@
-;;;; rational-lisp.el --- Lisp development configuration  -*- lexical-binding: t; -*-
+;;;; crafted-lisp.el --- Lisp development configuration  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -38,15 +38,15 @@
 ;; Global defaults
 (require 'eldoc)
 ;; keeps code indented even when copy/pasting.
-(rational-package-install-package 'aggressive-indent)
+(crafted-package-install-package 'aggressive-indent)
 
 
 
 ;;; Common Lisp
-(rational-package-install-package 'sly)
-(rational-package-install-package 'sly-asdf)
-(rational-package-install-package 'sly-quicklisp)
-(rational-package-install-package 'sly-repl-ansi-color)
+(crafted-package-install-package 'sly)
+(crafted-package-install-package 'sly-asdf)
+(crafted-package-install-package 'sly-quicklisp)
+(crafted-package-install-package 'sly-repl-ansi-color)
 
 (with-eval-after-load 'sly
   ;; Uncomment and update if you need to set the path to an
@@ -63,10 +63,10 @@
 
 
 ;;; Clojure
-(rational-package-install-package 'cider)
-(rational-package-install-package 'clj-refactor)
-(rational-package-install-package 'clojure-mode)
-(rational-package-install-package 'flycheck-clojure)
+(crafted-package-install-package 'cider)
+(crafted-package-install-package 'clj-refactor)
+(crafted-package-install-package 'clojure-mode)
+(crafted-package-install-package 'flycheck-clojure)
 
 (with-eval-after-load "clojure-mode"
   (require 'cider)
@@ -86,16 +86,16 @@
 
 
 ;;; Scheme and Racket
-;; As we wish to make Rational Emacs work well with GNU Guix, we start
+;; As we wish to make Crafted Emacs work well with GNU Guix, we start
 ;; the configuration with the GNU Guile loaded. Additional
 ;; implementations can be added by installing the appropriate package
 ;; and (possibly) adding that implementation to the list of geiser
 ;; active implmentations. Racket configuration is also provided out of
 ;; the box.
 
-(rational-package-install-package 'geiser)
-(rational-package-install-package 'geiser-guile)
-(rational-package-install-package 'geiser-racket)
+(crafted-package-install-package 'geiser)
+(crafted-package-install-package 'geiser-guile)
+(crafted-package-install-package 'geiser-racket)
 (add-hook 'scheme-mode #'aggressive-indent-mode)
 
 ;; The default is "scheme" which is used by cmuscheme, xscheme and
@@ -104,5 +104,5 @@
 (customize-set-variable 'scheme-program-name "guile")
 
 
-(provide 'rational-lisp)
-;;; rational-lisp.el ends here
+(provide 'crafted-lisp)
+;;; crafted-lisp.el ends here

@@ -1,16 +1,16 @@
-#+title: Rational Emacs
+#+title: Crafted Emacs
 #+author: System Crafters Community
 #+description: A sensible starting point for hacking your own Emacs configuration.
 #+subtitle: A sensible starting point for hacking your own Emacs configuration.
 #+texinfo_dir_category: Emacs
-#+texinfo_dir_title: Rational Emacs: (rational-emacs)
+#+texinfo_dir_title: Crafted Emacs: (crafted-emacs)
 #+texinfo_dir_desc: A sensible starting point for hacking your own Emacs configuration.
 
 Hacking one's Emacs configuration is, for some, an ongoing
 endeavor. For others, it just needs to work. Other configuration
 packages attempt to be a complete, canned, working configuration,
-while Rational attempts to provide the bare minimum to get you
-started. More like a framework than a complete solution, Rational
+while Crafted attempts to provide the bare minimum to get you
+started. More like a framework than a complete solution, Crafted
 Emacs intends to provide a sensible place to start configuring your
 Emacs to your needs.
 
@@ -37,7 +37,7 @@ Emacs configuration journey.
       functionality in Emacs, the standard extensibility points of
       each package should be used. The implication is someone should
       be able to copy code from a module into their own configuration
-      /without/ using Rational Emacs.
+      /without/ using Crafted Emacs.
 
   - Prioritize built-in Emacs functionality
 
@@ -83,7 +83,7 @@ Emacs configuration journey.
     Having multiple configurations available allows for testing
     individual package combinations or configurations from
     others. =Chemacs2= allows for having multiple configurations
-    simultaneously and Rational Emacs should work well in this
+    simultaneously and Crafted Emacs should work well in this
     environment also.
 
   - Helps you learn Emacs Lisp
@@ -110,69 +110,85 @@ Emacs configuration journey.
   with your own =init.el= file without using this base configuration
   repo!
 
+* Folder structure
+
+  There are two primary folders for working with Rational Emacs:
+
+  - `user-emacs-directory` (ie: `~/.config/emacs`) where Emacs, by default, searches for its configuration, packages, etc.
+  - `crafted-config-path` (ie: `~/.config/crafted-emacs`, see below) where Rational Emacs searches for everything except packages.
+
+  By default Crafted Emacs does not do much regarding those paths except for customizations as introduced below.
+
+  The `crafted-config-path` layout is designed following current common practices to help you keep configuration and runtime data separatedly (inside `etc/` and `var/` respectively).
+
+  Moreover, the [[file:crafted-defaults.org#sensible-path-defaults][crafted-defaults]] module sets several common default
+  paths to sensible new defaults following such practices.
+
+  We do not, yet, provide a cache path here as that needs further thought (most OS expect caches in specific places).
+
 * Customization
 
   To add your own customization to this configuration, create a
   configuration file in one of the following places:
 
-  - =~/.rational-emacs/=
-  - =~/.config/rational-emacs/=
+  - =~/.crafted-emacs/=
+  - =~/.config/crafted-emacs/=
 
   In your configuration you can set any Emacs configuration variable,
   face attributes, themes, etc as you normally would.
 
   If you prefer to explicitly control where your =config.el= and
-  =early-config.el= are found for Rational Emacs, you may provide a
-  value for the =RATIONAL_EMACS_HOME= environment variable, either on
+  =early-config.el= are found for Crafted Emacs, you may provide a
+  value for the =CRAFTED_EMACS_HOME= environment variable, either on
   the command line or in your shell configuration. This variable
   should only contain the path to the =config.el= files, for example:
 
-  #+caption: Set environment variable @@texinfo:@code{RATIONAL_EMACS_HOME}@@ to the path of the configuration directory.
+  #+caption: Set environment variable @@texinfo:@code{CRAFTED_EMACS_HOME}@@ to the path of the configuration directory.
   #+begin_src shell
-    RATIONAL_EMACS_HOME=~/my-rational-emacs-config
+    CRAFTED_EMACS_HOME=~/my-crafted-emacs-config
   #+end_src
 
-** How the rational config file is found
+** How the crafted config file is found
 
-   The rational config files (=config.el= and =early-config.el=) are
-   found in the =rational-config-path=. That path will match exactly
+   The crafted config files (=config.el= and =early-config.el=) are
+   found in the =crafted-config-path=. That path will match exactly
    one of the following scenarios, in the order specified:
 
   - Using =Chemacs2= (See below for more on this)
-    - The environment variable =RATIONAL_EMACS_HOME= is used if provided in the
+    - The environment variable =CRAFTED_EMACS_HOME= is used if provided in the
       profile definition.
     - The profile directory is used when no environment variable is provided in
       the profile definition.
-  - Use the value found in the =RATIONAL_EMACS_HOME= environment variable.
+  - Use the value found in the =CRAFTED_EMACS_HOME= environment variable.
   - The environment variable =XDG_CONFIG_HOME= is present or the path
-    =$HOME/.config/rational-emacs= exists.
+    =$HOME/.config/crafted-emacs= exists.
     - These normally resolve to the same file, so build the path from the
       =XDG_CONFIG_HOME= environment variable or the explicit path
-      =~/.config/rational-emacs=
+      =~/.config/crafted-emacs=
   - Use the =HOME= environment variable to make the path, which expands to
-    =$HOME/.rational-emacs=.
+    =$HOME/.crafted-emacs=.
 
-  Once the =rational-config-path= is determined, if it does not exist in the file system, it is created. However, just the path is created, the files =config.el= and =early-config.el= must be created by you.
+  Once the =crafted-config-path= is determined, if it does not exist in the file system, it is created. However, just the path is created, the files =config.el= and =early-config.el= must be created by you.
 
 ** Example Configuration:
 
-  #+caption: Example of user created Rational Emacs @@texinfo:@code{config.el}@@ file.
+  #+caption: Example of user created Crafted Emacs @@texinfo:@code{config.el}@@ file.
   #+begin_src emacs-lisp
 
-    (require 'rational-defaults)
-    (require 'rational-screencast)
-    (require 'rational-ui)
-    (require 'rational-editing)
-    (require 'rational-evil)
-    (require 'rational-completion)
-    (require 'rational-windows)
+    (require 'crafted-defaults)
+    (require 'crafted-screencast)
+    (require 'crafted-ui)
+    (require 'crafted-editing)
+    (require 'crafted-evil)
+    (require 'crafted-completion)
+    (require 'crafted-windows)
 
     ;; Set further font and theme customizations
     (custom-set-variables
-     '(rational-ui-default-font
+     '(crafted-ui-default-font
        '(:font "JetBrains Mono" :weight light :height 185)))
 
-    (rational-package-install-package 'doom-themes)
+    (crafted-package-install-package 'doom-themes)
     (load-theme 'doom-one t)
 
   #+end_src
@@ -195,7 +211,7 @@ Emacs configuration journey.
     consider two of them: the default state and the changed state. These are not
     the "official" names but easily convey the concepts of the variable. If a
     value is in the default state, looking in the Customization UI, the state
-    will be listed as =STANDARD=. Rational Emacs takes the approach of using the
+    will be listed as =STANDARD=. Crafted Emacs takes the approach of using the
     =customize-set-variable= to update the values defined with
     =defcustom=. This will show the values as =SET for current session only= in
     the Customization UI. This is normal since the values are set each time
@@ -221,8 +237,8 @@ Emacs configuration journey.
     code.
 
     This configuration sets the =custom-file= to exist in the
-    =rational-config-path= (see above) as a file known as =custom.el=. This file
-    is *not* automatically loaded by Rational Emacs configuration. You may, if
+    =crafted-config-path= (see above) as a file known as =custom.el=. This file
+    is *not* automatically loaded by Crafted Emacs configuration. You may, if
     you choose, load this file yourself with the following code in your
     =config.el= file.
 
@@ -239,15 +255,15 @@ Emacs configuration journey.
     #+name: config.el
     #+caption: Example @@texinfo:@samp{config.el}@@ loading the @@texinfo:@code{custom.el}@@ file.
     #+begin_src emacs-lisp
-      (require 'rational-defaults)
-      (require 'rational-screencast)
-      (require 'rational-ui)
-      (require 'rational-editing)
-      (require 'rational-evil)
-      (require 'rational-completion)
-      (require 'rational-windows)
+      (require 'crafted-defaults)
+      (require 'crafted-screencast)
+      (require 'crafted-ui)
+      (require 'crafted-editing)
+      (require 'crafted-evil)
+      (require 'crafted-completion)
+      (require 'crafted-windows)
 
-      (rational-package-install-package 'doom-themes)
+      (crafted-package-install-package 'doom-themes)
       (load-theme 'doom-one t)
 
       (load "custom")
@@ -265,8 +281,8 @@ Emacs configuration journey.
        ;; If you edit it by hand, you could mess it up, so be careful.
        ;; Your init file should contain only one such instance.
        ;; If there is more than one, they won't work right.
-       '(rational-ui-default-font '(:font "JetBrains Mono" :weight light :height 185))
-       '(rational-ui-display-line-numbers t))
+       '(crafted-ui-default-font '(:font "JetBrains Mono" :weight light :height 185))
+       '(crafted-ui-display-line-numbers t))
       (custom-set-faces
        ;; custom-set-faces was added by Custom.
        ;; If you edit it by hand, you could mess it up, so be careful.
@@ -290,19 +306,19 @@ Emacs configuration journey.
 
     #+caption: Example @@texinfo:@samp{config.el}@@ setting customization variables directly.
     #+begin_src emacs-lisp
-      (require 'rational-defaults)
-      (require 'rational-screencast)
-      (require 'rational-ui)
-      (require 'rational-editing)
-      (require 'rational-evil)
-      (require 'rational-completion)
-      (require 'rational-windows)
+      (require 'crafted-defaults)
+      (require 'crafted-screencast)
+      (require 'crafted-ui)
+      (require 'crafted-editing)
+      (require 'crafted-evil)
+      (require 'crafted-completion)
+      (require 'crafted-windows)
 
-      (customize-set-variable 'rational-ui-default-font
+      (customize-set-variable 'crafted-ui-default-font
                               '(:font "JetBrains Mono" :weight light :height 185))
-      (customize-set-variable 'rational-ui-display-line-numbers t)
+      (customize-set-variable 'crafted-ui-display-line-numbers t)
 
-      (rational-package-install-package 'doom-themes)
+      (crafted-package-install-package 'doom-themes)
       (load-theme 'doom-one t)
     #+end_src
 
@@ -345,48 +361,48 @@ Emacs configuration journey.
 * Using it with =Chemacs2=
 
   If you have the =Chemacs2= configuration cloned to =~/.emacs.d= or
-  =~/.config/emacs=, you can clone =rational-emacs= anywhere you like
+  =~/.config/emacs=, you can clone =crafted-emacs= anywhere you like
   and add an entry to it in your =~/.emacs-profiles.el= file:
 
   You can then put your =early-config.el= and =config.el= files in the
-  sub-folder =~/path/to/rational-emacs/rational-emacs=. So, for example
-  if you installed Rational Emacs to =~/.rational-emacs=, then your
+  sub-folder =~/path/to/crafted-emacs/crafted-emacs=. So, for example
+  if you installed Crafted Emacs to =~/.crafted-emacs=, then your
   =early-config.el= and =config.el= files would be in the path
-  =~/.rational-emacs/rational-emacs=. This is the default path, but
+  =~/.crafted-emacs/crafted-emacs=. This is the default path, but
   you can change the name to something else, see below for examples.
 
   #+caption: Example of a @@texinfo:@samp{Chemacs2}@@ user profile file in @@texinfo:@code{~/.emacs-profiles.el}@@.
   #+begin_src emacs-lisp
 
-    (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs"))))
+    (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs"))))
 
   #+end_src
 
-  If you prefer to put your Rational Emacs customizations elsewhere
+  If you prefer to put your Crafted Emacs customizations elsewhere
   (for example in a folder called `config` or maybe `personal`), you
-  can specify the =RATIONAL_EMACS_HOME= environment variable, for
+  can specify the =CRAFTED_EMACS_HOME= environment variable, for
   example like this:
 
   #+caption: User @@texinfo:@samp{Chemacs2}@@ profile file @@texinfo:@code{~/.emacs-profiles.el}@@ with environment variable.
   #+begin_src emacs-lisp
 
-      (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs")
-                      (env . (("RATIONAL_EMACS_HOME" . "~/path/to/rational-emacs/personal"))))))
+      (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
+                      (env . (("CRAFTED_EMACS_HOME" . "~/path/to/crafted-emacs/personal"))))))
 
   #+end_src
 
   Or some place completely different:
 
-  #+caption: User @@texinfo:@samp{Chemacs2}@@ profile file @@texinfo:@code{~/.emacs-profiles.el}@@ with Rational Emacs config files set to another path.
+  #+caption: User @@texinfo:@samp{Chemacs2}@@ profile file @@texinfo:@code{~/.emacs-profiles.el}@@ with Crafted Emacs config files set to another path.
   #+begin_src emacs-lisp
 
-      (("rational" . ((user-emacs-directory . "~/path/to/rational-emacs")
-                      (env . (("RATIONAL_EMACS_HOME" . "~/rational-config/personal"))))))
+      (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
+                      (env . (("CRAFTED_EMACS_HOME" . "~/crafted-config/personal"))))))
 
   #+end_src
 
 
-  Then launch it with =emacs --with-profile rational=!
+  Then launch it with =emacs --with-profile crafted=!
 
 * Contributing
 
@@ -402,7 +418,7 @@ Emacs configuration journey.
 
 * Modules
 
-  Rational Emacs includes a number of modules to further configure
+  Crafted Emacs includes a number of modules to further configure
   Emacs. These are intended to be stand-alone in the sense that no
   module requires the use of any other module.
 
@@ -419,13 +435,15 @@ Emacs configuration journey.
   reasonably possible, the best-practice is to simply read the code
   for the module of interest to understand it best.
 
-  #+include: rational-completion.org
-  #+include: rational-defaults.org
-  #+include: rational-editing.org
-  #+include: rational-lisp.org
-  #+include: rational-ide.org
-  #+include: rational-project.org
-  #+include: rational-python.org
+  #+include: crafted-completion.org
+  #+include: crafted-defaults.org
+  #+include: crafted-editing.org
+  #+include: crafted-lisp.org
+  #+include: crafted-ide.org
+  #+include: crafted-project.org
+  #+include: crafted-python.org
+  #+include: crafted-evil.org
+  #+include: crafted-windows.org
 
 * Troubleshooting
 
@@ -441,9 +459,9 @@ Emacs configuration journey.
    in the development version of the package however.
 
    Here are some example issues where things went wrong:
-   - [[https://github.com/SystemCrafters/rational-emacs/issues/126][Wrong number of arguments error]]
-   - [[https://github.com/SystemCrafters/rational-emacs/issues/132][Example config doesn't start]]
-   - [[https://github.com/SystemCrafters/rational-emacs/issues/140][there are some bugs in package "helpful"]]
+   - [[https://github.com/SystemCrafters/crafted-emacs/issues/126][Wrong number of arguments error]]
+   - [[https://github.com/SystemCrafters/crafted-emacs/issues/132][Example config doesn't start]]
+   - [[https://github.com/SystemCrafters/crafted-emacs/issues/140][there are some bugs in package "helpful"]]
 
    Here are some strategies:
 
