@@ -50,6 +50,8 @@
 (customize-set-variable 'evil-want-keybinding nil)
 (customize-set-variable 'evil-want-C-i-jump nil)
 (customize-set-variable 'evil-respect-visual-line-mode t)
+;; C-h is backspace in insert state
+(customize-set-variable 'evil-want-C-h-delete t)
 (if (< emacs-major-version 28)
   (customize-set-variable 'evil-undo-system 'undo-tree)
   (customize-set-variable 'evil-undo-system 'undo-redo))
@@ -74,9 +76,6 @@
 
 ;; Rebind `universal-argument' to 'C-M-u' since 'C-u' now scrolls the buffer
 (global-set-key (kbd "C-M-u") 'universal-argument)
-
-;; C-h is backspace in insert state
-(define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
 ;; Use visual line motions even outside of visual-line-mode buffers
 (evil-global-set-key 'motion "j" 'evil-next-visual-line)
