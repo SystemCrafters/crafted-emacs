@@ -246,7 +246,7 @@ The files to be compiled is defined in
               (crafted-compile-buffer))))
 
 (defun crafted-compile-locate-eln-file (library)
-  ""
+  "Locates the native-compiled file for LIBRARY."
   (let ((return nil))
     (dolist (dir (mapcar (lambda (path)
                            (expand-file-name comp-native-version-dir path))
