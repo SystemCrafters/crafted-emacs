@@ -56,7 +56,7 @@ This is called when `early-init.el' runs."
                                                        crafted-package-system
                                                        ;; In case both above are nil
                                                        'package)))))
-         (module-path (expand-file-name (symbol-name module) crafted-boostrap-directory)))
+         (module-path (expand-file-name (symbol-name module) crafted-bootstrap-directory)))
     (if (file-exists-p module-path)
         (load module-path)
       (error "Could not find module %s" module))))
