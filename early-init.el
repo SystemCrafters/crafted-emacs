@@ -102,10 +102,10 @@ customizations made by packages.")
 ;;; Package system
 ;; Load the package-system.  If needed, the user could customize the
 ;; system to use in `early-config.el'.
-(defvar crafted-boostrap-directory (expand-file-name "bootstrap/" user-emacs-directory)
+(defvar crafted-bootstrap-directory (expand-file-name "bootstrap/" user-emacs-directory)
   "Package system bootstrap configuration.")
 
-(load (expand-file-name "crafted-package.el" crafted-boostrap-directory))
+(load (expand-file-name "crafted-package.el" crafted-bootstrap-directory))
 ;; this is the default
 ;; (setq crafted-package-system 'package)
 (crafted-package-bootstrap crafted-package-system)
