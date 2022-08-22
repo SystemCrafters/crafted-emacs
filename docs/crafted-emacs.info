@@ -227,12 +227,12 @@ File: crafted-emacs.info,  Node: Folder structure,  Next: Customization,  Prev: 
 3 Folder structure
 ******************
 
-There are two primary folders for working with Rational Emacs:
+There are two primary folders for working with Crafted Emacs:
 
    • ‘user-emacs-directory‘ (ie: ‘~/.config/emacs‘) where Emacs, by
      default, searches for its configuration, packages, etc.
    • ‘crafted-config-path‘ (ie: ‘~/.config/crafted-emacs‘, see below)
-     where Rational Emacs searches for everything except packages.
+     where Crafted Emacs searches for everything except packages.
 
    By default Crafted Emacs does not do much regarding those paths
 except for customizations as introduced below.
@@ -1058,7 +1058,7 @@ File: crafted-emacs.info,  Node: Sensible path defaults,  Up: Crafted Emacs Defa
 ----------------------------
 
 Loading this module will make your Emacs, by default, save several
-runtime and/or configuration files inside Rational Emacs ‘var’ directory
+runtime and/or configuration files inside Crafted Emacs ‘var’ directory
 as explained in the documentation (crafted-emacs.org#folder-structure).
 
    This behaviour can be disabled by customizing ‘crafted-folders’ as
