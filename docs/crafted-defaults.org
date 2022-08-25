@@ -246,7 +246,7 @@
 ** Sensible path defaults
 
 Loading this module will make your Emacs, by default, save
-several runtime and/or configuration files inside Rational Emacs
+several runtime and/or configuration files inside Crafted Emacs
 =var= directory as explained in [[file:crafted-emacs.org#folder-structure][the documentation]].
 
 This behaviour can be disabled by customizing =crafted-folders=

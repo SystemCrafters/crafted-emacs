@@ -2,15 +2,14 @@
 
 A sensible starting point for hacking your own Emacs configuration.
 
-*Please note*: =crafted-emacs= is under active development. While the intent
-of this project is to provide a stable Emacs configuration for use by
-anyone, it is not yet stable enough for everyday or production use.  The
-rapid pace of changes could cause your configuration to break on your next
-pull of the repository. If you are not expecting or prepared to encounter
-such issues, we would recommend you wait for things to stabilize a bit
-before using.
+*Please note*: =crafted-emacs= is under active development.  The pace of
+development may be slow or fast depending on issues and pull requests
+submitted.  This is a community project, so the pace will depend largely on the
+needs of the community.  We would encourage you to try using this configuration,
+especially if you enjoy tinkering a bit on getting Emacs to work "just
+right"(tm) for you. 
 
-* Transtion from an existing Rational Emacs configuration
+* Transition from an existing Rational Emacs configuration
 
 This project was originally called _Rational Emacs_. However, we chose to rename
 to _Crafted Emacs_ to better represent our ideas and fit better with the System
@@ -36,14 +35,49 @@ Clone this repository to =~/.emacs.d= or =~/.config/emacs=:
 This will set up the minimal configuration. If you'd like a more
 fully-configured experience, see [[#customization][Customization]].
 
-* Principles
+* What is Crafted Emacs?
+
+Crafted Emacs is an attempt to simplify creating a configuration for Emacs.  It
+is not necessarily intended to provide all possible configuration for every
+eventuality.  We do envision it being a nice baseline for users who want to
+create their own Emacs configuration.  As a user develops their skill with Emacs
+Lisp and configuring Emacs in general, we anticipate such a person may end up
+rewriting their configuration to the point they are no longer using Crafted
+Emacs.  This is an exciting possibility to us, and a journey worth taking!
+
+We try to follow these goals:
+
++ No new configuration system, macros, layers etc.  Almost everything is straight
+  Emacs Lisp.  The one place we have macros is currently is the packaging system
+  to provide a simple consistent interface regardless of the packaging system
+  the user chooses (currently, either the built-in =package.el= or =straight.el=
+  for those who prefer a more functional approach to package management).
++ Provide some pre-configured modules to shorten the time it takes to build a
+  nice working configuration.
++ Customizations in the modules we provide should be _opt-in_ by default to
+  avoid surprising behavior.
++ Not a turn-key/kitchen sink solution. There will be holes the user is expected
+  to fill.
++ Fewer packages rather than more; we prefer to stay closer to built-in
+  functionality as much as possible.
++ Correctness is important, as we expect people who might be new to Emacs Lisp
+  to learn from what we have written.  We prefer =customize-set-variable=
+  instead of =setq= for =defcustom= values as an example.
++ Documentation is thorough, complete, and easy to find.  There is an [[info:crafted-emacs][info]]
+  manual for Crafted Emacs distributed with the source.
+
+These goals are based on the [[#Principles][Principles]] listed below.
+
+For more on the vision of this project, see [[https://github.com/SystemCrafters/crafted-emacs/issues/192][this]] issue.
+
+** Principles
 
 This configuration and all associated modules intend to follow the below
-priniciples.
+principles.
 
 *NOTE:* Some of these may change over time as we learn from this process.
 
-** Minimal, modular configuration
+*** Minimal, modular configuration
 
 The core configuration only sets up Emacs to have a cleaner presentation with
 sensible defaults. It is up to the user to decide which of the various
@@ -57,7 +91,7 @@ be used (instead of expecting our own configuration module).
 The implication is that someone should be able to install or copy code from a
 =crafted-*= module into their own configuration /without/ using Crafted Emacs.
 
-** Prioritize built-in Emacs functionality
+*** Prioritize built-in Emacs functionality
 
 Where possible, we will leverage built-in Emacs functionality instead of
 external packages, for example:
@@ -68,7 +102,7 @@ external packages, for example:
   functionality)
 - *Possibly* =vc-mode= by default
 
-** Sensible folder layout
+*** Sensible folder layout
 
 While Emacs tends to keep everything (code, configuration, state files, ...)
 inside `user-emacs-directory` modern computer systems tend to keep those
@@ -79,13 +113,13 @@ bringing just the right amount of order to it.
 
 See [[file:docs/crafted-emacs.org#folder-structure][Folder structure]] in the documentation for more details.
 
-** Works well in the terminal
+*** Works well in the terminal
 
 Some people prefer to use Emacs in the terminal instead of as a graphical
 program. This configuration should work well in this case too! This also enables
 the use of Emacs in Termux on Android.
 
-** Can be integrated with a Guix configuration
+*** Can be integrated with a Guix configuration
 
 It should be possible to customize aspects of the Crafted Emacs configuration
 inside of a Guix Home configuration so that things like font sizes, themes, etc
@@ -94,20 +128,20 @@ can be system-specific.
 It can also use packages installed via the Guix package manager instead of
 =package.el=.
 
-** Works well with =Chemacs2=
+*** Works well with =Chemacs2=
 
 =Chemacs2= is an excellent tool for enabling the use of multiple Emacs
 configurations simultaneously. This configuration will behave well when used
 with =Chemacs2= so that users can try and use different Emacs configurations as
 needed.
 
-** Helps you learn Emacs Lisp
+*** Helps you learn Emacs Lisp
 
 Instead of providing a higher-level configuration system out of the box like
 other Emacs configurations, we follow standard Emacs Lisp patterns so that you
 can learn by reading the configuration.
 
-** Reversible
+*** Reversible
 
    Not everyone will agree with our decisions, so each customization should be
    easily reversible in the users =config.el= file.
@@ -132,35 +166,51 @@ directory =$CRAFTED_EMACS_HOME/modules=, which are in the directory your =git=
 clone from listing [[li#git_clone]]. Follow the links to each to get more
 information about how they can be configured!
 
-- [[file:modules/crafted-defaults.el][crafted-defaults]] :: Sensible default settings for Emacs
-- [[file:modules/crafted-updates.el][crafted-updates]] :: Tools to upgrade Crafted Emacs
-- [[file:modules/crafted-completion.el][crafted-completion]] :: A better selection framework configuration based on
-  =Vertico=
-- [[file:modules/crafted-ui.el][crafted-ui]] :: Extra UI configuration for a better experience (mode line, etc)
-- [[file:modules/crafted-windows.el][crafted-windows]] :: Window management configuration
-- [[file:modules/crafted-editing.el][crafted-editing]] :: Settings for the editing component (whitespace trimming etc.)
-- [[file:modules/crafted-evil.el][crafted-evil]] :: An =evil-mode= configuration
-- [[file:modules/crafted-org.el][crafted-org]] :: A few tweaks to Org-mode (org-appear, clickable hyperlinks
-  etc.)
-- [[file:modules/crafted-project.el][crafted-project]] :: Built in project management alternative to =projectile=
-- [[file:modules/crafted-speedbar.el][crafted-speedbar]] :: A file-tree
-- [[file:modules/crafted-screencast.el][crafted-screencast]] :: Tools for doing screencasts
 - [[file:modules/crafted-compile.el][crafted-compile]] :: Set up automatic compilation for some emacs-lisp files
-- [[file:modules/crafted-osx.el][crafted-osx]] :: Set up some conviniences to work in a Mac OS/OSX enviroment
+- [[file:modules/crafted-completion.el][crafted-completion]] :: A selection framework configuration based on Vertico etc.
+- [[file:modules/crafted-defaults.el][crafted-defaults]] :: Lightly opinionated default settings for Emacs
+- [[file:modules/crafted-editing.el][crafted-editing]] :: Settings for the editing component (whitespace trimming etc.)
+- [[file:modules/crafted-erlang.el][crafted-erlang]] :: A configuration for Erlang programming
+- [[file:modules/crafted-evil.el][crafted-evil]] :: An =evil-mode= configuration
+- [[file:modules/crafted-ide.el][crafted-ide]] :: A general configuration to make Emacs more like an IDE, uses =eglot=.
+- [[file:modules/crafted-latex.el][crafted-latex]] :: A configuration for creating documents using the LaTeX
+  typesetting language
+- [[file:modules/crafted-lisp.el][crafted-lisp]] :: A configuration for the Lisp family of languages (Clojure,
+  Common Lisp, Scheme, Racket)
+- [[file:modules/crafted-org.el][crafted-org]] :: A few tweaks to Org-mode (org-appear, clickable hyperlinks
+- [[file:modules/crafted-osx.el][crafted-osx]] :: Set up some conveniences to work in a Mac OS/OSX environment
+- [[file:modules/crafted-pdf-reader.el][crafted-pdf-reader]] :: Setup =pdf-tools= for reading PDF files in Emacs
+- [[file:modules/crafted-project.el][crafted-project]] :: Built in project management alternative to =projectile=
+- [[file:modules/crafted-python.el][crafted-python]] :: A configuration for programming in Python
+- [[file:modules/crafted-screencast.el][crafted-screencast]] :: Tools for doing screencasts
+- [[file:modules/crafted-speedbar.el][crafted-speedbar]] :: A file-tree
+- [[file:modules/crafted-ui.el][crafted-ui]] :: Extra UI configuration for a better experience (mode line, etc)
+- [[file:modules/crafted-updates.el][crafted-updates]] :: Tools to upgrade Crafted Emacs
+- [[file:modules/crafted-windows.el][crafted-windows]] :: Window management configuration
 
-** Modules that we will be adding in the future:
+** Modules which might be nice to have
+
+   Pull requests which provide any of these will be gratefully considered.  This
+   list is not intended to be all inclusive, if you have an idea not listed
+   here, you are encouraged to raise an issue for discussion and/or submit a
+   pull request with your implementation.
 
 - crafted-desktop :: A desktop environment centered around =EXWM=
 - crafted-present :: Tools for giving presentations
 - crafted-workspace :: An improved workspace experience based on =tab-bar-mode=
 - crafted-shell :: A starter configuration for =eshell= and =vterm=
 
+Other ideas might be: 
+
+- Modules related to programming (c/c++, go, java, ruby, rust, perl, etc)
+- Modules related to music, whether playing it or composing it
+
 * Customization
 :PROPERTIES:
 :CUSTOM_ID: customization
 :END:
 
-To add your own customization to this configuration, create a configuraton file
+To add your own customization to this configuration, create a configuration file
 in one of the following directories:
 
 - =~/.crafted-emacs/=
@@ -230,7 +280,7 @@ config might begin like this:
   (require 'crafted-completion)  ; selection framework based on `vertico`
   (require 'crafted-ui)          ; Better UI experience (modeline etc.)
   (require 'crafted-windows)     ; Window management configuration
-  (require 'crafted-editing)     ; Whitspace trimming, auto parens etc.
+  (require 'crafted-editing)     ; Whitespace trimming, auto parens etc.
   ;(require 'crafted-evil)        ; An `evil-mode` configuration
   (require 'crafted-org)         ; org-appear, clickable hyperlinks etc.
   ;(require 'crafted-project)     ; built-in alternative to projectile
@@ -242,6 +292,53 @@ config might begin like this:
 #+end_src
 
 More detailed example config files can be found in the folder =examples=.
+
+** The =custom-modules= folder
+
+   This folder is where you can provide your own modules.  As an example, you
+   can copy one of the crafted modules to this folder and then change it for
+   your needs.  This folder is listed in the =load-path= before the crafted
+   modules path, so modules here will be loaded first.
+
+   For example, if you prefer =selectrum= instead of =vertico=, you might copy
+   the =crafted-completion= module to the =custom-modules= folder. Then you
+   might replace the configuration for =vertico= with a configuration you prefer
+   for =selectrum=.  Then in your =config.el= you would still have =(require
+   'crafted-completion)= but the version from your =custom-modules= folder will
+   be loaded.  Names do not have to be the same as a module name listed above.
+   You may choose to name your modules whatever makes sense to you.  One
+   advantage to /not/ naming your modules the same as a crafted module, you can
+   still require the crafted module in your own module. To follow the above
+   example, if you had named your module =my-completion.el= you might end up
+   with the following code:
+
+   #+name: my-completion.el
+   #+begin_src emacs-lisp
+     (require 'crafted-completion)
+     (vertico-mode -1)                       ; turn off vertico
+
+     (crafted-package-install-package 'prescient)
+     (crafted-package-install-package 'selectrum)
+     (crafted-package-install-package 'selectrum-prescient)
+
+     (customize-set-variable 'prescient-save-file
+                             (expand-file-name "prescient-save.el" crafted-config-var-directory))
+
+     
+     ;;; Selectrum
+     (require 'selectrum)
+     (require 'selectrum-prescient)
+     (customize-set-variable 'selectrum-highlight-candidates-function
+                             #'orderless-highlight-matches)
+     (customize-set-variable 'orderless-skip-highlighting (lambda () selectrum-is-active))
+     (selectrum-mode +1)                     ; use selectrum
+
+     ;; use this to layer prescient with orderless
+     ;; see: https://github.com/radian-software/selectrum
+     (customize-set-variable 'selectrum-prescient-enable-filtering nil)
+     (selectrum-prescient-mode +1)
+     (prescient-persist-mode +1)
+   #+end_src
 
 ** The =custom.el= file
 
@@ -370,6 +467,7 @@ Or some place completely different:
 Then launch it with =emacs --with-profile crafted=!
 
 * Transitioning from Rational Emacs to Crafted Emacs
+
 If you previously were using *rational-emacs*, these steps will help you
 transition your configuration for use with *crafted-emacs*. 
 
@@ -432,7 +530,7 @@ community!
      make sure it is in the appropriate group.
    + Provide verbose doc-strings for =defvar=, =defcustom=, =defun=, =defmacro=,
      etc to clearly document what is going on.
-   + Make sure to follow doc-string guidelines (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html][Documentation Tips]] or [[info:elisp#Documentation
+   + Make sure to follow doc-string guidelines (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html][Documentation Tips]] or [info:elisp#Documentation
      Tips][elisp#Documentation Tips]])
    + Add comments for blocks of code, especially to describe /why/ the code is
      present, or the intention. These comments serve as documentation when
@@ -467,7 +565,7 @@ community!
 
 ** A package (suddenly?) fails to work
 
-   This scenario happened frequently when upgading to Emacs 28. It also may
+   This scenario happened frequently when upgrading to Emacs 28. It also may
    occur in other scenarios as well. Usually, you will see some message
    indicating some symbol is void or some function or command does not
    exist. More often than not, the package maintainer is using a feature from
