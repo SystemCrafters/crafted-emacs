@@ -158,6 +158,7 @@ splash screen in another window."
         (dolist (text crafted-startup-text)
           (apply #'fancy-splash-insert text)
           (insert "\n"))
+        (crafted-updates-check-for-latest)
         (if (> (crafted-updates--get-new-commit-count) 0)
             (fancy-splash-insert
              :face '(variable-pitch font-lock-keyword-face bold)
