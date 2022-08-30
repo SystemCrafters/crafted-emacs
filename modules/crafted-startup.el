@@ -42,8 +42,8 @@
                    (welcome-len (length welcome-text))
                    (welcome-mid (/ welcome-len 2)))
               (concat
-               (make-string (- (/ (window-width) 2)
-                               welcome-mid)
+               (make-string (abs (- (/ (window-width) 2)
+                                    welcome-mid))
                             ? )
                welcome-text))
            :face variable-pitch
