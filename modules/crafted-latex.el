@@ -106,7 +106,7 @@ will still work
 
 ;; message the user if the latex executable is not found
 (add-hook 'tex-mode-hook
-          (lambda () (unless crafted-latex-latexp (message "latex executable not found"))))
+          #'(lambda () (unless crafted-latex-latexp (message "latex executable not found"))))
 
 ;; The following is to use auctex with latexmk.
 (defun crafted-latex--install-latexmk ()
@@ -131,7 +131,7 @@ are found (see `crafted-latex-inhibit-latexmk' )"
       (with-eval-after-load 'auctex-latexmk
         (auctex-latexmk-setup)
         (customize-set-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
-          (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "LatexMk"))))))
+          (add-hook 'TeX-mode-hook #'(lambda () (setq TeX-command-default "LatexMk"))))))
 
 (provide 'crafted-latex)
 ;;; crafted-latex.el ends here
