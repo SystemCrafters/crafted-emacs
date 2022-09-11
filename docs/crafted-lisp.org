@@ -107,7 +107,7 @@
    as mentioned on the github page) use the following snippet:
 
    #+begin_src emacs-lisp
-     (clj-add-keybindings-with-prefix "C-c C-m")
+     (cljr-add-keybindings-with-prefix "C-c C-m")
    #+end_src
 
 ** Scheme/Racket

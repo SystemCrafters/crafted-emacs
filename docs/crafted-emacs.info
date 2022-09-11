@@ -1334,7 +1334,7 @@ prefix is set to ‘C-c r’ to avoid conflicts with CIDER.  To change this
 to something else (for example ‘C-c C-m’ as mentioned on the github
 page) use the following snippet:
 
-          (clj-add-keybindings-with-prefix "C-c C-m")
+          (cljr-add-keybindings-with-prefix "C-c C-m")
 
 
 File: crafted-emacs.info,  Node: Scheme/Racket,  Prev: Clojure,  Up: Crafted Emacs Lisp Module
