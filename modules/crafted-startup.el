@@ -42,8 +42,8 @@
                    (welcome-len (length welcome-text))
                    (welcome-mid (/ welcome-len 2)))
               (concat
-               (make-string (- (/ (window-width) 2)
-                               welcome-mid)
+               (make-string (abs (- (/ (window-width) 2)
+                                    welcome-mid))
                             ? )
                welcome-text))
            :face variable-pitch
@@ -153,12 +153,13 @@ splash screen in another window."
         (make-local-variable 'crafted-startup-screen-inhibit-startup-screen)
         (if pure-space-overflow
             (insert pure-space-overflow-message))
-        ;; (unless concise
-        ;;   (fancy-splash-head))
         (dolist (text crafted-startup-text)
           (apply #'fancy-splash-insert text)
           (insert "\n"))
-        (if (> (crafted-updates--get-new-commit-count) 0)
+        (crafted-updates-check-for-latest)
+        (if (> (condition-case nil
+                   (crafted-updates--get-new-commit-count)
+                 (error 0)) 0)
             (fancy-splash-insert
              :face '(variable-pitch font-lock-keyword-face bold)
              (format "%s : " (crafted-updates-status-message))
@@ -169,11 +170,10 @@ splash screen in another window."
              "\n")
           (fancy-splash-insert
            :face '(variable-pitch font-lock-keyword-face bold)
-           (format "%s\n" (crafted-updates-status-message))))
+           (format "%s\n" (condition-case nil
+                              (crafted-updates-status-message)
+                            (error "Crafted Emacs status could not be determined.")))))
         (insert "\n\n")
-        ;; (skip-chars-backward "\n")
-        ;; (delete-region (point) (point-max))
-        ;; (insert "\n")
         (crafted-startup-recentf)
         (skip-chars-backward "\n")
         (delete-region (point) (point-max))

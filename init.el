@@ -14,7 +14,15 @@
   :group 'emacs)
 
 (when (eq crafted-package-system 'package)
-  (crafted-package-initialize))
+  (crafted-package-initialize)
+  ;; chemacs moves the `package-user-dir' to the profile's definition
+  ;; of the `user-emacs-directory' then loads this file. However,
+  ;; crafted had already set that value from bootstrapping in
+  ;; `early-init'. We need to reset that configuration here when using
+  ;; `chemacs'
+  (when (featurep 'chemacs)
+    (customize-set-variable 'package-user-dir
+                            (expand-file-name "elpa" crafted-config-path))))
 
 ;; Add the modules folder to the load path
 (add-to-list 'load-path (expand-file-name "modules/" user-emacs-directory))
