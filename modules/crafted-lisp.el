@@ -77,7 +77,7 @@
               ;; keybindings mentioned on clj-refactor github page
               ;; conflict with cider, use this by default as it does
               ;; not conflict and is a better mnemonic
-              (clj-add-keybindings-with-prefix "C-c r")))
+              (cljr-add-keybindings-with-prefix "C-c r")))
 
   (with-eval-after-load "flycheck"
     (flycheck-clojure-setup)))
