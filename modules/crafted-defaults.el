@@ -39,7 +39,7 @@
 (customize-set-variable 'recentf-save-file
                         (expand-file-name "recentf" crafted-config-var-directory))
 
-;; Do not saves duplicates in kill-ring
+;; Do not save duplicates in kill-ring
 (customize-set-variable 'kill-do-not-save-duplicates t)
 
 ;; Make scrolling less stuttered
@@ -57,7 +57,7 @@
 ;; Make shebang (#!) file executable when saved
 (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
 
-;; Enable savehist-mode for an command history
+;; Enable savehist-mode for command history
 (savehist-mode 1)
 
 ;; Keep state files in `crafted-config-var-directory' by default
