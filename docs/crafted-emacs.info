@@ -80,16 +80,28 @@ Modules
 * Crafted Emacs Completion Module::
 * Crafted Emacs Defaults Module::
 * Crafted Emacs Editing Module::
-* Crafted Emacs Lisp Module::
+* Crafted Emacs Evil Module::
 * Crafted Emacs IDE Module::
+* Crafted Emacs Lisp Module::
+* Crafted Mastering Emacs Module::
 * Crafted Emacs Project Module::
 * Crafted Emacs Python Module::
-* Crafted Emacs Evil Module::
 * Crafted Emacs Windows Module::
 
 Crafted Emacs Defaults Module
 
 * Sensible path defaults::
+
+Crafted Emacs Evil Module
+
+* Installation::
+* Description::
+* Customization Variables::
+* Some default settings::
+
+Crafted Emacs IDE Module
+
+* Provided configuration::
 
 Crafted Emacs Lisp Module
 
@@ -99,22 +111,19 @@ Crafted Emacs Lisp Module
 * Clojure::
 * Scheme/Racket::
 
-Crafted Emacs IDE Module
+Crafted Mastering Emacs Module
 
-* Provided configuration::
+* Completions::
+* Window configuration::
+* Buffer management::
+* Spell checking::
+* Additional packages::
 
 Crafted Emacs Python Module
 
 * Packages Installed: Packages Installed (1).
 * Provided configuration: Provided configuration (1).
 * Suggested keybindings::
-
-Crafted Emacs Evil Module
-
-* Installation::
-* Description::
-* Customization Variables::
-* Some default settings::
 
 Crafted Emacs Windows Module
 
@@ -624,11 +633,12 @@ the module of interest to understand it best.
 * Crafted Emacs Completion Module::
 * Crafted Emacs Defaults Module::
 * Crafted Emacs Editing Module::
-* Crafted Emacs Lisp Module::
+* Crafted Emacs Evil Module::
 * Crafted Emacs IDE Module::
+* Crafted Emacs Lisp Module::
+* Crafted Mastering Emacs Module::
 * Crafted Emacs Project Module::
 * Crafted Emacs Python Module::
-* Crafted Emacs Evil Module::
 * Crafted Emacs Windows Module::
 
 
@@ -1077,7 +1087,7 @@ practices.  What is currently altered is:
    • tramp-persistency-file-name (tramp-persistency-file-name)
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Editing Module,  Next: Crafted Emacs Lisp Module,  Prev: Crafted Emacs Defaults Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Editing Module,  Next: Crafted Emacs Evil Module,  Prev: Crafted Emacs Defaults Module,  Up: Modules
 
 7.3 Crafted Emacs Editing Module
 ================================
@@ -1200,9 +1210,151 @@ To use this module, simply require it in your config.
                                                        ; programming modes
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs IDE Module,  Prev: Crafted Emacs Editing Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Evil Module,  Next: Crafted Emacs IDE Module,  Prev: Crafted Emacs Editing Module,  Up: Modules
 
-7.4 Crafted Emacs Lisp Module
+7.4 Crafted Emacs Evil Module
+=============================
+
+* Menu:
+
+* Installation::
+* Description::
+* Customization Variables::
+* Some default settings::
+
+
+File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Evil Module
+
+7.4.1 Installation
+------------------
+
+To use this module, simply require it in your config.
+
+     (require 'crafted-evil)
+
+
+File: crafted-emacs.info,  Node: Description,  Next: Customization Variables,  Prev: Installation,  Up: Crafted Emacs Evil Module
+
+7.4.2 Description
+-----------------
+
+This module installs and sets up four packages to emulate and extend
+Vim’s (https://www.vim.org/) modal editing model.
+
+   • Evil (https://github.com/emacs-evil/evil): A minor mode that adds
+     Vim-like modal editing, visual selection, and text objects to Emacs
+   • Evil-collection (https://github.com/emacs-evil/evil-collection):
+     Vim-like bindings for modes not covered by default in Evil
+   • Undo-tree: Visualizes changes made in your file as a tree
+   • Evil-nerd-commenter
+     (https://github.com/redguardtoo/evil-nerd-commenter): Allows easy
+     commenting of code for many different file types.
+
+   More information can be found about each of these packages on their
+respective pages linked above.
+
+   If this module is included in your configuration file, evil-mode,
+along with evil-collection and evil-nerd-commenter will be enabled by
+default.  To toggle evil-mode on or off run ‘M-x evil-mode’.
+
+   The undo history of a file can be visualized using ‘M-x
+undo-tree-visualize’ which is bound by default to ‘C-x u’.  The history
+can then be navigated through using the arrow keys.
+
+
+File: crafted-emacs.info,  Node: Customization Variables,  Next: Some default settings,  Prev: Description,  Up: Crafted Emacs Evil Module
+
+7.4.3 Customization Variables
+-----------------------------
+
+This module provides two customizable variables
+
+   • ‘crafted-evil-discourage-arrow-keys’
+   • ‘crafted-evil-vim-muscle-memory’.
+
+   When ‘crafted-evil-discourage-arrow-keys’ is true, arrow keys are
+disabled in normal and visual mode.  When you attempt to use the arrow
+keys a message will pop up reminding you to use the ‘HJKL’ keys instead.
+
+   When ‘crafted-evil-vim-muscle-memory’ is true, the variables
+‘evil-want-C-i-jump’, ‘evil-want-Y-yank-to-eol’, and
+‘evil-want-fine-undo’ are all set to true.  By default, they are nil.
+Setting these to true allows Evil to overwrite some of the default Emacs
+keybindings to allow for a more Vim-like experience.
+
+   Setting ‘evil-want-C-i-jump’ to true sets ‘C-i’ to jump forward, as
+in Vim.  The default behavior is to insert a tab character.
+
+   When ‘evil-want-Y-yank-to-eol’ is true ‘Y’ yanks to the end of the
+line.  The default behavior if to yank the whole line.
+
+   Finally, setting ‘evil-want-fine-undo’ to true allows an action, such
+as an insert, to be broken into separate steps.  For example, if, while
+in the insert state, you performed a delete operation after a change
+operation setting this variable to true would allow it to be undone in
+multiple steps.  If it is set to nil then an action, like the one
+described above, will be undone all at once.
+
+   Each package this module installs might have additional variables
+that can be modified to change its behavior.  Please refer to the
+documentation for those packages for more information.
+
+
+File: crafted-emacs.info,  Node: Some default settings,  Prev: Customization Variables,  Up: Crafted Emacs Evil Module
+
+7.4.4 Some default settings
+---------------------------
+
+For your convenience, the following settings have been set by default.
+
+   • ‘evil-respect-visual-line-mode’ is set to t, causing Evil’s motion
+     commands to act on visual lines rather than logical lines.
+   • The following modes are set to open up in Emacs state (using Emacs’
+     default keybindings) when they start
+        • custom-mode
+        • eshell-mode
+        • term-mode
+   • The following keybindings have been added
+
+     Key-Chord   Function                               Keymap
+     -----------------------------------------------------------------------------
+     ‘C-g’       ‘evil-normal-state’                    ‘evil-insert-state-map’
+     ‘C-M-u’     ‘universal-argument’                   ‘current-global-map’
+     ‘C-h’       ‘evil-delete-backward-char-and-join’   ‘evil-insert-state-map’
+     ‘j’         ‘evil-next-visual-line’                ‘evil-motion-state-map’
+     ‘k’         ‘evil-previous-visual-line’            ‘evil-motion-state-map’
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs IDE Module,  Next: Crafted Emacs Lisp Module,  Prev: Crafted Emacs Evil Module,  Up: Modules
+
+7.5 Crafted Emacs IDE Module
+============================
+
+This module is a generic module which installs and configures Eglot for
+programming modes.  This package adds ‘eglot-ensure’ to existing loaded
+programming modes.  To use this module, simply require it in your
+config.
+
+* Menu:
+
+* Provided configuration::
+
+
+File: crafted-emacs.info,  Node: Provided configuration,  Up: Crafted Emacs IDE Module
+
+7.5.1 Provided configuration
+----------------------------
+
+‘eglot-autoshutdown’ is set to ‘t’ to cause Eglot to shutdown the
+language server(s) in use when the last buffer using one is killed.  Set
+this to ‘nil’ to keep the LSP servers running.
+
+     (customize-set-variable 'eglot-autoshutdown nil)
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Mastering Emacs Module,  Prev: Crafted Emacs IDE Module,  Up: Modules
+
+7.6 Crafted Emacs Lisp Module
 =============================
 
 This module installs and configures a few additonal packages to provide
@@ -1274,7 +1426,7 @@ Clojure, Scheme, and Racket.
 
 File: crafted-emacs.info,  Node: Packages Installed,  Next: Common,  Up: Crafted Emacs Lisp Module
 
-7.4.1 Packages Installed
+7.6.1 Packages Installed
 ------------------------
 
    • Common
@@ -1297,7 +1449,7 @@ File: crafted-emacs.info,  Node: Packages Installed,  Next: Common,  Up: Crafted
 
 File: crafted-emacs.info,  Node: Common,  Next: Common Lisp,  Prev: Packages Installed,  Up: Crafted Emacs Lisp Module
 
-7.4.2 Common
+7.6.2 Common
 ------------
 
 Aggressive indent mode is added to each of the other lisp family
@@ -1315,7 +1467,7 @@ feature off, remove the hook.  For example:
 
 File: crafted-emacs.info,  Node: Common Lisp,  Next: Clojure,  Prev: Common,  Up: Crafted Emacs Lisp Module
 
-7.4.3 Common Lisp
+7.6.3 Common Lisp
 -----------------
 
 The configuration for Common Lisp features Sylvester the cat’s Common
@@ -1325,7 +1477,7 @@ completion, integration with ASDF and Quicklsp system definition tools.
 
 File: crafted-emacs.info,  Node: Clojure,  Next: Scheme/Racket,  Prev: Common Lisp,  Up: Crafted Emacs Lisp Module
 
-7.4.4 Clojure
+7.6.4 Clojure
 -------------
 
 The configuration for Clojure is based on CIDER and adds ‘clj-refactor’
@@ -1339,7 +1491,7 @@ page) use the following snippet:
 
 File: crafted-emacs.info,  Node: Scheme/Racket,  Prev: Clojure,  Up: Crafted Emacs Lisp Module
 
-7.4.5 Scheme/Racket
+7.6.5 Scheme/Racket
 -------------------
 
 Geiser provides a modular package for the Scheme family of languages
@@ -1361,36 +1513,190 @@ to match the configuration for that implementation.  To change this to
      (customize-set-variable 'scheme-program-name "scheme")
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs IDE Module,  Next: Crafted Emacs Project Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Mastering Emacs Module,  Next: Crafted Emacs Project Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
 
-7.5 Crafted Emacs IDE Module
-============================
+7.7 Crafted Mastering Emacs Module
+==================================
 
-This module is a generic module which installs and configures Eglot for
-programming modes.  This package adds ‘eglot-ensure’ to existing loaded
-programming modes.  To use this module, simply require it in your
-config.
+To use this module, simply require it in your config.
+
+   This module is inspired by the book "Mastering Emacs" by Mickey
+Petersen.  Most of the configuration does not add any additional
+packages, preferring to use built-in functionality instead.  Similar in
+nature to the ‘crafted-defaults’ module, this makes an attempt to
+configure Emacs nicely in the general case.  Using this module alone
+will provide you with a nicely working and functional Emacs.
 
 * Menu:
 
-* Provided configuration::
+* Completions::
+* Window configuration::
+* Buffer management::
+* Spell checking::
+* Additional packages::
 
 
-File: crafted-emacs.info,  Node: Provided configuration,  Up: Crafted Emacs IDE Module
+File: crafted-emacs.info,  Node: Completions,  Next: Window configuration,  Up: Crafted Mastering Emacs Module
 
-7.5.1 Provided configuration
-----------------------------
+7.7.1 Completions
+-----------------
 
-‘eglot-autoshutdown’ is set to ‘t’ to cause Eglot to shutdown the
-language server(s) in use when the last buffer using one is killed.  Set
-this to ‘nil’ to keep the LSP servers running.
+If you are aware of Selectrum, Vertico, Marginalia, Consult, etc, this
+section will be of interest to you.  The settings here largely replace
+those packages.
 
-     (customize-set-variable 'eglot-autoshutdown nil)
+   • ‘completion-cycle-threshold’ : ‘3’
+
+     The number of completion candidates below which cycling will be
+     used.  This is to avoid cycling over hundreds of possible
+     completions.  Once the list of completions is limited to three or
+     less, pressing the TAB key will cycle through the list.
+
+   • ‘tab-always-indent’ : ‘'complete’
+
+     Controls the operation of the TAB key.  This setting causes TAB to
+     first try to indent the line.  If the line is already indented,
+     then TAB will attempt to complete the thing at point.
+
+   • ‘completion-category-overrides’ : ‘'((file (styles .
+     (partial-completion))))’
+
+     Sets the completion style for the category ‘file’.  Thus when
+     completing a filename, the ‘partial-completion’ style is used.
+     This will override the default completion style.
+
+   • ‘completions-detailed’ : ‘t’
+
+     This will display completions with details added as prefix/suffix.
+     This makes some commands (for instance, C-h o) provide a detailed
+     view with more information prepended or appended to completions.
+
+   • ‘fido-vertical-mode’
+
+     Turns on Fake IDO (Interactive Do) mode using a vertical layout.
+     This is a mini-buffer UI and is used when the mini-buffer is
+     activated, for example during searches or when using ‘M-x’.
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Project Module,  Next: Crafted Emacs Python Module,  Prev: Crafted Emacs IDE Module,  Up: Modules
+File: crafted-emacs.info,  Node: Window configuration,  Next: Buffer management,  Prev: Completions,  Up: Crafted Mastering Emacs Module
 
-7.6 Crafted Emacs Project Module
+7.7.2 Window configuration
+--------------------------
+
+   • Help windows :
+       1. First try to find an existing ‘*Help*’ window and reuse that
+          one.
+       2. If there is no ‘*Help*’ window, pop up a new window for that
+          buffer.
+       3. Whenever displaying the ‘*Help*’ window, it should not display
+          in the currently selected window.
+
+   • Completions windows :
+       1. First try to find an existing ‘*Help*’ window and reuse that
+          one.
+       2. If there is no ‘*Help*’ window, pop up a new window for that
+          buffer.
+       3. Whenever displaying the ‘*Help*’ window, it should not display
+          in the currently selected window.
+       4. Set the completions window height to 10 rows.
+
+   • ‘switch-to-buffer-in-dedicated-window’ : ‘'pop’
+
+     Pop buffers in a dedicated window.  Dedicated windows are special
+     windows in Emacs which are locked to the buffer they display.  So
+     any attempt to switch the buffer in that window will just display
+     the buffer in a different window.
+
+   • ‘switch-to-buffer-obey-display-actions’ : ‘t’
+
+     This treats manual buffer switching (interactively from the
+     keyboard) the same way programmatic buffer switching works.  Which
+     means, the rules for the ‘*Help*’ and ‘*Completions*’ windows are
+     obeyed when manually switching buffers or when doing so from elisp.
+
+   • ‘winner-mode’ :
+
+     This mode is turned on to enable "undo" functionality for resetting
+     your window layout.  Thus, if you accidentally close a window,
+     pressing control left arrow (normally assigned to ‘winner-undo’)
+     will reopen the window you closed.
+
+
+File: crafted-emacs.info,  Node: Buffer management,  Next: Spell checking,  Prev: Window configuration,  Up: Crafted Mastering Emacs Module
+
+7.7.3 Buffer management
+-----------------------
+
+This configuration prefers ‘ibuffer’ for buffer management.  It is quite
+featureful.  The normal keybinding for ‘list-buffers’ is ‘C-x C-b’,
+which is remapped to ‘ibuffer-list-buffers’.
+
+   • ‘ibuffer-movement-cycle’ : ‘nil’
+
+     Turn off forward and backward movement cycling when reaching the
+     top or bottom of the list of buffers.
+
+   • ‘ibuffer-old-time’ : ‘24’
+
+     Set the number of hours before a buffer is considered "old" by
+     ibuffer.
+
+
+File: crafted-emacs.info,  Node: Spell checking,  Next: Additional packages,  Prev: Buffer management,  Up: Crafted Mastering Emacs Module
+
+7.7.4 Spell checking
+--------------------
+
+If a spell checker is installed and the executable can be found, then
+‘flyspell-mode’ is turned on for text modes and ‘flyspell-prog-mode’ is
+turned on for programming modes.
+
+   In programming modes, spell checking is only performed in comments.
+
+
+File: crafted-emacs.info,  Node: Additional packages,  Prev: Spell checking,  Up: Crafted Mastering Emacs Module
+
+7.7.5 Additional packages
+-------------------------
+
+   • ‘hydra’
+
+     If the ‘hydra’ package is not already installed as a dependency to
+     another package you might have installed, calling the command:
+
+          (enable-hydra-package)
+
+     in your ‘config.el’ file.
+
+     A hydra will display a list of commands in a window when summoned.
+     This is a handy tool for calling commands for which you don’t
+     recall the keybinding or the name.
+
+   • ‘dumb-jump’
+
+     Dumb jump provides "jump to definition" support for 50+ programming
+     languages.  It provides a xref-based interface for jumping to
+     definitions and is based on tools such as ‘grep’, ‘the silver
+     searcher’, ‘ripgrep’, or ‘git-grep’.
+
+     The ‘dumb-jump-xref-activate’ command is added to the
+     ‘xref-backend-functions’ hook, which is how it is enabled.
+
+        • ‘xref-show-definitions-function’ :
+          ‘xref-show-definitions-completing-read’
+
+          This setting uses the completion system instead of a popup
+          window, in this case ‘fido-mode’, or possibly ‘consult’ if you
+          have configured that instead.
+
+        • if ‘hydra’ is installed, a hydra is created and displayed, by
+          default when the key ‘C-M-y’ is pressed to jump to a
+          definition.
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Project Module,  Next: Crafted Emacs Python Module,  Prev: Crafted Mastering Emacs Module,  Up: Modules
+
+7.8 Crafted Emacs Project Module
 ================================
 
 To use this module, simply require it in your config.
@@ -1419,9 +1725,9 @@ for details.
      can also run the ‘project-forget-project’ function.
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Python Module,  Next: Crafted Emacs Evil Module,  Prev: Crafted Emacs Project Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Python Module,  Next: Crafted Emacs Windows Module,  Prev: Crafted Emacs Project Module,  Up: Modules
 
-7.7 Crafted Emacs Python Module
+7.9 Crafted Emacs Python Module
 ===============================
 
 This module installs a few additional packages to configure an IDE-like
@@ -1438,7 +1744,7 @@ module, simply require it in your config.
 
 File: crafted-emacs.info,  Node: Packages Installed (1),  Next: Provided configuration (1),  Up: Crafted Emacs Python Module
 
-7.7.1 Packages Installed
+7.9.1 Packages Installed
 ------------------------
 
    • ‘anaconda-mode’
@@ -1474,7 +1780,7 @@ File: crafted-emacs.info,  Node: Packages Installed (1),  Next: Provided configu
 
 File: crafted-emacs.info,  Node: Provided configuration (1),  Next: Suggested keybindings,  Prev: Packages Installed (1),  Up: Crafted Emacs Python Module
 
-7.7.2 Provided configuration
+7.9.2 Provided configuration
 ----------------------------
 
 ‘anaconda-mode-installation-directory’ is set to the
@@ -1505,7 +1811,7 @@ with each variable.
 
 File: crafted-emacs.info,  Node: Suggested keybindings,  Prev: Provided configuration (1),  Up: Crafted Emacs Python Module
 
-7.7.3 Suggested keybindings
+7.9.3 Suggested keybindings
 ---------------------------
 
 No keybindings are provided, but we do offer the following suggestions.
@@ -1524,125 +1830,10 @@ until the module is loaded (either "python" or "pyvenv" in this case).
        (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Evil Module,  Next: Crafted Emacs Windows Module,  Prev: Crafted Emacs Python Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Emacs Python Module,  Up: Modules
 
-7.8 Crafted Emacs Evil Module
-=============================
-
-* Menu:
-
-* Installation::
-* Description::
-* Customization Variables::
-* Some default settings::
-
-
-File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Evil Module
-
-7.8.1 Installation
-------------------
-
-To use this module, simply require it in your config.
-
-     (require 'crafted-evil)
-
-
-File: crafted-emacs.info,  Node: Description,  Next: Customization Variables,  Prev: Installation,  Up: Crafted Emacs Evil Module
-
-7.8.2 Description
------------------
-
-This module installs and sets up four packages to emulate and extend
-Vim’s (https://www.vim.org/) modal editing model.
-
-   • Evil (https://github.com/emacs-evil/evil): A minor mode that adds
-     Vim-like modal editing, visual selection, and text objects to Emacs
-   • Evil-collection (https://github.com/emacs-evil/evil-collection):
-     Vim-like bindings for modes not covered by default in Evil
-   • Undo-tree: Visualizes changes made in your file as a tree
-   • Evil-nerd-commenter
-     (https://github.com/redguardtoo/evil-nerd-commenter): Allows easy
-     commenting of code for many different file types.
-
-   More information can be found about each of these packages on their
-respective pages linked above.
-
-   If this module is included in your configuration file, evil-mode,
-along with evil-collection and evil-nerd-commenter will be enabled by
-default.  To toggle evil-mode on or off run ‘M-x evil-mode’.
-
-   The undo history of a file can be visualized using ‘M-x
-undo-tree-visualize’ which is bound by default to ‘C-x u’.  The history
-can then be navigated through using the arrow keys.
-
-
-File: crafted-emacs.info,  Node: Customization Variables,  Next: Some default settings,  Prev: Description,  Up: Crafted Emacs Evil Module
-
-7.8.3 Customization Variables
------------------------------
-
-This module provides two customizable variables
-
-   • ‘crafted-evil-discourage-arrow-keys’
-   • ‘crafted-evil-vim-muscle-memory’.
-
-   When ‘crafted-evil-discourage-arrow-keys’ is true, arrow keys are
-disabled in normal and visual mode.  When you attempt to use the arrow
-keys a message will pop up reminding you to use the ‘HJKL’ keys instead.
-
-   When ‘crafted-evil-vim-muscle-memory’ is true, the variables
-‘evil-want-C-i-jump’, ‘evil-want-Y-yank-to-eol’, and
-‘evil-want-fine-undo’ are all set to true.  By default, they are nil.
-Setting these to true allows Evil to overwrite some of the default Emacs
-keybindings to allow for a more Vim-like experience.
-
-   Setting ‘evil-want-C-i-jump’ to true sets ‘C-i’ to jump forward, as
-in Vim.  The default behavior is to insert a tab character.
-
-   When ‘evil-want-Y-yank-to-eol’ is true ‘Y’ yanks to the end of the
-line.  The default behavior if to yank the whole line.
-
-   Finally, setting ‘evil-want-fine-undo’ to true allows an action, such
-as an insert, to be broken into separate steps.  For example, if, while
-in the insert state, you performed a delete operation after a change
-operation setting this variable to true would allow it to be undone in
-multiple steps.  If it is set to nil then an action, like the one
-described above, will be undone all at once.
-
-   Each package this module installs might have additional variables
-that can be modified to change its behavior.  Please refer to the
-documentation for those packages for more information.
-
-
-File: crafted-emacs.info,  Node: Some default settings,  Prev: Customization Variables,  Up: Crafted Emacs Evil Module
-
-7.8.4 Some default settings
----------------------------
-
-For your convenience, the following settings have been set by default.
-
-   • ‘evil-respect-visual-line-mode’ is set to t, causing Evil’s motion
-     commands to act on visual lines rather than logical lines.
-   • The following modes are set to open up in Emacs state (using Emacs’
-     default keybindings) when they start
-        • custom-mode
-        • eshell-mode
-        • term-mode
-   • The following keybindings have been added
-
-     Key-Chord   Function                               Keymap
-     -----------------------------------------------------------------------------
-     ‘C-g’       ‘evil-normal-state’                    ‘evil-insert-state-map’
-     ‘C-M-u’     ‘universal-argument’                   ‘current-global-map’
-     ‘C-h’       ‘evil-delete-backward-char-and-join’   ‘evil-insert-state-map’
-     ‘j’         ‘evil-next-visual-line’                ‘evil-motion-state-map’
-     ‘k’         ‘evil-previous-visual-line’            ‘evil-motion-state-map’
-
-
-File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Emacs Evil Module,  Up: Modules
-
-7.9 Crafted Emacs Windows Module
-================================
+7.10 Crafted Emacs Windows Module
+=================================
 
 * Menu:
 
@@ -1652,8 +1843,8 @@ File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Em
 
 File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Windows Module
 
-7.9.1 Installation
-------------------
+7.10.1 Installation
+-------------------
 
 To use this module, simply require it in your config.
 
@@ -1662,8 +1853,8 @@ To use this module, simply require it in your config.
 
 File: crafted-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Crafted Emacs Windows Module
 
-7.9.2 Description
------------------
+7.10.2 Description
+------------------
 
 This module enables winner-mode
 (https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html)
@@ -1810,58 +2001,64 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1408
-Node: Principles3889
-Node: Why use it?6953
-Node: Folder structure7631
-Node: Customization8729
-Ref: orgeeb96359533
-Node: How the crafted config file is found9817
-Node: Example Configuration11261
-Ref: org12bd1c411465
-Node: The customel file12116
-Node: Simplified overview of how Emacs Customization works12662
-Node: Loading the customel file14380
-Ref: configel15681
-Ref: customel16230
-Node: Not loading the customel file16960
-Ref: org0f0d5d617843
-Node: Caveat on the timing of loading customel18433
-Ref: configel (1)19099
-Ref: customel (1)19367
-Node: Using it with Chemacs219874
-Ref: orgbae3a2920687
-Ref: org623498921086
-Ref: orgfffd47021396
-Node: Contributing21745
-Node: Modules22382
-Node: Crafted Emacs Completion Module23636
-Node: Crafted Emacs Defaults Module33019
-Node: Sensible path defaults40729
-Node: Crafted Emacs Editing Module41708
-Node: Crafted Emacs Lisp Module46395
-Node: Packages Installed49013
-Node: Common49600
-Node: Common Lisp50214
-Node: Clojure50569
-Node: Scheme/Racket51096
-Node: Crafted Emacs IDE Module52090
-Node: Provided configuration52555
-Node: Crafted Emacs Project Module52958
-Node: Crafted Emacs Python Module54069
-Node: Packages Installed (1)54667
-Node: Provided configuration (1)55667
-Node: Suggested keybindings56987
-Node: Crafted Emacs Evil Module57906
-Node: Installation58213
-Node: Description58438
-Node: Customization Variables59731
-Node: Some default settings61495
-Node: Crafted Emacs Windows Module62733
-Node: Installation (1)62989
-Node: Description (1)63225
-Node: Troubleshooting64668
-Node: A package (suddenly?) fails to work64904
-Node: MIT License68710
+Node: Principles4063
+Node: Why use it?7127
+Node: Folder structure7805
+Node: Customization8903
+Ref: orgdd412249707
+Node: How the crafted config file is found9991
+Node: Example Configuration11435
+Ref: orgf12c76a11639
+Node: The customel file12290
+Node: Simplified overview of how Emacs Customization works12836
+Node: Loading the customel file14554
+Ref: configel15855
+Ref: customel16404
+Node: Not loading the customel file17134
+Ref: org2170b3718017
+Node: Caveat on the timing of loading customel18607
+Ref: configel (1)19273
+Ref: customel (1)19541
+Node: Using it with Chemacs220048
+Ref: orgdbcbfeb20861
+Ref: org65a29a121260
+Ref: org97de63f21570
+Node: Contributing21919
+Node: Modules22556
+Node: Crafted Emacs Completion Module23845
+Node: Crafted Emacs Defaults Module33228
+Node: Sensible path defaults40938
+Node: Crafted Emacs Editing Module41917
+Node: Crafted Emacs Evil Module46604
+Node: Installation46908
+Node: Description47133
+Node: Customization Variables48426
+Node: Some default settings50190
+Node: Crafted Emacs IDE Module51428
+Node: Provided configuration51890
+Node: Crafted Emacs Lisp Module52293
+Node: Packages Installed54913
+Node: Common55500
+Node: Common Lisp56114
+Node: Clojure56469
+Node: Scheme/Racket56996
+Node: Crafted Mastering Emacs Module57990
+Node: Completions58789
+Node: Window configuration60461
+Node: Buffer management62326
+Node: Spell checking63009
+Node: Additional packages63450
+Node: Crafted Emacs Project Module64923
+Node: Crafted Emacs Python Module66040
+Node: Packages Installed (1)66641
+Node: Provided configuration (1)67641
+Node: Suggested keybindings68961
+Node: Crafted Emacs Windows Module69880
+Node: Installation (1)70140
+Node: Description (1)70378
+Node: Troubleshooting71823
+Node: A package (suddenly?) fails to work72059
+Node: MIT License75865
 
 End Tag Table
 
