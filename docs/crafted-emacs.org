@@ -438,11 +438,12 @@ Emacs configuration journey.
   #+include: crafted-completion.org
   #+include: crafted-defaults.org
   #+include: crafted-editing.org
-  #+include: crafted-lisp.org
+  #+include: crafted-evil.org
   #+include: crafted-ide.org
+  #+include: crafted-lisp.org
+  #+include: crafted-mastering-emacs.org
   #+include: crafted-project.org
   #+include: crafted-python.org
-  #+include: crafted-evil.org
   #+include: crafted-windows.org
 
 * Troubleshooting

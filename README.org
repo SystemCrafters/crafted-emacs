@@ -177,6 +177,8 @@ information about how they can be configured!
   typesetting language
 - [[file:modules/crafted-lisp.el][crafted-lisp]] :: A configuration for the Lisp family of languages (Clojure,
   Common Lisp, Scheme, Racket)
+- [[file:modules/crafted-mastering-emacs.el][crafted-mastering-emacs]] :: A configuration inspired by the book
+  "[[https://masteringemacs.org/r/systemcrafters][Mastering Emacs]]" by Mickey Petersen.
 - [[file:modules/crafted-org.el][crafted-org]] :: A few tweaks to Org-mode (org-appear, clickable hyperlinks
 - [[file:modules/crafted-osx.el][crafted-osx]] :: Set up some conveniences to work in a Mac OS/OSX environment
 - [[file:modules/crafted-pdf-reader.el][crafted-pdf-reader]] :: Setup =pdf-tools= for reading PDF files in Emacs
