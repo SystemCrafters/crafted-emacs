@@ -44,7 +44,7 @@ By default, it uses 'package for `package.el'.  Another option is
 'straight for `straight.el'.")
 
 (defun crafted-package-bootstrap (&optional system)
-  "Loads the configuration and defaults to the selected package.
+  "Load the configuration and defaults to the selected package.
 
 This will check for the value of the variable
 `crafted-package-system', but could be overriden with the
@@ -62,4 +62,5 @@ This is called when `early-init.el' runs."
       (error "Could not find module %s" module))))
 
 (provide 'crafted-package)
-;;; crafted-packages.el ends here
+
+;;; crafted-package.el ends here
