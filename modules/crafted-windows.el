@@ -29,6 +29,7 @@
   'rational-windows-prefix-key
   'crafted-windows-prefix-key
   "1")
+
 (defcustom crafted-windows-prefix-key "C-c w"
   "Configure the prefix key for `crafted-windows' bindings."
   :group 'crafted-windows

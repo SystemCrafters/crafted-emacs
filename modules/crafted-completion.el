@@ -1,13 +1,13 @@
-;;; crafted-completion.el -*- lexical-binding: t; -*-
+;;; crafted-completion.el --- Crafted Completion Configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
-;; Setup completion packages. Completion in this sense is more like
+;; Setup completion packages.  Completion in this sense is more like
 ;; narrowing, allowing the user to find matches based on minimal
 ;; inputs and "complete" the commands, variables, etc from the
 ;; narrowed list of possible choices.
@@ -25,8 +25,9 @@
 (crafted-package-install-package 'vertico)
 
 (defun crafted-completion/minibuffer-backward-kill (arg)
-  "When minibuffer is completing a file name delete up to parent
-folder, otherwise delete a word"
+  "Delete word or delete up to parent folder when completion is a file.
+
+ARG is the thing being completed in the minibuffer."
   (interactive "p")
   (if minibuffer-completing-file-name
       ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
