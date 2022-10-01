@@ -72,9 +72,10 @@
 (winner-mode 1)
 
 ;; turn on spell checking, if available.
-(when (executable-find ispell-program-name)
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+(with-eval-after-load 'ispell
+  (when (executable-find ispell-program-name)
+    (add-hook 'text-mode-hook #'flyspell-mode)
+    (add-hook 'prog-mode-hook #'flyspell-prog-mode)))
 
 (defun enable-hydra-package ()
   "Install the hydra package."
