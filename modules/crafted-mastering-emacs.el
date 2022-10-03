@@ -17,6 +17,11 @@
 ;; the package and configure it.  Enabling `hydra' will install the
 ;; package and use it, if it is available, when configuring
 ;; `dumb-jump'.  See the appropriate defuns below.
+;;
+;; For users with Emacs prior to version 28, `icomplete-mode' is
+;; enabled with an method to install a vertical mode to make it work
+;; more like `fido-vertical-mode' from Emacs 28.  The defun is only
+;; provided for Emacsen prior to 28.
 
 ;;; Code:
 
@@ -26,7 +31,20 @@
 (customize-set-variable 'completion-category-overrides
                         '((file (styles . (partial-completion)))))
 (customize-set-variable 'completions-detailed t)
-(fido-vertical-mode 1)
+(if (version< emacs-version "28")
+    (icomplete-mode 1)
+  (fido-vertical-mode 1))               ; fido-vertical-mode is
+                                        ; available beginning in Emacs
+                                        ; 28
+
+(when (version< emacs-version "28")
+  (defun use-icomplete-vertical ()
+    "Install and enable icomplete-vertical-mode for Emacs versions
+less than 28."
+    (interactive)
+    (crafted-package-install-package 'icomplete-vertical)
+    (icomplete-mode 1)
+    (icomplete-vertical-mode 1)))
 
 ;; Window configuration for special windows.
 ;; This section inspired by the article "Demystifying Emacs’s Window
