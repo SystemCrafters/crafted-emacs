@@ -38,7 +38,7 @@
                                         ; 28
 
 (when (version< emacs-version "28")
-  (defun use-icomplete-vertical ()
+  (defun crafted-mastering-emacs-use-icomplete-vertical ()
     "Install and enable icomplete-vertical-mode for Emacs versions
 less than 28."
     (interactive)
@@ -95,12 +95,12 @@ less than 28."
     (add-hook 'text-mode-hook #'flyspell-mode)
     (add-hook 'prog-mode-hook #'flyspell-prog-mode)))
 
-(defun enable-hydra-package ()
+(defun crafted-mastering-emacs-enable-hydra-package ()
   "Install the hydra package."
   (interactive)
   (crafted-package-install-package 'hydra))
 
-(defun enable-dumb-jump-package ()
+(defun crafted-mastering-emacs-enable-dumb-jump-package ()
   "Install and configure dumb-jump package.
 
 Uses ripgrep, TheSilverSearcher(ag), or grep, however, the
