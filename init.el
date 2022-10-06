@@ -44,14 +44,18 @@
 (customize-set-variable 'visible-bell 1)  ; turn off beeps, make them flash!
 (customize-set-variable 'large-file-warning-threshold 100000000) ;; change to ~100 MB
 
+(defun guix-package-to-feature-name (package &optional args)
+  "Convert PACKAGE to the name of the feature provided when installed through Guix."
+  (intern
+   (concat (symbol-name package) "-autoloads")))
 
 (defun crafted-ensure-package (package &optional args)
   "Ensure that PACKAGE is installed on the system, either via
 package.el or Guix depending on the value of
 `crafted-prefer-guix-packages'."
   (if crafted-prefer-guix-packages
-      (unless (featurep package)
-        (message "Package '%s' does not appear to be installed by Guix: " package))
+      (unless (featurep (guix-package-to-feature-name package))
+        (message "Package '%s' does not appear to be installed by Guix." package))
     (crafted-package-install-package package)))
 
 ;; Check the system used
