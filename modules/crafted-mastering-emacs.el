@@ -61,6 +61,16 @@ less than 28."
                (inhibit-same-window . t)
                (window-height . 10)))
 
+;; Show dictionary definition on the left
+(add-to-list 'display-buffer-alist
+             '("^\\*Dictionary\\*"
+               (display-buffer-in-side-window)
+               (side . left)
+               (window-width . 70)))
+
+;; define a key to define the word at point.
+(define-key global-map (kbd "M-#") #'dictionary-lookup-definition)
+
 ;; pop up dedicated buffers in a different window.
 (customize-set-variable 'switch-to-buffer-in-dedicated-window 'pop)
 ;; treat manual buffer switching (C-x b for example) the same as
