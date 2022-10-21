@@ -17,6 +17,11 @@
 ;; the package and configure it.  Enabling `hydra' will install the
 ;; package and use it, if it is available, when configuring
 ;; `dumb-jump'.  See the appropriate defuns below.
+;;
+;; For users with Emacs prior to version 28, `icomplete-mode' is
+;; enabled with an method to install a vertical mode to make it work
+;; more like `fido-vertical-mode' from Emacs 28.  The defun is only
+;; provided for Emacsen prior to 28.
 
 ;;; Code:
 
@@ -26,7 +31,20 @@
 (customize-set-variable 'completion-category-overrides
                         '((file (styles . (partial-completion)))))
 (customize-set-variable 'completions-detailed t)
-(fido-vertical-mode 1)
+(if (version< emacs-version "28")
+    (icomplete-mode 1)
+  (fido-vertical-mode 1))               ; fido-vertical-mode is
+                                        ; available beginning in Emacs
+                                        ; 28
+
+(when (version< emacs-version "28")
+  (defun crafted-mastering-emacs-use-icomplete-vertical ()
+    "Install and enable icomplete-vertical-mode for Emacs versions
+less than 28."
+    (interactive)
+    (crafted-package-install-package 'icomplete-vertical)
+    (icomplete-mode 1)
+    (icomplete-vertical-mode 1)))
 
 ;; Window configuration for special windows.
 ;; This section inspired by the article "Demystifying Emacs’s Window
@@ -42,6 +60,16 @@
                (display-buffer-reuse-window display-buffer-pop-up-window)
                (inhibit-same-window . t)
                (window-height . 10)))
+
+;; Show dictionary definition on the left
+(add-to-list 'display-buffer-alist
+             '("^\\*Dictionary\\*"
+               (display-buffer-in-side-window)
+               (side . left)
+               (window-width . 70)))
+
+;; define a key to define the word at point.
+(define-key global-map (kbd "M-#") #'dictionary-lookup-definition)
 
 ;; pop up dedicated buffers in a different window.
 (customize-set-variable 'switch-to-buffer-in-dedicated-window 'pop)
@@ -72,16 +100,17 @@
 (winner-mode 1)
 
 ;; turn on spell checking, if available.
-(when (executable-find ispell-program-name)
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+(with-eval-after-load 'ispell
+  (when (executable-find ispell-program-name)
+    (add-hook 'text-mode-hook #'flyspell-mode)
+    (add-hook 'prog-mode-hook #'flyspell-prog-mode)))
 
-(defun enable-hydra-package ()
+(defun crafted-mastering-emacs-enable-hydra-package ()
   "Install the hydra package."
   (interactive)
   (crafted-package-install-package 'hydra))
 
-(defun enable-dumb-jump-package ()
+(defun crafted-mastering-emacs-enable-dumb-jump-package ()
   "Install and configure dumb-jump package.
 
 Uses ripgrep, TheSilverSearcher(ag), or grep, however, the

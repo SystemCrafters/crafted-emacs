@@ -43,6 +43,10 @@
 (customize-set-variable 'package-user-dir
                         (expand-file-name "elpa/" crafted-config-path))
 
+;; make sure the elpa/ folder exists after setting it above.
+(unless (file-exists-p package-user-dir)
+  (mkdir package-user-dir t))
+
 ;;; package configuration
 (defun crafted-package-archive-stale-p (archive)
   "Return `t' if ARCHIVE is stale.

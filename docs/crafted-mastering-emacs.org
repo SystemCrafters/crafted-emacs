@@ -42,12 +42,35 @@
      provide a detailed view with more information prepended or
      appended to completions.
 
-   - =fido-vertical-mode=
+   - =fido-vertical-mode= (for Emacs version 28+)
 
-     Turns on Fake IDO (Interactive Do) mode using a vertical layout.
-     This is a mini-buffer UI and is used when the mini-buffer is
-     activated, for example during searches or when using =M-x=. 
+     Emacs version 28 added =fido-vertical-mode=.  This setting Turns
+     on Fake IDO (Interactive Do) mode using a vertical layout.  This
+     is a mini-buffer UI and is used when the mini-buffer is
+     activated, for example during searches or when using =M-x=.
 
+   - =icomplete-mode= (for Emacs version 27+)
+
+     This setting turns on =icomplete-mode=.  This is a mini-buffer UI
+     and is used when the mini-buffer is activated, for example during
+     searches or when using =M-x=.  For users using Emacs 27 versions,
+     the following function is provided to install and turn on a
+     vertical mode for icomplete similar to =fido-vertical-mode=:
+
+     #+begin_src emacs-lisp
+       (crafted-mastering-emacs-use-icomplete-vertical)
+     #+end_src
+
+     Emacs 28 also provides =icomplete-vertical-mode= out of the box,
+     so if you prefer that over =fido-vertical-mode=, add the
+     following to your =config.el=
+
+     #+begin_src emacs-lisp
+       (with-eval-after-load 'crafted-mastering-emacs
+         (fido-vertical-mode -1)
+         (icomplete-vertical-mode 1))
+     #+end_src
+     
 ** Window configuration
 
    - Help windows :
@@ -121,7 +144,7 @@
      to another package you might have installed, calling the command:
 
      #+begin_src emacs-lisp
-       (enable-hydra-package)
+       (crafted-mastering-emacs-enable-hydra-package)
      #+end_src
 
      in your =config.el= file.
@@ -144,9 +167,15 @@
        =xref-show-definitions-completing-read=
 
        This setting uses the completion system instead of a popup
-       window, in this case =fido-mode=, or possibly =consult= if you
-       have configured that instead.
+       window, in this case =fido-mode=, =icomplete-mode=, or
+       possibly =consult= if you have configured that instead.
 
      - if =hydra= is installed, a hydra is created and displayed, by
        default when the key =C-M-y= is pressed to jump to a
        definition. 
+
+     To enable =dumb-jump= add the following to your config:
+
+     #+begin_src emacs-lisp
+       (crafted-mastering-emacs-enable-dumb-jump-package)
+     #+end_src

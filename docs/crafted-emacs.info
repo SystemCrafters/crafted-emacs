@@ -1571,11 +1571,30 @@ those packages.
      This makes some commands (for instance, C-h o) provide a detailed
      view with more information prepended or appended to completions.
 
-   • ‘fido-vertical-mode’
+   • ‘fido-vertical-mode’ (for Emacs version 28+)
 
-     Turns on Fake IDO (Interactive Do) mode using a vertical layout.
-     This is a mini-buffer UI and is used when the mini-buffer is
-     activated, for example during searches or when using ‘M-x’.
+     Emacs version 28 added ‘fido-vertical-mode’.  This setting Turns on
+     Fake IDO (Interactive Do) mode using a vertical layout.  This is a
+     mini-buffer UI and is used when the mini-buffer is activated, for
+     example during searches or when using ‘M-x’.
+
+   • ‘icomplete-mode’ (for Emacs version 27+)
+
+     This setting turns on ‘icomplete-mode’.  This is a mini-buffer UI
+     and is used when the mini-buffer is activated, for example during
+     searches or when using ‘M-x’.  For users using Emacs 27 versions,
+     the following function is provided to install and turn on a
+     vertical mode for icomplete similar to ‘fido-vertical-mode’:
+
+          (crafted-mastering-emacs-use-icomplete-vertical)
+
+     Emacs 28 also provides ‘icomplete-vertical-mode’ out of the box, so
+     if you prefer that over ‘fido-vertical-mode’, add the following to
+     your ‘config.el’
+
+          (with-eval-after-load 'crafted-mastering-emacs
+            (fido-vertical-mode -1)
+            (icomplete-vertical-mode 1))
 
 
 File: crafted-emacs.info,  Node: Window configuration,  Next: Buffer management,  Prev: Completions,  Up: Crafted Mastering Emacs Module
@@ -1664,7 +1683,7 @@ File: crafted-emacs.info,  Node: Additional packages,  Prev: Spell checking,  Up
      If the ‘hydra’ package is not already installed as a dependency to
      another package you might have installed, calling the command:
 
-          (enable-hydra-package)
+          (crafted-mastering-emacs-enable-hydra-package)
 
      in your ‘config.el’ file.
 
@@ -1686,12 +1705,16 @@ File: crafted-emacs.info,  Node: Additional packages,  Prev: Spell checking,  Up
           ‘xref-show-definitions-completing-read’
 
           This setting uses the completion system instead of a popup
-          window, in this case ‘fido-mode’, or possibly ‘consult’ if you
-          have configured that instead.
+          window, in this case ‘fido-mode’, ‘icomplete-mode’, or
+          possibly ‘consult’ if you have configured that instead.
 
         • if ‘hydra’ is installed, a hydra is created and displayed, by
           default when the key ‘C-M-y’ is pressed to jump to a
           definition.
+
+     To enable ‘dumb-jump’ add the following to your config:
+
+          (crafted-mastering-emacs-enable-dumb-jump-package)
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Project Module,  Next: Crafted Emacs Python Module,  Prev: Crafted Mastering Emacs Module,  Up: Modules
@@ -2005,24 +2028,24 @@ Node: Principles4063
 Node: Why use it?7127
 Node: Folder structure7805
 Node: Customization8903
-Ref: orgdd412249707
+Ref: org3b9fdb59707
 Node: How the crafted config file is found9991
 Node: Example Configuration11435
-Ref: orgf12c76a11639
+Ref: orgc96900a11639
 Node: The customel file12290
 Node: Simplified overview of how Emacs Customization works12836
 Node: Loading the customel file14554
 Ref: configel15855
 Ref: customel16404
 Node: Not loading the customel file17134
-Ref: org2170b3718017
+Ref: org08daa2918017
 Node: Caveat on the timing of loading customel18607
 Ref: configel (1)19273
 Ref: customel (1)19541
 Node: Using it with Chemacs220048
-Ref: orgdbcbfeb20861
-Ref: org65a29a121260
-Ref: org97de63f21570
+Ref: orga87e11420861
+Ref: org5dd77d621260
+Ref: orgdccab5521570
 Node: Contributing21919
 Node: Modules22556
 Node: Crafted Emacs Completion Module23845
@@ -2044,21 +2067,21 @@ Node: Clojure56469
 Node: Scheme/Racket56996
 Node: Crafted Mastering Emacs Module57990
 Node: Completions58789
-Node: Window configuration60461
-Node: Buffer management62326
-Node: Spell checking63009
-Node: Additional packages63450
-Node: Crafted Emacs Project Module64923
-Node: Crafted Emacs Python Module66040
-Node: Packages Installed (1)66641
-Node: Provided configuration (1)67641
-Node: Suggested keybindings68961
-Node: Crafted Emacs Windows Module69880
-Node: Installation (1)70140
-Node: Description (1)70378
-Node: Troubleshooting71823
-Node: A package (suddenly?) fails to work72059
-Node: MIT License75865
+Node: Window configuration61339
+Node: Buffer management63204
+Node: Spell checking63887
+Node: Additional packages64328
+Node: Crafted Emacs Project Module65975
+Node: Crafted Emacs Python Module67092
+Node: Packages Installed (1)67693
+Node: Provided configuration (1)68693
+Node: Suggested keybindings70013
+Node: Crafted Emacs Windows Module70932
+Node: Installation (1)71192
+Node: Description (1)71430
+Node: Troubleshooting72875
+Node: A package (suddenly?) fails to work73111
+Node: MIT License76917
 
 End Tag Table
 

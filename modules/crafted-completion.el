@@ -81,7 +81,7 @@ ARG is the thing being completed in the minibuffer."
 
 ;; Set up Orderless for better fuzzy matching
 (require 'orderless)
-(customize-set-variable 'completion-styles '(orderless))
+(customize-set-variable 'completion-styles '(orderless basic))
 (customize-set-variable 'completion-category-overrides '((file (styles . (partial-completion)))))
 
 
