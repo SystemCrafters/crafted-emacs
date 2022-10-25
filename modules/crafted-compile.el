@@ -118,7 +118,7 @@ directory will be compiled, but not it's subdirectories."
   (if (featurep 'native-compile)
       (dolist (source f)
         (let ((cache (crafted-compile-locate-eln-file (file-name-base source))))
-          (if (or (eq cache nil)
+          (if (or (null cache)
                   (file-newer-than-file-p cache source))
               (native-compile-async f)
             (message "Skipping compilation of file %s" source))))
