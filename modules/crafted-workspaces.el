@@ -1,6 +1,6 @@
 ;;; crafted-workspaces.el --- Workspaces configuration  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022  Timothy J. Miller
+;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
