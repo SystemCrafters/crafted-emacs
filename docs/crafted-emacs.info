@@ -87,6 +87,7 @@ Modules
 * Crafted Emacs Project Module::
 * Crafted Emacs Python Module::
 * Crafted Emacs Windows Module::
+* Crafted Workspaces Module::
 
 Crafted Emacs Defaults Module
 
@@ -129,6 +130,11 @@ Crafted Emacs Windows Module
 
 * Installation: Installation (1).
 * Description: Description (1).
+
+Crafted Workspaces Module
+
+* Provided configuration: Provided configuration (2).
+* Workarounds::
 
 Troubleshooting
 
@@ -640,6 +646,7 @@ the module of interest to understand it best.
 * Crafted Emacs Project Module::
 * Crafted Emacs Python Module::
 * Crafted Emacs Windows Module::
+* Crafted Workspaces Module::
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Completion Module,  Next: Crafted Emacs Defaults Module,  Up: Modules
@@ -1853,7 +1860,7 @@ until the module is loaded (either "python" or "pyvenv" in this case).
        (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Prev: Crafted Emacs Python Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Windows Module,  Next: Crafted Workspaces Module,  Prev: Crafted Emacs Python Module,  Up: Modules
 
 7.10 Crafted Emacs Windows Module
 =================================
@@ -1905,6 +1912,48 @@ C-c w n     windmove-down    Moves point to window below
 C-c w p     windmove-up      Moves point to window above
 C-c w b     windmove-left    Moves point to window to the left
 C-c w f     windmove-right   Moves point to window to the right
+
+
+File: crafted-emacs.info,  Node: Crafted Workspaces Module,  Prev: Crafted Emacs Windows Module,  Up: Modules
+
+7.11 Crafted Workspaces Module
+==============================
+
+This module installs and sets a basic configuration for tabspaces.el
+(https://github.com/mclear-tools/tabspaces).
+
+* Menu:
+
+* Provided configuration: Provided configuration (2).
+* Workarounds::
+
+
+File: crafted-emacs.info,  Node: Provided configuration (2),  Next: Workarounds,  Up: Crafted Workspaces Module
+
+7.11.1 Provided configuration
+-----------------------------
+
+‘tabspaces-use-filtered-buffers-as-default’ is enabled.  This setting
+remaps ‘switch-to-buffer’ with ‘tabspaces-switch-to-buffer’, which uses
+a filtered list of buffers in the completion list.
+
+   ‘tabspaces-remove-to-default’ is enabled.  Buffers removed from a
+tabspace are moved to the default tabspace.
+
+   ‘tabspaces-include-buffers’ adds the ‘*scratch*’ buffer to all
+tabspaces.
+
+
+File: crafted-emacs.info,  Node: Workarounds,  Prev: Provided configuration (2),  Up: Crafted Workspaces Module
+
+7.11.2 Workarounds
+------------------
+
+‘project--ensure-read-project-list’ is called to initialize the project
+list; this avoids an error where the dispatch menu causes an error when
+‘tabspaces-switch-or-create-workspace’ is called.  Users can still
+select a file or directory when creating the workspace, and the dispatch
+still works within the workspace.
 
 
 File: crafted-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
@@ -2024,64 +2073,67 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1408
-Node: Principles4063
-Node: Why use it?7127
-Node: Folder structure7805
-Node: Customization8903
-Ref: org3b9fdb59707
-Node: How the crafted config file is found9991
-Node: Example Configuration11435
-Ref: orgc96900a11639
-Node: The customel file12290
-Node: Simplified overview of how Emacs Customization works12836
-Node: Loading the customel file14554
-Ref: configel15855
-Ref: customel16404
-Node: Not loading the customel file17134
-Ref: org08daa2918017
-Node: Caveat on the timing of loading customel18607
-Ref: configel (1)19273
-Ref: customel (1)19541
-Node: Using it with Chemacs220048
-Ref: orga87e11420861
-Ref: org5dd77d621260
-Ref: orgdccab5521570
-Node: Contributing21919
-Node: Modules22556
-Node: Crafted Emacs Completion Module23845
-Node: Crafted Emacs Defaults Module33228
-Node: Sensible path defaults40938
-Node: Crafted Emacs Editing Module41917
-Node: Crafted Emacs Evil Module46604
-Node: Installation46908
-Node: Description47133
-Node: Customization Variables48426
-Node: Some default settings50190
-Node: Crafted Emacs IDE Module51428
-Node: Provided configuration51890
-Node: Crafted Emacs Lisp Module52293
-Node: Packages Installed54913
-Node: Common55500
-Node: Common Lisp56114
-Node: Clojure56469
-Node: Scheme/Racket56996
-Node: Crafted Mastering Emacs Module57990
-Node: Completions58789
-Node: Window configuration61339
-Node: Buffer management63204
-Node: Spell checking63887
-Node: Additional packages64328
-Node: Crafted Emacs Project Module65975
-Node: Crafted Emacs Python Module67092
-Node: Packages Installed (1)67693
-Node: Provided configuration (1)68693
-Node: Suggested keybindings70013
-Node: Crafted Emacs Windows Module70932
-Node: Installation (1)71192
-Node: Description (1)71430
-Node: Troubleshooting72875
-Node: A package (suddenly?) fails to work73111
-Node: MIT License76917
+Node: Principles4191
+Node: Why use it?7255
+Node: Folder structure7933
+Node: Customization9031
+Ref: orgd4b92139835
+Node: How the crafted config file is found10119
+Node: Example Configuration11563
+Ref: org668bc4e11767
+Node: The customel file12418
+Node: Simplified overview of how Emacs Customization works12964
+Node: Loading the customel file14682
+Ref: configel15983
+Ref: customel16532
+Node: Not loading the customel file17262
+Ref: orgf3cfd5818145
+Node: Caveat on the timing of loading customel18735
+Ref: configel (1)19401
+Ref: customel (1)19669
+Node: Using it with Chemacs220176
+Ref: org88e977b20989
+Ref: org17200ea21388
+Ref: orgc8d379d21698
+Node: Contributing22047
+Node: Modules22684
+Node: Crafted Emacs Completion Module24003
+Node: Crafted Emacs Defaults Module33386
+Node: Sensible path defaults41096
+Node: Crafted Emacs Editing Module42075
+Node: Crafted Emacs Evil Module46762
+Node: Installation47066
+Node: Description47291
+Node: Customization Variables48584
+Node: Some default settings50348
+Node: Crafted Emacs IDE Module51586
+Node: Provided configuration52048
+Node: Crafted Emacs Lisp Module52451
+Node: Packages Installed55071
+Node: Common55658
+Node: Common Lisp56272
+Node: Clojure56627
+Node: Scheme/Racket57154
+Node: Crafted Mastering Emacs Module58148
+Node: Completions58947
+Node: Window configuration61497
+Node: Buffer management63362
+Node: Spell checking64045
+Node: Additional packages64486
+Node: Crafted Emacs Project Module66133
+Node: Crafted Emacs Python Module67250
+Node: Packages Installed (1)67851
+Node: Provided configuration (1)68851
+Node: Suggested keybindings70171
+Node: Crafted Emacs Windows Module71090
+Node: Installation (1)71384
+Node: Description (1)71622
+Node: Crafted Workspaces Module73067
+Node: Provided configuration (2)73438
+Node: Workarounds74024
+Node: Troubleshooting74505
+Node: A package (suddenly?) fails to work74741
+Node: MIT License78547
 
 End Tag Table
 
