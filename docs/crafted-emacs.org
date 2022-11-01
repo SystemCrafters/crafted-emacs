@@ -445,6 +445,7 @@ Emacs configuration journey.
   #+include: crafted-project.org
   #+include: crafted-python.org
   #+include: crafted-windows.org
+  #+include: crafted-workspaces.org
 
 * Troubleshooting
 

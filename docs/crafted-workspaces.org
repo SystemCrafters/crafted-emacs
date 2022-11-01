@@ -1,0 +1,22 @@
+* Crafted Workspaces Module
+
+This module installs and sets a basic configuration for [[https://github.com/mclear-tools/tabspaces][tabspaces.el]].
+
+** Provided configuration
+
+=tabspaces-use-filtered-buffers-as-default= is enabled.  This setting
+remaps =switch-to-buffer= with =tabspaces-switch-to-buffer=, which uses a
+filtered list of buffers in the completion list.
+
+=tabspaces-remove-to-default= is enabled.  Buffers removed from a
+tabspace are moved to the default tabspace.
+
+=tabspaces-include-buffers= adds the =*scratch*= buffer to all tabspaces.
+
+** Workarounds
+
+=project--ensure-read-project-list= is called to initialize the project
+list; this avoids an error where the dispatch menu causes an error
+when =tabspaces-switch-or-create-workspace= is called.  Users can still
+select a file or directory when creating the workspace, and the
+dispatch still works within the workspace.
