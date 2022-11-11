@@ -70,15 +70,23 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
            (crafted-ui--set-default-font val)))))
 
 ;;;; Mode-Line
+(defcustom crafted-ui-use-doom-modeline nil
+  "Use doom-modeline-mode."
+  :group 'crafted-ui
+  :type 'boolean
+  :tag "Use Doom Modeline"
+  :set (lambda (sym val)
+         (set-default sym val)
+         (if val
+             (doom-modeline-mode 1)
+           (doom-modeline-mode -1))))
 
-;; Start up the modeline after initialization is finished
-(add-hook 'after-init-hook 'doom-modeline-mode)
-
-;; Configure `doom-modeline'
-(customize-set-variable 'doom-modeline-height 15)
-(customize-set-variable 'doom-modeline-bar-width 6)
-(customize-set-variable 'doom-modeline-minor-modes t)
-(customize-set-variable 'doom-modeline-buffer-file-name-style 'truncate-except-project)
+;; Configure `doom-modeline' if it is enabled
+(when crafted-ui-use-doom-modeline
+  (customize-set-variable 'doom-modeline-height 15)
+  (customize-set-variable 'doom-modeline-bar-width 6)
+  (customize-set-variable 'doom-modeline-minor-modes t)
+  (customize-set-variable 'doom-modeline-buffer-file-name-style 'truncate-except-project))
 
 ;;;; Help Buffers
 
