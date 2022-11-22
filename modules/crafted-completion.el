@@ -111,6 +111,7 @@ ARG is the thing being completed in the minibuffer."
 (global-corfu-mode 1)
 
 (add-hook 'corfu-mode-hook #'corfu-doc-mode)
+(eldoc-add-command #'corfu-insert)
 (define-key corfu-map (kbd "M-p") #'corfu-doc-scroll-down)
 (define-key corfu-map (kbd "M-n") #'corfu-doc-scroll-up)
 (define-key corfu-map (kbd "M-d") #'corfu-doc-toggle)
