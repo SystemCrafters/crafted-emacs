@@ -107,13 +107,12 @@ ARG is the thing being completed in the minibuffer."
 (customize-set-variable 'corfu-auto-delay 0.0) ; No delay for completion
 (customize-set-variable 'corfu-echo-documentation 0.25) ; Echo docs for current completion option
 
-(corfu-global-mode 1)
-
-(add-hook 'corfu-mode-hook #'corfu-doc-mode)
+(global-corfu-mode 1)
+(corfu-popupinfo-mode 1)
 (eldoc-add-command #'corfu-insert)
-(define-key corfu-map (kbd "M-p") #'corfu-doc-scroll-down)
-(define-key corfu-map (kbd "M-n") #'corfu-doc-scroll-up)
-(define-key corfu-map (kbd "M-d") #'corfu-doc-toggle)
+(define-key corfu-map (kbd "M-p") #'corfu-popupinfo-scroll-down)
+(define-key corfu-map (kbd "M-n") #'corfu-popupinfo-scroll-up)
+(define-key corfu-map (kbd "M-d") #'corfu-popupinfo-toggle)
 
 
 ;;; Cape
