@@ -16,7 +16,6 @@
 
 (crafted-package-install-package 'cape)
 (crafted-package-install-package 'consult)
-(crafted-package-install-package 'corfu-doc)
 (crafted-package-install-package 'corfu)
 (crafted-package-install-package 'embark)
 (crafted-package-install-package 'embark-consult)
@@ -100,7 +99,7 @@ ARG is the thing being completed in the minibuffer."
 
 
 ;;; Corfu
-
+(require 'corfu)
 ;; Setup corfu for popup like completion
 (customize-set-variable 'corfu-cycle t) ; Allows cycling through candidates
 (customize-set-variable 'corfu-auto t)  ; Enable auto completion
@@ -108,7 +107,7 @@ ARG is the thing being completed in the minibuffer."
 (customize-set-variable 'corfu-auto-delay 0.0) ; No delay for completion
 (customize-set-variable 'corfu-echo-documentation 0.25) ; Echo docs for current completion option
 
-(global-corfu-mode 1)
+(corfu-global-mode 1)
 
 (add-hook 'corfu-mode-hook #'corfu-doc-mode)
 (eldoc-add-command #'corfu-insert)
