@@ -100,7 +100,7 @@ ARG is the thing being completed in the minibuffer."
 
 ;;; Corfu
 (when (eq crafted-package-system 'straight)
-  (add-to-list 'load-
+  (add-to-list 'load-path
                (expand-file-name "straight/build/corfu/extensions"
                                  straight-base-dir)))
 (require 'corfu-popupinfo)
