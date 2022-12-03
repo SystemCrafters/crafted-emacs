@@ -14,3 +14,25 @@
    #+begin_src emacs-lisp
      (customize-set-variable 'eglot-autoshutdown nil)
    #+end_src
+
+** Workarounds
+
+   When eglot initializes management of a buffer, it overwrites
+   =flymake-diagnostic-functions=.  However, Not all LSP servers support
+   multiple checkers, and eglot does not support multiple servers, so
+   this can disable required mode specific checkers.
+
+   You can restore these checkers by hooking eglot to hook flymake in
+   the required mode.  For example, =pyright= does not do linting, so
+   you can add the default python-mode linter back to flymake like so.
+
+    #+begin_src emacs-lisp
+      (defun my/eglot-python-fixup ()
+        (add-hook 'eglot-managed-mode-hook
+                  (lambda ()
+                    (add-hook 'flymake-diagnostic-functions #'python-flymake t t))))
+
+      (add-hook 'python-mode-hook #'my/eglot-python-fixup)
+    #+end_src
+
+    
