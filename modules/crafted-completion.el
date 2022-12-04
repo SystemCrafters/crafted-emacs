@@ -17,6 +17,7 @@
 (crafted-package-install-package 'cape)
 (crafted-package-install-package 'consult)
 (crafted-package-install-package 'corfu)
+(crafted-package-install-package 'corfu-terminal)
 (crafted-package-install-package 'embark)
 (crafted-package-install-package 'embark-consult)
 (crafted-package-install-package 'marginalia)
@@ -106,6 +107,11 @@ ARG is the thing being completed in the minibuffer."
 (require 'corfu-popupinfo)
 
 (require 'corfu)
+
+(unless (display-graphic-p)
+  (require 'corfu-terminal)
+  (corfu-terminal-mode +1))
+
 ;; Setup corfu for popup like completion
 (customize-set-variable 'corfu-cycle t) ; Allows cycling through candidates
 (customize-set-variable 'corfu-auto t)  ; Enable auto completion
