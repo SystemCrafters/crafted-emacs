@@ -23,6 +23,7 @@
 
 ;; package configuration
 (require 'package)
+(require 'time-date)
 
 ;; Emacs 27.x has gnu elpa as the default
 ;; Emacs 28.x adds the nongnu elpa to the list by default, so only
@@ -47,18 +48,33 @@
 (unless (file-exists-p package-user-dir)
   (mkdir package-user-dir t))
 
+(defvar crafted-bootstrap-package-perform-stale-archive-check t
+  "Flag to allow the user to turn off checking if an archive is
+stale on startup.")
+
+(defvar crafted-bootstrap-package-update-days 1
+  "The number of days old a package archive must be before it is
+considered stale.")
+
 ;;; package configuration
 (defun crafted-package-archive-stale-p (archive)
   "Return `t' if ARCHIVE is stale.
 
-ARCHIVE is stale if the on-disk cache is older than 1 day"
-  (let ((today (time-to-days (current-time)))
-        (archive-name (expand-file-name
-                       (format "archives/%s/archive-contents" archive)
-                       package-user-dir)))
-    (time-less-p (time-to-days (file-attribute-modification-time
-                                (file-attributes archive-name)))
-                 today)))
+ARCHIVE is stale if the on-disk cache is older than
+`crafted-bootstrap-package-update-days' old.  If
+`crafted-bootstrap-package-perform-stale-archive-check' is nil,
+the check is skipped."
+  (let* ((today (decode-time nil nil t))
+         (archive-name (expand-file-name
+                        (format "archives/%s/archive-contents" archive)
+                        package-user-dir))
+         (last-update-time (decode-time (file-attribute-modification-time
+                                         (file-attributes archive-name))))
+         (delta (make-decoded-time :day crafted-bootstrap-package-update-days)))
+    (if crafted-bootstrap-package-perform-stale-archive-check
+        (time-less-p (encode-time (decoded-time-add last-update-time delta))
+                     (encode-time today))
+      nil)))
 
 (defun crafted-package-archives-stale-p ()
   "Return `t' if any PACKAGE-ARHIVES cache is out of date.

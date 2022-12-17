@@ -106,11 +106,21 @@ customizations made by packages.")
   "Package system bootstrap configuration.")
 
 (load (expand-file-name "crafted-package.el" crafted-bootstrap-directory))
-;; this is the default
-;; (setq crafted-package-system 'package)
-(crafted-package-bootstrap crafted-package-system)
+(when (eq crafted-package-system 'package)
+  ;; needed in case `early-config.el' has pinned packages configured
+  (require 'package))
 
-;;; Load the early config file if it exists
+;;; Load the early config file if it exists, must be run before the
+;;; package configuration below to allow the user to change packaging
+;;; system to `straight' (or other supported packaging system) or to
+;;; configure how often the package archives are updated when Emacs is
+;;; starting.
 (let ((early-config-path (expand-file-name "early-config.el" crafted-config-path)))
   (when (file-exists-p early-config-path)
     (load early-config-path nil 'nomessage)))
+
+;; this is the default
+;; (setq crafted-package-system 'package)
+;; use this in `early-config.el' to switch to `straight.el'
+;; (setq crafted-package-system 'straight)
+(crafted-package-bootstrap crafted-package-system)
