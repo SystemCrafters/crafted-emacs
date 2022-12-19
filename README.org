@@ -141,6 +141,21 @@ Instead of providing a higher-level configuration system out of the box like
 other Emacs configurations, we follow standard Emacs Lisp patterns so that you
 can learn by reading the configuration.
 
+An example of this is our decision not to leverage
+[[https://github.com/jwiegley/use-package][use-package]] to manage package
+installation and configuration. We choose to be as transparent as possible with
+the code we  write so others can learn from it.  We do have one macro which is
+a thin wrapper around the usage of either =striaght.el= or =package.el= so
+installing packages is consistent without the need for a lot of conditional
+logic to handle the different package managers.
+
+=use-package= as a macro does some fairly nice things under the hood, but
+obfuscates a lot of what is going on in order to provide a consistent interface
+to writing your own configuration. You can, if you choose, learn a lot from
+=use-package= by simply running it through =macroexpand= and reviewing the result.
+To learn more, you can peruse the source code for
+[[https://github.com/jwiegley/use-package][use-package]].
+
 *** Reversible
 
    Not everyone will agree with our decisions, so each customization should be
