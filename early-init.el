@@ -7,7 +7,7 @@
 
 ;;; Emacs lisp source/compiled preference
 ;; Prefer loading newest compiled .el file
-(customize-set-variable 'load-prefer-newer noninteractive)
+(customize-set-variable 'load-prefer-newer t)
 
 ;;; Crafted Config Path
 ;;
