@@ -38,8 +38,8 @@
       via faces. It has effect only if face (see above) is present
       in whitespace-style.
 
-    See the commentary for this variable (=C-h v whitespace-style
-    RET=) for more options. This variable can be changed through the
+    See the commentary for this variable (=C-h v whitespace-style RET=)
+    for more options. This variable can be changed through the
     Customization UI or by adding to =config.el=
 
     #+begin_src emacs-lisp
