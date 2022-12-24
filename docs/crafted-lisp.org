@@ -116,12 +116,12 @@
    languages including Racket. There are several modules availble for
    Geiser. We provide the configuration for Guile and Racket, but
    others can be added, see the Commentary section for this module to
-   see a list of other modules, or look for them by running =M-x
-   list-packages= and seaching for =geiser=.
+   see a list of other modules, or look for them by running
+   =M-x list-packages= and seaching for =geiser=.
 
    When visiting a scheme file, use =M-x gieser-run= to start a
-   REPL. Alternatively, you can use =M-x geiser-guile= or =M-x
-   geiser-racket-connect=.
+   REPL. Alternatively, you can use =M-x geiser-guile= or
+   =M-x geiser-racket-connect=.
 
    If you have installed multiple scheme implementations, you may wish
    to set the =scheme-program-name= variable, which we default to
