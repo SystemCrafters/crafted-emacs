@@ -94,7 +94,7 @@
 ** Common Lisp
 
    The configuration for Common Lisp features Sylvester the cat's
-   Common Lisp IDE for Emacs. It provides a debugger, inspecter, xref,
+   Common Lisp IDE for Emacs. It provides a debugger, inspector, xref,
    completion, integration with ASDF and Quicklsp system definition
    tools.
 
