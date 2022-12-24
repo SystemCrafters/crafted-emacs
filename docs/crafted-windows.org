@@ -5,7 +5,7 @@
 To use this module, simply require it in your config.
 
 #+begin_src emacs-lisp
-(require 'crafted-evil)
+(require 'crafted-windows)
 #+end_src
 
 ** Description
