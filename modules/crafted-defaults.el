@@ -94,6 +94,9 @@
 (crafted-defaults--sensible-path crafted-config-var-directory
                                  'savehist-file "history")
 
+(crafted-defaults--sensible-path crafted-config-var-directory
+                                 'auto-save-list-file-prefix "auto-save-list/.saves-")
+
 (with-eval-after-load 'saveplace
   (crafted-defaults--sensible-path crafted-config-var-directory
                                     'save-place-file "places"))
