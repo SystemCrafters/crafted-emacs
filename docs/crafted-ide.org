@@ -18,7 +18,7 @@
 ** Workarounds
 
    When eglot initializes management of a buffer, it overwrites
-   =flymake-diagnostic-functions=.  However, Not all LSP servers support
+   =flymake-diagnostic-functions=.  However, not all LSP servers support
    multiple checkers, and eglot does not support multiple servers, so
    this can disable required mode specific checkers.
 
