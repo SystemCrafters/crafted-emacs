@@ -32,7 +32,6 @@
 ;;; Code:
 
 (crafted-package-install-package 'all-the-icons)
-(crafted-package-install-package 'doom-modeline)
 (crafted-package-install-package 'elisp-demos)
 (crafted-package-install-package 'helpful)
 
@@ -45,6 +44,12 @@ as accepted by `set-face-attribute'."
   (when spec
     (apply 'set-face-attribute 'default nil spec)))
 
+(defun crafted-ui--toggle-doom-modeline-mode (state)
+  "Turn on/off doom-modeline-mode if it is installed.
+
+STATE is either 1 to turn the mode on, or -1 to turn it off."
+  (when (package-installed-p 'doom-modeline)
+    (doom-modeline-mode state)))
 
 (defgroup crafted-ui '()
   "User interface related configuration for Crafted Emacs."
@@ -78,11 +83,12 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
   :set (lambda (sym val)
          (set-default sym val)
          (if val
-             (doom-modeline-mode 1)
-           (doom-modeline-mode -1))))
+             (crafted-ui--toggle-doom-modeline-mode 1)
+           (crafted-ui--toggle-doom-modeline-mode -1))))
 
 ;; Configure `doom-modeline' if it is enabled
 (when crafted-ui-use-doom-modeline
+  (crafted-package-install-package 'doom-modeline)
   (customize-set-variable 'doom-modeline-height 15)
   (customize-set-variable 'doom-modeline-bar-width 6)
   (customize-set-variable 'doom-modeline-minor-modes t)

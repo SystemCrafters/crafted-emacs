@@ -1,0 +1,135 @@
+* Configuring a package manager
+
+  The default package manager in @@texinfo:@emph{Crafted Emacs}@@ is
+  =package.el=.  As this is built-in, it is the most commonly used
+  package manager or package backend.  The alternative package manager
+  is =straight.el= which some prefer for its features of locking
+  revisions and reproducability as it uses =git= directly to pull
+  packages from source rather than the package repositories where
+  prebuilt versions reside.
+
+  This section will cover how @@texinfo:@emph{Crafted Emacs}@@
+  installs packages and how you can choose either =package.el= or
+  =straight.el= for your configuration.
+
+  Since @@texinfo:@emph{Crafted Emacs}@@ supports two different
+  package managers, a simple wrapper macro is used to provide a simple
+  interface for package management within the modules.  There is no
+  requirement to use this macro interface within your own
+  configuration files, although you are welcome to do so.
+
+  - =crafted-package-install-package PACKAGE= will install a package using the
+    preferred package manager.
+  - =crafted package-installed-p PACKAGE= is a predicate which returns =t= or
+    =nil= if the package is installed.
+  - =crafted-package-system= is a variable, possible values are
+    ='package= or ='straight=, set this to the appropriate value for
+    your choice of package manager.  The default is ='package=.
+  - =crafted-package-bootstrap= This function is called in the
+    =early-init.el= file, it takes an optional package manager.  It
+    will load the bootstrap configuration for the package manager
+    chosen.  You should not need to call this function, as setting the
+    above variable in your =early-config.el= file is used in calling
+    this function after your =early-config.el= file loads. 
+
+* Using =package.el= 
+
+   =package.el= uses package archives to pull prebuilt packages from
+   and install on your system.  The following repositories, called
+   @@texinfo:@emph{elpas}@@ (for Emacs Lisp Package Archives) are
+   configured:
+
+   - @@texinfo:@strong{"gnu"}@@ - packages which use the GNU GPL (GNU
+     General Public License) for their license and for which the
+     author has signed the copyright release to the Free Software
+     Foundation.  Maintenance is by the GNU Emacs maintainers.
+   - @@texinfo:@strong{"nongnu"}@@ - packages which may or may not use
+     the GNU GPL for their license, but which the authors have not
+     signed copyright release to the Free Software Foundation, however
+     authors must follow a list of rules for package submission.  The
+     decision to include a package is left to the discretion of the
+     GNU Emacs maintainers.
+   - @@texinfo:@strong{"stable"}@@ - MELPA packages which have a
+     version tag in their =git= repository, these are pulled and built
+     on a regular basis as needed when the tag version changes.
+   - @@texinfo:@strong{"melpa"}@@ - hosts prebuilt development
+     packages based on the latest commit in the respective =git=
+     repository.  These will have version numbers similar to this:
+     =20210701.839= which is essentially a date stamp when the package
+     was built.
+
+   @@texinfo:@emph{Crafted Emacs}@@ prefers released versions, if
+   available, for all packages installed.  In preference order,
+   =package.el= will look for packages from "gnu", then "nongnu", then
+   "stable", and finally from "melpa".  The first three elpas offer
+   released versions only.  The last offers a development snapshot of
+   the package to install.
+
+   On startup, @@texinfo:@emph{Crafted Emacs}@@ will check daily (by
+   default) if the elpas listed are stale and need to be refreshed.
+   If they are stale, =package-refresh-contents= is run in the
+   background.  The following variables control this behavior:
+
+   - =crafted-bootstrap-package-perform-stale-archive-check= will turn
+     on or off the check to see if any of the listed elpas are stale.
+     They are considered stale if they have not been updated
+     recently.  By default, this is set to =t=.  Set it to =nil= to
+     turn off stale checks on startup.  This can be useful if you are
+     behind restrictive firewalls or proxy configurations since
+     performing the checks can affect startup performance. 
+   - =crafted-bootstrap-package-update-days= sets the number days
+     before an elpa is considered stale.  The default value is =1=.
+     Increase this number to wait longer between checks.  This value
+     is ignored if the previous variable is set to =nil=.
+
+   Once @@texinfo:@emph{Crafted Emacs}@@ is up and running, no stale
+   checks are made.  Thus, if you run @@texinfo:@emph{Crafted Emacs}@@
+   for several days without restarting Emacs, you'll need to refresh
+   the elpas manually.  This is done automatically when running
+   =package-list-packages=.
+
+* Using =straight.el=
+
+   The =straight.el= package manager uses the MELPA archive to pull a
+   list of "recipes" for building a package.  Each recipe contains a
+   =git= repository from which to pull the source.  By default, the
+   macro =crafted-package-install-package= will use =straight.el= to
+   install the current commit from the master branch.  This is
+   essentially what is happening with the MELPA archive when using
+   =package.el=.  You may choose to provide your own recipe in your
+   configuration for the modules you would otherwise have used from
+   @@texinfo:@emph{Crafted Emacs}@@.
+
+   For example, @@texinfo:@emph{Crafted Emacs}@@ might expand the
+   macro to be the following code:
+
+   #+begin_src emacs-lisp
+     (straight-use-package 'el-patch)
+   #+end_src
+
+   However, you may prefer something a bit more descriptive like this
+   (from the [[https://github.com/radian-software/straight.el][straight.el]] documentation):
+
+   #+begin_src emacs-lisp
+     (straight-use-package
+      '(el-patch :type git :host github :repo "radian-software/el-patch"
+                 :fork (:host github
+                              :repo "your-name/el-patch")))
+   #+end_src
+
+   If you need or prefer the latter, you can choose one of the
+   following options:
+
+   - Create a custom module in the =custom-modules= folder, copy the
+     contents of the module you would like to override and replace the
+     usage of =crafted-package-install-package= with your own recipe
+     like the second example above.
+   - You can create an entry for =straight-recipe-overrides= with the
+     preferred recipe for the appropriate package.  This possibly
+     implies not caring about profiles. 
+   - You can create a local recipe repository and add it to the list
+     of recipe repositories in =straight-recipe-repositories=.
+
+   For the latter two, see the documentation for overriding recipes in
+   =straight.el=, exact details are beyond the scope of this document
+   and are more up-to-date on the official =straight.el= website.

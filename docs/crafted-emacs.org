@@ -148,6 +148,10 @@ Emacs configuration journey.
     CRAFTED_EMACS_HOME=~/my-crafted-emacs-config
   #+end_src
 
+** Managing packages
+
+   #+include: crafted-package.org
+
 ** How the crafted config file is found
 
    The crafted config files (=config.el= and =early-config.el=) are
@@ -168,13 +172,15 @@ Emacs configuration journey.
   - Use the =HOME= environment variable to make the path, which expands to
     =$HOME/.crafted-emacs=.
 
-  Once the =crafted-config-path= is determined, if it does not exist in the file system, it is created. However, just the path is created, the files =config.el= and =early-config.el= must be created by you.
+  Once the =crafted-config-path= is determined, if it does not exist
+  in the file system, it is created. However, just the path is
+  created, the files =config.el= and =early-config.el= must be created
+  by you.
 
 ** Example Configuration:
 
   #+caption: Example of user created Crafted Emacs @@texinfo:@code{config.el}@@ file.
   #+begin_src emacs-lisp
-
     (require 'crafted-defaults)
     (require 'crafted-screencast)
     (require 'crafted-ui)
@@ -190,7 +196,6 @@ Emacs configuration journey.
 
     (crafted-package-install-package 'doom-themes)
     (load-theme 'doom-one t)
-
   #+end_src
 
   See the =examples= folder in the git-repo for more up to date and comprehensive

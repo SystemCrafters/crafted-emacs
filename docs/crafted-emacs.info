@@ -1,4 +1,4 @@
-This is crafted-emacs.info, produced by makeinfo version 7.0 from
+This is crafted-emacs.info, produced by makeinfo version 7.0.1 from
 crafted-emacs.texi.
 
 Copyright © 2022 System Crafters Community
@@ -64,9 +64,16 @@ configuration journey.
 
 Customization
 
+* Managing packages::
 * How the crafted config file is found::
 * Example Configuration::
 * The ‘custom.el’ file: The customel file.
+
+Managing packages
+
+* Configuring a package manager::
+* Using ‘package.el’: Using packageel.
+* Using ‘straight.el’: Using straightel.
 
 The ‘custom.el’ file
 
@@ -293,14 +300,166 @@ of the configuration directory.
 
 * Menu:
 
+* Managing packages::
 * How the crafted config file is found::
 * Example Configuration::
 * The ‘custom.el’ file: The customel file.
 
 
-File: crafted-emacs.info,  Node: How the crafted config file is found,  Next: Example Configuration,  Up: Customization
+File: crafted-emacs.info,  Node: Managing packages,  Next: How the crafted config file is found,  Up: Customization
 
-4.1 How the crafted config file is found
+4.1 Managing packages
+=====================
+
+* Menu:
+
+* Configuring a package manager::
+* Using ‘package.el’: Using packageel.
+* Using ‘straight.el’: Using straightel.
+
+
+File: crafted-emacs.info,  Node: Configuring a package manager,  Next: Using packageel,  Up: Managing packages
+
+4.1.1 Configuring a package manager
+-----------------------------------
+
+The default package manager in _Crafted Emacs_ is ‘package.el’.  As this
+is built-in, it is the most commonly used package manager or package
+backend.  The alternative package manager is ‘straight.el’ which some
+prefer for its features of locking revisions and reproducability as it
+uses ‘git’ directly to pull packages from source rather than the package
+repositories where prebuilt versions reside.
+
+   This section will cover how _Crafted Emacs_ installs packages and how
+you can choose either ‘package.el’ or ‘straight.el’ for your
+configuration.
+
+   Since _Crafted Emacs_ supports two different package managers, a
+simple wrapper macro is used to provide a simple interface for package
+management within the modules.  There is no requirement to use this
+macro interface within your own configuration files, although you are
+welcome to do so.
+
+   • ‘crafted-package-install-package PACKAGE’ will install a package
+     using the preferred package manager.
+   • ‘crafted package-installed-p PACKAGE’ is a predicate which returns
+     ‘t’ or ‘nil’ if the package is installed.
+   • ‘crafted-package-system’ is a variable, possible values are
+     ‘'package’ or ‘'straight’, set this to the appropriate value for
+     your choice of package manager.  The default is ‘'package’.
+   • ‘crafted-package-bootstrap’ This function is called in the
+     ‘early-init.el’ file, it takes an optional package manager.  It
+     will load the bootstrap configuration for the package manager
+     chosen.  You should not need to call this function, as setting the
+     above variable in your ‘early-config.el’ file is used in calling
+     this function after your ‘early-config.el’ file loads.
+
+
+File: crafted-emacs.info,  Node: Using packageel,  Next: Using straightel,  Prev: Configuring a package manager,  Up: Managing packages
+
+4.1.2 Using ‘package.el’
+------------------------
+
+‘package.el’ uses package archives to pull prebuilt packages from and
+install on your system.  The following repositories, called _elpas_ (for
+Emacs Lisp Package Archives) are configured:
+
+   • *"gnu"* - packages which use the GNU GPL (GNU General Public
+     License) for their license and for which the author has signed the
+     copyright release to the Free Software Foundation.  Maintenance is
+     by the GNU Emacs maintainers.
+   • *"nongnu"* - packages which may or may not use the GNU GPL for
+     their license, but which the authors have not signed copyright
+     release to the Free Software Foundation, however authors must
+     follow a list of rules for package submission.  The decision to
+     include a package is left to the discretion of the GNU Emacs
+     maintainers.
+   • *"stable"* - MELPA packages which have a version tag in their ‘git’
+     repository, these are pulled and built on a regular basis as needed
+     when the tag version changes.
+   • *"melpa"* - hosts prebuilt development packages based on the latest
+     commit in the respective ‘git’ repository.  These will have version
+     numbers similar to this: ‘20210701.839’ which is essentially a date
+     stamp when the package was built.
+
+   _Crafted Emacs_ prefers released versions, if available, for all
+packages installed.  In preference order, ‘package.el’ will look for
+packages from "gnu", then "nongnu", then "stable", and finally from
+"melpa".  The first three elpas offer released versions only.  The last
+offers a development snapshot of the package to install.
+
+   On startup, _Crafted Emacs_ will check daily (by default) if the
+elpas listed are stale and need to be refreshed.  If they are stale,
+‘package-refresh-contents’ is run in the background.  The following
+variables control this behavior:
+
+   • ‘crafted-bootstrap-package-perform-stale-archive-check’ will turn
+     on or off the check to see if any of the listed elpas are stale.
+     They are considered stale if they have not been updated recently.
+     By default, this is set to ‘t’.  Set it to ‘nil’ to turn off stale
+     checks on startup.  This can be useful if you are behind
+     restrictive firewalls or proxy configurations since performing the
+     checks can affect startup performance.
+   • ‘crafted-bootstrap-package-update-days’ sets the number days before
+     an elpa is considered stale.  The default value is ‘1’.  Increase
+     this number to wait longer between checks.  This value is ignored
+     if the previous variable is set to ‘nil’.
+
+   Once _Crafted Emacs_ is up and running, no stale checks are made.
+Thus, if you run _Crafted Emacs_ for several days without restarting
+Emacs, you’ll need to refresh the elpas manually.  This is done
+automatically when running ‘package-list-packages’.
+
+
+File: crafted-emacs.info,  Node: Using straightel,  Prev: Using packageel,  Up: Managing packages
+
+4.1.3 Using ‘straight.el’
+-------------------------
+
+The ‘straight.el’ package manager uses the MELPA archive to pull a list
+of "recipes" for building a package.  Each recipe contains a ‘git’
+repository from which to pull the source.  By default, the macro
+‘crafted-package-install-package’ will use ‘straight.el’ to install the
+current commit from the master branch.  This is essentially what is
+happening with the MELPA archive when using ‘package.el’.  You may
+choose to provide your own recipe in your configuration for the modules
+you would otherwise have used from _Crafted Emacs_.
+
+   For example, _Crafted Emacs_ might expand the macro to be the
+following code:
+
+     (straight-use-package 'el-patch)
+
+   However, you may prefer something a bit more descriptive like this
+(from the straight.el (https://github.com/radian-software/straight.el)
+documentation):
+
+     (straight-use-package
+      '(el-patch :type git :host github :repo "radian-software/el-patch"
+                 :fork (:host github
+                              :repo "your-name/el-patch")))
+
+   If you need or prefer the latter, you can choose one of the following
+options:
+
+   • Create a custom module in the ‘custom-modules’ folder, copy the
+     contents of the module you would like to override and replace the
+     usage of ‘crafted-package-install-package’ with your own recipe
+     like the second example above.
+   • You can create an entry for ‘straight-recipe-overrides’ with the
+     preferred recipe for the appropriate package.  This possibly
+     implies not caring about profiles.
+   • You can create a local recipe repository and add it to the list of
+     recipe repositories in ‘straight-recipe-repositories’.
+
+   For the latter two, see the documentation for overriding recipes in
+‘straight.el’, exact details are beyond the scope of this document and
+are more up-to-date on the official ‘straight.el’ website.
+
+
+File: crafted-emacs.info,  Node: How the crafted config file is found,  Next: Example Configuration,  Prev: Managing packages,  Up: Customization
+
+4.2 How the crafted config file is found
 ========================================
 
 The crafted config files (‘config.el’ and ‘early-config.el’) are found
@@ -329,9 +488,8 @@ files ‘config.el’ and ‘early-config.el’ must be created by you.
 
 File: crafted-emacs.info,  Node: Example Configuration,  Next: The customel file,  Prev: How the crafted config file is found,  Up: Customization
 
-4.2 Example Configuration:
+4.3 Example Configuration:
 ==========================
-
 
      (require 'crafted-defaults)
      (require 'crafted-screencast)
@@ -350,7 +508,6 @@ File: crafted-emacs.info,  Node: Example Configuration,  Next: The customel file
      (load-theme 'doom-one t)
 
 
-
 Listing 4.2: Example of user created Crafted Emacs ‘config.el’ file.
 
 See the ‘examples’ folder in the git-repo for more up to date and
@@ -359,7 +516,7 @@ comprehensive examples.
 
 File: crafted-emacs.info,  Node: The customel file,  Prev: Example Configuration,  Up: Customization
 
-4.3 The ‘custom.el’ file
+4.4 The ‘custom.el’ file
 ========================
 
 The ‘custom.el’ file will hold the auto-generated code from the Emacs
@@ -375,7 +532,7 @@ Customization UI.
 
 File: crafted-emacs.info,  Node: Simplified overview of how Emacs Customization works,  Next: Loading the customel file,  Up: The customel file
 
-4.3.1 Simplified overview of how Emacs Customization works
+4.4.1 Simplified overview of how Emacs Customization works
 ----------------------------------------------------------
 
 Customizable values are defined with the ‘defcustom’ form, and can be
@@ -406,7 +563,7 @@ the same name (see example below).
 
 File: crafted-emacs.info,  Node: Loading the customel file,  Next: Not loading the customel file,  Prev: Simplified overview of how Emacs Customization works,  Up: The customel file
 
-4.3.2 Loading the ‘custom.el’ file
+4.4.2 Loading the ‘custom.el’ file
 ----------------------------------
 
 This is important because if you, the user, wish to use the
@@ -471,7 +628,7 @@ Listing 4.4: Example auto-generated ‘custom.el’ file.
 
 File: crafted-emacs.info,  Node: Not loading the customel file,  Next: Caveat on the timing of loading customel,  Prev: Loading the customel file,  Up: The customel file
 
-4.3.3 Not loading the ‘custom.el’ file
+4.4.3 Not loading the ‘custom.el’ file
 --------------------------------------
 
 You may choose not to load the ‘custom.el’ file if you are writing your
@@ -506,7 +663,7 @@ directly.
 
 File: crafted-emacs.info,  Node: Caveat on the timing of loading customel,  Prev: Not loading the customel file,  Up: The customel file
 
-4.3.4 Caveat on the timing of loading ‘custom.el’
+4.4.4 Caveat on the timing of loading ‘custom.el’
 -------------------------------------------------
 
 Even if you are using emacs-lisp to customize Emacs, you may still
@@ -2096,69 +2253,73 @@ Appendix A MIT License
 
 
 Tag Table:
-Node: Top1408
-Node: Principles4223
-Node: Why use it?7287
-Node: Folder structure7965
-Node: Customization9063
-Ref: orge1803009867
-Node: How the crafted config file is found10151
-Node: Example Configuration11595
-Ref: org9fef8da11799
-Node: The customel file12450
-Node: Simplified overview of how Emacs Customization works12996
-Node: Loading the customel file14714
-Ref: configel16015
-Ref: customel16564
-Node: Not loading the customel file17294
-Ref: org45f63f618177
-Node: Caveat on the timing of loading customel18767
-Ref: configel (1)19433
-Ref: customel (1)19701
-Node: Using it with Chemacs220208
-Ref: org9ebd92c21021
-Ref: orge71153921420
-Ref: org7e9dfe821730
-Node: Contributing22079
-Node: Modules22716
-Node: Crafted Emacs Completion Module24035
-Node: Crafted Emacs Defaults Module33418
-Node: Sensible path defaults41128
-Node: Crafted Emacs Editing Module42107
-Node: Crafted Emacs Evil Module46794
-Node: Installation47098
-Node: Description47323
-Node: Customization Variables48616
-Node: Some default settings50380
-Node: Crafted Emacs IDE Module51618
-Node: Provided configuration52096
-Node: Workarounds52519
-Node: Crafted Emacs Lisp Module53380
-Node: Packages Installed56000
-Node: Common56587
-Node: Common Lisp57201
-Node: Clojure57556
-Node: Scheme/Racket58083
-Node: Crafted Mastering Emacs Module59077
-Node: Completions59876
-Node: Window configuration62426
-Node: Buffer management64291
-Node: Spell checking64974
-Node: Additional packages65415
-Node: Crafted Emacs Project Module67062
-Node: Crafted Emacs Python Module68179
-Node: Packages Installed (1)68780
-Node: Provided configuration (1)69780
-Node: Suggested keybindings71100
-Node: Crafted Emacs Windows Module72019
-Node: Installation (1)72313
-Node: Description (1)72551
-Node: Crafted Workspaces Module73996
-Node: Provided configuration (2)74383
-Node: Workarounds (1)74973
-Node: Troubleshooting75458
-Node: A package (suddenly?) fails to work75694
-Node: MIT License79500
+Node: Top1410
+Node: Principles4389
+Node: Why use it?7453
+Node: Folder structure8131
+Node: Customization9229
+Ref: orgdbc69f910033
+Node: Managing packages10339
+Node: Configuring a package manager10635
+Node: Using packageel12580
+Node: Using straightel15624
+Node: How the crafted config file is found17684
+Node: Example Configuration19154
+Ref: org2e28c4c19358
+Node: The customel file20007
+Node: Simplified overview of how Emacs Customization works20553
+Node: Loading the customel file22271
+Ref: configel23572
+Ref: customel24121
+Node: Not loading the customel file24851
+Ref: orgda2a0e025734
+Node: Caveat on the timing of loading customel26324
+Ref: configel (1)26990
+Ref: customel (1)27258
+Node: Using it with Chemacs227765
+Ref: org7190f9b28578
+Ref: orgaa619f428977
+Ref: orge37519429287
+Node: Contributing29636
+Node: Modules30273
+Node: Crafted Emacs Completion Module31592
+Node: Crafted Emacs Defaults Module40975
+Node: Sensible path defaults48685
+Node: Crafted Emacs Editing Module49664
+Node: Crafted Emacs Evil Module54351
+Node: Installation54655
+Node: Description54880
+Node: Customization Variables56173
+Node: Some default settings57937
+Node: Crafted Emacs IDE Module59175
+Node: Provided configuration59653
+Node: Workarounds60076
+Node: Crafted Emacs Lisp Module60937
+Node: Packages Installed63557
+Node: Common64144
+Node: Common Lisp64758
+Node: Clojure65113
+Node: Scheme/Racket65640
+Node: Crafted Mastering Emacs Module66634
+Node: Completions67433
+Node: Window configuration69983
+Node: Buffer management71848
+Node: Spell checking72531
+Node: Additional packages72972
+Node: Crafted Emacs Project Module74619
+Node: Crafted Emacs Python Module75736
+Node: Packages Installed (1)76337
+Node: Provided configuration (1)77337
+Node: Suggested keybindings78657
+Node: Crafted Emacs Windows Module79576
+Node: Installation (1)79870
+Node: Description (1)80108
+Node: Crafted Workspaces Module81553
+Node: Provided configuration (2)81940
+Node: Workarounds (1)82530
+Node: Troubleshooting83015
+Node: A package (suddenly?) fails to work83251
+Node: MIT License87057
 
 End Tag Table
 
