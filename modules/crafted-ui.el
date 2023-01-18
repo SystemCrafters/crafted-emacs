@@ -44,13 +44,6 @@ as accepted by `set-face-attribute'."
   (when spec
     (apply 'set-face-attribute 'default nil spec)))
 
-(defun crafted-ui--toggle-doom-modeline-mode (state)
-  "Turn on/off doom-modeline-mode if it is installed.
-
-STATE is either 1 to turn the mode on, or -1 to turn it off."
-  (when (package-installed-p 'doom-modeline)
-    (doom-modeline-mode state)))
-
 (defgroup crafted-ui '()
   "User interface related configuration for Crafted Emacs."
   :tag "Crafted UI"
@@ -73,26 +66,6 @@ Use a plist with the same key names as accepted by `set-face-attribute'."
          (set-default sym val)
          (when (and val (not (eq val prev-val)))
            (crafted-ui--set-default-font val)))))
-
-;;;; Mode-Line
-(defcustom crafted-ui-use-doom-modeline nil
-  "Use doom-modeline-mode."
-  :group 'crafted-ui
-  :type 'boolean
-  :tag "Use Doom Modeline"
-  :set (lambda (sym val)
-         (set-default sym val)
-         (if val
-             (crafted-ui--toggle-doom-modeline-mode 1)
-           (crafted-ui--toggle-doom-modeline-mode -1))))
-
-;; Configure `doom-modeline' if it is enabled
-(when crafted-ui-use-doom-modeline
-  (crafted-package-install-package 'doom-modeline)
-  (customize-set-variable 'doom-modeline-height 15)
-  (customize-set-variable 'doom-modeline-bar-width 6)
-  (customize-set-variable 'doom-modeline-minor-modes t)
-  (customize-set-variable 'doom-modeline-buffer-file-name-style 'truncate-except-project))
 
 ;;;; Help Buffers
 

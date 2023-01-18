@@ -9,6 +9,15 @@ needs of the community.  We would encourage you to try using this configuration,
 especially if you enjoy tinkering a bit on getting Emacs to work "just
 right"(tm) for you. 
 
+* !!! Major changes coming !!!
+
+Crafted Emacs is going through a fairly major update which may (or will!) be
+disruptive to most users.  This is an early notification of the changes coming. 
+The changes will be made on a branch and which will be published later (watch this 
+space, reddit #planetemacs, and/or emacs.ch/@wolfjb for announcements)
+
+For an early preview of the changes coming see my [[https://write.as/jeffbowman/crafted-emacs-update-for-january-2023-a-new-direction][blog post]].
+
 * Transition from an existing Rational Emacs configuration
 
 This project was originally called _Rational Emacs_. However, we chose to rename
