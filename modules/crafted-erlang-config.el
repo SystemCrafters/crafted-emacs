@@ -1,4 +1,4 @@
-;;; crafted-erlang.el --- Erlang development configuration  -*- lexical-binding: t; -*-
+;;; crafted-erlang-config.el --- Erlang development configuration  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -17,13 +17,8 @@
 
 ;;; Code:
 
-(crafted-package-install-package 'erlang)
-(crafted-package-install-package 'eglot)
-
-;; Hooks
-
 (add-hook 'erlang-mode-hook 'erlang-edoc-mode)
 (add-hook 'erlang-mode-hook #'eglot-ensure)
 
-(provide 'crafted-erlang)
-;;; crafted-erlang.el ends here
+(provide 'crafted-erlang-config)
+;;; crafted-erlang-config.el ends here

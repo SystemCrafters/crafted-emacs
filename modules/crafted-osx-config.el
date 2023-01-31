@@ -1,4 +1,4 @@
-;;; crafted-osx.el --- osx specific config -*- lexical-binding: t -*-
+;;; crafted-osx-config.el --- osx specific config -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -11,24 +11,11 @@
 
 ;;; Code:
 
-(defgroup crafted-osx '()
-  "Osx specific configurations for Crafted Emacs."
-  :tag "Crafted Osx"
-  :group 'crafted)
-
-;; Define configuration variables
-(define-obsolete-variable-alias
-  'rational-osx-transparent-titlebar
-  'crafted-osx-transparent-titlebar
-  "1")
-(defcustom crafted-osx-transparent-titlebar nil
-  "When set the osx title bar will become the same color as the emacs frame"
-  :group 'crafted-osx
-  :type 'boolean)
-
 ;; titlebar
 
-(when crafted-osx-transparent-titlebar
+(defun crafted-osx-transparent-titlebar ()
+  "Set the titlebar to be transparent."
+  (interactive)
   (customize-set-variable frame-resize-pixelwise t)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
   (add-to-list 'default-frame-alist '(selected-frame) 'name nil)
@@ -66,5 +53,5 @@
   (when (display-graphic-p)
     (ns-raise-emacs)))
 
-(provide 'crafted-osx)
-;;; crafted-osx.el ends here
+(provide 'crafted-osx-config)
+;;; crafted-osx-config.el ends here

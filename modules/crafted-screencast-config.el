@@ -5,17 +5,16 @@
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
 ;; Screencast configuration
 
 ;;; Code:
 
-(crafted-package-install-package 'keycast)
-
-(customize-set-variable 'keycast-remove-tail-elements nil)
-(customize-set-variable 'keycast-insert-after 'mode-line-misc-info)
-(keycast-mode)
+(when (featurep 'keycast)
+  (customize-set-variable 'keycast-remove-tail-elements nil)
+  (customize-set-variable 'keycast-insert-after 'mode-line-misc-info)
+  (keycast-mode))
 
 (provide 'crafted-screencast)
 ;;; crafted-screencast.el ends here

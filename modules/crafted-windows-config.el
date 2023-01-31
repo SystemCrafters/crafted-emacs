@@ -1,11 +1,11 @@
-;;; crafted-windows.el -*- lexical-binding: t; -*-
+;;; crafted-windows-config.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
 ;; Emacs windows configuration.
 
@@ -16,24 +16,13 @@
   :tag "Crafted Windows"
   :group 'crafted)
 
-(define-obsolete-variable-alias
-  'rational-windows-evil-style
-  'crafted-windows-evil-style
-  "1")
-(defcustom crafted-windows-evil-style nil
-  "When non-nil, window movement will use evil-style bindings."
-  :group 'crafted-windows
-  :type 'boolean)
-
-(define-obsolete-variable-alias
-  'rational-windows-prefix-key
-  'crafted-windows-prefix-key
-  "1")
-
 (defcustom crafted-windows-prefix-key "C-c w"
-  "Configure the prefix key for `crafted-windows' bindings."
+  "Configure the prefix key for window movement bindings.
+
+Movment commands provided by `windmove' package, `winner-mode'
+also enables undo functionality if the window layout changes."
   :group 'crafted-windows
-  :type 'key)
+  :type 'string)
 
 (winner-mode 1)
 
@@ -47,5 +36,5 @@
 
 (global-set-key (kbd crafted-windows-prefix-key) 'crafted-windows-key-map)
 
-(provide 'crafted-windows)
-;;; crafted-windows.el ends here
+(provide 'crafted-windows-config)
+;;; crafted-windows-config.el ends here

@@ -1,4 +1,4 @@
-;;;; crafted-compile.el --- Autocompile emacs-lisp code  -*- lexical-binding: t; -*-
+;;;; crafted-compile-config.el --- Autocompile emacs-lisp code  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -11,14 +11,15 @@
 ;; This module defines variables, functions and hooks to enable
 ;; automatic compilation of some emacs-lisp source files.
 
-;; This could be activated for the `modules' subdirectory under your
-;; `user-emacs-directory', your files under `crafted-config-path', or
-;; all files with mode `emacs-lisp-mode' after saving the file.
+;; This could be activated for the `modules' subdirectory in the
+;; `crafted-config-home' folder (where you cloned the crafted-emacs
+;; project), the `custom-modules' folder under your
+;; `user-emacs-directory', or all files with mode `emacs-lisp-mode'
+;; after saving the file.
 
 ;; It also chooses to compile to byte-code or native code depending if
 ;; the feature is available on the current build.
 
-
 ;;; Code:
 
 
@@ -35,8 +36,11 @@
   "A list of modules to compile.")
 
 (defvar crafted-compile-modules-path
-  `(,(expand-file-name "custom-modules" crafted-config-path)
-    ,(expand-file-name "modules" user-emacs-directory))
+  (seq-filter (lambda (x) (not (null x)))
+              `(,(let ((custom-modules (expand-file-name "custom-modules" user-emacs-directory))
+                       (modules (expand-file-name "modules" crafted-emacs-home)))
+                   (if (file-readable-p custom-modules) custom-modules nil)
+                   (if (file-readable-p modules) modules nil))))
   "Path where to locate modules.")
 
 (defvar crafted-compile-user-configuration t
@@ -79,11 +83,12 @@ directories defined in `crafted-compile-modules-path' and
 It returns the first source-file that matches for the MODULE in
 the order specified search path.  If it finds none, it retorns
 nil."
-  (let ((dir (seq-find (lambda (dir)
-               (file-exists-p (expand-file-name (format "%s.el" (symbol-name module)) dir)))
-             (or path
-                 (flatten-list `(,crafted-compile-modules-path
-                                 ,crafted-compile-extra-directories-list))))))
+  (let ((dir (seq-find
+              (lambda (dir)
+                (file-exists-p (expand-file-name (format "%s.el" (symbol-name module)) dir)))
+              (or path
+                  (flatten-list `(,crafted-compile-modules-path
+                                  ,crafted-compile-extra-directories-list))))))
     (when dir
       (expand-file-name (format "%s.el" (symbol-name module)) dir))))
 
@@ -118,8 +123,9 @@ directory will be compiled, but not it's subdirectories."
   (if (featurep 'native-compile)
       (dolist (source f)
         (let ((cache (crafted-compile-locate-eln-file (file-name-base source))))
-          (if (or (null cache)
-                  (file-newer-than-file-p cache source))
+          (if (and (or (null cache)
+                       (file-newer-than-file-p cache source))
+		   (file-exists-p source))
               (native-compile-async f)
             (message "Skipping compilation of file %s" source))))
     (dolist (source f)
@@ -154,9 +160,9 @@ D could be a single directory or a list of directories."
 (defun crafted-compile--config-dirs-list ()
   "Returns a list of configured directories to autocompile."
   (flatten-list `(,(and crafted-compile-modules
-                        (expand-file-name "modules/" user-emacs-directory))
+                        (expand-file-name "modules/" crafted-emacs-home))
                   ,(and crafted-compile-user-modules
-                        (expand-file-name "custom-modules/" crafted-config-path))
+                        (expand-file-name "custom-modules/" user-emacs-directory))
                   ,crafted-compile-extra-directories-list)))
 
 ;; A function to get the list of init files with full path:
@@ -169,7 +175,7 @@ D could be a single directory or a list of directories."
 (defun crafted-compile--config-files-list ()
   "Returns a list of the init files."
   (mapcar (lambda (f)
-            (expand-file-name f crafted-config-path))
+            (expand-file-name f user-emacs-directory))
           crafted-compile-config-files-list))
 ;;(crafted-compile--config-files-list)
 
@@ -183,7 +189,7 @@ the init-files (`crafted-compile-init-files-list') within
 
 If `crafted-compile-user-configuration' is non-nil, then it
 compiles the config-files (`crafted-compile-config-files-list')
-within `crafted-config-path'.
+within `user-emacs-directory
 
 If `crafted-compile-modules' is non-nil, then it compiles all
 the source-files for the modules defined in
@@ -194,7 +200,7 @@ in `user-emacs-directory', or in any directory specified in
 If `crafted-compile-user-modules' is non-nil, then it compiles
 all the source-files for the modules defined in
 `crafted-compile-module-list' within the subdirectory 'modules'
-in `crafted-config-path'.
+in `crafted-emacs-home'.
 
 If any source-file for any module specified in
 `crafted-compile-module-list' doesn't exist within the paths
@@ -206,16 +212,18 @@ specified, then it is ignored without a warning."
     (crafted-compile-config))
   (when crafted-compile-modules
     (dolist (module crafted-compile-module-list)
-      (let ((module-src (crafted-locate-module-file module
-                                                     (flatten-list
-                                                      `(,(expand-file-name "modules/" user-emacs-directory)
-                                                        ,crafted-compile-extra-directories-list)))))
+      (let ((module-src (crafted-locate-module-file
+                         module
+                         (flatten-list
+                          `(,(expand-file-name "modules/" crafted-emacs-home)
+                            ,crafted-compile-extra-directories-list)))))
         (when module-src
           (crafted-compile-file module-src)))))
   (when crafted-compile-user-modules
     (dolist (module crafted-compile-module-list)
-      (let ((module-src (crafted-locate-module-file module
-                                                     `(,(expand-file-name "custom-modules/" crafted-config-path)))))
+      (let ((module-src (crafted-locate-module-file
+                         module
+                         `(,(expand-file-name "custom-modules/" user-emacs-directory)))))
         (when module-src
           (crafted-compile-file module-src))))))
 
@@ -263,5 +271,5 @@ The files to be compiled is defined in
               (crafted-compile-buffer))))
 
 ;;; Package:
-(provide 'crafted-compile)
-;;; crafted-compile.el ends here
+(provide 'crafted-compile-config)
+;;; crafted-compile-config.el ends here

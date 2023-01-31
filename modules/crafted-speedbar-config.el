@@ -1,22 +1,22 @@
-;;; crafted-module.el -*- mode: emacs-lisp; mode: outline-minor; lexical-binding: t; -*-
+;;; crafted-speedbar-config.el --- Speedbar configuration -*- mode: emacs-lisp; mode: outline-minor; lexical-binding: t; -*-
 
 ;;; License
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: Erik Lundstedt, System Crafters Community
-;; history:
-;;;: https://gitlab.com/Erik.Lundstedt/crafted-speedbar
+
 ;;; Commentary:
 
-;; this file was made with outline-minor-mode in mind
+;; This file was made with outline-minor-mode in mind
 ;; and therefore have ";;;+"-comments as headders.
 
-;; crafted-moodule to setup "crafted defaults" for speedbar
-;; speedbar is a file-tree (and more) that comes builtin to emacs
-;; it also has integreation with some packages like Rmail and projectile
+;; Configuration for speedbar, a file-tree (and more), that comes
+;; builtin to Emacs it also has integration with some packages like
+;; Rmail and projectile
 
 ;;; Code:
+
 ;; require the module
 (require 'speedbar)
 
@@ -27,10 +27,8 @@
   (speedbar-change-initial-expansion-list "quick buffers"))
 
 
-;;; keybindings
-;;;; evil
-;;;: im assuming that the "default" builtin keybinds are ok for non-evil users
-;;;: feel free to contribute vanilla keybinds
+;;; Keybindings:
+;;;; evil-mode adjustments
 (with-eval-after-load 'speedbar
   (with-eval-after-load 'evil
     ;;edit/open file under point
@@ -43,11 +41,10 @@
     ;;useful for quickly switching to an open buffer
     (define-key speedbar-mode-map (kbd "b") 'speedbar-switch-to-quick-buffers)))
 
-;; this only runs in some cases
 (with-eval-after-load 'evil-collection
   (evil-collection-speedbar-setup))
 
-;;; set some sane defaults, can be easily extended by user
+;;; Set some sane defaults, can be easily extended by user.
 (setq-default speedbar-frame-parameters
               '((name . "speedbar")
                 (title . "speedbar")
@@ -58,8 +55,7 @@
                 (unsplittable . t)
                 (left-fringe . 10)))
 
-;;; list of supported file-extensions
-;; feel free to add to this list
+;;; List of supported file-extensions
 (speedbar-add-supported-extension
  (list
 ;;;; lua and fennel(lisp that transpiles to lua)
@@ -104,7 +100,6 @@
 ;;;; configuration
   ".yaml"
   ".toml"
-  ;; json is already in this list
 ;;;; notes,markup and orgmode
   ".md"
   ".markdown"
@@ -113,10 +108,11 @@
   "README"
   ))
 
-;;; make speedbar update automaticaly, and dont use ugly icons(images)
-(setq-default speedbar-update-flag t)
-(setq-default speedbar-use-images nil)
+;;; Make speedbar update automaticaly, and dont use ugly icons(images)
 ;; this can be set back to use icons by simply doing
 ;;`(setq-default speedbar-use-images t)` in your own config
-(provide 'crafted-speedbar)
-;;; crafted-speedbar.el ends here
+(setq-default speedbar-update-flag t)
+(setq-default speedbar-use-images nil)
+
+(provide 'crafted-speedbar-config)
+;;; crafted-speedbar-config.el ends here

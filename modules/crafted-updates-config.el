@@ -1,16 +1,32 @@
-;;;; crafted-updates.el --- Provides automatic update behavior for the configuration.  -*- lexical-binding: t; -*-
+;;;; crafted-updates-config.el --- Provides automatic update behavior for the configuration.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
+
+;; Checks for updates to the Crafted Emacs project.  Provides a
+;; function to show the updates before pulling changes.
+
+;; FIXME: [2023-01-31 Tue] This no longer works.  The problem is we
+;; don't know where the project was cloned to.  Formerly it was
+;; `user-emacs-directory', however, now we allow the user to clone
+;; this project wherever, add it (ostensibly the modules folder) to
+;; the `load-path' and then build their configuration however they see
+;; fit.  Unless we set a variable like `crafted-emacs-home' there is
+;; no good way to know where this project is cloned.
 
 ;;; Code:
+
+(unless (boundp 'crafted-emacs-home)
+  (setq crafted-emacs-home (project-root (project-current nil (file-name-directory (buffer-file-name)))))
+  (warn (format "crafted-emacs-home is not set.  Attempting to use %s" crafted-emacs-home)))
+
 (autoload 'vc-git--out-ok "vc-git")
 (defun crafted-updates--call-git (&rest args)
-  (let ((default-directory user-emacs-directory))
+  (let ((default-directory crafted-emacs-home))
     (with-temp-buffer
       (if (apply #'vc-git--out-ok args)
           (buffer-string)
@@ -34,9 +50,6 @@
           )
     (run-at-time 1 nil #'crafted-updates--poll-git-fetch-status process)))
 
-(defun crafted-updates--find-init-el ()
-  (find-file-noselect (expand-file-name "init.el" user-emacs-directory)))
-
 (defun crafted-updates-check-for-latest ()
   "Fetches the latest Crafted Emacs commits from GitHub and
 notifies you if there are any updates."
@@ -50,12 +63,16 @@ notifies you if there are any updates."
 Crafted Emacs."
   (interactive)
   (message "Fetching latest commit log for Crafted Emacs...")
-  (with-current-buffer (find-file-noselect (expand-file-name "init.el" user-emacs-directory))
+  (with-current-buffer (find-file-noselect (expand-file-name
+					    "README.org"
+					    crafted-emacs-home))
     (vc-log-incoming)))
 
 (defun crafted-updates--pull-commits ()
   (message "Pulling latest commits to Crafted Emacs...")
-  (with-current-buffer (find-file-noselect (expand-file-name "init.el" user-emacs-directory))
+  (with-current-buffer (find-file-noselect
+			(expand-file-name "README.org"
+					  crafted-emacs-home))
     (vc-pull)))
 
 (defun crafted-updates-pull-latest (do-pull)
@@ -87,10 +104,6 @@ and don't prompt for confirmation."
 
 ;; TODO: use a derived type to check that the value is something `run-at-time'
 ;; will accept
-(define-obsolete-variable-alias
-  'rational-updates-fetch-interval
-  'crafted-updates-fetch-interval
-  "1")
 (defcustom crafted-updates-fetch-interval "24 hours"
   "The interval at which `crafted-updates-mode' will check for updates.
 
@@ -116,5 +129,5 @@ the specified `crafted-updates-fetch-interval'."
   (when crafted-updates-mode
     (crafted-updates--schedule-fetch)))
 
-(provide 'crafted-updates)
-;;; crafted-updates.el ends here
+(provide 'crafted-updates-config)
+;;; crafted-updates-config.el ends here

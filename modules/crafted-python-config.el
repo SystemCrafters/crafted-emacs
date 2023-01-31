@@ -1,4 +1,4 @@
-;;; crafted-python.el --- python configuration      -*- lexical-binding: t; -*-
+;;; crafted-python-config.el --- python configuration      -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -44,41 +44,38 @@
 
 ;;; Code:
 
-(crafted-package-install-package 'anaconda-mode)
-(crafted-package-install-package 'blacken)
-(crafted-package-install-package 'eglot)
-(crafted-package-install-package 'numpydoc)
-(crafted-package-install-package 'pyvenv)
-
 ;; Hooks
-(add-hook 'python-mode-hook #'anaconda-mode)
-(add-hook 'python-mode-hook #'blacken-mode)
+(when (featurep 'anaconda-mode)
+  (add-hook 'python-mode-hook #'anaconda-mode))
+
+(when (featurep 'blacken)
+  (add-hook 'python-mode-hook #'blacken-mode))
+
+;; edloc is built-in
 (add-hook 'python-mode-hook #'eldoc-mode)
-(add-hook 'python-mode-hook #'eglot-ensure)
-(add-hook 'python-mode-hook #'pyvenv-mode)
-(add-hook 'python-mode-hook #'pyvenv-tracking-mode)
+
+(when (featurep 'eglot)
+  (add-hook 'python-mode-hook #'eglot-ensure))
+
+(when (featurep 'pyvenv)
+  (add-hook 'python-mode-hook #'pyvenv-mode)
+  (add-hook 'python-mode-hook #'pyvenv-tracking-mode))
 
 
 ;;; anaconda
-;; move anaconda python installation directory to
-;; `crafted-config-var-directory'
-(customize-set-variable
- 'anaconda-mode-installation-directory
- (expand-file-name "anaconda-mode" crafted-config-var-directory))
-
 ;; for those who use posframe, use it to show docs
-(when (and (crafted-package-installed-p 'posframe)
-           (featurep 'posframe))
+(when (featurep 'posframe)
   (customize-set-variable 'anaconda-mode-use-posframe-show-doc t))
 
 
 ;;; pyvenv
-;; restart python when the virtual environment changes
-(add-hook 'pyvenv-post-activate-hooks #'pyvenv-restart-python)
+(when (featurep 'pyvenv)
+  ;; restart python when the virtual environment changes
+  (add-hook 'pyvenv-post-activate-hooks #'pyvenv-restart-python)
 
-;; default to the commonly used "venv" folder for the virtual
-;; environment
-(customize-set-variable 'pyvenv-default-virtual-env-name "venv")
+  ;; default to the commonly used "venv" folder for the virtual
+  ;; environment
+  (customize-set-variable 'pyvenv-default-virtual-env-name "venv"))
 
 
 ;;; python mode
@@ -87,8 +84,9 @@
 
 
 ;;; numpydoc
-(customize-set-variable 'numpydoc-insert-examples-block nil)
-(customize-set-variable 'numpydoc-template-long nil)
+(when (featurep 'numpydoc)
+  (customize-set-variable 'numpydoc-insert-examples-block nil)
+  (customize-set-variable 'numpydoc-template-long nil))
 
-(provide 'crafted-python)
-;;; crafted-python.el ends here
+(provide 'crafted-python-config)
+;;; crafted-python-config.el ends here

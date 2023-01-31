@@ -1,4 +1,4 @@
-;;;; crafted-mastering-emacs.el --- Configuration based on the book Mastering Emacs  -*- lexical-binding: t; -*-
+;;;; crafted-mastering-emacs-config.el --- Configuration based on the book Mastering Emacs  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -13,10 +13,9 @@
 ;; YouTube channel.
 ;;
 ;; This module configures a nice base Emacs without necessarily
-;; installing additional packages.  Enabling `dumb-jump' will install
-;; the package and configure it.  Enabling `hydra' will install the
-;; package and use it, if it is available, when configuring
-;; `dumb-jump'.  See the appropriate defuns below.
+;; installing additional packages.  Two packages which could be used
+;; are `dumb-jump' and `hydra'.  If installed, they are configured
+;; here.
 ;;
 ;; For users with Emacs prior to version 28, `icomplete-mode' is
 ;; enabled with an method to install a vertical mode to make it work
@@ -105,40 +104,30 @@ less than 28."
     (add-hook 'text-mode-hook #'flyspell-mode)
     (add-hook 'prog-mode-hook #'flyspell-prog-mode)))
 
-(defun crafted-mastering-emacs-enable-hydra-package ()
-  "Install the hydra package."
-  (interactive)
-  (crafted-package-install-package 'hydra))
+(require 'hydra "hydra" :no-error)
+(require 'dumb-jump "dumb-jump" :no-error)
+;; add hydra to facilitate remembering the keys and actions for dumb-jump
+(when (and (featurep 'hydra)
+	   (featurep 'dumb-jump))
+  (defhydra dumb-jump-hydra (:color blue :columns 3)
+    "Dumb Jump"
+    ("j" dumb-jump-go "Go")
+    ("o" dumb-jump-go-other-window "Other window")
+    ("e" dumb-jump-go-prefer-external "Go external")
+    ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
+    ("i" dumb-jump-go-prompt "Prompt")
+    ("l" dumb-jump-quick-look "Quick look")
+    ("b" dumb-jump-back "Back"))
+  ;; not a great key as a mnemonic, but easy to press quickly
+  (define-key dumb-jump-mode-map (kbd "C-M-y") #'dumb-jump-hydra/body))
 
-(defun crafted-mastering-emacs-enable-dumb-jump-package ()
-  "Install and configure dumb-jump package.
+;; use xref
+(with-eval-after-load 'dumb-jump
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
-Uses ripgrep, TheSilverSearcher(ag), or grep, however, the
-slowest is grep.  Prefer to install ripgrep or ag to improve
-performance."
-  (interactive)
-  (crafted-package-install-package 'dumb-jump)
+;; use completion system instead of popup window
+(customize-set-variable 'xref-show-definitions-function
+                        #'xref-show-definitions-completing-read)
 
-  ;; add hydra to facilitate remembering the keys and actions.
-  (when (crafted-package-installed-p 'hydra)
-    (defhydra dumb-jump-hydra (:color blue :columns 3)
-      "Dumb Jump"
-      ("j" dumb-jump-go "Go")
-      ("o" dumb-jump-go-other-window "Other window")
-      ("e" dumb-jump-go-prefer-external "Go external")
-      ("x" dumb-jump-go-prefer-external-other-window "Go external other window")
-      ("i" dumb-jump-go-prompt "Prompt")
-      ("l" dumb-jump-quick-look "Quick look")
-      ("b" dumb-jump-back "Back"))
-    ;; not a great key as a mnemonic, but easy to press quickly
-    (define-key dumb-jump-mode-map (kbd "C-M-y") #'dumb-jump-hydra/body))
-
-  ;; use xref
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate)
-
-  ;; use completion system instead of popup window
-  (customize-set-variable 'xref-show-definitions-function
-                          #'xref-show-definitions-completing-read))
-
-(provide 'crafted-mastering-emacs)
-;;; crafted-mastering-emacs.el ends here
+(provide 'crafted-mastering-emacs-config)
+;;; crafted-mastering-emacs-config.el ends here

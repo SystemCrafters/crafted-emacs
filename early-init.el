@@ -1,51 +1,17 @@
-;;; early-init.el -*- lexical-binding: t; -*-
+;;; early-init.el --- Emacs early initialization for Crafted Emacs (optional) -*- lexical-binding: t; -*-
+;;; Commentary:
+;;
+;;; Code:
 
 ;;; Garbage collection
 ;; Increase the GC threshold for faster startup
 ;; The default is 800 kilobytes.  Measured in bytes.
+
 (setq gc-cons-threshold (* 50 1000 1000))
 
 ;;; Emacs lisp source/compiled preference
 ;; Prefer loading newest compiled .el file
 (customize-set-variable 'load-prefer-newer t)
-
-;;; Crafted Config Path
-;;
-;; Find the user configuration path. This needs to be done very early
-;; so later configuration can make use of this variable.
-;;
-;; In order do these checks:
-;; * using chemacs?
-;; ** yes, and have specified a location with the CRAFTED_EMACS_HOME
-;;    environment variable
-;; ** yes, but no environment variable, assume the crafted-emacs
-;;    folder in the profile
-;; * use CRAFTED_EMACS_HOME environment variable
-;; * XDG_CONFIG_HOME or the path .config/crafted-emacs
-;;   exists. XDG_CONFIG_HOME usually defaults to $HOME/.config/, so
-;;   these are the same thing
-;; * use HOME environment variable
-(defvar crafted-config-path
-  (cond
-   ((featurep 'chemacs)
-    (if (getenv  "CRAFTED_EMACS_HOME")
-        (expand-file-name (getenv "CRAFTED_EMACS_HOME"))
-      (expand-file-name "crafted-emacs" user-emacs-directory)))
-   ((getenv "CRAFTED_EMACS_HOME") (expand-file-name (getenv "CRAFTED_EMACS_HOME")))
-   ((or (getenv "XDG_CONFIG_HOME") (file-exists-p (expand-file-name ".config/crafted-emacs" (getenv "HOME"))))
-    (if (getenv "XDG_CONFIG_HOME")
-        (expand-file-name "crafted-emacs" (getenv "XDG_CONFIG_HOME"))
-      (expand-file-name ".config/crafted-emacs" (getenv "HOME"))))
-   ((getenv "HOME") (expand-file-name ".crafted-emacs" (getenv "HOME"))))
-  "The user's crafted-emacs configuration path.")
-
-;;; Load Path
-;; make sure the crafted-config-path is on the load path so the user
-;; can load "custom.el" from there if desired.
-(add-to-list 'load-path (expand-file-name crafted-config-path))
-
-(unless (file-exists-p crafted-config-path)
-  (mkdir crafted-config-path t))
 
 ;;; Native compilation settings
 (when (featurep 'native-compile)
@@ -64,22 +30,8 @@
 
   (add-to-list 'native-comp-eln-load-path (expand-file-name "eln-cache/" user-emacs-directory)))
 
-;;; UI configuration
-;; Remove some unneeded UI elements (the user can turn back on anything they wish)
-(setq inhibit-startup-message t)
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(menu-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars) default-frame-alist)
-(push '(mouse-color . "white") default-frame-alist)
-
-;; Loads a nice blue theme, avoids the white screen flash on startup.
-(load-theme 'deeper-blue t)
-
-;; Make the initial buffer load faster by setting its mode to fundamental-mode
-(customize-set-variable 'initial-major-mode 'fundamental-mode)
-
 (defun crafted-using-guix-emacs-p ()
-  "Verifies if the running emacs executable is under the `/gnu/store/' path."
+  "Verifies if the running Emacs executable is under the `/gnu/store/' path."
   (unless (or (equal system-type 'ms-dos)
               (equal system-type 'windows-nt))
     ;; Since there is no windows implementation of guix
@@ -91,36 +43,81 @@
 (defvar crafted-prefer-guix-packages (crafted-using-guix-emacs-p)
   "If t, expect packages to be installed via Guix by default.")
 
-(defvar crafted-load-custom-file t
-  "When non-nil, load `custom.el' after `config.el'.
+(require 'package)
+(require 'time-date)
 
-The custom file is found in the `crafted-config-path'. It
-contains customizations of variables and faces that are made by
-the user through the Customization UI, as well as any
-customizations made by packages.")
+(add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/"))
+(add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
-;;; Package system
-;; Load the package-system.  If needed, the user could customize the
-;; system to use in `early-config.el'.
-(defvar crafted-bootstrap-directory (expand-file-name "bootstrap/" user-emacs-directory)
-  "Package system bootstrap configuration.")
+(customize-set-variable 'package-archive-priorities
+                        '(("gnu"    . 99)   ; prefer GNU packages
+                          ("nongnu" . 80)   ; use non-gnu packages if
+                                            ; not found in GNU elpa
+                          ("stable" . 70)   ; prefer "released" versions
+                                            ; from melpa
+                          ("melpa"  . 0)))  ; if all else fails, get it
+                                            ; from melpa
+(defvar crafted-bootstrap-package-perform-stale-archive-check t
+  "Check if an archive is stale on startup when t.")
 
-(load (expand-file-name "crafted-package.el" crafted-bootstrap-directory))
-(when (eq crafted-package-system 'package)
-  ;; needed in case `early-config.el' has pinned packages configured
-  (require 'package))
+(defvar crafted-bootstrap-package-update-days 1
+  "The number of days old when a package archive is considered stale.")
 
-;;; Load the early config file if it exists, must be run before the
-;;; package configuration below to allow the user to change packaging
-;;; system to `straight' (or other supported packaging system) or to
-;;; configure how often the package archives are updated when Emacs is
-;;; starting.
-(let ((early-config-path (expand-file-name "early-config.el" crafted-config-path)))
-  (when (file-exists-p early-config-path)
-    (load early-config-path nil 'nomessage)))
+;;; package configuration
+(defun crafted-package-archive-stale-p (archive)
+  "Return t if ARCHIVE is stale.
 
-;; this is the default
-;; (setq crafted-package-system 'package)
-;; use this in `early-config.el' to switch to `straight.el'
-;; (setq crafted-package-system 'straight)
-(crafted-package-bootstrap crafted-package-system)
+ARCHIVE is stale if the on-disk cache is older than
+`crafted-bootstrap-package-update-days' old.  If
+`crafted-bootstrap-package-perform-stale-archive-check' is nil,
+the check is skipped."
+  (let* ((today (decode-time nil nil t))
+         (archive-name (expand-file-name
+                        (format "archives/%s/archive-contents" archive)
+                        package-user-dir))
+         (last-update-time (decode-time (file-attribute-modification-time
+                                         (file-attributes archive-name))))
+         (delta (make-decoded-time :day crafted-bootstrap-package-update-days)))
+    (if crafted-bootstrap-package-perform-stale-archive-check
+        (time-less-p (encode-time (decoded-time-add last-update-time delta))
+                     (encode-time today))
+      nil)))
+
+(defun crafted-package-archives-stale-p ()
+  "Return t if any PACKAGE-ARHIVES cache is out of date.
+
+Check each archive listed in PACKAGE-ARCHIVES, if the on-disk
+cache is older than 1 day, return a non-nil value.  Fails fast,
+will return t for the first stale archive found or nil if
+they are all up-to-date."
+  (interactive)
+  (cl-some #'crafted-package-archive-stale-p (mapcar #'car package-archives)))
+
+(defun crafted-package-initialize ()
+  "Initialize the package system."
+
+  ;; Only use package.el if it is enabled. The user may have turned it
+  ;; off in their `early-config.el' file, so respect their wishes if so.
+  (when package-enable-at-startup
+    (package-initialize)
+
+    (require 'seq)
+    ;; Only refresh package contents once per day on startup, or if the
+    ;; `package-archive-contents' has not been initialized. If Emacs has
+    ;; been running for a while, user will need to manually run
+    ;; `package-refresh-contents' before calling `package-install'.
+    (cond ((seq-empty-p package-archive-contents)
+           (progn
+             (message "crafted-init: package archives empty, initializing")
+             (package-refresh-contents)))
+          ((crafted-package-archives-stale-p)
+           (progn
+             (message "crafted-init: package archives stale, refreshing in the background")
+             (package-refresh-contents t))))))
+
+(crafted-package-initialize)
+
+(provide 'early-init)
+
+;;; early-init.el ends here

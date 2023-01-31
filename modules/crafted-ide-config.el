@@ -1,4 +1,4 @@
-;; crafted-ide.el -*- lexical-binding: t; -*-
+;; crafted-ide-config.el -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -18,7 +18,6 @@
 
 
 ;; Install dependencies
-(crafted-package-install-package 'eglot)
 
 ;;; hooks
 (defun crafted-ide--add-eglot-hooks (mode-list)
@@ -53,5 +52,5 @@ manually with something like this:
 ;; Shutdown server when last managed buffer is killed
 (customize-set-variable 'eglot-autoshutdown t)
 
-(provide 'crafted-ide)
-;;; crafted-ide.el ends here
+(provide 'crafted-ide-config)
+;;; crafted-ide-config.el ends here

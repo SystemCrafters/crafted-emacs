@@ -1,4 +1,4 @@
-;;;; crafted-lisp.el --- Lisp development configuration  -*- lexical-binding: t; -*-
+;;;; crafted-lisp-config.el --- Lisp development configuration  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -37,16 +37,9 @@
 
 ;; Global defaults
 (require 'eldoc)
-;; keeps code indented even when copy/pasting.
-(crafted-package-install-package 'aggressive-indent)
-
 
 
 ;;; Common Lisp
-(crafted-package-install-package 'sly)
-(crafted-package-install-package 'sly-asdf)
-(crafted-package-install-package 'sly-quicklisp)
-(crafted-package-install-package 'sly-repl-ansi-color)
 
 (with-eval-after-load 'sly
   ;; Uncomment and update if you need to set the path to an
@@ -54,49 +47,40 @@
   ;; have multiple instances of common lisp installed, for example,
   ;; both CLISP and SBCL. In this case, we are assuming SBCL.
   ;; (setq inferior-lisp-program "/usr/bin/sbcl")
-  (require 'sly-quicklisp)
-  (require 'sly-repl-ansi-color)
-  (require 'sly-asdf))
+  (require 'sly-quicklisp "sly-quicklisp" :no-error)
+  (require 'sly-repl-ansi-color "sly-repl-ansi-color" :no-error)
+  (require 'sly-asdf "sly-asdf" :no-error))
 
-(add-hook 'lisp-mode-hook #'sly-editing-mode)
-(add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+(when (featurep 'sly)
+  (add-hook 'lisp-mode-hook #'sly-editing-mode))
+
+(when (featurep 'aggressive-indent-mode)
+  (add-hook 'lisp-mode-hook #'aggressive-indent-mode))
 
 
 ;;; Clojure
-(crafted-package-install-package 'cider)
-(crafted-package-install-package 'clj-refactor)
-(crafted-package-install-package 'clojure-mode)
-(crafted-package-install-package 'flycheck-clojure)
-
 (with-eval-after-load "clojure-mode"
-  (require 'cider)
-  (require 'clj-refactor)
+  (require 'cider "cider" :no-error)
+  (require 'clj-refactor "clj-refactor" :no-error)
   (add-hook 'clojure-mode-hook
             (lambda ()
-              (clj-refactor-mode 1)
-              ;; keybindings mentioned on clj-refactor github page
-              ;; conflict with cider, use this by default as it does
-              ;; not conflict and is a better mnemonic
-              (cljr-add-keybindings-with-prefix "C-c r")))
+              (when (featurep 'clj-refactor)
+		(clj-refactor-mode 1)
+		;; keybindings mentioned on clj-refactor github page
+		;; conflict with cider, use this by default as it does
+		;; not conflict and is a better mnemonic
+		(cljr-add-keybindings-with-prefix "C-c r"))))
 
   (with-eval-after-load "flycheck"
     (flycheck-clojure-setup)))
 
-(add-hook 'clojure-mode #'aggressive-indent-mode)
+(when (featurep 'aggressive-indent-mode)
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode))
 
 
 ;;; Scheme and Racket
-;; As we wish to make Crafted Emacs work well with GNU Guix, we start
-;; the configuration with the GNU Guile loaded. Additional
-;; implementations can be added by installing the appropriate package
-;; and (possibly) adding that implementation to the list of geiser
-;; active implmentations. Racket configuration is also provided out of
-;; the box.
-
-(crafted-package-install-package 'geiser)
-(crafted-package-install-package 'geiser-guile)
-(crafted-package-install-package 'geiser-racket)
-(add-hook 'scheme-mode #'aggressive-indent-mode)
+(when (featurep 'aggressive-indent-mode)
+  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
 ;; The default is "scheme" which is used by cmuscheme, xscheme and
 ;; chez (at least). We are configuring guile, so use the apporpriate
@@ -104,5 +88,5 @@
 (customize-set-variable 'scheme-program-name "guile")
 
 
-(provide 'crafted-lisp)
-;;; crafted-lisp.el ends here
+(provide 'crafted-lisp-config)
+;;; crafted-lisp-config.el ends here

@@ -1,4 +1,4 @@
-;;; crafted-org.el  -*- lexical-binding: t; -*-
+;;; crafted-org-config.el  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -11,8 +11,6 @@
 
 ;;; Code:
 
-(crafted-package-install-package 'org-appear)
-
 ;; Return or left-click with mouse follows link
 (customize-set-variable 'org-return-follows-link t)
 (customize-set-variable 'org-mouse-1-follows-link t)
@@ -22,7 +20,8 @@
 
 ;; Hide markup markers
 (customize-set-variable 'org-hide-emphasis-markers t)
-(add-hook 'org-mode-hook 'org-appear-mode)
+(when (featurep 'org-appear)
+  (add-hook 'org-mode-hook 'org-appear-mode))
 
 ;; disable auto-pairing of "<" in org-mode
 (add-hook 'org-mode-hook (lambda ()
@@ -30,5 +29,5 @@
     `(lambda (c)
         (if (char-equal c ?<) t (,electric-pair-inhibit-predicate c))))))
 
-(provide 'crafted-org)
-;;; crafted-org.el ends here
+(provide 'crafted-org-config)
+;;; crafted-org-config.el ends here

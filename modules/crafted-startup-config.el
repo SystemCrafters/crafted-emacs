@@ -18,19 +18,11 @@
   :tag "Crafted Startup"
   :group 'crafted)
 
-(define-obsolete-variable-alias
-  'rational-startup-inhibit-splash
-  'crafted-startup-inhibit-splash
-  "1")
 (defcustom crafted-startup-inhibit-splash nil
   "Disable the Crafted Emacs Splash screen"
   :type 'boolean
   :group 'crafted-startup)
 
-(define-obsolete-variable-alias
-  'rational-startup-recentf-count
-  'crafted-startup-recentf-count
-  "1")
 (defcustom crafted-startup-recentf-count 10
   "The number of recent files to display on the splash screen"
   :type 'number
@@ -84,7 +76,7 @@ Each element in the list should be a list of strings or pairs
    :face '(default font-lock-keyword-face)
    "`(customize-set-variable 'crafted-startup-inhibit-splash t)'\n"
    :face '(variable-pitch (:height 0.7))
-   " to your " crafted-config-file "\n"
+   " to your initialization file (usually init.el)\n"
    "Or check the box and click the link below, which will do the same thing.")
 
   (fancy-splash-insert
