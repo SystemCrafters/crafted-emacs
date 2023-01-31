@@ -89,6 +89,9 @@ and Python modules will largely disappear though (most likely).  The LaTeX and
 PDF modules will likely be conflated into a single module as another example.
 Much more work to be done here. 
 
+/FIXME: "push-in" behavior when Crafted Emacs is no longer
+needed|wanted|whatever/
+
 --- original text below ---
 
 A sensible starting point for hacking your own Emacs configuration.
