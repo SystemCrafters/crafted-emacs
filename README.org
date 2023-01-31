@@ -1,5 +1,96 @@
 #+title: Crafted Emacs
 
+* Possibly very broken alpha level code.
+
+Use at your own risk, absolutely not ready for "production", but crafters are
+always welcome!  I am aggressively changing things, so buyer beware - and be
+patient too (please!).  Once the dust settles, documentation is (more) complete
+and examples exist, I'll promote this to a beta branch.  If that remains stable
+enough for most people, then I'll promote that to master.  That's still a ways
+off into the future, so bear with me as development continues. 
+
+There are many =crafted-*-packages.el= modules now.  These add package names to
+a list (currently =package-selected-packages=) which the user can then iterate
+over to perform installation.  As we support =package.el= by default, the simple
+answer is to just use =package-install-selected-packages= after requiring the
+package modules of your choice.  Note, not all modules require packages to be
+installed. There are several which just configure built-in packages.
+
+The =crafted-*-config.el= modules only provide configuration.  They _should_
+have guards around the configuration elements to make sure the appropriate
+packages are installed, but no promises.  This is where things are likely to be
+fairly broken.  If you would kindly file an issue when you find them, that would
+be helpful.  Before filing an issue, make sure you have the most up-to-date code
+from this repo, please provide the smallest configuration example you can which
+demonstrates the issue, please ensure to mention this is from the
+=craftedv2alpha= branch, and of course, what the specific issue you are facing,
+what you have tried, etc.  The more information you can provide, the more likely
+I'll be able to fix it.  Again, no promises, but I'll do my best.
+
+* WARNING There are NO transition helpers!
+
+When we renamed things from Rational to Crafted, we were able to write a
+transition helper to get you most of the way there.  That is not true in this
+case.  This is no longer a "starter kit" configuration. 
+
+* Structuring your configuration
+
+** early-init.el
+
+If you choose to use this file: 
+
+- This is where you would bootstrap your package configuration.  If you are
+  using =package.el=, there is (possibly) nothing to do here other than to order
+  the ELPAs to your taste, disable any packages (see =package-load-list=) pin
+  any packages to specific ELPAs (see =package-pinned-packages=).
+- Handle any UI elements (like turning off menu bars, tool bars, scroll bars,
+  etc) or setting any faces to specific fonts or sizes to your taste.
+
+** init.el
+
+If you choose to use this file, this is where you might do the following (order
+does matter now):
+
+- Load your =custom.el= file if you have split that out of your =inti.el= file.
+- Set the =crafted-emacs-home= variable, this is used in a couple of places in
+  the modules we provide, notably the =crafted-updates-config.el= module. 
+- Add the =modules= folder from this project to your =load-path=. 
+- Require any =crafted-*-packages= modules.  N.B. This step may not be needed if
+  you are managing your packages with Guix or Nix. 
+- Install packages from the =package-selected-packages= list.  If you are using
+  some other package manager than =package.el= (like =straight.el=, =el-get=,
+  =package-vc=, =borg=, etc) you'll want to iterate over the list of packages.
+  Note, it's just a list, so normal list functions (like =mapcar= for example)
+  can be used.  You can also remove pacakges from the list if you choose.  I do
+  provide some helpers in the =crafted-package-config.el= modules, you can set
+  the =crafted-package-installer= and =crafted-package-installed-predicate=
+  variables then call =crafted-package-install-packages= to get the packages
+  installed.  Again, if you are using =package.el= you don't _need_ to do this,
+  but you may still call the same function as it will call
+  =package-install-selected-packages= for you in that case.
+- Require any =crafted-*-config= modules
+- Add your own customizations, packages to install, whatever.
+- Profit :-)
+
+/FIXME: provide example files/
+
+* Modules
+
+Many changes coming for these.  At the moment, most of the modules from prior Crafted
+Emacs have made it into this branch.  Don't get too attached to them, as a few
+will be disappearing.  I'll be reworking most of these into more general
+concepts thus reducing the number of modules contained in Crafted Emacs.  With
+the exception of the =crafted-lisp-config.el= module, most of the language
+specific modules will disappear.  Emacs 29 will be bringing a built-in Eglot,
+and we have an "ide" module, so more of the language specific configuration (if
+any) will be found there.  I'm keeping the lisp module because Emacs itself is
+configured with that language, so intrinsic support seems reasonable.  Erlang
+and Python modules will largely disappear though (most likely).  The LaTeX and
+PDF modules will likely be conflated into a single module as another example.
+Much more work to be done here. 
+
+--- original text below ---
+
 A sensible starting point for hacking your own Emacs configuration.
 
 *Please note*: =crafted-emacs= is under active development.  The pace of
