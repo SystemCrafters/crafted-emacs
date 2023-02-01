@@ -12,6 +12,12 @@
            (file-exists-p custom-file))
   (load custom-file nil 'nomessage))
 
+;; Must be loaded *BEFORE* loading the crafted-init-config file.
+;; Creates a variable to hold the path to the project root for
+;; crafted-emacs (ie where it was cloned to) so the modules folder can
+;; be added to the load path.
+(load "~/crafted-emacs/modules/crafted-emacs-home-config")
+
 ;; Adds crafted-emacs modules to the `load-path', sets up a module
 ;; writing template, sets the `crafted-emacs-home' variable.
 (load "~/crafted-emacs/modules/crafted-init-config")

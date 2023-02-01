@@ -20,14 +20,14 @@
 
 (require 'project)
 
-(message (format "symbol-file 'crafted-emacs-home: %s"
-		 (symbol-file 'crafted-emacs-home)))
-
-(setq crafted-emacs-home
-      (expand-file-name
-       (project-root 
-	(project-current nil (file-name-directory
-			      (symbol-file 'crafted-emacs-home))))))
+;; Only set the `crafted-emacs-home' variable if it does not already
+;; have a value set by the user.
+(when (null crafted-emacs-home)
+  (setq crafted-emacs-home
+        (expand-file-name
+         (project-root 
+          (project-current nil (file-name-directory
+                                (symbol-file 'crafted-emacs-home)))))))
 
 ;; update the `load-path' to include the Crafted Emacs modules path
 
