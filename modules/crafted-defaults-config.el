@@ -58,5 +58,5 @@
 ;; Enable savehist-mode for command history
 (savehist-mode 1)
 
-(provide 'crafted-defaults)
-;;; crafted-defaults.el ends here
+(provide 'crafted-defaults-config)
+;;; crafted-defaults-config.el ends here

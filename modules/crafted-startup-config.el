@@ -1,4 +1,4 @@
-;;; crafted-startup.el --- Crafted Emacs splash screen on startup  -*- lexical-binding: t; -*-
+;;; crafted-startup-config.el --- Crafted Emacs splash screen on startup  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -11,7 +11,7 @@
 ;; screen or the Emacs about page.
 
 ;;; Code:
-(require 'crafted-updates)
+(require 'crafted-updates-config)
 
 (defgroup crafted-startup '()
   "Startup configuration for Crafted Emacs"
@@ -191,5 +191,5 @@ splash screen in another window."
                 (fit-window-to-buffer window))))
       (switch-to-buffer splash-buffer))))
 
-(provide 'crafted-startup)
-;;; crafted-startup.el ends here
+(provide 'crafted-startup-config)
+;;; crafted-startup-config.el ends here
