@@ -49,14 +49,11 @@
 ;;; Code:
 (require 'package)
 
-
 (defvar crafted-package-installer #'package-install
   "Function to use when installing packages")
 
-
 (defvar crafted-package-installed-predicate #'package-installed-p
   "Function to use when checking if a package is installed")
-
 
 (defun crafted-package-install-package (package &optional installer-fn predicate-fn)
   "Install PACKAGE optionally using the INSTALLER-FN.
@@ -71,7 +68,6 @@ INSTALLER-FN are held in the
     (unless (funcall checker package)
       (funcall installer package))))
 
-
 (defun crafted-package-install-selected-packages ()
   "Installs all packages listed in the `package-selected-packages' list.
 
@@ -83,7 +79,6 @@ this."
   (if (eq #'package-install crafted-package-installer)
       (package-install-selected-packages t)
     (mapc #'crafted-package-install-package package-selected-packages)))
-
 
 (provide 'crafted-package-config)
 ;;; crafted-package-config.el ends here
