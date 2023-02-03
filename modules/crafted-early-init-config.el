@@ -49,7 +49,8 @@ ARCHIVE is stale if the on-disk cache is older than
 is skipped"
   (let* ((today (decode-time nil nil t))
          (archive-name (expand-file-name
-                        (format "archives/%s/archive-contents" package-user-dir)))
+                        (format "archives/%s/archive-contents" archive)
+                        package-user-dir))
          (last-update-time (decode-time (file-attribute-modification-time
                                          (file-attributes archive-name))))
          (delta (make-decoded-time :day crafted-package-update-days)))
