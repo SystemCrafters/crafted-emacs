@@ -20,14 +20,23 @@
 
 (require 'project)
 
+;; Create the variable if needed
+(if (boundp 'crafted-emacs-home)
+    (message "crafted-emacs-home value set by user: %s" crafted-emacs-home)
+  (defvar crafted-emacs-home nil
+    "Defines where the Crafted Emacs project was cloned to.
+
+This is set when loading the crafted-init-config.el module during
+initialization.  Alternatively, it can be set by the user
+explicitly."))
+
 ;; Only set the `crafted-emacs-home' variable if it does not already
 ;; have a value set by the user.
 (when (null crafted-emacs-home)
   (setq crafted-emacs-home
         (expand-file-name
          (project-root 
-          (project-current nil (file-name-directory
-                                (symbol-file 'crafted-emacs-home)))))))
+          (project-current nil (file-name-directory load-file-name))))))
 
 ;; update the `load-path' to include the Crafted Emacs modules path
 
