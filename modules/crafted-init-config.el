@@ -20,6 +20,10 @@
 
 (require 'project)
 
+;; If the source file is newer than the compiled file, load it instead
+;; of the compiled version.
+(customize-set-variable 'load-prefer-newer t)
+
 ;; Create the variable if needed
 (if (boundp 'crafted-emacs-home)
     (message "crafted-emacs-home value set by user: %s" crafted-emacs-home)

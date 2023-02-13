@@ -18,6 +18,11 @@
 ;; fit.  Unless we set a variable like `crafted-emacs-home' there is
 ;; no good way to know where this project is cloned.
 
+;; UPDATE: [2023-02-09 Thu] `crafted-emacs-home' is now set on load,
+;; this can be updated to use that value for checking on updates from
+;; upstream.  Defensively would still need to check if that location
+;; is `bound-and-true-p' before doing anything.
+
 ;;; Code:
 
 (unless (boundp 'crafted-emacs-home)
