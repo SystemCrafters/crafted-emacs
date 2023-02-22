@@ -17,9 +17,7 @@
 ;;; Code:
 
 
-;; Install dependencies
-
-;;; hooks
+;;; Eglot
 (defun crafted-ide--add-eglot-hooks (mode-list)
   "Iterates over MODE-LIST recursively to add eglot-ensure to
 existing mode hooks.
@@ -48,9 +46,42 @@ manually with something like this:
 (with-eval-after-load "eglot"
   (crafted-ide--add-eglot-hooks eglot-server-programs))
 
-;;; customization
 ;; Shutdown server when last managed buffer is killed
 (customize-set-variable 'eglot-autoshutdown t)
+
+;;; tree-sitter
+;; Emacs versions prior to 29
+(when (version< emacs-version "29")
+  (when (featurep 'tree-sitter-langs)
+    (require 'tree-sitter-indent nil :noerror)
+
+    (defun crafted-tree-sitter-load (lang-symbol)
+      "Setup tree-sitter for a language.
+
+This must be called in the user's configuration to configure
+tree-sitter for LANG-SYMBOL. 
+
+Example: `(crafted-tree-sitter-load 'python)'"
+      (tree-sitter-require lang-symbol) 
+      (let ((mode-hook-name
+             (intern (concat (symbol-name lang-symbol) "-mode-hook"))))
+        (add-hook mode-hook-name #'tree-sitter-mode)))))
+
+;; Emacs versions after 29
+(when (>= (string-to-number emacs-version) 29)
+  ;; only attempt to use tree-sitter when Emacs was built with it.
+  (when (and (member "TREE_SITTER" (split-string system-configuration-features))
+             (executable-find "tree-sitter"))
+    (when (featurep 'treesit-auto)
+      ;; prefer tree-sitter modes
+      (global-treesit-auto-mode)
+      (with-eval-after-load 'treesit-auto
+        ;; install all the tree-sitter grammars
+        (treesit-auto-install-all)))
+    (when (featurep 'combobulate)
+      ;; perhaps too gross of an application, but the *-ts-modes
+      ;; eventually derive from this mode.
+      (add-hook 'prog-mode-hook #'combobulate-mode))))
 
 (provide 'crafted-ide-config)
 ;;; crafted-ide-config.el ends here
