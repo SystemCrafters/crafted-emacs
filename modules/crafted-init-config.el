@@ -84,5 +84,8 @@ explicitly."))
     (info-initialize)
     (push (file-name-directory crafted-info-dir) Info-directory-list)))
 
+;; Save all customizations to `custom-file'
+(add-hook 'after-init-hook #'customize-save-customized)
+
 (provide 'crafted-init-config)
 ;;; crafted-init-config.el ends here
