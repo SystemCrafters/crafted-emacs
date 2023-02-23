@@ -1,11 +1,11 @@
-;; crafted-ide-config.el -*- lexical-binding: t; -*-
+;;; crafted-ide-config.el --- Provide IDE-like features -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
 ;; Eglot configuration.
 
@@ -19,15 +19,13 @@
 
 ;;; Eglot
 (defun crafted-ide--add-eglot-hooks (mode-list)
-  "Iterates over MODE-LIST recursively to add eglot-ensure to
-existing mode hooks.
+  "Add `eglot-ensure' to modes in MODE-LIST.
 
-The mode must be loaded, ie. found with `fboundp'. A mode which
+The mode must be loaded, i.e. found with `fboundp'.  A mode which
 is not loaded will not have a hook added, in which case add it
 manually with something like this:
 
-`(add-hook 'some-mode-hook #'eglot-ensure)'
-"
+`(add-hook 'some-mode-hook #'eglot-ensure)'"
   (dolist (mode-def mode-list)
     (let ((mode (if (listp mode-def) (car mode-def) mode-def)))
       (cond
@@ -59,10 +57,10 @@ manually with something like this:
       "Setup tree-sitter for a language.
 
 This must be called in the user's configuration to configure
-tree-sitter for LANG-SYMBOL. 
+tree-sitter for LANG-SYMBOL.
 
 Example: `(crafted-tree-sitter-load 'python)'"
-      (tree-sitter-require lang-symbol) 
+      (tree-sitter-require lang-symbol)
       (let ((mode-hook-name
              (intern (concat (symbol-name lang-symbol) "-mode-hook"))))
         (add-hook mode-hook-name #'tree-sitter-mode)))))
