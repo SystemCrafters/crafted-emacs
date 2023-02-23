@@ -7,16 +7,15 @@
 
 ;;; Commentary:
 
-;; User interface customizations. Examples are the modeline and how
-;; help buffers are displayed.
+;; User interface customizations. Examples are icons, line numbers,
+;; and how help buffers are displayed.
 
 ;; This package provides a basic, customized appearance for
 ;; Emacs. Specifically, it uses: Helpful to customize the information
 ;; and visual display of help buffers, such as that created by M-x
-;; `describe-function'; Doom Modeline and Themes, to customize the
-;; appearance of buffers, text, et cetera; All-the-icons, to provide
-;; Doom Modeline with font-based icons (rather than raster or vector
-;; images); and includes some Emacs Lisp demonstrations.
+;; `describe-function'; All-the-icons, to provide font-based icons
+;; (rather than raster or vector images); and includes some Emacs Lisp
+;; demonstrations.
 
 ;;  Run `all-the-icons-install-fonts' to ensure the fonts necessary
 ;; for ALL THE ICONS are available on your system. You must run this
