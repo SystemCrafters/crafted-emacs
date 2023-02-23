@@ -33,7 +33,7 @@
 ;;;; Help Buffers
 
 ;; Make `describe-*' screens more helpful
-(with-eval-after-load 'helpful
+(when (featurep 'helpful)
   (require 'helpful)
   (define-key helpful-mode-map [remap revert-buffer] #'helpful-update)
   (global-set-key [remap describe-command]           #'helpful-command)
