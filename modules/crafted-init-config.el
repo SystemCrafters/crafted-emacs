@@ -18,6 +18,14 @@
 ;; including the template below used for writing Crafted Emacs
 ;; modules.
 
+(when (version< emacs-version "29")
+  ;; Get some Emacs 29 compatibility functions. Notably missing is
+  ;; `setopt' which the `compat' library deliberately does not
+  ;; provide, so we continue to use the `customize-set-variable'
+  ;; function for setting user options, unless we have a version guard
+  ;; around a block, in which case we use `setopt' instead.
+  (require 'compat))
+
 (require 'project)
 
 ;; If the source file is newer than the compiled file, load it instead
