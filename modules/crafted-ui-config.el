@@ -56,6 +56,7 @@
 (defcustom crafted-ui-line-numbers-disabled-modes
   '(org-mode)
   "Modes which should not display line numbers.
+
 Modes derived from the modes defined in
 `crafted-ui-line-number-enabled-modes', but should not display line numbers."
   :type 'list
