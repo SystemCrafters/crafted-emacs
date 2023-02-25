@@ -32,14 +32,14 @@
 (with-eval-after-load 'speedbar
   (with-eval-after-load 'evil
     ;;edit/open file under point
-    (define-key speedbar-mode-map (kbd "<return>") 'speedbar-edit-line)
+    (keymap-set speedbar-mode-map "<return>" 'speedbar-edit-line)
     ;;toggle thing at point
-    (define-key speedbar-mode-map (kbd "<tab>") 'speedbar-toggle-line-expansion)
+    (keymap-set speedbar-mode-map "<tab>" 'speedbar-toggle-line-expansion)
     ;;evaluate as elisp if file at point is elisp, I dont use this too much but might be useful
-    (define-key speedbar-mode-map (kbd "<C-return>") 'speedbar-item-load)
+    (keymap-set speedbar-mode-map "C-<return>" 'speedbar-item-load)
     ;;temporarly change mode in speedbar to "buffer-switching mode".
     ;;useful for quickly switching to an open buffer
-    (define-key speedbar-mode-map (kbd "b") 'speedbar-switch-to-quick-buffers)))
+    (keymap-set speedbar-mode-map "b" 'speedbar-switch-to-quick-buffers)))
 
 (with-eval-after-load 'evil-collection
   (evil-collection-speedbar-setup))

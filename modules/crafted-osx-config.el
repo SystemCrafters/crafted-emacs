@@ -29,14 +29,14 @@
 
 ;; Keybinds
 
-(global-set-key (kbd "s-W") 'delete-frame) ; ⌘-W = Close window
-(global-set-key (kbd "s-}") 'tab-bar-switch-to-next-tab) ; ⌘-} = Next tab
-(global-set-key (kbd "s-{") 'tab-bar-switch-to-prev-tab) ; ⌘-{ = Previous tab
-(global-set-key (kbd "s-t") 'tab-bar-new-tab) ;⌘-t = New tab
-(global-set-key (kbd "s-w") 'tab-bar-close-tab) ; ⌘-w = Close tab
+(keymap-global-set "s-W" 'delete-frame) ; ⌘-W = Close window
+(keymap-global-set "s-}" 'tab-bar-switch-to-next-tab) ; ⌘-} = Next tab
+(keymap-global-set "s-{" 'tab-bar-switch-to-prev-tab) ; ⌘-{ = Previous tab
+(keymap-global-set "s-t" 'tab-bar-new-tab) ;⌘-t = New tab
+(keymap-global-set "s-w" 'tab-bar-close-tab) ; ⌘-w = Close tab
 
 (unless (< emacs-major-version 28)
-  (global-set-key (kbd "s-Z") 'undo-redo)) ; ⌘-Z = Redo
+  (keymap-global-set "s-Z" 'undo-redo)) ; ⌘-Z = Redo
 
 ;; Better compatibility with osx based window managers
 

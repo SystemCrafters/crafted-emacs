@@ -47,10 +47,10 @@ Take some of the default keybindings for evil mode."
 (evilnc-default-hotkeys)
 
 ;; Make C-g revert to normal state
-(define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+(keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
 
 ;; Rebind `universal-argument' to 'C-M-u' since 'C-u' now scrolls the buffer
-(global-set-key (kbd "C-M-u") 'universal-argument)
+(keymap-global-set "C-M-u" 'universal-argument)
 
 ;; Use visual line motions even outside of visual-line-mode buffers
 (evil-global-set-key 'motion "j" 'evil-next-visual-line)
@@ -65,10 +65,10 @@ Rebinds the arrow keys to display a message instead."
     (message "Use HJKL keys instead!"))
 
   ;; Disable arrow keys in normal and visual modes
-  (define-key evil-normal-state-map (kbd "<left>")  'crafted-evil/discourage-arrow-keys)
-  (define-key evil-normal-state-map (kbd "<right>") 'crafted-evil/discourage-arrow-keys)
-  (define-key evil-normal-state-map (kbd "<down>")  'crafted-evil/discourage-arrow-keys)
-  (define-key evil-normal-state-map (kbd "<up>")    'crafted-evil/discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<left>"  'crafted-evil/discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<right>" 'crafted-evil/discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<down>"  'crafted-evil/discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<up>"    'crafted-evil/discourage-arrow-keys)
   (evil-global-set-key 'motion      (kbd "<left>")  'crafted-evil/discourage-arrow-keys)
   (evil-global-set-key 'motion      (kbd "<right>") 'crafted-evil/discourage-arrow-keys)
   (evil-global-set-key 'motion      (kbd "<down>")  'crafted-evil/discourage-arrow-keys)

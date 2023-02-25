@@ -41,9 +41,9 @@ ARG is the thing being completed in the minibuffer."
   ;; configure keys for those who prefer vi keybindings
   (when (featurep 'evil)
     (with-eval-after-load 'evil
-      (define-key vertico-map (kbd "C-j") 'vertico-next)
-      (define-key vertico-map (kbd "C-k") 'vertico-previous)
-      (define-key vertico-map (kbd "M-h") 'vertico-directory-up))))
+      (keymap-set vertico-map "C-j" 'vertico-next)
+      (keymap-set vertico-map "C-k" 'vertico-previous)
+      (keymap-set vertico-map "M-h" 'vertico-directory-up))))
 
 
 
@@ -60,8 +60,8 @@ ARG is the thing being completed in the minibuffer."
 
 (when (featurep 'consult)
   ;; Set some consult bindings
-  (global-set-key (kbd "C-s") 'consult-line)
-  (define-key minibuffer-local-map (kbd "C-r") 'consult-history)
+  (keymap-global-set "C-s" 'consult-line)
+  (keymap-set minibuffer-local-map "C-r" 'consult-history)
 
   (setq completion-in-region-function #'consult-completion-in-region))
 
@@ -79,8 +79,8 @@ ARG is the thing being completed in the minibuffer."
 (when (featurep 'embark)
   (require 'embark)
 
-  (global-set-key [remap describe-bindings] #'embark-bindings)
-  (global-set-key (kbd "C-.") 'embark-act)
+  (keymap-global-set "<remap> <describe-bindings>" #'embark-bindings)
+  (keymap-global-set "C-." 'embark-act)
 
   ;; Use Embark to show bindings in a key prefix with `C-h`
   (setq prefix-help-command #'embark-prefix-help-command)
@@ -113,9 +113,9 @@ ARG is the thing being completed in the minibuffer."
 
     (corfu-popupinfo-mode 1)
     (eldoc-add-command #'corfu-insert)
-    (define-key corfu-map (kbd "M-p") #'corfu-popupinfo-scroll-down)
-    (define-key corfu-map (kbd "M-n") #'corfu-popupinfo-scroll-up)
-    (define-key corfu-map (kbd "M-d") #'corfu-popupinfo-toggle)))
+    (keymap-set corfu-map "M-p" #'corfu-popupinfo-scroll-down)
+    (keymap-set corfu-map "M-n" #'corfu-popupinfo-scroll-up)
+    (keymap-set corfu-map "M-d" #'corfu-popupinfo-toggle)))
 
 
 ;;; Cape

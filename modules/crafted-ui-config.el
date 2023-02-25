@@ -35,16 +35,16 @@
 ;; Make `describe-*' screens more helpful
 (when (featurep 'helpful)
   (require 'helpful)
-  (define-key helpful-mode-map [remap revert-buffer] #'helpful-update)
-  (global-set-key [remap describe-command]           #'helpful-command)
-  (global-set-key [remap describe-function]          #'helpful-callable)
-  (global-set-key [remap describe-key]               #'helpful-key)
-  (global-set-key [remap describe-symbol]            #'helpful-symbol)
-  (global-set-key [remap describe-variable]          #'helpful-variable)
-  (global-set-key (kbd "C-h F")                      #'helpful-function))
+  (keymap-set helpful-mode-map "<remap> <revert-buffer>" #'helpful-update)
+  (keymap-global-set "<remap> <describe-command>"        #'helpful-command)
+  (keymap-global-set "<remap> <describe-function>"       #'helpful-callable)
+  (keymap-global-set "<remap> <describe-key>"            #'helpful-key)
+  (keymap-global-set "<remap> <describe-symbol>"         #'helpful-symbol)
+  (keymap-global-set "<remap> <describe-variable>"       #'helpful-variable)
+  (keymap-global-set "C-h F"                             #'helpful-function))
 
 ;; Bind extra `describe-*' commands
-(global-set-key (kbd "C-h K") #'describe-keymap)
+(keymap-global-set "C-h K" #'describe-keymap)
 
 ;;;; Line Numbers
 (defcustom crafted-ui-line-numbers-enabled-modes

@@ -68,7 +68,7 @@ less than 28."
                (window-width . 70)))
 
 ;; define a key to define the word at point.
-(define-key global-map (kbd "M-#") #'dictionary-lookup-definition)
+(keymap-set global-map "M-#" #'dictionary-lookup-definition)
 
 ;; pop up dedicated buffers in a different window.
 (customize-set-variable 'switch-to-buffer-in-dedicated-window 'pop)
@@ -91,7 +91,7 @@ less than 28."
 (customize-set-variable 'ibuffer-old-time 24)
 ;; prefer the more full-featured built-in ibuffer for managing
 ;; buffers.
-(global-set-key [remap list-buffers] #'ibuffer-list-buffers)
+(keymap-global-set "<remap> <list-buffers>" #'ibuffer-list-buffers)
 
 ;; Turning on `winner-mode' provides an "undo" function for resetting
 ;; your window layout.  This functionality is bound to control left
@@ -119,7 +119,7 @@ less than 28."
     ("l" dumb-jump-quick-look "Quick look")
     ("b" dumb-jump-back "Back"))
   ;; not a great key as a mnemonic, but easy to press quickly
-  (define-key dumb-jump-mode-map (kbd "C-M-y") #'dumb-jump-hydra/body))
+  (keymap-set dumb-jump-mode-map "C-M-y" #'dumb-jump-hydra/body))
 
 ;; use xref
 (with-eval-after-load 'dumb-jump

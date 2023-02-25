@@ -11,8 +11,8 @@
 
 ;; Suggested additional keybindings
 ;; (with-eval-after-load "prog-mode"
-;;   (define-key prog-mode-map (kbd "C-c e n") #'flymake-goto-next-error)
-;;   (define-key prog-mode-map (kbd "C-c e p") #'flymake-goto-prev-error))
+;;   (keymap-set prog-mode-map "C-c e n" #'flymake-goto-next-error)
+;;   (keymap-set prog-mode-map "C-c e p" #'flymake-goto-prev-error))
 
 ;;; Code:
 

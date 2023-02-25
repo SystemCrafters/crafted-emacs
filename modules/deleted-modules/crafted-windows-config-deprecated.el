@@ -28,13 +28,13 @@ also enables undo functionality if the window layout changes."
 
 (define-prefix-command 'crafted-windows-key-map)
 
-(define-key 'crafted-windows-key-map (kbd "u") 'winner-undo)
-(define-key 'crafted-windows-key-map (kbd "n") 'windmove-down)
-(define-key 'crafted-windows-key-map (kbd "p") 'windmove-up)
-(define-key 'crafted-windows-key-map (kbd "b") 'windmove-left)
-(define-key 'crafted-windows-key-map (kbd "f") 'windmove-right)
+(keymap-set 'crafted-windows-key-map "u" 'winner-undo)
+(keymap-set 'crafted-windows-key-map "n" 'windmove-down)
+(keymap-set 'crafted-windows-key-map "p" 'windmove-up)
+(keymap-set 'crafted-windows-key-map "b" 'windmove-left)
+(keymap-set 'crafted-windows-key-map "f" 'windmove-right)
 
-(global-set-key (kbd crafted-windows-prefix-key) 'crafted-windows-key-map)
+(keymap-global-set crafted-windows-prefix-key 'crafted-windows-key-map)
 
 (provide 'crafted-windows-config)
 ;;; crafted-windows-config.el ends here

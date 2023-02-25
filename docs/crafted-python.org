@@ -80,14 +80,14 @@
 
    #+begin_src emacs-lisp
      (with-eval-after-load "python"
-       (define-key python-mode-map (kbd "C-c C-n") #'numpydoc-generate)
-       (define-key python-mode-map (kbd "C-c e n") #'flymake-goto-next-error)
-       (define-key python-mode-map (kbd "C-c e p") #'flymake-goto-prev-error))
+       (keymap-set python-mode-map "C-c C-n" #'numpydoc-generate)
+       (keymap-set python-mode-map "C-c e n" #'flymake-goto-next-error)
+       (keymap-set python-mode-map "C-c e p" #'flymake-goto-prev-error))
    #+end_src
 
    #+begin_src emacs-lisp
      (with-eval-after-load "pyvenv"
-       (define-key pyvenv-mode-map (kbd "C-c p a") #'pyvenv-activate)
-       (define-key pyvenv-mode-map (kbd "C-c p d") #'pyvenv-deactivate)
-       (define-key pyvenv-mode-map (kbd "C-c p w") #'pyvenv-workon))
+       (keymap-set pyvenv-mode-map "C-c p a" #'pyvenv-activate)
+       (keymap-set pyvenv-mode-map "C-c p d" #'pyvenv-deactivate)
+       (keymap-set pyvenv-mode-map "C-c p w" #'pyvenv-workon))
    #+end_src
