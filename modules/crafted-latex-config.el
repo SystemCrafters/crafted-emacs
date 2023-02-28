@@ -68,8 +68,8 @@ Depends on having `pdf-tools' installed.  See
 ;; message the user if the latex executable is not found
 (add-hook 'tex-mode-hook
           #'(lambda ()
-	      (unless (executable-find "latex")
-		(message "latex executable not found"))))
+              (unless (executable-find "latex")
+                (message "latex executable not found"))))
 
 (when (and (executable-find "latex")
            (executable-find "latexmk"))
