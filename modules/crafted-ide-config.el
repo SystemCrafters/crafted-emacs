@@ -81,5 +81,24 @@ Example: `(crafted-tree-sitter-load 'python)'"
       ;; eventually derive from this mode.
       (add-hook 'prog-mode-hook #'combobulate-mode))))
 
+
+;; turn on aggressive indent if it is available, otherwise use
+;; electric indent.
+(if (require 'aggressive-indent nil :noerror)
+    (add-hook 'prog-mode-hook #'aggressive-indent-mode)
+  (add-hook 'prog-mode-hook #'electric-indent-mode))
+
+;; turn on editorconfig if it is available
+(when (require 'editorconfig nil :noerror)
+  (add-hook 'prog-mode-hook #'editorconfig-mode))
+
+;; enhance ibuffer with ibuffer-project if it is available.
+(when (require 'ibuffer-project nil :noerror)
+  (add-hook 'ibuffer-hook
+            (lambda ()
+              (setq ibuffer-filter-groups (ibuffer-project-generate-filter-groups))
+              (unless (eq ibuffer-sorting-mode 'project-file-relative)
+                (ibuffer-do-sort-by-project-file-relative)))))
+
 (provide 'crafted-ide-config)
 ;;; crafted-ide-config.el ends here
