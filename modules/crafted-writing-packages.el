@@ -15,10 +15,6 @@
 (add-to-list 'package-selected-packages 'markdown-mode)
 (add-to-list 'package-selected-packages 'pandoc-mode)
 
-;; markdown support with auto-updated preview (requires grip to be
-;; installed ala `pip install grip')
-(add-to-list 'package-selected-packages 'grip-mode)
-
 ;; LaTeX support - uses Auctex
 ;; only install and load auctex when the latex executable is found,
 ;; otherwise it crashes when loading
