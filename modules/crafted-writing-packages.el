@@ -44,7 +44,7 @@
            (executable-find "latexmk"))
   (add-to-list 'package-selected-packages 'auctex-latexmk))
 
-(defun crafted-install-pdf-tools ()
+(defun crafted-writing-install-pdf-tools ()
   "Use pdf-tools.
 
 If you have an appropriate build-system, you may choose to use
