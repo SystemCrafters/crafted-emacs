@@ -65,14 +65,14 @@ Example usage:
 ;; and derived modes.
 (crafted-editing-configure-whitespace nil nil 'prog-mode)"
   (if use-tabs
-      (customize-set-variable 'whitespace-style
-                              '(face empty trailing indentation::tab
-                                     space-after-tab::tab
-                                     space-before-tab::tab))
+      (customize-save-variable 'whitespace-style
+                               '(face empty trailing indentation::tab
+                                      space-after-tab::tab
+                                      space-before-tab::tab))
     ;; use spaces instead of tabs
-    (customize-set-variable 'whitespace-style
-                            '(face empty trailing tab-mark
-                                   indentation::space)))
+    (customize-save-variable 'whitespace-style
+                             '(face empty trailing tab-mark
+                                    indentation::space)))
 
   (if use-globally
       (global-whitespace-mode 1)
@@ -81,7 +81,7 @@ Example usage:
         (add-hook (intern (format "%s-hook" mode)) #'whitespace-mode))))
 
   ;; cleanup whitespace
-  (customize-set-variable 'whitespace-action '(cleanup auto-cleanup)))
+  (customize-save-variable 'whitespace-action '(cleanup auto-cleanup)))
 
 ;;; parentheses
 (electric-pair-mode 1) ; auto-insert matching bracket
@@ -90,8 +90,8 @@ Example usage:
 
 ;;; LaTeX configuration
 (with-eval-after-load 'latex
-  (customize-set-variable 'TeX-auto-save t)
-  (customize-set-variable 'TeX-parse-self t)
+  (customize-save-variable 'TeX-auto-save t)
+  (customize-save-variable 'TeX-parse-self t)
   (setq-default TeX-master nil)
 
   ;; compile to pdf
@@ -112,9 +112,9 @@ Example usage:
   (add-to-list 'LaTeX-verbatim-macros-with-delims "lstinline")
 
   ;; electric pairs in auctex
-  (customize-set-variable 'TeX-electric-sub-and-superscript t)
-  (customize-set-variable 'LaTeX-electric-left-right-brace t)
-  (customize-set-variable 'TeX-electric-math (cons "$" "$"))
+  (customize-save-variable 'TeX-electric-sub-and-superscript t)
+  (customize-save-variable 'LaTeX-electric-left-right-brace t)
+  (customize-save-variable 'TeX-electric-math (cons "$" "$"))
 
   ;; open all buffers with the math mode and auto-fill mode
   (add-hook 'LaTeX-mode-hook #'auto-fill-mode)
@@ -122,7 +122,7 @@ Example usage:
 
   ;; add support for references
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (customize-set-variable 'reftex-plug-into-AUCTeX t)
+  (customize-save-variable 'reftex-plug-into-AUCTeX t)
 
   ;; to have the buffer refresh after compilation
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
@@ -136,9 +136,9 @@ Depends on having `pdf-tools' installed.  See
 `crafted-pdf-reader-config.el'"
 
   (with-eval-after-load 'latex
-    (customize-set-variable 'TeX-view-program-selection '((output-pdf "PDF Tools")))
-    (customize-set-variable 'TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
-    (customize-set-variable 'TeX-source-correlate-start-server t)))
+    (customize-save-variable 'TeX-view-program-selection '((output-pdf "PDF Tools")))
+    (customize-save-variable 'TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
+    (customize-save-variable 'TeX-source-correlate-start-server t)))
 
 ;; message the user if the latex executable is not found
 (add-hook 'tex-mode-hook
@@ -152,7 +152,7 @@ Depends on having `pdf-tools' installed.  See
     (when (require 'auctex-latexmk nil 'noerror)
       (with-eval-after-load 'auctex-latexmk
         (auctex-latexmk-setup)
-        (customize-set-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
+        (customize-save-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
       (add-hook 'TeX-mode-hook #'(lambda () (setq TeX-command-default "LatexMk"))))))
 
 
@@ -163,14 +163,16 @@ Depends on having `pdf-tools' installed.  See
   ;; loaded, the others are superfluous but `or' fails fast, so they
   ;; are not checked if `markdown-command' is set and the command is
   ;; indeed found.
-  (unless (or (executable-find markdown-command)
+  (unless (or (and (boundp 'markdown-command)
+                   (executable-find markdown-command))
               (executable-find "markdown")
               (executable-find "pandoc"))
     (message "No markdown processor found, preview may not possible."))
 
-  (customize-set-variable 'markdown-enable-math t)
-  (customize-set-variable 'markdown-enable-html t)
-  (add-hook 'markdown-mode-hook #'conditionally-turn-on-pandoc))
+  (with-eval-after-load 'markdown-mode
+    (customize-save-variable 'markdown-enable-math t)
+    (customize-save-variable 'markdown-enable-html t)
+    (add-hook 'markdown-mode-hook #'conditionally-turn-on-pandoc)))
 
 
 ;;; PDF Support when using pdf-tools
