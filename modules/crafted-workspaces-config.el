@@ -18,7 +18,7 @@
   (customize-save-variable 'tabspaces-include-buffers '("*scratch*")))
 
 ;; Activate it
-(tabspaces-mode 1)
+(customize-save-variable 'tabspaces-mode t)
 
 ;; Make sure project is initialized
 (project--ensure-read-project-list)
