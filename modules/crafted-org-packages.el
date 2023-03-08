@@ -11,7 +11,17 @@
 
 ;;; Code:
 
+;; Second brain/zettlekasten by Protesilaos Stavrou (also known as
+;; Prot), similar features as Org-Roam, but keeps everything in a
+;; single directory, does not use a database preferring filenameing
+;; conventions and grep instead.
+(add-to-list 'package-selected-packages 'denote)
+
+;; Toggle the visibility of some Org elements.
 (add-to-list 'package-selected-packages 'org-appear)
+
+;; Second brain/zettlekasten for Org Mode
+(add-to-list 'package-selected-packages 'org-roam)
 
 (provide 'crafted-org-packages)
 ;;; crafted-org-packages.el ends here
