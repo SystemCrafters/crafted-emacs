@@ -52,8 +52,7 @@ less than 28."
 ;; https://www.masteringemacs.org/article/demystifying-emacs-window-manager
 (add-to-list 'display-buffer-alist
              '("\\*Help\\*"
-               (display-buffer-reuse-window display-buffer-pop-up-window)
-               (inhibit-same-window . t)))
+               (display-buffer-reuse-window display-buffer-pop-up-window)))
 
 (add-to-list 'display-buffer-alist
              '("\\*Completions\\*"
