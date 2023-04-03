@@ -1,0 +1,247 @@
+#+title: Crafted Emacs
+
+* Contents
+
+1. [[Description - What is this anyway?]]
+2. [[Philosophy]]
+   1. [[Goals]]
+   2. [[Principles]]
+3. Getting Started
+4. [[Contributing]]
+5. [[Troubleshooting]]
+6. [[License]]
+
+
+* Description - What is this anyway?
+
+Crafted Emacs is an attempt to simplify creating a configuration for
+Emacs.  It is not intended to provide all possible configuration for
+every eventuality.  We do envision it being a nice baseline for users
+who want to create their own Emacs configuration.  As a user develops
+their skill with Emacs Lisp and configuring Emacs in general, we
+anticipate such a person may end up rewriting their configuration to
+the point they are no longer using Crafted Emacs.  This is an exciting
+possibility to us, and a journey worth taking!
+
+* Philosophy
+
+It is our opinion your configuration is, well, yours!  We expect you
+to own your configuration, but maybe we can help get you started.  In
+the space of "starter kits" for Emacs, we really take to heart the
+word "starter", in the sense we help you start your configuration.  We
+aren't the kitchen sink and we don't provide every possible
+configuration.  That's your job.  It's YOUR configuration.
+
+** Goals
+
+   + No new configuration system, macros, layers etc.  Almost
+     everything is straight Emacs Lisp.
+   + Provide some pre-configured modules to shorten the time it takes to build a
+     nice working configuration.
+   + Customizations in the modules we provide should be _opt-in_ by
+     default to avoid surprising behavior.
+   + Not a turn-key/kitchen sink solution. There will be holes the
+     user must fill.
+   + Fewer packages rather than more; we prefer to stay closer to built-in
+     functionality as much as possible.
+   + Correctness is important, as we expect people who might be new to
+     Emacs Lisp to learn from what we have written.  We prefer
+     =customize-set-variable= instead of =setq= for =defcustom= values as an
+     example.
+   + Documentation is thorough, complete, and easy to find.  There is an [[info:crafted-emacs][info]]
+     manual for Crafted Emacs distributed with the source.
+
+** Principles
+*** Minimal, modular configuration
+
+The core configuration only sets up Emacs to have a cleaner
+presentation with sensible defaults. It is up to the user to decide
+which =crafted-*= modules to load.
+
+Configuration modules depend on other modules and the base configuration
+as little as possible.
+
+The implication is that someone should be able to install or copy code
+from a =crafted-*= module into their own configuration /without/ using
+Crafted Emacs.
+
+*** Prioritize built-in Emacs functionality
+
+Where possible, we leverage built-in Emacs functionality instead of
+external packages.  When we choose external packages, we prefer those
+which are layered on top of existing, built-in, functionality.  For
+example:
+
+- =project.el= instead of =Projectile=
+- =tab-bar-mode= instead of =Perspective.el=, =persp-mode=, =eyebrowse=, etc
+- =eglot= instead of =lsp-mode= (because =eglot= prioritizes built-in
+  functionality)
+
+*** Can be integrated with a Guix configuration
+
+It should be possible to customize aspects of the Crafted Emacs
+configuration inside of a Guix Home configuration so that things like
+font sizes, themes, etc can be system-specific.
+
+It can also use packages installed via the Guix package manager
+instead of =package.el=.
+
+*** Helps you learn Emacs Lisp
+
+Instead of providing a higher-level configuration system out of the
+box like other Emacs configurations, we follow standard Emacs Lisp
+patterns so that you can learn by reading the configuration.  We do
+our best to provide clear comments where necessary to help the reader
+understand our choices and how the code works.
+
+*** Reversible
+
+We recognize not everyone will agree with our decisions, so each
+customization should be easily reversible in the users configuration
+file.
+
+* Getting Started
+... Coming soon ...
+* Contributing
+[[http://makeapullrequest.com][https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square]]
+[[https://github.com/bbatsov/emacs-lisp-style-guide][https://img.shields.io/badge/elisp-style%20guide-purple.svg?style=flat-square]]
+
+This is a community-run modular Emacs configuration, for which we appreciate
+feedback in the form of issues and pull requests. Feel free to open an issue
+prior to opening a pull request if you're not certain your idea is in the spirit
+of the [[Principles]].
+
+If you enjoy crafting your computing experience, join the [[https://systemcrafters.net/][SystemCrafters]]
+community!
+
+** Contributing Tips for Elisp
+
+   + Prefer =customize-set-variable= instead of =setq= for =defcustom=
+     values. This helps make sure constructors or setters attached to
+     the variable are run when the value is set.
+   + Provide =defcustom= variables for things we expect the user to
+     modify and make sure it is in the appropriate group.
+   + Provide verbose doc-strings for =defvar=, =defcustom=, =defun=,
+     =defmacro=, etc to clearly document what is going on.
+   + Make sure to follow doc-string guidelines (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html][Documentation Tips]]
+     or [[info:elisp#Documentation Tips][elisp#Documentation Tips]])
+   + Add comments for blocks of code, especially to describe /why/ the
+     code is present, or the intention. These comments serve as
+     documentation when reading the code where a doc-string is not an
+     option.
+   + Add or update documentation in the /docs/ folder. Especially for
+     new modules, please provide the info file with your PR. (see
+     [[file:docs/CONTRIBUTING.org][Contributing Documentation]])
+   + If your PR addresses an issue, whether it closes or fixes the
+     issue, or is just related to it, please add the issue number in
+     your commit message or the description of your PR so they can be
+     linked together.
+
+** Contributing Tips for Issues
+
+   We welcome your questions and ideas, please open an issue if you
+   have one!
+
+   + If you feel there is a defect with what we provide, please
+     provide the steps necessary to reproduce the issue. A minimal
+     configuration, a link to your configuration, or a gist/pastebin
+     link or similar is appreciated to help us work toward a solution
+     together.
+   + If you feel there is a missing feature, please describe your
+     feature in as much detail as possible so we understand your
+     request.
+   + If you have a question, be as specific as possible so we can
+     understand how to help you as best we can.
+   + PRs to address any of the issues you might raise are appreciated
+     and encouraged! If you don't provide one, please be patient with
+     us, it may take longer to fix an issue or provide a missing
+     feature. That being said, please feel free to check on the status
+     of issues from time to time if it has been a while since the last
+     activity.
+
+* Troubleshooting
+
+  Some tips when things don't seem to work right.
+
+** A package (suddenly?) fails to work
+
+   This scenario happened frequently when upgrading to Emacs 28. It
+   also may occur in other scenarios as well. Usually, you will see
+   some message indicating some symbol is void or some function or
+   command does not exist. More often than not, the package maintainer
+   is using a feature from another package which has not yet been
+   released. The new feature is available in the development version
+   of the package however.
+
+   Here are some example issues where things went wrong:
+   - [[https://github.com/SystemCrafters/crafted-emacs/issues/126][Wrong number of arguments error]]
+   - [[https://github.com/SystemCrafters/crafted-emacs/issues/132][Example config doesn't start]]
+   - [[https://github.com/SystemCrafters/crafted-emacs/issues/140][there are some bugs in package "helpful"]]
+
+   Here are some strategies:
+
+   - Check the code on the package source control page (ie GitHub,
+     GitLab or whatever), and make sure the missing code is present on
+     the =master= branch.
+   - Look at the code associated with the released version (you need
+     to look at the most recent tag for this). If the code is missing
+     there, ask the maintainer for a new release. Often, there are
+     years between releases of Emacs packages, but that depends
+     completely on the package maintainer. Some of them release more
+     frequently, others only on request.
+
+   Once you have followed the steps above, you can choose to take one
+   of these actions in your configuration:
+
+   - Option 1
+     + Use =M-x package-list-packages= to display the list of packages.
+     + Find the package in the list which doesn't work for you, it
+       will have either the /installed/ or /dependency/ status.
+     + Press the =enter= key to get more details on the package an look
+       near the bottom of the metadata, you should see a line with
+       "Other Versions". Choose the development version - it will have
+       a version number that looks like a date and the text =(melpa)=
+       next to it. Press =enter= on this version.
+     + Following the step above will take you to the same package but
+       from the MELPA repository, and you'll see a button at the top
+       labeled =Install=. Click this button.
+     + *Optionally* you can go back to the list of packages, find
+       previous installed version, press the letter 'D' and then the
+       letter 'X' to uninstall that version.
+     + Restart Emacs
+   - Option 2
+     + Edit your =early-init.el= file, if you are using one.  If you
+       aren't using one, add the code mentioned next *before* any calls
+       to ~package-initialize~ or ~package-install-selected-packages~.
+     + Add a line similar to this to pin the offending package to
+       MELPA (make sure to replace /package-name/ with the name of the
+       actual package):
+
+       #+begin_src emacs-lisp
+         (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
+       #+end_src
+
+     + Use =M-x package-list-packages= to display the list of packages.
+     + Find the package in the list, press the letter 'D' and the
+       letter 'X' to uninstall that package.
+     + Restart Emacs, the package should be installed from MELPA thus
+       using the development version of the package instead of the
+       released version.
+
+   Regardless, always feel free to open an issue here and we can help
+   you out. Please be as complete as possible in your description of
+   the problem. Include any stack traces Emacs provides (ie start
+   Emacs with: =emacs --debug-init=), mention the version number of the
+   package you are installing, and anything you might have tried but
+   which didn't work for you.
+
+* License
+
+This code is licensed under the MIT License. Why? So you can copy the
+code from this configuration!
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:
