@@ -124,7 +124,7 @@ file.
 This is a community-run modular Emacs configuration, for which we appreciate
 feedback in the form of issues and pull requests. Feel free to open an issue
 prior to opening a pull request if you're not certain your idea is in the spirit
-of the [[Principles]].
+of the [[#principles][Principles]].
 
 If you enjoy crafting your computing experience, join the [[https://systemcrafters.net/][SystemCrafters]]
 community!
