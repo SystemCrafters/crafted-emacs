@@ -2,17 +2,20 @@
 
 * Contents
 
-1. [[Description - What is this anyway?]]
-2. [[Philosophy]]
-   1. [[Goals]]
-   2. [[Principles]]
+1. [[#description][Description - What is this anyway?]]
+2. [[#philosophy][Philosophy]]
+   1. [[#goals][Goals]]
+   2. [[#principles][Principles]]
 3. Getting Started
-4. [[Contributing]]
-5. [[Troubleshooting]]
-6. [[License]]
+4. [[#contributing][Contributing]]
+5. [[#troubleshooting][Troubleshooting]]
+6. [[#license][License]]
 
 
 * Description - What is this anyway?
+:properties:
+:custom_id: description
+:end:
 
 Crafted Emacs is an attempt to simplify creating a configuration for
 Emacs.  It is not intended to provide all possible configuration for
@@ -24,6 +27,9 @@ the point they are no longer using Crafted Emacs.  This is an exciting
 possibility to us, and a journey worth taking!
 
 * Philosophy
+:properties:
+:custom_id: philosophy
+:end:
 
 It is our opinion your configuration is, well, yours!  We expect you
 to own your configuration, but maybe we can help get you started.  In
@@ -33,7 +39,9 @@ aren't the kitchen sink and we don't provide every possible
 configuration.  That's your job.  It's YOUR configuration.
 
 ** Goals
-
+:properties:
+:custom_id: goals
+:end:
    + No new configuration system, macros, layers etc.  Almost
      everything is straight Emacs Lisp.
    + Provide some pre-configured modules to shorten the time it takes to build a
@@ -52,6 +60,10 @@ configuration.  That's your job.  It's YOUR configuration.
      manual for Crafted Emacs distributed with the source.
 
 ** Principles
+:PROPERTIES:
+:custom_id: principles
+:END:
+
 *** Minimal, modular configuration
 
 The core configuration only sets up Emacs to have a cleaner
@@ -103,6 +115,9 @@ file.
 * Getting Started
 ... Coming soon ...
 * Contributing
+:PROPERTIES:
+:custom_id: contributing
+:END:
 [[http://makeapullrequest.com][https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square]]
 [[https://github.com/bbatsov/emacs-lisp-style-guide][https://img.shields.io/badge/elisp-style%20guide-purple.svg?style=flat-square]]
 
@@ -160,6 +175,9 @@ community!
      activity.
 
 * Troubleshooting
+:PROPERTIES:
+:custom_id: troubleshooting
+:END:
 
   Some tips when things don't seem to work right.
 
@@ -236,6 +254,9 @@ community!
    which didn't work for you.
 
 * License
+:PROPERTIES:
+:custom_id: license
+:END:
 
 This code is licensed under the MIT License. Why? So you can copy the
 code from this configuration!
