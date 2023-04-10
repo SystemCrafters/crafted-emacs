@@ -6,7 +6,7 @@
 2. [[#philosophy][Philosophy]]
    1. [[#goals][Goals]]
    2. [[#principles][Principles]]
-3. Getting Started
+3. [[#getting_started][Getting Started]]
 4. [[#contributing][Contributing]]
 5. [[#troubleshooting][Troubleshooting]]
 6. [[#license][License]]
@@ -113,7 +113,35 @@ customization should be easily reversible in the users configuration
 file.
 
 * Getting Started
-... Coming soon ...
+:PROPERTIES:
+:custom_id: getting_started
+:END:
+
+Generally, getting started with Crafted Emacs is as simple as cloning the
+project from GitHub:
+
+#+begin_src sh
+  git clone https://github.com/SystemCrafters/crafted-emacs
+#+end_src
+
+After cloning the Crafted Emacs repo, to use the modules, you need to add the
+following to your configuration, preferably:
+
+#+begin_src emacs-lisp
+  ;; This assumes you cloned Crafted Emacs in you home directory, if you
+  ;; didn't, make sure to update the path to correctly reflect the
+  ;; location on your system.
+  (load "~/crafted-emacs/modules/crafted-init-config")
+#+end_src
+
+
+
+** Starting from scratch
+
+
+
+** Starting from a minimal configuration
+
 * Contributing
 :PROPERTIES:
 :custom_id: contributing
