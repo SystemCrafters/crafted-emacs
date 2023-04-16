@@ -134,13 +134,14 @@ following to your configuration, preferably:
   (load "~/crafted-emacs/modules/crafted-init-config")
 #+end_src
 
+This adds the ~crafted-emacs/modules~ folder to the ~load-path~.  If you need to
+have packages installed, look for modules ending with ~-packages.el~, if you
+only want the configuration, then the modules ending with ~-config.el~ will be
+what you want.
 
+For more detailed examples, see the [[file:docs/getting-started-guide.org][Getting Started Guide]]. There are also
+examples in the ~crafted-emacs/examples~ folder. 
 
-** Starting from scratch
-
-
-
-** Starting from a minimal configuration
 
 * Contributing
 :PROPERTIES:
