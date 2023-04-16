@@ -114,7 +114,7 @@ file.
 
 * Getting Started
 :PROPERTIES:
-:custom_id: getting_started
+:custom_id: getting-started
 :END:
 
 Generally, getting started with Crafted Emacs is as simple as cloning the
