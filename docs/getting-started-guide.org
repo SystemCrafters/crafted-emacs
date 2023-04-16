@@ -141,5 +141,5 @@ you'll be able to skim this section for the code examples and move from there.
 
     If you are very new to Emacs, you might take a moment here to go
     read through Mickey Petersen's "Mastering Emacs" book.  You can
-    get a copy from [[https://masteringemacs/r/systemcrafters][here]].
+    get a copy from [[https://masteringemacs.org/r/systemcrafters][here]].
 * starting from a minimal configuration
