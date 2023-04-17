@@ -6,7 +6,7 @@
 2. [[#philosophy][Philosophy]]
    1. [[#goals][Goals]]
    2. [[#principles][Principles]]
-3. [[#getting_started][Getting Started]]
+3. [[#getting-started][Getting Started]]
 4. [[#contributing][Contributing]]
 5. [[#troubleshooting][Troubleshooting]]
 6. [[#license][License]]
