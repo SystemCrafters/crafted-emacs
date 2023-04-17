@@ -2,6 +2,8 @@
 
 * Possibly very broken alpha level code.
 
+- Updated [[file:README-new.org][README]] available, see below for the original version. 
+
 Use at your own risk, absolutely not ready for "production", but crafters are
 always welcome!  I am aggressively changing things, so buyer beware - and be
 patient too (please!).  Once the dust settles, documentation is (more) complete
