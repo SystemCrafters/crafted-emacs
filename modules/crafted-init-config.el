@@ -47,7 +47,7 @@ explicitly."))
 (when (null crafted-emacs-home)
   (setq crafted-emacs-home
         (expand-file-name
-         (project-root 
+         (project-root
           (project-current nil (file-name-directory load-file-name))))))
 
 ;; update the `load-path' to include the Crafted Emacs modules path
