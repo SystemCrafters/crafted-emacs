@@ -19,7 +19,7 @@
   (add-to-list 'package-selected-packages 'eglot)
 
   ;; tree-sitter syntax aware packages
-  (add-to-list 'package-selected-packages 'tree-sitter                )
+  (add-to-list 'package-selected-packages 'tree-sitter)
   (add-to-list 'package-selected-packages 'tree-sitter-indent)
   (add-to-list 'package-selected-packages 'tree-sitter-ispell)
   (add-to-list 'package-selected-packages 'tree-sitter-langs))
