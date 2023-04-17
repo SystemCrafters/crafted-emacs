@@ -95,6 +95,7 @@ explicitly."))
 
 ;; Save all customizations to `custom-file'
 (add-hook 'after-init-hook #'customize-save-customized)
+(add-hook 'after-init-hook #'package--save-selected-packages)
 
 (provide 'crafted-init-config)
 ;;; crafted-init-config.el ends here
