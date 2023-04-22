@@ -125,7 +125,7 @@ project from GitHub:
 #+end_src
 
 After cloning the Crafted Emacs repo, to use the modules, you need to add the
-following to your configuration, preferably:
+following to your configuration:
 
 #+begin_src emacs-lisp
   ;; This assumes you cloned Crafted Emacs in you home directory, if you
@@ -135,13 +135,12 @@ following to your configuration, preferably:
 #+end_src
 
 This adds the ~crafted-emacs/modules~ folder to the ~load-path~.  If you need to
-have packages installed, look for modules ending with ~-packages.el~, if you
-only want the configuration, then the modules ending with ~-config.el~ will be
+have packages installed, look for modules ending with ~*-packages.el~, if you
+only want the configuration, then the modules ending with ~*-config.el~ will be
 what you want.
 
 For more detailed examples, see the [[file:docs/getting-started-guide.org][Getting Started Guide]]. There are also
 examples in the ~crafted-emacs/examples~ folder. 
-
 
 * Contributing
 :PROPERTIES:
