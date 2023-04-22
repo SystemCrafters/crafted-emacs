@@ -142,4 +142,99 @@ you'll be able to skim this section for the code examples and move from there.
     If you are very new to Emacs, you might take a moment here to go
     read through Mickey Petersen's "Mastering Emacs" book.  You can
     get a copy from [[https://masteringemacs.org/r/systemcrafters][here]].
-* starting from a minimal configuration
+
+* Starting from an existing configuration
+
+If you aren't starting from scratch, then you probably have some configuration
+already working and you want to add or use some of the configuration found in
+Crafted Emacs.
+
+To start, clone this repository.  Going forward, we will assume you did this in
+your home folder and will refer to this as ~crafted-emacs-home~.
+
+After cloning the Crafted Emacs repo, to use the modules, you need to add the
+following to your configuration:
+
+#+begin_src emacs-lisp
+  ;; This assumes you cloned Crafted Emacs in you home directory, if you
+  ;; didn't, make sure to update the path to correctly reflect the
+  ;; location on your system.
+  (load "~/crafted-emacs/modules/crafted-init-config")
+#+end_src
+
+This adds the ~crafted-emacs/modules~ folder to the ~load-path~.  If you need to
+have packages installed, look for modules ending with ~*-packages.el~, if you
+only want the configuration, then the modules ending with ~*-config.el~ will be
+what you want.
+
+In this example, we setup the ~custom-file~, which is used by Emacs to store
+configuration settings as well as to remember.  Next we load the
+~crafted-init-config~ file to setup the ~load-path~.  Finally, we add the
+completions packages and configuration modules.
+
+#+begin_src emacs-lisp
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (when (and custom-file
+             (file-exists-p custom-file))
+    (load custom-file nil :nomessage))
+
+  (load "~/crafted-emacs/modules/crafted-init-config")
+  (require 'crafted-completion-packages)  ; must come first to install
+                                          ; the packages
+  (require 'crafted-completion-config)
+#+end_src
+
+
+** Crafted Modules with ~use-package~
+
+   Some people prefer to use the very popular (and built-in to Emacs 29)
+   ~use-package~ configuration tool.  Here is an example similar to the previous
+   one.
+
+   #+begin_src emacs-lisp
+     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+     (when (and custom-file
+                (file-exists-p custom-file))
+       (load custom-file nil :nomessage))
+
+     (load "~/crafted-emacs/modules/crafted-init-config")
+     (require 'crafted-completion-packages)  ; must come first to install
+                                             ; the packages
+
+     ;; configure vertico
+     (use-package 'vertico
+       :init
+       (require 'vertico-directory)
+       :config
+       (customizie-set-variable 'vertico-cycle t)
+       (vertico-mode 1))
+
+     ;; more configuration for completion packages would go here
+   #+end_src
+
+** Crafted modules with Guix
+
+   Here, we assume you use ~guix-home~ to install your Emacs packages.  We
+   continue with another iteration on the previous example:
+
+   *TODO* Consider adding a minimal ~guix-home~ with packages for completion (ie
+   corfu, vertico, emark, et.al. installed - help wanted @daviwil or community!)
+
+   #+begin_src emacs-lisp
+     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+     (when (and custom-file
+                (file-exists-p custom-file))
+       (load custom-file nil :nomessage))
+
+     (load "~/crafted-emacs/modules/crafted-init-config")
+
+     ;; since the packages are already installed, we only need to use the
+     ;; config module to configure them.
+     (require 'crafted-completion-config)
+   #+end_src
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:
