@@ -46,11 +46,6 @@
 
 ;;; Optional configuration
 
-;;; Emacs lisp source/compiled preference
-;; Prefer loading newest either source (.el) or the compiled (.elc or
-;; .eln) file
-(customize-set-variable 'load-prefer-newer t)
-
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
           (lambda ()
