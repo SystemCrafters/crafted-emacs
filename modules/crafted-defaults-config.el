@@ -183,5 +183,10 @@ less than 28."
 (customize-set-variable 'xref-show-definitions-function
                         #'xref-show-definitions-completing-read)
 
+;;; Emacs lisp source/compiled preference
+;; Load source (.el) or the compiled (.elc or .eln) file whichever is
+;; newest
+(customize-set-variable 'load-prefer-newer t)
+
 (provide 'crafted-defaults-config)
 ;;; crafted-defaults-config.el ends here
