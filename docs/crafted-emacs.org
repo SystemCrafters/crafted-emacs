@@ -102,6 +102,10 @@ file.
   with your own ~init.el~ file without using this base configuration
   repo!
 
+* Getting Started
+
+  #+include: getting-started-guide.org
+
 * Customization
 
 ** Managing packages
@@ -125,7 +129,7 @@ file.
     (require 'crafted-completion-config)
   #+end_src
 
-  See the ~examples~ folder in the git-repo for more examples.
+  See the ~examples~ folder in the git-repo for more examples. 
 
 ** The @@texinfo:@code{custom.el}@@ file
 
@@ -198,7 +202,6 @@ file.
        ;; If there is more than one, they won't work right.
        )
     #+end_src
-
 
 * Contributing
 
@@ -280,7 +283,6 @@ file.
    problem. Include any stack traces Emacs provides (ie start Emacs with: ~emacs
    --debug-init~), mention the version number of the package you are installing,
    and anything you might have tried but which didn't work for you.
-
 
 * License
   :PROPERTIES:
