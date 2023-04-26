@@ -18,82 +18,74 @@ Defaults provided here were provided by a community of volunteers and
 ideally represent sane defaults from which to start. We expect you to
 have different opinions than ours and we expect you to implement those
 differences in your own configuration. Our intent is to provide
-something you might find useful to get your started on your own
-Emacs configuration journey.
+something you might find useful to get you started on your own Emacs
+configuration journey.  
 
+* Goals
+   + No new configuration system, macros, layers etc.  Almost
+     everything is straight Emacs Lisp.
+   + Provide some pre-configured modules to shorten the time it takes to build a
+     nice working configuration.
+   + Customizations in the modules we provide should be _opt-in_ by
+     default to avoid surprising behavior.
+   + Not a turn-key/kitchen sink solution. There will be holes the
+     user must fill.
+   + Fewer packages rather than more; we prefer to stay closer to built-in
+     functionality as much as possible.
+   + Correctness is important, as we expect people who might be new to
+     Emacs Lisp to learn from what we have written.  We prefer
+     =customize-set-variable= instead of =setq= for =defcustom= values as an
+     example.
+   + Documentation is thorough, complete, and easy to find.  There is an [[info:crafted-emacs][info]]
+     manual for Crafted Emacs distributed with the source.
 * Principles
+** Minimal, modular configuration
 
-  This configuration and all associated modules intend to follow these
-  principles:
+The core configuration only sets up Emacs to have a cleaner
+presentation with sensible defaults. It is up to the user to decide
+which ~crafted-*~ modules to load.
 
-  - Minimal, modular configuration
+Configuration modules depend on other modules and the base configuration
+as little as possible.
 
-    + The core configuration only sets up Emacs to have a cleaner
-      presentation with sensible defaults. It is up to the user to
-      decide which modules to load and when to load them.
+The implication is that someone should be able to install or copy code
+from a ~crafted-*~ module into their own configuration /without/ using
+Crafted Emacs.
 
-    + Modules should not depend on other modules as much as
-      possible. When a module needs to integrate with other
-      functionality in Emacs, the standard extensibility points of
-      each package should be used. The implication is someone should
-      be able to copy code from a module into their own configuration
-      /without/ using Crafted Emacs.
+** Prioritize built-in Emacs functionality
 
-  - Prioritize built-in Emacs functionality
+Where possible, we leverage built-in Emacs functionality instead of
+external packages.  When we choose external packages, we prefer those
+which are layered on top of existing, built-in, functionality.  For
+example:
 
-    Where possible, we will leverage built-in Emacs functionality
-    instead of external packages.
+- ~project.el~ instead of ~Projectile~
+- ~tab-bar-mode~ instead of ~Perspective.el~, ~persp-mode~, ~eyebrowse~, etc
+- ~eglot~ instead of ~lsp-mode~ (because ~eglot~ prioritizes built-in
+  functionality in Emacs 28, and is built-in with Emacs 29)
 
-    Some of the packages we prefer:
+** Can be integrated with a Guix configuration
 
-    + =project.el= for project management.
+It should be possible to customize aspects of the Crafted Emacs
+configuration inside of a Guix Home configuration so that things like
+font sizes, themes, etc can be system-specific.
 
-    + =tab-bar-mode= for organizing groups of buffers.
+It can also use packages installed via the Guix package manager
+instead of ~package.el~.
 
-    + =whitespace.el= to cleanup whitespace, like tabs, newlines or
-      additional space added to the end of lines.
+** Helps you learn Emacs Lisp
 
-    + =pulse.el= to flash the current line under certain conditions.
+Instead of providing a higher-level configuration system out of the
+box like other Emacs configurations, we follow standard Emacs Lisp
+patterns so that you can learn by reading the configuration.  We do
+our best to provide clear comments where necessary to help the reader
+understand our choices and how the code works.
 
-    + And others...
+** Reversible
 
-    This is not to take away from the amazing work package providers
-    have contributed to the Emacs community. By prioritizing built-in
-    features, we can highlight less known packages, have a more stable
-    product, and reduce the amount of network load just to get
-    started. Indeed, if you do not pull in any of the modules we
-    provide, you may not even need a network (other than to clone the
-    repo from GitHub).
-
-  - Works well in the terminal
-
-    Not everyone uses a windowing environment, and the terminal is
-    popular for remote sessions as well as command line
-    utilities. Working well in the terminal also enables the use of
-    Emacs in Termux on Android!
-
-  - Can be integrated with a Guix configuration
-
-    GNU Guix is a functional package manager and GNU Linux
-    distribution. This integration enables setting things like font
-    sizes, themes, etc in a system-specific and repeatable way.
-
-  - Works well with =Chemacs2=
-
-    Having multiple configurations available allows for testing
-    individual package combinations or configurations from
-    others. =Chemacs2= allows for having multiple configurations
-    simultaneously and Crafted Emacs should work well in this
-    environment also.
-
-  - Helps you learn Emacs Lisp
-
-    Instead of providing a higher-level configuration system out of
-    the box like other Emacs configurations (like Doom or Spacemacs
-    for example), we follow standard Emacs Lisp patterns so you can
-    learn by reading the configuration. This means we don't provide
-    macro wrappers around packaging and configuration tools. No
-    complex framework exists.
+We recognize not everyone will agree with our decisions, so each
+customization should be easily reversible in the users configuration
+file.
 
 * Why use it?
 
@@ -107,108 +99,42 @@ Emacs configuration journey.
   this configuration are optional or interchangeable.
 
   You should even be able to use the configuration modules we provide
-  with your own =init.el= file without using this base configuration
+  with your own ~init.el~ file without using this base configuration
   repo!
 
-* Folder structure
-
-  There are two primary folders for working with Crafted Emacs:
-
-  - `user-emacs-directory` (ie: `~/.config/emacs`) where Emacs, by default, searches for its configuration, packages, etc.
-  - `crafted-config-path` (ie: `~/.config/crafted-emacs`, see below) where Crafted Emacs searches for everything except packages.
-
-  By default Crafted Emacs does not do much regarding those paths except for customizations as introduced below.
-
-  The `crafted-config-path` layout is designed following current common practices to help you keep configuration and runtime data separatedly (inside `etc/` and `var/` respectively).
-
-  Moreover, the [[file:crafted-defaults.org#sensible-path-defaults][crafted-defaults]] module sets several common default
-  paths to sensible new defaults following such practices.
-
-  We do not, yet, provide a cache path here as that needs further thought (most OS expect caches in specific places).
-
 * Customization
-
-  To add your own customization to this configuration, create a
-  configuration file in one of the following places:
-
-  - =~/.crafted-emacs/=
-  - =~/.config/crafted-emacs/=
-
-  In your configuration you can set any Emacs configuration variable,
-  face attributes, themes, etc as you normally would.
-
-  If you prefer to explicitly control where your =config.el= and
-  =early-config.el= are found for Crafted Emacs, you may provide a
-  value for the =CRAFTED_EMACS_HOME= environment variable, either on
-  the command line or in your shell configuration. This variable
-  should only contain the path to the =config.el= files, for example:
-
-  #+caption: Set environment variable @@texinfo:@code{CRAFTED_EMACS_HOME}@@ to the path of the configuration directory.
-  #+begin_src shell
-    CRAFTED_EMACS_HOME=~/my-crafted-emacs-config
-  #+end_src
 
 ** Managing packages
 
    #+include: crafted-package.org
 
-** How the crafted config file is found
-
-   The crafted config files (=config.el= and =early-config.el=) are
-   found in the =crafted-config-path=. That path will match exactly
-   one of the following scenarios, in the order specified:
-
-  - Using =Chemacs2= (See below for more on this)
-    - The environment variable =CRAFTED_EMACS_HOME= is used if provided in the
-      profile definition.
-    - The profile directory is used when no environment variable is provided in
-      the profile definition.
-  - Use the value found in the =CRAFTED_EMACS_HOME= environment variable.
-  - The environment variable =XDG_CONFIG_HOME= is present or the path
-    =$HOME/.config/crafted-emacs= exists.
-    - These normally resolve to the same file, so build the path from the
-      =XDG_CONFIG_HOME= environment variable or the explicit path
-      =~/.config/crafted-emacs=
-  - Use the =HOME= environment variable to make the path, which expands to
-    =$HOME/.crafted-emacs=.
-
-  Once the =crafted-config-path= is determined, if it does not exist
-  in the file system, it is created. However, just the path is
-  created, the files =config.el= and =early-config.el= must be created
-  by you.
-
 ** Example Configuration:
 
-  #+caption: Example of user created Crafted Emacs @@texinfo:@code{config.el}@@ file.
+  #+caption: Example @@texinfo:@code{init.el}@@
   #+begin_src emacs-lisp
-    (require 'crafted-defaults)
-    (require 'crafted-screencast)
-    (require 'crafted-ui)
-    (require 'crafted-editing)
-    (require 'crafted-evil)
-    (require 'crafted-completion)
-    (require 'crafted-windows)
+    (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+    (when (and custom-file
+               (file-exists-p custom-file))
+      (load custom-file nil :nomessage))
 
-    ;; Set further font and theme customizations
-    (custom-set-variables
-     '(crafted-ui-default-font
-       '(:font "JetBrains Mono" :weight light :height 185)))
+    (load "~/crafted-emacs/modules/crafted-init-config")
 
-    (crafted-package-install-package 'doom-themes)
-    (load-theme 'doom-one t)
+    (require 'crafted-completion-packages)
+    (package-install-selected-packages :noconfirm)
+    (require 'crafted-defaults-config)
+    (require 'crafted-completion-config)
   #+end_src
 
-  See the =examples= folder in the git-repo for more up to date and comprehensive
-  examples.
+  See the ~examples~ folder in the git-repo for more examples.
 
-** The =custom.el= file
+** The @@texinfo:@code{custom.el}@@ file
 
-   The =custom.el= file will hold the auto-generated code from the Emacs
+   The ~custom.el~ file will hold the auto-generated code from the Emacs
    Customization UI.
 
 *** Simplified overview of how Emacs Customization works
 
-    Customizable values are defined with the =defcustom= form, and can be
+    Customizable values are defined with the ~defcustom~ form, and can be
     customized using the Easy Customization UI. A complete discussion is out of
     scope for this document, instead see the Emacs Manual for more information.
 
@@ -216,68 +142,45 @@ Emacs configuration journey.
     consider two of them: the default state and the changed state. These are not
     the "official" names but easily convey the concepts of the variable. If a
     value is in the default state, looking in the Customization UI, the state
-    will be listed as =STANDARD=. Crafted Emacs takes the approach of using the
-    =customize-set-variable= to update the values defined with
-    =defcustom=. This will show the values as =SET for current session only= in
+    will be listed as ~STANDARD~. Crafted Emacs takes the approach of using the
+    ~customize-set-variable~ to update the values defined with
+    ~defcustom~. This will show the values as ~SET for current session only~ in
     the Customization UI. This is normal since the values are set each time
     Emacs starts. They are technically "SAVED" since they exist as emacs-lisp
-    code, but since they are not in a =custom-set-variables= form the
+    code, but since they are not in a ~custom-set-variables~ form the
     Customization UI only sees them as "SET for the current session only".
 
-    A =SAVED and set= value means the Customization code has written the
+    A ~SAVED and set~ value means the Customization code has written the
     configuration to disk to be loaded again the next time Emacs starts. When
     Emacs saves the configuration from the Customization UI, it simply adds a
     couple of forms to the end of your initialization file (typically
-    =init.el=), with comments warning about having more than one form with the
+    ~init.el~), with comments warning about having more than one form with the
     same name (see example below).
 
-*** Loading the =custom.el= file
+*** Loading the @@texinfo:@code{custom.el}@@ file
 
-    This is important because if you, the user, wish to use the Customization
-    UI to configure Emacs, the customizations will (by default) be written to
-    the bottom of the =init.el= file in a form called =custom-set-variables= and
-    =custom-set-faces=. These are loaded usually at the end of the init cycle
-    (which is why they are listed at the bottom of the =init.el= file) and
-    allows restoring values set by the Customization UI rather than through
-    code.
+    This is important because if you, the user, wish to use the Customization UI
+    to configure Emacs, the customizations will (by default) be written to the
+    of the ~init.el~ file in a form called ~custom-set-variables~ and
+    ~custom-set-faces~. 
 
-    This configuration sets the =custom-file= to exist in the
-    =crafted-config-path= (see above) as a file known as =custom.el=. This file
-    is *not* automatically loaded by Crafted Emacs configuration. You may, if
-    you choose, load this file yourself with the following code in your
-    =config.el= file.
-
+    This snippet, added to the top of your ~init.el~ file sets the name of the
+    file holding Emacs customizations to be ~custom.el~ in the same directory
+    where your ~init.el~ file resides.  Additionally, the code checks to see if
+    the file exists, and if so, loads it to take advantage of the saved
+    configuration therein.
+    
     #+begin_src emacs-lisp
-      (load "custom")
+      (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+      (when (and custom-file
+                 (file-exists-p custom-file))
+        (load custom-file nil :nomessage))
     #+end_src
 
-    It is important to load this file last to make sure it overrides any values
-    previously set while Emacs was starting.
-
-    If you are using something like the example provided above, you might have
-    something that looks more like this:
-
-    #+name: config.el
-    #+caption: Example @@texinfo:@samp{config.el}@@ loading the @@texinfo:@code{custom.el}@@ file.
-    #+begin_src emacs-lisp
-      (require 'crafted-defaults)
-      (require 'crafted-screencast)
-      (require 'crafted-ui)
-      (require 'crafted-editing)
-      (require 'crafted-evil)
-      (require 'crafted-completion)
-      (require 'crafted-windows)
-
-      (crafted-package-install-package 'doom-themes)
-      (load-theme 'doom-one t)
-
-      (load "custom")
-      ;;; example-config.el ends here
-    #+end_src
-
-    And then in =custom.el= you would have something like the following which
-    is auto-generated by Emacs:
-
+    This is an example of what the Emacs customization file might look like.
+    The values used here are just examples, you may have many more values
+    configured than just these.
+    
     #+name: custom.el
     #+caption: Example auto-generated @@texinfo:@code{custom.el}@@ file.
     #+begin_src emacs-lisp
@@ -286,8 +189,8 @@ Emacs configuration journey.
        ;; If you edit it by hand, you could mess it up, so be careful.
        ;; Your init file should contain only one such instance.
        ;; If there is more than one, they won't work right.
-       '(crafted-ui-default-font '(:font "JetBrains Mono" :weight light :height 185))
-       '(crafted-ui-display-line-numbers t))
+       '(column-number-mode t)
+       '(fido-vertical-mode t))
       (custom-set-faces
        ;; custom-set-faces was added by Custom.
        ;; If you edit it by hand, you could mess it up, so be careful.
@@ -296,118 +199,6 @@ Emacs configuration journey.
        )
     #+end_src
 
-
-*** Not loading the =custom.el= file
-
-    You may choose not to load the =custom.el= file if you are writing your own
-    configuration with Emacs-Lisp. Using =customize-set-variable= has the same
-    effect as using the Customization UI, with the primary difference, the
-    customization is not written later as if you had used the Customization
-    UI. If you choose to follow this pattern, you will not need to load the
-    =custom.el= file ever. Our example (see above) could imply the use of the
-    Customization UI, as our example uses the =custom-set-variables= form to set
-    a list of customizable values all at once. Here is the same example written
-    differently.
-
-    #+caption: Example @@texinfo:@samp{config.el}@@ setting customization variables directly.
-    #+begin_src emacs-lisp
-      (require 'crafted-defaults)
-      (require 'crafted-screencast)
-      (require 'crafted-ui)
-      (require 'crafted-editing)
-      (require 'crafted-evil)
-      (require 'crafted-completion)
-      (require 'crafted-windows)
-
-      (customize-set-variable 'crafted-ui-default-font
-                              '(:font "JetBrains Mono" :weight light :height 185))
-      (customize-set-variable 'crafted-ui-display-line-numbers t)
-
-      (crafted-package-install-package 'doom-themes)
-      (load-theme 'doom-one t)
-    #+end_src
-
-*** Caveat on the timing of loading =custom.el=
-
-    Even if you are using emacs-lisp to customize Emacs, you may still choose to
-    load the =custom.el= file. Keep in mind, if you use =customize-set-variable=
-    or =setq= to set the value for a =defcustom= option and then load the
-    =custom.el= file which might have the same variable set with a different
-    value, the last thing to set that value wins.
-
-    Here is an example, first a =config.el= snippet:
-
-    #+name: config.el
-    #+caption: @@texinfo:@samp{config.el}@@ snippet loading @@texinfo:@code{custom.el}@@ last
-    #+begin_src emacs-lisp
-      ;; ... some customization before
-      (customize-set-variable 'display-line-numbers-type 'relative)
-      ;; ... some more customization
-
-      (load "custom")
-    #+end_src
-
-    and the =custom.el= snippet
-
-    #+name: custom.el
-    #+caption: @@texinfo:@code{custom.el}@@ snippet.
-    #+begin_src emacs-lisp
-      (custom-set-variables
-       '(display-line-numbers-type t))
-    #+end_src
-
-    The value of the =display-line-numbers-type= will be =t=. Since the
-    =custom.el= file is loaded _last_ the first value of the
-    =display-line-numbers-type= is overwritten. The fix is to make sure you set
-    the value only once in your configuration with either
-    =customize-set-variable= or with =custom-set-variables= either in your
-    =config.el= or loaded from =custom.el=
-
-* Using it with =Chemacs2=
-
-  If you have the =Chemacs2= configuration cloned to =~/.emacs.d= or
-  =~/.config/emacs=, you can clone =crafted-emacs= anywhere you like
-  and add an entry to it in your =~/.emacs-profiles.el= file:
-
-  You can then put your =early-config.el= and =config.el= files in the
-  sub-folder =~/path/to/crafted-emacs/crafted-emacs=. So, for example
-  if you installed Crafted Emacs to =~/.crafted-emacs=, then your
-  =early-config.el= and =config.el= files would be in the path
-  =~/.crafted-emacs/crafted-emacs=. This is the default path, but
-  you can change the name to something else, see below for examples.
-
-  #+caption: Example of a @@texinfo:@samp{Chemacs2}@@ user profile file in @@texinfo:@code{~/.emacs-profiles.el}@@.
-  #+begin_src emacs-lisp
-
-    (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs"))))
-
-  #+end_src
-
-  If you prefer to put your Crafted Emacs customizations elsewhere
-  (for example in a folder called `config` or maybe `personal`), you
-  can specify the =CRAFTED_EMACS_HOME= environment variable, for
-  example like this:
-
-  #+caption: User @@texinfo:@samp{Chemacs2}@@ profile file @@texinfo:@code{~/.emacs-profiles.el}@@ with environment variable.
-  #+begin_src emacs-lisp
-
-      (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
-                      (env . (("CRAFTED_EMACS_HOME" . "~/path/to/crafted-emacs/personal"))))))
-
-  #+end_src
-
-  Or some place completely different:
-
-  #+caption: User @@texinfo:@samp{Chemacs2}@@ profile file @@texinfo:@code{~/.emacs-profiles.el}@@ with Crafted Emacs config files set to another path.
-  #+begin_src emacs-lisp
-
-      (("crafted" . ((user-emacs-directory . "~/path/to/crafted-emacs")
-                      (env . (("CRAFTED_EMACS_HOME" . "~/crafted-config/personal"))))))
-
-  #+end_src
-
-
-  Then launch it with =emacs --with-profile crafted=!
 
 * Contributing
 
@@ -420,37 +211,6 @@ Emacs configuration journey.
 
   If you enjoy crafting your computing experience, join the
   [[https://systemcrafters.net/][SystemCrafters]] community!
-
-* Modules
-
-  Crafted Emacs includes a number of modules to further configure
-  Emacs. These are intended to be stand-alone in the sense that no
-  module requires the use of any other module.
-
-  The modules are written to support various themes: mini-buffer
-  selection (completion), editing, ui, etc. To use these modules,
-  simply =require= them in your =config.el=, or copy the relevant
-  portions to your =config.el= and modify them to suit your needs.
-
-  In most cases, you can =require= the module, and then adjust the
-  configuration for specific parts by overriding the settings provided
-  by the module by additional code in your =config.el=.
-
-  While the intent here is to document each module as completely as
-  reasonably possible, the best-practice is to simply read the code
-  for the module of interest to understand it best.
-
-  #+include: crafted-completion.org
-  #+include: crafted-defaults.org
-  #+include: crafted-editing.org
-  #+include: crafted-evil.org
-  #+include: crafted-ide.org
-  #+include: crafted-lisp.org
-  #+include: crafted-mastering-emacs.org
-  #+include: crafted-project.org
-  #+include: crafted-python.org
-  #+include: crafted-windows.org
-  #+include: crafted-workspaces.org
 
 * Troubleshooting
 
@@ -485,22 +245,22 @@ Emacs configuration journey.
    actions in your configuration:
 
    - Option 1
-     + Use =M-x package-list-packages= to display the list of packages.
+     + Use ~M-x list-packages~ to display the list of packages.
      + Find the package in the list which doesn't work for you, it will have
        either the /installed/ or /dependency/ status.
-     + Press the =enter= key to get more details on the package an look near the
+     + Press the ~enter~ key to get more details on the package an look near the
        bottom of the metadata, you should see a line with "Other Versions". Choose
        the development version - it will have a version number that looks like a
-       date and the text =(melpa)= next to it. Press =enter= on this version.
+       date and the text ~(melpa)~ next to it. Press ~enter~ on this version.
      + Following the step above will take you to the same package but from the
        MELPA repository, and you'll see a button at the top labeled
-       =Install=. Click this button.
+       ~Install~. Click this button.
      + *Optionally* you can go back to the list of packages, find previous
        installed version, press the letter 'D' and then the letter 'X' to
        uninstall that version.
      + Restart Emacs
    - Option 2
-     + Edit your =early-config.el= file.
+     + Edit your ~early-config.el~ file.
      + Near the bottom, add a line similar to this to pin the offending package
        to MELPA (make sure to replace /package-name/ with the name of the actual
        package):
@@ -509,7 +269,7 @@ Emacs configuration journey.
          (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
        #+end_src
 
-     + Use =M-x package-list-packages= to display the list of packages.
+     + Use ~M-x package-list-packages~ to display the list of packages.
      + Find the package in the list, press the letter 'D' and the letter 'X' to
        uninstall that package.
      + Restart Emacs, the package should be installed from MELPA thus using the
@@ -517,8 +277,8 @@ Emacs configuration journey.
 
    Regardless, always feel free to open an issue here and we can help you
    out. Please be as complete as possible in your description of the
-   problem. Include any stack traces Emacs provides (ie start Emacs with: =emacs
-   --debug-init=), mention the version number of the package you are installing,
+   problem. Include any stack traces Emacs provides (ie start Emacs with: ~emacs
+   --debug-init~), mention the version number of the package you are installing,
    and anything you might have tried but which didn't work for you.
 
 
@@ -558,3 +318,9 @@ Emacs configuration journey.
   :end:
 
   #+include: mit-license.org
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:
