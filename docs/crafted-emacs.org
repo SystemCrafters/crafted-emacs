@@ -34,7 +34,7 @@ configuration journey.
      functionality as much as possible.
    + Correctness is important, as we expect people who might be new to
      Emacs Lisp to learn from what we have written.  We prefer
-     =customize-set-variable= instead of =setq= for =defcustom= values as an
+     ~customize-set-variable~ instead of ~setq~ for ~defcustom~ values as an
      example.
    + Documentation is thorough, complete, and easy to find.  There is an [[info:crafted-emacs][info]]
      manual for Crafted Emacs distributed with the source.
@@ -236,7 +236,7 @@ file.
    Here are some strategies:
 
    - Check the code on the package source control page (ie GitHub, GitLab or
-     whatever), and make sure the missing code is present on the =master=
+     whatever), and make sure the missing code is present on the ~master~
      branch.
    - Look at the code associated with the released version (you need to look at
      the most recent tag for this). If the code is missing there, ask the
