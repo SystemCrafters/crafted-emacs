@@ -54,7 +54,7 @@ configuration.  That's your job.  It's YOUR configuration.
      functionality as much as possible.
    + Correctness is important, as we expect people who might be new to
      Emacs Lisp to learn from what we have written.  We prefer
-     =customize-set-variable= instead of =setq= for =defcustom= values as an
+     ~customize-set-variable~ instead of ~setq~ for ~defcustom~ values as an
      example.
    + Documentation is thorough, complete, and easy to find.  There is an [[info:crafted-emacs][info]]
      manual for Crafted Emacs distributed with the source.
@@ -68,13 +68,13 @@ configuration.  That's your job.  It's YOUR configuration.
 
 The core configuration only sets up Emacs to have a cleaner
 presentation with sensible defaults. It is up to the user to decide
-which =crafted-*= modules to load.
+which ~crafted-*~ modules to load.
 
 Configuration modules depend on other modules and the base configuration
 as little as possible.
 
 The implication is that someone should be able to install or copy code
-from a =crafted-*= module into their own configuration /without/ using
+from a ~crafted-*~ module into their own configuration /without/ using
 Crafted Emacs.
 
 *** Prioritize built-in Emacs functionality
@@ -84,9 +84,9 @@ external packages.  When we choose external packages, we prefer those
 which are layered on top of existing, built-in, functionality.  For
 example:
 
-- =project.el= instead of =Projectile=
-- =tab-bar-mode= instead of =Perspective.el=, =persp-mode=, =eyebrowse=, etc
-- =eglot= instead of =lsp-mode= (because =eglot= prioritizes built-in
+- ~project.el~ instead of ~Projectile~
+- ~tab-bar-mode~ instead of ~Perspective.el~, ~persp-mode~, ~eyebrowse~, etc
+- ~eglot~ instead of ~lsp-mode~ (because ~eglot~ prioritizes built-in
   functionality)
 
 *** Can be integrated with a Guix configuration
@@ -96,7 +96,7 @@ configuration inside of a Guix Home configuration so that things like
 font sizes, themes, etc can be system-specific.
 
 It can also use packages installed via the Guix package manager
-instead of =package.el=.
+instead of ~package.el~.
 
 *** Helps you learn Emacs Lisp
 
@@ -159,13 +159,13 @@ community!
 
 ** Contributing Tips for Elisp
 
-   + Prefer =customize-set-variable= instead of =setq= for =defcustom=
+   + Prefer ~customize-set-variable~ instead of ~setq~ for ~defcustom~
      values. This helps make sure constructors or setters attached to
      the variable are run when the value is set.
-   + Provide =defcustom= variables for things we expect the user to
+   + Provide ~defcustom~ variables for things we expect the user to
      modify and make sure it is in the appropriate group.
-   + Provide verbose doc-strings for =defvar=, =defcustom=, =defun=,
-     =defmacro=, etc to clearly document what is going on.
+   + Provide verbose doc-strings for ~defvar~, ~defcustom~, ~defun~,
+     ~defmacro~, etc to clearly document what is going on.
    + Make sure to follow doc-string guidelines (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html][Documentation Tips]]
      or [[info:elisp#Documentation Tips][elisp#Documentation Tips]])
    + Add comments for blocks of code, especially to describe /why/ the
@@ -228,7 +228,7 @@ community!
 
    - Check the code on the package source control page (ie GitHub,
      GitLab or whatever), and make sure the missing code is present on
-     the =master= branch.
+     the ~master~ branch.
    - Look at the code associated with the released version (you need
      to look at the most recent tag for this). If the code is missing
      there, ask the maintainer for a new release. Often, there are
@@ -240,23 +240,23 @@ community!
    of these actions in your configuration:
 
    - Option 1
-     + Use =M-x package-list-packages= to display the list of packages.
+     + Use ~M-x package-list-packages~ to display the list of packages.
      + Find the package in the list which doesn't work for you, it
        will have either the /installed/ or /dependency/ status.
-     + Press the =enter= key to get more details on the package an look
+     + Press the ~enter~ key to get more details on the package an look
        near the bottom of the metadata, you should see a line with
        "Other Versions". Choose the development version - it will have
-       a version number that looks like a date and the text =(melpa)=
-       next to it. Press =enter= on this version.
+       a version number that looks like a date and the text ~(melpa)~
+       next to it. Press ~enter~ on this version.
      + Following the step above will take you to the same package but
        from the MELPA repository, and you'll see a button at the top
-       labeled =Install=. Click this button.
+       labeled ~Install~. Click this button.
      + *Optionally* you can go back to the list of packages, find
        previous installed version, press the letter 'D' and then the
        letter 'X' to uninstall that version.
      + Restart Emacs
    - Option 2
-     + Edit your =early-init.el= file, if you are using one.  If you
+     + Edit your ~early-init.el~ file, if you are using one.  If you
        aren't using one, add the code mentioned next *before* any calls
        to ~package-initialize~ or ~package-install-selected-packages~.
      + Add a line similar to this to pin the offending package to
@@ -267,7 +267,7 @@ community!
          (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
        #+end_src
 
-     + Use =M-x package-list-packages= to display the list of packages.
+     + Use ~M-x package-list-packages~ to display the list of packages.
      + Find the package in the list, press the letter 'D' and the
        letter 'X' to uninstall that package.
      + Restart Emacs, the package should be installed from MELPA thus
@@ -277,7 +277,7 @@ community!
    Regardless, always feel free to open an issue here and we can help
    you out. Please be as complete as possible in your description of
    the problem. Include any stack traces Emacs provides (ie start
-   Emacs with: =emacs --debug-init=), mention the version number of the
+   Emacs with: ~emacs --debug-init~), mention the version number of the
    package you are installing, and anything you might have tried but
    which didn't work for you.
 
