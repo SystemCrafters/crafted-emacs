@@ -62,6 +62,7 @@ explicitly."))
 ;; `user-emacs-directory', include it on the load-path.
 (let ((custom-modules (expand-file-name "custom-modules" user-emacs-directory)))
   (when (file-directory-p custom-modules)
+    (message "adding custom-modules to load-path")
     (add-to-list 'load-path custom-modules)))
 
 ;; When writing crafted-modules, insert header from skeleton
