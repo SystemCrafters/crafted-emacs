@@ -182,8 +182,14 @@ community!
 
 ** Contributing Tips for Issues
 
-   We welcome your questions and ideas, please open an issue if you
-   have one!
+   We welcome your questions and ideas, please open an issue if you have one!
+
+   Pease keep in mind, we only support released versions of Emacs.  Development
+   versions of Emacs may have incompatibilities, defects or incomplete features.
+   Trying to support development versions of Emacs is like shooting at a moving
+   target; not impossible, but a lot more difficult than may be expected.
+   Applying changes to Crafted Emacs to accomodate development versions of Emacs
+   may break things for those who use a released version.
 
    + If you feel there is a defect with what we provide, please
      provide the steps necessary to reproduce the issue. A minimal
