@@ -16,5 +16,5 @@
   (customize-set-variable 'keycast-insert-after 'mode-line-misc-info)
   (keycast-mode))
 
-(provide 'crafted-screencast)
+(provide 'crafted-screencast-config)
 ;;; crafted-screencast.el ends here

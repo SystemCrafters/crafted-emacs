@@ -141,5 +141,5 @@ ARG is the thing being completed in the minibuffer."
                                    corfu-auto nil)
               (corfu-mode))))
 
-(provide 'crafted-completion)
+(provide 'crafted-completion-config)
 ;;; crafted-completion.el ends here
