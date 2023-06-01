@@ -15,4 +15,3 @@
 
 (provide 'crafted-workspaces-packages)
 ;;; crafted-workspaces-packages.el ends here
-

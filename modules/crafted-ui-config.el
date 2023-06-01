@@ -117,9 +117,9 @@ Used as hook for modes which should not display line numebrs."
   (pulse-momentary-highlight-one-line (point)))
 
 (dolist (command '(scroll-up-command
-		   scroll-down-command
+                   scroll-down-command
                    recenter-top-bottom
-		   other-window))
+                   other-window))
   (advice-add command :after #'pulse-line))
 
 (provide 'crafted-ui-config)

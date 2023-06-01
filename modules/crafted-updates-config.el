@@ -69,15 +69,15 @@ Crafted Emacs."
   (interactive)
   (message "Fetching latest commit log for Crafted Emacs...")
   (with-current-buffer (find-file-noselect (expand-file-name
-					    "README.org"
-					    crafted-emacs-home))
+                                            "README.org"
+                                            crafted-emacs-home))
     (vc-log-incoming)))
 
 (defun crafted-updates--pull-commits ()
   (message "Pulling latest commits to Crafted Emacs...")
   (with-current-buffer (find-file-noselect
-			(expand-file-name "README.org"
-					  crafted-emacs-home))
+                        (expand-file-name "README.org"
+                                          crafted-emacs-home))
     (vc-pull)))
 
 (defun crafted-updates-pull-latest (do-pull)

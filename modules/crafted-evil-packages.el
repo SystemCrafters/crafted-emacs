@@ -22,4 +22,3 @@
 
 (provide 'crafted-evil-packages)
 ;;; crafted-evil-packages.el ends here
-

@@ -15,4 +15,3 @@
 
 (provide 'crafted-screencast-packages)
 ;;; crafted-screencast-packages.el ends here
-

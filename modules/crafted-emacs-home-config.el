@@ -25,4 +25,3 @@ explicitly.")
 
 (provide 'crafted-emacs-home-config)
 ;;; crafted-emacs-home-config.el ends here
-

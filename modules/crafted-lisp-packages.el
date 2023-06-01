@@ -7,7 +7,7 @@
 
 ;;; Commentary:
 
-;; Packages used with the crafted-lisp-config. 
+;; Packages used with the crafted-lisp-config.
 
 ;;; Code:
 

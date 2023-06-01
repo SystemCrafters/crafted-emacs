@@ -65,11 +65,11 @@
   (add-hook 'clojure-mode-hook
             (lambda ()
               (when (featurep 'clj-refactor)
-		(clj-refactor-mode 1)
-		;; keybindings mentioned on clj-refactor github page
-		;; conflict with cider, use this by default as it does
-		;; not conflict and is a better mnemonic
-		(cljr-add-keybindings-with-prefix "C-c r"))))
+                (clj-refactor-mode 1)
+                ;; keybindings mentioned on clj-refactor github page
+                ;; conflict with cider, use this by default as it does
+                ;; not conflict and is a better mnemonic
+                (cljr-add-keybindings-with-prefix "C-c r"))))
 
   (with-eval-after-load "flycheck"
     (flycheck-clojure-setup)))
