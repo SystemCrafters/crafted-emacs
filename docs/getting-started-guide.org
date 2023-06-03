@@ -29,9 +29,9 @@ you'll be able to skim this section for the code examples and move from there.
     #+begin_src shell
       git clone https://github.com/SystemCrafters/crafted-emacs
 
-      # N.B. As this is still an alpha release, make sure to also execute the following command:
+      # N.B. As this is still a beta release, make sure to also execute the following command:
 
-      git checkout craftedv2alpha
+      git checkout craftedv2beta
     #+end_src
 
     For the rest of this document, the location where you checked out Crafted
