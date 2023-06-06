@@ -148,12 +148,14 @@ Depends on having `pdf-tools' installed.  See
 
 (when (and (executable-find "latex")
            (executable-find "latexmk"))
+  (defun set-TeX-default-command ()
+    (setq TeX-command-default "LatexMk"))
   (with-eval-after-load 'latex
     (when (require 'auctex-latexmk nil 'noerror)
       (with-eval-after-load 'auctex-latexmk
         (auctex-latexmk-setup)
         (customize-save-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
-      (add-hook 'TeX-mode-hook #'(lambda () (setq TeX-command-default "LatexMk"))))))
+      (add-hook 'TeX-mode-hook #'set-TeX-default-command)))
 
 
 ;;; Markdown
