@@ -15,7 +15,7 @@
 (add-to-list 'package-selected-packages 'erlang)
 
 ;; Only need to install eglot if using Emacs prior to version 29.
-(unless (version< emacs-version "29")
+(unless (< emacs-major-version 29)
   (add-to-list 'package-selected-packages 'eglot))
 
 (provide 'crafted-erlang-packages)

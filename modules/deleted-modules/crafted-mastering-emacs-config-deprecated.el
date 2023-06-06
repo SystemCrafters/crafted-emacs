@@ -30,13 +30,13 @@
 (customize-set-variable 'completion-category-overrides
                         '((file (styles . (partial-completion)))))
 (customize-set-variable 'completions-detailed t)
-(if (version< emacs-version "28")
+(if (< emacs-major-version 28)
     (icomplete-mode 1)
   (fido-vertical-mode 1))               ; fido-vertical-mode is
                                         ; available beginning in Emacs
                                         ; 28
 
-(when (version< emacs-version "28")
+(when (< emacs-major-version 28)
   (defun crafted-mastering-emacs-use-icomplete-vertical ()
     "Install and enable icomplete-vertical-mode for Emacs versions
 less than 28."
@@ -81,7 +81,7 @@ less than 28."
 ;; keystroke once, pressing repeated [ keys will continue paging
 ;; backward. `repeat-mode' is exited with the normal C-g, by movement
 ;; keys, typing, or pressing ESC three times.
-(unless (version< emacs-version "28")
+(unless (< emacs-major-version 28)
   (repeat-mode 1))
 
 ;; turn off forward and backward movement cycling

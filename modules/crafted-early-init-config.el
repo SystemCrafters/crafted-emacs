@@ -13,7 +13,7 @@
 
 (require 'package)
 
-(when (version< emacs-version "28")
+(when (< emacs-major-version 28)
   (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 (add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))

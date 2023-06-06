@@ -18,7 +18,7 @@
 ;; including the template below used for writing Crafted Emacs
 ;; modules.
 
-(when (version< emacs-version "29")
+(when (< emacs-major-version 29)
   ;; Get some Emacs 29 compatibility functions. Notably missing is
   ;; `setopt' which the `compat' library deliberately does not
   ;; provide, so we continue to use the `customize-set-variable'

@@ -32,7 +32,7 @@
 (require 'files)
 (require 'seq)
 
-(when (version< emacs-version "28")
+(when (< emacs-major-version 28)
   ;; `string-replace' was introduced in Emacs 28. This was identified
   ;; in issue #198. This code is to support Emacs 27 users.
   (defun string-replace (from-string to-string in-string)

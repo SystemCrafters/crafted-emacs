@@ -14,7 +14,7 @@
 
 ;; Add Eglot only for Emacs prior to version 29.  It is built-in since
 ;; Emacs 29.
-(when (version< emacs-version "29")
+(when (< emacs-major-version 29)
   ;; LSP capabilities
   (add-to-list 'package-selected-packages 'eglot)
 
@@ -25,7 +25,7 @@
   (add-to-list 'package-selected-packages 'tree-sitter-langs))
 
 ;; Emacs 29 packages
-(when (> (string-to-number emacs-version) 29)
+(when (> emacs-major-version 29)
   ;; automatically handles switching to tree-sitter versions of major
   ;; modes, can install grammars, etc.
   (add-to-list 'package-selected-packages 'treesit-auto)

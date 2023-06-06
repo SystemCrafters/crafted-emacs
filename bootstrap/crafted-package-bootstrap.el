@@ -28,7 +28,7 @@
 ;; Emacs 27.x has gnu elpa as the default
 ;; Emacs 28.x adds the nongnu elpa to the list by default, so only
 ;; need to add nongnu when this isn't Emacs 28+
-(when (version< emacs-version "28")
+(when (< emacs-major-version 28)
   (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 (add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
