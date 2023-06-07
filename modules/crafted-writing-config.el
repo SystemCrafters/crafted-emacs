@@ -140,11 +140,12 @@ Depends on having `pdf-tools' installed.  See
     (customize-save-variable 'TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
     (customize-save-variable 'TeX-source-correlate-start-server t)))
 
+(defun message-no-latex ()
+  (unless (executable-find "latex")
+    (message "latex executable not found")))
+
 ;; message the user if the latex executable is not found
-(add-hook 'tex-mode-hook
-          #'(lambda ()
-              (unless (executable-find "latex")
-                (message "latex executable not found"))))
+(add-hook 'tex-mode-hook #'message-no-latex)
 
 (when (and (executable-find "latex")
            (executable-find "latexmk"))
@@ -155,7 +156,7 @@ Depends on having `pdf-tools' installed.  See
       (with-eval-after-load 'auctex-latexmk
         (auctex-latexmk-setup)
         (customize-save-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
-      (add-hook 'TeX-mode-hook #'set-TeX-default-command)))
+      (add-hook 'TeX-mode-hook #'set-TeX-default-command))))
 
 
 ;;; Markdown
