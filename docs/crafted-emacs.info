@@ -290,9 +290,9 @@ your home folder.
 
      git clone https://github.com/SystemCrafters/crafted-emacs
 
-     # N.B. As this is still an alpha release, make sure to also execute the following command:
+     # N.B. As this is still a beta release, make sure to also execute the following command:
 
-     git checkout craftedv2alpha
+     git checkout craftedv2beta
 
    For the rest of this document, the location where you checked out
 Crafted Emacs will be known as ‘crafted-emacs-home’.
@@ -961,27 +961,27 @@ Node: Why use it?7614
 Node: Getting Started8291
 Node: Starting from scratch8512
 Node: Prerequisites9358
-Node: Early Emacs Initialization10463
-Node: Emacs Initialization12827
-Ref: Basic Configuration14210
-Node: Starting from an existing configuration16908
-Node: Crafted Modules with use-package19113
-Node: Crafted modules with externally installed Emacs packages20192
-Node: Customization21576
-Node: Managing packages21819
-Node: Configuring a package manager22073
-Node: Installing packages25486
-Node: Using alternate package managers27129
-Node: Example Configuration28796
-Ref: orgbf85af528981
-Node: The customel file29514
-Node: Simplified overview of how Emacs Customization works29896
-Node: Loading the customel file31614
-Ref: customel32787
-Node: Contributing33449
-Node: Troubleshooting34085
-Node: A package (suddenly?) fails to work34326
-Node: MIT License38114
+Node: Early Emacs Initialization10460
+Node: Emacs Initialization12824
+Ref: Basic Configuration14207
+Node: Starting from an existing configuration16905
+Node: Crafted Modules with use-package19110
+Node: Crafted modules with externally installed Emacs packages20189
+Node: Customization21573
+Node: Managing packages21816
+Node: Configuring a package manager22070
+Node: Installing packages25483
+Node: Using alternate package managers27126
+Node: Example Configuration28793
+Ref: org11c8c2328978
+Node: The customel file29511
+Node: Simplified overview of how Emacs Customization works29893
+Node: Loading the customel file31611
+Ref: customel32784
+Node: Contributing33446
+Node: Troubleshooting34082
+Node: A package (suddenly?) fails to work34323
+Node: MIT License38111
 
 End Tag Table
 
