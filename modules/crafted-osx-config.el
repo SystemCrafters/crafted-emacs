@@ -35,7 +35,7 @@
 (keymap-global-set "s-t" 'tab-bar-new-tab) ;⌘-t = New tab
 (keymap-global-set "s-w" 'tab-bar-close-tab) ; ⌘-w = Close tab
 
-(unless (< emacs-major-version 28)
+(unless (version< emacs-version "28")
   (keymap-global-set "s-Z" 'undo-redo)) ; ⌘-Z = Redo
 
 ;; Better compatibility with osx based window managers

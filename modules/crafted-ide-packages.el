@@ -25,7 +25,7 @@
   (add-to-list 'package-selected-packages 'tree-sitter-langs))
 
 ;; Emacs 29 packages
-(when (> (string-to-number emacs-version) 29)
+(when (version< "29" emacs-version)
   ;; automatically handles switching to tree-sitter versions of major
   ;; modes, can install grammars, etc.
   (add-to-list 'package-selected-packages 'treesit-auto)

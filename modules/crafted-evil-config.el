@@ -13,7 +13,7 @@
 
 ;; Turn on undo-tree globally for version older than 28.  Use
 ;; undo-redo for Emacs 28+
-(when (and (< emacs-major-version 28)
+(when (and (version< emacs-version "28")
            (featurep 'undo-tree))
   (global-undo-tree-mode))
 
@@ -24,7 +24,7 @@
 (customize-set-variable 'evil-respect-visual-line-mode t)
 ;; C-h is backspace in insert state
 (customize-set-variable 'evil-want-C-h-delete t)
-(if (< emacs-major-version 28)
+(if (version< emacs-version "28")
   (customize-set-variable 'evil-undo-system 'undo-tree)
   (customize-set-variable 'evil-undo-system 'undo-redo))
 

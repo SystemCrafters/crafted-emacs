@@ -66,7 +66,7 @@ Example: `(crafted-tree-sitter-load 'python)'"
         (add-hook mode-hook-name #'tree-sitter-mode)))))
 
 ;; Emacs versions after 29
-(when (>= (string-to-number emacs-version) 29)
+(when (version< "29" emacs-version)
   ;; only attempt to use tree-sitter when Emacs was built with it.
   (when (and (member "TREE_SITTER" (split-string system-configuration-features))
              (executable-find "tree-sitter"))

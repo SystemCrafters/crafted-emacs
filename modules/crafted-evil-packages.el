@@ -17,7 +17,7 @@
 
 ;; Emacs 28+ prefer the built-in undo-redo facility, but for older
 ;; versions, undo-tree is a nice option.
-(when (< emacs-major-version "28")
+(when (version< emacs-version "28")
   (add-to-list 'package-selected-packages 'undo-tree))
 
 (provide 'crafted-evil-packages)

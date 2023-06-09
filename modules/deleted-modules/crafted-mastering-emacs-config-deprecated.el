@@ -108,7 +108,7 @@ less than 28."
 (require 'dumb-jump "dumb-jump" :no-error)
 ;; add hydra to facilitate remembering the keys and actions for dumb-jump
 (when (and (featurep 'hydra)
-	   (featurep 'dumb-jump))
+           (featurep 'dumb-jump))
   (defhydra dumb-jump-hydra (:color blue :columns 3)
     "Dumb Jump"
     ("j" dumb-jump-go "Go")
