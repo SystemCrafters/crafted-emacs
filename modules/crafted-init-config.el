@@ -48,8 +48,11 @@ explicitly."))
 (when (null crafted-emacs-home)
   (setq crafted-emacs-home
         (expand-file-name
-         (project-root
-          (project-current nil (file-name-directory load-file-name))))))
+         (if (executable-find "git")
+             (project-root
+              (project-current nil (file-name-directory load-file-name)))
+           (vc-find-root load-file-name "modules")))))
+
 
 ;; update the `load-path' to include the Crafted Emacs modules path
 
