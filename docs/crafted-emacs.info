@@ -898,7 +898,7 @@ appropriate points.
      (package-install-selected-packages :noconfirm)
 
      ;; Load crafted-org configuration
-     (require 'crafted-org-packages)
+     (require 'crafted-org-config)
 
 
 File: crafted-emacs.info,  Node: Description,  Next: Alternative package org-roam,  Prev: Installation,  Up: Crafted Emacs Org Module
@@ -1136,7 +1136,7 @@ Node: Configuring a package manager22214
 Node: Installing packages25627
 Node: Using alternate package managers27270
 Node: Example Configuration28937
-Ref: orgdc99eb529122
+Ref: org2dfc65b29122
 Node: The customel file29655
 Node: Simplified overview of how Emacs Customization works30037
 Node: Loading the customel file31755
@@ -1145,11 +1145,11 @@ Node: Contributing33590
 Node: Modules34218
 Node: Crafted Emacs Org Module35146
 Node: Installation35356
-Node: Description35852
-Node: Alternative package org-roam37595
-Node: Troubleshooting39395
-Node: A package (suddenly?) fails to work39631
-Node: MIT License43419
+Node: Description35850
+Node: Alternative package org-roam37593
+Node: Troubleshooting39393
+Node: A package (suddenly?) fails to work39629
+Node: MIT License43417
 
 End Tag Table
 
