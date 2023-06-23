@@ -1,0 +1,111 @@
+* Crafted Emacs Org Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; add crafted-org package definitions to selected packages list
+(require 'crafted-org-packages)
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-org configuration
+(require 'crafted-org-packages)
+#+end_src
+
+** Description
+The =crafted-org= module configures various settings related to =org-mode=
+as well as installing a few additional related packages to enhance the
+experience.
+
+- =org-return-follows-link=: =t=
+
+  Pressing =<RET>= while the cursor is over a link will follow the link.
+
+- =org-mouse-1-follows-link=: =t=
+
+  Pressing =<Mouse 1>= (usually left-click) while the cursor is over a link
+  will follow the link.
+
+- =org-link-descriptive=: =t=
+
+  Display links in a prettified style, only showing the description
+  (if provided).
+
+- =org-hide-emphasis-markers=: =t=
+
+  Hides emphasis markers like =*bold*= or ==highlighted==.
+
+- New =org-mode-hook=:
+
+  Adding a hook to org-mode setting the local
+  =electric-pair-inhibit-predicate= value to ignore =<= for auto-pairing.
+
+- =Package: denote=
+
+  Denote is a simple note-taking system for Emacs. It is entirely based
+  around file-naming conventions.
+
+  It works with org, markdown and even basic text (txt) notes. If you have
+  denote installed, [[info:denote][denote]].
+
+- =Package: org-appear=
+
+  org-appear automatically toggles the appearance of certain elements
+  in org-mode when editing in the surrounded region. This is combined
+  with the org-mode setting =org-hide-emphasis-markers= to only show markers
+  when editing a region.
+
+  org-appear-mode is added as a hook to =org-mode-hook=, enabling when
+  visiting an org-mode buffer.
+
+** Alternative package: ~org-roam~
+
+=org-roam= is an alternative package option to =denote=. Compared to denote,
+it uses a SQLite database to organize notes and links. It requires a C
+compiler as an external dependency to interface with the database.
+
+Installation:
+
+#+begin_src emacs-lisp
+(add-to-list 'package-selected-packages 'org-roam)
+(package-install-selected-packages :noconfirm)
+#+end_src
+
+Example configuration:
+
+#+begin_src emacs-lisp
+;; Setting the storage directory:
+;; Stores org-roam data in a subdirectory under the emacs directory
+(customize-set-variable 'org-roam-directory
+                        (expand-file-name "org-roam" user-emacs-directory))
+
+;; If you're using a vertical completion framework, you might want a
+;; more informative completion interface:
+(when (or (bound-and-true-p fido-vertical-mode)
+          (bound-and-true-p icomplete-vertical-mode)
+          (bound-and-true-p vertico))
+  (customize-set-variable 'org-roam-node-display-template
+                          (concat "${title:*} "
+                                  (propertize "${tags:10}" 'face 'org-tag))))
+
+;; suggested keymap based on example from project documentation
+(keymap-global-set "C-c r l" #'org-roam-buffer-toggle)
+(keymap-global-set "C-c r f" #'org-roam-node-find)
+(keymap-global-set "C-c r g" #'org-roam-graph)
+(keymap-global-set "C-c r i" #'org-roam-node-insert)
+(keymap-global-set "C-c r c" #'org-roam-capture)
+(keymap-global-set "C-c r j" . org-roam-dailies-capture-today)
+
+;; Enable automatic sync of the SQLite database
+(org-roam-db-autosync-mode)
+#+end_src
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:

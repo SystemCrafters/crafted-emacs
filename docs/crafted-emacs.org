@@ -232,6 +232,8 @@ file.
   packages and a small example on how to extend your configuration while
   using the same package installation methods as Crafted Emacs.
 
+  #+include: crafted-org.org
+
 * Troubleshooting
 
   Some tips when things don't seem to work right.
