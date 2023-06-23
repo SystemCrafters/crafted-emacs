@@ -13,7 +13,7 @@ points.
 (package-install-selected-packages :noconfirm)
 
 ;; Load crafted-org configuration
-(require 'crafted-org-packages)
+(require 'crafted-org-config)
 #+end_src
 
 ** Description
