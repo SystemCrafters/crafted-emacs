@@ -20,8 +20,5 @@
 ;; Toggle the visibility of some Org elements.
 (add-to-list 'package-selected-packages 'org-appear)
 
-;; Second brain/zettlekasten for Org Mode
-(add-to-list 'package-selected-packages 'org-roam)
-
 (provide 'crafted-org-packages)
 ;;; crafted-org-packages.el ends here
