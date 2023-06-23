@@ -56,6 +56,7 @@ configuration journey.
 * Getting Started::
 * Customization::
 * Contributing::
+* Modules::
 * Troubleshooting::
 * MIT License::
 
@@ -816,7 +817,7 @@ values configured than just these.
 Listing 5.2: Example auto-generated ‘custom.el’ file.
 
 
-File: crafted-emacs.info,  Node: Contributing,  Next: Troubleshooting,  Prev: Customization,  Up: Top
+File: crafted-emacs.info,  Node: Contributing,  Next: Modules,  Prev: Customization,  Up: Top
 
 6 Contributing
 **************
@@ -834,9 +835,31 @@ your idea is in the spirit of the *note Principles::.
 SystemCrafters (https://systemcrafters.net/) community!
 
 
-File: crafted-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Contributing,  Up: Top
+File: crafted-emacs.info,  Node: Modules,  Next: Troubleshooting,  Prev: Contributing,  Up: Top
 
-7 Troubleshooting
+7 Modules
+*********
+
+Crafted Emacs includes a number of modules to further configure Emacs.
+These are intended to be stand-alone in the sense that no module
+requires the use of any other module.
+
+   The modules are written to support various themes, for example
+mini-buffer selection (completion), writing or ui.  For how to use them,
+see the *note Getting Started:: section of the manual.
+
+   While the intent here is to document each module as completely as
+reasonably possible, the best-practice is to simply read the code for
+the module of interest to understand it best.
+
+   Module documentation may include additional information on related,
+popular packages and a small example on how to extend your configuration
+while using the same package installation methods as Crafted Emacs.
+
+
+File: crafted-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
+
+8 Troubleshooting
 *****************
 
 Some tips when things don’t seem to work right.
@@ -848,7 +871,7 @@ Some tips when things don’t seem to work right.
 
 File: crafted-emacs.info,  Node: A package (suddenly?) fails to work,  Up: Troubleshooting
 
-7.1 A package (suddenly?) fails to work
+8.1 A package (suddenly?) fails to work
 =======================================
 
 This scenario happened frequently when upgading to Emacs 28.  It also
@@ -950,38 +973,39 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals3440
-Node: Principles4490
-Node: Minimal modular configuration4821
-Node: Prioritize built-in Emacs functionality5457
-Node: Can be integrated with a Guix configuration6251
-Node: Helps you learn Emacs Lisp6808
-Node: Reversible7343
-Node: Why use it?7614
-Node: Getting Started8291
-Node: Starting from scratch8512
-Node: Prerequisites9358
-Node: Early Emacs Initialization10460
-Node: Emacs Initialization12824
-Ref: Basic Configuration14207
-Node: Starting from an existing configuration16905
-Node: Crafted Modules with use-package19110
-Node: Crafted modules with externally installed Emacs packages20189
-Node: Customization21573
-Node: Managing packages21816
-Node: Configuring a package manager22070
-Node: Installing packages25483
-Node: Using alternate package managers27126
-Node: Example Configuration28793
-Ref: org11c8c2328978
-Node: The customel file29511
-Node: Simplified overview of how Emacs Customization works29893
-Node: Loading the customel file31611
-Ref: customel32784
-Node: Contributing33446
-Node: Troubleshooting34082
-Node: A package (suddenly?) fails to work34323
-Node: MIT License38111
+Node: Goals3452
+Node: Principles4502
+Node: Minimal modular configuration4833
+Node: Prioritize built-in Emacs functionality5469
+Node: Can be integrated with a Guix configuration6263
+Node: Helps you learn Emacs Lisp6820
+Node: Reversible7355
+Node: Why use it?7626
+Node: Getting Started8303
+Node: Starting from scratch8524
+Node: Prerequisites9370
+Node: Early Emacs Initialization10472
+Node: Emacs Initialization12836
+Ref: Basic Configuration14219
+Node: Starting from an existing configuration16917
+Node: Crafted Modules with use-package19122
+Node: Crafted modules with externally installed Emacs packages20201
+Node: Customization21585
+Node: Managing packages21828
+Node: Configuring a package manager22082
+Node: Installing packages25495
+Node: Using alternate package managers27138
+Node: Example Configuration28805
+Ref: org20cb83328990
+Node: The customel file29523
+Node: Simplified overview of how Emacs Customization works29905
+Node: Loading the customel file31623
+Ref: customel32796
+Node: Contributing33458
+Node: Modules34086
+Node: Troubleshooting34975
+Node: A package (suddenly?) fails to work35211
+Node: MIT License38999
 
 End Tag Table
 

@@ -215,6 +215,23 @@ file.
   If you enjoy crafting your computing experience, join the
   [[https://systemcrafters.net/][SystemCrafters]] community!
 
+* Modules
+  Crafted Emacs includes a number of modules to further configure
+  Emacs. These are intended to be stand-alone in the sense that no
+  module requires the use of any other module.
+
+  The modules are written to support various themes, for example mini-buffer
+  selection (completion), writing or ui. For how to use them, see the
+  [[Getting Started][Getting Started]] section of the manual.
+
+  While the intent here is to document each module as completely as
+  reasonably possible, the best-practice is to simply read the code
+  for the module of interest to understand it best.
+
+  Module documentation may include additional information on related, popular
+  packages and a small example on how to extend your configuration while
+  using the same package installation methods as Crafted Emacs.
+
 * Troubleshooting
 
   Some tips when things don't seem to work right.
