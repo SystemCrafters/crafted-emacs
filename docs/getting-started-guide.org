@@ -44,7 +44,7 @@ you'll be able to skim this section for the code examples and move from there.
     allows user to affect some configuration options which occur before Emacs
     draws the initial frame (often known as the "window" in a graphical
     windowing system).  For more information about this file, see the entry in
-    the Emacs info system: [info:emacs#Early Init File][Early Init File]], or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html][Early Init File]].
+    the Emacs info system: [[info:emacs#Early Init File][Early Init File]], or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html][Early Init File]].
 
     Emacs looks for initialization files in several defined places.  For our
     purposes, we will be using the directory ~.emacs.d~ in your home folder.  If
