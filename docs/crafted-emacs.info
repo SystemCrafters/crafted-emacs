@@ -319,8 +319,8 @@ discussed here.  We will briefly cover the ‘early-init.el’ file which
 Emacs allows user to affect some configuration options which occur
 before Emacs draws the initial frame (often known as the "window" in a
 graphical windowing system).  For more information about this file, see
-the entry in the Emacs info system: [*note (emacs)Early:: Init
-File][Early Init File]], or on the web: Early Init File
+the entry in the Emacs info system: *note Early Init File: (emacs)Early
+Init File, or on the web: Early Init File
 (https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html).
 
    Emacs looks for initialization files in several defined places.  For
@@ -1125,31 +1125,31 @@ Node: Getting Started8435
 Node: Starting from scratch8656
 Node: Prerequisites9502
 Node: Early Emacs Initialization10604
-Node: Emacs Initialization12968
-Ref: Basic Configuration14351
-Node: Starting from an existing configuration17049
-Node: Crafted Modules with use-package19254
-Node: Crafted modules with externally installed Emacs packages20333
-Node: Customization21717
-Node: Managing packages21960
-Node: Configuring a package manager22214
-Node: Installing packages25627
-Node: Using alternate package managers27270
-Node: Example Configuration28937
-Ref: org2dfc65b29122
-Node: The customel file29655
-Node: Simplified overview of how Emacs Customization works30037
-Node: Loading the customel file31755
-Ref: customel32928
-Node: Contributing33590
-Node: Modules34218
-Node: Crafted Emacs Org Module35146
-Node: Installation35356
-Node: Description35850
-Node: Alternative package org-roam37593
-Node: Troubleshooting39393
-Node: A package (suddenly?) fails to work39629
-Node: MIT License43417
+Node: Emacs Initialization12963
+Ref: Basic Configuration14346
+Node: Starting from an existing configuration17044
+Node: Crafted Modules with use-package19249
+Node: Crafted modules with externally installed Emacs packages20328
+Node: Customization21712
+Node: Managing packages21955
+Node: Configuring a package manager22209
+Node: Installing packages25622
+Node: Using alternate package managers27265
+Node: Example Configuration28932
+Ref: org18af9b229117
+Node: The customel file29650
+Node: Simplified overview of how Emacs Customization works30032
+Node: Loading the customel file31750
+Ref: customel32923
+Node: Contributing33585
+Node: Modules34213
+Node: Crafted Emacs Org Module35141
+Node: Installation35351
+Node: Description35845
+Node: Alternative package org-roam37588
+Node: Troubleshooting39388
+Node: A package (suddenly?) fails to work39624
+Node: MIT License43412
 
 End Tag Table
 
