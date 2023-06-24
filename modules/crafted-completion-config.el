@@ -1,4 +1,4 @@
-;;; crafted-completion.el --- Crafted Completion Configuration -*- lexical-binding: t; -*-
+;;; crafted-completion-config.el --- Crafted Completion Configuration -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -13,7 +13,19 @@
 ;; narrowed list of possible choices.
 
 ;;; Code:
-
+(when (featurep 'crafted-completion-packages)
+  (require 'vertico)
+  (require 'vertico-directory)
+  (require 'marginalia)
+  (require 'consult)  
+  (require 'orderless)
+  (require 'embark)
+  (require 'embark-consult)
+  (require 'corfu)
+  (unless (display-graphic-p)
+    (require 'corfu-terminal))
+  (require 'corfu-popupinfo)
+  (require 'cape))
 
 (defun crafted-completion/minibuffer-backward-kill (arg)
   "Delete word or delete up to parent folder when completion is a file.
@@ -30,8 +42,6 @@ ARG is the thing being completed in the minibuffer."
 
 ;;; Vertico
 (when (featurep 'vertico)
-  (require 'vertico)
-  (require 'vertico-directory)
   ;; Cycle back to top/bottom result when the edge is reached
   (customize-set-variable 'vertico-cycle t)
 
@@ -51,7 +61,6 @@ ARG is the thing being completed in the minibuffer."
 
 (when (featurep 'marginalia)
   ;; Configure Marginalia
-  (require 'marginalia)
   (customize-set-variable 'marginalia-annotators
                           '(marginalia-annotators-heavy
                             marginalia-annotators-light
@@ -69,7 +78,6 @@ ARG is the thing being completed in the minibuffer."
 ;;; Orderless
 (when (featurep 'orderless)
   ;; Set up Orderless for better fuzzy matching
-  (require 'orderless)
   (customize-set-variable 'completion-styles '(orderless basic))
   (customize-set-variable 'completion-category-overrides
                           '((file (styles . (partial-completion))))))
@@ -77,7 +85,6 @@ ARG is the thing being completed in the minibuffer."
 
 ;;; Embark
 (when (featurep 'embark)
-  (require 'embark)
 
   (keymap-global-set "<remap> <describe-bindings>" #'embark-bindings)
   (keymap-global-set "C-." 'embark-act)
@@ -86,19 +93,14 @@ ARG is the thing being completed in the minibuffer."
   (setq prefix-help-command #'embark-prefix-help-command)
 
   (when (featurep 'embark-consult)
-    (require 'embark-consult)
     (with-eval-after-load 'embark-consult
       (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))))
 
 
 ;;; Corfu
 (when (featurep 'corfu)
-  (require 'corfu)
-
-  (unless (display-graphic-p)
-    (when (featurep 'corfu-terminal)
-      (require 'corfu-terminal)
-      (corfu-terminal-mode +1)))
+  (when (featurep 'corfu-terminal)
+    (corfu-terminal-mode +1))
 
   ;; Setup corfu for popup like completion
   (customize-set-variable 'corfu-cycle t)                 ; Allows cycling through candidates
@@ -109,7 +111,6 @@ ARG is the thing being completed in the minibuffer."
 
   (global-corfu-mode 1)
   (when (featurep 'corfu-popupinfo)
-    (require 'corfu-popupinfo)
 
     (corfu-popupinfo-mode 1)
     (eldoc-add-command #'corfu-insert)
@@ -119,10 +120,8 @@ ARG is the thing being completed in the minibuffer."
 
 
 ;;; Cape
-
 (when (featurep 'cape)
   ;; Setup Cape for better completion-at-point support and more
-  (require 'cape)
 
   ;; Add useful defaults completion sources from cape
   (add-to-list 'completion-at-point-functions #'cape-file)
