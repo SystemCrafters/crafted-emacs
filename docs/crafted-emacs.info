@@ -925,6 +925,10 @@ enhance the experience.
      Display links in a prettified style, only showing the description
      (if provided).
 
+   • New ‘org-mode-hook’: ‘org-indent-mode’
+
+     Visually indent org-mode files to a given header level.
+
    • ‘org-hide-emphasis-markers’: ‘t’
 
      Hides emphasis markers like ‘*bold*’ or ‘=highlighted=’.
@@ -1136,7 +1140,7 @@ Node: Configuring a package manager22209
 Node: Installing packages25622
 Node: Using alternate package managers27265
 Node: Example Configuration28932
-Ref: org18af9b229117
+Ref: org1fbd04829117
 Node: The customel file29650
 Node: Simplified overview of how Emacs Customization works30032
 Node: Loading the customel file31750
@@ -1146,10 +1150,10 @@ Node: Modules34213
 Node: Crafted Emacs Org Module35141
 Node: Installation35351
 Node: Description35845
-Node: Alternative package org-roam37588
-Node: Troubleshooting39388
-Node: A package (suddenly?) fails to work39624
-Node: MIT License43412
+Node: Alternative package org-roam37705
+Node: Troubleshooting39505
+Node: A package (suddenly?) fails to work39741
+Node: MIT License43529
 
 End Tag Table
 
