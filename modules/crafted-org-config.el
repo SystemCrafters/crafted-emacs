@@ -18,6 +18,9 @@
 ;; Display links as the description provided
 (customize-set-variable 'org-link-descriptive t)
 
+;; Visually indent org-mode files to a given header level
+(add-hook 'org-mode-hook #'org-indent-mode)
+
 ;; Hide markup markers
 (customize-set-variable 'org-hide-emphasis-markers t)
 (when (featurep 'org-appear)
