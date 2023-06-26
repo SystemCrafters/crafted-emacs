@@ -35,6 +35,10 @@ experience.
   Display links in a prettified style, only showing the description
   (if provided).
 
+- New =org-mode-hook=: =org-indent-mode=
+
+  Visually indent org-mode files to a given header level.
+
 - =org-hide-emphasis-markers=: =t=
 
   Hides emphasis markers like =*bold*= or ==highlighted==.
