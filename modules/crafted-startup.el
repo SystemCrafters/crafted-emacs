@@ -76,6 +76,18 @@ Each element in the list should be a list of strings or pairs
    :link `("Customize Crafted Emacs"
            ,(lambda (_button) (customize-group 'crafted))
            "Change initialization settings including this screen")
+   "\n\n"
+   :link `("Select a font style/size"
+	   ,(lambda (_button) (menu-set-font))
+	   "Change the font")
+   "     "
+   :link `("Select a theme"
+	   ,(lambda (_button) (customize-themes))
+	   "Customize the color scheme")
+   " Type 'q' to return from theme menu\n\nSave your settings => "
+   :link `("Save settings"
+	   ,(lambda (_button) (customize-save-customized))
+	   "Make Emacs yours")
    "\n")
 
   (fancy-splash-insert
