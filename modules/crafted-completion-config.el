@@ -1,6 +1,6 @@
-;;; crafted-completion.el --- Crafted Completion Configuration -*- lexical-binding: t; -*-
+;;; crafted-completion-config.el --- Crafted Completion Configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023-07-04
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -13,7 +13,6 @@
 ;; narrowed list of possible choices.
 
 ;;; Code:
-
 
 (defun crafted-completion/minibuffer-backward-kill (arg)
   "Delete word or delete up to parent folder when completion is a file.
@@ -140,6 +139,16 @@ ARG is the thing being completed in the minibuffer."
                                    corfu-quit-no-match t
                                    corfu-auto nil)
               (corfu-mode))))
+
+
+;; Turn off the built-in fido-vertical-mode and icomplete-vertical-mode, if
+;; they have been turned on by crafted-defaults-config, because they interfere
+;; with this module.
+(when (featurep 'crafted-defaults-config)
+  (fido-mode -1)
+  (fido-vertical-mode -1)
+  (icomplete-mode -1)
+  (icomplete-vertical-mode -1))
 
 (provide 'crafted-completion-config)
 ;;; crafted-completion.el ends here
