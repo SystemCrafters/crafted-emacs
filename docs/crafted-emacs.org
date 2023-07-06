@@ -232,6 +232,7 @@ file.
   packages and a small example on how to extend your configuration while
   using the same package installation methods as Crafted Emacs.
 
+  #+include: crafted-lisp.org
   #+include: crafted-org.org
 
 * Troubleshooting
