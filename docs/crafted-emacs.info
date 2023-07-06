@@ -105,12 +105,19 @@ The ‘custom.el’ file
 
 Modules
 
+* Crafted Emacs Lisp Module::
 * Crafted Emacs Org Module::
 
-Crafted Emacs Org Module
+Crafted Emacs Lisp Module
 
 * Installation::
 * Description::
+* Additional packages geiser-*::
+
+Crafted Emacs Org Module
+
+* Installation: Installation (1).
+* Description: Description (1).
 * Alternative package org-roam::
 
 Troubleshooting
@@ -868,24 +875,161 @@ while using the same package installation methods as Crafted Emacs.
 
 * Menu:
 
+* Crafted Emacs Lisp Module::
 * Crafted Emacs Org Module::
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Org Module,  Up: Modules
 
-7.1 Crafted Emacs Org Module
-============================
+7.1 Crafted Emacs Lisp Module
+=============================
 
 * Menu:
 
 * Installation::
 * Description::
+* Additional packages geiser-*::
+
+
+File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Lisp Module
+
+7.1.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-lisp package definitions to selected packages list
+     (require 'crafted-lisp-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-lisp configuration
+     (require 'crafted-lisp-config)
+
+
+File: crafted-emacs.info,  Node: Description,  Next: Additional packages geiser-*,  Prev: Installation,  Up: Crafted Emacs Lisp Module
+
+7.1.2 Description
+-----------------
+
+The ‘crafted-lisp’ module provides packages and configuration for
+development using various Lisp and Scheme variants.
+
+   • ‘aggressive-indent-mode’ for all Lisp/Scheme modes
+
+     ‘aggressive-indent’ automatically indents code, even while editing
+     or moving code around.  aggressive-indent-mode is added to
+     ‘lisp-mode-hook’, ‘scheme-mode-hook’ and ‘clojure-mode-hook’.
+
+  1. Common Lisp
+
+     The configuration for Common Lisp features Sylvester the cat’s
+     Common Lisp IDE for Emacs (‘sly’).  The ‘sly-editing-mode’ is added
+     to the ‘lisp-mode-hook’.
+
+     Sly provides a debugger, inspector, xref, completion, integration
+     with ASDF (‘sly-asdf’) and Quicklisp (‘sly-quicklisp’) system
+     definition tools.  For ansi-color in the REPL, the package
+     ‘sly-repl-ansi-color’ is added.
+
+     The sly extension packages (‘sly-*’) are loaded once the main ‘sly’
+     package is loaded.
+
+     To set the Common Lisp implementation, customize the
+     ‘inferior-lisp-program’, for example:
+
+          ;; SBCL
+          (customize-set-variable 'inferior-lisp-program "/usr/bin/sbcl")
+
+          ;; Using roswell
+          (customize-set-variable 'inferior-lisp-program "/usr/bin/ros run")
+
+  2. Clojure
+
+        • Package: ‘cider’
+
+          Cider provides the REPL interface for Clojure in Emacs.
+
+        • Package: ‘clj-refactor’
+
+          Additional refactoring layer built on-top of cider.
+
+          The refactoring keybindings are conflicting with cider by
+          default.  Crafted Emacs sets the bindings to ‘C-c r’ by
+          default to avoid this conflict.
+
+        • Package: ‘clojure-mode’
+
+          Major mode for Clojure providing syntax highlighting,
+          indentation and more.
+
+        • Package: ‘flycheck-clojure’
+
+          Flycheck integration for Clojure linters.
+
+  3. Scheme and Racket
+
+     The Scheme and Racket configuration is entirely based around
+     ‘geiser’.
+
+     Geiser provides a modular package for the Scheme family of
+     languages including Racket.  There are several modules availble for
+     Geiser.  When visiting a scheme file, use ‘M-x run-geiser’ to start
+     a REPL.
+
+     If you have installed multiple scheme implementations, you may wish
+     to customize the ‘scheme-program-name’ variable.
+
+          ;; Default to guile (already in crafted-lisp-config.el)
+          (customize-set-variable 'scheme-program-name "guile")
+
+
+File: crafted-emacs.info,  Node: Additional packages geiser-*,  Prev: Description,  Up: Crafted Emacs Lisp Module
+
+7.1.3 Additional packages: geiser-*
+-----------------------------------
+
+‘Crafted Emacs’ pre-installs the geiser interface packages for ‘guile’
+and ‘racket’.  Additional geiser packages are usually named in the form
+of ‘geiser-<implementation>’, for example:
+
+   • ‘geiser-chez’ for Chez Scheme
+   • ‘geiser-chibi’ for Chibi Scheme
+   • ‘geiser-chicken’ for Chicken Scheme
+   • ‘geiser-gambit’ for Gambit Scheme
+   • ‘geiser-gauche’ for Gauche Scheme
+   • ‘geiser-kawa’ for GNU Kawa
+   • ‘geiser-mit’ for MIT/GNU Scheme
+   • ‘stklos’ for STklos
+
+   All of these packages can be installed by adding them to the
+‘package-selected-packages’ list before installing all selected
+packages:
+
+     ;; Add support for MIT/GNU Scheme
+     (add-to-list 'package-selected-packages 'geiser-mit)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
+
+7.2 Crafted Emacs Org Module
+============================
+
+* Menu:
+
+* Installation: Installation (1).
+* Description: Description (1).
 * Alternative package org-roam::
 
 
-File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Org Module
 
-7.1.1 Installation
+7.2.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -901,9 +1045,9 @@ appropriate points.
      (require 'crafted-org-config)
 
 
-File: crafted-emacs.info,  Node: Description,  Next: Alternative package org-roam,  Prev: Installation,  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Description (1),  Next: Alternative package org-roam,  Prev: Installation (1),  Up: Crafted Emacs Org Module
 
-7.1.2 Description
+7.2.2 Description
 -----------------
 
 The ‘crafted-org’ module configures various settings related to
@@ -958,9 +1102,9 @@ enhance the experience.
      when visiting an org-mode buffer.
 
 
-File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description,  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description (1),  Up: Crafted Emacs Org Module
 
-7.1.3 Alternative package: ‘org-roam’
+7.2.3 Alternative package: ‘org-roam’
 -------------------------------------
 
 ‘org-roam’ is an alternative package option to ‘denote’.  Compared to
@@ -1117,43 +1261,50 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals3584
-Node: Principles4634
-Node: Minimal modular configuration4965
-Node: Prioritize built-in Emacs functionality5601
-Node: Can be integrated with a Guix configuration6395
-Node: Helps you learn Emacs Lisp6952
-Node: Reversible7487
-Node: Why use it?7758
-Node: Getting Started8435
-Node: Starting from scratch8656
-Node: Prerequisites9502
-Node: Early Emacs Initialization10604
-Node: Emacs Initialization12963
-Ref: Basic Configuration14346
-Node: Starting from an existing configuration17044
-Node: Crafted Modules with use-package19249
-Node: Crafted modules with externally installed Emacs packages20328
-Node: Customization21712
-Node: Managing packages21955
-Node: Configuring a package manager22209
-Node: Installing packages25622
-Node: Using alternate package managers27265
-Node: Example Configuration28932
-Ref: org1fbd04829117
-Node: The customel file29650
-Node: Simplified overview of how Emacs Customization works30032
-Node: Loading the customel file31750
-Ref: customel32923
-Node: Contributing33585
-Node: Modules34213
-Node: Crafted Emacs Org Module35141
-Node: Installation35351
-Node: Description35845
-Node: Alternative package org-roam37705
-Node: Troubleshooting39505
-Node: A package (suddenly?) fails to work39741
-Node: MIT License43529
+Node: Goals3741
+Node: Principles4791
+Node: Minimal modular configuration5122
+Node: Prioritize built-in Emacs functionality5758
+Node: Can be integrated with a Guix configuration6552
+Node: Helps you learn Emacs Lisp7109
+Node: Reversible7644
+Node: Why use it?7915
+Node: Getting Started8592
+Node: Starting from scratch8813
+Node: Prerequisites9659
+Node: Early Emacs Initialization10761
+Node: Emacs Initialization13120
+Ref: Basic Configuration14503
+Node: Starting from an existing configuration17201
+Node: Crafted Modules with use-package19406
+Node: Crafted modules with externally installed Emacs packages20485
+Node: Customization21869
+Node: Managing packages22112
+Node: Configuring a package manager22366
+Node: Installing packages25779
+Node: Using alternate package managers27422
+Node: Example Configuration29089
+Ref: orgce675c829274
+Node: The customel file29807
+Node: Simplified overview of how Emacs Customization works30189
+Node: Loading the customel file31907
+Ref: customel33080
+Node: Contributing33742
+Node: Modules34370
+Node: Crafted Emacs Lisp Module35328
+Node: Installation35574
+Node: Description36073
+Ref: Common Lisp36659
+Ref: Clojure37525
+Ref: Scheme and Racket38161
+Node: Additional packages geiser-*38757
+Node: Crafted Emacs Org Module39807
+Node: Installation (1)40084
+Node: Description (1)40586
+Node: Alternative package org-roam42454
+Node: Troubleshooting44258
+Node: A package (suddenly?) fails to work44494
+Node: MIT License48282
 
 End Tag Table
 
