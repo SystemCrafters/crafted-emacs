@@ -49,6 +49,15 @@
 ;; Enable savehist-mode for command history
 (savehist-mode 1)
 
+;; Make dired do something intelligent when two directories are shown
+;; in separate dired buffers.  Makes copying or moving files between
+;; directories easier.  The value `t' means to guess the default
+;; target directory.
+(customize-set-variable 'dired-dwim-target t)
+
+;; automatically update dired buffers on revisiting their directory
+(customize-set-variable 'dired-auto-revert-buffer t)
+
 
 ;;; Window management
 (defgroup crafted-windows '()
@@ -187,6 +196,27 @@ less than 28."
 ;; Load source (.el) or the compiled (.elc or .eln) file whichever is
 ;; newest
 (customize-set-variable 'load-prefer-newer t)
+
+
+;;; Configuration inspired by Charles Choi
+;; see http://yummymelon.com/devnull/surprise-and-emacs-defaults.html
+
+;; open man  pages in their own  window, and switch to  that window to
+;; facilitate reading and closing the man page.
+(customize-set-variable 'Man-notify-method 'aggressive)
+
+;; keep the Ediff control panel in the same frame
+(customize-set-variable 'ediff-window-setup-function
+                        'ediff-setup-windows-plain)
+
+;; scroll eshell buffer to the bottom on input, but only in "this"
+;; buffer
+(customize-set-variable 'eshell-scroll-to-bottom-on-input 'this)
+
+;; save the bookmarks file every time a bookmark is made or deleted
+;; rather than waiting for Emacs to be killed.  Useful especially when
+;; Emacs is a long running process.
+(customize-set-variable 'bookmark-save-flag 1)
 
 (provide 'crafted-defaults-config)
 ;;; crafted-defaults-config.el ends here
