@@ -104,7 +104,16 @@ file.
 
 * Getting Started
 
-  #+include: getting-started-guide.org
+Welcome to @@texinfo:@emph{Crafted Emacs}@@.
+
+This section provides introductory material for setting up
+@@texinfo:@emph{Crafted Emacs}@@.
+We'll approach this from the perspective of the brand new Emacs user.
+
+If you are already familiar with Emacs, you'll be able to skim this guide
+for the code examples.
+
+#+include: getting-started-guide.org
 
 * Customization
 
