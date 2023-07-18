@@ -313,6 +313,8 @@ Example @@texinfo:@code{init.el}@@:
   (require 'crafted-completion-config)
 #+end_src
 
+See the ~examples~ folder in the git-repo for more examples.
+
 * Where to go from here
 
 Congratulations,
