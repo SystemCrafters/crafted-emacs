@@ -106,6 +106,7 @@ The ‘custom.el’ file
 Modules
 
 * Crafted Emacs Lisp Module::
+* Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
 
 Crafted Emacs Lisp Module
@@ -114,10 +115,15 @@ Crafted Emacs Lisp Module
 * Description::
 * Additional packages geiser-*::
 
-Crafted Emacs Org Module
+Crafted Emacs Screencast Module
 
 * Installation: Installation (1).
 * Description: Description (1).
+
+Crafted Emacs Org Module
+
+* Installation: Installation (2).
+* Description: Description (2).
 * Alternative package org-roam::
 
 Troubleshooting
@@ -819,10 +825,11 @@ while using the same package installation methods as Crafted Emacs.
 * Menu:
 
 * Crafted Emacs Lisp Module::
+* Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Org Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Screencast Module,  Up: Modules
 
 7.1 Crafted Emacs Lisp Module
 =============================
@@ -958,21 +965,71 @@ packages:
      (package-install-selected-packages :noconfirm)
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Screencast Module,  Next: Crafted Emacs Org Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
 
-7.2 Crafted Emacs Org Module
-============================
+7.2 Crafted Emacs Screencast Module
+===================================
 
 * Menu:
 
 * Installation: Installation (1).
 * Description: Description (1).
+
+
+File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Screencast Module
+
+7.2.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-screencast package definitions to selected packages list
+     (require 'crafted-screencast-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-screencast configuration
+     (require 'crafted-screencast-config)
+
+
+File: crafted-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Crafted Emacs Screencast Module
+
+7.2.2 Description
+-----------------
+
+   • ‘Package: keycast’
+
+     Package to show current command and its binding in the modeline or
+     in the tab-bar.  By default, activates keycast in the modeline.
+
+   • ‘keycast-remove-tail-elements’: ‘nil’
+
+     By default, keycast-mode removes the elements to the right of the
+     modeline.  This may obscure information, so we’ll disable it.
+
+   • ‘keycast-insert-after’: ‘mode-line-misc-info’
+
+     Insert keycast information after ‘mode-line-misc-info’ in the
+     ‘mode-line-format’.
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Prev: Crafted Emacs Screencast Module,  Up: Modules
+
+7.3 Crafted Emacs Org Module
+============================
+
+* Menu:
+
+* Installation: Installation (2).
+* Description: Description (2).
 * Alternative package org-roam::
 
 
-File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Installation (2),  Next: Description (2),  Up: Crafted Emacs Org Module
 
-7.2.1 Installation
+7.3.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -988,9 +1045,9 @@ appropriate points.
      (require 'crafted-org-config)
 
 
-File: crafted-emacs.info,  Node: Description (1),  Next: Alternative package org-roam,  Prev: Installation (1),  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Description (2),  Next: Alternative package org-roam,  Prev: Installation (2),  Up: Crafted Emacs Org Module
 
-7.2.2 Description
+7.3.2 Description
 -----------------
 
 The ‘crafted-org’ module configures various settings related to
@@ -1045,9 +1102,9 @@ enhance the experience.
      when visiting an org-mode buffer.
 
 
-File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description (1),  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description (2),  Up: Crafted Emacs Org Module
 
-7.2.3 Alternative package: ‘org-roam’
+7.3.3 Alternative package: ‘org-roam’
 -------------------------------------
 
 ‘org-roam’ is an alternative package option to ‘denote’.  Compared to
@@ -1204,50 +1261,53 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals3692
-Node: Principles4742
-Node: Minimal modular configuration5073
-Node: Prioritize built-in Emacs functionality5709
-Node: Can be integrated with a Guix configuration6503
-Node: Helps you learn Emacs Lisp7060
-Node: Reversible7595
-Node: Why use it?7866
-Node: Getting Started8543
-Node: Initial setup9107
-Node: Cleaning out your configuration directories9337
-Node: Cloning the repository10603
-Node: Bootstrapping Crafted Emacs11249
-Node: Early Emacs Initialization11618
-Node: Emacs Initialization15499
-Node: Crafted Emacs Modules17542
-Node: Installing packages17917
-Node: Using Crafted Emacs Modules19755
-Ref: Package definitions crafted-*-packages20233
-Ref: Configuration crafted-*-config21194
-Node: Example Configuration22368
-Node: Where to go from here23612
-Node: Customization24293
-Node: Using alternate package managers24525
-Node: The customel file26182
-Node: Simplified overview of how Emacs Customization works26575
-Node: Loading the customel file28293
-Ref: customel29466
-Node: Contributing30128
-Node: Modules30756
-Node: Crafted Emacs Lisp Module31714
-Node: Installation31960
-Node: Description32459
-Ref: Common Lisp33045
-Ref: Clojure33911
-Ref: Scheme and Racket34547
-Node: Additional packages geiser-*35143
-Node: Crafted Emacs Org Module36193
-Node: Installation (1)36470
-Node: Description (1)36972
-Node: Alternative package org-roam38840
-Node: Troubleshooting40644
-Node: A package (suddenly?) fails to work40880
-Node: MIT License44668
+Node: Goals3828
+Node: Principles4878
+Node: Minimal modular configuration5209
+Node: Prioritize built-in Emacs functionality5845
+Node: Can be integrated with a Guix configuration6639
+Node: Helps you learn Emacs Lisp7196
+Node: Reversible7731
+Node: Why use it?8002
+Node: Getting Started8679
+Node: Initial setup9243
+Node: Cleaning out your configuration directories9473
+Node: Cloning the repository10739
+Node: Bootstrapping Crafted Emacs11385
+Node: Early Emacs Initialization11754
+Node: Emacs Initialization15635
+Node: Crafted Emacs Modules17678
+Node: Installing packages18053
+Node: Using Crafted Emacs Modules19891
+Ref: Package definitions crafted-*-packages20369
+Ref: Configuration crafted-*-config21330
+Node: Example Configuration22504
+Node: Where to go from here23748
+Node: Customization24429
+Node: Using alternate package managers24661
+Node: The customel file26318
+Node: Simplified overview of how Emacs Customization works26711
+Node: Loading the customel file28429
+Ref: customel29602
+Node: Contributing30264
+Node: Modules30892
+Node: Crafted Emacs Lisp Module31886
+Node: Installation32139
+Node: Description32638
+Ref: Common Lisp33224
+Ref: Clojure34090
+Ref: Scheme and Racket34726
+Node: Additional packages geiser-*35322
+Node: Crafted Emacs Screencast Module36372
+Node: Installation (1)36670
+Node: Description (1)37207
+Node: Crafted Emacs Org Module37890
+Node: Installation (2)38173
+Node: Description (2)38675
+Node: Alternative package org-roam40543
+Node: Troubleshooting42347
+Node: A package (suddenly?) fails to work42583
+Node: MIT License46371
 
 End Tag Table
 
