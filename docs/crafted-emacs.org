@@ -257,6 +257,7 @@ for the code examples.
   using the same package installation methods as Crafted Emacs.
 
   #+include: crafted-lisp.org
+  #+include: crafted-screencast.org
   #+include: crafted-org.org
 
 * Troubleshooting
