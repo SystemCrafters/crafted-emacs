@@ -27,6 +27,11 @@ Evaluating this block will load the =crafted-docs.el= file into your Emacs:
 Afterwards, the info file can be exported by running
 =M-x crafted-docs-export RET=.
 
+If you're using Crafted Emacs and develop inside the repository you cloned,
+you can set =crafted-docs-export-use-crafted-emacs-home= to =t= to utilize the
+=crafted-emacs-home= path to auto-find the documentation when running
+=M-x crafted-docs-export RET=.
+
 ** Using ~make~
 
 Requirements:
