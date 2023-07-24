@@ -38,7 +38,7 @@
         nil))))
 
 (defun crafted-updates--get-new-commit-count ()
-  (string-to-number (crafted-updates--call-git "rev-list" "--count" "master..origin/master")))
+  (string-to-number (crafted-updates--call-git "rev-list" "--count" "craftedv2beta..origin/craftedv2beta")))
 
 (defun crafted-updates-status-message ()
   "Status message indicating availble updates or not."
