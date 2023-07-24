@@ -73,7 +73,7 @@ Export output is written to the *crafted-docs-export* buffer."
     (cond ((file-exists-p "./crafted-docs.el") ".")
           ((and crafted-docs-export-use-crafted-emacs-home
                 (boundp 'crafted-emacs-home)
-                (file-exists-p crafted-emacs-home))
+                (file-directory-p crafted-emacs-home))
            (expand-file-name "docs/" crafted-emacs-home))
           (t (read-directory-name "Crafted Emacs docs-directory: ")))))
 
