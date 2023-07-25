@@ -134,8 +134,11 @@ Each element in the list should be a list of strings or pairs
 
 (defun crafted-startup-screen (&optional concise)
   "Display fancy startup screen.
-If CONCISE is non-nil, display a concise version of the
-splash screen in another window."
+If CONCISE is non-nil, display a concise version of the splash
+screen in another window.  This function can be bound to
+`initial-buffer-choice' which will run this function when Emacs
+starts.  See the variable documenation for
+`initial-buffer-choice' for more information."
   (message "Loading Crafted Startup Screen")
   (let ((splash-buffer (get-buffer-create "*Crafted Emacs*")))
     (with-current-buffer splash-buffer
