@@ -40,9 +40,9 @@
 (defun crafted-updates--get-new-commit-count ()
   (with-temp-buffer
     (let* ((default-directory crafted-emacs-home)
-          (current-branch (car (vc-git-branches)))
-          (rev-list-path (concat current-branch "..origin/" current-branch)))
-  (string-to-number (crafted-updates--call-git "rev-list" "--count" rev-list-path)))))
+           (current-branch (car (vc-git-branches)))
+           (rev-list-path (concat current-branch "..origin/" current-branch)))
+      (string-to-number (crafted-updates--call-git "rev-list" "--count" rev-list-path)))))
 
 (defun crafted-updates-status-message ()
   "Status message indicating availble updates or not."
