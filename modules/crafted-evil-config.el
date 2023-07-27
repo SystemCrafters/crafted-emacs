@@ -14,7 +14,7 @@
 ;; Turn on undo-tree globally for version older than 28.  Use
 ;; undo-redo for Emacs 28+
 (when (and (version< emacs-version "28")
-           (featurep 'undo-tree))
+           (locate-library "undo-tree"))
   (global-undo-tree-mode))
 
 ;; Set some variables that must be configured before loading the package

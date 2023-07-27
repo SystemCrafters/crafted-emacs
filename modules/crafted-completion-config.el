@@ -29,7 +29,7 @@ ARG is the thing being completed in the minibuffer."
 
 
 ;;; Vertico
-(when (featurep 'vertico)
+(when (locate-library "vertico")
   (require 'vertico)
   (require 'vertico-directory)
   ;; Cycle back to top/bottom result when the edge is reached
@@ -39,7 +39,7 @@ ARG is the thing being completed in the minibuffer."
   (vertico-mode 1)
 
   ;; configure keys for those who prefer vi keybindings
-  (when (featurep 'evil)
+  (when (locate-library "evil")
     (with-eval-after-load 'evil
       (keymap-set vertico-map "C-j" 'vertico-next)
       (keymap-set vertico-map "C-k" 'vertico-previous)
@@ -49,7 +49,7 @@ ARG is the thing being completed in the minibuffer."
 
 ;;; Marginalia
 
-(when (featurep 'marginalia)
+(when (locate-library "marginalia")
   ;; Configure Marginalia
   (require 'marginalia)
   (customize-set-variable 'marginalia-annotators
@@ -58,7 +58,7 @@ ARG is the thing being completed in the minibuffer."
                             nil))
   (marginalia-mode 1))
 
-(when (featurep 'consult)
+(when (locate-library "consult")
   ;; Set some consult bindings
   (keymap-global-set "C-s" 'consult-line)
   (keymap-set minibuffer-local-map "C-r" 'consult-history)
@@ -67,7 +67,7 @@ ARG is the thing being completed in the minibuffer."
 
 
 ;;; Orderless
-(when (featurep 'orderless)
+(when (locate-library "orderless")
   ;; Set up Orderless for better fuzzy matching
   (require 'orderless)
   (customize-set-variable 'completion-styles '(orderless basic))
@@ -76,7 +76,7 @@ ARG is the thing being completed in the minibuffer."
 
 
 ;;; Embark
-(when (featurep 'embark)
+(when (locate-library "embark")
   (require 'embark)
 
   (keymap-global-set "<remap> <describe-bindings>" #'embark-bindings)
@@ -85,18 +85,18 @@ ARG is the thing being completed in the minibuffer."
   ;; Use Embark to show bindings in a key prefix with `C-h`
   (setq prefix-help-command #'embark-prefix-help-command)
 
-  (when (featurep 'embark-consult)
+  (when (locate-library "embark-consult")
     (require 'embark-consult)
     (with-eval-after-load 'embark-consult
       (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))))
 
 
 ;;; Corfu
-(when (featurep 'corfu)
+(when (locate-library "corfu")
   (require 'corfu)
 
   (unless (display-graphic-p)
-    (when (featurep 'corfu-terminal)
+    (when (locate-library "corfu-terminal")
       (require 'corfu-terminal)
       (corfu-terminal-mode +1)))
 
@@ -108,7 +108,7 @@ ARG is the thing being completed in the minibuffer."
   (customize-set-variable 'corfu-echo-documentation 0.25) ; Echo docs for current completion option
 
   (global-corfu-mode 1)
-  (when (featurep 'corfu-popupinfo)
+  (when (locate-library "corfu-popupinfo")
     (require 'corfu-popupinfo)
 
     (corfu-popupinfo-mode 1)
@@ -120,7 +120,7 @@ ARG is the thing being completed in the minibuffer."
 
 ;;; Cape
 
-(when (featurep 'cape)
+(when (locate-library "cape")
   ;; Setup Cape for better completion-at-point support and more
   (require 'cape)
 

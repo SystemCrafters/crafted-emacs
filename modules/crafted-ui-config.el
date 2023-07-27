@@ -33,7 +33,7 @@
 ;;;; Help Buffers
 
 ;; Make `describe-*' screens more helpful
-(when (featurep 'helpful)
+(when (locate-library "helpful")
   (require 'helpful)
   (keymap-set helpful-mode-map "<remap> <revert-buffer>" #'helpful-update)
   (keymap-global-set "<remap> <describe-command>"        #'helpful-command)

@@ -157,7 +157,7 @@ Depends on having `pdf-tools' installed.  See
 
 
 ;;; Markdown
-(when (fboundp 'markdown-mode)
+(when (locate-library "markdown-mode")
   ;; because the markdown-command variable may not be loaded (yet),
   ;; check manually for the other markdown processors.  If it is
   ;; loaded, the others are superfluous but `or' fails fast, so they
@@ -176,7 +176,7 @@ Depends on having `pdf-tools' installed.  See
 
 
 ;;; PDF Support when using pdf-tools
-(when (featurep 'pdf-tools)
+(when (locate-library "pdf-tools")
   (add-hook 'doc-view-mode-hook
             (lambda ()
               (require 'pdf-tools nil :noerror)))
