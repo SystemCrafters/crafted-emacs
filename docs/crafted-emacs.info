@@ -1077,11 +1077,12 @@ enhance the experience.
 
      Hides emphasis markers like ‘*bold*’ or ‘=highlighted=’.
 
-   • New ‘org-mode-hook’:
+   • New ‘org-mode-hook’ and ‘electric-pair-mode-hook’:
 
-     Adding a hook to org-mode setting the local
+     Adding a hook to setting the local
      ‘electric-pair-inhibit-predicate’ value to ignore ‘<’ for
-     auto-pairing.
+     auto-pairing.  It is attached to both hooks to ensure the predicate
+     is set up properly no matter which order the mode-hooks are run.
 
    • ‘Package: denote’
 
@@ -1304,10 +1305,10 @@ Node: Description (1)37207
 Node: Crafted Emacs Org Module37890
 Node: Installation (2)38173
 Node: Description (2)38675
-Node: Alternative package org-roam40543
-Node: Troubleshooting42347
-Node: A package (suddenly?) fails to work42583
-Node: MIT License46371
+Node: Alternative package org-roam40692
+Node: Troubleshooting42496
+Node: A package (suddenly?) fails to work42732
+Node: MIT License46520
 
 End Tag Table
 

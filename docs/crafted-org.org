@@ -43,10 +43,12 @@ experience.
 
   Hides emphasis markers like =*bold*= or ==highlighted==.
 
-- New =org-mode-hook=:
+- New =org-mode-hook= and =electric-pair-mode-hook=:
 
-  Adding a hook to org-mode setting the local
-  =electric-pair-inhibit-predicate= value to ignore =<= for auto-pairing.
+  Adding a hook to setting the local =electric-pair-inhibit-predicate=
+  value to ignore =<= for auto-pairing.
+  It is attached to both hooks to ensure the predicate is set up properly
+  no matter which order the mode-hooks are run.
 
 - =Package: denote=
 
