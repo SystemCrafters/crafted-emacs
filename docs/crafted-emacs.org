@@ -104,32 +104,56 @@ file.
 
 * Getting Started
 
-  #+include: getting-started-guide.org
+Welcome to @@texinfo:@emph{Crafted Emacs}@@.
+
+This section provides introductory material for setting up
+@@texinfo:@emph{Crafted Emacs}@@.
+We'll approach this from the perspective of the brand new Emacs user.
+
+If you are already familiar with Emacs, you'll be able to skim this guide
+for the code examples.
+
+#+include: getting-started-guide.org
 
 * Customization
 
-** Managing packages
+** Using alternate package managers
 
-   #+include: crafted-package.org
+  Not everyone will prefer to use Emacs' built-in package manager,
+  ~package.el~.  Using the package bundle modules from
+  @@texinfo:@emph{Crafted Emacs}@@ is still possible, however, you will
+  potentially need to iterate over the ~package-selected-packages~
+  list to perform the install for your package manager.  To help with
+  that, the ~crafted-package-config~ module provides a variable to set
+  and a function to call.
 
-** Example Configuration:
+  Here is an example using ~straight-use-package~ as the tool to
+  install packages:
 
-  #+caption: Example @@texinfo:@code{init.el}@@
   #+begin_src emacs-lisp
-    (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-    (when (and custom-file
-               (file-exists-p custom-file))
-      (load custom-file nil :nomessage))
-
-    (load "~/crafted-emacs/modules/crafted-init-config")
-
-    (require 'crafted-completion-packages)
-    (package-install-selected-packages :noconfirm)
-    (require 'crafted-defaults-config)
-    (require 'crafted-completion-config)
+    (setq crafted-package-installer #'straight-use-package)
+    (setq crafted-package-installed-predicate #'straight--installed-p)
+    (crafted-package-install-package-list)
   #+end_src
 
-  See the ~examples~ folder in the git-repo for more examples. 
+  Note: This usage is simple in the sense full recipes are not used
+  when using @@texinfo:@emph{Crafted Emacs}@@ package bundle modules.
+  The above essentially runs code like the following:
+
+  #+begin_src emacs-lisp
+    (straight-use-package 'corfu)
+  #+end_src
+
+  It is not required to use the @@texinfo:@emph{Crafted Emacs}@@
+  package bundle modules, you are free to install packages in whatever
+  manner you choose, for example, using ~guix-home~ to install Emacs
+  packages from the Guix Store.  Similarly, using ~straight~,
+  ~elpaca~, ~package-vc~ or others can be used to install any packages
+  you choose.  Once your packages are installed, you can then use the
+  @@texinfo:@emph{Crafted Emacs}@@ configuration modules.  These
+  modules have names like ~crafted-completion-config.el~ for example.
+  Add these to your ~init.el~ @@texinfo:@strong{after}@@ installing
+  packages.
 
 ** The @@texinfo:@code{custom.el}@@ file
 
@@ -232,6 +256,8 @@ file.
   packages and a small example on how to extend your configuration while
   using the same package installation methods as Crafted Emacs.
 
+  #+include: crafted-lisp.org
+  #+include: crafted-screencast.org
   #+include: crafted-org.org
 
 * Troubleshooting

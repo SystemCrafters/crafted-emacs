@@ -1,0 +1,123 @@
+* Crafted Emacs Lisp Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; add crafted-lisp package definitions to selected packages list
+(require 'crafted-lisp-packages)
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-lisp configuration
+(require 'crafted-lisp-config)
+#+end_src
+
+** Description
+The =crafted-lisp= module provides packages and configuration for development
+using various Lisp and Scheme variants.
+
+- =aggressive-indent-mode= for all Lisp/Scheme modes
+
+  =aggressive-indent= automatically indents code, even while editing
+  or moving code around.
+  aggressive-indent-mode is added to =lisp-mode-hook=, =scheme-mode-hook=
+  and =clojure-mode-hook=.
+
+*** Common Lisp
+
+  The configuration for Common Lisp features Sylvester the cat’s
+  Common Lisp IDE for Emacs (=sly=).
+  The =sly-editing-mode= is added to the =lisp-mode-hook=.
+
+  Sly provides a debugger, inspector, xref, completion, integration with
+  ASDF (=sly-asdf=) and Quicklisp (=sly-quicklisp=) system definition tools.
+  For ansi-color in the REPL, the package =sly-repl-ansi-color= is added.
+
+  The sly extension packages (=sly-*=) are loaded once the main =sly= package
+  is loaded.
+
+  To set the Common Lisp implementation, customize the
+  =inferior-lisp-program=, for example:
+
+  #+begin_src emacs-lisp
+  ;; SBCL
+  (customize-set-variable 'inferior-lisp-program "/usr/bin/sbcl")
+
+  ;; Using roswell
+  (customize-set-variable 'inferior-lisp-program "/usr/bin/ros run")
+  #+end_src
+
+*** Clojure
+
+- Package: =cider=
+
+  Cider provides the REPL interface for Clojure in Emacs.
+
+- Package: =clj-refactor=
+
+  Additional refactoring layer built on-top of cider.
+
+  The refactoring keybindings are conflicting with cider by default.
+  Crafted Emacs sets the bindings to =C-c r= by default to avoid this
+  conflict.
+
+- Package: =clojure-mode=
+
+  Major mode for Clojure providing syntax highlighting, indentation
+  and more.
+
+- Package: =flycheck-clojure=
+
+  Flycheck integration for Clojure linters.
+
+*** Scheme and Racket
+
+The Scheme and Racket configuration is entirely based around =geiser=.
+
+Geiser provides a modular package for the Scheme family of languages
+including Racket. There are several modules availble for Geiser.
+When visiting a scheme file, use =M-x run-geiser= to start a REPL.
+
+If you have installed multiple scheme implementations, you may wish
+to customize the =scheme-program-name= variable.
+
+#+begin_src emacs-lisp
+;; Default to guile (already in crafted-lisp-config.el)
+(customize-set-variable 'scheme-program-name "guile")
+#+end_src
+
+** Additional packages: geiser-*
+
+=Crafted Emacs= pre-installs the geiser interface packages for =guile= and
+=racket=. Additional geiser packages are usually named in the form of
+=geiser-<implementation>=, for example:
+
+- =geiser-chez= for Chez Scheme
+- =geiser-chibi= for Chibi Scheme
+- =geiser-chicken= for Chicken Scheme
+- =geiser-gambit= for Gambit Scheme
+- =geiser-gauche= for Gauche Scheme
+- =geiser-kawa= for GNU Kawa
+- =geiser-mit= for MIT/GNU Scheme
+- =stklos= for STklos
+
+All of these packages can be installed by adding them to the
+=package-selected-packages= list before installing all selected packages:
+
+#+begin_src emacs-lisp
+;; Add support for MIT/GNU Scheme
+(add-to-list 'package-selected-packages 'geiser-mit)
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+#+end_src
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:

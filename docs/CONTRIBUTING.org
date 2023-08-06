@@ -1,18 +1,52 @@
 * Contributing documentation
 
-  The documentation provided here is written in Org mode files. The
-  primary file is the =crafted-emacs.org= file. Each module has it's
-  own Org file as well, but each is included in the primary file.
+The documentation provided here is written in Org mode files. The
+primary file is the =crafted-emacs.org= file. Each module has it's
+own Org file as well, but each is included in the primary file.
 
-  To export the org file to an info file, run the following command:
-  =M-x org-texinfo-export-to-info RET=. To use the org export
-  interface to reach this function, make sure to first run:
+The =crafted-docs.el= file contains useful tools for working with the docs.
+To ensure the export is reproducible and independent from your Emacs
+configuration, there are two ways of exporting a clean info file.
 
-  #+begin_src emacs-lisp
-    (require 'ox-texinfo)
-  #+end_src
+Note that it is discouraged to run =M-x org-texinfo-export-to-info RET=
+or using =org-export-dispatch= directly.
+This is because it can introduce unnecessary diffs depending on certain
+Emacs configuration settings.
 
-  Then you can use =C-c C-e i= to export to info.
+** Interactively from Emacs
+
+Requirements:
+- =emacs= in your =$PATH=
+
+Evaluating this block will load the =crafted-docs.el= file into your Emacs:
+
+#+begin_src emacs-lisp
+(load (expand-file-name "crafted-docs.el"))
+#+end_src
+
+Afterwards, the info file can be exported by running
+=M-x crafted-docs-export RET=.
+
+If you're using Crafted Emacs and develop inside the repository you cloned,
+you can set =crafted-docs-export-use-crafted-emacs-home= to =t= to utilize the
+=crafted-emacs-home= path to auto-find the documentation when running
+=M-x crafted-docs-export RET=.
+
+** Using ~make~
+
+Requirements:
+- =emacs= in your =$PATH=
+- =make= in your =$PATH=
+
+If you're familiar with =make= and already have a workflow using for example
+the =compile= command in Emacs, you can use it in the =docs/= directory:
+
+#+begin_src shell
+make docs
+#+end_src
+
+Running =make docs= will automatically build the =crafted-emacs.info= file
+unless the info file is already up-to-date.
 
 * Documenting a Crafted Emacs module
 

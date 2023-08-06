@@ -72,31 +72,31 @@ Principles
 
 Getting Started
 
-* Starting from scratch::
-* Starting from an existing configuration::
+* Initial setup::
+* Bootstrapping Crafted Emacs::
+* Crafted Emacs Modules::
+* Example Configuration::
+* Where to go from here::
 
-Starting from scratch
+Initial setup
 
-* Prerequisites::
+* Cleaning out your configuration directories::
+* Cloning the repository::
+
+Bootstrapping Crafted Emacs
+
 * Early Emacs Initialization::
 * Emacs Initialization::
 
-Starting from an existing configuration
+Crafted Emacs Modules
 
-* Crafted Modules with use-package::
-* Crafted modules with externally installed Emacs packages::
+* Installing packages::
+* Using Crafted Emacs Modules::
 
 Customization
 
-* Managing packages::
-* Example Configuration::
-* The ‘custom.el’ file: The customel file.
-
-Managing packages
-
-* Configuring a package manager::
-* Installing packages::
 * Using alternate package managers::
+* The ‘custom.el’ file: The customel file.
 
 The ‘custom.el’ file
 
@@ -105,12 +105,25 @@ The ‘custom.el’ file
 
 Modules
 
+* Crafted Emacs Lisp Module::
+* Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
 
-Crafted Emacs Org Module
+Crafted Emacs Lisp Module
 
 * Installation::
 * Description::
+* Additional packages geiser-*::
+
+Crafted Emacs Screencast Module
+
+* Installation: Installation (1).
+* Description: Description (1).
+
+Crafted Emacs Org Module
+
+* Installation: Installation (2).
+* Description: Description (2).
 * Alternative package org-roam::
 
 Troubleshooting
@@ -249,379 +262,142 @@ File: crafted-emacs.info,  Node: Getting Started,  Next: Customization,  Prev: W
 4 Getting Started
 *****************
 
+Welcome to _Crafted Emacs_.
+
+   This section provides introductory material for setting up _Crafted
+Emacs_.  We’ll approach this from the perspective of the brand new Emacs
+user.
+
+   If you are already familiar with Emacs, you’ll be able to skim this
+guide for the code examples.
+
 * Menu:
 
-* Starting from scratch::
-* Starting from an existing configuration::
+* Initial setup::
+* Bootstrapping Crafted Emacs::
+* Crafted Emacs Modules::
+* Example Configuration::
+* Where to go from here::
 
 
-File: crafted-emacs.info,  Node: Starting from scratch,  Next: Starting from an existing configuration,  Up: Getting Started
+File: crafted-emacs.info,  Node: Initial setup,  Next: Bootstrapping Crafted Emacs,  Up: Getting Started
 
-4.1 Starting from scratch
-=========================
-
-The person who is starting from scratch is likely in one of the
-following categories:
-
-   • New to Emacs.
-   • Not new to Emacs, but coming from another starter kit
-   • Not new to Emacs, but choosing to throw away whatever configuration
-     they have and start over from scratch - also known as _"Emacs
-     configuration bankruptcy"_
-
-   Each category has different concerns, but we’ll approach this from
-the perspective of the brand new Emacs user.  If you are more familiar
-with Emacs, you’ll be able to skim this section for the code examples
-and move from there.
+4.1 Initial setup
+=================
 
 * Menu:
 
-* Prerequisites::
+* Cleaning out your configuration directories::
+* Cloning the repository::
+
+
+File: crafted-emacs.info,  Node: Cleaning out your configuration directories,  Next: Cloning the repository,  Up: Initial setup
+
+4.1.1 Cleaning out your configuration directories
+-------------------------------------------------
+
+First, we need to make sure we are starting with a clean slate.
+
+   If you are starting from scratch, but have started Emacs already, you
+probably already have generated some amount of configuration files.  For
+more information: *note Init File: (emacs)Init File, or on the web: Init
+File
+(https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html).
+If you’re on Windows, also see *note Windows HOME: (emacs)Windows HOME,
+or on the web: Windows HOME
+(https://www.gnu.org/software/emacs/manual/html_node/emacs/Windows-HOME.html).
+
+   You must decide if you wish to remove them or rename them to
+something else.
+
+   If you aren’t starting from scratch, then you probably have some
+configuration already working and you want to add or use some of the
+configuration found in _Crafted Emacs_.  You probably have to adapt and
+rewrite parts of your configuration to work with _Crafted Emacs_.
+
+   Wherever you decide to put your Emacs configuration will be known as
+‘user-emacs-directory’ for the rest of this guide.
+
+
+File: crafted-emacs.info,  Node: Cloning the repository,  Prev: Cleaning out your configuration directories,  Up: Initial setup
+
+4.1.2 Cloning the repository
+----------------------------
+
+To use _Crafted Emacs_, you will need to download the repository.  It is
+up to you where you clone to.  If you are not sure where to clone to,
+you can use your home directory.
+
+     # N.B. As this is still a beta release, use the craftedv2beta branch
+     git clone https://github.com/SystemCrafters/crafted-emacs -b craftedv2beta
+
+   For the rest of this guide, the location where you cloned _Crafted
+Emacs_ to will be known as ‘crafted-emacs-home’.
+
+
+File: crafted-emacs.info,  Node: Bootstrapping Crafted Emacs,  Next: Crafted Emacs Modules,  Prev: Initial setup,  Up: Getting Started
+
+4.2 Bootstrapping Crafted Emacs
+===============================
+
+After cloning the crafted-emacs repository, we need to let Emacs know
+how to load _Crafted Emacs_.
+
+* Menu:
+
 * Early Emacs Initialization::
 * Emacs Initialization::
 
 
-File: crafted-emacs.info,  Node: Prerequisites,  Next: Early Emacs Initialization,  Up: Starting from scratch
+File: crafted-emacs.info,  Node: Early Emacs Initialization,  Next: Emacs Initialization,  Up: Bootstrapping Crafted Emacs
 
-4.1.1 Prerequisites
--------------------
-
-First, we need to make sure we are starting with a clean slate.  If you
-are starting from scratch, but have started Emacs and tried changing any
-of the configuration options, you have that laying about which can
-confuse things.  If the following exist, you must decide if you wish to
-remove them or rename them to something else.
-
-   • In your home folder, the file ‘.emacs’ or ‘_emacs’.
-   • In your home folder, the directory ‘.emacs.d’ or ‘_emacs.d’.
-   • In your home folder, the directory ‘.config/emacs’
-
-   You’ll also need to clone this project somewhere, the easiest is in
-your home folder.
-
-     git clone https://github.com/SystemCrafters/crafted-emacs
-
-     # N.B. As this is still a beta release, make sure to also execute the following command:
-
-     git checkout craftedv2beta
-
-   For the rest of this document, the location where you checked out
-Crafted Emacs will be known as ‘crafted-emacs-home’.
-
-
-File: crafted-emacs.info,  Node: Early Emacs Initialization,  Next: Emacs Initialization,  Prev: Prerequisites,  Up: Starting from scratch
-
-4.1.2 Early Emacs Initialization
+4.2.1 Early Emacs Initialization
 --------------------------------
 
 The Emacs startup process has several steps, more than what will be
 discussed here.  We will briefly cover the ‘early-init.el’ file which
 Emacs allows user to affect some configuration options which occur
 before Emacs draws the initial frame (often known as the "window" in a
-graphical windowing system).  For more information about this file, see
-the entry in the Emacs info system: *note Early Init File: (emacs)Early
-Init File, or on the web: Early Init File
+graphical windowing system).  For more information on ‘early-init.el’
+see *note Early Init File: (emacs)Early Init File, or on the web: Early
+Init File
 (https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html).
 
-   Emacs looks for initialization files in several defined places.  For
-our purposes, we will be using the directory ‘.emacs.d’ in your home
-folder.  If you removed this directory in the last step, we now need to
-create that directory so we can put our initialization files there.  If
-you are using a Linux or MacOS system and prefer to follow the
-Freedesktop guidelines, then create the path ‘.config/emacs/’ instead.
-
-   If you are on a recent version of Microsoft Windows, either location
-will work.  Sometimes you need to look in the
-‘%USERPROFILE%/AppData/Roaming’ folder to find either the ‘.emacs.d’ or
-‘.config/emacs’ folder.  In some cases ‘%HOME%’ will point to
-‘%USERPROFILE%/AppData/Roaming’ already.  Older versions of Microsoft
-Windows may refer to ‘_emacs.d’ instead.
-
-   From now on, we will call this the ‘user-emacs-directory’, and all of
-our work will be in that folder.
-
-   For our purposes, this is where we initialize the package system.
-These steps are optional.  In the ‘user-emacs-directory’:
+   For our purposes, this is where we initialize the package system.  In
+the ‘user-emacs-directory’:
 
   1. Create a file called ‘early-init.el’
   2. Add this single line of code (which assumes the
      ‘crafted-emacs-home’ is the ‘crafted-emacs’ directory found in your
      home folder):
 
-          (load "~/crafted-emacs/modules/crafted-early-init-config")
-
-   For more detail on how the package system is configured for _Crafted
-Emacs_, see the info page: *note Configuring a package manager:
-(crafted-emacs.info)Configuring a package manager. or, if you are
-reading this locally, see: crafted-package.org (crafted-package.org)
-
-
-File: crafted-emacs.info,  Node: Emacs Initialization,  Prev: Early Emacs Initialization,  Up: Starting from scratch
-
-4.1.3 Emacs Initialization
---------------------------
-
-The ‘init.el’ file is where most of the work of configuring Emacs will
-occur.  Let’s start by creating the ‘init.el’ file in your
-‘user-emacs-directory’ and add this code:
-
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (and custom-file
-                (file-exists-p custom-file))
-       (load custom-file nil :nomessage))
-
-     (load "~/crafted-emacs/modules/crafted-init-config")
-
-   Emacs customization is largely a matter of setting the values of
-certain variables.  The Emacs customization system will store these in
-the file known as the ‘custom-file’ which defaults to your
-initialization file, in this case called ‘init.el’.  We’d rather keep
-that separate from what we are doing in the ‘init.el’ file as that code
-is auto-generated by Emacs.  In a sense, it is a duplication of the work
-we will be doing as the values we set programmatically will also be
-stored in this file and loaded by the code in lines 2-4 above.  Line six
-adds the ‘modules’ folder from the ‘crafted-emacs-home’ directory to the
-Emacs ‘load-path’ variable so Emacs knows where to look to get the
-customizations we will apply going forward.
-
-  1. Basic Configuration
-
-     At this point, Emacs is still in it’s mostly "out of the box"
-     state.  Some people will prefer to stop at this point, but most
-     will prefer to continue to customize their configuration.  To move
-     to the next step, add the following to the bottom of your
-     initialization file:
-
-          (require 'crafted-defaults-config)
-
-     This will turn on and configure the following features in Emacs:
-
-        • Auto revert mode - this will keep your buffers up-to-date if
-          they are changed outside of Emacs.
-        • Delete selection mode - most people expect to delete or
-          replace text they have highlighted, this turns on that
-          behavior.
-        • Using tabs is turned off - this makes using spaces the default
-          method of indentation and helps when sharing files with
-          others.
-        • Recent files mode - this keeps track of the files you have
-          opened recently so you can open them again more quickly next
-          time.  A menu option is added to the file menu so you can find
-          the list of files you recently opened.
-        • Scrolling is enhanced to make it less stuttered.
-        • Long lines are handled more gracefully.
-        • Shell scripts are made to be executable on save automatically.
-        • Window navigation keybindings are set, and undo/redo for
-          window layouts is turned on so once you have your windows laid
-          out to your liking, if something changes the layout, you can
-          undo those changes and get your window layout back.
-        • The built in completion is configured to launch on the TAB
-          key.  This includes vertical completions are turned on in the
-          minibuffer (that area below the modeline at the bottom of the
-          frame).
-        • Certain windows, like the Help, Completions and Dictionary
-          windows are configured for buffer reuse, window height and
-          location.
-        • Using dictionary to look up words is bound to a key, and the
-          spell checker is turned on (if you have ‘ispell’ or ‘aspell’
-          installed)
-
-     We believe this is a nicely configured base Emacs.  No packages
-     need to be installed for this configuration, but adding a few can
-     further enhance your Emacs experience.  We’ll talk more about that
-     later in this guide.  For now, congratulations!  You have a nicely
-     configured and usable Emacs.
-
-     If you are very new to Emacs, you might take a moment here to go
-     read through Mickey Petersen’s "Mastering Emacs" book.  You can get
-     a copy from here (https://masteringemacs.org/r/systemcrafters).
-
-
-File: crafted-emacs.info,  Node: Starting from an existing configuration,  Prev: Starting from scratch,  Up: Getting Started
-
-4.2 Starting from an existing configuration
-===========================================
-
-If you aren’t starting from scratch, then you probably have some
-configuration already working and you want to add or use some of the
-configuration found in Crafted Emacs.
-
-   To start, clone this repository.  Going forward, we will assume you
-did this in your home folder and will refer to this as
-‘crafted-emacs-home’.
-
-   After cloning the Crafted Emacs repo, to use the modules, you need to
-add the following to your configuration:
-
-     ;; This assumes you cloned Crafted Emacs in you home directory, if you
-     ;; didn't, make sure to update the path to correctly reflect the
-     ;; location on your system.
-     (load "~/crafted-emacs/modules/crafted-init-config")
-
-   This adds the ‘crafted-emacs/modules’ folder to the ‘load-path’.  If
-you need to have packages installed, look for modules ending with
-‘*-packages.el’, if you only want the configuration, then the modules
-ending with ‘*-config.el’ will be what you want.
-
-   In this example, we setup the ‘custom-file’, which is used by Emacs
-to store configuration settings as well as to remember.  Next we load
-the ‘crafted-init-config’ file to setup the ‘load-path’.  Finally, we
-add the completions packages and configuration modules.
-
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (and custom-file
-                (file-exists-p custom-file))
-       (load custom-file nil :nomessage))
-
-     (load "~/crafted-emacs/modules/crafted-init-config")
-     (require 'crafted-completion-packages)  ; must come first to install
-                                             ; the packages
-
-     (package-install-selected-packages :noconfirm) ; install the packages
-                                                    ; from the bundle
-                                                    ; mentioned above.
-
-     (require 'crafted-completion-config)
-
-* Menu:
-
-* Crafted Modules with use-package::
-* Crafted modules with externally installed Emacs packages::
-
-
-File: crafted-emacs.info,  Node: Crafted Modules with use-package,  Next: Crafted modules with externally installed Emacs packages,  Up: Starting from an existing configuration
-
-4.2.1 Crafted Modules with ‘use-package’
-----------------------------------------
-
-Some people prefer to use the very popular (and built-in to Emacs 29)
-‘use-package’ configuration tool.  Here is an example similar to the
-previous one.
-
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (and custom-file
-                (file-exists-p custom-file))
-       (load custom-file nil :nomessage))
-
-     (load "~/crafted-emacs/modules/crafted-init-config")
-
-     ;; must come first to install the packages
-     (require 'crafted-completion-packages)
-     (package-install-selected-packages :noconfirm)
-
-     ;; configure vertico
-     (use-package 'vertico
-       :init
-       (require 'vertico-directory)
-       :config
-       (customize-set-variable 'vertico-cycle t)
-       (vertico-mode 1))
-
-     ;; more configuration for completion packages would go here
-
-
-File: crafted-emacs.info,  Node: Crafted modules with externally installed Emacs packages,  Prev: Crafted Modules with use-package,  Up: Starting from an existing configuration
-
-4.2.2 Crafted modules with externally installed Emacs packages
---------------------------------------------------------------
-
-Here, we assume you use ‘guix-home’, ‘NixOS Home Manager’ or other
-similar tool to install Emacs packages from your operating system
-software library.  We continue with another iteration on the previous
-example, in this case we will assume something like the following
-‘guix-home’ configuration:
-
-     (home-environment
-      (packages (specifications->packages
-                 (list
-                  "emacs"
-                  "emacs-vertico"
-                  "emacs-corfu"
-                  ;; other emacs packages
-                  )))
-
-   Then, in the ‘init.el’ file, the following snippet can be used to
-configure the packages installed above:
-
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (and custom-file
-                (file-exists-p custom-file))
-       (load custom-file nil :nomessage))
-
-     (load "~/crafted-emacs/modules/crafted-init-config")
-
-     ;; since the packages are already installed, we only need to use the
-     ;; config module to configure them.
-     (require 'crafted-completion-config)
-
-
-File: crafted-emacs.info,  Node: Customization,  Next: Contributing,  Prev: Getting Started,  Up: Top
-
-5 Customization
-***************
-
-* Menu:
-
-* Managing packages::
-* Example Configuration::
-* The ‘custom.el’ file: The customel file.
-
-
-File: crafted-emacs.info,  Node: Managing packages,  Next: Example Configuration,  Up: Customization
-
-5.1 Managing packages
-=====================
-
-* Menu:
-
-* Configuring a package manager::
-* Installing packages::
-* Using alternate package managers::
-
-
-File: crafted-emacs.info,  Node: Configuring a package manager,  Next: Installing packages,  Up: Managing packages
-
-5.1.1 Configuring a package manager
------------------------------------
-
-The default package manager in _Crafted Emacs_ is the built-in
-‘package.el’.  Other package managers can be used with _Crafted Emacs_,
-their configuration is up to the user.
-
-   The general process for using a package manager in Emacs is to
-provide the configuration in the ‘early-init.el’ file.  This file is
-used specifically to allow the user to configure various parts of Emacs
-very early in the startup process.
-
-   To configure ‘package.el’, add the following to your ‘early-init.el’
-file.
-
-     ;; This assumes you have cloned the Crafted Emacs project in the
-     ;; `crafted-emacs' directory in your home folder.  Change the path
-     ;; appropriately for your system.
      (load "~/crafted-emacs/modules/crafted-early-init-config")
 
-   This code will do the following:
+   Loading ‘crafted-early-init-config’ will do the following:
 
    • Setup the ‘package-archives’ list to include the following list of
      package repositories:
-       1. *GNU Elpa* - contains packages which use the GNU GPL (GNU
-          General Public License) for their license and for which the
-          author has signed the copyright release to the Free Software
-          Foundation.  Maintenance is by the GNU Emacs maintainers.
-       2. *Non-GNU Elpa* - contains packages which may or may not use
-          the GNU GPL for their license, but which the authors have not
-          signed copyright release to the Free Software Foundation,
-          however authors must follow a list of rules for package
-          submission.  The decision to include a package is left to the
-          discretion of the GNU Emacs maintainers.
-       3. *MELPA Stable* - MELPA packages which have a version tag in
-          their ‘git’ repository, these are pulled and built on a
-          regular basis as needed when the tag version changes.
-       4. *MELPA* - hosts prebuilt development packages based on the
-          latest commit in the respective ‘git’ repository.  These will
-          have version numbers similar to this: ‘20210701.839’ which is
-          essentially a date stamp when the package was built.
+       1. *GNU Elpa*: Contains packages which are licensed under the GNU
+          GPL (GNU General Public License) and for which the author has
+          signed the copyright release to the Free Software Foundation.
+          The package archive is maintained by the GNU Emacs
+          maintainers.
+       2. *Non-GNU Elpa*: Contains packages which are licensed as free
+          software (https://www.gnu.org/philosophy/free-sw.html) and for
+          which authors have not signed the copyright release required
+          for GNU Elpa.  Authors must however follow a list of rules for
+          package submission.  The decision to include a package is left
+          to the discretion of the GNU Emacs maintainers.
+       3. *MELPA Stable*: MELPA is a community-authored package archive
+          with a wide range of packages available.  The stable
+          repository contains packages which have a version tag in their
+          ‘git’ repository.  These are pulled and built on a regular
+          basis as needed when the tag version changes.
+       4. *MELPA*: Like MELPA Stable, but packages are based on the
+          latest commit in the respective ‘git’ repository (essentially,
+          development versions).  These will have version numbers
+          similar to this: ‘20210701.839’ which is essentially a date
+          stamp when the package was built.
    • Prioritize the list of package repositories to be in the order
      listed above.  This means, we prefer to get packages from GNU Elpa
      first, if not found, then try the next repository down the list,
@@ -636,44 +412,110 @@ file.
      the check at all, set the
      ‘crafted-package-perform-stale-archive-check’ variable to ‘nil’.
 
-     Once _Crafted Emacs_ is up and running, no stale checks are made.
-     Thus, if you run _Crafted Emacs_ for several days without
-     restarting Emacs, you’ll need to refresh the package repository
-     archive caches manually.  This is done automatically when running
-     ‘package-list-packages’.
+   Once _Crafted Emacs_ is up and running, no stale checks are made.
+Thus, if you run _Crafted Emacs_ for several days without restarting
+Emacs, you’ll need to refresh the package repository archive caches
+manually.  This is done automatically when running
+‘package-list-packages’.
+
+   Outside of special use-cases, this single line of code will be your
+entire ‘early-init.el’ file.
 
 
-File: crafted-emacs.info,  Node: Installing packages,  Next: Using alternate package managers,  Prev: Configuring a package manager,  Up: Managing packages
+File: crafted-emacs.info,  Node: Emacs Initialization,  Prev: Early Emacs Initialization,  Up: Bootstrapping Crafted Emacs
 
-5.1.2 Installing packages
+4.2.2 Emacs Initialization
+--------------------------
+
+The ‘init.el’ file is where most of the work of configuring Emacs will
+occur.  Let’s start by creating the ‘init.el’ file in your
+‘user-emacs-directory’ and add this code:
+
+     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+     (when (and custom-file
+                (file-exists-p custom-file))
+       (load custom-file nil :nomessage))
+
+   Emacs customization is largely a matter of setting the values of
+certain variables.  The Emacs customization system will store these in
+the file known as the ‘custom-file’ which defaults to your
+initialization file, in this case called ‘init.el’.  We’d rather keep
+that separate from what we are doing in the ‘init.el’ file as that code
+is auto-generated by Emacs.  In a sense, it is a duplication of the work
+we will be doing as the values we set programmatically will also be
+stored in this file and loaded by the code above.
+
+   For more information on the ‘custom-file’ see *note Saving
+Customizations: (emacs)Saving Customizations, or on the web: Saving
+Customizations
+(https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html).
+
+   Right below the ‘custom-file’ setup, add the following line (which
+assumes the ‘crafted-emacs-home’ is the ‘crafted-emacs’ directory found
+in your home folder):
+
+     (load "~/crafted-emacs/modules/crafted-init-config")
+
+   In a rough outline, the ‘crafted-init-config’:
+   • sets up the load-path, so code from ‘modules’ and ‘custom-modules’
+     can be loaded with ‘require’
+   • sets up the ‘info’ system to make this documentation accessible
+     from within Emacs’ info buffer
+   • ensures all customizations and packages are saved to the
+     ‘custom-file’
+
+   These lines define the top of our ‘init.el’, everything else will be
+put below.
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Modules,  Next: Example Configuration,  Prev: Bootstrapping Crafted Emacs,  Up: Getting Started
+
+4.3 Crafted Emacs Modules
+=========================
+
+Now that you have bootstrapped _Crafted Emacs_, you can start
+configuring Emacs using Crafted Emacs Modules.
+
+* Menu:
+
+* Installing packages::
+* Using Crafted Emacs Modules::
+
+
+File: crafted-emacs.info,  Node: Installing packages,  Next: Using Crafted Emacs Modules,  Up: Crafted Emacs Modules
+
+4.3.1 Installing packages
 -------------------------
 
 The standard approach to finding and installing packages is to use the
-following command ‘M-x list-packages RET’, which will bring up a user
-interface to search for packages, review the package details, install,
-update or remove package.  For more information, see the *note Emacs
-Packages Info page: (emacs)Packages.
+command ‘M-x list-packages RET’, which will bring up a user interface to
+search for packages, review the package details, install, update or
+remove package.  For more information: *note Packages: (emacs)Packages.
+or on the web: Packages
+(https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html).
 
-   Additionally, _Crafted Emacs_ provides a few modules which bundle
-together packages for installation.  Each of these modules simply adds
-one or more package names to the ‘package-selected-packages’ list, for
-example:
+   _Crafted Emacs_ uses the selection facilities for batch-installation
+of packages.  This means all packages are added to a list (namely
+‘package-selected-packages’) and installed at once.
 
+     ;; Example: Adding "vertico" to the package-selected-packages list (init.el)
+     (add-to-list 'package-selected-packages 'vertico)
+
+   Additionally, _Crafted Emacs_ provides a few modules which are
+bundled together packages for installation.  Each of these modules
+simply adds one or more package names to the ‘package-selected-packages’
+list, for example:
+
+     ;; snippet of crafted-completion-packages.el:
      ;; not all package names are shown here, the list is shortened for
      ;; brevity.
      (add-to-list 'package-selected-packages 'cape)
      (add-to-list 'package-selected-packages 'consult)
      (add-to-list 'package-selected-packages 'corfu)
 
-   To use these modules, simply add a ‘require’ in your ‘init.el’ file.
-For example, to get the list above, you would add the following:
-
-     ;; Currently there are nine modules which provide packages, this is
-     ;; just one of them.
-     (require 'crafted-completion-packages)
-
-   somewhere near the top.  After this line, you then install the
-packages with the following:
+   After all packages are selected, they are installed at once with
+‘package-install-selected-packages’.  Adding packages after this line
+will not install them.
 
      ;; adding the `:noconfirm' flag will cause all the packages listed in
      ;; the `package-selected-packages' variable to be installed without
@@ -681,10 +523,147 @@ packages with the following:
      (package-install-selected-packages :noconfirm)
 
 
-File: crafted-emacs.info,  Node: Using alternate package managers,  Prev: Installing packages,  Up: Managing packages
+File: crafted-emacs.info,  Node: Using Crafted Emacs Modules,  Prev: Installing packages,  Up: Crafted Emacs Modules
 
-5.1.3 Using alternate package managers
---------------------------------------
+4.3.2 Using Crafted Emacs Modules
+---------------------------------
+
+There are two types of modules provided by _Crafted Emacs_.
+
+  1. Package modules (bundle together multiple packages for
+     installation)
+  2. Configuration modules (configuration for multiple packages)
+
+   The module definitions can be found in ‘crafted-emacs-home/modules/’.
+
+  1. Package definitions: crafted-*-packages
+
+     As explained earlier in the guide, you can add packages manually
+     using ‘add-to-list’.  Additionally, _Crafted Emacs_ provides a few
+     modules which are bundled together packages for installation.  Each
+     of these modules simply adds one or more package names to the
+     ‘package-selected-packages’ list.  The bundles of packages are
+     split up by logical categories (ui, completion, writing, ...).
+
+     To load one of these bundles, use:
+
+          ;; Add package definitions for completion packages
+          ;; to `package-selected-packages'.
+          (require 'crafted-completion-packages)
+
+          ;; install selected packages (as shown earlier)
+          (package-install-selected-packages :noconfirm)
+
+     To list all the available package bundle available, you can run:
+
+          # In a shell/term from the crafted-emacs-home directory
+          ls ./modules/*-packages.el
+
+  2. Configuration: crafted-*-config
+
+     The configuration code provided by _Crafted Emacs_ is to be loaded
+     after installing all the packages.
+
+          ;; install selected packages
+          (package-install-selected-packages :noconfirm)
+
+          ;; load configuration for the completion packages
+          (require 'crafted-completion-config)
+
+     It should be noted that the package definitions are not required to
+     use the configuration.  You can manually add a subset of packages,
+     the configuration code will only apply the configuration for those
+     packages:
+
+          ;; Only select vertico from the crafted-completions module.
+          (add-to-list 'package-selected-packages 'vertico)
+
+          ;; install selected packages
+          (package-install-selected-packages :noconfirm)
+
+          ;; Load configuration for the completion packages.
+          ;; This will only apply the vertico section of the configuration module.
+          (require 'crafted-completion-config)
+
+     To list all the available configuration modules, you can run:
+
+          # In a shell/term from the crafted-emacs-home directory
+          ls ./modules/*-config.el
+
+
+File: crafted-emacs.info,  Node: Example Configuration,  Next: Where to go from here,  Prev: Crafted Emacs Modules,  Up: Getting Started
+
+4.4 Example Configuration
+=========================
+
+The example assumes you have cloned crafted-emacs to your home
+directory.
+
+   Example ‘early-init.el’:
+
+     ;; Set up package archives
+     (load "~/crafted-emacs/modules/crafted-early-init-config")
+
+   Example ‘init.el’:
+
+     ;; Set up custom.el file
+     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+     (when (and custom-file
+                (file-exists-p custom-file))
+       (load custom-file nil :nomessage))
+
+     ;; Bootstrap crafted-emacs in init.el
+     (load "~/crafted-emacs/modules/crafted-init-config")
+
+     ;; Add package definitions for completion packages
+     ;; to `package-selected-packages'.
+     (require 'crafted-completion-packages)
+
+     ;; Manually select "ef-themes" package
+     (add-to-list 'package-selected-packages 'ef-themes)
+
+     ;; Install selected packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load configuration for the completion module
+     (require 'crafted-completion-config)
+
+   See the ‘examples’ folder in the git-repo for more examples.
+
+
+File: crafted-emacs.info,  Node: Where to go from here,  Prev: Example Configuration,  Up: Getting Started
+
+4.5 Where to go from here
+=========================
+
+Congratulations, crafted-emacs is now set up for you to start your
+configuration.
+
+   Here are some pointers to get you started:
+   • For more details on Crafted Emacs Modules: *note Modules:
+     (crafted-emacs.info)Modules.
+   • For more information and explanations on customizing Emacs: *note
+     Customization: (crafted-emacs.info)Customization.
+   • Want to use a different package manager?  See *note Using
+     alternative package managers: (crafted-emacs.info)Using alternative
+     package managers.
+
+
+File: crafted-emacs.info,  Node: Customization,  Next: Contributing,  Prev: Getting Started,  Up: Top
+
+5 Customization
+***************
+
+* Menu:
+
+* Using alternate package managers::
+* The ‘custom.el’ file: The customel file.
+
+
+File: crafted-emacs.info,  Node: Using alternate package managers,  Next: The customel file,  Up: Customization
+
+5.1 Using alternate package managers
+====================================
 
 Not everyone will prefer to use Emacs’ built-in package manager,
 ‘package.el’.  Using the package bundle modules from _Crafted Emacs_ is
@@ -716,32 +695,9 @@ These modules have names like ‘crafted-completion-config.el’ for
 example.  Add these to your ‘init.el’ *after* installing packages.
 
 
-File: crafted-emacs.info,  Node: Example Configuration,  Next: The customel file,  Prev: Managing packages,  Up: Customization
+File: crafted-emacs.info,  Node: The customel file,  Prev: Using alternate package managers,  Up: Customization
 
-5.2 Example Configuration:
-==========================
-
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (and custom-file
-                (file-exists-p custom-file))
-       (load custom-file nil :nomessage))
-
-     (load "~/crafted-emacs/modules/crafted-init-config")
-
-     (require 'crafted-completion-packages)
-     (package-install-selected-packages :noconfirm)
-     (require 'crafted-defaults-config)
-     (require 'crafted-completion-config)
-
-
-Listing 5.1: Example ‘init.el’
-
-See the ‘examples’ folder in the git-repo for more examples.
-
-
-File: crafted-emacs.info,  Node: The customel file,  Prev: Example Configuration,  Up: Customization
-
-5.3 The ‘custom.el’ file
+5.2 The ‘custom.el’ file
 ========================
 
 The ‘custom.el’ file will hold the auto-generated code from the Emacs
@@ -755,7 +711,7 @@ Customization UI.
 
 File: crafted-emacs.info,  Node: Simplified overview of how Emacs Customization works,  Next: Loading the customel file,  Up: The customel file
 
-5.3.1 Simplified overview of how Emacs Customization works
+5.2.1 Simplified overview of how Emacs Customization works
 ----------------------------------------------------------
 
 Customizable values are defined with the ‘defcustom’ form, and can be
@@ -786,7 +742,7 @@ the same name (see example below).
 
 File: crafted-emacs.info,  Node: Loading the customel file,  Prev: Simplified overview of how Emacs Customization works,  Up: The customel file
 
-5.3.2 Loading the ‘custom.el’ file
+5.2.2 Loading the ‘custom.el’ file
 ----------------------------------
 
 This is important because if you, the user, wish to use the
@@ -824,7 +780,7 @@ values configured than just these.
       )
 
 
-Listing 5.2: Example auto-generated ‘custom.el’ file.
+Listing 5.1: Example auto-generated ‘custom.el’ file.
 
 
 File: crafted-emacs.info,  Node: Contributing,  Next: Modules,  Prev: Customization,  Up: Top
@@ -868,24 +824,212 @@ while using the same package installation methods as Crafted Emacs.
 
 * Menu:
 
+* Crafted Emacs Lisp Module::
+* Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Screencast Module,  Up: Modules
 
-7.1 Crafted Emacs Org Module
-============================
+7.1 Crafted Emacs Lisp Module
+=============================
 
 * Menu:
 
 * Installation::
 * Description::
+* Additional packages geiser-*::
+
+
+File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Lisp Module
+
+7.1.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-lisp package definitions to selected packages list
+     (require 'crafted-lisp-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-lisp configuration
+     (require 'crafted-lisp-config)
+
+
+File: crafted-emacs.info,  Node: Description,  Next: Additional packages geiser-*,  Prev: Installation,  Up: Crafted Emacs Lisp Module
+
+7.1.2 Description
+-----------------
+
+The ‘crafted-lisp’ module provides packages and configuration for
+development using various Lisp and Scheme variants.
+
+   • ‘aggressive-indent-mode’ for all Lisp/Scheme modes
+
+     ‘aggressive-indent’ automatically indents code, even while editing
+     or moving code around.  aggressive-indent-mode is added to
+     ‘lisp-mode-hook’, ‘scheme-mode-hook’ and ‘clojure-mode-hook’.
+
+  1. Common Lisp
+
+     The configuration for Common Lisp features Sylvester the cat’s
+     Common Lisp IDE for Emacs (‘sly’).  The ‘sly-editing-mode’ is added
+     to the ‘lisp-mode-hook’.
+
+     Sly provides a debugger, inspector, xref, completion, integration
+     with ASDF (‘sly-asdf’) and Quicklisp (‘sly-quicklisp’) system
+     definition tools.  For ansi-color in the REPL, the package
+     ‘sly-repl-ansi-color’ is added.
+
+     The sly extension packages (‘sly-*’) are loaded once the main ‘sly’
+     package is loaded.
+
+     To set the Common Lisp implementation, customize the
+     ‘inferior-lisp-program’, for example:
+
+          ;; SBCL
+          (customize-set-variable 'inferior-lisp-program "/usr/bin/sbcl")
+
+          ;; Using roswell
+          (customize-set-variable 'inferior-lisp-program "/usr/bin/ros run")
+
+  2. Clojure
+
+        • Package: ‘cider’
+
+          Cider provides the REPL interface for Clojure in Emacs.
+
+        • Package: ‘clj-refactor’
+
+          Additional refactoring layer built on-top of cider.
+
+          The refactoring keybindings are conflicting with cider by
+          default.  Crafted Emacs sets the bindings to ‘C-c r’ by
+          default to avoid this conflict.
+
+        • Package: ‘clojure-mode’
+
+          Major mode for Clojure providing syntax highlighting,
+          indentation and more.
+
+        • Package: ‘flycheck-clojure’
+
+          Flycheck integration for Clojure linters.
+
+  3. Scheme and Racket
+
+     The Scheme and Racket configuration is entirely based around
+     ‘geiser’.
+
+     Geiser provides a modular package for the Scheme family of
+     languages including Racket.  There are several modules availble for
+     Geiser.  When visiting a scheme file, use ‘M-x run-geiser’ to start
+     a REPL.
+
+     If you have installed multiple scheme implementations, you may wish
+     to customize the ‘scheme-program-name’ variable.
+
+          ;; Default to guile (already in crafted-lisp-config.el)
+          (customize-set-variable 'scheme-program-name "guile")
+
+
+File: crafted-emacs.info,  Node: Additional packages geiser-*,  Prev: Description,  Up: Crafted Emacs Lisp Module
+
+7.1.3 Additional packages: geiser-*
+-----------------------------------
+
+‘Crafted Emacs’ pre-installs the geiser interface packages for ‘guile’
+and ‘racket’.  Additional geiser packages are usually named in the form
+of ‘geiser-<implementation>’, for example:
+
+   • ‘geiser-chez’ for Chez Scheme
+   • ‘geiser-chibi’ for Chibi Scheme
+   • ‘geiser-chicken’ for Chicken Scheme
+   • ‘geiser-gambit’ for Gambit Scheme
+   • ‘geiser-gauche’ for Gauche Scheme
+   • ‘geiser-kawa’ for GNU Kawa
+   • ‘geiser-mit’ for MIT/GNU Scheme
+   • ‘stklos’ for STklos
+
+   All of these packages can be installed by adding them to the
+‘package-selected-packages’ list before installing all selected
+packages:
+
+     ;; Add support for MIT/GNU Scheme
+     (add-to-list 'package-selected-packages 'geiser-mit)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Screencast Module,  Next: Crafted Emacs Org Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
+
+7.2 Crafted Emacs Screencast Module
+===================================
+
+* Menu:
+
+* Installation: Installation (1).
+* Description: Description (1).
+
+
+File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Screencast Module
+
+7.2.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-screencast package definitions to selected packages list
+     (require 'crafted-screencast-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-screencast configuration
+     (require 'crafted-screencast-config)
+
+
+File: crafted-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Crafted Emacs Screencast Module
+
+7.2.2 Description
+-----------------
+
+   • ‘Package: keycast’
+
+     Package to show current command and its binding in the modeline or
+     in the tab-bar.  By default, activates keycast in the modeline.
+
+   • ‘keycast-remove-tail-elements’: ‘nil’
+
+     By default, keycast-mode removes the elements to the right of the
+     modeline.  This may obscure information, so we’ll disable it.
+
+   • ‘keycast-insert-after’: ‘mode-line-misc-info’
+
+     Insert keycast information after ‘mode-line-misc-info’ in the
+     ‘mode-line-format’.
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Prev: Crafted Emacs Screencast Module,  Up: Modules
+
+7.3 Crafted Emacs Org Module
+============================
+
+* Menu:
+
+* Installation: Installation (2).
+* Description: Description (2).
 * Alternative package org-roam::
 
 
-File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Installation (2),  Next: Description (2),  Up: Crafted Emacs Org Module
 
-7.1.1 Installation
+7.3.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -901,9 +1045,9 @@ appropriate points.
      (require 'crafted-org-config)
 
 
-File: crafted-emacs.info,  Node: Description,  Next: Alternative package org-roam,  Prev: Installation,  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Description (2),  Next: Alternative package org-roam,  Prev: Installation (2),  Up: Crafted Emacs Org Module
 
-7.1.2 Description
+7.3.2 Description
 -----------------
 
 The ‘crafted-org’ module configures various settings related to
@@ -933,11 +1077,12 @@ enhance the experience.
 
      Hides emphasis markers like ‘*bold*’ or ‘=highlighted=’.
 
-   • New ‘org-mode-hook’:
+   • New ‘org-mode-hook’ and ‘electric-pair-mode-hook’:
 
-     Adding a hook to org-mode setting the local
+     Adding a hook to setting the local
      ‘electric-pair-inhibit-predicate’ value to ignore ‘<’ for
-     auto-pairing.
+     auto-pairing.  It is attached to both hooks to ensure the predicate
+     is set up properly no matter which order the mode-hooks are run.
 
    • ‘Package: denote’
 
@@ -958,9 +1103,9 @@ enhance the experience.
      when visiting an org-mode buffer.
 
 
-File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description,  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description (2),  Up: Crafted Emacs Org Module
 
-7.1.3 Alternative package: ‘org-roam’
+7.3.3 Alternative package: ‘org-roam’
 -------------------------------------
 
 ‘org-roam’ is an alternative package option to ‘denote’.  Compared to
@@ -1117,43 +1262,53 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals3584
-Node: Principles4634
-Node: Minimal modular configuration4965
-Node: Prioritize built-in Emacs functionality5601
-Node: Can be integrated with a Guix configuration6395
-Node: Helps you learn Emacs Lisp6952
-Node: Reversible7487
-Node: Why use it?7758
-Node: Getting Started8435
-Node: Starting from scratch8656
-Node: Prerequisites9502
-Node: Early Emacs Initialization10604
-Node: Emacs Initialization12963
-Ref: Basic Configuration14346
-Node: Starting from an existing configuration17044
-Node: Crafted Modules with use-package19249
-Node: Crafted modules with externally installed Emacs packages20328
-Node: Customization21712
-Node: Managing packages21955
-Node: Configuring a package manager22209
-Node: Installing packages25622
-Node: Using alternate package managers27265
-Node: Example Configuration28932
-Ref: org1fbd04829117
-Node: The customel file29650
-Node: Simplified overview of how Emacs Customization works30032
-Node: Loading the customel file31750
-Ref: customel32923
-Node: Contributing33585
-Node: Modules34213
-Node: Crafted Emacs Org Module35141
-Node: Installation35351
-Node: Description35845
-Node: Alternative package org-roam37705
-Node: Troubleshooting39505
-Node: A package (suddenly?) fails to work39741
-Node: MIT License43529
+Node: Goals3828
+Node: Principles4878
+Node: Minimal modular configuration5209
+Node: Prioritize built-in Emacs functionality5845
+Node: Can be integrated with a Guix configuration6639
+Node: Helps you learn Emacs Lisp7196
+Node: Reversible7731
+Node: Why use it?8002
+Node: Getting Started8679
+Node: Initial setup9243
+Node: Cleaning out your configuration directories9473
+Node: Cloning the repository10739
+Node: Bootstrapping Crafted Emacs11385
+Node: Early Emacs Initialization11754
+Node: Emacs Initialization15635
+Node: Crafted Emacs Modules17678
+Node: Installing packages18053
+Node: Using Crafted Emacs Modules19891
+Ref: Package definitions crafted-*-packages20369
+Ref: Configuration crafted-*-config21330
+Node: Example Configuration22504
+Node: Where to go from here23748
+Node: Customization24429
+Node: Using alternate package managers24661
+Node: The customel file26318
+Node: Simplified overview of how Emacs Customization works26711
+Node: Loading the customel file28429
+Ref: customel29602
+Node: Contributing30264
+Node: Modules30892
+Node: Crafted Emacs Lisp Module31886
+Node: Installation32139
+Node: Description32638
+Ref: Common Lisp33224
+Ref: Clojure34090
+Ref: Scheme and Racket34726
+Node: Additional packages geiser-*35322
+Node: Crafted Emacs Screencast Module36372
+Node: Installation (1)36670
+Node: Description (1)37207
+Node: Crafted Emacs Org Module37890
+Node: Installation (2)38173
+Node: Description (2)38675
+Node: Alternative package org-roam40692
+Node: Troubleshooting42496
+Node: A package (suddenly?) fails to work42732
+Node: MIT License46520
 
 End Tag Table
 

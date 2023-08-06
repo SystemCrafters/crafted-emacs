@@ -1,272 +1,329 @@
-* Starting from scratch
+* Initial setup
 
-The person who is starting from scratch is likely in one of the following categories:
+** Cleaning out your configuration directories
 
-- New to Emacs.
-- Not new to Emacs, but coming from another starter kit
-- Not new to Emacs, but choosing to throw away whatever configuration they have
-  and start over from scratch - also known as /"Emacs configuration bankruptcy"/
+First, we need to make sure we are starting with a clean slate.
 
-Each category has different concerns, but we'll approach this from the
-perspective of the brand new Emacs user.  If you are more familiar with Emacs,
-you'll be able to skim this section for the code examples and move from there.
+If you are starting from scratch, but have started Emacs already,
+you probably already have generated some amount of configuration files.
+For more information: [[info:emacs#Init File][Init File]], or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html][Init File]].
+If you're on Windows, also see [[info:emacs#Windows HOME][Windows HOME]], or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Windows-HOME.html][Windows HOME]].
 
-** Prerequisites
+You must decide if you wish to remove them or rename them to something else.
 
-    First, we need to make sure we are starting with a clean slate.  If you are
-    starting from scratch, but have started Emacs and tried changing any of the
-    configuration options, you have that laying about which can confuse things.
-    If the following exist, you must decide if you wish to remove them or rename
-    them to something else. 
+If you aren't starting from scratch, then you probably have some
+configuration already working and you want to add or use some of the
+configuration found in @@texinfo:@emph{Crafted Emacs}@@.
+You probably have to adapt and rewrite parts of your configuration to
+work with @@texinfo:@emph{Crafted Emacs}@@.
 
-    - In your home folder, the file ~.emacs~ or ~_emacs~.
-    - In your home folder, the directory ~.emacs.d~ or ~_emacs.d~.
-    - In your home folder, the directory ~.config/emacs~
+Wherever you decide to put your Emacs configuration will be known
+as ~user-emacs-directory~ for the rest of this guide.
 
-    You'll also need to clone this project somewhere, the easiest is in your
-    home folder.
+** Cloning the repository
 
-    #+begin_src shell
-      git clone https://github.com/SystemCrafters/crafted-emacs
+To use @@texinfo:@emph{Crafted Emacs}@@,
+you will need to download the repository.
+It is up to you where you clone to.
+If you are not sure where to clone to, you can use your home directory.
 
-      # N.B. As this is still a beta release, make sure to also execute the following command:
+#+begin_src shell
+  # N.B. As this is still a beta release, use the craftedv2beta branch
+  git clone https://github.com/SystemCrafters/crafted-emacs -b craftedv2beta
+#+end_src
 
-      git checkout craftedv2beta
-    #+end_src
+For the rest of this guide, the location where you cloned
+@@texinfo:@emph{Crafted Emacs}@@ to will be known as ~crafted-emacs-home~.
 
-    For the rest of this document, the location where you checked out Crafted
-    Emacs will be known as ~crafted-emacs-home~.
+* Bootstrapping Crafted Emacs
+
+After cloning the crafted-emacs repository,
+we need to let Emacs know how to load @@texinfo:@emph{Crafted Emacs}@@.
 
 ** Early Emacs Initialization
 
-    The Emacs startup process has several steps, more than what will be
-    discussed here.  We will briefly cover the ~early-init.el~ file which Emacs
-    allows user to affect some configuration options which occur before Emacs
-    draws the initial frame (often known as the "window" in a graphical
-    windowing system).  For more information about this file, see the entry in
-    the Emacs info system: [[info:emacs#Early Init File][Early Init File]], or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html][Early Init File]].
+The Emacs startup process has several steps, more than what will be
+discussed here. We will briefly cover the ~early-init.el~ file which Emacs
+allows user to affect some configuration options which occur before Emacs
+draws the initial frame (often known as the "window" in a graphical
+windowing system). For more information on ~early-init.el~ see
+[[info:emacs#Early Init File][Early Init File]], or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html][Early Init File]].
 
-    Emacs looks for initialization files in several defined places.  For our
-    purposes, we will be using the directory ~.emacs.d~ in your home folder.  If
-    you removed this directory in the last step, we now need to create that
-    directory so we can put our initialization files there.  If you are using a
-    Linux or MacOS system and prefer to follow the Freedesktop guidelines, then
-    create the path ~.config/emacs/~ instead.
+For our purposes, this is where we initialize the package system.
+In the ~user-emacs-directory~:
 
-    If you are on a recent version of Microsoft Windows, either location will
-    work.  Sometimes you need to look in the ~%USERPROFILE%/AppData/Roaming~
-    folder to find either the ~.emacs.d~ or ~.config/emacs~ folder.  In some
-    cases ~%HOME%~ will point to ~%USERPROFILE%/AppData/Roaming~ already.  Older
-    versions of Microsoft Windows may refer to ~_emacs.d~ instead.
+1. Create a file called ~early-init.el~
+2. Add this single line of code (which assumes the ~crafted-emacs-home~ is
+   the ~crafted-emacs~ directory found in your home folder):
 
-    From now on, we will call this the ~user-emacs-directory~, and all of our
-    work will be in that folder.
+#+begin_src emacs-lisp
+  (load "~/crafted-emacs/modules/crafted-early-init-config")
+#+end_src
 
-    For our purposes, this is where we initialize the package system.  These steps
-    are optional.  In the ~user-emacs-directory~:
+Loading ~crafted-early-init-config~ will do the following:
 
-    1. Create a file called ~early-init.el~
-    2. Add this single line of code (which assumes the ~crafted-emacs-home~ is
-       the ~crafted-emacs~ directory found in your home folder):
+- Setup the ~package-archives~ list to include the following list of
+  package repositories:
+  1. @@texinfo:@strong{GNU Elpa}@@:
+     Contains packages which are licensed under the GNU GPL
+     (GNU General Public License) and for which the author has signed
+     the copyright release to the Free Software Foundation.
+     The package archive is maintained by the GNU Emacs maintainers.
+  2. @@texinfo:@strong{Non-GNU Elpa}@@:
+     Contains packages which are licensed as [[https://www.gnu.org/philosophy/free-sw.html][free software]] and for which
+     authors have not signed the copyright release required for GNU Elpa.
+     Authors must however follow a list of rules for package submission.
+     The decision to include a package is left to the discretion of the
+     GNU Emacs maintainers.
+  3. @@texinfo:@strong{MELPA Stable}@@:
+     MELPA is a community-authored package archive with a wide range of
+     packages available.
+     The stable repository contains packages which have a
+     version tag in their ~git~ repository.
+     These are pulled and built on a regular basis as needed
+     when the tag version changes.
+  4. @@texinfo:@strong{MELPA}@@:
+     Like MELPA Stable, but packages are based on the latest commit
+     in the respective ~git~ repository (essentially, development versions).
+     These will have version numbers similar to this:
+     ~20210701.839~ which is essentially a date stamp when
+     the package was built.
+- Prioritize the list of package repositories to be in the order
+  listed above. This means, we prefer to get packages from GNU Elpa
+  first, if not found, then try the next repository down the list,
+  finally trying to get the package from MELPA as a last resort.
+  This is because @@texinfo:@emph{Crafted Emacs}@@ prefers released
+  versions, if available, for all packages installed.
+- Check to make sure the repository cache archives are up-to-date,
+  and update if needed.  This check is performed when Emacs is
+  starting, and will check to see if the repository cache is older
+  than one day. To check less frequently, set the variable
+  ~crafted-package-update-days~ to a higher value.  To not perform
+  the check at all, set the
+  ~crafted-package-perform-stale-archive-check~ variable to ~nil~.
 
-       #+begin_src emacs-lisp
-         (load "~/crafted-emacs/modules/crafted-early-init-config")
-       #+end_src
+Once @@texinfo:@emph{Crafted Emacs}@@ is up and running, no stale
+checks are made. Thus, if you run @@texinfo:@emph{Crafted Emacs}@@
+for several days without restarting Emacs, you'll need to
+refresh the package repository archive caches manually. This is
+done automatically when running ~package-list-packages~.
 
-    For more detail on how the package system is configured for /Crafted Emacs/,
-    see the info page: [[info:crafted-emacs.info#Configuring a package manager][Configuring a package manager]] or, if you are reading this
-    locally, see: [[file:crafted-package.org][crafted-package.org]]
-
+Outside of special use-cases, this single line of code will be
+your entire ~early-init.el~ file.
 
 ** Emacs Initialization
 
-    The ~init.el~ file is where most of the work of configuring Emacs will
-    occur.  Let's start by creating the ~init.el~ file in your
-    ~user-emacs-directory~ and add this code:
-
-    #+begin_src emacs-lisp
-      (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-      (when (and custom-file
-                 (file-exists-p custom-file))
-        (load custom-file nil :nomessage))
-
-      (load "~/crafted-emacs/modules/crafted-init-config")
-    #+end_src
-
-    Emacs customization is largely a matter of setting the values of certain
-    variables.  The Emacs customization system will store these in the file
-    known as the ~custom-file~ which defaults to your initialization file, in
-    this case called ~init.el~.  We'd rather keep that separate from what we are
-    doing in the ~init.el~ file as that code is auto-generated by Emacs.  In a
-    sense, it is a duplication of the work we will be doing as the values we set
-    programmatically will also be stored in this file and loaded by the code in
-    lines 2-4 above.  Line six adds the ~modules~ folder from the
-    ~crafted-emacs-home~ directory to the Emacs ~load-path~ variable so Emacs
-    knows where to look to get the customizations we will apply going forward.
-
-*** Basic Configuration
-
-    At this point, Emacs is still in it's mostly "out of the box"
-    state.  Some people will prefer to stop at this point, but most
-    will prefer to continue to customize their configuration.  To move
-    to the next step, add the following to the bottom of your
-    initialization file:
-
-    #+begin_src emacs-lisp
-      (require 'crafted-defaults-config)
-    #+end_src
-
-    This will turn on and configure the following features in Emacs:
-
-    + Auto revert mode - this will keep your buffers up-to-date if
-      they are changed outside of Emacs.
-    + Delete selection mode - most people expect to delete or replace
-      text they have highlighted, this turns on that behavior.
-    + Using tabs is turned off - this makes using spaces the default
-      method of indentation and helps when sharing files with others.
-    + Recent files mode - this keeps track of the files you have
-      opened recently so you can open them again more quickly next
-      time.  A menu option is added to the file menu so you can find
-      the list of files you recently opened.
-    + Scrolling is enhanced to make it less stuttered.
-    + Long lines are handled more gracefully.
-    + Shell scripts are made to be executable on save automatically.
-    + Window navigation keybindings are set, and undo/redo for window
-      layouts is turned on so once you have your windows laid out to
-      your liking, if something changes the layout, you can undo those
-      changes and get your window layout back.
-    + The built in completion is configured to launch on the TAB key.
-      This includes vertical completions are turned on in the
-      minibuffer (that area below the modeline at the bottom of the
-      frame).
-    + Certain windows, like the Help, Completions and Dictionary
-      windows are configured for buffer reuse, window height and
-      location.
-    + Using dictionary to look up words is bound to a key, and the
-      spell checker is turned on (if you have ~ispell~ or ~aspell~
-      installed)
-    
-    We believe this is a nicely configured base Emacs.  No packages
-    need to be installed for this configuration, but adding a few can
-    further enhance your Emacs experience.  We'll talk more about
-    that later in this guide.  For now, congratulations!  You have a
-    nicely configured and usable Emacs.
-
-    If you are very new to Emacs, you might take a moment here to go
-    read through Mickey Petersen's "Mastering Emacs" book.  You can
-    get a copy from [[https://masteringemacs.org/r/systemcrafters][here]].
-
-* Starting from an existing configuration
-
-If you aren't starting from scratch, then you probably have some configuration
-already working and you want to add or use some of the configuration found in
-Crafted Emacs.
-
-To start, clone this repository.  Going forward, we will assume you did this in
-your home folder and will refer to this as ~crafted-emacs-home~.
-
-After cloning the Crafted Emacs repo, to use the modules, you need to add the
-following to your configuration:
-
-#+begin_src emacs-lisp
-  ;; This assumes you cloned Crafted Emacs in you home directory, if you
-  ;; didn't, make sure to update the path to correctly reflect the
-  ;; location on your system.
-  (load "~/crafted-emacs/modules/crafted-init-config")
-#+end_src
-
-This adds the ~crafted-emacs/modules~ folder to the ~load-path~.  If you need to
-have packages installed, look for modules ending with ~*-packages.el~, if you
-only want the configuration, then the modules ending with ~*-config.el~ will be
-what you want.
-
-In this example, we setup the ~custom-file~, which is used by Emacs to store
-configuration settings as well as to remember.  Next we load the
-~crafted-init-config~ file to setup the ~load-path~.  Finally, we add the
-completions packages and configuration modules.
+The ~init.el~ file is where most of the work of configuring Emacs will
+occur. Let's start by creating the ~init.el~ file in your
+~user-emacs-directory~ and add this code:
 
 #+begin_src emacs-lisp
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
   (when (and custom-file
              (file-exists-p custom-file))
     (load custom-file nil :nomessage))
+#+end_src
 
+Emacs customization is largely a matter of setting the values of certain
+variables. The Emacs customization system will store these in the file
+known as the ~custom-file~ which defaults to your initialization file, in
+this case called ~init.el~. We'd rather keep that separate from what we are
+doing in the ~init.el~ file as that code is auto-generated by Emacs. In a
+sense, it is a duplication of the work we will be doing as the values we
+set programmatically will also be stored in this file and loaded by the
+code above.
+
+For more information on the ~custom-file~ see [[info:emacs#Saving Customizations][Saving Customizations]],
+or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Saving-Customizations.html][Saving Customizations]].
+
+Right below the ~custom-file~ setup, add the following line (which assumes
+the ~crafted-emacs-home~ is the ~crafted-emacs~ directory found in your
+home folder):
+
+#+begin_src emacs-lisp
   (load "~/crafted-emacs/modules/crafted-init-config")
-  (require 'crafted-completion-packages)  ; must come first to install
-                                          ; the packages
+#+end_src
 
-  (package-install-selected-packages :noconfirm) ; install the packages
-                                                 ; from the bundle
-                                                 ; mentioned above.
+In a rough outline, the ~crafted-init-config~:
+- sets up the load-path, so code from ~modules~ and ~custom-modules~ can
+  be loaded with ~require~
+- sets up the ~info~ system to make this documentation accessible from
+  within Emacs' info buffer
+- ensures all customizations and packages are saved to the ~custom-file~
 
+These lines define the top of our ~init.el~, everything else will be put
+below.
+
+* Crafted Emacs Modules
+
+Now that you have bootstrapped @@texinfo:@emph{Crafted Emacs}@@,
+you can start configuring Emacs using Crafted Emacs Modules.
+
+** Installing packages
+
+The standard approach to finding and installing packages is to use
+the command ~M-x list-packages RET~, which will bring up a
+user interface to search for packages, review the package details,
+install, update or remove package.
+For more information: [[info:emacs#Packages][Packages]] or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html][Packages]].
+
+@@texinfo:@emph{Crafted Emacs}@@ uses the selection facilities
+for batch-installation of packages. This means all packages are added
+to a list (namely ~package-selected-packages~) and installed at once.
+
+#+begin_src emacs-lisp
+;; Example: Adding "vertico" to the package-selected-packages list (init.el)
+(add-to-list 'package-selected-packages 'vertico)
+#+end_src
+
+Additionally, @@texinfo:@emph{Crafted Emacs}@@ provides a few
+modules which are bundled together packages for installation.
+Each of these modules simply adds one or more package names to the
+~package-selected-packages~ list, for example:
+
+#+begin_src emacs-lisp
+  ;; snippet of crafted-completion-packages.el:
+  ;; not all package names are shown here, the list is shortened for
+  ;; brevity.
+  (add-to-list 'package-selected-packages 'cape)
+  (add-to-list 'package-selected-packages 'consult)
+  (add-to-list 'package-selected-packages 'corfu)
+#+end_src
+
+After all packages are selected,
+they are installed at once with ~package-install-selected-packages~.
+Adding packages after this line will not install them.
+
+#+begin_src emacs-lisp
+;; adding the `:noconfirm' flag will cause all the packages listed in
+;; the `package-selected-packages' variable to be installed without
+;; prompting you to confirm that choice.
+(package-install-selected-packages :noconfirm)
+#+end_src
+
+** Using Crafted Emacs Modules
+
+There are two types of modules provided by @@texinfo:@emph{Crafted Emacs}@@.
+
+1. Package modules (bundle together multiple packages for installation)
+2. Configuration modules (configuration for multiple packages)
+
+The module definitions can be found in =crafted-emacs-home/modules/=.
+
+*** Package definitions: crafted-*-packages
+
+As explained earlier in the guide, you can add packages manually
+using ~add-to-list~.
+Additionally, @@texinfo:@emph{Crafted Emacs}@@ provides a few
+modules which are bundled together packages for installation.
+Each of these modules simply adds one or more package names to the
+~package-selected-packages~ list.
+The bundles of packages are split up by logical categories
+(ui, completion, writing, ...).
+
+To load one of these bundles, use:
+
+#+begin_src emacs-lisp
+;; Add package definitions for completion packages
+;; to `package-selected-packages'.
+(require 'crafted-completion-packages)
+
+;; install selected packages (as shown earlier)
+(package-install-selected-packages :noconfirm)
+#+end_src
+
+To list all the available package bundle available, you can run:
+
+#+begin_src shell
+# In a shell/term from the crafted-emacs-home directory
+ls ./modules/*-packages.el
+#+end_src
+
+*** Configuration: crafted-*-config
+
+The configuration code provided by @@texinfo:@emph{Crafted Emacs}@@
+is to be loaded after installing all the packages.
+
+#+begin_src emacs-lisp
+;; install selected packages
+(package-install-selected-packages :noconfirm)
+
+;; load configuration for the completion packages
+(require 'crafted-completion-config)
+#+end_src
+
+It should be noted that the package definitions are not required
+to use the configuration.
+You can manually add a subset of packages, the configuration code
+will only apply the configuration for those packages:
+
+#+begin_src emacs-lisp
+;; Only select vertico from the crafted-completions module.
+(add-to-list 'package-selected-packages 'vertico)
+
+;; install selected packages
+(package-install-selected-packages :noconfirm)
+
+;; Load configuration for the completion packages.
+;; This will only apply the vertico section of the configuration module.
+(require 'crafted-completion-config)
+#+end_src
+
+To list all the available configuration modules, you can run:
+
+#+begin_src shell
+# In a shell/term from the crafted-emacs-home directory
+ls ./modules/*-config.el
+#+end_src
+
+* Example Configuration
+
+The example assumes you have cloned crafted-emacs to your home directory.
+
+Example @@texinfo:@code{early-init.el}@@:
+
+#+begin_src emacs-lisp
+  ;; Set up package archives
+  (load "~/crafted-emacs/modules/crafted-early-init-config")
+#+end_src
+
+Example @@texinfo:@code{init.el}@@:
+
+#+begin_src emacs-lisp
+  ;; Set up custom.el file
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (when (and custom-file
+             (file-exists-p custom-file))
+    (load custom-file nil :nomessage))
+
+  ;; Bootstrap crafted-emacs in init.el
+  (load "~/crafted-emacs/modules/crafted-init-config")
+
+  ;; Add package definitions for completion packages
+  ;; to `package-selected-packages'.
+  (require 'crafted-completion-packages)
+
+  ;; Manually select "ef-themes" package
+  (add-to-list 'package-selected-packages 'ef-themes)
+
+  ;; Install selected packages
+  (package-install-selected-packages :noconfirm)
+
+  ;; Load configuration for the completion module
   (require 'crafted-completion-config)
 #+end_src
 
+See the ~examples~ folder in the git-repo for more examples.
 
-** Crafted Modules with ~use-package~
+* Where to go from here
 
-   Some people prefer to use the very popular (and built-in to Emacs 29)
-   ~use-package~ configuration tool.  Here is an example similar to the previous
-   one.
+Congratulations,
+crafted-emacs is now set up for you to start your configuration.
 
-   #+begin_src emacs-lisp
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (and custom-file
-                (file-exists-p custom-file))
-       (load custom-file nil :nomessage))
-
-     (load "~/crafted-emacs/modules/crafted-init-config")
-
-     ;; must come first to install the packages
-     (require 'crafted-completion-packages)
-     (package-install-selected-packages :noconfirm)
-
-     ;; configure vertico
-     (use-package 'vertico
-       :init
-       (require 'vertico-directory)
-       :config
-       (customize-set-variable 'vertico-cycle t)
-       (vertico-mode 1))
-
-     ;; more configuration for completion packages would go here
-   #+end_src
-
-** Crafted modules with externally installed Emacs packages
-
-   Here, we assume you use ~guix-home~, ~NixOS Home Manager~ or other similar
-   tool to install Emacs packages from your operating system software library.
-   We continue with another iteration on the previous example, in this case we
-   will assume something like the following ~guix-home~ configuration:
-
-   #+name: guix-home snippet
-   #+begin_src scheme
-     (home-environment
-      (packages (specifications->packages
-                 (list
-                  "emacs"
-                  "emacs-vertico"
-                  "emacs-corfu"
-                  ;; other emacs packages
-                  )))
-   #+end_src
-
-   Then, in the ~init.el~ file, the following snippet can be used to configure
-   the packages installed above:
-
-   #+name: Emacs init.el snippet
-   #+begin_src emacs-lisp
-     (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-     (when (and custom-file
-                (file-exists-p custom-file))
-       (load custom-file nil :nomessage))
-
-     (load "~/crafted-emacs/modules/crafted-init-config")
-
-     ;; since the packages are already installed, we only need to use the
-     ;; config module to configure them.
-     (require 'crafted-completion-config)
-   #+end_src
+Here are some pointers to get you started:
+- For more details on Crafted Emacs Modules: [[info:crafted-emacs.info#Modules][Modules]]
+- For more information and explanations on customizing Emacs: [[info:crafted-emacs.info#Customization][Customization]]
+- Want to use a different package manager? See [[info:crafted-emacs.info#Using alternative package managers][Using alternative package managers]]
 
 -----
 # Local Variables:
