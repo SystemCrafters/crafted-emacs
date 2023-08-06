@@ -1,13 +1,13 @@
 ;;; crafted-completion-config.el --- Crafted Completion Configuration -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023-07-04
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
 
 ;;; Commentary:
 
-;; Setup completion packages.  Completion in this sense is more like
+;; Setup completion packages. Completion in this sense is more like
 ;; narrowing, allowing the user to find matches based on minimal
 ;; inputs and "complete" the commands, variables, etc from the
 ;; narrowed list of possible choices.
@@ -28,8 +28,7 @@ ARG is the thing being completed in the minibuffer."
 
 
 ;;; Vertico
-(when (featurep 'vertico)
-  (require 'vertico)
+(when (require 'vertico nil :noerror)
   (require 'vertico-directory)
   ;; Cycle back to top/bottom result when the edge is reached
   (customize-set-variable 'vertico-cycle t)
@@ -42,22 +41,32 @@ ARG is the thing being completed in the minibuffer."
     (with-eval-after-load 'evil
       (keymap-set vertico-map "C-j" 'vertico-next)
       (keymap-set vertico-map "C-k" 'vertico-previous)
-      (keymap-set vertico-map "M-h" 'vertico-directory-up))))
+      (keymap-set vertico-map "M-h" 'vertico-directory-up)))
 
+  ;; Turn off the built-in fido-vertical-mode and icomplete-vertical-mode, if
+  ;; they have been turned on by crafted-defaults-config, because they interfere
+  ;; with this module.
+  (when (featurep 'crafted-defaults-config)
+    (fido-mode -1)
+    (fido-vertical-mode -1)
+    (icomplete-mode -1)
+    (icomplete-vertical-mode -1)))
 
 
 ;;; Marginalia
-
-(when (featurep 'marginalia)
+(when (require 'marginalia nil :noerror)
   ;; Configure Marginalia
-  (require 'marginalia)
   (customize-set-variable 'marginalia-annotators
                           '(marginalia-annotators-heavy
                             marginalia-annotators-light
                             nil))
   (marginalia-mode 1))
 
-(when (featurep 'consult)
+
+;;; Consult
+;; Since Consult doesn't need to be required, we assume the user wants these
+;; setting if it is installed (regardless of the installation method).
+(when (locate-library "consult")
   ;; Set some consult bindings
   (keymap-global-set "C-s" 'consult-line)
   (keymap-set minibuffer-local-map "C-r" 'consult-history)
@@ -66,17 +75,15 @@ ARG is the thing being completed in the minibuffer."
 
 
 ;;; Orderless
-(when (featurep 'orderless)
+(when (require 'orderless nil :noerror)
   ;; Set up Orderless for better fuzzy matching
-  (require 'orderless)
   (customize-set-variable 'completion-styles '(orderless basic))
   (customize-set-variable 'completion-category-overrides
                           '((file (styles . (partial-completion))))))
 
 
 ;;; Embark
-(when (featurep 'embark)
-  (require 'embark)
+(when (require 'embark nil :noerror)
 
   (keymap-global-set "<remap> <describe-bindings>" #'embark-bindings)
   (keymap-global-set "C-." 'embark-act)
@@ -84,19 +91,16 @@ ARG is the thing being completed in the minibuffer."
   ;; Use Embark to show bindings in a key prefix with `C-h`
   (setq prefix-help-command #'embark-prefix-help-command)
 
-  (when (featurep 'embark-consult)
-    (require 'embark-consult)
+  (when (require 'embark-consult nil :noerror)
     (with-eval-after-load 'embark-consult
       (add-hook 'embark-collect-mode-hook #'consult-preview-at-point-mode))))
 
 
 ;;; Corfu
-(when (featurep 'corfu)
-  (require 'corfu)
+(when (require 'corfu nil :noerror)
 
   (unless (display-graphic-p)
-    (when (featurep 'corfu-terminal)
-      (require 'corfu-terminal)
+    (when (require 'corfu-terminal nil :noerror)
       (corfu-terminal-mode +1)))
 
   ;; Setup corfu for popup like completion
@@ -107,9 +111,8 @@ ARG is the thing being completed in the minibuffer."
   (customize-set-variable 'corfu-echo-documentation 0.25) ; Echo docs for current completion option
 
   (global-corfu-mode 1)
-  (when (featurep 'corfu-popupinfo)
-    (require 'corfu-popupinfo)
-
+  (when (require 'corfu-popupinfo nil :noerror)
+    
     (corfu-popupinfo-mode 1)
     (eldoc-add-command #'corfu-insert)
     (keymap-set corfu-map "M-p" #'corfu-popupinfo-scroll-down)
@@ -119,9 +122,8 @@ ARG is the thing being completed in the minibuffer."
 
 ;;; Cape
 
-(when (featurep 'cape)
+(when (require 'cape nil :noerror)
   ;; Setup Cape for better completion-at-point support and more
-  (require 'cape)
 
   ;; Add useful defaults completion sources from cape
   (add-to-list 'completion-at-point-functions #'cape-file)
@@ -140,15 +142,6 @@ ARG is the thing being completed in the minibuffer."
                                    corfu-auto nil)
               (corfu-mode))))
 
-
-;; Turn off the built-in fido-vertical-mode and icomplete-vertical-mode, if
-;; they have been turned on by crafted-defaults-config, because they interfere
-;; with this module.
-(when (featurep 'crafted-defaults-config)
-  (fido-mode -1)
-  (fido-vertical-mode -1)
-  (icomplete-mode -1)
-  (icomplete-vertical-mode -1))
 
 (provide 'crafted-completion-config)
 ;;; crafted-completion.el ends here
