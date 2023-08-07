@@ -46,12 +46,11 @@ ARG is the thing being completed in the minibuffer."
   ;; Turn off the built-in fido-vertical-mode and icomplete-vertical-mode, if
   ;; they have been turned on by crafted-defaults-config, because they interfere
   ;; with this module.
-  (when (featurep 'crafted-defaults-config)
-    (with-eval-after-load 'crafted-defaults-config
-      (fido-mode -1)
-      (fido-vertical-mode -1)
-      (icomplete-mode -1)
-      (icomplete-vertical-mode -1))))
+  (with-eval-after-load 'crafted-defaults-config
+    (fido-mode -1)
+    (fido-vertical-mode -1)
+    (icomplete-mode -1)
+    (icomplete-vertical-mode -1)))
 
 
 ;;; Marginalia
