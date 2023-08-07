@@ -1,6 +1,6 @@
 ;;; crafted-ide-config.el --- Provide IDE-like features -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -50,8 +50,7 @@ manually with something like this:
 ;;; tree-sitter
 ;; Emacs versions prior to 29
 (when (version< emacs-version "29")
-  (when (featurep 'tree-sitter-langs)
-    (require 'tree-sitter-indent nil :noerror)
+  (when (require 'tree-sitter-indent nil :noerror)
 
     (defun crafted-tree-sitter-load (lang-symbol)
       "Setup tree-sitter for a language.
@@ -70,13 +69,13 @@ Example: `(crafted-tree-sitter-load 'python)'"
   ;; only attempt to use tree-sitter when Emacs was built with it.
   (when (and (member "TREE_SITTER" (split-string system-configuration-features))
              (executable-find "tree-sitter"))
-    (when (featurep 'treesit-auto)
+    (when (locate-library "treesit-auto")
       ;; prefer tree-sitter modes
       (global-treesit-auto-mode)
       (with-eval-after-load 'treesit-auto
         ;; install all the tree-sitter grammars
         (treesit-auto-install-all)))
-    (when (featurep 'combobulate)
+    (when (locate-library "combobulate")
       ;; perhaps too gross of an application, but the *-ts-modes
       ;; eventually derive from this mode.
       (add-hook 'prog-mode-hook #'combobulate-mode))))
