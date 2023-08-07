@@ -47,10 +47,11 @@ ARG is the thing being completed in the minibuffer."
   ;; they have been turned on by crafted-defaults-config, because they interfere
   ;; with this module.
   (when (featurep 'crafted-defaults-config)
-    (fido-mode -1)
-    (fido-vertical-mode -1)
-    (icomplete-mode -1)
-    (icomplete-vertical-mode -1)))
+    (with-eval-after-load 'crafted-defaults-config
+      (fido-mode -1)
+      (fido-vertical-mode -1)
+      (icomplete-mode -1)
+      (icomplete-vertical-mode -1))))
 
 
 ;;; Marginalia
@@ -141,7 +142,6 @@ ARG is the thing being completed in the minibuffer."
                                    corfu-quit-no-match t
                                    corfu-auto nil)
               (corfu-mode))))
-
 
 (provide 'crafted-completion-config)
 ;;; crafted-completion.el ends here
