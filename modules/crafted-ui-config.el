@@ -1,6 +1,6 @@
 ;;; crafted-ui-config.el -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -33,8 +33,7 @@
 ;;;; Help Buffers
 
 ;; Make `describe-*' screens more helpful
-(when (featurep 'helpful)
-  (require 'helpful)
+(when (require 'helpful nil :noerror)
   (keymap-set helpful-mode-map "<remap> <revert-buffer>" #'helpful-update)
   (keymap-global-set "<remap> <describe-command>"        #'helpful-command)
   (keymap-global-set "<remap> <describe-function>"       #'helpful-callable)
