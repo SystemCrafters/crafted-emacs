@@ -1,6 +1,6 @@
 ;;; crafted-defaults.el -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -167,11 +167,10 @@ less than 28."
     (add-hook 'text-mode-hook #'flyspell-mode)
     (add-hook 'prog-mode-hook #'flyspell-prog-mode)))
 
-(require 'hydra "hydra" :no-error)
-(require 'dumb-jump "dumb-jump" :no-error)
 ;; add hydra to facilitate remembering the keys and actions for dumb-jump
-(when (and (featurep 'hydra)
-           (featurep 'dumb-jump))
+(when (and (require 'hydra nil :noerror)
+           (require 'dumb-jump nil :noerror))
+  
   (defhydra dumb-jump-hydra (:color blue :columns 3)
     "Dumb Jump"
     ("j" dumb-jump-go "Go")
