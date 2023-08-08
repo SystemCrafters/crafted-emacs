@@ -23,7 +23,7 @@
 
 ;; Hide markup markers
 (customize-set-variable 'org-hide-emphasis-markers t)
-(when (featurep 'org-appear)
+(when (locate-library "org-appear")
   (add-hook 'org-mode-hook 'org-appear-mode))
 
 ;; Disable auto-pairing of "<" in org-mode with electric-pair-mode
