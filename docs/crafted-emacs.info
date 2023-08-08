@@ -673,17 +673,35 @@ manager.  To help with that, the ‘crafted-package-config’ module
 provides a variable to set and a function to call.
 
    Here is an example using ‘straight-use-package’ as the tool to
-install packages:
+install packages.  The following lines must be called before any package
+is installed (preferable in ‘early-init.el’):
+
+     (load (expand-file-name "modules/crafted-package-config" crafted-emacs-home))
 
      (setq crafted-package-installer #'straight-use-package)
      (setq crafted-package-installed-predicate #'straight--installed-p)
-     (crafted-package-install-package-list)
+
+   In your ‘init.el’ you have to call
+‘crafted-package-install-selected-packages’ instead of
+‘package-install-selected-packages’, after adding your packages to
+‘package-selected-packages’.
 
    Note: This usage is simple in the sense full recipes are not used
 when using _Crafted Emacs_ package bundle modules.  The above
 essentially runs code like the following:
 
      (straight-use-package 'corfu)
+
+   You find a full example crafted-early-init-straight.el
+(../examples/crafted-early-init-straight.el) to bootstrap straight in
+the examples directory.  Merge it into your ‘early-init.el’ or copy it
+to your ‘custom-modules’ folder.  In the later case ‘early-init.el’
+would look like this:
+
+     (setq crafted-emacs-home "~/crafted-emacs")
+
+     (load (expand-file-name "custom-modules/crafted-early-init-straight"
+                             user-emacs-directory))
 
    It is not required to use the _Crafted Emacs_ package bundle modules,
 you are free to install packages in whatever manner you choose, for
@@ -1286,29 +1304,29 @@ Node: Example Configuration22504
 Node: Where to go from here23748
 Node: Customization24429
 Node: Using alternate package managers24661
-Node: The customel file26318
-Node: Simplified overview of how Emacs Customization works26711
-Node: Loading the customel file28429
-Ref: customel29602
-Node: Contributing30264
-Node: Modules30892
-Node: Crafted Emacs Lisp Module31886
-Node: Installation32139
-Node: Description32638
-Ref: Common Lisp33224
-Ref: Clojure34090
-Ref: Scheme and Racket34726
-Node: Additional packages geiser-*35322
-Node: Crafted Emacs Screencast Module36372
-Node: Installation (1)36670
-Node: Description (1)37207
-Node: Crafted Emacs Org Module37890
-Node: Installation (2)38173
-Node: Description (2)38675
-Node: Alternative package org-roam40692
-Node: Troubleshooting42496
-Node: A package (suddenly?) fails to work42732
-Node: MIT License46520
+Node: The customel file27148
+Node: Simplified overview of how Emacs Customization works27541
+Node: Loading the customel file29259
+Ref: customel30432
+Node: Contributing31094
+Node: Modules31722
+Node: Crafted Emacs Lisp Module32716
+Node: Installation32969
+Node: Description33468
+Ref: Common Lisp34054
+Ref: Clojure34920
+Ref: Scheme and Racket35556
+Node: Additional packages geiser-*36152
+Node: Crafted Emacs Screencast Module37202
+Node: Installation (1)37500
+Node: Description (1)38037
+Node: Crafted Emacs Org Module38720
+Node: Installation (2)39003
+Node: Description (2)39505
+Node: Alternative package org-roam41522
+Node: Troubleshooting43326
+Node: A package (suddenly?) fails to work43562
+Node: MIT License47350
 
 End Tag Table
 

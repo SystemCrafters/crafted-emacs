@@ -127,14 +127,20 @@ for the code examples.
   that, the ~crafted-package-config~ module provides a variable to set
   and a function to call.
 
-  Here is an example using ~straight-use-package~ as the tool to
-  install packages:
+  Here is an example using ~straight-use-package~ as the tool to install
+  packages. The following lines must be called before any package is installed
+  (preferable in ~early-init.el~):
 
   #+begin_src emacs-lisp
+    (load (expand-file-name "modules/crafted-package-config" crafted-emacs-home))
+ 
     (setq crafted-package-installer #'straight-use-package)
     (setq crafted-package-installed-predicate #'straight--installed-p)
-    (crafted-package-install-package-list)
   #+end_src
+
+  In your ~init.el~ you have to call ~crafted-package-install-selected-packages~
+  instead of ~package-install-selected-packages~, after adding your packages to
+  ~package-selected-packages~.
 
   Note: This usage is simple in the sense full recipes are not used
   when using @@texinfo:@emph{Crafted Emacs}@@ package bundle modules.
@@ -142,6 +148,18 @@ for the code examples.
 
   #+begin_src emacs-lisp
     (straight-use-package 'corfu)
+  #+end_src
+
+  You find a full example [[file:../examples/crafted-early-init-straight.el][crafted-early-init-straight.el]] to bootstrap straight
+  in the examples directory. Merge it into your ~early-init.el~ or copy it to your
+  ~custom-modules~ folder. In the later case ~early-init.el~ would look like
+  this:
+
+  #+begin_src emacs-lisp
+  (setq crafted-emacs-home "~/crafted-emacs")
+
+  (load (expand-file-name "custom-modules/crafted-early-init-straight"
+                          user-emacs-directory))
   #+end_src
 
   It is not required to use the @@texinfo:@emph{Crafted Emacs}@@
