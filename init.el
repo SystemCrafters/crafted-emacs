@@ -81,6 +81,21 @@ package.el or Guix depending on the value of
 ;; When writing crafted-modules, insert header from skeleton
 (auto-insert-mode)
 (with-eval-after-load "autoinsert"
+  ;; Handle a missing `custom-file' by not running `auto-insert' when
+  ;; it gets created.  The value of the `custom-file' for Crafted
+  ;; Emacs is `custom.el', however, the user could change that to
+  ;; something else.  On startup, asking the user to automatically
+  ;; insert the standard headers may cause confusion if they choose to
+  ;; answer 'y'.  Here we advise the `auto-insert' function to not run
+  ;; when the file is the `custom-file' and it is being created.
+  (defun ignore-auto-insert-for-custom (orig-auto-insert &rest args)
+    "Apply ORIG-AUTO-INSERT only when the file is not the
+`custom-file' to avoid confusion when that file doesn't exist on
+startup."
+    (if (string-match (file-name-nondirectory custom-file) buffer-file-name)
+        (message "Skipping auto-insert for %s" custom-file)
+      (apply orig-auto-insert args)))
+  (advice-add 'auto-insert :around #'ignore-auto-insert-for-custom)
   (define-auto-insert
     (cons (concat (expand-file-name user-emacs-directory) "modules/crafted-.*\\.el")
           "Crafted Emacs Lisp Skeleton")
