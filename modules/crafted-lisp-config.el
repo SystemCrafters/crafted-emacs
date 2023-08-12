@@ -54,9 +54,6 @@
 (when (featurep 'sly)
   (add-hook 'lisp-mode-hook #'sly-editing-mode))
 
-(when (featurep 'aggressive-indent-mode)
-  (add-hook 'lisp-mode-hook #'aggressive-indent-mode))
-
 
 ;;; Clojure
 (with-eval-after-load "clojure-mode"
@@ -76,18 +73,19 @@
   (with-eval-after-load "flycheck"
     (flycheck-clojure-setup)))
 
-(when (featurep 'aggressive-indent-mode)
-  (add-hook 'clojure-mode-hook #'aggressive-indent-mode))
-
 
 ;;; Scheme and Racket
-(when (featurep 'aggressive-indent-mode)
-  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
-
 ;; The default is "scheme" which is used by cmuscheme, xscheme and
 ;; chez (at least). We are configuring guile, so use the apporpriate
 ;; command for that implementation.
 (customize-set-variable 'scheme-program-name "guile")
+
+
+;;; Aggressive Indent Mode for all Lisp Modes
+(when (locate-lbirary "aggressive-indent")
+  (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
 
 
 (provide 'crafted-lisp-config)
