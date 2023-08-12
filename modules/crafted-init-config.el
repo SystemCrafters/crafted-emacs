@@ -82,7 +82,8 @@ explicitly."))
     "Apply ORIG-AUTO-INSERT only when the file is not the
 `custom-file' to avoid confusion when that file doesn't exist on
 startup."
-    (if (string-match (file-name-nondirectory custom-file) buffer-file-name)
+    (if (and custom-file buffer-file-name
+             (string-match (file-name-nondirectory custom-file) buffer-file-name))
         (message "Skipping auto-insert for %s" custom-file)
       (apply orig-auto-insert args)))
   (advice-add 'auto-insert :around #'ignore-auto-insert-for-custom)
