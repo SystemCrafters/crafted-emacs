@@ -38,6 +38,12 @@
 ;; Global defaults
 (require 'eldoc)
 
+;; aggressive-indent-mode for all lisp modes
+(when (locate-library "aggressive-indent")
+  (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
+
 
 ;;; Common Lisp
 
@@ -53,9 +59,6 @@
 
 (when (featurep 'sly)
   (add-hook 'lisp-mode-hook #'sly-editing-mode))
-
-(when (featurep 'aggressive-indent-mode)
-  (add-hook 'lisp-mode-hook #'aggressive-indent-mode))
 
 
 ;;; Clojure
@@ -76,14 +79,8 @@
   (with-eval-after-load "flycheck"
     (flycheck-clojure-setup)))
 
-(when (featurep 'aggressive-indent-mode)
-  (add-hook 'clojure-mode-hook #'aggressive-indent-mode))
-
 
 ;;; Scheme and Racket
-(when (featurep 'aggressive-indent-mode)
-  (add-hook 'scheme-mode-hook #'aggressive-indent-mode))
-
 ;; The default is "scheme" which is used by cmuscheme, xscheme and
 ;; chez (at least). We are configuring guile, so use the apporpriate
 ;; command for that implementation.
