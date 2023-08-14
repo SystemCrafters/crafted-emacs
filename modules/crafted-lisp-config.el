@@ -57,7 +57,7 @@
   (require 'sly-repl-ansi-color "sly-repl-ansi-color" :no-error)
   (require 'sly-asdf "sly-asdf" :no-error))
 
-(when (featurep 'sly)
+(when (locate-library "sly")
   (add-hook 'lisp-mode-hook #'sly-editing-mode))
 
 
@@ -68,7 +68,7 @@
 
   (defun crafted-lisp/load-clojure-refactor ()
     "Load `clj-refactor' toooling and fix keybinding conflicts with cider."
-    (when (featurep 'clj-refactor)
+    (when (locate-library "clj-refactor")
       (clj-refactor-mode 1)
       ;; keybindings mentioned on clj-refactor github page
       ;; conflict with cider, use this by default as it does
