@@ -65,14 +65,14 @@ Example usage:
 ;; and derived modes.
 (crafted-editing-configure-whitespace nil nil 'prog-mode)"
   (if use-tabs
-      (customize-save-variable 'whitespace-style
-                               '(face empty trailing indentation::tab
-                                      space-after-tab::tab
-                                      space-before-tab::tab))
+      (customize-set-variable 'whitespace-style
+                              '(face empty trailing indentation::tab
+                                     space-after-tab::tab
+                                     space-before-tab::tab))
     ;; use spaces instead of tabs
-    (customize-save-variable 'whitespace-style
-                             '(face empty trailing tab-mark
-                                    indentation::space)))
+    (customize-set-variable 'whitespace-style
+                            '(face empty trailing tab-mark
+                                   indentation::space)))
 
   (if use-globally
       (global-whitespace-mode 1)
@@ -81,7 +81,7 @@ Example usage:
         (add-hook (intern (format "%s-hook" mode)) #'whitespace-mode))))
 
   ;; cleanup whitespace
-  (customize-save-variable 'whitespace-action '(cleanup auto-cleanup)))
+  (customize-set-variable 'whitespace-action '(cleanup auto-cleanup)))
 
 ;;; parentheses
 (electric-pair-mode 1) ; auto-insert matching bracket
@@ -90,8 +90,8 @@ Example usage:
 
 ;;; LaTeX configuration
 (with-eval-after-load 'latex
-  (customize-save-variable 'TeX-auto-save t)
-  (customize-save-variable 'TeX-parse-self t)
+  (customize-set-variable 'TeX-auto-save t)
+  (customize-set-variable 'TeX-parse-self t)
   (setq-default TeX-master nil)
 
   ;; compile to pdf
@@ -112,9 +112,9 @@ Example usage:
   (add-to-list 'LaTeX-verbatim-macros-with-delims "lstinline")
 
   ;; electric pairs in auctex
-  (customize-save-variable 'TeX-electric-sub-and-superscript t)
-  (customize-save-variable 'LaTeX-electric-left-right-brace t)
-  (customize-save-variable 'TeX-electric-math (cons "$" "$"))
+  (customize-set-variable 'TeX-electric-sub-and-superscript t)
+  (customize-set-variable 'LaTeX-electric-left-right-brace t)
+  (customize-set-variable 'TeX-electric-math (cons "$" "$"))
 
   ;; open all buffers with the math mode and auto-fill mode
   (add-hook 'LaTeX-mode-hook #'auto-fill-mode)
@@ -122,7 +122,7 @@ Example usage:
 
   ;; add support for references
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-  (customize-save-variable 'reftex-plug-into-AUCTeX t)
+  (customize-set-variable 'reftex-plug-into-AUCTeX t)
 
   ;; to have the buffer refresh after compilation
   (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer))
@@ -136,9 +136,9 @@ Depends on having `pdf-tools' installed.  See
 `crafted-pdf-reader-config.el'"
 
   (with-eval-after-load 'latex
-    (customize-save-variable 'TeX-view-program-selection '((output-pdf "PDF Tools")))
-    (customize-save-variable 'TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
-    (customize-save-variable 'TeX-source-correlate-start-server t)))
+    (customize-set-variable 'TeX-view-program-selection '((output-pdf "PDF Tools")))
+    (customize-set-variable 'TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
+    (customize-set-variable 'TeX-source-correlate-start-server t)))
 
 ;; message the user if the latex executable is not found
 (defun crafted-writing/tex-warning-if-no-latex-executable ()
@@ -153,7 +153,7 @@ Depends on having `pdf-tools' installed.  See
     (when (require 'auctex-latexmk nil 'noerror)
       (with-eval-after-load 'auctex-latexmk
         (auctex-latexmk-setup)
-        (customize-save-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
+        (customize-set-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
 
       (defun crafted-writing/tex-make-latexmk-default-command ()
         "Set `TeX-command-default' to \"LatexMk\"."
@@ -175,8 +175,8 @@ Depends on having `pdf-tools' installed.  See
     (message "No markdown processor found, preview may not possible."))
 
   (with-eval-after-load 'markdown-mode
-    (customize-save-variable 'markdown-enable-math t)
-    (customize-save-variable 'markdown-enable-html t)
+    (customize-set-variable 'markdown-enable-math t)
+    (customize-set-variable 'markdown-enable-html t)
     (add-hook 'markdown-mode-hook #'conditionally-turn-on-pandoc)))
 
 
