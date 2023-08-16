@@ -181,7 +181,7 @@ Depends on having `pdf-tools' installed.  See
 
 
 ;;; PDF Support when using pdf-tools
-(when (featurep 'pdf-tools)
+(when (require 'pdf-tools nil :noerror)
   (defun crafted-writing/load-pdf-tools ()
     "Attempts to require pdf-tools, but for attaching to hooks."
     (require 'pdf-tools nil :noerror))
