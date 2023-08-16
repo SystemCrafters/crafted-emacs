@@ -1,6 +1,6 @@
 ;;; crafted-workspaces-config.el --- Workspaces configuration  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -13,12 +13,12 @@
 ;;; Code:
 
 (with-eval-after-load 'tabspaces
-  (customize-save-variable 'tabspaces-use-filtered-buffers-as-default t)
-  (customize-save-variable 'tabspaces-remove-to-default t)
-  (customize-save-variable 'tabspaces-include-buffers '("*scratch*")))
+  (customize-set-variable 'tabspaces-use-filtered-buffers-as-default t)
+  (customize-set-variable 'tabspaces-remove-to-default t)
+  (customize-set-variable 'tabspaces-include-buffers '("*scratch*")))
 
 ;; Activate it
-(customize-save-variable 'tabspaces-mode t)
+(customize-set-variable 'tabspaces-mode t)
 
 ;; Make sure project is initialized
 (project--ensure-read-project-list)
