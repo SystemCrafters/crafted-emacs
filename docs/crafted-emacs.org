@@ -274,9 +274,10 @@ for the code examples.
   packages and a small example on how to extend your configuration while
   using the same package installation methods as Crafted Emacs.
 
+  #+include: crafted-completion.org
   #+include: crafted-lisp.org
-  #+include: crafted-screencast.org
   #+include: crafted-org.org
+  #+include: crafted-screencast.org
 
 * Troubleshooting
 

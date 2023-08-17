@@ -1,0 +1,220 @@
+* Crafted Emacs Completion Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; add crafted-completion package definitions to selected packages list
+(require 'crafted-completion-packages)
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-completion configuration
+(require 'crafted-completion-config)
+#+end_src
+
+** Description
+This module installs and sets up a set of completion-related packages that work
+together to achieve a functionality that presents the user with possible
+choices to select for all kinds of tasks (picking files, commands etc.)
+based on minimal input. The choices can be narrowed ever further by more
+input.
+
+| [[https://github.com/minad/vertico][vertico]]    | vertical completion UI based on the default completion system |
+| [[https://github.com/oantolin/orderless][orderless]]  | completion style that matches candidates in any order         |
+| [[https://github.com/minad/consult][consult]]    | provides handy search and select commands                     |
+| [[https://github.com/minad/marginalia/][marginalia]] | adds info to the minibuffer completions on the side           |
+| [[https://github.com/oantolin/embark/][embark]]     | provides a set of possible actions for a given context        |
+| [[https://github.com/minad/corfu/][corfu]]      | provides a completion overlay for completions while typing    |
+| [[https://github.com/minad/cape][cape]]       | provides completion at point extensions for corfu             |
+
+To explain what the packages do and how they interact, it's best to go
+through them step by step.
+For each step, imagine you want to switch buffers but you neither remember the
+binding nor the command to do that. Neither do you remember that the command
+starts with "switch". But you're sure it was something with buffers, so you
+hit "M-x" and type =buf=.
+
+A fresh Emacs install would actually be pretty helpful for that already. After
+=buf= you could hit <SPC> or <TAB> to complete to =buffer-= and after trying
+several continutations without success, you'd hit <TAB> repeatedly to find out
+that the command you're looking for apparently doesn't start with "buffer".
+
+[[./img/01-vanilla.png]]
+
+So you'd try something else, you'd eventually start typing with =swi= and arrive
+at =switch-to-buffer= rather quickly, via completion. Emacs would even show you
+that there are more than one command that start with that and present you with
+the keybindings.
+
+[[./img/02-vanilla.png]]
+
+That's OK, but there's a lot of room for improvement. That's where the packages
+of these module come in.
+
+- Vertico
+
+  Vertico is a "minimalistic vertical completion UI" which means that when
+  Emacs has a list of candidates that could be completed, it offers a list of
+  them in a vertical arrangement.
+
+  If you hit "M-x" and start typing =buf= with vertico installed, Emacs shows
+  you a list of all available commands that start with "buf". No need to
+  trigger any completions, it's just there.
+
+  [[./img/03-vertico.png]]
+
+  So this time, you immediately see that no commands with "change" or "switch"
+  is in the list and that you have to start with something else. You will
+  probably arrive at the command you're looking for much easier and
+  quicker.
+
+- Orderless
+
+  Orderless splits your search string and gives you candidates that match them
+  regardless of the order. So with vertico *and* orderless installed, it doesn't
+  matter anymore that you started to type =buf=. No need to go back and start
+  with =swi=. With =buf= <SPC> =swi= you'll see all commands that contain both
+  components of your search.
+
+  [[./img/04-vertico-orderless.png]]
+
+  This time, you achieved your goal at the first try. And Emacs still showed
+  you the other commands and their keybindings. You might go and check out
+  what they might do, but wouldn't it be nice if Emacs had already told you?
+  Time for marginalia.
+
+- Marginalia
+
+  Marginalia offers helpful information in the minibuffer when completions are
+  offered. So with vertico, orderless and marginalia installed, your search
+  for =buf= <SPC> =swi= shows you a list of all matching commands with a short
+  info on what they're doing.
+
+  [[./img/05-vertico-orderless-marginalia.png]]
+
+- Consult
+
+  Consult provides a set of practical commands. A lot of them are
+  [[https://github.com/minad/consult#available-commands][replacements for built-in everyday functions]]. (For example, try replacing
+  =switch-to-buffer= with =consult-buffer=. Or replace =yank-pop= with
+  =consult-yank-pop=). However, Crafted Emacs leaves most of that
+  untouched. It's up to you as the user.  The module =crafted-completion= sets
+  three consult functions for you that fit into the completion behaviour
+  described above.
+
+  - Search-/filtering candidates and bind "C-s" to =consult-line=
+
+    Whenever you're presented with candidates for completions, consult
+    provides a filtering search function which updates not only the list
+    of candidates in the minibuffer, but also the active buffer in a
+    sort of live preview (if applicable). Crafted Emacs also replaces
+    =isearch= with =consult-line=, so that searching through your buffer
+    gives you the same behaviour. Essentially, =isearch-backward= becomes
+    obsolete, because consult shows you the forward matches first and
+    next the backward matches and you can cycle through them.
+
+    [[./img/06-consult-line.png]]
+
+  - Bind "C-r" in the minibuffer to =consult-history=
+
+    Whenever you're presented with candidates for completions in a minibuffer,
+    =consult= automatically sorts your most recently used candidates to the
+    top. Also it is searchable like with =consult-line=. Inside a minibuffer,
+    you can also hit "C-r" to show *only* the candidates you have used before.
+
+    [[./img/07-consult-history.png]]
+
+  - Use =consult-completion-in-region= as completion function
+
+    Completion not only comes into effect in the minibuffer, but also
+    (depending on other settings – like major mode) within your main
+    buffer. E.g. completing function or variable names etc.
+
+    *Without* =consult=, triggering a completion gives you a static list of
+    candidates if there is more than one.
+
+    [[./img/08-completion-without-consult.png]]
+
+    *With* =consult=, the list of candidates is dynamic as you type and updates
+    the current selection as a preview in the buffer.
+
+    [[./img/09-completion-with-consult.png]]  
+
+- Embark
+
+  Embark is very versatile package that does far more than can be described
+  here. We highly recommend to read through the [[https://github.com/oantolin/embark][packages documentation]].
+
+  As it's set up in this module, Embark offers two main features:
+
+  - =embark-act=
+
+    The =embark-act= function (bound to "C-.") offers you a lot of possible
+    actions that can be applied to the element of the buffer (or minibuffer)
+    in which your cursor is positioned. You can think of this as a context
+    menu, similar to what you achieve in many user interfaces by
+    right-clicking on something.
+
+    But =embark-act= can be used for much more, have a look at the video
+    [[https://youtu.be/qk2Is_sC8Lk][The Many Uses of Embark]] in the System Crafters Channel.
+
+  - =embark-bindings= & =embark-prefix-help-command=
+
+    Crafted Emacs replaces =describe-bindings= and =prefix-help-command= with
+    their Embark-alternatives to provide a functionality similar to packages
+    like =which-key=: It shows you available options and commands, but with all
+    the goodies provided by the other packages above.
+
+    For one last time, imagine you want so switch buffers and have forgotten
+    how. But this time, you also remember that there was a binding for it,
+    probably starting with "C-x".
+
+    You can hit "C-x C-h" to see a list of possible bindings after the "C-x"
+    prefix. But you don't need to cycle through them, you can fuzzy-filter
+    them. Type "buf" to see only the bindings that relate to buffers.
+
+    [[./img/10-filtered-describe-bindings.png]]    
+
+- Corfu
+
+  Corfu provides a completion overlay while you are typing in a regular
+  buffer. How these overlays are triggered depends on the major mode of
+  the buffer. This module sets up corfu so that it almost always triggers
+  automatically. Otherwise, try hitting <TAB> or by ~C-M-i~, which are the
+  regular completion at point commands.
+  In programming modes, it's also set up to show documentation if possible,
+  so the effect is similar to how other IDEs offer popup completions.
+
+  [[./img/11-corfu-and-doc.png]]    
+
+  Use arrow keys or =C-n= and =C-p= to move the next or previous completion in the
+  list. To read more of the documentation, use =M-n= or =M-p= to scroll the
+  documentation overlay.
+
+- Cape
+
+  A great addition to Corfu is Cape. Cape provides several completion backends
+  for Corfu (see table below). This module turns on ~cape-dabbrev~ and ~cape-file~.
+
+  Here are the backends built into Cape and what they're doing:
+
+| ~cape-dabbrev~ | Complete word from current buffers                         |
+| ~cape-file~    | Complete file name                                         |
+| ~cape-history~ | Complete from Eshell, Comint or minibuffer history         |
+| ~cape-keyword~ | Complete programming language keyword                      |
+| ~cape-symbol~  | Complete Elisp symbol                                      |
+| ~cape-abbrev~  | Complete abbreviation (~add-global-abbrev~, ~add-mode-abbrev~) |
+| ~cape-ispell~  | Complete word from Ispell dictionary                       |
+| ~cape-dict~    | Complete word from dictionary file                         |
+| ~cape-line~    | Complete entire line from current buffer                   |
+| ~cape-tex~     | Complete unicode char from TeX command, e.g. ~\hbar~.        |
+| ~cape-sgml~    | Complete unicode char from Sgml entity, e.g., ~&alpha~.      |
+| ~cape-rfc1345~ | Complete unicode char using RFC 1345 mnemonics.            |
+
+[[./img/12-cape-dabbrev.png]]
+
+[[./img/13-cape-file.png]]

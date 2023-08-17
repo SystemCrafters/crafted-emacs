@@ -105,26 +105,32 @@ The ‘custom.el’ file
 
 Modules
 
+* Crafted Emacs Completion Module::
 * Crafted Emacs Lisp Module::
-* Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
+* Crafted Emacs Screencast Module::
 
-Crafted Emacs Lisp Module
+Crafted Emacs Completion Module
 
 * Installation::
 * Description::
-* Additional packages geiser-*::
 
-Crafted Emacs Screencast Module
+Crafted Emacs Lisp Module
 
 * Installation: Installation (1).
 * Description: Description (1).
+* Additional packages geiser-*::
 
 Crafted Emacs Org Module
 
 * Installation: Installation (2).
 * Description: Description (2).
 * Alternative package org-roam::
+
+Crafted Emacs Screencast Module
+
+* Installation: Installation (3).
+* Description: Description (3).
 
 Troubleshooting
 
@@ -842,26 +848,291 @@ while using the same package installation methods as Crafted Emacs.
 
 * Menu:
 
+* Crafted Emacs Completion Module::
 * Crafted Emacs Lisp Module::
-* Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
+* Crafted Emacs Screencast Module::
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Screencast Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Completion Module,  Next: Crafted Emacs Lisp Module,  Up: Modules
 
-7.1 Crafted Emacs Lisp Module
-=============================
+7.1 Crafted Emacs Completion Module
+===================================
 
 * Menu:
 
 * Installation::
 * Description::
+
+
+File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Completion Module
+
+7.1.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-completion package definitions to selected packages list
+     (require 'crafted-completion-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-completion configuration
+     (require 'crafted-completion-config)
+
+
+File: crafted-emacs.info,  Node: Description,  Prev: Installation,  Up: Crafted Emacs Completion Module
+
+7.1.2 Description
+-----------------
+
+This module installs and sets up a set of completion-related packages
+that work together to achieve a functionality that presents the user
+with possible choices to select for all kinds of tasks (picking files,
+commands etc.)  based on minimal input.  The choices can be narrowed
+ever further by more input.
+
+vertico (https://github.com/minad/vertico)             vertical completion UI based on the default completion system
+orderless (https://github.com/oantolin/orderless)      completion style that matches candidates in any order
+consult (https://github.com/minad/consult)             provides handy search and select commands
+marginalia (https://github.com/minad/marginalia/)      adds info to the minibuffer completions on the side
+embark (https://github.com/oantolin/embark/)           provides a set of possible actions for a given context
+corfu (https://github.com/minad/corfu/)                provides a completion overlay for completions while typing
+cape (https://github.com/minad/cape)                   provides completion at point extensions for corfu
+
+   To explain what the packages do and how they interact, it’s best to
+go through them step by step.  For each step, imagine you want to switch
+buffers but you neither remember the binding nor the command to do that.
+Neither do you remember that the command starts with "switch".  But
+you’re sure it was something with buffers, so you hit "M-x" and type
+‘buf’.
+
+   A fresh Emacs install would actually be pretty helpful for that
+already.  After ‘buf’ you could hit <SPC> or <TAB> to complete to
+‘buffer-’ and after trying several continutations without success, you’d
+hit <TAB> repeatedly to find out that the command you’re looking for
+apparently doesn’t start with "buffer".
+
+ [image src="img/01-vanilla.png" ]
+
+
+   So you’d try something else, you’d eventually start typing with ‘swi’
+and arrive at ‘switch-to-buffer’ rather quickly, via completion.  Emacs
+would even show you that there are more than one command that start with
+that and present you with the keybindings.
+
+ [image src="img/02-vanilla.png" ]
+
+
+   That’s OK, but there’s a lot of room for improvement.  That’s where
+the packages of these module come in.
+
+   • Vertico
+
+     Vertico is a "minimalistic vertical completion UI" which means that
+     when Emacs has a list of candidates that could be completed, it
+     offers a list of them in a vertical arrangement.
+
+     If you hit "M-x" and start typing ‘buf’ with vertico installed,
+     Emacs shows you a list of all available commands that start with
+     "buf".  No need to trigger any completions, it’s just there.
+
+ [image src="img/03-vertico.png" ]
+
+
+     So this time, you immediately see that no commands with "change" or
+     "switch" is in the list and that you have to start with something
+     else.  You will probably arrive at the command you’re looking for
+     much easier and quicker.
+
+   • Orderless
+
+     Orderless splits your search string and gives you candidates that
+     match them regardless of the order.  So with vertico *and*
+     orderless installed, it doesn’t matter anymore that you started to
+     type ‘buf’.  No need to go back and start with ‘swi’.  With ‘buf’
+     <SPC> ‘swi’ you’ll see all commands that contain both components of
+     your search.
+
+ [image src="img/04-vertico-orderless.png" ]
+
+
+     This time, you achieved your goal at the first try.  And Emacs
+     still showed you the other commands and their keybindings.  You
+     might go and check out what they might do, but wouldn’t it be nice
+     if Emacs had already told you?  Time for marginalia.
+
+   • Marginalia
+
+     Marginalia offers helpful information in the minibuffer when
+     completions are offered.  So with vertico, orderless and marginalia
+     installed, your search for ‘buf’ <SPC> ‘swi’ shows you a list of
+     all matching commands with a short info on what they’re doing.
+
+ [image src="img/05-vertico-orderless-marginalia.png" ]
+
+
+   • Consult
+
+     Consult provides a set of practical commands.  A lot of them are
+     replacements for built-in everyday functions
+     (https://github.com/minad/consult#available-commands).  (For
+     example, try replacing ‘switch-to-buffer’ with ‘consult-buffer’.
+     Or replace ‘yank-pop’ with ‘consult-yank-pop’).  However, Crafted
+     Emacs leaves most of that untouched.  It’s up to you as the user.
+     The module ‘crafted-completion’ sets three consult functions for
+     you that fit into the completion behaviour described above.
+
+        • Search-/filtering candidates and bind "C-s" to ‘consult-line’
+
+          Whenever you’re presented with candidates for completions,
+          consult provides a filtering search function which updates not
+          only the list of candidates in the minibuffer, but also the
+          active buffer in a sort of live preview (if applicable).
+          Crafted Emacs also replaces ‘isearch’ with ‘consult-line’, so
+          that searching through your buffer gives you the same
+          behaviour.  Essentially, ‘isearch-backward’ becomes obsolete,
+          because consult shows you the forward matches first and next
+          the backward matches and you can cycle through them.
+
+ [image src="img/06-consult-line.png" ]
+
+
+        • Bind "C-r" in the minibuffer to ‘consult-history’
+
+          Whenever you’re presented with candidates for completions in a
+          minibuffer, ‘consult’ automatically sorts your most recently
+          used candidates to the top.  Also it is searchable like with
+          ‘consult-line’.  Inside a minibuffer, you can also hit "C-r"
+          to show *only* the candidates you have used before.
+
+ [image src="img/07-consult-history.png" ]
+
+
+        • Use ‘consult-completion-in-region’ as completion function
+
+          Completion not only comes into effect in the minibuffer, but
+          also (depending on other settings – like major mode) within
+          your main buffer.  E.g.  completing function or variable names
+          etc.
+
+          *Without* ‘consult’, triggering a completion gives you a
+          static list of candidates if there is more than one.
+
+ [image src="img/08-completion-without-consult.png" ]
+
+
+          *With* ‘consult’, the list of candidates is dynamic as you
+          type and updates the current selection as a preview in the
+          buffer.
+
+ [image src="img/09-completion-with-consult.png" ]
+
+
+   • Embark
+
+     Embark is very versatile package that does far more than can be
+     described here.  We highly recommend to read through the packages
+     documentation (https://github.com/oantolin/embark).
+
+     As it’s set up in this module, Embark offers two main features:
+
+        • ‘embark-act’
+
+          The ‘embark-act’ function (bound to "C-.")  offers you a lot
+          of possible actions that can be applied to the element of the
+          buffer (or minibuffer) in which your cursor is positioned.
+          You can think of this as a context menu, similar to what you
+          achieve in many user interfaces by right-clicking on
+          something.
+
+          But ‘embark-act’ can be used for much more, have a look at the
+          video The Many Uses of Embark (https://youtu.be/qk2Is_sC8Lk)
+          in the System Crafters Channel.
+
+        • ‘embark-bindings’ & ‘embark-prefix-help-command’
+
+          Crafted Emacs replaces ‘describe-bindings’ and
+          ‘prefix-help-command’ with their Embark-alternatives to
+          provide a functionality similar to packages like ‘which-key’:
+          It shows you available options and commands, but with all the
+          goodies provided by the other packages above.
+
+          For one last time, imagine you want so switch buffers and have
+          forgotten how.  But this time, you also remember that there
+          was a binding for it, probably starting with "C-x".
+
+          You can hit "C-x C-h" to see a list of possible bindings after
+          the "C-x" prefix.  But you don’t need to cycle through them,
+          you can fuzzy-filter them.  Type "buf" to see only the
+          bindings that relate to buffers.
+
+ [image src="img/10-filtered-describe-bindings.png" ]
+
+
+   • Corfu
+
+     Corfu provides a completion overlay while you are typing in a
+     regular buffer.  How these overlays are triggered depends on the
+     major mode of the buffer.  This module sets up corfu so that it
+     almost always triggers automatically.  Otherwise, try hitting <TAB>
+     or by ‘C-M-i’, which are the regular completion at point commands.
+     In programming modes, it’s also set up to show documentation if
+     possible, so the effect is similar to how other IDEs offer popup
+     completions.
+
+ [image src="img/11-corfu-and-doc.png" ]
+
+
+     Use arrow keys or ‘C-n’ and ‘C-p’ to move the next or previous
+     completion in the list.  To read more of the documentation, use
+     ‘M-n’ or ‘M-p’ to scroll the documentation overlay.
+
+   • Cape
+
+     A great addition to Corfu is Cape.  Cape provides several
+     completion backends for Corfu (see table below).  This module turns
+     on ‘cape-dabbrev’ and ‘cape-file’.
+
+     Here are the backends built into Cape and what they’re doing:
+
+‘cape-dabbrev’   Complete word from current buffers
+‘cape-file’      Complete file name
+‘cape-history’   Complete from Eshell, Comint or minibuffer history
+‘cape-keyword’   Complete programming language keyword
+‘cape-symbol’    Complete Elisp symbol
+‘cape-abbrev’    Complete abbreviation (‘add-global-abbrev’, ‘add-mode-abbrev’)
+‘cape-ispell’    Complete word from Ispell dictionary
+‘cape-dict’      Complete word from dictionary file
+‘cape-line’      Complete entire line from current buffer
+‘cape-tex’       Complete unicode char from TeX command, e.g.  ‘\hbar’.
+‘cape-sgml’      Complete unicode char from Sgml entity, e.g., ‘&alpha’.
+‘cape-rfc1345’   Complete unicode char using RFC 1345 mnemonics.
+
+ [image src="img/12-cape-dabbrev.png" ]
+
+
+ [image src="img/13-cape-file.png" ]
+
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Org Module,  Prev: Crafted Emacs Completion Module,  Up: Modules
+
+7.2 Crafted Emacs Lisp Module
+=============================
+
+* Menu:
+
+* Installation: Installation (1).
+* Description: Description (1).
 * Additional packages geiser-*::
 
 
-File: crafted-emacs.info,  Node: Installation,  Next: Description,  Up: Crafted Emacs Lisp Module
+File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Lisp Module
 
-7.1.1 Installation
+7.2.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -877,9 +1148,9 @@ appropriate points.
      (require 'crafted-lisp-config)
 
 
-File: crafted-emacs.info,  Node: Description,  Next: Additional packages geiser-*,  Prev: Installation,  Up: Crafted Emacs Lisp Module
+File: crafted-emacs.info,  Node: Description (1),  Next: Additional packages geiser-*,  Prev: Installation (1),  Up: Crafted Emacs Lisp Module
 
-7.1.2 Description
+7.2.2 Description
 -----------------
 
 The ‘crafted-lisp’ module provides packages and configuration for
@@ -954,9 +1225,9 @@ development using various Lisp and Scheme variants.
           (customize-set-variable 'scheme-program-name "guile")
 
 
-File: crafted-emacs.info,  Node: Additional packages geiser-*,  Prev: Description,  Up: Crafted Emacs Lisp Module
+File: crafted-emacs.info,  Node: Additional packages geiser-*,  Prev: Description (1),  Up: Crafted Emacs Lisp Module
 
-7.1.3 Additional packages: geiser-*
+7.2.3 Additional packages: geiser-*
 -----------------------------------
 
 ‘Crafted Emacs’ pre-installs the geiser interface packages for ‘guile’
@@ -983,57 +1254,7 @@ packages:
      (package-install-selected-packages :noconfirm)
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Screencast Module,  Next: Crafted Emacs Org Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
-
-7.2 Crafted Emacs Screencast Module
-===================================
-
-* Menu:
-
-* Installation: Installation (1).
-* Description: Description (1).
-
-
-File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Screencast Module
-
-7.2.1 Installation
-------------------
-
-To use this module, simply require them in your ‘init.el’ at the
-appropriate points.
-
-     ;; add crafted-screencast package definitions to selected packages list
-     (require 'crafted-screencast-packages)
-
-     ;; install the packages
-     (package-install-selected-packages :noconfirm)
-
-     ;; Load crafted-screencast configuration
-     (require 'crafted-screencast-config)
-
-
-File: crafted-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Crafted Emacs Screencast Module
-
-7.2.2 Description
------------------
-
-   • ‘Package: keycast’
-
-     Package to show current command and its binding in the modeline or
-     in the tab-bar.  By default, activates keycast in the modeline.
-
-   • ‘keycast-remove-tail-elements’: ‘nil’
-
-     By default, keycast-mode removes the elements to the right of the
-     modeline.  This may obscure information, so we’ll disable it.
-
-   • ‘keycast-insert-after’: ‘mode-line-misc-info’
-
-     Insert keycast information after ‘mode-line-misc-info’ in the
-     ‘mode-line-format’.
-
-
-File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Prev: Crafted Emacs Screencast Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Next: Crafted Emacs Screencast Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
 
 7.3 Crafted Emacs Org Module
 ============================
@@ -1164,6 +1385,56 @@ database.
      (org-roam-db-autosync-mode)
 
 
+File: crafted-emacs.info,  Node: Crafted Emacs Screencast Module,  Prev: Crafted Emacs Org Module,  Up: Modules
+
+7.4 Crafted Emacs Screencast Module
+===================================
+
+* Menu:
+
+* Installation: Installation (3).
+* Description: Description (3).
+
+
+File: crafted-emacs.info,  Node: Installation (3),  Next: Description (3),  Up: Crafted Emacs Screencast Module
+
+7.4.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-screencast package definitions to selected packages list
+     (require 'crafted-screencast-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-screencast configuration
+     (require 'crafted-screencast-config)
+
+
+File: crafted-emacs.info,  Node: Description (3),  Prev: Installation (3),  Up: Crafted Emacs Screencast Module
+
+7.4.2 Description
+-----------------
+
+   • ‘Package: keycast’
+
+     Package to show current command and its binding in the modeline or
+     in the tab-bar.  By default, activates keycast in the modeline.
+
+   • ‘keycast-remove-tail-elements’: ‘nil’
+
+     By default, keycast-mode removes the elements to the right of the
+     modeline.  This may obscure information, so we’ll disable it.
+
+   • ‘keycast-insert-after’: ‘mode-line-misc-info’
+
+     Insert keycast information after ‘mode-line-misc-info’ in the
+     ‘mode-line-format’.
+
+
 File: crafted-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
 
 8 Troubleshooting
@@ -1280,53 +1551,56 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals3828
-Node: Principles4878
-Node: Minimal modular configuration5209
-Node: Prioritize built-in Emacs functionality5845
-Node: Can be integrated with a Guix configuration6639
-Node: Helps you learn Emacs Lisp7196
-Node: Reversible7731
-Node: Why use it?8002
-Node: Getting Started8679
-Node: Initial setup9243
-Node: Cleaning out your configuration directories9473
-Node: Cloning the repository10739
-Node: Bootstrapping Crafted Emacs11385
-Node: Early Emacs Initialization11754
-Node: Emacs Initialization15635
-Node: Crafted Emacs Modules17678
-Node: Installing packages18053
-Node: Using Crafted Emacs Modules19891
-Ref: Package definitions crafted-*-packages20369
-Ref: Configuration crafted-*-config21330
-Node: Example Configuration22504
-Node: Where to go from here23748
-Node: Customization24429
-Node: Using alternate package managers24661
-Node: The customel file27148
-Node: Simplified overview of how Emacs Customization works27541
-Node: Loading the customel file29259
-Ref: customel30432
-Node: Contributing31094
-Node: Modules31722
-Node: Crafted Emacs Lisp Module32716
-Node: Installation32969
-Node: Description33468
-Ref: Common Lisp34054
-Ref: Clojure34920
-Ref: Scheme and Racket35556
-Node: Additional packages geiser-*36152
-Node: Crafted Emacs Screencast Module37202
-Node: Installation (1)37500
-Node: Description (1)38037
-Node: Crafted Emacs Org Module38720
-Node: Installation (2)39003
-Node: Description (2)39505
-Node: Alternative package org-roam41522
-Node: Troubleshooting43326
-Node: A package (suddenly?) fails to work43562
-Node: MIT License47350
+Node: Goals3964
+Node: Principles5014
+Node: Minimal modular configuration5345
+Node: Prioritize built-in Emacs functionality5981
+Node: Can be integrated with a Guix configuration6775
+Node: Helps you learn Emacs Lisp7332
+Node: Reversible7867
+Node: Why use it?8138
+Node: Getting Started8815
+Node: Initial setup9379
+Node: Cleaning out your configuration directories9609
+Node: Cloning the repository10875
+Node: Bootstrapping Crafted Emacs11521
+Node: Early Emacs Initialization11890
+Node: Emacs Initialization15771
+Node: Crafted Emacs Modules17814
+Node: Installing packages18189
+Node: Using Crafted Emacs Modules20027
+Ref: Package definitions crafted-*-packages20505
+Ref: Configuration crafted-*-config21466
+Node: Example Configuration22640
+Node: Where to go from here23884
+Node: Customization24565
+Node: Using alternate package managers24797
+Node: The customel file27284
+Node: Simplified overview of how Emacs Customization works27677
+Node: Loading the customel file29395
+Ref: customel30568
+Node: Contributing31230
+Node: Modules31858
+Node: Crafted Emacs Completion Module32888
+Node: Installation33120
+Node: Description33649
+Node: Crafted Emacs Lisp Module44065
+Node: Installation (1)44384
+Node: Description (1)44891
+Ref: Common Lisp45485
+Ref: Clojure46351
+Ref: Scheme and Racket46987
+Node: Additional packages geiser-*47583
+Node: Crafted Emacs Org Module48637
+Node: Installation (2)48954
+Node: Description (2)49456
+Node: Alternative package org-roam51473
+Node: Crafted Emacs Screencast Module53277
+Node: Installation (3)53541
+Node: Description (3)54078
+Node: Troubleshooting54761
+Node: A package (suddenly?) fails to work54997
+Node: MIT License58785
 
 End Tag Table
 
