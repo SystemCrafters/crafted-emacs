@@ -40,14 +40,5 @@
            (executable-find "latexmk"))
   (add-to-list 'package-selected-packages 'auctex-latexmk))
 
-(defun crafted-writing-install-pdf-tools ()
-  "Use pdf-tools.
-
-If you have an appropriate build-system, you may choose to use
-pdf-tools.  Installing this package will ask you to build it
-during install or upgrade options, but using it often provides a
-better experience than just docview for rendering PDF files."
-  (add-to-list 'package-selected-packages 'pdf-tools))
-
 (provide 'crafted-writing-packages)
 ;;; crafted-writing-packages.el ends here

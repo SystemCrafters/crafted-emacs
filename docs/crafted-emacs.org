@@ -278,6 +278,7 @@ for the code examples.
   #+include: crafted-lisp.org
   #+include: crafted-org.org
   #+include: crafted-screencast.org
+  #+include: crafted-writing.org
 
 * Troubleshooting
 
