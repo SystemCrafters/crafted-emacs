@@ -108,6 +108,7 @@ Modules
 * Crafted Emacs Lisp Module::
 * Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
+* Crafted Emacs Writing Module::
 
 Crafted Emacs Lisp Module
 
@@ -125,6 +126,11 @@ Crafted Emacs Org Module
 * Installation: Installation (2).
 * Description: Description (2).
 * Alternative package org-roam::
+
+Crafted Emacs Writing Module
+
+* Installation: Installation (3).
+* Description: Description (3).
 
 Troubleshooting
 
@@ -845,6 +851,7 @@ while using the same package installation methods as Crafted Emacs.
 * Crafted Emacs Lisp Module::
 * Crafted Emacs Screencast Module::
 * Crafted Emacs Org Module::
+* Crafted Emacs Writing Module::
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Screencast Module,  Up: Modules
@@ -1033,7 +1040,7 @@ File: crafted-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: 
      ‘mode-line-format’.
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Prev: Crafted Emacs Screencast Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Next: Crafted Emacs Writing Module,  Prev: Crafted Emacs Screencast Module,  Up: Modules
 
 7.3 Crafted Emacs Org Module
 ============================
@@ -1164,6 +1171,158 @@ database.
      (org-roam-db-autosync-mode)
 
 
+File: crafted-emacs.info,  Node: Crafted Emacs Writing Module,  Prev: Crafted Emacs Org Module,  Up: Modules
+
+7.4 Crafted Emacs Writing Module
+================================
+
+* Menu:
+
+* Installation: Installation (3).
+* Description: Description (3).
+
+
+File: crafted-emacs.info,  Node: Installation (3),  Next: Description (3),  Up: Crafted Emacs Writing Module
+
+7.4.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-writing package definitions to selected packages list
+     (require 'crafted-writing-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-writing configuration
+     (require 'crafted-writing-config)
+
+
+File: crafted-emacs.info,  Node: Description (3),  Prev: Installation (3),  Up: Crafted Emacs Writing Module
+
+7.4.2 Description
+-----------------
+
+The ‘crafted-writing’ module configures various settings related to text
+production with markup languages like Markdown or LaTeX.
+
+   It installs and sets up following packages:
+   • ‘markdown-mode’
+   • ‘pandoc-mode’
+   • ‘auctex’ (if LaTeX is installed on your system)
+   • ‘auctex-latexmk’ (if ‘latexmk’ is installed on your system)
+
+  1. Whitespace Mode
+
+     This module also provides a configuration for ‘whitespace-mode’,
+     which visualizes whitespace characters like spaces and tabs.  This
+     is especially useful for major modes with meaningful whitespace,
+     like e.g.  Makefiles.
+
+     This module provides the handy function that can be used in your
+     configuration to quickly and easily set up whitespace mode, either
+     globally or with mode-specific configurations:
+
+       1. Function ‘crafted-writing-configure-whitespace‘
+
+            1. Signature
+
+                    (defun crafted-writing-configure-whitespace
+                      (use-tabs &optional use-globally &rest enabled-modes)
+
+            2. Parameters
+
+               ‘use-tabs‘ (Type: Boolean)
+                    Specifies whether to use tabs for indentation.  If
+                    true, tabs are used; if false, spaces are used.
+               ‘use-globally‘ (Type: Boolean, Optional)
+                    Determines whether the whitespace configuration
+                    should be applied globally or not.  If true, the
+                    configuration is applied globally; if false, the
+                    configuration is applied only to the current buffer.
+                    Defaults to false if not specified.
+               ‘enabled-modes‘ (Type: List, Optional)
+                    List of modes to enable the configuration for.  The
+                    configuration gets applied to all modes in the list.
+                    If not specified, the configuration applies to all
+                    modes.
+
+            3. Examples
+
+               To globally enable whitespace-mode, using spaces instead
+               of tabs:
+                    (crafted-writing-configure-whitespace nil t nil)
+
+               Or to enable whitespace-mode only for Makefiles, using
+               tabs:
+                    (crafted-writing-configure-whitespace t nil 'makefile-mode)
+
+               *Please Note:* These two uses of the functions overwrite
+               each other.  So if you want to have ‘whitespace-mode’
+               active globally with spaces, except for Makefiles, where
+               you want to use tabs, use this configuration instead:
+
+                    ;; turns on global-whitespace-mode to use spaces instead of tabs
+                    (crafted-writing-configure-whitespace nil t)
+
+                    ;; for Makefiles, turn on the buffer-local mode for using tabs instead of
+                    ;; spaces.
+                    (add-hook 'makefile-mode-hook #'indent-tabs-mode)
+
+               For more information on ‘indent-tabs-mode’, See the info
+               node ‘(emacs)Just Spaces’
+
+  2. Optional Package: PDF-Tools
+
+     Another useful package is PDF-Tools
+     (https://github.com/vedang/pdf-tools), which provides a better
+     experience than just docview for rendering PDF files.  It is not
+     installed by default, however, because it involves a two-part
+     installation process that varies depending on your OS.
+
+       1. Part 1: Installing the Emacs package ‘pdf-tools’
+
+          Installing the front end in Emacs is simple, just use your
+          package manager to install the package ‘pdf-tools’, e.g.  by
+          putting this in the packages phase of your ‘init.el’ and
+          running ‘package-install-selected-packages’ afterwards:
+
+               (add-to-list 'package-selected-packages 'pdf-tools)
+
+       2. Part 2: Installing the ‘epdfinfo-server’
+
+          PDF-Tools needs a backend to be run against, the
+          epdfinfo-server.
+
+          The only OS officially supported by PDF-Tools is GNU/Linux.
+          The Emacs package provides an install script that can be run
+          from inside emacs:
+
+          Run M-x ‘pdf-tools-install’.
+
+          That will compile the backend for your system.  For many
+          GNU/Linux distributions, the script also takes care of
+          installing the necessary prerequisites to build it.
+
+          For other OSes and further info, see Installing the epdfinfo
+          server
+          (https://github.com/vedang/pdf-tools#installing-the-epdfinfo-server).
+
+       3. Configuration
+
+          If this module finds ‘pdf-tools’ installed in your Emacs
+          setup, it will add a hook to automatically load it when you
+          view PDF documents.  It will also adjust the view to fit the
+          width of the document.
+
+          For further options, read the documentation of the package, or
+          have a look at the Github repo
+          (https://github.com/vedang/pdf-tools) or the PDF-Tools Wiki
+          (https://pdftools.wiki/).
+
+
 File: crafted-emacs.info,  Node: Troubleshooting,  Next: MIT License,  Prev: Modules,  Up: Top
 
 8 Troubleshooting
@@ -1280,53 +1439,65 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals3828
-Node: Principles4878
-Node: Minimal modular configuration5209
-Node: Prioritize built-in Emacs functionality5845
-Node: Can be integrated with a Guix configuration6639
-Node: Helps you learn Emacs Lisp7196
-Node: Reversible7731
-Node: Why use it?8002
-Node: Getting Started8679
-Node: Initial setup9243
-Node: Cleaning out your configuration directories9473
-Node: Cloning the repository10739
-Node: Bootstrapping Crafted Emacs11385
-Node: Early Emacs Initialization11754
-Node: Emacs Initialization15635
-Node: Crafted Emacs Modules17678
-Node: Installing packages18053
-Node: Using Crafted Emacs Modules19891
-Ref: Package definitions crafted-*-packages20369
-Ref: Configuration crafted-*-config21330
-Node: Example Configuration22504
-Node: Where to go from here23748
-Node: Customization24429
-Node: Using alternate package managers24661
-Node: The customel file27148
-Node: Simplified overview of how Emacs Customization works27541
-Node: Loading the customel file29259
-Ref: customel30432
-Node: Contributing31094
-Node: Modules31722
-Node: Crafted Emacs Lisp Module32716
-Node: Installation32969
-Node: Description33468
-Ref: Common Lisp34054
-Ref: Clojure34920
-Ref: Scheme and Racket35556
-Node: Additional packages geiser-*36152
-Node: Crafted Emacs Screencast Module37202
-Node: Installation (1)37500
-Node: Description (1)38037
-Node: Crafted Emacs Org Module38720
-Node: Installation (2)39003
-Node: Description (2)39505
-Node: Alternative package org-roam41522
-Node: Troubleshooting43326
-Node: A package (suddenly?) fails to work43562
-Node: MIT License47350
+Node: Goals3958
+Node: Principles5008
+Node: Minimal modular configuration5339
+Node: Prioritize built-in Emacs functionality5975
+Node: Can be integrated with a Guix configuration6769
+Node: Helps you learn Emacs Lisp7326
+Node: Reversible7861
+Node: Why use it?8132
+Node: Getting Started8809
+Node: Initial setup9373
+Node: Cleaning out your configuration directories9603
+Node: Cloning the repository10869
+Node: Bootstrapping Crafted Emacs11515
+Node: Early Emacs Initialization11884
+Node: Emacs Initialization15765
+Node: Crafted Emacs Modules17808
+Node: Installing packages18183
+Node: Using Crafted Emacs Modules20021
+Ref: Package definitions crafted-*-packages20499
+Ref: Configuration crafted-*-config21460
+Node: Example Configuration22634
+Node: Where to go from here23878
+Node: Customization24559
+Node: Using alternate package managers24791
+Node: The customel file27278
+Node: Simplified overview of how Emacs Customization works27671
+Node: Loading the customel file29389
+Ref: customel30562
+Node: Contributing31224
+Node: Modules31852
+Node: Crafted Emacs Lisp Module32879
+Node: Installation33132
+Node: Description33631
+Ref: Common Lisp34217
+Ref: Clojure35083
+Ref: Scheme and Racket35719
+Node: Additional packages geiser-*36315
+Node: Crafted Emacs Screencast Module37365
+Node: Installation (1)37663
+Node: Description (1)38200
+Node: Crafted Emacs Org Module38883
+Node: Installation (2)39203
+Node: Description (2)39705
+Node: Alternative package org-roam41722
+Node: Crafted Emacs Writing Module43526
+Node: Installation (3)43781
+Node: Description (3)44303
+Ref: Whitespace Mode44826
+Ref: Function `crafted-writing-configure-whitespace`45292
+Ref: Signature45360
+Ref: Parameters45527
+Ref: Examples46436
+Ref: Optional Package PDF-Tools47545
+Ref: Part 1 Installing the Emacs package pdf-tools47891
+Ref: Part 2 Installing the epdfinfo-server48309
+Ref: Configuration49031
+Node: Troubleshooting49513
+Node: A package (suddenly?) fails to work49749
+Node: MIT License53537
 
 End Tag Table
 
