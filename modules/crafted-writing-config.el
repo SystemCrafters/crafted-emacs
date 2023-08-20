@@ -10,7 +10,7 @@
 ;; Configuration for editing text or writing documents of different
 ;; kinds. Markdown and LaTeX documents are supported, general text
 ;; editing is also supported.  Not configured here are second brain /
-;; zettlekasten systems, those are found in the `crafted-org-config'
+;; Zettelkasten systems, those are found in the `crafted-org-config'
 ;; module.
 
 ;;; Code:
@@ -33,16 +33,16 @@ think.  For example, if you wanted to use spaces instead of tabs
 globally except for in Makefiles, doing the following won't work:
 
 ;; turns on global-whitespace-mode to use spaces instead of tabs
-(crafted-editing-configure-whitespace nil t)
+(crafted-writing-configure-whitespace nil t)
 
 ;; overwrites the above to turn to use tabs instead of spaces,
 ;; does not turn off global-whitespace-mode, adds a hook to
 ;; makefile-mode-hook
-(crafted-editing-configure-whitespace t nil 'makefile-mode)
+(crafted-writing-configure-whitespace t nil 'makefile-mode)
 
 Instead, use a configuration like this:
 ;; turns on global-whitespace-mode to use spaces instead of tabs
-(crafted-editing-configure-whitespace nil t)
+(crafted-writing-configure-whitespace nil t)
 
 ;; turn on the buffer-local mode for using tabs instead of spaces.
 (add-hook 'makefile-mode-hook #'indent-tabs-mode)
@@ -52,18 +52,18 @@ node `(emacs)Just Spaces'
 
 Example usage:
 
-;; Configure whitespace mode, does not turn on whitespace mode
+;; Configuring whitespace mode does not turn on whitespace mode
 ;; since we don't know which modes to turn it on for.
 ;; You will need to do that in your configuration by adding
 ;; whitespace mode to the appropriate mode hooks.
-(crafted-editing-configure-whitespace nil)
+(crafted-writing-configure-whitespace nil)
 
 ;; Configure whitespace mode, but turn it on globally.
-(crafted-editing-configure-whitespace nil t)
+(crafted-writing-configure-whitespace nil t)
 
 ;; Configure whitespace mode and turn it on only for prog-mode
 ;; and derived modes.
-(crafted-editing-configure-whitespace nil nil 'prog-mode)"
+(crafted-writing-configure-whitespace nil nil 'prog-mode)"
   (if use-tabs
       (customize-set-variable 'whitespace-style
                               '(face empty trailing indentation::tab
@@ -131,9 +131,7 @@ Example usage:
   "Use PDF Tools instead of docview, requires a build environment
 to compile PDF Tools.
 
-Depends on having `pdf-tools' installed.  See
-`crafted-pdf-reader-packages.el' and
-`crafted-pdf-reader-config.el'"
+Depends on having `pdf-tools'."
 
   (with-eval-after-load 'latex
     (customize-set-variable 'TeX-view-program-selection '((output-pdf "PDF Tools")))
@@ -181,14 +179,15 @@ Depends on having `pdf-tools' installed.  See
 
 
 ;;; PDF Support when using pdf-tools
-(when (require 'pdf-tools nil :noerror)
+(when (locate-library "pdf-tools")
+  ;; load pdf-tools when going into doc-view-mode 
   (defun crafted-writing/load-pdf-tools ()
     "Attempts to require pdf-tools, but for attaching to hooks."
     (require 'pdf-tools nil :noerror))
   (add-hook 'doc-view-mode-hook #'crafted-writing/load-pdf-tools)
 
+  ;; when pdf-tools is loaded, apply settings.
   (with-eval-after-load 'pdf-tools
-    (pdf-tools-install)
     (setq-default pdf-view-display-size 'fit-width)))
 
 (provide 'crafted-writing-config)

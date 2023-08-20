@@ -1,0 +1,130 @@
+* Crafted Emacs Writing Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; add crafted-writing package definitions to selected packages list
+(require 'crafted-writing-packages)
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-writing configuration
+(require 'crafted-writing-config)
+#+end_src
+
+** Description
+The =crafted-writing= module configures various settings related to text
+production with markup languages like Markdown or LaTeX.
+
+It installs and sets up following packages:
+- =markdown-mode=
+- =pandoc-mode=
+- =auctex= (if LaTeX is installed on your system)
+- =auctex-latexmk= (if =latexmk= is installed on your system)
+
+*** Whitespace Mode
+
+This module also provides a configuration for =whitespace-mode=, which
+visualizes whitespace characters like spaces and tabs. This is especially
+useful for major modes with meaningful whitespace, like e.g. Makefiles.
+
+This module provides the handy function that can be used in your configuration
+to quickly and easily set up whitespace mode, either globally or with
+mode-specific configurations:
+
+**** Function `crafted-writing-configure-whitespace`
+
+***** Signature
+
+#+begin_src emacs-lisp 
+  (defun crafted-writing-configure-whitespace 
+    (use-tabs &optional use-globally &rest enabled-modes)
+#+end_src
+
+***** Parameters
+
+- `use-tabs` (Type: Boolean) :: Specifies whether to use tabs for indentation.
+  If true, tabs are used; if false, spaces are used.
+- `use-globally` (Type: Boolean, Optional) :: Determines whether the whitespace
+  configuration should be applied globally or not. If true, the configuration
+  is applied globally; if false, the configuration is applied only to the
+  current buffer. Defaults to false if not specified.
+- `enabled-modes` (Type: List, Optional) ::  List of modes to enable the
+  configuration for. The configuration gets applied to all modes in the list.
+  If not specified, the configuration applies to all modes.
+
+***** Examples
+
+To globally enable whitespace-mode, using spaces instead of tabs:
+#+begin_src emacs-lisp
+  (crafted-writing-configure-whitespace nil t nil)
+#+end_src
+
+Or to enable whitespace-mode only for Makefiles, using tabs:
+#+begin_src emacs-lisp
+  (crafted-writing-configure-whitespace t nil 'makefile-mode)
+#+end_src
+
+*Please Note:* These two uses of the functions overwrite each other.
+So if you want to have =whitespace-mode= active globally with spaces,
+except for Makefiles, where you want to use tabs, use this
+configuration instead:
+
+#+begin_src emacs-lisp 
+  ;; turns on global-whitespace-mode to use spaces instead of tabs
+  (crafted-writing-configure-whitespace nil t)
+
+  ;; for Makefiles, turn on the buffer-local mode for using tabs instead of
+  ;; spaces.
+  (add-hook 'makefile-mode-hook #'indent-tabs-mode)
+#+end_src
+
+For more information on `indent-tabs-mode', See the info
+node `(emacs)Just Spaces'
+
+*** Optional Package: PDF-Tools
+
+Another useful package is [[https://github.com/vedang/pdf-tools][PDF-Tools]], which provides a better experience than
+just docview for rendering PDF files. It is not installed by default,
+however, because it involves a two-part installation process that
+varies depending on your OS.
+
+**** Part 1: Installing the Emacs package =pdf-tools=
+
+Installing the front end in Emacs is simple, just use your package manager
+to install the package =pdf-tools=, e.g. by putting this in the packages
+phase of your =init.el= and running ~package-install-selected-packages~
+afterwards:
+
+#+begin_src emacs-lisp 
+  (add-to-list 'package-selected-packages 'pdf-tools)
+#+end_src
+
+**** Part 2: Installing the =epdfinfo-server=
+
+PDF-Tools needs a backend to be run against, the epdfinfo-server.
+
+The only OS officially supported by PDF-Tools is GNU/Linux. The
+Emacs package provides an install script that can be run from inside
+emacs:
+
+Run M-x ~pdf-tools-install~.
+
+That will compile the backend for your system. For many GNU/Linux
+distributions, the script also takes care of installing the necessary
+prerequisites to build it.
+
+For other OSes and further info, see [[https://github.com/vedang/pdf-tools#installing-the-epdfinfo-server][Installing the epdfinfo server]].
+
+**** Configuration
+
+If this module finds =pdf-tools= installed in your Emacs setup, it will
+add a hook to automatically load it when you view PDF documents. It will
+also adjust the view to fit the width of the document.
+
+For further options, read the documentation of the package, or have a
+look at the [[https://github.com/vedang/pdf-tools][Github repo]] or the [[https://pdftools.wiki/][PDF-Tools Wiki]].
