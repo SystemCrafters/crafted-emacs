@@ -18,6 +18,27 @@
 ;; including the template below used for writing Crafted Emacs
 ;; modules.
 
+(defgroup crafted-init '()
+  "Initialization configuration for Crafted Emacs"
+  :tag "Crafted Init"
+  :group 'crafted)
+
+;; By default, crafted emacs calls `customize-save-variable' in the
+;; `after-init-hook'. The user can opt out of this by setting
+;; `crafted-init-auto-save-customized' to nil.
+(defcustom crafted-init-auto-save-customized t
+  "Save customized variables automatically every session."
+  :type 'boolean
+  :group 'crafted-init)
+
+;; By default, crafted emacs calls `package--save-selected-packages' in the
+;; `after-init-hook'. The user can opt out of this by setting
+;; `crafted-init-auto-save-selected-packages' to nil.
+(defcustom crafted-init-auto-save-selected-packages t
+  "Save the list of selected packages automatically every session."
+  :type 'boolean
+  :group 'crafted-init)
+
 (when (version< emacs-version "29")
   ;; Get some Emacs 29 compatibility functions. Notably missing is
   ;; `setopt' which the `compat' library deliberately does not
@@ -119,9 +140,11 @@ startup."
     (info-initialize)
     (push (file-name-directory crafted-info-dir) Info-directory-list)))
 
-;; Save all customizations to `custom-file'
-(add-hook 'after-init-hook #'customize-save-customized)
-(add-hook 'after-init-hook #'package--save-selected-packages)
+;; Save all customizations to `custom-file', unless the user opted out.
+(when crafted-init-auto-save-customized
+  (add-hook 'after-init-hook #'customize-save-customized))
+(when crafted-init-auto-save-selected-packages
+  (add-hook 'after-init-hook #'package--save-selected-packages))
 
 (provide 'crafted-init-config)
 ;;; crafted-init-config.el ends here
