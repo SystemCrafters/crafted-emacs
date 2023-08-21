@@ -1,6 +1,6 @@
 ;;; crafted-startup-config.el --- Crafted Emacs splash screen on startup  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -11,7 +11,6 @@
 ;; screen or the Emacs about page.
 
 ;;; Code:
-(require 'crafted-updates-config)
 
 (defgroup crafted-startup '()
   "Startup configuration for Crafted Emacs"
@@ -151,24 +150,27 @@ starts.  See the variable documenation for
         (dolist (text crafted-startup-text)
           (apply #'fancy-splash-insert text)
           (insert "\n"))
-        (crafted-updates-check-for-latest)
-        (if (> (condition-case nil
-                   (crafted-updates--get-new-commit-count)
-                 (error 0)) 0)
+        (with-eval-after-load 'crafted-updates-config
+          ;; If the user loads the respective module, check for updates
+          ;; and display the information on the start screen.
+          (crafted-updates-check-for-latest)
+          (if (> (condition-case nil
+                     (crafted-updates--get-new-commit-count)
+                   (error 0)) 0)
+              (fancy-splash-insert
+               :face '(variable-pitch font-lock-keyword-face bold)
+               (format "%s : " (crafted-updates-status-message))
+               :face '(variable-pitch font-lock-keyword-face)
+               :link `(" Show Updates " ,(lambda (_button) (crafted-updates-show-latest)))
+               :face '(variable-pitch font-lock-keyword-face)
+               :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest t)))
+               "\n")
             (fancy-splash-insert
              :face '(variable-pitch font-lock-keyword-face bold)
-             (format "%s : " (crafted-updates-status-message))
-             :face '(variable-pitch font-lock-keyword-face)
-             :link `(" Show Updates " ,(lambda (_button) (crafted-updates-show-latest)))
-             :face '(variable-pitch font-lock-keyword-face)
-             :link `(" Get Updates " ,(lambda (_button) (crafted-updates-pull-latest t)))
-             "\n")
-          (fancy-splash-insert
-           :face '(variable-pitch font-lock-keyword-face bold)
-           (format "%s\n" (condition-case nil
-                              (crafted-updates-status-message)
-                            (error "Crafted Emacs status could not be determined.")))))
-        (insert "\n\n")
+             (format "%s\n" (condition-case nil
+                                (crafted-updates-status-message)
+                              (error "Crafted Emacs status could not be determined.")))))
+          (insert "\n\n"))
         (crafted-startup-recentf)
         (skip-chars-backward "\n")
         (delete-region (point) (point-max))
