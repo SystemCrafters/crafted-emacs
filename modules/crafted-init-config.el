@@ -109,7 +109,7 @@ startup."
       (apply orig-auto-insert args)))
   (advice-add 'auto-insert :around #'ignore-auto-insert-for-custom)
   (define-auto-insert
-    (cons (concat (expand-file-name crafted-emacs-home) "modules/crafted-.*\\.el")
+    (cons (expand-file-name "modules/crafted-.*\\.el" crafted-emacs-home)
           "Crafted Emacs Lisp Skeleton")
     '("Crafted Emacs Module Description: "
       ";;;; " (file-name-nondirectory (buffer-file-name)) " --- " str
