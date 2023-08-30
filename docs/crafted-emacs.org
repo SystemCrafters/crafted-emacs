@@ -279,6 +279,7 @@ for the code examples.
   #+include: crafted-org.org
   #+include: crafted-screencast.org
   #+include: crafted-ui.org
+  #+include: crafted-workspaces.org
   #+include: crafted-writing.org
 
 * Troubleshooting
