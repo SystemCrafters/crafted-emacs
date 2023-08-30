@@ -1,0 +1,59 @@
+* Crafted Emacs IDE Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; add crafted-ide package definitions to selected packages list
+(require 'crafted-ide-packages)
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-ide configuration
+(require 'crafted-ide-config)
+#+end_src
+
+** Description
+
+The =crafted-ide= module sets up (and installs if necessary) functionality
+that makes Emacs act like a integrated development environment (IDE).
+
+It sets up project based buffer management ([[https://github.com/muffinmad/emacs-ibuffer-project][ibuffer-project]]) and a
+semi-automatic indentation ([[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent]]) for many programming and
+markup languages.
+
+If you use [[https://editorconfig.org][EditorConfig]], this module provides support for that, too (see
+[[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]] for details).
+
+Furthermore, it sets up Eglot (a LSP-client) and Tree-Sitter (a next
+generation syntax parser).
+
+*** Eglot
+
+[[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP) built into
+Emacs (>=29). For it to work, you have to have a LSP-Server installed for
+the language of your choice. Usually, these have to be installed through
+your operating system. See [[https://github.com/joaotavora/eglot#connecting-to-a-server][this list]] of servers that work with Eglot out
+of the box.
+
+*** Tree-Sitter
+
+Tree-Sitter support (built-in since Emacs 29) enables Emacs to better
+understand the syntax of your code, thus improving syntax highlighting
+and similar functions.
+
+**** Combobulate
+
+Another use is the package Combobulate, which uses Tree-Sitter to provide
+a structured movement within your code. Combobulate is not installed
+by this module (it is not yet available on (M)ELPA etc.). But if you have
+installed it manually, it is automatically loaded for programming modes. 
+ 
+See [[https://github.com/mickeynp/combobulate][Combobulate]] for details.
+
+If you're interested in a more in-depth look at both Tree-Stitter and
+Combobulate, the author of the package has written an extensive blog post
+about it: [[https://www.masteringemacs.org/article/combobulate-structured-movement-editing-treesitter][Combobulate: Structured Movement and Editing with Tree-Sitter]].
