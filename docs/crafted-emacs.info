@@ -106,6 +106,7 @@ The ‘custom.el’ file
 Modules
 
 * Crafted Emacs Completion Module::
+* Crafted Emacs IDE Module::
 * Crafted Emacs Lisp Module::
 * Crafted Emacs Org Module::
 * Crafted Emacs Screencast Module::
@@ -118,37 +119,42 @@ Crafted Emacs Completion Module
 * Installation::
 * Description::
 
-Crafted Emacs Lisp Module
+Crafted Emacs IDE Module
 
 * Installation: Installation (1).
 * Description: Description (1).
+
+Crafted Emacs Lisp Module
+
+* Installation: Installation (2).
+* Description: Description (2).
 * Additional packages geiser-*::
 
 Crafted Emacs Org Module
 
-* Installation: Installation (2).
-* Description: Description (2).
+* Installation: Installation (3).
+* Description: Description (3).
 * Alternative package org-roam::
 
 Crafted Emacs Screencast Module
 
-* Installation: Installation (3).
-* Description: Description (3).
-
-Crafted Emacs UI Module
-
 * Installation: Installation (4).
 * Description: Description (4).
 
-Crafted Emacs Workspaces Module
+Crafted Emacs UI Module
 
 * Installation: Installation (5).
 * Description: Description (5).
 
-Crafted Emacs Writing Module
+Crafted Emacs Workspaces Module
 
 * Installation: Installation (6).
 * Description: Description (6).
+
+Crafted Emacs Writing Module
+
+* Installation: Installation (7).
+* Description: Description (7).
 
 Troubleshooting
 
@@ -867,6 +873,7 @@ while using the same package installation methods as Crafted Emacs.
 * Menu:
 
 * Crafted Emacs Completion Module::
+* Crafted Emacs IDE Module::
 * Crafted Emacs Lisp Module::
 * Crafted Emacs Org Module::
 * Crafted Emacs Screencast Module::
@@ -875,7 +882,7 @@ while using the same package installation methods as Crafted Emacs.
 * Crafted Emacs Writing Module::
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Completion Module,  Next: Crafted Emacs Lisp Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs Completion Module,  Next: Crafted Emacs IDE Module,  Up: Modules
 
 7.1 Crafted Emacs Completion Module
 ===================================
@@ -1138,21 +1145,106 @@ the packages of these module come in.
 
 
 
-File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Org Module,  Prev: Crafted Emacs Completion Module,  Up: Modules
+File: crafted-emacs.info,  Node: Crafted Emacs IDE Module,  Next: Crafted Emacs Lisp Module,  Prev: Crafted Emacs Completion Module,  Up: Modules
 
-7.2 Crafted Emacs Lisp Module
-=============================
+7.2 Crafted Emacs IDE Module
+============================
 
 * Menu:
 
 * Installation: Installation (1).
 * Description: Description (1).
+
+
+File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs IDE Module
+
+7.2.1 Installation
+------------------
+
+To use this module, simply require them in your ‘init.el’ at the
+appropriate points.
+
+     ;; add crafted-ide package definitions to selected packages list
+     (require 'crafted-ide-packages)
+
+     ;; install the packages
+     (package-install-selected-packages :noconfirm)
+
+     ;; Load crafted-ide configuration
+     (require 'crafted-ide-config)
+
+
+File: crafted-emacs.info,  Node: Description (1),  Prev: Installation (1),  Up: Crafted Emacs IDE Module
+
+7.2.2 Description
+-----------------
+
+The ‘crafted-ide’ module sets up (and installs if necessary)
+functionality that makes Emacs act like a integrated development
+environment (IDE).
+
+   It sets up project based buffer management (ibuffer-project
+(https://github.com/muffinmad/emacs-ibuffer-project)) and a
+semi-automatic indentation (aggressive-indent
+(https://github.com/Malabarba/aggressive-indent-mode)) for many
+programming and markup languages.
+
+   If you use EditorConfig (https://editorconfig.org), this module
+provides support for that, too (see editorconfig-emacs
+(https://github.com/editorconfig/editorconfig-emacs) for details).
+
+   Furthermore, it sets up Eglot (a LSP-client) and Tree-Sitter (a next
+generation syntax parser).
+
+  1. Eglot
+
+     Eglot (https://github.com/joaotavora/eglot) is a client for the
+     Language Server Protocol (LSP) built into Emacs (>=29).  For it to
+     work, you have to have a LSP-Server installed for the language of
+     your choice.  Usually, these have to be installed through your
+     operating system.  See this list
+     (https://github.com/joaotavora/eglot#connecting-to-a-server) of
+     servers that work with Eglot out of the box.
+
+  2. Tree-Sitter
+
+     Tree-Sitter support (built-in since Emacs 29) enables Emacs to
+     better understand the syntax of your code, thus improving syntax
+     highlighting and similar functions.
+
+       1. Combobulate
+
+          Another use is the package Combobulate, which uses Tree-Sitter
+          to provide a structured movement within your code.
+          Combobulate is not installed by this module (it is not yet
+          available on (M)ELPA etc.).  But if you have installed it
+          manually, it is automatically loaded for programming modes.
+
+          See Combobulate (https://github.com/mickeynp/combobulate) for
+          details.
+
+          If you’re interested in a more in-depth look at both
+          Tree-Stitter and Combobulate, the author of the package has
+          written an extensive blog post about it: Combobulate:
+          Structured Movement and Editing with Tree-Sitter
+          (https://www.masteringemacs.org/article/combobulate-structured-movement-editing-treesitter).
+
+
+File: crafted-emacs.info,  Node: Crafted Emacs Lisp Module,  Next: Crafted Emacs Org Module,  Prev: Crafted Emacs IDE Module,  Up: Modules
+
+7.3 Crafted Emacs Lisp Module
+=============================
+
+* Menu:
+
+* Installation: Installation (2).
+* Description: Description (2).
 * Additional packages geiser-*::
 
 
-File: crafted-emacs.info,  Node: Installation (1),  Next: Description (1),  Up: Crafted Emacs Lisp Module
+File: crafted-emacs.info,  Node: Installation (2),  Next: Description (2),  Up: Crafted Emacs Lisp Module
 
-7.2.1 Installation
+7.3.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -1168,9 +1260,9 @@ appropriate points.
      (require 'crafted-lisp-config)
 
 
-File: crafted-emacs.info,  Node: Description (1),  Next: Additional packages geiser-*,  Prev: Installation (1),  Up: Crafted Emacs Lisp Module
+File: crafted-emacs.info,  Node: Description (2),  Next: Additional packages geiser-*,  Prev: Installation (2),  Up: Crafted Emacs Lisp Module
 
-7.2.2 Description
+7.3.2 Description
 -----------------
 
 The ‘crafted-lisp’ module provides packages and configuration for
@@ -1245,9 +1337,9 @@ development using various Lisp and Scheme variants.
           (customize-set-variable 'scheme-program-name "guile")
 
 
-File: crafted-emacs.info,  Node: Additional packages geiser-*,  Prev: Description (1),  Up: Crafted Emacs Lisp Module
+File: crafted-emacs.info,  Node: Additional packages geiser-*,  Prev: Description (2),  Up: Crafted Emacs Lisp Module
 
-7.2.3 Additional packages: geiser-*
+7.3.3 Additional packages: geiser-*
 -----------------------------------
 
 ‘Crafted Emacs’ pre-installs the geiser interface packages for ‘guile’
@@ -1276,19 +1368,19 @@ packages:
 
 File: crafted-emacs.info,  Node: Crafted Emacs Org Module,  Next: Crafted Emacs Screencast Module,  Prev: Crafted Emacs Lisp Module,  Up: Modules
 
-7.3 Crafted Emacs Org Module
+7.4 Crafted Emacs Org Module
 ============================
 
 * Menu:
 
-* Installation: Installation (2).
-* Description: Description (2).
+* Installation: Installation (3).
+* Description: Description (3).
 * Alternative package org-roam::
 
 
-File: crafted-emacs.info,  Node: Installation (2),  Next: Description (2),  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Installation (3),  Next: Description (3),  Up: Crafted Emacs Org Module
 
-7.3.1 Installation
+7.4.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -1304,9 +1396,9 @@ appropriate points.
      (require 'crafted-org-config)
 
 
-File: crafted-emacs.info,  Node: Description (2),  Next: Alternative package org-roam,  Prev: Installation (2),  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Description (3),  Next: Alternative package org-roam,  Prev: Installation (3),  Up: Crafted Emacs Org Module
 
-7.3.2 Description
+7.4.2 Description
 -----------------
 
 The ‘crafted-org’ module configures various settings related to
@@ -1362,9 +1454,9 @@ enhance the experience.
      when visiting an org-mode buffer.
 
 
-File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description (2),  Up: Crafted Emacs Org Module
+File: crafted-emacs.info,  Node: Alternative package org-roam,  Prev: Description (3),  Up: Crafted Emacs Org Module
 
-7.3.3 Alternative package: ‘org-roam’
+7.4.3 Alternative package: ‘org-roam’
 -------------------------------------
 
 ‘org-roam’ is an alternative package option to ‘denote’.  Compared to
@@ -1407,18 +1499,18 @@ database.
 
 File: crafted-emacs.info,  Node: Crafted Emacs Screencast Module,  Next: Crafted Emacs UI Module,  Prev: Crafted Emacs Org Module,  Up: Modules
 
-7.4 Crafted Emacs Screencast Module
+7.5 Crafted Emacs Screencast Module
 ===================================
 
 * Menu:
 
-* Installation: Installation (3).
-* Description: Description (3).
+* Installation: Installation (4).
+* Description: Description (4).
 
 
-File: crafted-emacs.info,  Node: Installation (3),  Next: Description (3),  Up: Crafted Emacs Screencast Module
+File: crafted-emacs.info,  Node: Installation (4),  Next: Description (4),  Up: Crafted Emacs Screencast Module
 
-7.4.1 Installation
+7.5.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -1434,9 +1526,9 @@ appropriate points.
      (require 'crafted-screencast-config)
 
 
-File: crafted-emacs.info,  Node: Description (3),  Prev: Installation (3),  Up: Crafted Emacs Screencast Module
+File: crafted-emacs.info,  Node: Description (4),  Prev: Installation (4),  Up: Crafted Emacs Screencast Module
 
-7.4.2 Description
+7.5.2 Description
 -----------------
 
    • ‘Package: keycast’
@@ -1457,18 +1549,18 @@ File: crafted-emacs.info,  Node: Description (3),  Prev: Installation (3),  Up: 
 
 File: crafted-emacs.info,  Node: Crafted Emacs UI Module,  Next: Crafted Emacs Workspaces Module,  Prev: Crafted Emacs Screencast Module,  Up: Modules
 
-7.5 Crafted Emacs UI Module
+7.6 Crafted Emacs UI Module
 ===========================
 
 * Menu:
 
-* Installation: Installation (4).
-* Description: Description (4).
+* Installation: Installation (5).
+* Description: Description (5).
 
 
-File: crafted-emacs.info,  Node: Installation (4),  Next: Description (4),  Up: Crafted Emacs UI Module
+File: crafted-emacs.info,  Node: Installation (5),  Next: Description (5),  Up: Crafted Emacs UI Module
 
-7.5.1 Installation
+7.6.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -1484,9 +1576,9 @@ appropriate points.
      (require 'crafted-ui-config)
 
 
-File: crafted-emacs.info,  Node: Description (4),  Prev: Installation (4),  Up: Crafted Emacs UI Module
+File: crafted-emacs.info,  Node: Description (5),  Prev: Installation (5),  Up: Crafted Emacs UI Module
 
-7.5.2 Description
+7.6.2 Description
 -----------------
 
 The ‘crafted-ui’ module provides a few interface customizations.
@@ -1553,18 +1645,18 @@ while leaving them turned off for others.
 
 File: crafted-emacs.info,  Node: Crafted Emacs Workspaces Module,  Next: Crafted Emacs Writing Module,  Prev: Crafted Emacs UI Module,  Up: Modules
 
-7.6 Crafted Emacs Workspaces Module
+7.7 Crafted Emacs Workspaces Module
 ===================================
 
 * Menu:
 
-* Installation: Installation (5).
-* Description: Description (5).
+* Installation: Installation (6).
+* Description: Description (6).
 
 
-File: crafted-emacs.info,  Node: Installation (5),  Next: Description (5),  Up: Crafted Emacs Workspaces Module
+File: crafted-emacs.info,  Node: Installation (6),  Next: Description (6),  Up: Crafted Emacs Workspaces Module
 
-7.6.1 Installation
+7.7.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -1580,9 +1672,9 @@ appropriate points.
      (require 'crafted-workspaces-config)
 
 
-File: crafted-emacs.info,  Node: Description (5),  Prev: Installation (5),  Up: Crafted Emacs Workspaces Module
+File: crafted-emacs.info,  Node: Description (6),  Prev: Installation (6),  Up: Crafted Emacs Workspaces Module
 
-7.6.2 Description
+7.7.2 Description
 -----------------
 
 The ‘crafted-workspaces’ module installs and sets up the tabspaces
@@ -1621,18 +1713,18 @@ explore further options and settings.
 
 File: crafted-emacs.info,  Node: Crafted Emacs Writing Module,  Prev: Crafted Emacs Workspaces Module,  Up: Modules
 
-7.7 Crafted Emacs Writing Module
+7.8 Crafted Emacs Writing Module
 ================================
 
 * Menu:
 
-* Installation: Installation (6).
-* Description: Description (6).
+* Installation: Installation (7).
+* Description: Description (7).
 
 
-File: crafted-emacs.info,  Node: Installation (6),  Next: Description (6),  Up: Crafted Emacs Writing Module
+File: crafted-emacs.info,  Node: Installation (7),  Next: Description (7),  Up: Crafted Emacs Writing Module
 
-7.7.1 Installation
+7.8.1 Installation
 ------------------
 
 To use this module, simply require them in your ‘init.el’ at the
@@ -1648,9 +1740,9 @@ appropriate points.
      (require 'crafted-writing-config)
 
 
-File: crafted-emacs.info,  Node: Description (6),  Prev: Installation (6),  Up: Crafted Emacs Writing Module
+File: crafted-emacs.info,  Node: Description (7),  Prev: Installation (7),  Up: Crafted Emacs Writing Module
 
-7.7.2 Description
+7.8.2 Description
 -----------------
 
 The ‘crafted-writing’ module configures various settings related to text
@@ -1887,83 +1979,89 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals4350
-Node: Principles5400
-Node: Minimal modular configuration5731
-Node: Prioritize built-in Emacs functionality6367
-Node: Can be integrated with a Guix configuration7161
-Node: Helps you learn Emacs Lisp7718
-Node: Reversible8253
-Node: Why use it?8524
-Node: Getting Started9201
-Node: Initial setup9765
-Node: Cleaning out your configuration directories9995
-Node: Cloning the repository11261
-Node: Bootstrapping Crafted Emacs11907
-Node: Early Emacs Initialization12276
-Node: Emacs Initialization16157
-Node: Crafted Emacs Modules18200
-Node: Installing packages18575
-Node: Using Crafted Emacs Modules20413
-Ref: Package definitions crafted-*-packages20891
-Ref: Configuration crafted-*-config21852
-Node: Example Configuration23026
-Node: Where to go from here24270
-Node: Customization24951
-Node: Using alternate package managers25183
-Node: The customel file27670
-Node: Simplified overview of how Emacs Customization works28063
-Node: Loading the customel file29781
-Ref: customel30954
-Node: Contributing31616
-Node: Modules32244
-Node: Crafted Emacs Completion Module33371
-Node: Installation33603
-Node: Description34132
-Ref: Vertico36516
-Ref: Orderless37226
-Ref: Marginalia37951
-Ref: Consult38316
-Ref: Embark40833
-Ref: Corfu42634
-Ref: Cape43417
-Node: Crafted Emacs Lisp Module44592
-Node: Installation (1)44911
-Node: Description (1)45418
-Ref: Common Lisp46012
-Ref: Clojure46878
-Ref: Scheme and Racket47514
-Node: Additional packages geiser-*48110
-Node: Crafted Emacs Org Module49164
-Node: Installation (2)49481
-Node: Description (2)49983
-Node: Alternative package org-roam52000
-Node: Crafted Emacs Screencast Module53804
-Node: Installation (3)54100
-Node: Description (3)54637
-Node: Crafted Emacs UI Module55320
-Node: Installation (4)55607
-Node: Description (4)56104
-Ref: Icons with all-the-icons56771
-Ref: Line numbers57286
-Node: Crafted Emacs Workspaces Module58577
-Node: Installation (5)58877
-Node: Description (5)59414
-Node: Crafted Emacs Writing Module60963
-Node: Installation (6)61225
-Node: Description (6)61747
-Ref: Whitespace Mode62270
-Ref: Function `crafted-writing-configure-whitespace`62736
-Ref: Signature62804
-Ref: Parameters62971
-Ref: Examples63880
-Ref: Optional Package PDF-Tools64989
-Ref: Part 1 Installing the Emacs package pdf-tools65335
-Ref: Part 2 Installing the epdfinfo-server65753
-Ref: Configuration66475
-Node: Troubleshooting66957
-Node: A package (suddenly?) fails to work67193
-Node: MIT License70981
+Node: Goals4472
+Node: Principles5522
+Node: Minimal modular configuration5853
+Node: Prioritize built-in Emacs functionality6489
+Node: Can be integrated with a Guix configuration7283
+Node: Helps you learn Emacs Lisp7840
+Node: Reversible8375
+Node: Why use it?8646
+Node: Getting Started9323
+Node: Initial setup9887
+Node: Cleaning out your configuration directories10117
+Node: Cloning the repository11383
+Node: Bootstrapping Crafted Emacs12029
+Node: Early Emacs Initialization12398
+Node: Emacs Initialization16279
+Node: Crafted Emacs Modules18322
+Node: Installing packages18697
+Node: Using Crafted Emacs Modules20535
+Ref: Package definitions crafted-*-packages21013
+Ref: Configuration crafted-*-config21974
+Node: Example Configuration23148
+Node: Where to go from here24392
+Node: Customization25073
+Node: Using alternate package managers25305
+Node: The customel file27792
+Node: Simplified overview of how Emacs Customization works28185
+Node: Loading the customel file29903
+Ref: customel31076
+Node: Contributing31738
+Node: Modules32366
+Node: Crafted Emacs Completion Module33522
+Node: Installation33753
+Node: Description34282
+Ref: Vertico36666
+Ref: Orderless37376
+Ref: Marginalia38101
+Ref: Consult38466
+Ref: Embark40983
+Ref: Corfu42784
+Ref: Cape43567
+Node: Crafted Emacs IDE Module44742
+Node: Installation (1)45026
+Node: Description (1)45528
+Ref: Eglot46386
+Ref: Tree-Sitter46836
+Ref: Combobulate47039
+Node: Crafted Emacs Lisp Module47848
+Node: Installation (2)48160
+Node: Description (2)48667
+Ref: Common Lisp49261
+Ref: Clojure50127
+Ref: Scheme and Racket50763
+Node: Additional packages geiser-*51359
+Node: Crafted Emacs Org Module52413
+Node: Installation (3)52730
+Node: Description (3)53232
+Node: Alternative package org-roam55249
+Node: Crafted Emacs Screencast Module57053
+Node: Installation (4)57349
+Node: Description (4)57886
+Node: Crafted Emacs UI Module58569
+Node: Installation (5)58856
+Node: Description (5)59353
+Ref: Icons with all-the-icons60020
+Ref: Line numbers60535
+Node: Crafted Emacs Workspaces Module61826
+Node: Installation (6)62126
+Node: Description (6)62663
+Node: Crafted Emacs Writing Module64212
+Node: Installation (7)64474
+Node: Description (7)64996
+Ref: Whitespace Mode65519
+Ref: Function `crafted-writing-configure-whitespace`65985
+Ref: Signature66053
+Ref: Parameters66220
+Ref: Examples67129
+Ref: Optional Package PDF-Tools68238
+Ref: Part 1 Installing the Emacs package pdf-tools68584
+Ref: Part 2 Installing the epdfinfo-server69002
+Ref: Configuration69724
+Node: Troubleshooting70206
+Node: A package (suddenly?) fails to work70442
+Node: MIT License74230
 
 End Tag Table
 
