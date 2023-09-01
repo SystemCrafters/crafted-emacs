@@ -1,0 +1,93 @@
+* Crafted Emacs Updates Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; No additional packages are installed by this module.
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-updates configuration
+(require 'crafted-updates-config)
+#+end_src
+
+** Description
+
+The =crafted-updates= module provides functionality to check for updates of
+Crafted Emacs. To do so, it relies on [[https://git-scm.com/][git]]. It will only work if you cloned the
+Crafted Emacs [[https://github.com/SystemCrafters/crafted-emacs][github repository]] to your machine.
+
+If you installed Crafted Emacs by other means, it's probably a good idea not to
+load this module, but take care of updates manually.
+
+*** Usage and Customization
+
+You can use the functionality provided by this module in three ways:
+
+1. On startup
+2. Regularly
+3. Manually
+
+**** On Startup
+
+This is probably the easiest way. Just load the module =crafted-startup-config=
+alongside this module in your init.el. The update check will be run during
+every startup. If you also use the startup screen, a notification about updates
+will be shown there.
+
+#+begin_src emacs-lisp
+  (require 'crafted-updates-config)
+  (require 'crafted-startup-config)
+#+end_src
+
+If you don't want to use the startup module, you can also run
+=crafted-updates-check-for-latest= in your init.el. It will show a notification
+in the mini-buffer (and in =*Messages*=).
+
+#+begin_src emacs-lisp
+  (crafted-updates-check-for-latest)
+#+end_src
+
+**** Regularly
+
+This module provides a minor mode =crafted-updates-mode=. When active, it will
+check for updates regularly.
+
+Activate it in your config, e.g. in init.el:
+#+begin_src emacs-lisp
+  (crafted-updates-mode 1)
+#+end_src
+
+By default, it checks for updates every 24 hours. You can customize this by
+modifying the variable =crafted-updates-fetch-interval=.
+
+For example, if you want to check every 10 hours:
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-updates-fetch-interval "10 hours")
+#+end_src
+
+You can also specify a specific time:
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-updates-fetch-interval "01:23pm")
+#+end_src
+
+In fact that variable accepts a variety of strings describing intervals or
+points at time. See the documentation for the function =run-at-time= (e.g. by
+using C-h f) for more examples.
+
+**** Manually
+
+If you want to manually check for Crafted Emacs updates, run
+M-x =crafted-updates-check-for-latest=.
+
+If /no/ updates are available, you'll see the message "Crafted Emacs is up to
+date!" in the mini-buffer.
+
+If updates are available, you'll see "Crafted Emacs updates are available!".
+Then you can run M-x =crafted-updates-pull-latest= to update your
+installation. If you want to have a look at the changes first, run
+M-x =crafted-updates-show-latest= before pulling the changes in. 
