@@ -1,6 +1,6 @@
 ;;;; crafted-updates-config.el --- Provides automatic update behavior for the configuration.  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -10,16 +10,9 @@
 ;; Checks for updates to the Crafted Emacs project.  Provides a
 ;; function to show the updates before pulling changes.
 
-;; FIXME: [2023-01-31 Tue] This no longer works.  The problem is we
-;; don't know where the project was cloned to.  Formerly it was
-;; `user-emacs-directory', however, now we allow the user to clone
-;; this project wherever, add it (ostensibly the modules folder) to
-;; the `load-path' and then build their configuration however they see
-;; fit.  Unless we set a variable like `crafted-emacs-home' there is
-;; no good way to know where this project is cloned.
-
-;; UPDATE: [2023-02-09 Thu] `crafted-emacs-home' is now set on load,
-;; this can be updated to use that value for checking on updates from
+;; This uses `crafted-emacs-home', which is set on load by if it hasn't been
+;; set by the user or by `crafted-init-config'. It expects that directory
+;; to be a git directory that can be used to checking on updates from
 ;; upstream.  Defensively would still need to check if that location
 ;; is `bound-and-true-p' before doing anything.
 
