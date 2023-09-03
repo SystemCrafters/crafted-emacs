@@ -26,11 +26,8 @@ load this module, but take care of updates manually.
 
 *** Usage and Customization
 
-You can use the functionality provided by this module in three ways:
-
-1. On startup
-2. Regularly
-3. Manually
+You can use the functionality provided by this module in three ways: on startup,
+regularly and manually.
 
 **** On Startup
 
