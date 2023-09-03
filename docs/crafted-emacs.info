@@ -1694,11 +1694,7 @@ idea not to load this module, but take care of updates manually.
   1. Usage and Customization
 
      You can use the functionality provided by this module in three
-     ways:
-
-       1. On startup
-       2. Regularly
-       3. Manually
+     ways: on startup, regularly and manually.
 
        1. On Startup
 
@@ -2160,27 +2156,27 @@ Node: Crafted Emacs Updates Module61986
 Node: Installation (6)62280
 Node: Description (6)62748
 Ref: Usage and Customization63324
-Ref: On Startup63500
-Ref: Regularly64211
-Ref: Manually65138
-Node: Crafted Emacs Workspaces Module65741
-Node: Installation (7)66046
-Node: Description (7)66583
-Node: Crafted Emacs Writing Module68132
-Node: Installation (8)68394
-Node: Description (8)68916
-Ref: Whitespace Mode69439
-Ref: Function `crafted-writing-configure-whitespace`69905
-Ref: Signature69973
-Ref: Parameters70140
-Ref: Examples71049
-Ref: Optional Package PDF-Tools72158
-Ref: Part 1 Installing the Emacs package pdf-tools72504
-Ref: Part 2 Installing the epdfinfo-server72922
-Ref: Configuration73644
-Node: Troubleshooting74126
-Node: A package (suddenly?) fails to work74362
-Node: MIT License78150
+Ref: On Startup63475
+Ref: Regularly64186
+Ref: Manually65113
+Node: Crafted Emacs Workspaces Module65716
+Node: Installation (7)66021
+Node: Description (7)66558
+Node: Crafted Emacs Writing Module68107
+Node: Installation (8)68369
+Node: Description (8)68891
+Ref: Whitespace Mode69414
+Ref: Function `crafted-writing-configure-whitespace`69880
+Ref: Signature69948
+Ref: Parameters70115
+Ref: Examples71024
+Ref: Optional Package PDF-Tools72133
+Ref: Part 1 Installing the Emacs package pdf-tools72479
+Ref: Part 2 Installing the epdfinfo-server72897
+Ref: Configuration73619
+Node: Troubleshooting74101
+Node: A package (suddenly?) fails to work74337
+Node: MIT License78125
 
 End Tag Table
 
