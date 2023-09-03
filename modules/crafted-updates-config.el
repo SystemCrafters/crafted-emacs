@@ -10,7 +10,7 @@
 ;; Checks for updates to the Crafted Emacs project.  Provides a
 ;; function to show the updates before pulling changes.
 
-;; This uses `crafted-emacs-home', which is set on load by if it hasn't been
+;; This uses `crafted-emacs-home', which is set on load if it hasn't been
 ;; set by the user or by `crafted-init-config'. It expects that directory
 ;; to be a git directory that can be used to checking on updates from
 ;; upstream.  Defensively would still need to check if that location
