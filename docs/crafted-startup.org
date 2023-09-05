@@ -1,0 +1,45 @@
+* Crafted Emacs Startup Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; No additional packages are installed by this module.
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-startup configuration
+(require 'crafted-startup-config)
+#+end_src
+
+** Description
+
+The =crafted-startup= module provides a fancy splash screen similar to the Emacs
+default splash screen or the Emacs about page.
+
+If it is used together with the =crafted-updates= module, it will also check for
+updates during startup and will display the options to preview and install
+updates on the splash screen.
+
+If the list =recentf-list= is not empty, the splash screen will display the most
+recent entries of that list as links. By default, the most recent 10 entries
+in that list are displayed. You can modify this behaviour by setting
+=crafted-startup-recentf-count= in your config, for example:
+
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-startup-recentf-count 3)
+  #+end_src
+
+See the documentation for =recentf-mode= for details about the list.
+
+If you want to turn off the splash screen altogether, you can either choose
+not to load the module at all. Or, e.g. if you want to use the check for updates
+during startup but not the splash screen, you can set
+=crafted-startup-inhibit-splash= to non-nil.
+
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-startup-inhibit-splash t)
+#+end_src
