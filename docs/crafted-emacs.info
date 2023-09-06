@@ -1599,7 +1599,11 @@ the Emacs default splash screen or the Emacs about page.
 
    If it is used together with the ‘crafted-updates’ module, it will
 also check for updates during startup and will display the options to
-preview and install updates on the splash screen.
+preview and install updates on the splash screen.  To use this, simply
+require ‘crafted-updates-config’ alongside this module:
+
+     (require 'crafted-startup-config)
+     (require 'crafted-updates-config)
 
    If the list ‘recentf-list’ is not empty, the splash screen will
 display the most recent entries of that list as links.  By default, the
@@ -2215,36 +2219,36 @@ Node: Description (4)58217
 Node: Crafted Emacs Startup Module58900
 Node: Installation (5)59194
 Node: Description (5)59662
-Node: Crafted Emacs UI Module60912
-Node: Installation (6)61193
-Node: Description (6)61690
-Ref: Icons with all-the-icons62357
-Ref: Line numbers62872
-Node: Crafted Emacs Updates Module64163
-Node: Installation (7)64457
-Node: Description (7)64925
-Ref: Usage and Customization65501
-Ref: On Startup65652
-Ref: Regularly66363
-Ref: Manually67290
-Node: Crafted Emacs Workspaces Module67893
-Node: Installation (8)68198
-Node: Description (8)68735
-Node: Crafted Emacs Writing Module70284
-Node: Installation (9)70548
-Node: Description (9)71072
-Ref: Whitespace Mode71597
-Ref: Function `crafted-writing-configure-whitespace`72063
-Ref: Signature72131
-Ref: Parameters72298
-Ref: Examples73207
-Ref: Optional Package PDF-Tools74316
-Ref: Part 1 Installing the Emacs package pdf-tools74662
-Ref: Part 2 Installing the epdfinfo-server75080
-Ref: Configuration75802
-Node: Troubleshooting76284
-Node: A package (suddenly?) fails to work76520
-Node: MIT License80308
+Node: Crafted Emacs UI Module61072
+Node: Installation (6)61353
+Node: Description (6)61850
+Ref: Icons with all-the-icons62517
+Ref: Line numbers63032
+Node: Crafted Emacs Updates Module64323
+Node: Installation (7)64617
+Node: Description (7)65085
+Ref: Usage and Customization65661
+Ref: On Startup65812
+Ref: Regularly66523
+Ref: Manually67450
+Node: Crafted Emacs Workspaces Module68053
+Node: Installation (8)68358
+Node: Description (8)68895
+Node: Crafted Emacs Writing Module70444
+Node: Installation (9)70708
+Node: Description (9)71232
+Ref: Whitespace Mode71757
+Ref: Function `crafted-writing-configure-whitespace`72223
+Ref: Signature72291
+Ref: Parameters72458
+Ref: Examples73367
+Ref: Optional Package PDF-Tools74476
+Ref: Part 1 Installing the Emacs package pdf-tools74822
+Ref: Part 2 Installing the epdfinfo-server75240
+Ref: Configuration75962
+Node: Troubleshooting76444
+Node: A package (suddenly?) fails to work76680
+Node: MIT License80468
 
 End Tag Table
 
