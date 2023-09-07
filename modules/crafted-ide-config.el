@@ -69,7 +69,7 @@ Example: `(crafted-tree-sitter-load 'python)'"
   ;; only attempt to use tree-sitter when Emacs was built with it.
   (when (and (member "TREE_SITTER" (split-string system-configuration-features))
              (executable-find "tree-sitter"))
-    (when (locate-library "treesit-auto")
+    (when (require 'treesit-auto nil :noerror)
       ;; prefer tree-sitter modes
       (global-treesit-auto-mode)
       (with-eval-after-load 'treesit-auto
