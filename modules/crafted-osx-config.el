@@ -16,10 +16,8 @@
 (defun crafted-osx-transparent-titlebar ()
   "Set the titlebar to be transparent."
   (interactive)
-  (customize-set-variable frame-resize-pixelwise t)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
-  (add-to-list 'default-frame-alist '(selected-frame) 'name nil)
-  (add-to-list 'default-frame-alist '(ns-appearance . dark))) ;; assuming a dark theme is in use
+  (customize-set-variable 'frame-resize-pixelwise t)
+  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 
 ;; Special keys
 (when (featurep 'ns)
