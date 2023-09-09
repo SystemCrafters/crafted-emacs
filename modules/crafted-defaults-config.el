@@ -59,23 +59,20 @@
 
 ;;; Completion settings
 
-;; Turn on built in vertical completion mode, if available (beginning
-;; in Emacs 28).
-;; Note: If you also use `crafted-completion', this will be turned off
-;;       in favour of vertico etc.
+;; Turn on the best completion-mode available:
+;; - in version 28 or later, turn on `fido-vertical-mode'
+;; - in earlier versions, if the additional package `icomplete-vertical' is
+;;   present, turn it on.
+;; - otherwise turn on `icomplete-mode'
+;;
+;; Note: If you also use `crafted-completion-config' and have `vertico'
+;;       installed, all of these modes will be turned off in favour of
+;;       `vertico'.
 (if (version< emacs-version "28")
-    (icomplete-mode 1)
+    (if (locate-library "icomplete-vertical")
+        (icomplete-vertical-mode 1)
+      (icomplete-mode 1))
   (fido-vertical-mode 1))
-
-;; TODO fix or remove
-(when (version< emacs-version "28")
-  (defun crafted-mastering-emacs-use-icomplete-vertical ()
-    "Install and enable icomplete-vertical-mode for Emacs versions
-less than 28."
-    (interactive)
-    (crafted-package-install-package 'icomplete-vertical)
-    (icomplete-mode 1)
-    (icomplete-vertical-mode 1)))
 
 ;; No matter which completion mode is used:
 (customize-set-variable 'tab-always-indent 'complete)

@@ -151,11 +151,14 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
 *** Completion
 
-- =fido-vertical-mode= (or =icomplete-mode=)
+- =fido-vertical-mode=, =icomplete-vertical-mode= or =icomplete-mode=
 
-  If the built-in completion mode =fido-vertical-mode= is available (beginning
-  with Emacs 28), it is turned on. For earlier Emacs versions, the built-in
-  =icomplete-mode= is turned on.
+  Turn on the best completion-mode available:
+
+  - In Emacs 28 or later, turn on =fido-vertical-mode=.
+  - In earlier versions, if the additional package =icomplete-vertical= is
+    installed, turn on =icomplete-vertical-mode=.
+  - Otherwise, turn on =icomplete-mode=.
 
   You can change this by turning off the respective mode in your config, e.g.
   like this:
@@ -165,12 +168,16 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 #+end_src
 
   Note:
-  - For Emacs versions older than 28, you might also want to install and use
-    the =icomplete-vertical= package.
-  - If instead of the built-in modes, you have the package =vertico= installed,
-    (e.g. by using use the =crafted-completion-packages= module, this will be
-    deactivated automatically.
-  - The following settings will apply, no matter which of these modes you use.
+  - To install =icomplete-vertical=, add the following code to the packages phase
+    of your config:
+
+#+begin_src emacs-lisp
+  (add-to-list 'package-selected-packages 'icomplete-vertical)
+#+end_src
+   
+  - If you also use =crafted-completion-config= and have the package =vertico=
+    installed, all of these modes will be turned off in favour of =vertico=.
+  - The following settings will apply, no matter which of completion mode you use.
 
 - =tab-always-indent= : =complete=
 
