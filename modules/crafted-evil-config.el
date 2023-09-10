@@ -81,7 +81,13 @@ Rebinds the arrow keys to display a message instead."
                 term-mode))
   (add-to-list 'evil-emacs-state-modes mode))
 
-(evil-collection-init)
+(when (locate-library "evil-collection")
+  ;; Initialize evil-collection
+  (evil-collection-init)
+
+  ;; If speedbar is loaded, run evil-collection setup
+  (with-eval-after-load 'speedbar
+    (evil-collection-speedbar-setup)))
 
 (provide 'crafted-evil-config)
 ;;; crafted-evil-config.el ends here

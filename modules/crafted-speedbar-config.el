@@ -46,18 +46,6 @@ Useful for quickly switching to an open buffer."
 ;; map switch-to-quick-buffers in speedbar-mode
 (keymap-set speedbar-mode-map "b" 'crafted-speedbar-switch-to-quick-buffers)
 
-;;;; Adjustments for evil-mode
-(with-eval-after-load 'evil
-  ;; edit/open file under point (like non-evil or evil-collection)
-  (keymap-set speedbar-mode-map "<return>" 'speedbar-edit-line)
-  ;; toggle thing at point (like evil-collection)
-  (keymap-set speedbar-mode-map "<tab>" 'speedbar-toggle-line-expansion)
-  ;; Evaluate as elisp if file at point is elisp (like evil-collection)
-  (keymap-set speedbar-mode-map "L" 'speedbar-item-load))
-
-(with-eval-after-load 'evil-collection
-  (evil-collection-speedbar-setup))
-
 ;;; File Extensions
 (speedbar-add-supported-extension
  (list
