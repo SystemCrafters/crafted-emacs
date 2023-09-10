@@ -1856,7 +1856,8 @@ enhance the experience.
    • ‘Package: evil-collection’
 
      vim-like bindings for modes not covered by the ‘evil’ package.
-     Automatically initialized for all common modes and ‘speedbar’.
+     Automatically initialized for all common modes (see
+     ‘evil-collection-mode-list’).
 
    • ‘Package: evil-nerd-commenter’
 
@@ -2983,59 +2984,59 @@ Node: Acknowledgements67243
 Node: Crafted Emacs Evil Module67766
 Node: Installation (2)68050
 Node: Description (2)68557
-Node: Crafted Emacs IDE Module71756
-Node: Installation (3)72034
-Node: Description (3)72536
-Ref: Eglot73394
-Ref: Tree-Sitter73844
-Ref: Combobulate74047
-Node: Crafted Emacs Lisp Module74856
-Node: Installation (4)75168
-Node: Description (4)75675
-Ref: Common Lisp76269
-Ref: Clojure77135
-Ref: Scheme and Racket77771
-Node: Additional packages geiser-*78367
-Node: Crafted Emacs Org Module79421
-Node: Installation (5)79738
-Node: Description (5)80240
-Node: Alternative package org-roam82257
-Node: Crafted Emacs Screencast Module84061
-Node: Installation (6)84362
-Node: Description (6)84899
-Node: Crafted Emacs Startup Module85582
-Node: Installation (7)85876
-Node: Description (7)86344
-Node: Crafted Emacs UI Module87754
-Node: Installation (8)88035
-Node: Description (8)88532
-Ref: Icons with all-the-icons89199
-Ref: Line numbers89714
-Node: Crafted Emacs Updates Module91005
-Node: Installation (9)91301
-Node: Description (9)91771
-Ref: Usage and Customization92349
-Ref: On Startup92500
-Ref: Regularly93211
-Ref: Manually94138
-Node: Crafted Emacs Workspaces Module94741
-Node: Installation (10)95050
-Node: Description (10)95591
-Node: Crafted Emacs Writing Module97144
-Node: Installation (11)97410
-Node: Description (11)97936
-Ref: Whitespace Mode98463
-Ref: Function `crafted-writing-configure-whitespace`98929
-Ref: Signature98997
-Ref: Parameters99164
-Ref: Examples100073
-Ref: Optional Package PDF-Tools101182
-Ref: Part 1 Installing the Emacs package pdf-tools101528
-Ref: Part 2 Installing the epdfinfo-server101946
-Ref: Configuration102668
-Node: Troubleshooting103150
-Node: A package (suddenly?) fails to work103386
-Node: MIT License107174
+Node: Crafted Emacs IDE Module71780
+Node: Installation (3)72058
+Node: Description (3)72560
+Ref: Eglot73418
+Ref: Tree-Sitter73868
+Ref: Combobulate74071
+Node: Crafted Emacs Lisp Module74880
+Node: Installation (4)75192
+Node: Description (4)75699
+Ref: Common Lisp76293
+Ref: Clojure77159
+Ref: Scheme and Racket77795
+Node: Additional packages geiser-*78391
+Node: Crafted Emacs Org Module79445
+Node: Installation (5)79762
+Node: Description (5)80264
+Node: Alternative package org-roam82281
+Node: Crafted Emacs Screencast Module84085
+Node: Installation (6)84386
+Node: Description (6)84923
+Node: Crafted Emacs Startup Module85606
+Node: Installation (7)85900
+Node: Description (7)86368
+Node: Crafted Emacs UI Module87778
+Node: Installation (8)88059
+Node: Description (8)88556
+Ref: Icons with all-the-icons89223
+Ref: Line numbers89738
+Node: Crafted Emacs Updates Module91029
+Node: Installation (9)91325
+Node: Description (9)91795
+Ref: Usage and Customization92373
+Ref: On Startup92524
+Ref: Regularly93235
+Ref: Manually94162
+Node: Crafted Emacs Workspaces Module94765
+Node: Installation (10)95074
+Node: Description (10)95615
+Node: Crafted Emacs Writing Module97168
+Node: Installation (11)97434
+Node: Description (11)97960
+Ref: Whitespace Mode98487
+Ref: Function `crafted-writing-configure-whitespace`98953
+Ref: Signature99021
+Ref: Parameters99188
+Ref: Examples100097
+Ref: Optional Package PDF-Tools101206
+Ref: Part 1 Installing the Emacs package pdf-tools101552
+Ref: Part 2 Installing the epdfinfo-server101970
+Ref: Configuration102692
+Node: Troubleshooting103174
+Node: A package (suddenly?) fails to work103410
+Node: MIT License107198
 
 End Tag Table
 

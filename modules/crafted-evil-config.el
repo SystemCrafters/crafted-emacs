@@ -83,11 +83,7 @@ Rebinds the arrow keys to display a message instead."
 
 (when (locate-library "evil-collection")
   ;; Initialize evil-collection
-  (evil-collection-init)
-
-  ;; If speedbar is loaded, run evil-collection setup
-  (with-eval-after-load 'speedbar
-    (evil-collection-speedbar-setup)))
+  (evil-collection-init))
 
 (provide 'crafted-evil-config)
 ;;; crafted-evil-config.el ends here
