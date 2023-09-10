@@ -81,9 +81,16 @@ Rebinds the arrow keys to display a message instead."
                 term-mode))
   (add-to-list 'evil-emacs-state-modes mode))
 
-(when (locate-library "evil-collection")
-  ;; Initialize evil-collection
-  (evil-collection-init))
+;;; Evil Collection or some sparse defaults
+(if (locate-library "evil-collection")
+    ;; If the user has `evil-collection' installed, initialize it.
+    (evil-collection-init)
+  ;; otherwise set up some defaults
+  (with-eval-after-load 'crafted-completion-config
+    (when (featurep 'vertico) ; only if `vertico' is actually loaded.
+      (keymap-set vertico-map "C-j" 'vertico-next)
+      (keymap-set vertico-map "C-k" 'vertico-previous)
+      (keymap-set vertico-map "M-h" 'vertico-directory-up))))
 
 (provide 'crafted-evil-config)
 ;;; crafted-evil-config.el ends here

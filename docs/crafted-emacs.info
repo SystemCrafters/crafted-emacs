@@ -1932,6 +1932,22 @@ enhance the experience.
 
      ‘crafted-evil’ adds ‘custom-mode’, ‘eshell-mode’ and ‘term-mode’.
 
+   • ‘vertico’ - keybindings
+
+     If ‘vertico’ is installed and loaded, (e.g.  by
+     ‘crafted-completion-config’), evil bindings for it are proably
+     handled by ‘evil-collection’ (see above).  If the latter is _not_
+     installed, this module provides three keybindings:
+
+     "C-j"   ‘vertico-next’
+     "C-k"   ‘vertico-previous’
+     "M-h"   ‘vertico-directory-up’
+
+     To change this, add code like this to you config, replacing "C-j"
+     with the desired keybinding:
+
+          (keymap-set vertico-map "C-j" 'vertico-next)
+
 
 File: crafted-emacs.info,  Node: Crafted Emacs IDE Module,  Next: Crafted Emacs Lisp Module,  Prev: Crafted Emacs Evil Module,  Up: Modules
 
@@ -2984,59 +3000,59 @@ Node: Acknowledgements67243
 Node: Crafted Emacs Evil Module67766
 Node: Installation (2)68050
 Node: Description (2)68557
-Node: Crafted Emacs IDE Module71780
-Node: Installation (3)72058
-Node: Description (3)72560
-Ref: Eglot73418
-Ref: Tree-Sitter73868
-Ref: Combobulate74071
-Node: Crafted Emacs Lisp Module74880
-Node: Installation (4)75192
-Node: Description (4)75699
-Ref: Common Lisp76293
-Ref: Clojure77159
-Ref: Scheme and Racket77795
-Node: Additional packages geiser-*78391
-Node: Crafted Emacs Org Module79445
-Node: Installation (5)79762
-Node: Description (5)80264
-Node: Alternative package org-roam82281
-Node: Crafted Emacs Screencast Module84085
-Node: Installation (6)84386
-Node: Description (6)84923
-Node: Crafted Emacs Startup Module85606
-Node: Installation (7)85900
-Node: Description (7)86368
-Node: Crafted Emacs UI Module87778
-Node: Installation (8)88059
-Node: Description (8)88556
-Ref: Icons with all-the-icons89223
-Ref: Line numbers89738
-Node: Crafted Emacs Updates Module91029
-Node: Installation (9)91325
-Node: Description (9)91795
-Ref: Usage and Customization92373
-Ref: On Startup92524
-Ref: Regularly93235
-Ref: Manually94162
-Node: Crafted Emacs Workspaces Module94765
-Node: Installation (10)95074
-Node: Description (10)95615
-Node: Crafted Emacs Writing Module97168
-Node: Installation (11)97434
-Node: Description (11)97960
-Ref: Whitespace Mode98487
-Ref: Function `crafted-writing-configure-whitespace`98953
-Ref: Signature99021
-Ref: Parameters99188
-Ref: Examples100097
-Ref: Optional Package PDF-Tools101206
-Ref: Part 1 Installing the Emacs package pdf-tools101552
-Ref: Part 2 Installing the epdfinfo-server101970
-Ref: Configuration102692
-Node: Troubleshooting103174
-Node: A package (suddenly?) fails to work103410
-Node: MIT License107198
+Node: Crafted Emacs IDE Module72348
+Node: Installation (3)72626
+Node: Description (3)73128
+Ref: Eglot73986
+Ref: Tree-Sitter74436
+Ref: Combobulate74639
+Node: Crafted Emacs Lisp Module75448
+Node: Installation (4)75760
+Node: Description (4)76267
+Ref: Common Lisp76861
+Ref: Clojure77727
+Ref: Scheme and Racket78363
+Node: Additional packages geiser-*78959
+Node: Crafted Emacs Org Module80013
+Node: Installation (5)80330
+Node: Description (5)80832
+Node: Alternative package org-roam82849
+Node: Crafted Emacs Screencast Module84653
+Node: Installation (6)84954
+Node: Description (6)85491
+Node: Crafted Emacs Startup Module86174
+Node: Installation (7)86468
+Node: Description (7)86936
+Node: Crafted Emacs UI Module88346
+Node: Installation (8)88627
+Node: Description (8)89124
+Ref: Icons with all-the-icons89791
+Ref: Line numbers90306
+Node: Crafted Emacs Updates Module91597
+Node: Installation (9)91893
+Node: Description (9)92363
+Ref: Usage and Customization92941
+Ref: On Startup93092
+Ref: Regularly93803
+Ref: Manually94730
+Node: Crafted Emacs Workspaces Module95333
+Node: Installation (10)95642
+Node: Description (10)96183
+Node: Crafted Emacs Writing Module97736
+Node: Installation (11)98002
+Node: Description (11)98528
+Ref: Whitespace Mode99055
+Ref: Function `crafted-writing-configure-whitespace`99521
+Ref: Signature99589
+Ref: Parameters99756
+Ref: Examples100665
+Ref: Optional Package PDF-Tools101774
+Ref: Part 1 Installing the Emacs package pdf-tools102120
+Ref: Part 2 Installing the epdfinfo-server102538
+Ref: Configuration103260
+Node: Troubleshooting103742
+Node: A package (suddenly?) fails to work103978
+Node: MIT License107766
 
 End Tag Table
 
