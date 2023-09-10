@@ -315,6 +315,20 @@ Example @@texinfo:@code{init.el}@@:
 
 See the ~examples~ folder in the git-repo for more examples.
 
+* To save or not to save customizations
+
+As described above, by default Crafted Emacs will save both the list 
+=package-selected-packages= and all customizations to your customization file
+(e.g. ~custom.el~).
+
+You can customize that, too. To change that behaviour, add one or both of the
+following lines to your config:
+
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-init-auto-save-customized nil)
+  (customize-set-variable 'crafted-init-auto-save-selected-passages nil)
+#+end_src
+
 * Where to go from here
 
 Congratulations,
