@@ -106,6 +106,23 @@ the experience.
 
   =crafted-evil= adds ~custom-mode~, ~eshell-mode~ and ~term-mode~.
 
+- =vertico= - keybindings
+
+  If =vertico= is installed and loaded, (e.g. by =crafted-completion-config=),
+  evil bindings for it are proably handled by =evil-collection= (see above). If
+  the latter is /not/ installed, this module provides three keybindings:
+
+  | "C-j" | =vertico-next=         |
+  | "C-k" | =vertico-previous=     |
+  | "M-h" | =vertico-directory-up= |
+
+  To change this, add code like this to you config, replacing "C-j" with the
+  desired keybinding:
+
+  #+begin_src emacs-lisp
+    (keymap-set vertico-map "C-j" 'vertico-next)
+  #+end_src
+  
 -----
 # Local Variables:
 # fill-column: 80

@@ -36,13 +36,6 @@ ARG is the thing being completed in the minibuffer."
   ;; Start Vertico
   (vertico-mode 1)
 
-  ;; configure keys for those who prefer vi keybindings
-  (when (featurep 'evil)
-    (with-eval-after-load 'evil
-      (keymap-set vertico-map "C-j" 'vertico-next)
-      (keymap-set vertico-map "C-k" 'vertico-previous)
-      (keymap-set vertico-map "M-h" 'vertico-directory-up)))
-
   ;; Turn off the built-in fido-vertical-mode and icomplete-vertical-mode, if
   ;; they have been turned on by crafted-defaults-config, because they interfere
   ;; with this module.
