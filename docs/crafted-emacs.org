@@ -275,12 +275,13 @@ for the code examples.
   using the same package installation methods as Crafted Emacs.
 
   #+include: crafted-completion.org
+  #+include: crafted-defaults.org
+  #+include: crafted-evil.org
   #+include: crafted-ide.org
   #+include: crafted-lisp.org
   #+include: crafted-org.org
   #+include: crafted-screencast.org
   #+include: crafted-startup.org
-  #+include: crafted-evil.org
   #+include: crafted-ui.org
   #+include: crafted-updates.org
   #+include: crafted-workspaces.org
