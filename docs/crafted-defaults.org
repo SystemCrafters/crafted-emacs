@@ -28,7 +28,7 @@ setting with the default we chose (usually in the format "variable : value"),
 followed by instructions on how to /change/ the setting if you /don't/ want to use
 the default.
 
-*** Buffers
+** Buffers
 
 - =global-auto-revert-non-file-buffers= : =t=
 
@@ -39,9 +39,9 @@ the default.
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'global-auto-revert-non-file-buffers nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'global-auto-revert-non-file-buffers nil)
+  #+end_src
 
 - =global-auto-revert-mode=
 
@@ -50,9 +50,9 @@ the default.
 
   To turn this off, add this code to your config:
 
-#+begin_src emacs-lisp
-  (global-auto-revert-mode -1)
-#+end_src
+  #+begin_src emacs-lisp
+    (global-auto-revert-mode -1)
+  #+end_src
 
 - =dired-dwim-target= : =t=
 
@@ -63,9 +63,9 @@ the default.
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'dired-dwim-target nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'dired-dwim-target nil)
+  #+end_src
 
 - =dired-auto-revert-buffer= : =t=
 
@@ -74,9 +74,9 @@ the default.
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'dired-auto-revert-buffer nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'dired-auto-revert-buffer nil)
+  #+end_src
 
 - =eshell-scroll-to-bottom-on-input= : =this=
 
@@ -87,9 +87,9 @@ the default.
   or to =nil= to turn it off altogether, either by using the Customization UI
   or by adding code like this:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'eshell-scroll-to-bottom-on-input nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'eshell-scroll-to-bottom-on-input nil)
+  #+end_src
 
 - =switch-to-buffer-in-dedicated-window= : =pop=
 
@@ -98,11 +98,12 @@ the default.
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'switch-to-buffer-in-dedicated-window nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'switch-to-buffer-in-dedicated-window nil)
+  #+end_src
 
-See the documentation for =switch-to-buffer-in-dedicated-window= for more options.
+  See the documentation for =switch-to-buffer-in-dedicated-window= for more
+  options.
 
 - =switch-to-buffer-obey-display-actions= : =t=
 
@@ -112,9 +113,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'switch-to-buffer-obey-display-actions nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'switch-to-buffer-obey-display-actions nil)
+  #+end_src
 
 - use ibuffer to list buffers
 
@@ -123,8 +124,8 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   You can change this back to the Emacs default by adding this code to your
   config:
 
-#+begin_src emacs-lisp
-  (keymap-global-set "<remap> <list-buffers>" #'list-buffers)
+  #+begin_src emacs-lisp
+    (keymap-global-set "<remap> <list-buffers>" #'list-buffers)
   #+end_src
 
 - =ibuffer-movement-cycle= : =nil=
@@ -134,9 +135,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'ibuffer-movement-cycle t)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'ibuffer-movement-cycle t)
+  #+end_src
 
 - =ibuffer-old-time= : 24
 
@@ -145,11 +146,11 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   Change this setting either by finding it in the Customization UI or by adding
   code like this to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'ibuffer-old-time 72)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'ibuffer-old-time 72)
+  #+end_src
 
-*** Completion
+** Completion
 
 - =fido-vertical-mode=, =icomplete-vertical-mode= or =icomplete-mode=
 
@@ -163,21 +164,23 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   You can change this by turning off the respective mode in your config, e.g.
   like this:
 
-#+begin_src emacs-lisp
-  (fido-vertical-mode -1)
-#+end_src
+  #+begin_src emacs-lisp
+    (fido-vertical-mode -1)
+  #+end_src
 
   Note:
   - To install =icomplete-vertical=, add the following code to the packages phase
     of your config:
 
-#+begin_src emacs-lisp
-  (add-to-list 'package-selected-packages 'icomplete-vertical)
-#+end_src
+  #+begin_src emacs-lisp
+    (add-to-list 'package-selected-packages 'icomplete-vertical)
+  #+end_src
    
   - If you also use =crafted-completion-config= and have the package =vertico=
     installed, all of these modes will be turned off in favour of =vertico=.
-  - The following settings will apply, no matter which of completion mode you use.
+
+
+The following settings will apply, no matter which completion mode you use.
 
 - =tab-always-indent= : =complete=
 
@@ -187,9 +190,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   To change this, see the documentation of =tab-always-indent= and change it in
   your config (or the Customizations UI) to reflect the desired behaviour, e.g.:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'tab-always-indent nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'tab-always-indent nil)
+  #+end_src
 
 - =completion-cycle-threshold= : =3=
 
@@ -200,9 +203,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   You can change this by setting it to another number, to =t= for cycling always,
   or to =nil= to turn it off altogether, e.g. by adding this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'completion-cycle-threshold 3)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'completion-cycle-threshold 3)
+  #+end_src
 
 - =completion-category-overrides= : =file= : =partial-completion=
 
@@ -212,9 +215,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
   You can revert this setting by adding the following code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'completion-category-overrides nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'completion-category-overrides nil)
+  #+end_src
 
   Or see the documentation of the variable for alternatives. You can also use
   it for other category specific completion settings. For example, you can use
@@ -227,9 +230,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
   You can change this by adding the following code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set 'completions-detailed nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set 'completions-detailed nil)
+  #+end_src
 
 - =xref-show-definitions-function= : =xref-show-definitions-completing-read=
 
@@ -239,14 +242,13 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   You can change this back to Emacs' default by adding the following code to
   your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'xref-show-definitions-function
-                          #'xref-show-definitions-buffer)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'xref-show-definitions-function
+                            #'xref-show-definitions-buffer)
+  #+end_src
 
 
-*** Editing
-
+** Editing
 
 - =delete-selection-mode=
 
@@ -255,9 +257,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
   To turn this off, add this code to your config:
 
-#+begin_src emacs-lisp
-  (delete-selection-mode -1)
-#+end_src
+  #+begin_src emacs-lisp
+    (delete-selection-mode -1)
+  #+end_src
 
 - =indent-tabs-mode= : =nil=
 
@@ -266,9 +268,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'indent-tabs-mode t)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'indent-tabs-mode t)
+  #+end_src
 
 - =kill-do-not-save-duplicates= : =t=
 
@@ -279,10 +281,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'kill-do-not-save-duplicates nil)
-#+end_src
-
+  #+begin_src emacs-lisp
+    (customize-set-variable 'kill-do-not-save-duplicates nil)
+  #+end_src
 
 - =bidi-paragraph-direction= : =left-to-right=
 
@@ -293,9 +294,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
   You can change this through the Customization UI or by adding the following
   code in config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'bidi-paragraph-direction 'right-to-left)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'bidi-paragraph-direction 'right-to-left)
+  #+end_src
 
 - =bidi-inhibit-bpa= : =t=
 
@@ -304,9 +305,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
   You can change the value of this variable by adding this code to your config:
 
-#+begin_src emacs-lisp
-  (setq bidi-inhibit-bpa nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (setq bidi-inhibit-bpa nil)
+  #+end_src
 
 - =global-so-long-mode=
 
@@ -314,9 +315,9 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
   This minor mode can be turned off in your config by adding:
 
-#+begin_src emacs-lisp
-  (global-so-long-mode -1)
-#+end_src
+  #+begin_src emacs-lisp
+    (global-so-long-mode -1)
+  #+end_src
 
 - Look up dictionary definitions
 
@@ -328,11 +329,11 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
   You can unset this keybinding by adding this code to your config:
 
-#+begin_src emacs-lisp
-  (keymap-global-unset "M-#")
-  ;; or, for older Emacs versions:
-  (global-unset-key "M-#")
-#+end_src
+  #+begin_src emacs-lisp
+    (keymap-global-unset "M-#")
+    ;; or, for older Emacs versions:
+    (global-unset-key "M-#")
+  #+end_src
 
 - Flyspell Mode
 
@@ -341,12 +342,12 @@ See the documentation for =switch-to-buffer-in-dedicated-window= for more option
 
   You can change this by adding this code to your config:
 
-#+begin_src emacs-lisp
-  (remove-hook 'text-mode-hook 'flyspell-mode)
-  (remove-hook 'prog-mode-hook 'flyspell-prog-mode)
-#+end_src
+  #+begin_src emacs-lisp
+    (remove-hook 'text-mode-hook 'flyspell-mode)
+    (remove-hook 'prog-mode-hook 'flyspell-prog-mode)
+  #+end_src
 
-*** Navigation
+** Navigation
 
 If you have the packages =hydra= and =dumb-jump= installed, this module adds a hydra
 definition for dumb-jump and binds it to ~C-M-y~.
@@ -354,14 +355,14 @@ definition for dumb-jump and binds it to ~C-M-y~.
 You can change that binding by adding this code to your config, replace ~C-M-y~
 by the key stroke you prefer:
 
-#+begin_src emacs-lisp
-  (keymap-set dumb-jump-mode-map "C-M-y" #'dumb-jump-hydra/body)
-#+end_src
+  #+begin_src emacs-lisp
+    (keymap-set dumb-jump-mode-map "C-M-y" #'dumb-jump-hydra/body)
+  #+end_src
 
 You can also use the =defhydra= command to overwrite the hydra. See the
 documentation of the hydra package for details.
 
-*** Persistence
+** Persistence
 
 - =recentf-mode=
 
@@ -373,15 +374,15 @@ documentation of the hydra package for details.
 
   You can change the location of the recent file by adding this to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'recentf-save-file "/some/path/to/recentf")
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'recentf-save-file "/some/path/to/recentf")
+  #+end_src
 
   You can turn off this behaviour by adding this to your config:
 
-#+begin_src emacs-lisp
-  (remove-hook 'after-init-hook 'recentf-mode)
-#+end_src
+  #+begin_src emacs-lisp
+    (remove-hook 'after-init-hook 'recentf-mode)
+  #+end_src
 
 - =savehist-mode=
 
@@ -389,16 +390,16 @@ documentation of the hydra package for details.
   the location of the file with the Customization UI or by adding the following
   to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'savehist-file
-                          "/path/to/minibuffer/history/file")
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'savehist-file
+                            "/path/to/minibuffer/history/file")
+  #+end_src
 
   You can turn off this mode by adding this code to your config:
 
-#+begin_src emacs-lisp
-  (savehist-mode -1)
-#+end_src
+  #+begin_src emacs-lisp
+    (savehist-mode -1)
+  #+end_src
 
 - =bookmark-save-flag= : =1=
 
@@ -407,11 +408,11 @@ documentation of the hydra package for details.
   To change this, see the documentation of =bookmark-save-flag= for valid values
   and then add code like this to your config (e.g. to never save bookmarks):
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'bookmark-save-flag nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'bookmark-save-flag nil)
+  #+end_src
 
-*** Windows
+** Windows
 
 - =winner-mode=
 
@@ -432,11 +433,11 @@ documentation of the hydra package for details.
   To do so, replace ~C-c w~ with the desired keystrokes in code like this in your
   config:
 
-#+begin_src emacs-lisp
-  (with-eval-after-load 'crafted-defaults-config
-    (customize-set-variable 'crafted-windows-prefix-key "C-c w")
-    (keymap-global-set crafted-windows-prefix-key 'crafted-windows-key-map))
-#+end_src
+  #+begin_src emacs-lisp
+    (with-eval-after-load 'crafted-defaults-config
+      (customize-set-variable 'crafted-windows-prefix-key "C-c w")
+      (keymap-global-set crafted-windows-prefix-key 'crafted-windows-key-map))
+  #+end_src
 
 
   Using the default prefix-key, the keybindings defined in this module are
@@ -451,15 +452,15 @@ documentation of the hydra package for details.
 
   If you want to change the keybindings, add code like this to your config:
 
-#+begin_src emacs-lisp
-  (keymap-set 'crafted-windows-key-map "d" 'windmove-down)
-#+end_src
+  #+begin_src emacs-lisp
+    (keymap-set 'crafted-windows-key-map "d" 'windmove-down)
+  #+end_src
 
   If you want to turn off the mode altogether, add this code to your config:
 
-#+begin_src emacs-lisp
-  (winner-mode -1)
-#+end_src
+  #+begin_src emacs-lisp
+    (winner-mode -1)
+  #+end_src
 
 - =auto-window-vscroll= : =nil=
 
@@ -469,9 +470,9 @@ documentation of the hydra package for details.
 
   To change this, add this code to your config:
 
-#+begin_src emacs-lisp
-  (setq auto-window-vscroll t)
-#+end_src
+  #+begin_src emacs-lisp
+    (setq auto-window-vscroll t)
+  #+end_src
 
 - =fast-but-imprecise-scrolling= : =t=
 
@@ -483,11 +484,11 @@ documentation of the hydra package for details.
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'fast-but-imprecise-scrolling nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'fast-but-imprecise-scrolling nil)
+  #+end_src
 
-- =scroll-conservatively= : =101=
+- =scroll-conservatively= : 101
 
   If the point moves off the screen, redisplay will scroll by up to 101 lines
   to bring it back on the screen again. If that is not enough, redisplay will
@@ -498,12 +499,12 @@ documentation of the hydra package for details.
   adding code like this to your config, setting the number to the desired amount.
   Setting it to 0 will make it recenter all the time:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'scroll-conservatively 0)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'scroll-conservatively 0)
+  #+end_src
 
 
-- =scroll-margin= : =0=
+- =scroll-margin= : 0
 
   Turn off automatic scrolling when the point comes near to the bottom or top
   of the window. Together with other settings in this section, this makes
@@ -512,9 +513,9 @@ documentation of the hydra package for details.
   To change this, set =scroll-margin= to a number of lines within which automatic
   scrolling should be triggered, e.g.
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'scroll-margin 5)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'scroll-margin 5)
+  #+end_src
 
 - =scroll-preserve-screen-position= : =t=
 
@@ -524,9 +525,9 @@ documentation of the hydra package for details.
 
   Change this value in the Customization UI or by adding this code to config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'scroll-preserve-screen-position nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'scroll-preserve-screen-position nil)
+  #+end_src
 
 - =Man-notify-method= : =aggressive=
 
@@ -535,9 +536,9 @@ documentation of the hydra package for details.
 
   You can change this back to Emacs' default by adding this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'Man-notify-method 'friendly)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'Man-notify-method 'friendly)
+  #+end_src
 
   See the documentation of =Man-notify-method= for other valid values.
 
@@ -547,10 +548,10 @@ documentation of the hydra package for details.
 
   You can change this back to Emacs' default by adding this code to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'ediff-window-setup-function
-                          'ediff-setup-windows-default)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'ediff-window-setup-function
+                            'ediff-setup-windows-default)
+  #+end_src
 
   See the documentation of =ediff-window-setup-function= for details.
 
@@ -568,7 +569,7 @@ documentation of the hydra package for details.
 
   To change this, see the documentation of =display-buffer-alist=.
 
-*** Miscellaneous
+** Miscellaneous
 
 - =load-prefer-newer= : =t=
 
@@ -580,9 +581,9 @@ documentation of the hydra package for details.
   To change this, either find it in the Customization UI or by adding this code
   to your config:
 
-#+begin_src emacs-lisp
-  (customize-set-variable 'load-prefer-newer nil)
-#+end_src
+  #+begin_src emacs-lisp
+    (customize-set-variable 'load-prefer-newer nil)
+  #+end_src
 
 - =executable-make-buffer-file-executable-if-script-p=
 
@@ -591,10 +592,10 @@ documentation of the hydra package for details.
 
   To change this, add the following code to your config:
 
-#+begin_src emacs-lisp
+  #+begin_src emacs-lisp
     (remove-hook 'after-save-hook
                  'executable-make-buffer-file-executable-if-script-p)
-#+end_src
+  #+end_src
 
 - =repeat-mode=
 
@@ -613,9 +614,9 @@ documentation of the hydra package for details.
 
   To change this, add the following code to your config:
 
-#+begin_src emacs-lisp
-  (repeat-mode -1)
-#+end_src
+  #+begin_src emacs-lisp
+    (repeat-mode -1)
+  #+end_src
 
 ** Acknowledgements
 

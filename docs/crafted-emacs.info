@@ -127,6 +127,13 @@ Crafted Emacs Defaults Module
 
 * Installation: Installation (1).
 * Description: Description (1).
+* Buffers::
+* Completion::
+* Editing::
+* Navigation::
+* Persistence::
+* Windows::
+* Miscellaneous::
 * Acknowledgements::
 
 Crafted Emacs Evil Module
@@ -1183,6 +1190,13 @@ File: crafted-emacs.info,  Node: Crafted Emacs Defaults Module,  Next: Crafted E
 
 * Installation: Installation (1).
 * Description: Description (1).
+* Buffers::
+* Completion::
+* Editing::
+* Navigation::
+* Persistence::
+* Windows::
+* Miscellaneous::
 * Acknowledgements::
 
 
@@ -1203,7 +1217,7 @@ appropriate points.
      (require 'crafted-defaults-config)
 
 
-File: crafted-emacs.info,  Node: Description (1),  Next: Acknowledgements,  Prev: Installation (1),  Up: Crafted Emacs Defaults Module
+File: crafted-emacs.info,  Node: Description (1),  Next: Buffers,  Prev: Installation (1),  Up: Crafted Emacs Defaults Module
 
 7.2.2 Description
 -----------------
@@ -1219,126 +1233,132 @@ presents each setting with the default we chose (usually in the format
 "variable : value"), followed by instructions on how to _change_ the
 setting if you _don’t_ want to use the default.
 
-  1. Buffers
+
+File: crafted-emacs.info,  Node: Buffers,  Next: Completion,  Prev: Description (1),  Up: Crafted Emacs Defaults Module
 
-        • ‘global-auto-revert-non-file-buffers’ : ‘t’
+7.2.3 Buffers
+-------------
 
-          Automatically update buffers not backed by files (e.g.  a
-          directory listing in dired) if they are changed outside Emacs
-          (e.g.  by version control or a file manager).
+   • ‘global-auto-revert-non-file-buffers’ : ‘t’
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Automatically update buffers not backed by files (e.g.  a directory
+     listing in dired) if they are changed outside Emacs (e.g.  by
+     version control or a file manager).
+
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'global-auto-revert-non-file-buffers nil)
 
-        • ‘global-auto-revert-mode’
+   • ‘global-auto-revert-mode’
 
-          Activate a global minor mode to revert any buffer when it
-          changes either on disk or via another process (see above).
-          Affects file buffers, too.
+     Activate a global minor mode to revert any buffer when it changes
+     either on disk or via another process (see above).  Affects file
+     buffers, too.
 
-          To turn this off, add this code to your config:
+     To turn this off, add this code to your config:
 
           (global-auto-revert-mode -1)
 
-        • ‘dired-dwim-target’ : ‘t’
+   • ‘dired-dwim-target’ : ‘t’
 
-          When dired shows two directories in separate dired buffers and
-          you use copy or move commands in one of them, dired will
-          assume the other directory as target directory.
+     When dired shows two directories in separate dired buffers and you
+     use copy or move commands in one of them, dired will assume the
+     other directory as target directory.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'dired-dwim-target nil)
 
-        • ‘dired-auto-revert-buffer’ : ‘t’
+   • ‘dired-auto-revert-buffer’ : ‘t’
 
-          When revisiting a directory, automatically update dired
-          buffers.
+     When revisiting a directory, automatically update dired buffers.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'dired-auto-revert-buffer nil)
 
-        • ‘eshell-scroll-to-bottom-on-input’ : ‘this’
+   • ‘eshell-scroll-to-bottom-on-input’ : ‘this’
 
-          In eshell buffers, scroll to the bottom on input, but only in
-          the selected window.
+     In eshell buffers, scroll to the bottom on input, but only in the
+     selected window.
 
-          You can change this in your config by setting it to ‘all’ (for
-          all windows) or to ‘nil’ to turn it off altogether, either by
-          using the Customization UI or by adding code like this:
+     You can change this in your config by setting it to ‘all’ (for all
+     windows) or to ‘nil’ to turn it off altogether, either by using the
+     Customization UI or by adding code like this:
 
           (customize-set-variable 'eshell-scroll-to-bottom-on-input nil)
 
-        • ‘switch-to-buffer-in-dedicated-window’ : ‘pop’
+   • ‘switch-to-buffer-in-dedicated-window’ : ‘pop’
 
-          Pop up dedicated buffers in a different window.
+     Pop up dedicated buffers in a different window.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'switch-to-buffer-in-dedicated-window nil)
 
      See the documentation for ‘switch-to-buffer-in-dedicated-window’
      for more options.
 
-        • ‘switch-to-buffer-obey-display-actions’ : ‘t’
+   • ‘switch-to-buffer-obey-display-actions’ : ‘t’
 
-          Treat manual buffer switching (C-x b for example) the same as
-          programmatic buffer switching.
+     Treat manual buffer switching (C-x b for example) the same as
+     programmatic buffer switching.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'switch-to-buffer-obey-display-actions nil)
 
-        • use ibuffer to list buffers
+   • use ibuffer to list buffers
 
-          Prefer the more full-featured built-in ibuffer for managing
-          buffers.
+     Prefer the more full-featured built-in ibuffer for managing
+     buffers.
 
-          You can change this back to the Emacs default by adding this
-          code to your config:
+     You can change this back to the Emacs default by adding this code
+     to your config:
 
           (keymap-global-set "<remap> <list-buffers>" #'list-buffers)
 
-        • ‘ibuffer-movement-cycle’ : ‘nil’
+   • ‘ibuffer-movement-cycle’ : ‘nil’
 
-          When using ibuffer, turn off cycling forward and backward.
+     When using ibuffer, turn off cycling forward and backward.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'ibuffer-movement-cycle t)
 
-        • ‘ibuffer-old-time’ : 24
+   • ‘ibuffer-old-time’ : 24
 
-          In ibuffer, consider buffers "old" after 24 hours.
+     In ibuffer, consider buffers "old" after 24 hours.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding code like this to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding code like this to your config:
 
           (customize-set-variable 'ibuffer-old-time 72)
 
-  2. Completion
+
+File: crafted-emacs.info,  Node: Completion,  Next: Editing,  Prev: Buffers,  Up: Crafted Emacs Defaults Module
 
-        • ‘fido-vertical-mode’, ‘icomplete-vertical-mode’ or
-          ‘icomplete-mode’
+7.2.4 Completion
+----------------
 
-          Turn on the best completion-mode available:
+   • ‘fido-vertical-mode’, ‘icomplete-vertical-mode’ or ‘icomplete-mode’
 
-             • In Emacs 28 or later, turn on ‘fido-vertical-mode’.
-             • In earlier versions, if the additional package
-               ‘icomplete-vertical’ is installed, turn on
-               ‘icomplete-vertical-mode’.
-             • Otherwise, turn on ‘icomplete-mode’.
+     Turn on the best completion-mode available:
 
-          You can change this by turning off the respective mode in your
-          config, e.g.  like this:
+        • In Emacs 28 or later, turn on ‘fido-vertical-mode’.
+        • In earlier versions, if the additional package
+          ‘icomplete-vertical’ is installed, turn on
+          ‘icomplete-vertical-mode’.
+        • Otherwise, turn on ‘icomplete-mode’.
+
+     You can change this by turning off the respective mode in your
+     config, e.g.  like this:
 
           (fido-vertical-mode -1)
 
@@ -1351,43 +1371,43 @@ setting if you _don’t_ want to use the default.
         • If you also use ‘crafted-completion-config’ and have the
           package ‘vertico’ installed, all of these modes will be turned
           off in favour of ‘vertico’.
-        • The following settings will apply, no matter which of
-          completion mode you use.
-        • ‘tab-always-indent’ : ‘complete’
 
-          When hitting the TAB key, Emacs first tries to indent the
-          current line.  If it is already indented, it tries to complete
-          the thing at point.
+The following settings will apply, no matter which completion modeyou use.
 
-          To change this, see the documentation of ‘tab-always-indent’
-          and change it in your config (or the Customizations UI) to
-          reflect the desired behaviour, e.g.:
+   • ‘tab-always-indent’ : ‘complete’
+
+     When hitting the TAB key, Emacs first tries to indent the current
+     line.  If it is already indented, it tries to complete the thing at
+     point.
+
+     To change this, see the documentation of ‘tab-always-indent’ and
+     change it in your config (or the Customizations UI) to reflect the
+     desired behaviour, e.g.:
 
           (customize-set-variable 'tab-always-indent nil)
 
-        • ‘completion-cycle-threshold’ : ‘3’
+   • ‘completion-cycle-threshold’ : ‘3’
 
-          When selection completion candidates, setting this variable
-          uses cycling, i.e.  completing each of the candidates in turn.
-          This set it up to use cycling as long as there are not more
-          than three candidates.
+     When selection completion candidates, setting this variable uses
+     cycling, i.e.  completing each of the candidates in turn.  This set
+     it up to use cycling as long as there are not more than three
+     candidates.
 
-          You can change this by setting it to another number, to ‘t’
-          for cycling always, or to ‘nil’ to turn it off altogether,
-          e.g.  by adding this code to your config:
+     You can change this by setting it to another number, to ‘t’ for
+     cycling always, or to ‘nil’ to turn it off altogether, e.g.  by
+     adding this code to your config:
 
           (customize-set-variable 'completion-cycle-threshold 3)
 
-        • ‘completion-category-overrides’ : ‘file’ :
-          ‘partial-completion’
+   • ‘completion-category-overrides’ : ‘file’ : ‘partial-completion’
 
-          When completing file names, this settings allows for partial
-          completion.  When you type part of the filename Emacs will
-          complete the rest if there’s no ambiguity, or offer choices if
-          there are multiple possible candidates.
+     When completing file names, this settings allows for partial
+     completion.  When you type part of the filename Emacs will complete
+     the rest if there’s no ambiguity, or offer choices if there are
+     multiple possible candidates.
 
-          You can revert this setting by adding the following code to
-          your config:
+     You can revert this setting by adding the following code to your
+     config:
 
           (customize-set-variable 'completion-category-overrides nil)
 
@@ -1397,143 +1417,150 @@ setting if you _don’t_ want to use the default.
      ‘completion-cycle-threshold’ (see above) for files and buffers
      respectively.
 
-        • ‘completions-detailed’ : ‘t’
+   • ‘completions-detailed’ : ‘t’
 
-          Display completions with details (for example in C-h o).
+     Display completions with details (for example in C-h o).
 
-          You can change this by adding the following code to your
-          config:
+     You can change this by adding the following code to your config:
 
           (customize-set 'completions-detailed nil)
 
-        • ‘xref-show-definitions-function’ :
-          ‘xref-show-definitions-completing-read’
+   • ‘xref-show-definitions-function’ :
+     ‘xref-show-definitions-completing-read’
 
-          When using a definition search, and there is more than one
-          definition, let the user choose between them by typing in the
-          minibuffer with completion.
+     When using a definition search, and there is more than one
+     definition, let the user choose between them by typing in the
+     minibuffer with completion.
 
-          You can change this back to Emacs’ default by adding the
-          following code to your config:
+     You can change this back to Emacs’ default by adding the following
+     code to your config:
 
           (customize-set-variable 'xref-show-definitions-function
                                   #'xref-show-definitions-buffer)
 
-  3. Editing
+
+File: crafted-emacs.info,  Node: Editing,  Next: Navigation,  Prev: Completion,  Up: Crafted Emacs Defaults Module
 
-        • ‘delete-selection-mode’
+7.2.5 Editing
+-------------
 
-          Typed text replaces the selection if the selection is active,
-          pressing delete or backspace deletes the selection.
+   • ‘delete-selection-mode’
 
-          To turn this off, add this code to your config:
+     Typed text replaces the selection if the selection is active,
+     pressing delete or backspace deletes the selection.
+
+     To turn this off, add this code to your config:
 
           (delete-selection-mode -1)
 
-        • ‘indent-tabs-mode’ : ‘nil’
+   • ‘indent-tabs-mode’ : ‘nil’
 
-          Only indent using spaces.
+     Only indent using spaces.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'indent-tabs-mode t)
 
-        • ‘kill-do-not-save-duplicates’ : ‘t’
+   • ‘kill-do-not-save-duplicates’ : ‘t’
 
-          The ‘kill-ring’ is where Emacs stores the strings to paste
-          later.  This variable prohibits Emacs from storing duplicates
-          of strings which are already on the ‘kill-ring’.
+     The ‘kill-ring’ is where Emacs stores the strings to paste later.
+     This variable prohibits Emacs from storing duplicates of strings
+     which are already on the ‘kill-ring’.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'kill-do-not-save-duplicates nil)
 
-        • ‘bidi-paragraph-direction’ : ‘left-to-right’
+   • ‘bidi-paragraph-direction’ : ‘left-to-right’
 
-          Force directionality of text paragraphs in the buffer.
-          Crafted Emacs sets the default value as ‘left-to-right’, which
-          means for buffers which don’t have their own value, this one
-          will be used.
+     Force directionality of text paragraphs in the buffer.  Crafted
+     Emacs sets the default value as ‘left-to-right’, which means for
+     buffers which don’t have their own value, this one will be used.
 
-          You can change this through the Customization UI or by adding
-          the following code in config:
+     You can change this through the Customization UI or by adding the
+     following code in config:
 
           (customize-set-variable 'bidi-paragraph-direction 'right-to-left)
 
-        • ‘bidi-inhibit-bpa’ : ‘t’
+   • ‘bidi-inhibit-bpa’ : ‘t’
 
-          This setting will inhibit the Bidirectional Parentheses
-          Algorithm, which makes redisplay faster.
+     This setting will inhibit the Bidirectional Parentheses Algorithm,
+     which makes redisplay faster.
 
-          You can change the value of this variable by adding this code
-          to your config:
+     You can change the value of this variable by adding this code to
+     your config:
 
           (setq bidi-inhibit-bpa nil)
 
-        • ‘global-so-long-mode’
+   • ‘global-so-long-mode’
 
-          Improve performance for files with excessively long lines.
+     Improve performance for files with excessively long lines.
 
-          This minor mode can be turned off in your config by adding:
+     This minor mode can be turned off in your config by adding:
 
           (global-so-long-mode -1)
 
-        • Look up dictionary definitions
+   • Look up dictionary definitions
 
-          Using ‘M-#’ will lookup the word at point in a dictionary.
-          See the documentation of ‘dictionary-lookup-definition’ or the
-          README of the built-in ‘dictionary.el’ for details
-          (<https://github.com/myrkr/dictionary-el>).  It is set up to
-          show dictionary definitions in a side window on the left (see
-          the settings for Special Windows below).
+     Using ‘M-#’ will lookup the word at point in a dictionary.  See the
+     documentation of ‘dictionary-lookup-definition’ or the README of
+     the built-in ‘dictionary.el’ for details
+     (<https://github.com/myrkr/dictionary-el>).  It is set up to show
+     dictionary definitions in a side window on the left (see the
+     settings for Special Windows below).
 
-          You can unset this keybinding by adding this code to your
-          config:
+     You can unset this keybinding by adding this code to your config:
 
           (keymap-global-unset "M-#")
           ;; or, for older Emacs versions:
           (global-unset-key "M-#")
 
-        • Flyspell Mode
+   • Flyspell Mode
 
-          If ‘ispell’ is available, this module automatically turns on
-          ‘flyspell-mode’ for text-mode and for the comments in
-          prog-mode.
+     If ‘ispell’ is available, this module automatically turns on
+     ‘flyspell-mode’ for text-mode and for the comments in prog-mode.
 
-          You can change this by adding this code to your config:
+     You can change this by adding this code to your config:
 
           (remove-hook 'text-mode-hook 'flyspell-mode)
           (remove-hook 'prog-mode-hook 'flyspell-prog-mode)
 
-  4. Navigation
+
+File: crafted-emacs.info,  Node: Navigation,  Next: Persistence,  Prev: Editing,  Up: Crafted Emacs Defaults Module
 
-     If you have the packages ‘hydra’ and ‘dumb-jump’ installed, this
-     module adds a hydra definition for dumb-jump and binds it to
-     ‘C-M-y’.
+7.2.6 Navigation
+----------------
 
-     You can change that binding by adding this code to your config,
-     replace ‘C-M-y’ by the key stroke you prefer:
+If you have the packages ‘hydra’ and ‘dumb-jump’ installed, this module
+adds a hydra definition for dumb-jump and binds it to ‘C-M-y’.
 
-          (keymap-set dumb-jump-mode-map "C-M-y" #'dumb-jump-hydra/body)
+   You can change that binding by adding this code to your config,
+replace ‘C-M-y’ by the key stroke you prefer:
 
-     You can also use the ‘defhydra’ command to overwrite the hydra.
-     See the documentation of the hydra package for details.
+     (keymap-set dumb-jump-mode-map "C-M-y" #'dumb-jump-hydra/body)
 
-  5. Persistence
+   You can also use the ‘defhydra’ command to overwrite the hydra.  See
+the documentation of the hydra package for details.
 
-        • ‘recentf-mode’
+
+File: crafted-emacs.info,  Node: Persistence,  Next: Windows,  Prev: Navigation,  Up: Crafted Emacs Defaults Module
 
-          This minor mode saves the files you visit as a recent file so
-          you can load that file again quickly.  The command
-          ‘recentf-open-files’ will display a menu of files you opened
-          recently so you can quickly open it again.  This mode is added
-          to the ‘after-init-hook’ which runs when Emacs is starting but
-          after the initialization files have completed running.
+7.2.7 Persistence
+-----------------
 
-          You can change the location of the recent file by adding this
-          to your config:
+   • ‘recentf-mode’
+
+     This minor mode saves the files you visit as a recent file so you
+     can load that file again quickly.  The command ‘recentf-open-files’
+     will display a menu of files you opened recently so you can quickly
+     open it again.  This mode is added to the ‘after-init-hook’ which
+     runs when Emacs is starting but after the initialization files have
+     completed running.
+
+     You can change the location of the recent file by adding this to
+     your config:
 
           (customize-set-variable 'recentf-save-file "/some/path/to/recentf")
 
@@ -1541,11 +1568,11 @@ setting if you _don’t_ want to use the default.
 
           (remove-hook 'after-init-hook 'recentf-mode)
 
-        • ‘savehist-mode’
+   • ‘savehist-mode’
 
-          This minor mode saves minibuffer history in the ‘history’
-          file.  You can change the location of the file with the
-          Customization UI or by adding the following to your config:
+     This minor mode saves minibuffer history in the ‘history’ file.
+     You can change the location of the file with the Customization UI
+     or by adding the following to your config:
 
           (customize-set-variable 'savehist-file
                                   "/path/to/minibuffer/history/file")
@@ -1554,220 +1581,223 @@ setting if you _don’t_ want to use the default.
 
           (savehist-mode -1)
 
-        • ‘bookmark-save-flag’ : ‘1’
+   • ‘bookmark-save-flag’ : ‘1’
 
-          Save bookmarks to file every time you make or delete a
-          bookmark.
+     Save bookmarks to file every time you make or delete a bookmark.
 
-          To change this, see the documentation of ‘bookmark-save-flag’
-          for valid values and then add code like this to your config
-          (e.g.  to never save bookmarks):
+     To change this, see the documentation of ‘bookmark-save-flag’ for
+     valid values and then add code like this to your config (e.g.  to
+     never save bookmarks):
 
           (customize-set-variable 'bookmark-save-flag nil)
 
-  6. Windows
+
+File: crafted-emacs.info,  Node: Windows,  Next: Miscellaneous,  Prev: Persistence,  Up: Crafted Emacs Defaults Module
 
-        • ‘winner-mode’
+7.2.8 Windows
+-------------
 
-          Enable winner-mode
-          (https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html)
-          and provides a set of keybindings that help you navigate
-          through multiple windows.
+   • ‘winner-mode’
 
-          ‘winner-mode’ is a minor mode that, when activated, allows you
-          to revert to a prior windows arrangement.  It provides two
-          functions to allow this: ‘winner-undo’ and ‘winner-redo’.
-          These take you to earlier and later windows arrangements
-          respectively.
+     Enable winner-mode
+     (https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html)
+     and provides a set of keybindings that help you navigate through
+     multiple windows.
 
-          To store the keybindings associated with this module, a new
-          keymap is created: ‘crafted-windows-key-map’, Additionally,
-          this module defines a custom variable,
-          ‘crafted-windows-prefix-key’, which allows you to set the
-          prefix key to the keymap.  By default, this is set to ‘C-c w’,
-          but you are free to change it.
+     ‘winner-mode’ is a minor mode that, when activated, allows you to
+     revert to a prior windows arrangement.  It provides two functions
+     to allow this: ‘winner-undo’ and ‘winner-redo’.  These take you to
+     earlier and later windows arrangements respectively.
 
-          To do so, replace ‘C-c w’ with the desired keystrokes in code
-          like this in your config:
+     To store the keybindings associated with this module, a new keymap
+     is created: ‘crafted-windows-key-map’, Additionally, this module
+     defines a custom variable, ‘crafted-windows-prefix-key’, which
+     allows you to set the prefix key to the keymap.  By default, this
+     is set to ‘C-c w’, but you are free to change it.
+
+     To do so, replace ‘C-c w’ with the desired keystrokes in code like
+     this in your config:
 
           (with-eval-after-load 'crafted-defaults-config
             (customize-set-variable 'crafted-windows-prefix-key "C-c w")
             (keymap-global-set crafted-windows-prefix-key 'crafted-windows-key-map))
 
-     Using the default prefix-key, the keybindings defined in this
-     module are
+   Using the default prefix-key, the keybindings defined in this module
+are
 
-     Key Chord   Function         Description
-     ----------------------------------------------------------------------
-     C-c w u     winner-undo      Reverts to the previous windows layout
-     C-c w n     windmove-down    Moves point to window below
-     C-c w p     windmove-up      Moves point to window above
-     C-c w b     windmove-left    Moves point to window to the left
-     C-c w f     windmove-right   Moves point to window to the right
+Key Chord   Function         Description
+----------------------------------------------------------------------
+C-c w u     winner-undo      Reverts to the previous windows layout
+C-c w n     windmove-down    Moves point to window below
+C-c w p     windmove-up      Moves point to window above
+C-c w b     windmove-left    Moves point to window to the left
+C-c w f     windmove-right   Moves point to window to the right
 
-     If you want to change the keybindings, add code like this to your
-     config:
+   If you want to change the keybindings, add code like this to your
+config:
 
-          (keymap-set 'crafted-windows-key-map "d" 'windmove-down)
+     (keymap-set 'crafted-windows-key-map "d" 'windmove-down)
 
-     If you want to turn off the mode altogether, add this code to your
-     config:
+   If you want to turn off the mode altogether, add this code to your
+config:
 
-          (winner-mode -1)
+     (winner-mode -1)
 
-        • ‘auto-window-vscroll’ : ‘nil’
+   • ‘auto-window-vscroll’ : ‘nil’
 
-          Turn off the automatic adjustment of ‘window-vscroll’ to view
-          tall lines.  Together with the following four settings, this
-          makes scrolling less stuttered.
+     Turn off the automatic adjustment of ‘window-vscroll’ to view tall
+     lines.  Together with the following four settings, this makes
+     scrolling less stuttered.
 
-          To change this, add this code to your config:
+     To change this, add this code to your config:
 
           (setq auto-window-vscroll t)
 
-        • ‘fast-but-imprecise-scrolling’ : ‘t’
+   • ‘fast-but-imprecise-scrolling’ : ‘t’
 
-          Improves scrolling speed by not rendering fontification
-          updates unless the text would actually be visible in the
-          buffer.  Applies when scrolling very fast.  Together with
-          other settings in this section, this makes scrolling less
-          stuttered.
+     Improves scrolling speed by not rendering fontification updates
+     unless the text would actually be visible in the buffer.  Applies
+     when scrolling very fast.  Together with other settings in this
+     section, this makes scrolling less stuttered.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding this code to your config:
+     Change this setting either by finding it in the Customization UI or
+     by adding this code to your config:
 
           (customize-set-variable 'fast-but-imprecise-scrolling nil)
 
-        • ‘scroll-conservatively’ : ‘101’
+   • ‘scroll-conservatively’ : 101
 
-          If the point moves off the screen, redisplay will scroll by up
-          to 101 lines to bring it back on the screen again.  If that is
-          not enough, redisplay will recenter.  Together with other
-          settings in this section, this makes scrolling less stuttered.
+     If the point moves off the screen, redisplay will scroll by up to
+     101 lines to bring it back on the screen again.  If that is not
+     enough, redisplay will recenter.  Together with other settings in
+     this section, this makes scrolling less stuttered.
 
-          Change this setting either by finding it in the Customization
-          UI or by adding code like this to your config, setting the
-          number to the desired amount.  Setting it to 0 will make it
-          recenter all the time:
+     Change this setting either by finding it in the Customization UI or
+     by adding code like this to your config, setting the number to the
+     desired amount.  Setting it to 0 will make it recenter all the
+     time:
 
           (customize-set-variable 'scroll-conservatively 0)
 
-        • ‘scroll-margin’ : ‘0’
+   • ‘scroll-margin’ : 0
 
-          Turn off automatic scrolling when the point comes near to the
-          bottom or top of the window.  Together with other settings in
-          this section, this makes scrolling less stuttered.
+     Turn off automatic scrolling when the point comes near to the
+     bottom or top of the window.  Together with other settings in this
+     section, this makes scrolling less stuttered.
 
-          To change this, set ‘scroll-margin’ to a number of lines
-          within which automatic scrolling should be triggered, e.g.
+     To change this, set ‘scroll-margin’ to a number of lines within
+     which automatic scrolling should be triggered, e.g.
 
           (customize-set-variable 'scroll-margin 5)
 
-        • ‘scroll-preserve-screen-position’ : ‘t’
+   • ‘scroll-preserve-screen-position’ : ‘t’
 
-          When scrolling, move the point to keep its screen position
-          unchanged.  Together with other settings in this section, this
-          makes scrolling less stuttered.
+     When scrolling, move the point to keep its screen position
+     unchanged.  Together with other settings in this section, this
+     makes scrolling less stuttered.
 
-          Change this value in the Customization UI or by adding this
-          code to config:
+     Change this value in the Customization UI or by adding this code to
+     config:
 
           (customize-set-variable 'scroll-preserve-screen-position nil)
 
-        • ‘Man-notify-method’ : ‘aggressive’
+   • ‘Man-notify-method’ : ‘aggressive’
 
-          Open man pages in their own window, and switch to that window
-          to facilitate reading and closing the man page.
+     Open man pages in their own window, and switch to that window to
+     facilitate reading and closing the man page.
 
-          You can change this back to Emacs’ default by adding this code
-          to your config:
+     You can change this back to Emacs’ default by adding this code to
+     your config:
 
           (customize-set-variable 'Man-notify-method 'friendly)
 
      See the documentation of ‘Man-notify-method’ for other valid
      values.
 
-        • ‘ediff-window-setup-function’ : ‘ediff-setup-windows-plain’
+   • ‘ediff-window-setup-function’ : ‘ediff-setup-windows-plain’
 
-          When using Ediff, keep the control panel in the same frame.
+     When using Ediff, keep the control panel in the same frame.
 
-          You can change this back to Emacs’ default by adding this code
-          to your config:
+     You can change this back to Emacs’ default by adding this code to
+     your config:
 
           (customize-set-variable 'ediff-window-setup-function
                                   'ediff-setup-windows-default)
 
      See the documentation of ‘ediff-window-setup-function’ for details.
 
-        • Special windows - ‘display-buffer-alist’
+   • Special windows - ‘display-buffer-alist’
 
-          Define rules how Emacs opens some special windows.
+     Define rules how Emacs opens some special windows.
 
-          ‘*Completions*’
-               If two windows are open, use not the current one, but the
-               other one.  If only one window is open, open a new one.
-               If the new window is created by a horizontal split, Emacs
-               tries to limit the window height to 10 lines.
-          ‘*Dictionary*’
-               In a new window on the left.
-          ‘*Help*’
-               If two windows are open, use not the current one, but the
-               other one.  If only one window is open, open a new one.
+     ‘*Completions*’
+          If two windows are open, use not the current one, but the
+          other one.  If only one window is open, open a new one.  If
+          the new window is created by a horizontal split, Emacs tries
+          to limit the window height to 10 lines.
+     ‘*Dictionary*’
+          In a new window on the left.
+     ‘*Help*’
+          If two windows are open, use not the current one, but the
+          other one.  If only one window is open, open a new one.
 
-          To change this, see the documentation of
-          ‘display-buffer-alist’.
+     To change this, see the documentation of ‘display-buffer-alist’.
 
-  7. Miscellaneous
+
+File: crafted-emacs.info,  Node: Miscellaneous,  Next: Acknowledgements,  Prev: Windows,  Up: Crafted Emacs Defaults Module
 
-        • ‘load-prefer-newer’ : ‘t’
+7.2.9 Miscellaneous
+-------------------
 
-          When both a compiled (.elc or .eln) and an uncompiled (.el)
-          variant of a source file is present, load whichever is newest.
-          This prevents puzzling behaviour when you change something in
-          your code but unless you recompile, Emacs will load an
-          out-of-date state of your code.
+   • ‘load-prefer-newer’ : ‘t’
 
-          To change this, either find it in the Customization UI or by
-          adding this code to your config:
+     When both a compiled (.elc or .eln) and an uncompiled (.el) variant
+     of a source file is present, load whichever is newest.  This
+     prevents puzzling behaviour when you change something in your code
+     but unless you recompile, Emacs will load an out-of-date state of
+     your code.
+
+     To change this, either find it in the Customization UI or by adding
+     this code to your config:
 
           (customize-set-variable 'load-prefer-newer nil)
 
-        • ‘executable-make-buffer-file-executable-if-script-p’
+   • ‘executable-make-buffer-file-executable-if-script-p’
 
-          When saving a file that starts with the shebang (‘#!’), make
-          that file executable.
+     When saving a file that starts with the shebang (‘#!’), make that
+     file executable.
 
-          To change this, add the following code to your config:
+     To change this, add the following code to your config:
 
           (remove-hook 'after-save-hook
                        'executable-make-buffer-file-executable-if-script-p)
 
-        • ‘repeat-mode’
+   • ‘repeat-mode’
 
-          If available (beginning with Emacs 28), turn on repeat mode to
-          allow certain keys to repeat on the last keystroke.
+     If available (beginning with Emacs 28), turn on repeat mode to
+     allow certain keys to repeat on the last keystroke.
 
-          For example, ‘C-x [’ to page backward, after pressing this
-          keystroke once, pressing repeated ‘[’ keys will continue
-          paging backward.
+     For example, ‘C-x [’ to page backward, after pressing this
+     keystroke once, pressing repeated ‘[’ keys will continue paging
+     backward.
 
-          ‘repeat-mode’ is exited with the normal ‘C-g’, by movement
-          keys, typing, or pressing ESC three times.
+     ‘repeat-mode’ is exited with the normal ‘C-g’, by movement keys,
+     typing, or pressing ESC three times.
 
-          Note that in the case of ‘undo’ (by default bound to ‘C-x u’),
-          pressing ‘u’ repeatedly will iterate further undos, but typing
-          ‘C-x u’ again will act as an undo of the undo, i.e.  a redo,
-          which is handy, but possibly unexpected.
+     Note that in the case of ‘undo’ (by default bound to ‘C-x u’),
+     pressing ‘u’ repeatedly will iterate further undos, but typing ‘C-x
+     u’ again will act as an undo of the undo, i.e.  a redo, which is
+     handy, but possibly unexpected.
 
-          To change this, add the following code to your config:
+     To change this, add the following code to your config:
 
           (repeat-mode -1)
 
 
-File: crafted-emacs.info,  Node: Acknowledgements,  Prev: Description (1),  Up: Crafted Emacs Defaults Module
+File: crafted-emacs.info,  Node: Acknowledgements,  Prev: Miscellaneous,  Up: Crafted Emacs Defaults Module
 
-7.2.3 Acknowledgements
-----------------------
+7.2.10 Acknowledgements
+-----------------------
 
 Some of the defaults in this module were inspired by the following
 articles:
@@ -2897,113 +2927,113 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals5013
-Node: Principles6063
-Node: Minimal modular configuration6394
-Node: Prioritize built-in Emacs functionality7030
-Node: Can be integrated with a Guix configuration7824
-Node: Helps you learn Emacs Lisp8381
-Node: Reversible8916
-Node: Why use it?9187
-Node: Getting Started9864
-Node: Initial setup10428
-Node: Cleaning out your configuration directories10658
-Node: Cloning the repository11924
-Node: Bootstrapping Crafted Emacs12570
-Node: Early Emacs Initialization12939
-Node: Emacs Initialization16820
-Node: Crafted Emacs Modules18863
-Node: Installing packages19238
-Node: Using Crafted Emacs Modules21076
-Ref: Package definitions crafted-*-packages21554
-Ref: Configuration crafted-*-config22515
-Node: Example Configuration23689
-Node: Where to go from here24933
-Node: Customization25614
-Node: Using alternate package managers25846
-Node: The customel file28333
-Node: Simplified overview of how Emacs Customization works28726
-Node: Loading the customel file30444
-Ref: customel31617
-Node: Contributing32279
-Node: Modules32907
-Node: Crafted Emacs Completion Module34193
-Node: Installation34429
-Node: Description34958
-Ref: Vertico37342
-Ref: Orderless38052
-Ref: Marginalia38777
-Ref: Consult39142
-Ref: Embark41659
-Ref: Corfu43460
-Ref: Cape44243
-Node: Crafted Emacs Defaults Module45418
-Node: Installation (1)45738
-Node: Description (1)46208
-Ref: Buffers46928
-Ref: Completion50666
-Ref: Editing54437
-Ref: Navigation57497
-Ref: Persistence58011
-Ref: Windows59633
-Ref: Miscellaneous65785
-Node: Acknowledgements67554
-Node: Crafted Emacs Evil Module68077
-Node: Installation (2)68361
-Node: Description (2)68868
-Node: Crafted Emacs IDE Module71995
-Node: Installation (3)72273
-Node: Description (3)72775
-Ref: Eglot73633
-Ref: Tree-Sitter74083
-Ref: Combobulate74286
-Node: Crafted Emacs Lisp Module75095
-Node: Installation (4)75407
-Node: Description (4)75914
-Ref: Common Lisp76508
-Ref: Clojure77374
-Ref: Scheme and Racket78010
-Node: Additional packages geiser-*78606
-Node: Crafted Emacs Org Module79660
-Node: Installation (5)79977
-Node: Description (5)80479
-Node: Alternative package org-roam82496
-Node: Crafted Emacs Screencast Module84300
-Node: Installation (6)84601
-Node: Description (6)85138
-Node: Crafted Emacs Startup Module85821
-Node: Installation (7)86115
-Node: Description (7)86583
-Node: Crafted Emacs UI Module87993
-Node: Installation (8)88274
-Node: Description (8)88771
-Ref: Icons with all-the-icons89438
-Ref: Line numbers89953
-Node: Crafted Emacs Updates Module91244
-Node: Installation (9)91540
-Node: Description (9)92010
-Ref: Usage and Customization92588
-Ref: On Startup92739
-Ref: Regularly93450
-Ref: Manually94377
-Node: Crafted Emacs Workspaces Module94980
-Node: Installation (10)95289
-Node: Description (10)95830
-Node: Crafted Emacs Writing Module97383
-Node: Installation (11)97649
-Node: Description (11)98175
-Ref: Whitespace Mode98702
-Ref: Function `crafted-writing-configure-whitespace`99168
-Ref: Signature99236
-Ref: Parameters99403
-Ref: Examples100312
-Ref: Optional Package PDF-Tools101421
-Ref: Part 1 Installing the Emacs package pdf-tools101767
-Ref: Part 2 Installing the epdfinfo-server102185
-Ref: Configuration102907
-Node: Troubleshooting103389
-Node: A package (suddenly?) fails to work103625
-Node: MIT License107413
+Node: Goals5113
+Node: Principles6163
+Node: Minimal modular configuration6494
+Node: Prioritize built-in Emacs functionality7130
+Node: Can be integrated with a Guix configuration7924
+Node: Helps you learn Emacs Lisp8481
+Node: Reversible9016
+Node: Why use it?9287
+Node: Getting Started9964
+Node: Initial setup10528
+Node: Cleaning out your configuration directories10758
+Node: Cloning the repository12024
+Node: Bootstrapping Crafted Emacs12670
+Node: Early Emacs Initialization13039
+Node: Emacs Initialization16920
+Node: Crafted Emacs Modules18963
+Node: Installing packages19338
+Node: Using Crafted Emacs Modules21176
+Ref: Package definitions crafted-*-packages21654
+Ref: Configuration crafted-*-config22615
+Node: Example Configuration23789
+Node: Where to go from here25033
+Node: Customization25714
+Node: Using alternate package managers25946
+Node: The customel file28433
+Node: Simplified overview of how Emacs Customization works28826
+Node: Loading the customel file30544
+Ref: customel31717
+Node: Contributing32379
+Node: Modules33007
+Node: Crafted Emacs Completion Module34293
+Node: Installation34529
+Node: Description35058
+Ref: Vertico37442
+Ref: Orderless38152
+Ref: Marginalia38877
+Ref: Consult39242
+Ref: Embark41759
+Ref: Corfu43560
+Ref: Cape44343
+Node: Crafted Emacs Defaults Module45518
+Node: Installation (1)45938
+Node: Description (1)46408
+Node: Buffers47114
+Node: Completion50736
+Node: Editing54386
+Node: Navigation57350
+Node: Persistence57968
+Node: Windows59627
+Node: Miscellaneous65445
+Node: Acknowledgements67243
+Node: Crafted Emacs Evil Module67766
+Node: Installation (2)68050
+Node: Description (2)68557
+Node: Crafted Emacs IDE Module71684
+Node: Installation (3)71962
+Node: Description (3)72464
+Ref: Eglot73322
+Ref: Tree-Sitter73772
+Ref: Combobulate73975
+Node: Crafted Emacs Lisp Module74784
+Node: Installation (4)75096
+Node: Description (4)75603
+Ref: Common Lisp76197
+Ref: Clojure77063
+Ref: Scheme and Racket77699
+Node: Additional packages geiser-*78295
+Node: Crafted Emacs Org Module79349
+Node: Installation (5)79666
+Node: Description (5)80168
+Node: Alternative package org-roam82185
+Node: Crafted Emacs Screencast Module83989
+Node: Installation (6)84290
+Node: Description (6)84827
+Node: Crafted Emacs Startup Module85510
+Node: Installation (7)85804
+Node: Description (7)86272
+Node: Crafted Emacs UI Module87682
+Node: Installation (8)87963
+Node: Description (8)88460
+Ref: Icons with all-the-icons89127
+Ref: Line numbers89642
+Node: Crafted Emacs Updates Module90933
+Node: Installation (9)91229
+Node: Description (9)91699
+Ref: Usage and Customization92277
+Ref: On Startup92428
+Ref: Regularly93139
+Ref: Manually94066
+Node: Crafted Emacs Workspaces Module94669
+Node: Installation (10)94978
+Node: Description (10)95519
+Node: Crafted Emacs Writing Module97072
+Node: Installation (11)97338
+Node: Description (11)97864
+Ref: Whitespace Mode98391
+Ref: Function `crafted-writing-configure-whitespace`98857
+Ref: Signature98925
+Ref: Parameters99092
+Ref: Examples100001
+Ref: Optional Package PDF-Tools101110
+Ref: Part 1 Installing the Emacs package pdf-tools101456
+Ref: Part 2 Installing the epdfinfo-server101874
+Ref: Configuration102596
+Node: Troubleshooting103078
+Node: A package (suddenly?) fails to work103314
+Node: MIT License107102
 
 End Tag Table
 
