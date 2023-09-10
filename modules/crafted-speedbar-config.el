@@ -26,24 +26,6 @@
   (interactive)
   (speedbar-change-initial-expansion-list "quick buffers"))
 
-
-;;; Keybindings:
-;;;; evil-mode adjustments
-(with-eval-after-load 'speedbar
-  (with-eval-after-load 'evil
-    ;;edit/open file under point
-    (keymap-set speedbar-mode-map "<return>" 'speedbar-edit-line)
-    ;;toggle thing at point
-    (keymap-set speedbar-mode-map "<tab>" 'speedbar-toggle-line-expansion)
-    ;;evaluate as elisp if file at point is elisp, I dont use this too much but might be useful
-    (keymap-set speedbar-mode-map "C-<return>" 'speedbar-item-load)
-    ;;temporarly change mode in speedbar to "buffer-switching mode".
-    ;;useful for quickly switching to an open buffer
-    (keymap-set speedbar-mode-map "b" 'speedbar-switch-to-quick-buffers)))
-
-(with-eval-after-load 'evil-collection
-  (evil-collection-speedbar-setup))
-
 ;;; Set some sane defaults, can be easily extended by user.
 (setq-default speedbar-frame-parameters
               '((name . "speedbar")

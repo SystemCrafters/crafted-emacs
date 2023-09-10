@@ -81,7 +81,29 @@ Rebinds the arrow keys to display a message instead."
                 term-mode))
   (add-to-list 'evil-emacs-state-modes mode))
 
-(evil-collection-init)
+;;; evil-collection or some crafted defaults
+(if (locate-library "evil-collection")
+    ;; if the user has `evil-collection' installed, let it take care of
+    ;; keybindings
+    (evil-collection-init)
+  ;; Otherwise load up a few keybindings for other crafted modules
+  ;; as needed
+  ((with-eval-after-load 'crafted-completion-config
+     (when (featurep 'vertico) ;; only if the user actually uses vertico
+       (keymap-set vertico-map "C-j" 'vertico-next)
+       (keymap-set vertico-map "C-k" 'vertico-previous)
+       (keymap-set vertico-map "M-h" 'vertico-directory-up)))
+
+   (with-eval-after-load 'crafted-speedbar-config
+     ;;edit/open file under point
+     (keymap-set speedbar-mode-map "<return>" 'speedbar-edit-line)
+     ;;toggle thing at point
+     (keymap-set speedbar-mode-map "<tab>" 'speedbar-toggle-line-expansion)
+     ;;evaluate as elisp if file at point is elisp, I dont use this too much but might be useful
+     (keymap-set speedbar-mode-map "L" 'speedbar-item-load)
+     ;;temporarly change mode in speedbar to "buffer-switching mode".
+     ;;useful for quickly switching to an open buffer
+     (keymap-set speedbar-mode-map "b" 'speedbar-switch-to-quick-buffers))))
 
 (provide 'crafted-evil-config)
 ;;; crafted-evil-config.el ends here
