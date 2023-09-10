@@ -16,103 +16,99 @@
 ;; Rmail and projectile
 
 ;;; Code:
-
-;; require the module
 (require 'speedbar)
 
-;;; simple function for use in keybindings
-(defun speedbar-switch-to-quick-buffers ()
-  "Switch to quick-buffers expansion list."
+;;; Look & Feel
+;; Auto-update when the attached frame changes directory
+(customize-set-variable 'speedbar-update-flag t)
+
+;; Disable icon images, instead use text
+(customize-set-variable 'speedbar-use-images nil)
+
+;; Customize Speedbar Frame
+(customize-set-variable 'speedbar-frame-parameters
+                        '((name . "speedbar")
+                          (title . "speedbar")
+                          (minibuffer . nil)
+                          (border-width . 2)
+                          (menu-bar-lines . 0)
+                          (tool-bar-lines . 0)
+                          (unsplittable . t)
+                          (left-fringe . 10)))
+
+;;; Keybindings
+(defun crafted-speedbar-switch-to-quick-buffers ()
+  "Temporarily switch to quick-buffers expansion list.
+Useful for quickly switching to an open buffer."
   (interactive)
   (speedbar-change-initial-expansion-list "quick buffers"))
 
+;; map switch-to-quick-buffers in speedbar-mode
+(keymap-set speedbar-mode-map "b" 'crafted-speedbar-switch-to-quick-buffers)
 
-;;; Keybindings:
-;;;; evil-mode adjustments
-(with-eval-after-load 'speedbar
-  (with-eval-after-load 'evil
-    ;;edit/open file under point
-    (keymap-set speedbar-mode-map "<return>" 'speedbar-edit-line)
-    ;;toggle thing at point
-    (keymap-set speedbar-mode-map "<tab>" 'speedbar-toggle-line-expansion)
-    ;;evaluate as elisp if file at point is elisp, I dont use this too much but might be useful
-    (keymap-set speedbar-mode-map "C-<return>" 'speedbar-item-load)
-    ;;temporarly change mode in speedbar to "buffer-switching mode".
-    ;;useful for quickly switching to an open buffer
-    (keymap-set speedbar-mode-map "b" 'speedbar-switch-to-quick-buffers)))
+;;;; Adjustments for evil-mode
+(with-eval-after-load 'evil
+  ;; edit/open file under point (like non-evil or evil-collection)
+  (keymap-set speedbar-mode-map "<return>" 'speedbar-edit-line)
+  ;; toggle thing at point (like evil-collection)
+  (keymap-set speedbar-mode-map "<tab>" 'speedbar-toggle-line-expansion)
+  ;; Evaluate as elisp if file at point is elisp (like evil-collection)
+  (keymap-set speedbar-mode-map "L" 'speedbar-item-load))
 
 (with-eval-after-load 'evil-collection
   (evil-collection-speedbar-setup))
 
-;;; Set some sane defaults, can be easily extended by user.
-(setq-default speedbar-frame-parameters
-              '((name . "speedbar")
-                (title . "speedbar")
-                (minibuffer . nil)
-                (border-width . 2)
-                (menu-bar-lines . 0)
-                (tool-bar-lines . 0)
-                (unsplittable . t)
-                (left-fringe . 10)))
-
-;;; List of supported file-extensions
+;;; File Extensions
 (speedbar-add-supported-extension
  (list
-;;;; lua and fennel(lisp that transpiles to lua)
-  ".lua"
-  ".fnl"
-  ".fennel"
-;;;; shellscript
-  ".sh"
-  ".bash";;is this ever used?
-;;;; web languages
-;;;;; Hyper-Text-markup-language(html) and php
-  ".php"
-  ".html"
-  ".htm"
-;;;;; ecma(java/type)-script
-  ".js"
-  ".json"
-  ".ts"
-;;;;; stylasheets
-  ".css"
-  ".less"
-  ".scss"
-  ".sass"
-;;;; c/c++ and makefiles
-  ".c"
-  ".cpp"
-  ".h"
-  "makefile"
-  "MAKEFILE"
-  "Makefile"
-;;;; runs on JVM, java,kotlin etc
-  ".java"
-  ".kt";;this is for kotlin
-  ".mvn"
-  ".gradle" ".properties";; this is for gradle-projects
-  ".clj";;lisp on the JVM
-;;;; lisps
+;;;; General Lisp Languages
   ".cl"
   ".el"
   ".scm"
   ".lisp"
-;;;; configuration
+;;;; Lua/Fennel (Lisp that transpiles to lua)
+  ".lua"
+  ".fnl"
+  ".fennel"
+;;;; JVM languages (Java, Kotlin, Clojure)
+  ".java"
+  ".kt"
+  ".mvn"
+  ".gradle"
+  ".properties"
+  ".clj"
+;;;; C/C++
+  ".c"
+  ".cpp"
+  ".h"
+;;;; shellscript
+  ".sh"
+  ".bash"
+;;;; Web Languages and Markup/Styling
+  ".php"
+  ".js"
+  ".ts"
+  ".html"
+  ".htm"
+  ".css"
+  ".less"
+  ".scss"
+  ".sass"
+;;;; Makefile
+  "makefile"
+  "MAKEFILE"
+  "Makefile"
+;;;; Data formats
+  ".json"
   ".yaml"
   ".toml"
-;;;; notes,markup and orgmode
+;;;; Notes and Markup
   ".md"
   ".markdown"
   ".org"
   ".txt"
-  "README"
-  ))
+  "README"))
 
-;;; Make speedbar update automaticaly, and dont use ugly icons(images)
-;; this can be set back to use icons by simply doing
-;;`(setq-default speedbar-use-images t)` in your own config
-(setq-default speedbar-update-flag t)
-(setq-default speedbar-use-images nil)
-
+;;; _
 (provide 'crafted-speedbar-config)
 ;;; crafted-speedbar-config.el ends here
