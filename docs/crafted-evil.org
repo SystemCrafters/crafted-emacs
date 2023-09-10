@@ -30,6 +30,7 @@ the experience.
 - =Package: evil-collection=
 
   vim-like bindings for modes not covered by the ~evil~ package.
+  Automatically initialized for all common modes and ~speedbar~.
 
 - =Package: evil-nerd-commenter=
 

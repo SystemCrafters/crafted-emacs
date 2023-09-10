@@ -1372,7 +1372,8 @@ File: crafted-emacs.info,  Node: Completion,  Next: Editing,  Prev: Buffers,  Up
           package ‘vertico’ installed, all of these modes will be turned
           off in favour of ‘vertico’.
 
-The following settings will apply, no matter which completion modeyou use.
+   The following settings will apply, no matter which completion mode
+you use.
 
    • ‘tab-always-indent’ : ‘complete’
 
@@ -1855,6 +1856,7 @@ enhance the experience.
    • ‘Package: evil-collection’
 
      vim-like bindings for modes not covered by the ‘evil’ package.
+     Automatically initialized for all common modes and ‘speedbar’.
 
    • ‘Package: evil-nerd-commenter’
 
@@ -2981,59 +2983,59 @@ Node: Acknowledgements67243
 Node: Crafted Emacs Evil Module67766
 Node: Installation (2)68050
 Node: Description (2)68557
-Node: Crafted Emacs IDE Module71684
-Node: Installation (3)71962
-Node: Description (3)72464
-Ref: Eglot73322
-Ref: Tree-Sitter73772
-Ref: Combobulate73975
-Node: Crafted Emacs Lisp Module74784
-Node: Installation (4)75096
-Node: Description (4)75603
-Ref: Common Lisp76197
-Ref: Clojure77063
-Ref: Scheme and Racket77699
-Node: Additional packages geiser-*78295
-Node: Crafted Emacs Org Module79349
-Node: Installation (5)79666
-Node: Description (5)80168
-Node: Alternative package org-roam82185
-Node: Crafted Emacs Screencast Module83989
-Node: Installation (6)84290
-Node: Description (6)84827
-Node: Crafted Emacs Startup Module85510
-Node: Installation (7)85804
-Node: Description (7)86272
-Node: Crafted Emacs UI Module87682
-Node: Installation (8)87963
-Node: Description (8)88460
-Ref: Icons with all-the-icons89127
-Ref: Line numbers89642
-Node: Crafted Emacs Updates Module90933
-Node: Installation (9)91229
-Node: Description (9)91699
-Ref: Usage and Customization92277
-Ref: On Startup92428
-Ref: Regularly93139
-Ref: Manually94066
-Node: Crafted Emacs Workspaces Module94669
-Node: Installation (10)94978
-Node: Description (10)95519
-Node: Crafted Emacs Writing Module97072
-Node: Installation (11)97338
-Node: Description (11)97864
-Ref: Whitespace Mode98391
-Ref: Function `crafted-writing-configure-whitespace`98857
-Ref: Signature98925
-Ref: Parameters99092
-Ref: Examples100001
-Ref: Optional Package PDF-Tools101110
-Ref: Part 1 Installing the Emacs package pdf-tools101456
-Ref: Part 2 Installing the epdfinfo-server101874
-Ref: Configuration102596
-Node: Troubleshooting103078
-Node: A package (suddenly?) fails to work103314
-Node: MIT License107102
+Node: Crafted Emacs IDE Module71756
+Node: Installation (3)72034
+Node: Description (3)72536
+Ref: Eglot73394
+Ref: Tree-Sitter73844
+Ref: Combobulate74047
+Node: Crafted Emacs Lisp Module74856
+Node: Installation (4)75168
+Node: Description (4)75675
+Ref: Common Lisp76269
+Ref: Clojure77135
+Ref: Scheme and Racket77771
+Node: Additional packages geiser-*78367
+Node: Crafted Emacs Org Module79421
+Node: Installation (5)79738
+Node: Description (5)80240
+Node: Alternative package org-roam82257
+Node: Crafted Emacs Screencast Module84061
+Node: Installation (6)84362
+Node: Description (6)84899
+Node: Crafted Emacs Startup Module85582
+Node: Installation (7)85876
+Node: Description (7)86344
+Node: Crafted Emacs UI Module87754
+Node: Installation (8)88035
+Node: Description (8)88532
+Ref: Icons with all-the-icons89199
+Ref: Line numbers89714
+Node: Crafted Emacs Updates Module91005
+Node: Installation (9)91301
+Node: Description (9)91771
+Ref: Usage and Customization92349
+Ref: On Startup92500
+Ref: Regularly93211
+Ref: Manually94138
+Node: Crafted Emacs Workspaces Module94741
+Node: Installation (10)95050
+Node: Description (10)95591
+Node: Crafted Emacs Writing Module97144
+Node: Installation (11)97410
+Node: Description (11)97936
+Ref: Whitespace Mode98463
+Ref: Function `crafted-writing-configure-whitespace`98929
+Ref: Signature98997
+Ref: Parameters99164
+Ref: Examples100073
+Ref: Optional Package PDF-Tools101182
+Ref: Part 1 Installing the Emacs package pdf-tools101528
+Ref: Part 2 Installing the epdfinfo-server101946
+Ref: Configuration102668
+Node: Troubleshooting103150
+Node: A package (suddenly?) fails to work103386
+Node: MIT License107174
 
 End Tag Table
 
