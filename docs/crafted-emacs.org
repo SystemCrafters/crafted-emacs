@@ -281,6 +281,7 @@ for the code examples.
   #+include: crafted-lisp.org
   #+include: crafted-org.org
   #+include: crafted-screencast.org
+  #+include: crafted-speedbar.org
   #+include: crafted-startup.org
   #+include: crafted-ui.org
   #+include: crafted-updates.org

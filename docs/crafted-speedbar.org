@@ -1,0 +1,87 @@
+* Crafted Emacs Speedbar Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; No additional packages are installed by this module.
+
+;; install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-speedbar configuration
+(require 'crafted-speedbar-config)
+#+end_src
+
+** Description
+
+Speedbar is a tree-like view model built-in to Emacs.
+It can be used for viewing file-trees, currently open buffers and more.
+
+- =speedbar-update-flag=: =t=
+
+  Update the speedbar view if the directory of the attached frame changes.
+
+  This behaviour can be changed temporarily by invoking ~speedbar-toggle-updates~.
+  Alternatively, in your configuration you can set it to ~nil~:
+
+  #+begin_src emacs-lisp
+  (setq-default speedbar-update-flag nil)
+  #+end_src
+
+- =speedbar-use-images=: =nil=
+
+  Speedbar uses small images for directories, files and file-local structures,
+  however in many configurations they turn out pixelated or don't fit the theme.
+  Instead, use text versions.
+
+  To set it back to using images, run:
+
+  #+begin_src emacs-lisp
+  (setq-default speedbar-use-images t)
+  #+end_src
+
+- =speedbar-frame-parameters=
+
+  Customizing =speedbar-frame-parameters= sets additional frame parameters
+  for speedbar frames.
+
+  Crafted Emacs adds a frame name/title, removes the minibuffer status
+  and adds some border and fringe to the frame.
+
+  To reset the frame parameters:
+
+  #+begin_src emacs-lisp
+  (customize-set-variable 'speedbar-frame-parameters
+                          ((minibuffer)
+                           (width . 20)
+                           (border-width . 0)
+                           (menu-bar-lines . 0)
+                           (tool-bar-lines . 0)
+                           (unsplittable . t)
+                           (left-fringe . 0)))
+  #+end_src
+
+- =new keybinding=: =crafted-speedbar-switch-to-quick-buffers= (=b=)
+
+  Temporarily change speedbar into a buffer switching tool,
+  displaying the currently open buffers.
+  Pressing =<enter>= on a buffer in the list will switch to that buffer.
+
+  To bind this function to another key:
+
+  #+begin_src emacs-lisp
+  (keymap-set speedbar-mode-map
+              "<key>"
+              #'crafted-speedbar-switch-to-quick-buffers)
+  #+end_src
+
+- =speedbar-add-supported-extension=: new extensions
+
+  Crafted Emacs adds a wide selection of file extensions that support
+  tagging to speedbar's tagging system.
+  This allows speedbar to add tags when expanding a file entry with this
+  extension (e.g. ~org-mode~ headings) and make them clickable navigation
+  links.
