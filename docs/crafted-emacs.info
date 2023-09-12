@@ -2423,11 +2423,28 @@ for viewing file-trees, currently open buffers and more.
      Crafted Emacs adds a frame name/title, removes the minibuffer
      status and adds some border and fringe to the frame.
 
-   • ‘new keybinding’: ‘speedbar-switch-to-quick-buffers’ (‘b’)
+     To reset the frame parameters:
+
+          (customize-set-variable 'speedbar-frame-parameters
+                                  ((minibuffer)
+                                   (width . 20)
+                                   (border-width . 0)
+                                   (menu-bar-lines . 0)
+                                   (tool-bar-lines . 0)
+                                   (unsplittable . t)
+                                   (left-fringe . 0)))
+
+   • ‘new keybinding’: ‘crafted-speedbar-switch-to-quick-buffers’ (‘b’)
 
      Temporarily change speedbar into a buffer switching tool,
      displaying the currently open buffers.  Pressing ‘<enter>’ on a
      buffer in the list will switch to that buffer.
+
+     To bind this function to another key:
+
+          (keymap-set speedbar-mode-map
+                      "<key>"
+                      #'crafted-speedbar-switch-to-quick-buffers)
 
    • ‘speedbar-add-supported-extension’: new extensions
 
@@ -3109,39 +3126,39 @@ Node: Description (6)85660
 Node: Crafted Emacs Speedbar Module86343
 Node: Installation (7)86645
 Node: Description (7)87116
-Node: Crafted Emacs Startup Module88970
-Node: Installation (8)89262
-Node: Description (8)89730
-Node: Crafted Emacs UI Module91140
-Node: Installation (9)91423
-Node: Description (9)91922
-Ref: Icons with all-the-icons92591
-Ref: Line numbers93106
-Node: Crafted Emacs Updates Module94397
-Node: Installation (10)94695
-Node: Description (10)95167
-Ref: Usage and Customization95747
-Ref: On Startup95898
-Ref: Regularly96609
-Ref: Manually97536
-Node: Crafted Emacs Workspaces Module98139
-Node: Installation (11)98448
-Node: Description (11)98989
-Node: Crafted Emacs Writing Module100542
-Node: Installation (12)100808
-Node: Description (12)101334
-Ref: Whitespace Mode101861
-Ref: Function `crafted-writing-configure-whitespace`102327
-Ref: Signature102395
-Ref: Parameters102562
-Ref: Examples103471
-Ref: Optional Package PDF-Tools104580
-Ref: Part 1 Installing the Emacs package pdf-tools104926
-Ref: Part 2 Installing the epdfinfo-server105344
-Ref: Configuration106066
-Node: Troubleshooting106548
-Node: A package (suddenly?) fails to work106784
-Node: MIT License110572
+Node: Crafted Emacs Startup Module89629
+Node: Installation (8)89921
+Node: Description (8)90389
+Node: Crafted Emacs UI Module91799
+Node: Installation (9)92082
+Node: Description (9)92581
+Ref: Icons with all-the-icons93250
+Ref: Line numbers93765
+Node: Crafted Emacs Updates Module95056
+Node: Installation (10)95354
+Node: Description (10)95826
+Ref: Usage and Customization96406
+Ref: On Startup96557
+Ref: Regularly97268
+Ref: Manually98195
+Node: Crafted Emacs Workspaces Module98798
+Node: Installation (11)99107
+Node: Description (11)99648
+Node: Crafted Emacs Writing Module101201
+Node: Installation (12)101467
+Node: Description (12)101993
+Ref: Whitespace Mode102520
+Ref: Function `crafted-writing-configure-whitespace`102986
+Ref: Signature103054
+Ref: Parameters103221
+Ref: Examples104130
+Ref: Optional Package PDF-Tools105239
+Ref: Part 1 Installing the Emacs package pdf-tools105585
+Ref: Part 2 Installing the epdfinfo-server106003
+Ref: Configuration106725
+Node: Troubleshooting107207
+Node: A package (suddenly?) fails to work107443
+Node: MIT License111231
 
 End Tag Table
 

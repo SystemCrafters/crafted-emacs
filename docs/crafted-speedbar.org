@@ -51,11 +51,32 @@ It can be used for viewing file-trees, currently open buffers and more.
   Crafted Emacs adds a frame name/title, removes the minibuffer status
   and adds some border and fringe to the frame.
 
-- =new keybinding=: =speedbar-switch-to-quick-buffers= (=b=)
+  To reset the frame parameters:
+
+  #+begin_src emacs-lisp
+  (customize-set-variable 'speedbar-frame-parameters
+                          ((minibuffer)
+                           (width . 20)
+                           (border-width . 0)
+                           (menu-bar-lines . 0)
+                           (tool-bar-lines . 0)
+                           (unsplittable . t)
+                           (left-fringe . 0)))
+  #+end_src
+
+- =new keybinding=: =crafted-speedbar-switch-to-quick-buffers= (=b=)
 
   Temporarily change speedbar into a buffer switching tool,
   displaying the currently open buffers.
   Pressing =<enter>= on a buffer in the list will switch to that buffer.
+
+  To bind this function to another key:
+
+  #+begin_src emacs-lisp
+  (keymap-set speedbar-mode-map
+              "<key>"
+              #'crafted-speedbar-switch-to-quick-buffers)
+  #+end_src
 
 - =speedbar-add-supported-extension=: new extensions
 
