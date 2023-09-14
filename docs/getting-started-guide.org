@@ -317,7 +317,7 @@ See the ~examples~ folder in the git-repo for more examples.
 
 * To save or not to save customizations
 
-As described above, by default Crafted Emacs will save both the list 
+As described previously, by default Crafted Emacs will save both the list
 =package-selected-packages= and all customizations to your customization file
 (e.g. ~custom.el~).
 
@@ -330,7 +330,7 @@ following lines to your config:
 #+end_src
 
 Whether or not to save these settings to ~custom.el~ is ultimately a matter of
-personal preference. You'll probably won't notice a difference either way.
+personal preference. You probably won't notice a difference either way.
 
 In the case of the customizations, we call the function
 =customize-save-customized= under the hood, which is originally intended for users
@@ -363,6 +363,10 @@ need to run those two functions.
 Still, if you prefer not to save customizations and/or the list of selected
 packages during each startup, you can turn that behaviour off as described
 above.
+
+Please note: These variables only affect whether /Crafted Emacs/ will or won't
+automatically store anything set by customize-set-variable, but that doesn't
+hinder other processes in Emacs to do so.
 
 * Where to go from here
 
