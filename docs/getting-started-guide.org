@@ -329,6 +329,41 @@ following lines to your config:
   (customize-set-variable 'crafted-init-auto-save-selected-packages nil)
 #+end_src
 
+Whether or not to save these settings to ~custom.el~ is ultimately a matter of
+personal preference. You'll probably won't notice a difference either way.
+
+In the case of the customizations, we call the function
+=customize-save-customized= under the hood, which is originally intended for users
+who use the Customization UI to try out a bunch of settings and then decide to
+conserve the state of their Emacs session. If you are such a user, you still
+have to run =customize-save-customized= manually, because the settings above save
+the customizations during /startup/ (via the =after-init-hook=). So it saves the
+customizations that are already present in your configuration.
+
+So why did we turn that on, if it's redundant? It has to do with another use of
+the customization file:
+
+When you want to leave Crafted Emacs behind, your customization file will
+reflect much of your present settings. In particular, it will contain the
+settings that you /haven't/ added to your config yourself, but that stem from some
+Crafted Emacs module. So to leave Crafted Emacs behind, you don't need to go
+through the code of the modules and consider all the ifs and whens we had to
+consider for different users. You can see the resulting settings /for you/. It's
+all there in you customization file. Combine it with the stuff you added
+yourself and you have the basis for your new ~init.el~.
+
+True, to achieve that, these customizations don't need to be saved every
+session. When you decide to leave Crafted Emacs behind, you can just run
+=customize-save-customized= and =package--save-selected-packages= manually and
+achieve the same result. But we want to make it as easy as possible for users to
+leave Crafted Emacs behind. And as it doesn't have any noticeable effect on
+startup time, we just do it automatically every session and even spare you the
+need to run those two functions.
+
+Still, if you prefer not to save customizations and/or the list of selected
+packages during each startup, you can turn that behaviour off as described
+above.
+
 * Where to go from here
 
 Congratulations,
