@@ -326,7 +326,7 @@ following lines to your config:
 
 #+begin_src emacs-lisp
   (customize-set-variable 'crafted-init-auto-save-customized nil)
-  (customize-set-variable 'crafted-init-auto-save-selected-passages nil)
+  (customize-set-variable 'crafted-init-auto-save-selected-packages nil)
 #+end_src
 
 * Where to go from here
