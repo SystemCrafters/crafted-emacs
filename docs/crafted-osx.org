@@ -1,0 +1,42 @@
+* Crafted Emacs OSX Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; Load crafted-osx configuration
+(require 'crafted-osx-config)
+#+end_src
+
+** Description
+
+The =crafted-osx= module provides customizations to make Emacs more
+friendly on a Mac.  These largely have to do with keybindings as the
+Mac has a few keys different from a Linux or Windows computer.
+
+We bind Emacs =super= key to ⌘.  This allows the following keybindings
+to be set:
+
+| Keybinding | Meaning                          |
+|------------+----------------------------------|
+| ⌘-W        | (upper case W) delete-frame      |
+| ⌘-}        | tab-bar-switch-to-next-tab       |
+| ⌘-{        | tab-bar-switch-to-prev-tab       |
+| ⌘-t        | tab-bar-new-tab                  |
+| ⌘-w        | (lower case w) tab-bar-close-tab |
+|------------+----------------------------------|
+
+We provide a function to set the frame titlebar transparent.  You call
+it in your configuration like this:
+
+#+begin_src emacs-lisp
+  (crafted-osx-transparent-titlebar)
+#+end_src
+
+Note, this must come after loading the module as describe in the
+previous section.
+
+Finally, we add configuration to raise newly created frames by
+default. 
