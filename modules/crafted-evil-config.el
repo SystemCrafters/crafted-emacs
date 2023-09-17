@@ -61,18 +61,18 @@ Take some of the default keybindings for evil mode."
 
 Rebinds the arrow keys to display a message instead."
 
-  (defun crafted-evil/discourage-arrow-keys ()
+  (defun crafted-evil-discourage-arrow-keys ()
     (message "Use HJKL keys instead!"))
 
   ;; Disable arrow keys in normal and visual modes
-  (keymap-set evil-normal-state-map "<left>"  'crafted-evil/discourage-arrow-keys)
-  (keymap-set evil-normal-state-map "<right>" 'crafted-evil/discourage-arrow-keys)
-  (keymap-set evil-normal-state-map "<down>"  'crafted-evil/discourage-arrow-keys)
-  (keymap-set evil-normal-state-map "<up>"    'crafted-evil/discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<left>")  'crafted-evil/discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<right>") 'crafted-evil/discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<down>")  'crafted-evil/discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<up>")    'crafted-evil/discourage-arrow-keys))
+  (keymap-set evil-normal-state-map "<left>"  'crafted-evil-discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<right>" 'crafted-evil-discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<down>"  'crafted-evil-discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<up>"    'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<left>")  'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<right>") 'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<down>")  'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<up>")    'crafted-evil-discourage-arrow-keys))
 
 ;; Make sure some modes start in Emacs state
 ;; TODO: Split this out to other configuration modules?
