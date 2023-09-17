@@ -66,7 +66,7 @@
   (require 'cider "cider" :no-error)
   (require 'clj-refactor "clj-refactor" :no-error)
 
-  (defun crafted-lisp/load-clojure-refactor ()
+  (defun crafted-lisp-load-clojure-refactor ()
     "Load `clj-refactor' toooling and fix keybinding conflicts with cider."
     (when (locate-library "clj-refactor")
       (clj-refactor-mode 1)
@@ -74,7 +74,7 @@
       ;; conflict with cider, use this by default as it does
       ;; not conflict and is a better mnemonic
       (cljr-add-keybindings-with-prefix "C-c r")))
-  (add-hook 'clojure-mode-hook #'crafted-lisp/load-clojure-refactor)
+  (add-hook 'clojure-mode-hook #'crafted-lisp-load-clojure-refactor)
 
   (with-eval-after-load "flycheck"
     (flycheck-clojure-setup)))

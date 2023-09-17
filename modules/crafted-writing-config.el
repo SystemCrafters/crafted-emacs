@@ -139,11 +139,11 @@ Depends on having `pdf-tools'."
     (customize-set-variable 'TeX-source-correlate-start-server t)))
 
 ;; message the user if the latex executable is not found
-(defun crafted-writing/tex-warning-if-no-latex-executable ()
+(defun crafted-writing-tex-warning-if-no-latex-executable ()
   "Print a message to the minibuffer if the \"latex\" executable cannot be found."
   (unless (executable-find "latex")
     (message "latex executable not found")))
-(add-hook 'tex-mode-hook #'crafted-writing/tex-warning-if-no-latex-executable)
+(add-hook 'tex-mode-hook #'crafted-writing-tex-warning-if-no-latex-executable)
 
 (when (and (executable-find "latex")
            (executable-find "latexmk"))
@@ -153,10 +153,10 @@ Depends on having `pdf-tools'."
         (auctex-latexmk-setup)
         (customize-set-variable 'auctex-latexmk-inherit-TeX-PDF-mode t))
 
-      (defun crafted-writing/tex-make-latexmk-default-command ()
+      (defun crafted-writing-tex-make-latexmk-default-command ()
         "Set `TeX-command-default' to \"LatexMk\"."
         (setq TeX-command-default "LatexMk"))
-      (add-hook 'TeX-mode-hook #'crafted-writing/tex-make-latexmk-default-command))))
+      (add-hook 'TeX-mode-hook #'crafted-writing-tex-make-latexmk-default-command))))
 
 
 ;;; Markdown
@@ -180,11 +180,11 @@ Depends on having `pdf-tools'."
 
 ;;; PDF Support when using pdf-tools
 (when (locate-library "pdf-tools")
-  ;; load pdf-tools when going into doc-view-mode 
-  (defun crafted-writing/load-pdf-tools ()
+  ;; load pdf-tools when going into doc-view-mode
+  (defun crafted-writing-load-pdf-tools ()
     "Attempts to require pdf-tools, but for attaching to hooks."
     (require 'pdf-tools nil :noerror))
-  (add-hook 'doc-view-mode-hook #'crafted-writing/load-pdf-tools)
+  (add-hook 'doc-view-mode-hook #'crafted-writing-load-pdf-tools)
 
   ;; when pdf-tools is loaded, apply settings.
   (with-eval-after-load 'pdf-tools

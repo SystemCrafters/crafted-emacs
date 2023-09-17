@@ -14,7 +14,7 @@
 
 ;;; Code:
 
-(defun crafted-completion/minibuffer-backward-kill (arg)
+(defun crafted-completion-minibuffer-backward-kill (arg)
   "Delete word or delete up to parent folder when completion is a file.
 
 ARG is the thing being completed in the minibuffer."
@@ -131,13 +131,13 @@ ARG is the thing being completed in the minibuffer."
   (advice-add 'pcomplete-completions-at-point :around #'cape-wrap-purify)
 
   ;; No auto-completion or completion-on-quit in eshell
-  (defun crafted-completion/corfu-eshell ()
+  (defun crafted-completion-corfu-eshell ()
     "Special settings for when using corfu with eshell."
     (setq-local corfu-quit-at-boundary t
                 corfu-quit-no-match t
                 corfu-auto nil)
     (corfu-mode))
-  (add-hook 'eshell-mode-hook #'crafted-completion/corfu-eshell))
+  (add-hook 'eshell-mode-hook #'crafted-completion-corfu-eshell))
 
 (provide 'crafted-completion-config)
 ;;; crafted-completion.el ends here

@@ -27,7 +27,7 @@
   (add-hook 'org-mode-hook 'org-appear-mode))
 
 ;; Disable auto-pairing of "<" in org-mode with electric-pair-mode
-(defun crafted-org/enhance-electric-pair-inhibit-predicate ()
+(defun crafted-org-enhance-electric-pair-inhibit-predicate ()
   "Disable auto-pairing of \"<\" in `org-mode' when using `electric-pair-mode'."
   (when (and electric-pair-mode (eql major-mode #'org-mode))
     (setq-local electric-pair-inhibit-predicate
@@ -39,8 +39,8 @@
 ;; Add hook to both electric-pair-mode-hook and org-mode-hook
 ;; This ensures org-mode buffers don't behave weirdly,
 ;; no matter when electric-pair-mode is activated.
-(add-hook 'electric-pair-mode-hook #'crafted-org/enhance-electric-pair-inhibit-predicate)
-(add-hook 'org-mode-hook #'crafted-org/enhance-electric-pair-inhibit-predicate)
+(add-hook 'electric-pair-mode-hook #'crafted-org-enhance-electric-pair-inhibit-predicate)
+(add-hook 'org-mode-hook #'crafted-org-enhance-electric-pair-inhibit-predicate)
 
 (provide 'crafted-org-config)
 ;;; crafted-org-config.el ends here
