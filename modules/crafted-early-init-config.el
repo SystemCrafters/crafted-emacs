@@ -54,10 +54,9 @@ is skipped"
          (last-update-time (decode-time (file-attribute-modification-time
                                          (file-attributes archive-name))))
          (delta (make-decoded-time :day crafted-package-update-days)))
-    (if crafted-package-perform-stale-archive-check
+    (when crafted-package-perform-stale-archive-check
         (time-less-p (encode-time (decoded-time-add last-update-time delta))
-                     (encode-time today))
-      nil)))
+                     (encode-time today)))))
 
 (defun crafted-package-archives-stale-p ()
   "Return t if any package archives' cache is out of date.
