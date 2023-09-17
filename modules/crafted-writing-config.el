@@ -121,7 +121,7 @@ Example usage:
   (add-hook 'LaTeX-mode-hook #'LaTeX-math-mode)
 
   ;; add support for references
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (add-hook 'LaTeX-mode-hook #'turn-on-reftex)
   (customize-set-variable 'reftex-plug-into-AUCTeX t)
 
   ;; to have the buffer refresh after compilation

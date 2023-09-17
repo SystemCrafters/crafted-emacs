@@ -65,14 +65,14 @@ Rebinds the arrow keys to display a message instead."
     (message "Use HJKL keys instead!"))
 
   ;; Disable arrow keys in normal and visual modes
-  (keymap-set evil-normal-state-map "<left>"  'crafted-evil-discourage-arrow-keys)
-  (keymap-set evil-normal-state-map "<right>" 'crafted-evil-discourage-arrow-keys)
-  (keymap-set evil-normal-state-map "<down>"  'crafted-evil-discourage-arrow-keys)
-  (keymap-set evil-normal-state-map "<up>"    'crafted-evil-discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<left>")  'crafted-evil-discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<right>") 'crafted-evil-discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<down>")  'crafted-evil-discourage-arrow-keys)
-  (evil-global-set-key 'motion      (kbd "<up>")    'crafted-evil-discourage-arrow-keys))
+  (keymap-set evil-normal-state-map "<left>"  #'crafted-evil-discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<right>" #'crafted-evil-discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<down>"  #'crafted-evil-discourage-arrow-keys)
+  (keymap-set evil-normal-state-map "<up>"    #'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<left>")  #'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<right>") #'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<down>")  #'crafted-evil-discourage-arrow-keys)
+  (evil-global-set-key 'motion      (kbd "<up>")    #'crafted-evil-discourage-arrow-keys))
 
 ;; Make sure some modes start in Emacs state
 ;; TODO: Split this out to other configuration modules?
@@ -88,9 +88,9 @@ Rebinds the arrow keys to display a message instead."
   ;; otherwise set up some defaults
   (with-eval-after-load 'crafted-completion-config
     (when (featurep 'vertico) ; only if `vertico' is actually loaded.
-      (keymap-set vertico-map "C-j" 'vertico-next)
-      (keymap-set vertico-map "C-k" 'vertico-previous)
-      (keymap-set vertico-map "M-h" 'vertico-directory-up))))
+      (keymap-set vertico-map "C-j" #'vertico-next)
+      (keymap-set vertico-map "C-k" #'vertico-previous)
+      (keymap-set vertico-map "M-h" #'vertico-directory-up))))
 
 (provide 'crafted-evil-config)
 ;;; crafted-evil-config.el ends here
