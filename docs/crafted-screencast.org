@@ -18,17 +18,17 @@ points.
 
 ** Description
 
-- =Package: keycast=
+- Package: ~keycast~
 
   Package to show current command and its binding in the modeline or
   in the tab-bar. By default, activates keycast in the modeline.
 
-- =keycast-remove-tail-elements=: =nil=
+- ~keycast-remove-tail-elements~: =nil=
 
   By default, keycast-mode removes the elements to the right of the modeline.
   This may obscure information, so we'll disable it.
 
-- =keycast-insert-after=: =mode-line-misc-info=
+- ~keycast-insert-after~: =mode-line-misc-info=
 
   Insert keycast information after ~mode-line-misc-info~ in the
   ~mode-line-format~.

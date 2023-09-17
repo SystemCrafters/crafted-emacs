@@ -17,60 +17,59 @@ points.
 #+end_src
 
 ** Description
-The =crafted-org= module configures various settings related to =org-mode=
+The ~crafted-org~ module configures various settings related to ~org-mode~
 as well as installing a few additional related packages to enhance the
 experience.
 
-- =org-return-follows-link=: =t=
+- ~org-return-follows-link~: =t=
 
   Pressing =<RET>= while the cursor is over a link will follow the link.
 
-- =org-mouse-1-follows-link=: =t=
+- ~org-mouse-1-follows-link~: =t=
 
   Pressing =<Mouse 1>= (usually left-click) while the cursor is over a link
   will follow the link.
 
-- =org-link-descriptive=: =t=
+- ~org-link-descriptive~: =t=
 
   Display links in a prettified style, only showing the description
   (if provided).
 
-- New =org-mode-hook=: =org-indent-mode=
+- New ~org-mode-hook~: ~org-indent-mode~
 
   Visually indent org-mode files to a given header level.
 
-- =org-hide-emphasis-markers=: =t=
+- ~org-hide-emphasis-markers~: =t=
 
   Hides emphasis markers like =*bold*= or ==highlighted==.
 
-- New =org-mode-hook= and =electric-pair-mode-hook=:
+- New ~org-mode-hook~ and ~electric-pair-mode-hook~:
 
-  Adding a hook to setting the local =electric-pair-inhibit-predicate=
-  value to ignore =<= for auto-pairing.
-  It is attached to both hooks to ensure the predicate is set up properly
-  no matter which order the mode-hooks are run.
+  Adding a hook to setting the local ~electric-pair-inhibit-predicate~ value to
+  ignore =<= for auto-pairing. It is attached to both hooks to ensure the
+  predicate is set up properly no matter which order the mode-hooks are run.
 
-- =Package: denote=
+- Package: ~denote~
 
-  Denote is a simple note-taking system for Emacs. It is entirely based
-  around file-naming conventions.
+  Denote is a simple note-taking system for Emacs. It is entirely based around
+  file-naming conventions.
 
   It works with org, markdown and even basic text (txt) notes. If you have
   denote installed, [[info:denote][denote]].
 
-- =Package: org-appear=
+- Package: ~org-appear~
 
-  org-appear automatically toggles the appearance of certain elements
-  in org-mode when editing in the surrounded region. This is combined
-  with the org-mode setting =org-hide-emphasis-markers= to only show markers
-  when editing a region.
+  org-appear automatically toggles the appearance of certain elements in
+  org-mode when editing in the surrounded region. This is combined with the
+  org-mode setting ~org-hide-emphasis-markers~ to only show markers when editing a
+  region.
 
-  org-appear-mode is added as a hook to =org-mode-hook=, enabling when
+  org-appear-mode is added as a hook to ~org-mode-hook~, enabling when
   visiting an org-mode buffer.
 
 ** Alternative package: ~org-roam~
 
-=org-roam= is an alternative package option to =denote=. Compared to denote,
+~org-roam~ is an alternative package option to ~denote~. Compared to denote,
 it uses a SQLite database to organize notes and links. It requires a C
 compiler as an external dependency to interface with the database.
 

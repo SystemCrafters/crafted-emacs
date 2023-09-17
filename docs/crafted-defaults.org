@@ -17,7 +17,7 @@ points.
 
 ** Description
 
-The =crafted-defaults= module provides a variety of sensible settings that are
+The ~crafted-defaults~ module provides a variety of sensible settings that are
 commonly held to be universally useful for Emacs users.
 
 These defaults have been grouped into loose categories. However, most of them
@@ -30,7 +30,7 @@ the default.
 
 ** Buffers
 
-- =global-auto-revert-non-file-buffers= : =t=
+- ~global-auto-revert-non-file-buffers~ : =t=
 
   Automatically update buffers not backed by files (e.g. a directory listing in
   dired) if they are changed outside Emacs (e.g. by version control or a file
@@ -43,7 +43,7 @@ the default.
     (customize-set-variable 'global-auto-revert-non-file-buffers nil)
   #+end_src
 
-- =global-auto-revert-mode=
+- ~global-auto-revert-mode~
 
   Activate a global minor mode to revert any buffer when it changes either on
   disk or via another process (see above). Affects file buffers, too.
@@ -54,7 +54,7 @@ the default.
     (global-auto-revert-mode -1)
   #+end_src
 
-- =dired-dwim-target= : =t=
+- ~dired-dwim-target~ : =t=
 
   When dired shows two directories in separate dired buffers and you use copy
   or move commands in one of them, dired will assume the other directory as
@@ -67,7 +67,7 @@ the default.
     (customize-set-variable 'dired-dwim-target nil)
   #+end_src
 
-- =dired-auto-revert-buffer= : =t=
+- ~dired-auto-revert-buffer~ : =t=
 
   When revisiting a directory, automatically update dired buffers.
 
@@ -78,7 +78,7 @@ the default.
     (customize-set-variable 'dired-auto-revert-buffer nil)
   #+end_src
 
-- =eshell-scroll-to-bottom-on-input= : =this=
+- ~eshell-scroll-to-bottom-on-input~ : =this=
 
   In eshell buffers, scroll to the bottom on input, but only in the selected
   window.
@@ -91,7 +91,7 @@ the default.
     (customize-set-variable 'eshell-scroll-to-bottom-on-input nil)
   #+end_src
 
-- =switch-to-buffer-in-dedicated-window= : =pop=
+- ~switch-to-buffer-in-dedicated-window~ : =pop=
 
   Pop up dedicated buffers in a different window.
 
@@ -102,10 +102,10 @@ the default.
     (customize-set-variable 'switch-to-buffer-in-dedicated-window nil)
   #+end_src
 
-  See the documentation for =switch-to-buffer-in-dedicated-window= for more
+  See the documentation for ~switch-to-buffer-in-dedicated-window~ for more
   options.
 
-- =switch-to-buffer-obey-display-actions= : =t=
+- ~switch-to-buffer-obey-display-actions~ : =t=
 
   Treat manual buffer switching (C-x b for example) the same as programmatic
   buffer switching.
@@ -128,7 +128,7 @@ the default.
     (keymap-global-set "<remap> <list-buffers>" #'list-buffers)
   #+end_src
 
-- =ibuffer-movement-cycle= : =nil=
+- ~ibuffer-movement-cycle~ : =nil=
 
   When using ibuffer, turn off cycling forward and backward.
 
@@ -139,7 +139,7 @@ the default.
     (customize-set-variable 'ibuffer-movement-cycle t)
   #+end_src
 
-- =ibuffer-old-time= : 24
+- ~ibuffer-old-time~ : 24
 
   In ibuffer, consider buffers "old" after 24 hours.
 
@@ -152,14 +152,14 @@ the default.
 
 ** Completion
 
-- =fido-vertical-mode=, =icomplete-vertical-mode= or =icomplete-mode=
+- ~fido-vertical-mode~, ~icomplete-vertical-mode~ or ~icomplete-mode~
 
   Turn on the best completion-mode available:
 
-  - In Emacs 28 or later, turn on =fido-vertical-mode=.
-  - In earlier versions, if the additional package =icomplete-vertical= is
-    installed, turn on =icomplete-vertical-mode=.
-  - Otherwise, turn on =icomplete-mode=.
+  - In Emacs 28 or later, turn on ~fido-vertical-mode~.
+  - In earlier versions, if the additional package ~icomplete-vertical~ is
+    installed, turn on ~icomplete-vertical-mode~.
+  - Otherwise, turn on ~icomplete-mode~.
 
   You can change this by turning off the respective mode in your config, e.g.
   like this:
@@ -169,32 +169,32 @@ the default.
   #+end_src
 
   Note:
-  - To install =icomplete-vertical=, add the following code to the packages phase
+  - To install ~icomplete-vertical~, add the following code to the packages phase
     of your config:
 
   #+begin_src emacs-lisp
     (add-to-list 'package-selected-packages 'icomplete-vertical)
   #+end_src
    
-  - If you also use =crafted-completion-config= and have the package =vertico=
-    installed, all of these modes will be turned off in favour of =vertico=.
+  - If you also use ~crafted-completion-config~ and have the package ~vertico~
+    installed, all of these modes will be turned off in favour of ~vertico~.
 
 
 The following settings will apply, no matter which completion mode you use.
 
-- =tab-always-indent= : =complete=
+- ~tab-always-indent~ : =complete=
 
   When hitting the TAB key, Emacs first tries to indent the current line.
   If it is already indented, it tries to complete the thing at point.
 
-  To change this, see the documentation of =tab-always-indent= and change it in
+  To change this, see the documentation of ~tab-always-indent~ and change it in
   your config (or the Customizations UI) to reflect the desired behaviour, e.g.:
 
   #+begin_src emacs-lisp
     (customize-set-variable 'tab-always-indent nil)
   #+end_src
 
-- =completion-cycle-threshold= : =3=
+- ~completion-cycle-threshold~ : 3
 
   When selection completion candidates, setting this variable uses cycling, i.e.
   completing each of the candidates in turn. This set it up to use cycling as
@@ -207,7 +207,7 @@ The following settings will apply, no matter which completion mode you use.
     (customize-set-variable 'completion-cycle-threshold 3)
   #+end_src
 
-- =completion-category-overrides= : =file= : =partial-completion=
+- ~completion-category-overrides~ : =file= : =partial-completion=
 
   When completing file names, this settings allows for partial completion. When
   you type part of the filename Emacs will complete the rest if there's no
@@ -221,10 +221,10 @@ The following settings will apply, no matter which completion mode you use.
 
   Or see the documentation of the variable for alternatives. You can also use
   it for other category specific completion settings. For example, you can use
-  it to specify a different =completion-cycle-threshold= (see above) for files
+  it to specify a different ~completion-cycle-threshold~ (see above) for files
   and buffers respectively.
 
-- =completions-detailed= : =t=
+- ~completions-detailed~ : =t=
 
   Display completions with details (for example in C-h o).
 
@@ -234,7 +234,7 @@ The following settings will apply, no matter which completion mode you use.
     (customize-set 'completions-detailed nil)
   #+end_src
 
-- =xref-show-definitions-function= : =xref-show-definitions-completing-read=
+- ~xref-show-definitions-function~ : ~xref-show-definitions-completing-read~
 
   When using a definition search, and there is more than one definition, let
   the user choose between them by typing in the minibuffer with completion.
@@ -250,7 +250,7 @@ The following settings will apply, no matter which completion mode you use.
 
 ** Editing
 
-- =delete-selection-mode=
+- ~delete-selection-mode~
 
   Typed text replaces the selection if the selection is active, pressing delete
   or backspace deletes the selection.
@@ -261,7 +261,7 @@ The following settings will apply, no matter which completion mode you use.
     (delete-selection-mode -1)
   #+end_src
 
-- =indent-tabs-mode= : =nil=
+- ~indent-tabs-mode~ : =nil=
 
   Only indent using spaces.
 
@@ -272,11 +272,11 @@ The following settings will apply, no matter which completion mode you use.
     (customize-set-variable 'indent-tabs-mode t)
   #+end_src
 
-- =kill-do-not-save-duplicates= : =t=
+- ~kill-do-not-save-duplicates~ : =t=
 
-  The =kill-ring= is where Emacs stores the strings to paste later. This variable
+  The ~kill-ring~ is where Emacs stores the strings to paste later. This variable
   prohibits Emacs from storing duplicates of strings which are already on the
-  =kill-ring=.
+  ~kill-ring~.
 
   Change this setting either by finding it in the Customization UI or by adding
   this code to your config:
@@ -285,7 +285,7 @@ The following settings will apply, no matter which completion mode you use.
     (customize-set-variable 'kill-do-not-save-duplicates nil)
   #+end_src
 
-- =bidi-paragraph-direction= : =left-to-right=
+- ~bidi-paragraph-direction~ : =left-to-right=
 
   Force directionality of text paragraphs in the buffer. Crafted Emacs sets
   the default value as =left-to-right=, which means for buffers which don't have
@@ -298,7 +298,7 @@ The following settings will apply, no matter which completion mode you use.
     (customize-set-variable 'bidi-paragraph-direction 'right-to-left)
   #+end_src
 
-- =bidi-inhibit-bpa= : =t=
+- ~bidi-inhibit-bpa~ : =t=
 
   This setting will inhibit the Bidirectional Parentheses Algorithm, which
   makes redisplay faster.
@@ -309,7 +309,7 @@ The following settings will apply, no matter which completion mode you use.
     (setq bidi-inhibit-bpa nil)
   #+end_src
 
-- =global-so-long-mode=
+- ~global-so-long-mode~
 
   Improve performance for files with excessively long lines.
 
@@ -321,8 +321,8 @@ The following settings will apply, no matter which completion mode you use.
 
 - Look up dictionary definitions
 
-  Using ~M-#~ will lookup the word at point in a dictionary. See the documentation
-  of =dictionary-lookup-definition= or the README of the built-in =dictionary.el=
+  Using =M-#= will lookup the word at point in a dictionary. See the documentation
+  of ~dictionary-lookup-definition~ or the README of the built-in =dictionary.el=
   for details (https://github.com/myrkr/dictionary-el). It is set up to show
   dictionary definitions in a side window on the left (see the settings for
   Special Windows below).
@@ -337,7 +337,7 @@ The following settings will apply, no matter which completion mode you use.
 
 - Flyspell Mode
 
-  If =ispell= is available, this module automatically turns on =flyspell-mode=
+  If ~ispell~ is available, this module automatically turns on ~flyspell-mode~
   for text-mode and for the comments in prog-mode.
 
   You can change this by adding this code to your config:
@@ -349,27 +349,27 @@ The following settings will apply, no matter which completion mode you use.
 
 ** Navigation
 
-If you have the packages =hydra= and =dumb-jump= installed, this module adds a hydra
-definition for dumb-jump and binds it to ~C-M-y~.
+If you have the packages ~hydra~ and ~dumb-jump~ installed, this module adds a hydra
+definition for dumb-jump and binds it to =C-M-y=.
 
-You can change that binding by adding this code to your config, replace ~C-M-y~
+You can change that binding by adding this code to your config, replace =C-M-y=
 by the key stroke you prefer:
 
   #+begin_src emacs-lisp
     (keymap-set dumb-jump-mode-map "C-M-y" #'dumb-jump-hydra/body)
   #+end_src
 
-You can also use the =defhydra= command to overwrite the hydra. See the
+You can also use the ~defhydra~ command to overwrite the hydra. See the
 documentation of the hydra package for details.
 
 ** Persistence
 
-- =recentf-mode=
+- ~recentf-mode~
 
   This minor mode saves the files you visit as a recent file so you can load
-  that file again quickly. The command =recentf-open-files= will display a menu
+  that file again quickly. The command ~recentf-open-files~ will display a menu
   of files you opened recently so you can quickly open it again. This mode is
-  added to the =after-init-hook= which runs when Emacs is starting but after the
+  added to the ~after-init-hook~ which runs when Emacs is starting but after the
   initialization files have completed running.
 
   You can change the location of the recent file by adding this to your config:
@@ -384,7 +384,7 @@ documentation of the hydra package for details.
     (remove-hook 'after-init-hook 'recentf-mode)
   #+end_src
 
-- =savehist-mode=
+- ~savehist-mode~
 
   This minor mode saves minibuffer history in the =history= file. You can change
   the location of the file with the Customization UI or by adding the following
@@ -401,11 +401,11 @@ documentation of the hydra package for details.
     (savehist-mode -1)
   #+end_src
 
-- =bookmark-save-flag= : =1=
+- ~bookmark-save-flag~ : 1
 
   Save bookmarks to file every time you make or delete a bookmark.
 
-  To change this, see the documentation of =bookmark-save-flag= for valid values
+  To change this, see the documentation of ~bookmark-save-flag~ for valid values
   and then add code like this to your config (e.g. to never save bookmarks):
 
   #+begin_src emacs-lisp
@@ -414,19 +414,19 @@ documentation of the hydra package for details.
 
 ** Windows
 
-- =winner-mode=
+- ~winner-mode~
 
   Enable [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Window-Convenience.html][winner-mode]] and provides a set of keybindings that help you navigate
   through multiple windows.
 
-  =winner-mode= is a minor mode that, when activated, allows you to revert to a
+  ~winner-mode~ is a minor mode that, when activated, allows you to revert to a
   prior windows arrangement. It provides two functions to allow this:
-  =winner-undo= and =winner-redo=. These take you to earlier and later windows
+  ~winner-undo~ and ~winner-redo~. These take you to earlier and later windows
   arrangements respectively.
 
   To store the keybindings associated with this module, a new keymap is
-  created: =crafted-windows-key-map=, Additionally, this module defines a custom
-  variable, =crafted-windows-prefix-key=, which allows you to set the prefix key
+  created: ~crafted-windows-key-map~, Additionally, this module defines a custom
+  variable, ~crafted-windows-prefix-key~, which allows you to set the prefix key
   to the keymap. By default, this is set to =C-c w=, but you are free to change
   it.
 
@@ -462,9 +462,9 @@ documentation of the hydra package for details.
     (winner-mode -1)
   #+end_src
 
-- =auto-window-vscroll= : =nil=
+- ~auto-window-vscroll~ : =nil=
 
-  Turn off the automatic adjustment of =window-vscroll= to view tall lines.
+  Turn off the automatic adjustment of ~window-vscroll~ to view tall lines.
   Together with the following four settings, this makes scrolling less
   stuttered.
 
@@ -474,7 +474,7 @@ documentation of the hydra package for details.
     (setq auto-window-vscroll t)
   #+end_src
 
-- =fast-but-imprecise-scrolling= : =t=
+- ~fast-but-imprecise-scrolling~ : =t=
 
   Improves scrolling speed by not rendering fontification updates unless the
   text would actually be visible in the buffer. Applies when scrolling very
@@ -488,7 +488,7 @@ documentation of the hydra package for details.
     (customize-set-variable 'fast-but-imprecise-scrolling nil)
   #+end_src
 
-- =scroll-conservatively= : 101
+- ~scroll-conservatively~ : 101
 
   If the point moves off the screen, redisplay will scroll by up to 101 lines
   to bring it back on the screen again. If that is not enough, redisplay will
@@ -504,20 +504,20 @@ documentation of the hydra package for details.
   #+end_src
 
 
-- =scroll-margin= : 0
+- ~scroll-margin~ : 0
 
   Turn off automatic scrolling when the point comes near to the bottom or top
   of the window. Together with other settings in this section, this makes
   scrolling less stuttered.
 
-  To change this, set =scroll-margin= to a number of lines within which automatic
+  To change this, set ~scroll-margin~ to a number of lines within which automatic
   scrolling should be triggered, e.g.
 
   #+begin_src emacs-lisp
     (customize-set-variable 'scroll-margin 5)
   #+end_src
 
-- =scroll-preserve-screen-position= : =t=
+- ~scroll-preserve-screen-position~ : =t=
 
   When scrolling, move the point to keep its screen position unchanged.
   Together with other settings in this section, this makes scrolling less
@@ -529,7 +529,7 @@ documentation of the hydra package for details.
     (customize-set-variable 'scroll-preserve-screen-position nil)
   #+end_src
 
-- =Man-notify-method= : =aggressive=
+- ~Man-notify-method~ : =aggressive=
 
   Open man pages in their own window, and switch to that window to facilitate
   reading and closing the man page.
@@ -540,9 +540,9 @@ documentation of the hydra package for details.
     (customize-set-variable 'Man-notify-method 'friendly)
   #+end_src
 
-  See the documentation of =Man-notify-method= for other valid values.
+  See the documentation of ~Man-notify-method~ for other valid values.
 
-- =ediff-window-setup-function= : =ediff-setup-windows-plain=
+- ~ediff-window-setup-function~ : =ediff-setup-windows-plain=
 
   When using Ediff, keep the control panel in the same frame.
 
@@ -553,9 +553,9 @@ documentation of the hydra package for details.
                             'ediff-setup-windows-default)
   #+end_src
 
-  See the documentation of =ediff-window-setup-function= for details.
+  See the documentation of ~ediff-window-setup-function~ for details.
 
-- Special windows - =display-buffer-alist=
+- Special windows - ~display-buffer-alist~
 
   Define rules how Emacs opens some special windows.
 
@@ -567,11 +567,11 @@ documentation of the hydra package for details.
   - =*Help*=        :: If two windows are open, use not the current one, but the
                      other one. If only one window is open, open a new one.
 
-  To change this, see the documentation of =display-buffer-alist=.
+  To change this, see the documentation of ~display-buffer-alist~.
 
 ** Miscellaneous
 
-- =load-prefer-newer= : =t=
+- ~load-prefer-newer~ : =t=
 
   When both a compiled (.elc or .eln) and an uncompiled (.el) variant of a
   source file is present, load whichever is newest. This prevents puzzling
@@ -585,7 +585,7 @@ documentation of the hydra package for details.
     (customize-set-variable 'load-prefer-newer nil)
   #+end_src
 
-- =executable-make-buffer-file-executable-if-script-p=
+- ~executable-make-buffer-file-executable-if-script-p~
 
   When saving a file that starts with the shebang (=#!=), make that file
   executable.
@@ -597,19 +597,19 @@ documentation of the hydra package for details.
                  'executable-make-buffer-file-executable-if-script-p)
   #+end_src
 
-- =repeat-mode=
+- ~repeat-mode~
 
   If available (beginning with Emacs 28), turn on repeat mode to allow certain
   keys to repeat on the last keystroke.
 
-  For example, ~C-x [~ to page backward, after pressing this keystroke once,
-  pressing repeated ~[~ keys will continue paging backward.
+  For example, =C-x [= to page backward, after pressing this keystroke once,
+  pressing repeated =[= keys will continue paging backward.
 
-  =repeat-mode= is exited with the normal ~C-g~, by movement keys, typing, or
+  ~repeat-mode~ is exited with the normal =C-g=, by movement keys, typing, or
   pressing ESC three times.
 
-  Note that in the case of =undo= (by default bound to ~C-x u~), pressing ~u~
-  repeatedly will iterate further undos, but typing ~C-x u~ again will act as an
+  Note that in the case of ~undo~ (by default bound to =C-x u=), pressing =u=
+  repeatedly will iterate further undos, but typing =C-x u= again will act as an
   undo of the undo, i.e. a redo, which is handy, but possibly unexpected.
 
   To change this, add the following code to your config:

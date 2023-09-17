@@ -18,32 +18,31 @@ points.
 
 ** Description
 
-The =crafted-ide= module sets up (and installs if necessary) functionality
-that makes Emacs act like a integrated development environment (IDE).
+The ~crafted-ide~ module sets up (and installs if necessary) functionality that
+makes Emacs act like a integrated development environment (IDE).
 
 It sets up project based buffer management ([[https://github.com/muffinmad/emacs-ibuffer-project][ibuffer-project]]) and a
-semi-automatic indentation ([[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent]]) for many programming and
-markup languages.
+semi-automatic indentation ([[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent]]) for many programming and markup
+languages.
 
 If you use [[https://editorconfig.org][EditorConfig]], this module provides support for that, too (see
 [[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]] for details).
 
-Furthermore, it sets up Eglot (a LSP-client) and Tree-Sitter (a next
-generation syntax parser).
+Furthermore, it sets up Eglot (a LSP-client) and Tree-Sitter (a next generation
+syntax parser).
 
 *** Eglot
 
-[[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP) built into
-Emacs (>=29). For it to work, you have to have a LSP-Server installed for
-the language of your choice. Usually, these have to be installed through
-your operating system. See [[https://github.com/joaotavora/eglot#connecting-to-a-server][this list]] of servers that work with Eglot out
-of the box.
+[[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP) built into Emacs
+(>=29). For it to work, you have to have a LSP-Server installed for the
+language of your choice. Usually, these have to be installed through your
+operating system. See [[https://github.com/joaotavora/eglot#connecting-to-a-server][this list]] of servers that work with Eglot out of the box.
 
 *** Tree-Sitter
 
 Tree-Sitter support (built-in since Emacs 29) enables Emacs to better
-understand the syntax of your code, thus improving syntax highlighting
-and similar functions.
+understand the syntax of your code, thus improving syntax highlighting and
+similar functions.
 
 **** Combobulate
 

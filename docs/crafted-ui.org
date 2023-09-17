@@ -17,7 +17,7 @@ points.
 #+end_src
 
 ** Description
-The =crafted-ui= module provides a few interface customizations.
+The ~crafted-ui~ module provides a few interface customizations.
 
 It installs the packages
 
@@ -27,12 +27,12 @@ It installs the packages
 - elisp-demos :: Code examples that can be displayed by helpful.
 
 It further provides custom variables which can be used to turn on line
-numbers in certain major modes (i.e. =prog-mode= and =conf-mode=) while leaving
+numbers in certain major modes (i.e. ~prog-mode~ and ~conf-mode~) while leaving
 them turned off for others.   
 
-*** Icons with =all-the-icons=
+*** Icons with ~all-the-icons~
 
- For =all-the-icons= to work, the necessary fonts need to be installed on
+ For ~all-the-icons~ to work, the necessary fonts need to be installed on
 your system. If you see a "stop"-icon with an exclamation mark at the
 beginning of this paragraph, you're good to go.
 
