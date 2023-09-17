@@ -44,7 +44,7 @@ Useful for quickly switching to an open buffer."
   (speedbar-change-initial-expansion-list "quick buffers"))
 
 ;; map switch-to-quick-buffers in speedbar-mode
-(keymap-set speedbar-mode-map "b" 'crafted-speedbar-switch-to-quick-buffers)
+(keymap-set speedbar-mode-map "b" #'crafted-speedbar-switch-to-quick-buffers)
 
 ;;; File Extensions
 (speedbar-add-supported-extension
