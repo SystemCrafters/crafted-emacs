@@ -36,8 +36,8 @@ manually with something like this:
                    (not (eq 'lisp-mode mode))     ; prefer sly/slime
                    (not (eq 'scheme-mode mode))   ; prefer geiser
                    )
-          (let ((hook-name (concat (symbol-name mode) "-hook")))
-            (message (concat "adding eglot to " hook-name))
+          (let ((hook-name (format "%s-hook" (symbol-name mode))))
+            (message "adding eglot to %s" hook-name)
             (add-hook (intern hook-name) #'eglot-ensure))))))))
 
 ;; add eglot to existing programming modes when eglot is loaded.
@@ -61,7 +61,7 @@ tree-sitter for LANG-SYMBOL.
 Example: `(crafted-tree-sitter-load 'python)'"
       (tree-sitter-require lang-symbol)
       (let ((mode-hook-name
-             (intern (concat (symbol-name lang-symbol) "-mode-hook"))))
+             (intern (format "%s-mode-hook" (symbol-name lang-symbol)))))
         (add-hook mode-hook-name #'tree-sitter-mode)))))
 
 ;; Emacs versions after 29
