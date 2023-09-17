@@ -79,14 +79,14 @@ explicitly."))
 
 (let ((modules (expand-file-name "./modules/" crafted-emacs-home)))
   (when (file-directory-p modules)
-    (message (concat "adding modules to load-path: " modules))
+    (message "adding modules to load-path: %s" modules)
     (add-to-list 'load-path modules)))
 
 ;; If a `custom-modules' directory exists in the
 ;; `user-emacs-directory', include it on the load-path.
 (let ((custom-modules (expand-file-name "custom-modules" user-emacs-directory)))
   (when (file-directory-p custom-modules)
-    (message "adding custom-modules to load-path")
+    (message "adding custom-modules to load-path: %s" custom-modules)
     (add-to-list 'load-path custom-modules)))
 
 ;; When writing crafted-modules, insert header from skeleton
