@@ -16,33 +16,33 @@ Emacs configuration settings.
 ** Interactively from Emacs
 
 Requirements:
-- =emacs= in your =$PATH=
+- ~emacs~ in your ~$PATH~
 
 Evaluating this block will load the =crafted-docs.el= file into your Emacs:
 
 #+begin_src emacs-lisp
-(load (expand-file-name "crafted-docs.el"))
+  (load (expand-file-name "crafted-docs.el"))
 #+end_src
 
 Afterwards, the info file can be exported by running
 =M-x crafted-docs-export RET=.
 
 If you're using Crafted Emacs and develop inside the repository you cloned,
-you can set =crafted-docs-export-use-crafted-emacs-home= to =t= to utilize the
-=crafted-emacs-home= path to auto-find the documentation when running
+you can set ~crafted-docs-export-use-crafted-emacs-home~ to =t= to utilize the
+~crafted-emacs-home~ path to auto-find the documentation when running
 =M-x crafted-docs-export RET=.
 
 ** Using ~make~
 
 Requirements:
-- =emacs= in your =$PATH=
-- =make= in your =$PATH=
+- ~emacs~ in your ~$PATH~
+- ~make~ in your ~$PATH~
 
-If you're familiar with =make= and already have a workflow using for example
-the =compile= command in Emacs, you can use it in the =docs/= directory:
+If you're familiar with ~make~ and already have a workflow using for example
+the ~compile~ command in Emacs, you can use it in the =docs/= directory:
 
 #+begin_src shell
-make docs
+  make docs
 #+end_src
 
 Running =make docs= will automatically build the =crafted-emacs.info= file
@@ -63,11 +63,27 @@ unless the info file is already up-to-date.
 
 * Guidelines
 
+  + Provide examples.
   + Make sure your grammar is correct.
   + Spellcheck your work.
+  + Use consistent formatting in the org docs:
+    - use === for ::
+      + file paths, e.g. =init.el=
+      + buffer names, e.g. =*Messages*=
+      + values (except numbers, which stay plain), e.g. =nil=
+      + keystrokes or keybindings, e.g. =C-n=
+      + text (to be) entered into the minibuffer (unless it is a complete
+        command name), e.g. =buf=
+      + info nodes, e.g. =(emacs)Just Spaces=
+    - use =~= for ::
+      + module names, e.g. ~crafted-defaults-config~
+      + variable names, incl. external ones, e.g. ~load-prefer-newer~, ~$PATH~
+      + function names, e.g. ~car~
+      + command names, incl. external ones, e.g. ~find-file~, ~make~
+      + package names, incl. ones that are shaped like a file name, e.g. ~denote~,
+        ~package.el~
   + Preview the info document in Emacs to make sure the formatting
     works.
   + Use =@@texinfo:@code{}@@= or =@@texinfo:@samp{}@@= tags in
-    headers, captions, or other places where org formatting does not
-    directly translate correctly.
-  + Provide examples.
+    places where org formatting does not directly translate correctly.
+

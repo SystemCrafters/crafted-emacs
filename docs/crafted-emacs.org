@@ -99,15 +99,14 @@ file.
   this configuration are optional or interchangeable.
 
   You should even be able to use the configuration modules we provide
-  with your own ~init.el~ file without using this base configuration
+  with your own =init.el= file without using this base configuration
   repo!
 
 * Getting Started
 
-Welcome to @@texinfo:@emph{Crafted Emacs}@@.
+Welcome to Crafted Emacs.
 
-This section provides introductory material for setting up
-@@texinfo:@emph{Crafted Emacs}@@.
+This section provides introductory material for setting up Crafted Emacs.
 We'll approach this from the perspective of the brand new Emacs user.
 
 If you are already familiar with Emacs, you'll be able to skim this guide
@@ -119,17 +118,16 @@ for the code examples.
 
 ** Using alternate package managers
 
-  Not everyone will prefer to use Emacs' built-in package manager,
-  ~package.el~.  Using the package bundle modules from
-  @@texinfo:@emph{Crafted Emacs}@@ is still possible, however, you will
-  potentially need to iterate over the ~package-selected-packages~
-  list to perform the install for your package manager.  To help with
-  that, the ~crafted-package-config~ module provides a variable to set
-  and a function to call.
+  Not everyone will prefer to use Emacs' built-in package manager, ~package.el~.
+  Using the package bundle modules from Crafted Emacs is still possible,
+  however, you will potentially need to iterate over the
+  ~package-selected-packages~ list to perform the install for your package
+  manager. To help with that, the ~crafted-package-config~ module provides a
+  variable to set and a function to call.
 
   Here is an example using ~straight-use-package~ as the tool to install
   packages. The following lines must be called before any package is installed
-  (preferable in ~early-init.el~):
+  (preferable in =early-init.el=):
 
   #+begin_src emacs-lisp
     (load (expand-file-name "modules/crafted-package-config" crafted-emacs-home))
@@ -138,21 +136,21 @@ for the code examples.
     (setq crafted-package-installed-predicate #'straight--installed-p)
   #+end_src
 
-  In your ~init.el~ you have to call ~crafted-package-install-selected-packages~
+  In your =init.el= you have to call ~crafted-package-install-selected-packages~
   instead of ~package-install-selected-packages~, after adding your packages to
   ~package-selected-packages~.
 
-  Note: This usage is simple in the sense full recipes are not used
-  when using @@texinfo:@emph{Crafted Emacs}@@ package bundle modules.
-  The above essentially runs code like the following:
+  Note: This usage is simple in the sense full recipes are not used when using
+  Crafted Emacs package bundle modules. The above essentially runs code like the
+  following:
 
   #+begin_src emacs-lisp
     (straight-use-package 'corfu)
   #+end_src
 
   You find a full example [[file:../examples/crafted-early-init-straight.el][crafted-early-init-straight.el]] to bootstrap straight
-  in the examples directory. Merge it into your ~early-init.el~ or copy it to your
-  ~custom-modules~ folder. In the later case ~early-init.el~ would look like
+  in the examples directory. Merge it into your =early-init.el= or copy it to your
+  =custom-modules= folder. In the later case =early-init.el= would look like
   this:
 
   #+begin_src emacs-lisp
@@ -162,20 +160,18 @@ for the code examples.
                           user-emacs-directory))
   #+end_src
 
-  It is not required to use the @@texinfo:@emph{Crafted Emacs}@@
-  package bundle modules, you are free to install packages in whatever
-  manner you choose, for example, using ~guix-home~ to install Emacs
-  packages from the Guix Store.  Similarly, using ~straight~,
-  ~elpaca~, ~package-vc~ or others can be used to install any packages
-  you choose.  Once your packages are installed, you can then use the
-  @@texinfo:@emph{Crafted Emacs}@@ configuration modules.  These
-  modules have names like ~crafted-completion-config.el~ for example.
-  Add these to your ~init.el~ @@texinfo:@strong{after}@@ installing
-  packages.
+  It is not required to use the Crafted Emacs package bundle modules, you are
+  free to install packages in whatever manner you choose, for example, using
+  ~guix-home~ to install Emacs packages from the Guix Store. Similarly, using
+  ~straight~, ~elpaca~, ~package-vc~ or others can be used to install any packages you
+  choose. Once your packages are installed, you can then use the Crafted Emacs
+  configuration modules. These modules have names like
+  ~crafted-completion-config.el~ for example. Add these to your =init.el= *after*
+  installing packages.
 
-** The @@texinfo:@code{custom.el}@@ file
+** The =custom.el= file
 
-   The ~custom.el~ file will hold the auto-generated code from the Emacs
+   The =custom.el= file will hold the auto-generated code from the Emacs
    Customization UI.
 
 *** Simplified overview of how Emacs Customization works
@@ -188,31 +184,31 @@ for the code examples.
     consider two of them: the default state and the changed state. These are not
     the "official" names but easily convey the concepts of the variable. If a
     value is in the default state, looking in the Customization UI, the state
-    will be listed as ~STANDARD~. Crafted Emacs takes the approach of using the
-    ~customize-set-variable~ to update the values defined with
-    ~defcustom~. This will show the values as ~SET for current session only~ in
-    the Customization UI. This is normal since the values are set each time
-    Emacs starts. They are technically "SAVED" since they exist as emacs-lisp
-    code, but since they are not in a ~custom-set-variables~ form the
-    Customization UI only sees them as "SET for the current session only".
+    will be listed as =STANDARD=. Crafted Emacs takes the approach of using the
+    ~customize-set-variable~ to update the values defined with ~defcustom~. This
+    will show the values as =SET for current session only= in the Customization
+    UI. This is normal since the values are set each time Emacs starts. They are
+    technically "SAVED" since they exist as emacs-lisp code, but since they are
+    not in a ~custom-set-variables~ form the Customization UI only sees them as
+    "SET for the current session only".
 
-    A ~SAVED and set~ value means the Customization code has written the
+    A =SAVED and set= value means the Customization code has written the
     configuration to disk to be loaded again the next time Emacs starts. When
     Emacs saves the configuration from the Customization UI, it simply adds a
     couple of forms to the end of your initialization file (typically
-    ~init.el~), with comments warning about having more than one form with the
+    =init.el=), with comments warning about having more than one form with the
     same name (see example below).
 
-*** Loading the @@texinfo:@code{custom.el}@@ file
+*** Loading the =custom.el= file
 
     This is important because if you, the user, wish to use the Customization UI
     to configure Emacs, the customizations will (by default) be written to the
-    of the ~init.el~ file in a form called ~custom-set-variables~ and
+    of the =init.el= file in a form called ~custom-set-variables~ and
     ~custom-set-faces~. 
 
-    This snippet, added to the top of your ~init.el~ file sets the name of the
-    file holding Emacs customizations to be ~custom.el~ in the same directory
-    where your ~init.el~ file resides.  Additionally, the code checks to see if
+    This snippet, added to the top of your =init.el= file sets the name of the
+    file holding Emacs customizations to be =custom.el= in the same directory
+    where your =init.el= file resides.  Additionally, the code checks to see if
     the file exists, and if so, loads it to take advantage of the saved
     configuration therein.
     
@@ -228,7 +224,7 @@ for the code examples.
     configured than just these.
     
     #+name: custom.el
-    #+caption: Example auto-generated @@texinfo:@code{custom.el}@@ file.
+    #+caption: Example auto-generated =custom.el= file.
     #+begin_src emacs-lisp
       (custom-set-variables
        ;; custom-set-variables was added by Custom.
@@ -322,22 +318,22 @@ for the code examples.
    actions in your configuration:
 
    - Option 1
-     + Use ~M-x list-packages~ to display the list of packages.
+     + Use =M-x list-packages= to display the list of packages.
      + Find the package in the list which doesn't work for you, it will have
        either the /installed/ or /dependency/ status.
-     + Press the ~enter~ key to get more details on the package an look near the
+     + Press the =enter= key to get more details on the package an look near the
        bottom of the metadata, you should see a line with "Other Versions". Choose
        the development version - it will have a version number that looks like a
-       date and the text ~(melpa)~ next to it. Press ~enter~ on this version.
+       date and the text =(melpa)= next to it. Press =enter= on this version.
      + Following the step above will take you to the same package but from the
        MELPA repository, and you'll see a button at the top labeled
-       ~Install~. Click this button.
+       =Install=. Click this button.
      + *Optionally* you can go back to the list of packages, find previous
        installed version, press the letter 'D' and then the letter 'X' to
        uninstall that version.
      + Restart Emacs
    - Option 2
-     + Edit your ~early-config.el~ file.
+     + Edit your =early-config.el= file.
      + Near the bottom, add a line similar to this to pin the offending package
        to MELPA (make sure to replace /package-name/ with the name of the actual
        package):
@@ -346,16 +342,16 @@ for the code examples.
          (add-to-list 'package-pinned-packages (cons 'package-name "melpa"))
        #+end_src
 
-     + Use ~M-x package-list-packages~ to display the list of packages.
-     + Find the package in the list, press the letter 'D' and the letter 'X' to
+     + Use =M-x package-list-packages= to display the list of packages.
+     + Find the package in the list, press the letter =D= and the letter =X= to
        uninstall that package.
      + Restart Emacs, the package should be installed from MELPA thus using the
        development version of the package instead of the released version.
 
    Regardless, always feel free to open an issue here and we can help you
    out. Please be as complete as possible in your description of the
-   problem. Include any stack traces Emacs provides (ie start Emacs with: ~emacs
-   --debug-init~), mention the version number of the package you are installing,
+   problem. Include any stack traces Emacs provides (ie start Emacs with: =emacs
+   --debug-init=), mention the version number of the package you are installing,
    and anything you might have tried but which didn't work for you.
 
 * License
@@ -363,7 +359,7 @@ for the code examples.
   :COPYING:  t
   :END:
 
-  Copyright \copy 2022 System Crafters Community
+  Copyright \copy 2023 System Crafters Community
 
   #+caption: MIT License
   #+begin_quote

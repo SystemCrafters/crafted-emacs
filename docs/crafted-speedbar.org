@@ -20,7 +20,7 @@ points.
 Speedbar is a tree-like view model built-in to Emacs.
 It can be used for viewing file-trees, currently open buffers and more.
 
-- =speedbar-update-flag=: =t=
+- ~speedbar-update-flag~: =t=
 
   Update the speedbar view if the directory of the attached frame changes.
 
@@ -31,7 +31,7 @@ It can be used for viewing file-trees, currently open buffers and more.
   (setq-default speedbar-update-flag nil)
   #+end_src
 
-- =speedbar-use-images=: =nil=
+- ~speedbar-use-images~: =nil=
 
   Speedbar uses small images for directories, files and file-local structures,
   however in many configurations they turn out pixelated or don't fit the theme.
@@ -43,9 +43,9 @@ It can be used for viewing file-trees, currently open buffers and more.
   (setq-default speedbar-use-images t)
   #+end_src
 
-- =speedbar-frame-parameters=
+- ~speedbar-frame-parameters~
 
-  Customizing =speedbar-frame-parameters= sets additional frame parameters
+  Customizing ~speedbar-frame-parameters~ sets additional frame parameters
   for speedbar frames.
 
   Crafted Emacs adds a frame name/title, removes the minibuffer status
@@ -64,7 +64,7 @@ It can be used for viewing file-trees, currently open buffers and more.
                            (left-fringe . 0)))
   #+end_src
 
-- =new keybinding=: =crafted-speedbar-switch-to-quick-buffers= (=b=)
+- new keybinding: ~crafted-speedbar-switch-to-quick-buffers~ (=b=)
 
   Temporarily change speedbar into a buffer switching tool,
   displaying the currently open buffers.
@@ -78,7 +78,7 @@ It can be used for viewing file-trees, currently open buffers and more.
               #'crafted-speedbar-switch-to-quick-buffers)
   #+end_src
 
-- =speedbar-add-supported-extension=: new extensions
+- ~speedbar-add-supported-extension~: new extensions
 
   Crafted Emacs adds a wide selection of file extensions that support
   tagging to speedbar's tagging system.

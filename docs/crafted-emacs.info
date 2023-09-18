@@ -1,7 +1,7 @@
 This is crafted-emacs.info, produced by makeinfo version 7.0.3 from
 crafted-emacs.texi.
 
-Copyright © 2022 System Crafters Community
+Copyright © 2023 System Crafters Community
 
      Permission is hereby granted, free of charge, to any person
      obtaining a copy of this software and associated documentation
@@ -337,10 +337,10 @@ File: crafted-emacs.info,  Node: Getting Started,  Next: Customization,  Prev: W
 4 Getting Started
 *****************
 
-Welcome to _Crafted Emacs_.
+Welcome to Crafted Emacs.
 
-   This section provides introductory material for setting up _Crafted
-Emacs_.  We’ll approach this from the perspective of the brand new Emacs
+   This section provides introductory material for setting up Crafted
+Emacs.  We’ll approach this from the perspective of the brand new Emacs
 user.
 
    If you are already familiar with Emacs, you’ll be able to skim this
@@ -388,8 +388,8 @@ something else.
 
    If you aren’t starting from scratch, then you probably have some
 configuration already working and you want to add or use some of the
-configuration found in _Crafted Emacs_.  You probably have to adapt and
-rewrite parts of your configuration to work with _Crafted Emacs_.
+configuration found in Crafted Emacs.  You probably have to adapt and
+rewrite parts of your configuration to work with Crafted Emacs.
 
    Wherever you decide to put your Emacs configuration will be known as
 ‘user-emacs-directory’ for the rest of this guide.
@@ -400,15 +400,15 @@ File: crafted-emacs.info,  Node: Cloning the repository,  Prev: Cleaning out you
 4.1.2 Cloning the repository
 ----------------------------
 
-To use _Crafted Emacs_, you will need to download the repository.  It is
+To use Crafted Emacs, you will need to download the repository.  It is
 up to you where you clone to.  If you are not sure where to clone to,
 you can use your home directory.
 
      # N.B. As this is still a beta release, use the craftedv2beta branch
      git clone https://github.com/SystemCrafters/crafted-emacs -b craftedv2beta
 
-   For the rest of this guide, the location where you cloned _Crafted
-Emacs_ to will be known as ‘crafted-emacs-home’.
+   For the rest of this guide, the location where you cloned Crafted
+Emacs to will be known as ‘crafted-emacs-home’.
 
 
 File: crafted-emacs.info,  Node: Bootstrapping Crafted Emacs,  Next: Crafted Emacs Modules,  Prev: Initial setup,  Up: Getting Started
@@ -417,7 +417,7 @@ File: crafted-emacs.info,  Node: Bootstrapping Crafted Emacs,  Next: Crafted Ema
 ===============================
 
 After cloning the crafted-emacs repository, we need to let Emacs know
-how to load _Crafted Emacs_.
+how to load Crafted Emacs.
 
 * Menu:
 
@@ -478,7 +478,7 @@ the ‘user-emacs-directory’:
      listed above.  This means, we prefer to get packages from GNU Elpa
      first, if not found, then try the next repository down the list,
      finally trying to get the package from MELPA as a last resort.
-     This is because _Crafted Emacs_ prefers released versions, if
+     This is because Crafted Emacs prefers released versions, if
      available, for all packages installed.
    • Check to make sure the repository cache archives are up-to-date,
      and update if needed.  This check is performed when Emacs is
@@ -488,8 +488,8 @@ the ‘user-emacs-directory’:
      the check at all, set the
      ‘crafted-package-perform-stale-archive-check’ variable to ‘nil’.
 
-   Once _Crafted Emacs_ is up and running, no stale checks are made.
-Thus, if you run _Crafted Emacs_ for several days without restarting
+   Once Crafted Emacs is up and running, no stale checks are made.
+Thus, if you run Crafted Emacs for several days without restarting
 Emacs, you’ll need to refresh the package repository archive caches
 manually.  This is done automatically when running
 ‘package-list-packages’.
@@ -549,8 +549,8 @@ File: crafted-emacs.info,  Node: Crafted Emacs Modules,  Next: Example Configura
 4.3 Crafted Emacs Modules
 =========================
 
-Now that you have bootstrapped _Crafted Emacs_, you can start
-configuring Emacs using Crafted Emacs Modules.
+Now that you have bootstrapped Crafted Emacs, you can start configuring
+Emacs using Crafted Emacs Modules.
 
 * Menu:
 
@@ -564,23 +564,23 @@ File: crafted-emacs.info,  Node: Installing packages,  Next: Using Crafted Emacs
 -------------------------
 
 The standard approach to finding and installing packages is to use the
-command ‘M-x list-packages RET’, which will bring up a user interface to
+command ‘M-x list-packages’, which will bring up a user interface to
 search for packages, review the package details, install, update or
 remove package.  For more information: *note Packages: (emacs)Packages.
 or on the web: Packages
 (https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html).
 
-   _Crafted Emacs_ uses the selection facilities for batch-installation
-of packages.  This means all packages are added to a list (namely
+   Crafted Emacs uses the selection facilities for batch-installation of
+packages.  This means all packages are added to a list (namely
 ‘package-selected-packages’) and installed at once.
 
      ;; Example: Adding "vertico" to the package-selected-packages list (init.el)
      (add-to-list 'package-selected-packages 'vertico)
 
-   Additionally, _Crafted Emacs_ provides a few modules which are
-bundled together packages for installation.  Each of these modules
-simply adds one or more package names to the ‘package-selected-packages’
-list, for example:
+   Additionally, Crafted Emacs provides a few modules which are bundled
+together packages for installation.  Each of these modules simply adds
+one or more package names to the ‘package-selected-packages’ list, for
+example:
 
      ;; snippet of crafted-completion-packages.el:
      ;; not all package names are shown here, the list is shortened for
@@ -604,7 +604,7 @@ File: crafted-emacs.info,  Node: Using Crafted Emacs Modules,  Prev: Installing 
 4.3.2 Using Crafted Emacs Modules
 ---------------------------------
 
-There are two types of modules provided by _Crafted Emacs_.
+There are two types of modules provided by Crafted Emacs.
 
   1. Package modules (bundle together multiple packages for
      installation)
@@ -615,7 +615,7 @@ There are two types of modules provided by _Crafted Emacs_.
   1. Package definitions: crafted-*-packages
 
      As explained earlier in the guide, you can add packages manually
-     using ‘add-to-list’.  Additionally, _Crafted Emacs_ provides a few
+     using ‘add-to-list’.  Additionally, Crafted Emacs provides a few
      modules which are bundled together packages for installation.  Each
      of these modules simply adds one or more package names to the
      ‘package-selected-packages’ list.  The bundles of packages are
@@ -635,9 +635,9 @@ There are two types of modules provided by _Crafted Emacs_.
           # In a shell/term from the crafted-emacs-home directory
           ls ./modules/*-packages.el
 
-  2. Configuration: crafted-*-config
+  2. Configuration: ‘crafted-*-config’
 
-     The configuration code provided by _Crafted Emacs_ is to be loaded
+     The configuration code provided by Crafted Emacs is to be loaded
      after installing all the packages.
 
           ;; install selected packages
@@ -761,9 +761,9 @@ need to run those two functions.
 selected packages during each startup, you can turn that behaviour off
 as described above.
 
-   Please note: These variables only affect whether _Crafted Emacs_ will
-or won’t automatically store anything set by customize-set-variable, but
-that doesn’t hinder other processes in Emacs to do so.
+   Please note: These variables only affect whether Crafted Emacs will
+or won’t automatically store anything set by ‘customize-set-variable’,
+but that doesn’t hinder other processes in Emacs to do so.
 
 
 File: crafted-emacs.info,  Node: Where to go from here,  Prev: To save or not to save customizations,  Up: Getting Started
@@ -771,7 +771,7 @@ File: crafted-emacs.info,  Node: Where to go from here,  Prev: To save or not to
 4.6 Where to go from here
 =========================
 
-Congratulations, crafted-emacs is now set up for you to start your
+Congratulations, Crafted Emacs is now set up for you to start your
 configuration.
 
    Here are some pointers to get you started:
@@ -801,7 +801,7 @@ File: crafted-emacs.info,  Node: Using alternate package managers,  Next: The cu
 ====================================
 
 Not everyone will prefer to use Emacs’ built-in package manager,
-‘package.el’.  Using the package bundle modules from _Crafted Emacs_ is
+‘package.el’.  Using the package bundle modules from Crafted Emacs is
 still possible, however, you will potentially need to iterate over the
 ‘package-selected-packages’ list to perform the install for your package
 manager.  To help with that, the ‘crafted-package-config’ module
@@ -822,8 +822,8 @@ is installed (preferable in ‘early-init.el’):
 ‘package-selected-packages’.
 
    Note: This usage is simple in the sense full recipes are not used
-when using _Crafted Emacs_ package bundle modules.  The above
-essentially runs code like the following:
+when using Crafted Emacs package bundle modules.  The above essentially
+runs code like the following:
 
      (straight-use-package 'corfu)
 
@@ -838,12 +838,12 @@ would look like this:
      (load (expand-file-name "custom-modules/crafted-early-init-straight"
                              user-emacs-directory))
 
-   It is not required to use the _Crafted Emacs_ package bundle modules,
+   It is not required to use the Crafted Emacs package bundle modules,
 you are free to install packages in whatever manner you choose, for
 example, using ‘guix-home’ to install Emacs packages from the Guix
 Store.  Similarly, using ‘straight’, ‘elpaca’, ‘package-vc’ or others
 can be used to install any packages you choose.  Once your packages are
-installed, you can then use the _Crafted Emacs_ configuration modules.
+installed, you can then use the Crafted Emacs configuration modules.
 These modules have names like ‘crafted-completion-config.el’ for
 example.  Add these to your ‘init.el’ *after* installing packages.
 
@@ -933,7 +933,7 @@ values configured than just these.
       )
 
 
-Listing 5.1: Example auto-generated ‘custom.el’ file.
+Listing 5.1: Example auto-generated file.
 
 
 File: crafted-emacs.info,  Node: Contributing,  Next: Modules,  Prev: Customization,  Up: Top
@@ -1045,7 +1045,7 @@ cape (https://github.com/minad/cape)                   provides completion at po
 go through them step by step.  For each step, imagine you want to switch
 buffers but you neither remember the binding nor the command to do that.
 Neither do you remember that the command starts with "switch".  But
-you’re sure it was something with buffers, so you hit "M-x" and type
+you’re sure it was something with buffers, so you hit ‘M-x’ and type
 ‘buf’.
 
    A fresh Emacs install would actually be pretty helpful for that
@@ -1124,7 +1124,7 @@ the packages of these module come in.
      The module ‘crafted-completion’ sets three consult functions for
      you that fit into the completion behaviour described above.
 
-        • Search-/filtering candidates and bind "C-s" to ‘consult-line’
+        • Search-/filtering candidates and bind ‘C-s’ to ‘consult-line’
           Whenever you’re presented with candidates for completions,
           consult provides a filtering search function which updates not
           only the list of candidates in the minibuffer, but also the
@@ -1138,7 +1138,7 @@ the packages of these module come in.
  [image src="img/06-consult-line.png" ]
 
 
-        • Bind "C-r" in the minibuffer to ‘consult-history’
+        • Bind ‘C-r’ in the minibuffer to ‘consult-history’
 
           Whenever you’re presented with candidates for completions in a
           minibuffer, ‘consult’ automatically sorts your most recently
@@ -1179,8 +1179,8 @@ the packages of these module come in.
 
         • ‘embark-act’
 
-          The ‘embark-act’ function (bound to "C-.")  offers you a lot
-          of possible actions that can be applied to the element of the
+          The ‘embark-act’ function (bound to ‘C-.’) offers you a lot of
+          possible actions that can be applied to the element of the
           buffer (or minibuffer) in which your cursor is positioned.
           You can think of this as a context menu, similar to what you
           achieve in many user interfaces by right-clicking on
@@ -1200,10 +1200,10 @@ the packages of these module come in.
 
           For one last time, imagine you want so switch buffers and have
           forgotten how.  But this time, you also remember that there
-          was a binding for it, probably starting with "C-x".
+          was a binding for it, probably starting with ‘C-x’.
 
-          You can hit "C-x C-h" to see a list of possible bindings after
-          the "C-x" prefix.  But you don’t need to cycle through them,
+          You can hit ‘C-x C-h’ to see a list of possible bindings after
+          the ‘C-x’ prefix.  But you don’t need to cycle through them,
           you can fuzzy-filter them.  Type "buf" to see only the
           bindings that relate to buffers.
 
@@ -1462,7 +1462,7 @@ you use.
 
           (customize-set-variable 'tab-always-indent nil)
 
-   • ‘completion-cycle-threshold’ : ‘3’
+   • ‘completion-cycle-threshold’ : 3
 
      When selection completion candidates, setting this variable uses
      cycling, i.e.  completing each of the candidates in turn.  This set
@@ -1657,7 +1657,7 @@ File: crafted-emacs.info,  Node: Persistence,  Next: Windows,  Prev: Navigation,
 
           (savehist-mode -1)
 
-   • ‘bookmark-save-flag’ : ‘1’
+   • ‘bookmark-save-flag’ : 1
 
      Save bookmarks to file every time you make or delete a bookmark.
 
@@ -1923,23 +1923,23 @@ File: crafted-emacs.info,  Node: Description (2),  Prev: Installation (2),  Up: 
 The ‘crafted-evil’ module adds ‘evil-mode’ alongside configuration to
 enhance the experience.
 
-   • ‘Package: evil’
+   • Package: ‘evil’
 
      Introduces the ‘evil-mode’ minor mode that adds vim-like modal
      editing, visual selection and text objects to Emacs.
 
-   • ‘Package: evil-collection’
+   • Package: ‘evil-collection’
 
      vim-like bindings for modes not covered by the ‘evil’ package.
      Automatically initialized for all common modes (see
      ‘evil-collection-mode-list’).
 
-   • ‘Package: evil-nerd-commenter’
+   • Package: ‘evil-nerd-commenter’
 
      Allow easy commenting of code for many different file types.  Is
      enabled with the default keybindings.
 
-   • ‘Package: undo-tree’
+   • Package: ‘undo-tree’
 
      This package is only installed for Emacs 28 or older.  With Emacs
      29 onwards, ‘undo-redo’ is used instead.  Both systems provide
@@ -2014,11 +2014,11 @@ enhance the experience.
      handled by ‘evil-collection’ (see above).  If the latter is _not_
      installed, this module provides three keybindings:
 
-     "C-j"   ‘vertico-next’
-     "C-k"   ‘vertico-previous’
-     "M-h"   ‘vertico-directory-up’
+     ‘C-j’   ‘vertico-next’
+     ‘C-k’   ‘vertico-previous’
+     ‘M-h’   ‘vertico-directory-up’
 
-     To change this, add code like this to you config, replacing "C-j"
+     To change this, add code like this to you config, replacing ‘C-j’
      with the desired keybinding:
 
           (keymap-set vertico-map "C-j" 'vertico-next)
@@ -2150,7 +2150,7 @@ development using various Lisp and Scheme variants.
    • ‘aggressive-indent-mode’ for all Lisp/Scheme modes
 
      ‘aggressive-indent’ automatically indents code, even while editing
-     or moving code around.  aggressive-indent-mode is added to
+     or moving code around.  ‘aggressive-indent-mode’ is added to
      ‘lisp-mode-hook’, ‘scheme-mode-hook’ and ‘clojure-mode-hook’.
 
   1. Common Lisp
@@ -2218,12 +2218,12 @@ development using various Lisp and Scheme variants.
 
 File: crafted-emacs.info,  Node: Additional packages geiser-*,  Prev: Description (4),  Up: Crafted Emacs Lisp Module
 
-7.5.3 Additional packages: geiser-*
------------------------------------
+7.5.3 Additional packages: ‘geiser-*’
+-------------------------------------
 
-‘Crafted Emacs’ pre-installs the geiser interface packages for ‘guile’
-and ‘racket’.  Additional geiser packages are usually named in the form
-of ‘geiser-<implementation>’, for example:
+Crafted Emacs pre-installs the geiser interface packages for guile and
+racket.  Additional geiser packages are usually named in the form of
+‘geiser-<implementation>’, for example:
 
    • ‘geiser-chez’ for Chez Scheme
    • ‘geiser-chibi’ for Chibi Scheme
@@ -2314,7 +2314,7 @@ enhance the experience.
      auto-pairing.  It is attached to both hooks to ensure the predicate
      is set up properly no matter which order the mode-hooks are run.
 
-   • ‘Package: denote’
+   • Package: ‘denote’
 
      Denote is a simple note-taking system for Emacs.  It is entirely
      based around file-naming conventions.
@@ -2322,7 +2322,7 @@ enhance the experience.
      It works with org, markdown and even basic text (txt) notes.  If
      you have denote installed, *note denote: (denote)Top.
 
-   • ‘Package: org-appear’
+   • Package: ‘org-appear’
 
      org-appear automatically toggles the appearance of certain elements
      in org-mode when editing in the surrounded region.  This is
@@ -2465,7 +2465,7 @@ File: crafted-emacs.info,  Node: Description (7),  Prev: Installation (7),  Up: 
 7.8.2 Description
 -----------------
 
-   • ‘Package: keycast’
+   • Package: ‘keycast’
 
      Package to show current command and its binding in the modeline or
      in the tab-bar.  By default, activates keycast in the modeline.
@@ -2557,7 +2557,7 @@ for viewing file-trees, currently open buffers and more.
                                    (unsplittable . t)
                                    (left-fringe . 0)))
 
-   • ‘new keybinding’: ‘crafted-speedbar-switch-to-quick-buffers’ (‘b’)
+   • new keybinding: ‘crafted-speedbar-switch-to-quick-buffers’ (‘b’)
 
      Temporarily change speedbar into a buffer switching tool,
      displaying the currently open buffers.  Pressing ‘<enter>’ on a
@@ -2696,7 +2696,7 @@ while leaving them turned off for others.
      exclamation mark at the beginning of this paragraph, you’re good to
      go.
 
-     If not, you can run M-x ‘all-the-icons-install-fonts’ to download
+     If not, you can run ‘M-x all-the-icons-install-fonts’ to download
      the necessary fonts.  On most OSes, they get installed
      automatically by that command.  On Windows however, they are only
      downloaded and must be installed manually.
@@ -2793,7 +2793,7 @@ idea not to load this module, but take care of updates manually.
                (require 'crafted-startup-config)
 
           If you don’t want to use the startup module, you can also run
-          ‘crafted-updates-check-for-latest’ in your init.el.  It will
+          ‘crafted-updates-check-for-latest’ in your ‘init.el’.  It will
           show a notification in the mini-buffer (and in ‘*Messages*’).
 
                (crafted-updates-check-for-latest)
@@ -2818,22 +2818,22 @@ idea not to load this module, but take care of updates manually.
 
           In fact that variable accepts a variety of strings describing
           intervals or points at time.  See the documentation for the
-          function ‘run-at-time’ (e.g.  by using C-h f) for more
+          function ‘run-at-time’ (e.g.  by using ‘C-h f’) for more
           examples.
 
        3. Manually
 
           If you want to manually check for Crafted Emacs updates, run
-          M-x ‘crafted-updates-check-for-latest’.
+          ‘M-x crafted-updates-check-for-latest’.
 
           If _no_ updates are available, you’ll see the message "Crafted
           Emacs is up to date!"  in the mini-buffer.
 
           If updates are available, you’ll see "Crafted Emacs updates
-          are available!".  Then you can run M-x
-          ‘crafted-updates-pull-latest’ to update your installation.  If
-          you want to have a look at the changes first, run M-x
-          ‘crafted-updates-show-latest’ before pulling the changes in.
+          are available!".  Then you can run ‘M-x
+          crafted-updates-pull-latest’ to update your installation.  If
+          you want to have a look at the changes first, run ‘M-x
+          crafted-updates-show-latest’ before pulling the changes in.
 
 
 File: crafted-emacs.info,  Node: Crafted Emacs Workspaces Module,  Next: Crafted Emacs Writing Module,  Prev: Crafted Emacs Updates Module,  Up: Modules
@@ -2874,8 +2874,8 @@ The ‘crafted-workspaces’ module installs and sets up the tabspaces
 (https://github.com/mclear-tools/tabspaces) package to provide
 workspaces (think of them like tabs in a web browser) for Emacs.
 
-   To open new workspaces, run M-x
-‘tabspaces-switch-or-create-workspace’.
+   To open new workspaces, run ‘M-x
+tabspaces-switch-or-create-workspace’.
 
    This module sets it up so that when changing buffers, you don’t see
 the whole list of currently opened buffers, but only those that belong
@@ -2958,7 +2958,7 @@ production with markup languages like Markdown or LaTeX.
      configuration to quickly and easily set up whitespace mode, either
      globally or with mode-specific configurations:
 
-       1. Function ‘crafted-writing-configure-whitespace‘
+       1. Function ‘crafted-writing-configure-whitespace’
 
             1. Signature
 
@@ -2967,16 +2967,16 @@ production with markup languages like Markdown or LaTeX.
 
             2. Parameters
 
-               ‘use-tabs‘ (Type: Boolean)
+               ‘use-tabs’ (Type: Boolean)
                     Specifies whether to use tabs for indentation.  If
                     true, tabs are used; if false, spaces are used.
-               ‘use-globally‘ (Type: Boolean, Optional)
+               ‘use-globally’ (Type: Boolean, Optional)
                     Determines whether the whitespace configuration
                     should be applied globally or not.  If true, the
-                    configuration is applied globally; if false, the
+                    configuration is applied globally; if ‘nil’, the
                     configuration is applied only to the current buffer.
-                    Defaults to false if not specified.
-               ‘enabled-modes‘ (Type: List, Optional)
+                    Defaults to ‘nil’ if not specified.
+               ‘enabled-modes’ (Type: List, Optional)
                     List of modes to enable the configuration for.  The
                     configuration gets applied to all modes in the list.
                     If not specified, the configuration applies to all
@@ -3033,7 +3033,7 @@ production with markup languages like Markdown or LaTeX.
           The Emacs package provides an install script that can be run
           from inside emacs:
 
-          Run M-x ‘pdf-tools-install’.
+          Run ‘M-x pdf-tools-install’.
 
           That will compile the backend for your system.  For many
           GNU/Linux distributions, the script also takes care of
@@ -3129,8 +3129,8 @@ these actions in your configuration:
 
         • Use ‘M-x package-list-packages’ to display the list of
           packages.
-        • Find the package in the list, press the letter ’D’ and the
-          letter ’X’ to uninstall that package.
+        • Find the package in the list, press the letter ‘D’ and the
+          letter ‘X’ to uninstall that package.
         • Restart Emacs, the package should be installed from MELPA thus
           using the development version of the package instead of the
           released version.
@@ -3181,111 +3181,111 @@ Node: Helps you learn Emacs Lisp8781
 Node: Reversible9316
 Node: Why use it?9587
 Node: Getting Started10264
-Node: Initial setup10870
-Node: Cleaning out your configuration directories11100
-Node: Cloning the repository12366
-Node: Bootstrapping Crafted Emacs13012
-Node: Early Emacs Initialization13381
-Node: Emacs Initialization17262
-Node: Crafted Emacs Modules19305
-Node: Installing packages19680
-Node: Using Crafted Emacs Modules21518
-Ref: Package definitions crafted-*-packages21996
-Ref: Configuration crafted-*-config22957
-Node: Example Configuration24131
-Node: To save or not to save customizations25391
-Node: Where to go from here28380
-Node: Customization29077
-Node: Using alternate package managers29309
-Node: The customel file31796
-Node: Simplified overview of how Emacs Customization works32189
-Node: Loading the customel file33907
-Ref: customel35080
-Node: Contributing35742
-Node: Modules36370
-Node: Crafted Emacs Completion Module37719
-Node: Installation37955
-Node: Description38484
-Ref: Vertico40868
-Ref: Orderless41578
-Ref: Marginalia42303
-Ref: Consult42668
-Ref: Embark45185
-Ref: Corfu46986
-Ref: Cape47769
-Node: Crafted Emacs Defaults Module48944
-Node: Installation (1)49364
-Node: Description (1)49834
-Node: Buffers50540
-Node: Completion54162
-Node: Editing57812
-Node: Navigation60776
-Node: Persistence61394
-Node: Windows63053
-Node: Miscellaneous68871
-Node: Acknowledgements70669
-Node: Crafted Emacs Evil Module71192
-Node: Installation (2)71476
-Node: Description (2)71983
-Node: Crafted Emacs IDE Module75774
-Node: Installation (3)76052
-Node: Description (3)76554
-Ref: Eglot77412
-Ref: Tree-Sitter77862
-Ref: Combobulate78065
-Node: Crafted Emacs Lisp Module78874
-Node: Installation (4)79186
-Node: Description (4)79693
-Ref: Common Lisp80287
-Ref: Clojure81153
-Ref: Scheme and Racket81789
-Node: Additional packages geiser-*82385
-Node: Crafted Emacs Org Module83439
-Node: Installation (5)83749
-Node: Description (5)84251
-Node: Alternative package org-roam86268
-Node: Crafted Emacs OSX Module88072
-Node: Installation (6)88355
-Node: Description (6)88667
-Node: Crafted Emacs Screencast Module89701
-Node: Installation (7)90003
-Node: Description (7)90540
-Node: Crafted Emacs Speedbar Module91223
-Node: Installation (8)91525
-Node: Description (8)91996
-Node: Crafted Emacs Startup Module94509
-Node: Installation (9)94803
-Node: Description (9)95273
-Node: Crafted Emacs UI Module96685
-Node: Installation (10)96970
-Node: Description (10)97471
-Ref: Icons with all-the-icons98142
-Ref: Line numbers98657
-Node: Crafted Emacs Updates Module99948
-Node: Installation (11)100246
-Node: Description (11)100718
-Ref: Usage and Customization101298
-Ref: On Startup101449
-Ref: Regularly102160
-Ref: Manually103087
-Node: Crafted Emacs Workspaces Module103690
-Node: Installation (12)103999
-Node: Description (12)104540
-Node: Crafted Emacs Writing Module106093
-Node: Installation (13)106359
-Node: Description (13)106885
-Ref: Whitespace Mode107412
-Ref: Function `crafted-writing-configure-whitespace`107878
-Ref: Signature107946
-Ref: Parameters108113
-Ref: Examples109022
-Ref: Optional Package PDF-Tools110131
-Ref: Part 1 Installing the Emacs package pdf-tools110477
-Ref: Part 2 Installing the epdfinfo-server110895
-Ref: Configuration111617
-Node: Troubleshooting112099
-Node: A package (suddenly?) fails to work112335
-Node: MIT License116123
+Node: Initial setup10866
+Node: Cleaning out your configuration directories11096
+Node: Cloning the repository12358
+Node: Bootstrapping Crafted Emacs13000
+Node: Early Emacs Initialization13367
+Node: Emacs Initialization17242
+Node: Crafted Emacs Modules19285
+Node: Installing packages19658
+Node: Using Crafted Emacs Modules21488
+Ref: Package definitions crafted-*-packages21964
+Ref: Configuration crafted-*-config22923
+Node: Example Configuration24101
+Node: To save or not to save customizations25361
+Node: Where to go from here28354
+Node: Customization29051
+Node: Using alternate package managers29283
+Node: The customel file31762
+Node: Simplified overview of how Emacs Customization works32155
+Node: Loading the customel file33873
+Ref: customel35046
+Node: Contributing35692
+Node: Modules36320
+Node: Crafted Emacs Completion Module37669
+Node: Installation37905
+Node: Description38434
+Ref: Vertico40822
+Ref: Orderless41532
+Ref: Marginalia42257
+Ref: Consult42622
+Ref: Embark45147
+Ref: Corfu46963
+Ref: Cape47746
+Node: Crafted Emacs Defaults Module48921
+Node: Installation (1)49341
+Node: Description (1)49811
+Node: Buffers50517
+Node: Completion54139
+Node: Editing57783
+Node: Navigation60747
+Node: Persistence61365
+Node: Windows63018
+Node: Miscellaneous68836
+Node: Acknowledgements70634
+Node: Crafted Emacs Evil Module71157
+Node: Installation (2)71441
+Node: Description (2)71948
+Node: Crafted Emacs IDE Module75755
+Node: Installation (3)76033
+Node: Description (3)76535
+Ref: Eglot77393
+Ref: Tree-Sitter77843
+Ref: Combobulate78046
+Node: Crafted Emacs Lisp Module78855
+Node: Installation (4)79167
+Node: Description (4)79674
+Ref: Common Lisp80274
+Ref: Clojure81140
+Ref: Scheme and Racket81776
+Node: Additional packages geiser-*82372
+Node: Crafted Emacs Org Module83416
+Node: Installation (5)83726
+Node: Description (5)84228
+Node: Alternative package org-roam86245
+Node: Crafted Emacs OSX Module88049
+Node: Installation (6)88332
+Node: Description (6)88644
+Node: Crafted Emacs Screencast Module89678
+Node: Installation (7)89980
+Node: Description (7)90517
+Node: Crafted Emacs Speedbar Module91200
+Node: Installation (8)91502
+Node: Description (8)91973
+Node: Crafted Emacs Startup Module94480
+Node: Installation (9)94774
+Node: Description (9)95244
+Node: Crafted Emacs UI Module96656
+Node: Installation (10)96941
+Node: Description (10)97442
+Ref: Icons with all-the-icons98113
+Ref: Line numbers98628
+Node: Crafted Emacs Updates Module99919
+Node: Installation (11)100217
+Node: Description (11)100689
+Ref: Usage and Customization101269
+Ref: On Startup101420
+Ref: Regularly102137
+Ref: Manually103070
+Node: Crafted Emacs Workspaces Module103673
+Node: Installation (12)103982
+Node: Description (12)104523
+Node: Crafted Emacs Writing Module106076
+Node: Installation (13)106342
+Node: Description (13)106868
+Ref: Whitespace Mode107395
+Ref: Function crafted-writing-configure-whitespace107861
+Ref: Signature107929
+Ref: Parameters108096
+Ref: Examples109013
+Ref: Optional Package PDF-Tools110122
+Ref: Part 1 Installing the Emacs package pdf-tools110468
+Ref: Part 2 Installing the epdfinfo-server110886
+Ref: Configuration111608
+Node: Troubleshooting112090
+Node: A package (suddenly?) fails to work112326
+Node: MIT License116114
 
 End Tag Table
 

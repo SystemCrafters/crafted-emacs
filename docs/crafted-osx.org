@@ -12,7 +12,7 @@ points.
 
 ** Description
 
-The =crafted-osx= module provides customizations to make Emacs more
+The ~crafted-osx~ module provides customizations to make Emacs more
 friendly on a Mac.  These largely have to do with keybindings as the
 Mac has a few keys different from a Linux or Windows computer.
 

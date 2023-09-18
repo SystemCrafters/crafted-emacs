@@ -18,10 +18,10 @@ points.
 
 ** Description
 
-The =crafted-workspaces= module installs and sets up the [[https://github.com/mclear-tools/tabspaces][tabspaces]] package
+The ~crafted-workspaces~ module installs and sets up the [[https://github.com/mclear-tools/tabspaces][tabspaces]] package
 to provide workspaces (think of them like tabs in a web browser) for Emacs.
 
-To open new workspaces, run M-x ~tabspaces-switch-or-create-workspace~.
+To open new workspaces, run =M-x tabspaces-switch-or-create-workspace=.
 
 This module sets it up so that when changing buffers, you don't see the
 whole list of currently opened buffers, but only those that belong to the
@@ -39,7 +39,7 @@ When you remove a buffer from all opened workspaces, it will still be open
 and available from your default workspace. You can modify that behaviour by
 setting the custom variable ~tabspaces-remove-to-default~ to nil.
 
-By default the ~*scratch*~ buffer is accessible from all workspaces. You can
+By default the =*scratch*= buffer is accessible from all workspaces. You can
 modify which buffers are included by default by changing the value of
 ~tabspaces-include-buffers~.
 
