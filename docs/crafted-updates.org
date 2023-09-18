@@ -79,12 +79,12 @@ using =C-h f=) for more examples.
 **** Manually
 
 If you want to manually check for Crafted Emacs updates, run
-=M-x= ~crafted-updates-check-for-latest~.
+=M-x crafted-updates-check-for-latest=.
 
 If /no/ updates are available, you'll see the message "Crafted Emacs is up to
 date!" in the mini-buffer.
 
 If updates are available, you'll see "Crafted Emacs updates are available!".
-Then you can run =M-x= ~crafted-updates-pull-latest~ to update your installation.
-If you want to have a look at the changes first, run =M-x=
-~crafted-updates-show-latest~ before pulling the changes in.
+Then you can run =M-x crafted-updates-pull-latest= to update your installation.
+If you want to have a look at the changes first, run
+=M-x crafted-updates-show-latest= before pulling the changes in.

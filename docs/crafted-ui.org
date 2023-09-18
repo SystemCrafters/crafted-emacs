@@ -36,7 +36,7 @@ them turned off for others.
 your system. If you see a "stop"-icon with an exclamation mark at the
 beginning of this paragraph, you're good to go.
 
-If not, you can run M-x ~all-the-icons-install-fonts~ to download the
+If not, you can run =M-x all-the-icons-install-fonts= to download the
 necessary fonts. On most OSes, they get installed automatically by that
 command. On Windows however, they are only downloaded and must be
 installed manually.

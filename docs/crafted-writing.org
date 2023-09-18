@@ -112,7 +112,7 @@ The only OS officially supported by PDF-Tools is GNU/Linux. The
 Emacs package provides an install script that can be run from inside
 emacs:
 
-Run =M-x= ~pdf-tools-install~.
+Run =M-x pdf-tools-install=.
 
 That will compile the backend for your system. For many GNU/Linux
 distributions, the script also takes care of installing the necessary

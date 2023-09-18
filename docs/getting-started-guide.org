@@ -158,7 +158,7 @@ you can start configuring Emacs using Crafted Emacs Modules.
 ** Installing packages
 
 The standard approach to finding and installing packages is to use the command
-=M-x= ~list-packages RET~, which will bring up a user interface to search for
+=M-x list-packages=, which will bring up a user interface to search for
 packages, review the package details, install, update or remove package. For
 more information: [[info:emacs#Packages][Packages]] or on the web: [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Packages.html][Packages]].
 
