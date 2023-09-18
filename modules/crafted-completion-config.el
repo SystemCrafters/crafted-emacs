@@ -14,19 +14,6 @@
 
 ;;; Code:
 
-(defun crafted-completion-minibuffer-backward-kill (arg)
-  "Delete word or delete up to parent folder when completion is a file.
-
-ARG is the thing being completed in the minibuffer."
-  (interactive "p")
-  (if minibuffer-completing-file-name
-      ;; Borrowed from https://github.com/raxod502/selectrum/issues/498#issuecomment-803283608
-      (if (string-match-p "/." (minibuffer-contents))
-          (zap-up-to-char (- arg) ?/)
-        (delete-minibuffer-contents))
-    (backward-kill-word arg)))
-
-
 ;;; Vertico
 (when (require 'vertico nil :noerror)
   (require 'vertico-directory)
@@ -105,7 +92,7 @@ ARG is the thing being completed in the minibuffer."
 
   (global-corfu-mode 1)
   (when (require 'corfu-popupinfo nil :noerror)
-    
+
     (corfu-popupinfo-mode 1)
     (eldoc-add-command #'corfu-insert)
     (keymap-set corfu-map "M-p" #'corfu-popupinfo-scroll-down)
