@@ -21,11 +21,11 @@ to be set:
 
 | Keybinding | Meaning                          |
 |------------+----------------------------------|
-| ⌘-W       | (upper case W) delete-frame      |
-| ⌘-}       | tab-bar-switch-to-next-tab       |
-| ⌘-{       | tab-bar-switch-to-prev-tab       |
-| ⌘-t       | tab-bar-new-tab                  |
-| ⌘-w       | (lower case w) tab-bar-close-tab |
+| ⌘-W        | (upper case W) delete-frame      |
+| ⌘-}        | tab-bar-switch-to-next-tab       |
+| ⌘-{        | tab-bar-switch-to-prev-tab       |
+| ⌘-t        | tab-bar-new-tab                  |
+| ⌘-w        | (lower case w) tab-bar-close-tab |
 |------------+----------------------------------|
 
 We provide a function to set the frame titlebar transparent.  You call
