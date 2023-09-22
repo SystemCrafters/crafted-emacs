@@ -67,14 +67,12 @@ Example: `(crafted-tree-sitter-load 'python)'"
 ;; Emacs versions after 29
 (when (version< "29" emacs-version)
   ;; only attempt to use tree-sitter when Emacs was built with it.
-  (when (and (member "TREE_SITTER" (split-string system-configuration-features))
-             (executable-find "tree-sitter"))
+  (when (member "TREE_SITTER" (split-string system-configuration-features))
     (when (require 'treesit-auto nil :noerror)
       ;; prefer tree-sitter modes
       (global-treesit-auto-mode)
-      (with-eval-after-load 'treesit-auto
-        ;; install all the tree-sitter grammars
-        (treesit-auto-install-all)))
+      ;; install all the tree-sitter grammars
+      (treesit-auto-install-all))
     (when (locate-library "combobulate")
       ;; perhaps too gross of an application, but the *-ts-modes
       ;; eventually derive from this mode.
