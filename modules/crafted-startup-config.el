@@ -196,5 +196,10 @@ starts.  See the variable documenation for
                 (fit-window-to-buffer window))))
       (switch-to-buffer splash-buffer))))
 
+(unless crafted-startup-inhibit-splash
+  ;; Setting the initial-buffer-choice to the function to show the
+  ;; Crafted Emacs startup screen when Emacs is started.
+  (setq initial-buffer-choice #'crafted-startup-screen))
+
 (provide 'crafted-startup-config)
 ;;; crafted-startup-config.el ends here
