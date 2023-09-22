@@ -41,10 +41,6 @@
 ;; for you and add them here.
 (require 'crafted-defaults-config)
 (require 'crafted-startup-config)
-(unless crafted-startup-inhibit-splash
-  ;; Setting the initial-buffer-choice to the function to show the
-  ;; Crafted Emacs startup screen when Emacs is started.
-  (setq initial-buffer-choice #'crafted-startup-screen))
 
 ;;; Optional configuration
 
