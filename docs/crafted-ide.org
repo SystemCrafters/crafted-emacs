@@ -42,7 +42,46 @@ operating system. See [[https://github.com/joaotavora/eglot#connecting-to-a-serv
 
 Tree-Sitter support (built-in since Emacs 29) enables Emacs to better
 understand the syntax of your code, thus improving syntax highlighting and
-similar functions.
+similar functions. Usage of Tree-Sitter is optional.
+
+**** Configuring Tree-Sitter (Emacs 28 or earlier)
+
+Call ~crafted-ide-configure-tree-sitter~ after requiring ~crafted-ide-config~.
+
+#+begin_src emacs-lisp
+
+(require 'crafted-ide-config)
+(crafted-ide-configure-tree-sitter)
+
+#+end_src
+
+A new function ~crafted-tree-sitter-load~ will be available to
+install language grammars.
+
+#+begin_src emacs-lisp
+
+(crafted-tree-sitter-load 'python)
+
+#+end_src
+
+**** Configuring Tree-Sitter (Emacs 29 or later)
+
+Call ~crafted-ide-configure-tree-sitter~ after requiring ~crafted-ide-config~.
+This will install all known language grammars for Tree-Sitter.
+To opt-out of one or more language grammars, pass them as a list
+to ~crafted-ide-configure-tree-sitter~.
+
+#+begin_src emacs-lisp
+
+(require 'crafted-ide-config)
+
+;; install all language grammars
+(crafted-ide-configure-tree-sitter)
+
+;; install all language grammars, except protobuf
+(crafted-ide-configure-tree-sitter '(protobuf))
+
+#+end_src
 
 **** Combobulate
 
