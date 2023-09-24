@@ -48,27 +48,32 @@ manually with something like this:
 (customize-set-variable 'eglot-autoshutdown t)
 
 ;;; tree-sitter
-;; Emacs versions prior to 29
-(when (version< emacs-version "29")
-  (when (require 'tree-sitter-indent nil :noerror)
+(defun crafted-ide--configure-tree-sitter-pre-29 ()
+  "Configure tree-sitter for Emacs 28 or earlier."
+  (when (version< emacs-version "29")
+    (when (require 'tree-sitter-indent nil :noerror)
 
-    (defun crafted-tree-sitter-load (lang-symbol)
-      "Setup tree-sitter for a language.
+      (defun crafted-tree-sitter-load (lang-symbol)
+        "Setup tree-sitter for a language.
 
 This must be called in the user's configuration to configure
 tree-sitter for LANG-SYMBOL.
 
 Example: `(crafted-tree-sitter-load 'python)'"
-      (tree-sitter-require lang-symbol)
-      (let ((mode-hook-name
-             (intern (format "%s-mode-hook" (symbol-name lang-symbol)))))
-        (add-hook mode-hook-name #'tree-sitter-mode)))))
+        (tree-sitter-require lang-symbol)
+        (let ((mode-hook-name
+               (intern (format "%s-mode-hook" (symbol-name lang-symbol)))))
+          (add-hook mode-hook-name #'tree-sitter-mode))))))
 
-;; Emacs versions after 29
-(when (version< "29" emacs-version)
+(defun crafted-ide--configure-tree-sitter (opt-out)
+  "Configure tree-sitter for Emacs 29 or later.
+OPT-OUT is a list of symbols of language grammars to opt out before auto-install."
   ;; only attempt to use tree-sitter when Emacs was built with it.
   (when (member "TREE_SITTER" (split-string system-configuration-features))
     (when (require 'treesit-auto nil :noerror)
+      ;; add all items of opt-out to the `treesit-auto-opt-out-list'.
+      (when opt-out
+        (mapc (lambda (e) (add-to-list 'treesit-auto-opt-out-list e)) opt-out))
       ;; prefer tree-sitter modes
       (global-treesit-auto-mode)
       ;; install all the tree-sitter grammars
@@ -78,6 +83,17 @@ Example: `(crafted-tree-sitter-load 'python)'"
       ;; eventually derive from this mode.
       (add-hook 'prog-mode-hook #'combobulate-mode))))
 
+(defun crafted-ide-configure-tree-sitter (&optional opt-out)
+  "Configure tree-sitter.
+Requires a C compiler (gcc, cc, c99) installed on the system.
+Note that OPT-OUT only affects setups with Emacs 29 or later.
+
+For Emacs 29 or later:
+Requires Emacs to be built using \"--with-tree-sitter\".
+All language grammars are auto-installed unless they are a member of OPT-OUT."
+  (if (version< emacs-version "29")
+      (crafted-ide--configure-tree-sitter opt-out)
+    (crafted-ide--configure-tree-sitter-pre-29)))
 
 ;; turn on aggressive indent if it is available, otherwise use
 ;; electric indent.
