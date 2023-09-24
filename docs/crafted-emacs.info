@@ -2089,9 +2089,45 @@ generation syntax parser).
 
      Tree-Sitter support (built-in since Emacs 29) enables Emacs to
      better understand the syntax of your code, thus improving syntax
-     highlighting and similar functions.
+     highlighting and similar functions.  Usage of Tree-Sitter is
+     optional.
 
-       1. Combobulate
+       1. Configuring Tree-Sitter (Emacs 28 or earlier)
+
+          Call ‘crafted-ide-configure-tree-sitter’ after requiring
+          ‘crafted-ide-config’.
+
+
+               (require 'crafted-ide-config)
+               (crafted-ide-configure-tree-sitter)
+
+
+          A new function ‘crafted-tree-sitter-load’ will be available to
+          install language grammars.
+
+
+               (crafted-tree-sitter-load 'python)
+
+
+       2. Configuring Tree-Sitter (Emacs 29 or later)
+
+          Call ‘crafted-ide-configure-tree-sitter’ after requiring
+          ‘crafted-ide-config’.  This will install all known language
+          grammars for Tree-Sitter.  To opt-out of one or more language
+          grammars, pass them as a list to
+          ‘crafted-ide-configure-tree-sitter’.
+
+
+               (require 'crafted-ide-config)
+
+               ;; install all language grammars
+               (crafted-ide-configure-tree-sitter)
+
+               ;; install all language grammars, except protobuf
+               (crafted-ide-configure-tree-sitter '(protobuf))
+
+
+       3. Combobulate
 
           Another use is the package Combobulate, which uses Tree-Sitter
           to provide a structured movement within your code.
@@ -2470,12 +2506,12 @@ File: crafted-emacs.info,  Node: Description (7),  Prev: Installation (7),  Up: 
      Package to show current command and its binding in the modeline or
      in the tab-bar.  By default, activates keycast in the modeline.
 
-   • ‘keycast-remove-tail-elements’: ‘nil’
+   • ‘keycast-mode-line-remove-tail-elements’: ‘nil’
 
      By default, keycast-mode removes the elements to the right of the
      modeline.  This may obscure information, so we’ll disable it.
 
-   • ‘keycast-insert-after’: ‘mode-line-misc-info’
+   • ‘keycast-mode-line-insert-after’: ‘mode-line-misc-info’
 
      Insert keycast information after ‘mode-line-misc-info’ in the
      ‘mode-line-format’.
@@ -3232,60 +3268,62 @@ Node: Installation (3)76033
 Node: Description (3)76535
 Ref: Eglot77393
 Ref: Tree-Sitter77843
-Ref: Combobulate78046
-Node: Crafted Emacs Lisp Module78855
-Node: Installation (4)79167
-Node: Description (4)79674
-Ref: Common Lisp80274
-Ref: Clojure81140
-Ref: Scheme and Racket81776
-Node: Additional packages geiser-*82372
-Node: Crafted Emacs Org Module83416
-Node: Installation (5)83726
-Node: Description (5)84228
-Node: Alternative package org-roam86245
-Node: Crafted Emacs OSX Module88049
-Node: Installation (6)88332
-Node: Description (6)88644
-Node: Crafted Emacs Screencast Module89678
-Node: Installation (7)89980
-Node: Description (7)90517
-Node: Crafted Emacs Speedbar Module91200
-Node: Installation (8)91502
-Node: Description (8)91973
-Node: Crafted Emacs Startup Module94480
-Node: Installation (9)94774
-Node: Description (9)95244
-Node: Crafted Emacs UI Module96656
-Node: Installation (10)96941
-Node: Description (10)97442
-Ref: Icons with all-the-icons98113
-Ref: Line numbers98628
-Node: Crafted Emacs Updates Module99919
-Node: Installation (11)100217
-Node: Description (11)100689
-Ref: Usage and Customization101269
-Ref: On Startup101420
-Ref: Regularly102137
-Ref: Manually103070
-Node: Crafted Emacs Workspaces Module103673
-Node: Installation (12)103982
-Node: Description (12)104523
-Node: Crafted Emacs Writing Module106076
-Node: Installation (13)106342
-Node: Description (13)106868
-Ref: Whitespace Mode107395
-Ref: Function crafted-writing-configure-whitespace107861
-Ref: Signature107929
-Ref: Parameters108096
-Ref: Examples109013
-Ref: Optional Package PDF-Tools110122
-Ref: Part 1 Installing the Emacs package pdf-tools110468
-Ref: Part 2 Installing the epdfinfo-server110886
-Ref: Configuration111608
-Node: Troubleshooting112090
-Node: A package (suddenly?) fails to work112326
-Node: MIT License116114
+Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78086
+Ref: Configuring Tree-Sitter (Emacs 29 or later)78518
+Ref: Combobulate79162
+Node: Crafted Emacs Lisp Module79971
+Node: Installation (4)80283
+Node: Description (4)80790
+Ref: Common Lisp81390
+Ref: Clojure82256
+Ref: Scheme and Racket82892
+Node: Additional packages geiser-*83488
+Node: Crafted Emacs Org Module84532
+Node: Installation (5)84842
+Node: Description (5)85344
+Node: Alternative package org-roam87361
+Node: Crafted Emacs OSX Module89165
+Node: Installation (6)89448
+Node: Description (6)89760
+Node: Crafted Emacs Screencast Module90794
+Node: Installation (7)91096
+Node: Description (7)91633
+Node: Crafted Emacs Speedbar Module92336
+Node: Installation (8)92638
+Node: Description (8)93109
+Node: Crafted Emacs Startup Module95616
+Node: Installation (9)95910
+Node: Description (9)96380
+Node: Crafted Emacs UI Module97792
+Node: Installation (10)98077
+Node: Description (10)98578
+Ref: Icons with all-the-icons99249
+Ref: Line numbers99764
+Node: Crafted Emacs Updates Module101055
+Node: Installation (11)101353
+Node: Description (11)101825
+Ref: Usage and Customization102405
+Ref: On Startup102556
+Ref: Regularly103273
+Ref: Manually104206
+Node: Crafted Emacs Workspaces Module104809
+Node: Installation (12)105118
+Node: Description (12)105659
+Node: Crafted Emacs Writing Module107212
+Node: Installation (13)107478
+Node: Description (13)108004
+Ref: Whitespace Mode108531
+Ref: Function crafted-writing-configure-whitespace108997
+Ref: Signature109065
+Ref: Parameters109232
+Ref: Examples110149
+Ref: Optional Package PDF-Tools111258
+Ref: Part 1 Installing the Emacs package pdf-tools111604
+Ref: Part 2 Installing the epdfinfo-server112022
+Ref: Configuration112744
+Node: Troubleshooting113226
+Node: A package (suddenly?) fails to work113462
+Node: MIT License117250
 
 End Tag Table
 
