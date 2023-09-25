@@ -2092,6 +2092,9 @@ generation syntax parser).
      highlighting and similar functions.  Usage of Tree-Sitter is
      optional.
 
+     To compile the language grammars on initial startup, a C compiler
+     is required.
+
        1. Configuring Tree-Sitter (Emacs 28 or earlier)
 
           Call ‘crafted-ide-configure-tree-sitter’ after requiring
@@ -2115,7 +2118,10 @@ generation syntax parser).
           ‘crafted-ide-config’.  This will install all known language
           grammars for Tree-Sitter.  To opt-out of one or more language
           grammars, pass them as a list to
-          ‘crafted-ide-configure-tree-sitter’.
+          ‘crafted-ide-configure-tree-sitter’.  This can be useful if a
+          language grammar doesn’t build on your setup or you generally
+          do not want a language grammar included as you would otherwise
+          be re-prompted to install new grammars on every Emacs startup.
 
 
                (require 'crafted-ide-config)
@@ -3268,62 +3274,62 @@ Node: Installation (3)76033
 Node: Description (3)76535
 Ref: Eglot77393
 Ref: Tree-Sitter77843
-Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78086
-Ref: Configuring Tree-Sitter (Emacs 29 or later)78518
-Ref: Combobulate79162
-Node: Crafted Emacs Lisp Module79971
-Node: Installation (4)80283
-Node: Description (4)80790
-Ref: Common Lisp81390
-Ref: Clojure82256
-Ref: Scheme and Racket82892
-Node: Additional packages geiser-*83488
-Node: Crafted Emacs Org Module84532
-Node: Installation (5)84842
-Node: Description (5)85344
-Node: Alternative package org-roam87361
-Node: Crafted Emacs OSX Module89165
-Node: Installation (6)89448
-Node: Description (6)89760
-Node: Crafted Emacs Screencast Module90794
-Node: Installation (7)91096
-Node: Description (7)91633
-Node: Crafted Emacs Speedbar Module92336
-Node: Installation (8)92638
-Node: Description (8)93109
-Node: Crafted Emacs Startup Module95616
-Node: Installation (9)95910
-Node: Description (9)96380
-Node: Crafted Emacs UI Module97792
-Node: Installation (10)98077
-Node: Description (10)98578
-Ref: Icons with all-the-icons99249
-Ref: Line numbers99764
-Node: Crafted Emacs Updates Module101055
-Node: Installation (11)101353
-Node: Description (11)101825
-Ref: Usage and Customization102405
-Ref: On Startup102556
-Ref: Regularly103273
-Ref: Manually104206
-Node: Crafted Emacs Workspaces Module104809
-Node: Installation (12)105118
-Node: Description (12)105659
-Node: Crafted Emacs Writing Module107212
-Node: Installation (13)107478
-Node: Description (13)108004
-Ref: Whitespace Mode108531
-Ref: Function crafted-writing-configure-whitespace108997
-Ref: Signature109065
-Ref: Parameters109232
-Ref: Examples110149
-Ref: Optional Package PDF-Tools111258
-Ref: Part 1 Installing the Emacs package pdf-tools111604
-Ref: Part 2 Installing the epdfinfo-server112022
-Ref: Configuration112744
-Node: Troubleshooting113226
-Node: A package (suddenly?) fails to work113462
-Node: MIT License117250
+Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78176
+Ref: Configuring Tree-Sitter (Emacs 29 or later)78608
+Ref: Combobulate79497
+Node: Crafted Emacs Lisp Module80306
+Node: Installation (4)80618
+Node: Description (4)81125
+Ref: Common Lisp81725
+Ref: Clojure82591
+Ref: Scheme and Racket83227
+Node: Additional packages geiser-*83823
+Node: Crafted Emacs Org Module84867
+Node: Installation (5)85177
+Node: Description (5)85679
+Node: Alternative package org-roam87696
+Node: Crafted Emacs OSX Module89500
+Node: Installation (6)89783
+Node: Description (6)90095
+Node: Crafted Emacs Screencast Module91129
+Node: Installation (7)91431
+Node: Description (7)91968
+Node: Crafted Emacs Speedbar Module92671
+Node: Installation (8)92973
+Node: Description (8)93444
+Node: Crafted Emacs Startup Module95951
+Node: Installation (9)96245
+Node: Description (9)96715
+Node: Crafted Emacs UI Module98127
+Node: Installation (10)98412
+Node: Description (10)98913
+Ref: Icons with all-the-icons99584
+Ref: Line numbers100099
+Node: Crafted Emacs Updates Module101390
+Node: Installation (11)101688
+Node: Description (11)102160
+Ref: Usage and Customization102740
+Ref: On Startup102891
+Ref: Regularly103608
+Ref: Manually104541
+Node: Crafted Emacs Workspaces Module105144
+Node: Installation (12)105453
+Node: Description (12)105994
+Node: Crafted Emacs Writing Module107547
+Node: Installation (13)107813
+Node: Description (13)108339
+Ref: Whitespace Mode108866
+Ref: Function crafted-writing-configure-whitespace109332
+Ref: Signature109400
+Ref: Parameters109567
+Ref: Examples110484
+Ref: Optional Package PDF-Tools111593
+Ref: Part 1 Installing the Emacs package pdf-tools111939
+Ref: Part 2 Installing the epdfinfo-server112357
+Ref: Configuration113079
+Node: Troubleshooting113561
+Node: A package (suddenly?) fails to work113797
+Node: MIT License117585
 
 End Tag Table
 
