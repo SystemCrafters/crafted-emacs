@@ -50,20 +50,18 @@ manually with something like this:
 ;;; tree-sitter
 (defun crafted-ide--configure-tree-sitter-pre-29 ()
   "Configure tree-sitter for Emacs 28 or earlier."
-  (when (version< emacs-version "29")
-    (when (require 'tree-sitter-indent nil :noerror)
 
-      (defun crafted-tree-sitter-load (lang-symbol)
-        "Setup tree-sitter for a language.
+  (defun crafted-tree-sitter-load (lang-symbol)
+    "Setup tree-sitter for a language.
 
 This must be called in the user's configuration to configure
 tree-sitter for LANG-SYMBOL.
 
 Example: `(crafted-tree-sitter-load 'python)'"
-        (tree-sitter-require lang-symbol)
-        (let ((mode-hook-name
-               (intern (format "%s-mode-hook" (symbol-name lang-symbol)))))
-          (add-hook mode-hook-name #'tree-sitter-mode))))))
+    (tree-sitter-require lang-symbol)
+    (let ((mode-hook-name
+           (intern (format "%s-mode-hook" (symbol-name lang-symbol)))))
+      (add-hook mode-hook-name #'tree-sitter-mode))))
 
 (defun crafted-ide--configure-tree-sitter (opt-out)
   "Configure tree-sitter for Emacs 29 or later.
