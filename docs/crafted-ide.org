@@ -44,6 +44,9 @@ Tree-Sitter support (built-in since Emacs 29) enables Emacs to better
 understand the syntax of your code, thus improving syntax highlighting and
 similar functions. Usage of Tree-Sitter is optional.
 
+To compile the language grammars on initial startup,
+a C compiler is required.
+
 **** Configuring Tree-Sitter (Emacs 28 or earlier)
 
 Call ~crafted-ide-configure-tree-sitter~ after requiring ~crafted-ide-config~.
@@ -70,6 +73,9 @@ Call ~crafted-ide-configure-tree-sitter~ after requiring ~crafted-ide-config~.
 This will install all known language grammars for Tree-Sitter.
 To opt-out of one or more language grammars, pass them as a list
 to ~crafted-ide-configure-tree-sitter~.
+This can be useful if a language grammar doesn't build on your setup
+or you generally do not want a language grammar included as you would
+otherwise be re-prompted to install new grammars on every Emacs startup.
 
 #+begin_src emacs-lisp
 
