@@ -404,8 +404,8 @@ To use Crafted Emacs, you will need to download the repository.  It is
 up to you where you clone to.  If you are not sure where to clone to,
 you can use your home directory.
 
-     # N.B. As this is still a beta release, use the craftedv2beta branch
-     git clone https://github.com/SystemCrafters/crafted-emacs -b craftedv2beta
+     # N.B. As this is still a release candidate, use the craftedv2RC1 branch
+     git clone https://github.com/SystemCrafters/crafted-emacs -b craftedv2RC1
 
    For the rest of this guide, the location where you cloned Crafted
 Emacs to will be known as ‘crafted-emacs-home’.
@@ -3226,110 +3226,110 @@ Node: Getting Started10264
 Node: Initial setup10866
 Node: Cleaning out your configuration directories11096
 Node: Cloning the repository12358
-Node: Bootstrapping Crafted Emacs13000
-Node: Early Emacs Initialization13367
-Node: Emacs Initialization17242
-Node: Crafted Emacs Modules19285
-Node: Installing packages19658
-Node: Using Crafted Emacs Modules21488
-Ref: Package definitions crafted-*-packages21964
-Ref: Configuration crafted-*-config22923
-Node: Example Configuration24101
-Node: To save or not to save customizations25361
-Node: Where to go from here28354
-Node: Customization29051
-Node: Using alternate package managers29283
-Node: The customel file31762
-Node: Simplified overview of how Emacs Customization works32155
-Node: Loading the customel file33873
-Ref: customel35046
-Node: Contributing35692
-Node: Modules36320
-Node: Crafted Emacs Completion Module37669
-Node: Installation37905
-Node: Description38434
-Ref: Vertico40822
-Ref: Orderless41532
-Ref: Marginalia42257
-Ref: Consult42622
-Ref: Embark45147
-Ref: Corfu46963
-Ref: Cape47746
-Node: Crafted Emacs Defaults Module48921
-Node: Installation (1)49341
-Node: Description (1)49811
-Node: Buffers50517
-Node: Completion54139
-Node: Editing57783
-Node: Navigation60747
-Node: Persistence61365
-Node: Windows63018
-Node: Miscellaneous68836
-Node: Acknowledgements70634
-Node: Crafted Emacs Evil Module71157
-Node: Installation (2)71441
-Node: Description (2)71948
-Node: Crafted Emacs IDE Module75755
-Node: Installation (3)76033
-Node: Description (3)76535
-Ref: Eglot77393
-Ref: Tree-Sitter77843
-Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78176
-Ref: Configuring Tree-Sitter (Emacs 29 or later)78608
-Ref: Combobulate79497
-Node: Crafted Emacs Lisp Module80306
-Node: Installation (4)80618
-Node: Description (4)81125
-Ref: Common Lisp81725
-Ref: Clojure82591
-Ref: Scheme and Racket83227
-Node: Additional packages geiser-*83823
-Node: Crafted Emacs Org Module84867
-Node: Installation (5)85177
-Node: Description (5)85679
-Node: Alternative package org-roam87696
-Node: Crafted Emacs OSX Module89500
-Node: Installation (6)89783
-Node: Description (6)90095
-Node: Crafted Emacs Screencast Module91129
-Node: Installation (7)91431
-Node: Description (7)91968
-Node: Crafted Emacs Speedbar Module92671
-Node: Installation (8)92973
-Node: Description (8)93444
-Node: Crafted Emacs Startup Module95951
-Node: Installation (9)96245
-Node: Description (9)96715
-Node: Crafted Emacs UI Module98127
-Node: Installation (10)98412
-Node: Description (10)98913
-Ref: Icons with all-the-icons99584
-Ref: Line numbers100099
-Node: Crafted Emacs Updates Module101390
-Node: Installation (11)101688
-Node: Description (11)102160
-Ref: Usage and Customization102740
-Ref: On Startup102891
-Ref: Regularly103608
-Ref: Manually104541
-Node: Crafted Emacs Workspaces Module105144
-Node: Installation (12)105453
-Node: Description (12)105994
-Node: Crafted Emacs Writing Module107547
-Node: Installation (13)107813
-Node: Description (13)108339
-Ref: Whitespace Mode108866
-Ref: Function crafted-writing-configure-whitespace109332
-Ref: Signature109400
-Ref: Parameters109567
-Ref: Examples110484
-Ref: Optional Package PDF-Tools111593
-Ref: Part 1 Installing the Emacs package pdf-tools111939
-Ref: Part 2 Installing the epdfinfo-server112357
-Ref: Configuration113079
-Node: Troubleshooting113561
-Node: A package (suddenly?) fails to work113797
-Node: MIT License117585
+Node: Bootstrapping Crafted Emacs13003
+Node: Early Emacs Initialization13370
+Node: Emacs Initialization17245
+Node: Crafted Emacs Modules19288
+Node: Installing packages19661
+Node: Using Crafted Emacs Modules21491
+Ref: Package definitions crafted-*-packages21967
+Ref: Configuration crafted-*-config22926
+Node: Example Configuration24104
+Node: To save or not to save customizations25364
+Node: Where to go from here28357
+Node: Customization29054
+Node: Using alternate package managers29286
+Node: The customel file31765
+Node: Simplified overview of how Emacs Customization works32158
+Node: Loading the customel file33876
+Ref: customel35049
+Node: Contributing35695
+Node: Modules36323
+Node: Crafted Emacs Completion Module37672
+Node: Installation37908
+Node: Description38437
+Ref: Vertico40825
+Ref: Orderless41535
+Ref: Marginalia42260
+Ref: Consult42625
+Ref: Embark45150
+Ref: Corfu46966
+Ref: Cape47749
+Node: Crafted Emacs Defaults Module48924
+Node: Installation (1)49344
+Node: Description (1)49814
+Node: Buffers50520
+Node: Completion54142
+Node: Editing57786
+Node: Navigation60750
+Node: Persistence61368
+Node: Windows63021
+Node: Miscellaneous68839
+Node: Acknowledgements70637
+Node: Crafted Emacs Evil Module71160
+Node: Installation (2)71444
+Node: Description (2)71951
+Node: Crafted Emacs IDE Module75758
+Node: Installation (3)76036
+Node: Description (3)76538
+Ref: Eglot77396
+Ref: Tree-Sitter77846
+Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78179
+Ref: Configuring Tree-Sitter (Emacs 29 or later)78611
+Ref: Combobulate79500
+Node: Crafted Emacs Lisp Module80309
+Node: Installation (4)80621
+Node: Description (4)81128
+Ref: Common Lisp81728
+Ref: Clojure82594
+Ref: Scheme and Racket83230
+Node: Additional packages geiser-*83826
+Node: Crafted Emacs Org Module84870
+Node: Installation (5)85180
+Node: Description (5)85682
+Node: Alternative package org-roam87699
+Node: Crafted Emacs OSX Module89503
+Node: Installation (6)89786
+Node: Description (6)90098
+Node: Crafted Emacs Screencast Module91132
+Node: Installation (7)91434
+Node: Description (7)91971
+Node: Crafted Emacs Speedbar Module92674
+Node: Installation (8)92976
+Node: Description (8)93447
+Node: Crafted Emacs Startup Module95954
+Node: Installation (9)96248
+Node: Description (9)96718
+Node: Crafted Emacs UI Module98130
+Node: Installation (10)98415
+Node: Description (10)98916
+Ref: Icons with all-the-icons99587
+Ref: Line numbers100102
+Node: Crafted Emacs Updates Module101393
+Node: Installation (11)101691
+Node: Description (11)102163
+Ref: Usage and Customization102743
+Ref: On Startup102894
+Ref: Regularly103611
+Ref: Manually104544
+Node: Crafted Emacs Workspaces Module105147
+Node: Installation (12)105456
+Node: Description (12)105997
+Node: Crafted Emacs Writing Module107550
+Node: Installation (13)107816
+Node: Description (13)108342
+Ref: Whitespace Mode108869
+Ref: Function crafted-writing-configure-whitespace109335
+Ref: Signature109403
+Ref: Parameters109570
+Ref: Examples110487
+Ref: Optional Package PDF-Tools111596
+Ref: Part 1 Installing the Emacs package pdf-tools111942
+Ref: Part 2 Installing the epdfinfo-server112360
+Ref: Configuration113082
+Node: Troubleshooting113564
+Node: A package (suddenly?) fails to work113800
+Node: MIT License117588
 
 End Tag Table
 
