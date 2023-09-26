@@ -90,8 +90,8 @@ For Emacs 29 or later:
 Requires Emacs to be built using \"--with-tree-sitter\".
 All language grammars are auto-installed unless they are a member of OPT-OUT."
   (if (version< emacs-version "29")
-      (crafted-ide--configure-tree-sitter opt-out)
-    (crafted-ide--configure-tree-sitter-pre-29)))
+      (crafted-ide--configure-tree-sitter-pre-29)
+    (crafted-ide--configure-tree-sitter opt-out)))
 
 ;; turn on aggressive indent if it is available, otherwise use
 ;; electric indent.
