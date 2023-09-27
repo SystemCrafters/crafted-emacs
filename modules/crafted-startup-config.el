@@ -27,6 +27,11 @@
   :type 'number
   :group 'crafted-startup)
 
+(defcustom crafted-startup-project-count 10
+  "The number of projects to display on the splash screen"
+  :type 'number
+  :group 'crafted-startup)
+
 (defconst crafted-startup-text
   `((:face (variable-pitch font-lock-comment-face (:height 1.5) bold)
            ,(let* ((welcome-text "Welcome to Crafted Emacs!\n\n")
@@ -88,29 +93,55 @@ Each element in the list should be a list of strings or pairs
                 (custom-save-all))
               (quit-windows-on "*Crafted Emacs*" t)))
    "  ")
-   (when custom-file
-     (let ((checked (create-image "checked.xpm"
-                                  nil nil :ascent 'center))
-           (unchecked (create-image "unchecked.xpm"
-                                    nil nil :ascent 'center)))
-       (insert-button
-        " "
-        :on-glyph checked
-        :off-glyph unchecked
-        'checked nil 'display unchecked 'follow-link t
-        'action (lambda (button)
-                  (if (overlay-get button 'checked)
-                      (progn (overlay-put button 'checked nil)
-                             (overlay-put button 'display
-                                          (overlay-get button :off-glyph))
-                             (setq crafted-startup-screen-inhibit-startup-screen
-                                   nil))
-                    (overlay-put button 'checked t)
-                    (overlay-put button 'display
-                                 (overlay-get button :on-glyph))
-                    (setq crafted-startup-screen-inhibit-startup-screen t))))))
+  (when custom-file
+    (let ((checked (create-image "checked.xpm"
+                                 nil nil :ascent 'center))
+          (unchecked (create-image "unchecked.xpm"
+                                   nil nil :ascent 'center)))
+      (insert-button
+       " "
+       :on-glyph checked
+       :off-glyph unchecked
+       'checked nil 'display unchecked 'follow-link t
+       'action (lambda (button)
+                 (if (overlay-get button 'checked)
+                     (progn (overlay-put button 'checked nil)
+                            (overlay-put button 'display
+                                         (overlay-get button :off-glyph))
+                            (setq crafted-startup-screen-inhibit-startup-screen
+                                  nil))
+                   (overlay-put button 'checked t)
+                   (overlay-put button 'display
+                                (overlay-get button :on-glyph))
+                   (setq crafted-startup-screen-inhibit-startup-screen t))))))
   (fancy-splash-insert :face '(variable-pitch (:height 0.9))
                        " Never show it again."))
+
+(defun crafted-startup-projects ()
+  (require 'project nil :noerror)
+  (when (file-exists-p project-list-file)
+    (project--read-project-list)
+    (message "Showing projects on splash screen")
+    (message (format "project count %s" (length project--list)))
+    (dolist (proj (seq-take project--list crafted-startup-project-count))
+      (message (format "%s" (car proj))))
+    (fancy-splash-insert
+     :face '(variable-pitch font-lock-string-face italic)
+     (condition-case project--list
+         (if (not (seq-empty-p project--list))
+             "Projects:\n"
+           "\n")
+       (error "\n")))
+    (condition-case project--list
+        (if (not (seq-empty-p project--list))
+            (dolist (proj (seq-take project--list crafted-startup-project-count))
+              (fancy-splash-insert
+               :face 'default
+               (format "%s" (car proj))
+               ;; :link `(,file ,(lambda (_button) (car proj)))
+               "\n"))
+          "\n")
+      (error "\n"))))
 
 (defun crafted-startup-recentf ()
   (message "Showing recents on splash screen")
@@ -171,7 +202,13 @@ starts.  See the variable documenation for
                                 (crafted-updates-status-message)
                               (error "Crafted Emacs status could not be determined.")))))
           (insert "\n\n"))
-        (crafted-startup-recentf)
+        (mapc (lambda (f)
+                (insert "\n")
+                (funcall f)
+                (skip-chars-backward "\n")
+                (delete-region (point) (point-max))
+                (insert "\n"))
+              '(crafted-startup-recentf crafted-startup-projects))
         (skip-chars-backward "\n")
         (delete-region (point) (point-max))
         (insert "\n")
