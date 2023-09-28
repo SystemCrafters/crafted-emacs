@@ -94,7 +94,7 @@ OPT-OUT is a list of symbols of language grammars to opt out before auto-install
     (julia . ("\\.jl\\'" . julia-ts-mode))
     (lua . ("\\.lua\\'" . lua-ts-mode))
     (markdown . ("\\.md\\'" . markdown-ts-mode))
-    (dockerfile . ("Dockerfile\\'" . dockerfile-mode)))
+    (dockerfile . ("Dockerfile\\'" . dockerfile-ts-mode)))
   "Map of tree-sitter languages to `auto-mode-alist' entries.")
 
 (defun crafted-ide--configure-tree-sitter-modes ()
