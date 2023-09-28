@@ -50,7 +50,7 @@
 Each element in the list should be a list of strings or pairs
 `:face FACE', like `fancy-splash-insert' accepts them.")
 
-(defvar crafted-startup-module-list '(crafted-startup-diary crafted-startup-recentf crafted-startup-projects)
+(defvar crafted-startup-module-list '(crafted-startup-recentf)
   "List of functions to call to display \"modules\" on the splash
 screen.  Functions are called in the order listed.  See
 `crafted-startup-recentf' as an example.  Current list provided
