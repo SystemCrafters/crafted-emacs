@@ -122,9 +122,6 @@ Each element in the list should be a list of strings or pairs
   (when (file-exists-p project-list-file)
     (project--read-project-list)
     (message "Showing projects on splash screen")
-    (message (format "project count %s" (length project--list)))
-    (dolist (proj (seq-take project--list crafted-startup-project-count))
-      (message (format "%s" (car proj))))
     (fancy-splash-insert
      :face '(variable-pitch font-lock-string-face italic)
      (condition-case project--list
@@ -137,8 +134,7 @@ Each element in the list should be a list of strings or pairs
             (dolist (proj (seq-take project--list crafted-startup-project-count))
               (fancy-splash-insert
                :face 'default
-               (format "%s" (car proj))
-               ;; :link `(,file ,(lambda (_button) (car proj)))
+               :link `(,(car proj) ,(lambda (_button) (project-switch-project (car proj))))
                "\n"))
           "\n")
       (error "\n"))))
@@ -161,6 +157,11 @@ Each element in the list should be a list of strings or pairs
              "\n"))
         "\n")
     (error "\n")))
+
+(defvar crafted-startup-module-list '(crafted-startup-projects crafted-startup-recentf)
+  "List of functions to call to display \"modules\" on the splash
+screen.  Functions are called in the order listed.  See
+`crafted-startup-recentf' as an example.")
 
 (defun crafted-startup-screen (&optional concise)
   "Display fancy startup screen.
@@ -208,7 +209,7 @@ starts.  See the variable documenation for
                 (skip-chars-backward "\n")
                 (delete-region (point) (point-max))
                 (insert "\n"))
-              '(crafted-startup-recentf crafted-startup-projects))
+              crafted-startup-module-list)
         (skip-chars-backward "\n")
         (delete-region (point) (point-max))
         (insert "\n")
