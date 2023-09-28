@@ -50,6 +50,13 @@
 Each element in the list should be a list of strings or pairs
 `:face FACE', like `fancy-splash-insert' accepts them.")
 
+(defvar crafted-startup-module-list '(crafted-startup-diary crafted-startup-recentf crafted-startup-projects)
+  "List of functions to call to display \"modules\" on the splash
+screen.  Functions are called in the order listed.  See
+`crafted-startup-recentf' as an example.  Current list provided
+ by Crafted Emacs is `crafted-startup-diary',
+ `crafted-startup-projects', `crafted-startup-recentf'")
+
 (defvar crafted-startup-screen-inhibit-startup-screen nil)
 
 (defun crafted-startup-tail (&optional concise)
@@ -117,6 +124,32 @@ Each element in the list should be a list of strings or pairs
   (fancy-splash-insert :face '(variable-pitch (:height 0.9))
                        " Never show it again."))
 
+(defun crafted-startup-diary ()
+  (require 'diary-lib nil :noerror)
+  (when (diary-check-diary-file)
+    (let* ((today (decode-time nil nil 'integer))
+           (mm (decoded-time-month today))
+           (dd (decoded-time-day today))
+           (yy (decoded-time-year today))
+           (entries (mapcar #'cadr (diary-list-entries (list mm dd yy) 1 t))))
+      (message "Showing today's diary entries on splash screen")
+      (fancy-splash-insert
+       :face '(variable-pitch font-lock-string-face italic)
+       (condition-case entries
+           (if (not (seq-empty-p entries))
+               "Diary Entries for Today:\n"
+             "No diary entries for today\n")
+         (error "\n")))
+      (condition-case entries
+          (if (not (seq-empty-p entries))
+              (dolist (entry entries)
+                (fancy-splash-insert
+                 :face 'default
+                 entry
+                 "\n"))
+            "\n")
+        (error "\n")))))
+
 (defun crafted-startup-projects ()
   (require 'project nil :noerror)
   (when (file-exists-p project-list-file)
@@ -157,11 +190,6 @@ Each element in the list should be a list of strings or pairs
              "\n"))
         "\n")
     (error "\n")))
-
-(defvar crafted-startup-module-list '(crafted-startup-projects crafted-startup-recentf)
-  "List of functions to call to display \"modules\" on the splash
-screen.  Functions are called in the order listed.  See
-`crafted-startup-recentf' as an example.")
 
 (defun crafted-startup-screen (&optional concise)
   "Display fancy startup screen.
