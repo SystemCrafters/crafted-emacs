@@ -1,0 +1,73 @@
+---
+name: Bug Report
+description: Interactive Form for filing bug reports
+labels: ["bug"]
+body:
+  - type: markdown
+    id: general
+    attributes:
+      value: First, please tell us a little bit about your setup. This helps reproducing the issue.
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      description: What Operating System do you use?
+      options:
+        - Linux/BSD
+        - Windows
+        - Mac
+        - Android
+        - other
+      default: 0
+  - type: input
+    id: os-details
+    attributes:
+      label: Additional Operating System information
+      description: Anything additional about your OS setup? Distribution, Version, ...
+      placeholder: GNU/Guix
+  - type: dropdown
+    id: emacs-version
+    attributes:
+      label: Emacs Version
+      description: What version of Emacs have you encountered this issue? (You can run `M-x emacs-version RET` to find out)
+      options:
+        - 27
+        - 28
+        - 29
+      default: 0
+    validations:
+      required: true
+  - type: checkboxes
+    id: emacs-configuration-info
+    attributes:
+      label: Emacs Configuration Details
+      description: Some more about your Emacs configuration (if you don't know, ignore this section and mention it in the text area below)
+      options:
+        - label: Native Compilation
+        - label: pGTK
+        - label: alternative package manager (use-package, straight.el, ...)
+    validations:
+      required: true
+  - type: textarea
+    id: emacs-user-info
+    attributes:
+      label: Anything else that may be related to the issue you're having?
+      description: Any information you think is important to understanding the issue that we should know (other versions tested, ...).
+  - type: markdown
+    id: general
+    attributes:
+      value: Now, let's get into the details about the issue.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Please describe the bug you encountered. If you can, please provide a step-by-step way to reproduce the bug and a backtrace (using `(toggle-debug-on-error)` to display the backtrace on error) of the issue.
+    validations:
+      required: true
+  - type: textarea
+    id: what-should-have-happened
+    attributes:
+      label: What should have happened?
+      description: Please describe the behaviour you were expecting.
+    validations:
+      required: true
