@@ -50,12 +50,14 @@
 Each element in the list should be a list of strings or pairs
 `:face FACE', like `fancy-splash-insert' accepts them.")
 
-(defvar crafted-startup-module-list '(crafted-startup-recentf)
+(defcustom crafted-startup-module-list '(crafted-startup-recentf)
   "List of functions to call to display \"modules\" on the splash
 screen.  Functions are called in the order listed.  See
 `crafted-startup-recentf' as an example.  Current list provided
  by Crafted Emacs is `crafted-startup-diary',
- `crafted-startup-projects', `crafted-startup-recentf'")
+ `crafted-startup-projects', `crafted-startup-recentf'"
+  :type '(repeat function)
+  :group 'crafted-startup)
 
 (defvar crafted-startup-screen-inhibit-startup-screen nil)
 
@@ -145,8 +147,7 @@ screen.  Functions are called in the order listed.  See
               (dolist (entry entries)
                 (fancy-splash-insert
                  :face 'default
-                 entry
-                 "\n"))
+                 (format "%s\n" entry)))
             "\n")
         (error "\n")))))
 
@@ -166,7 +167,6 @@ screen.  Functions are called in the order listed.  See
         (if (not (seq-empty-p project--list))
             (dolist (proj (seq-take project--list crafted-startup-project-count))
               (fancy-splash-insert
-               :face 'default
                :link `(,(car proj) ,(lambda (_button) (project-switch-project (car proj))))
                "\n"))
           "\n")
@@ -185,7 +185,6 @@ screen.  Functions are called in the order listed.  See
       (if (not (seq-empty-p recentf-list))
           (dolist (file (seq-take recentf-list crafted-startup-recentf-count))
             (fancy-splash-insert
-             :face 'default
              :link `(,file ,(lambda (_button) (find-file file)))
              "\n"))
         "\n")
