@@ -128,28 +128,35 @@ screen.  Functions are called in the order listed.  See
 
 (defun crafted-startup-diary ()
   (require 'diary-lib nil :noerror)
-  (when (diary-check-diary-file)
-    (let* ((today (decode-time nil nil 'integer))
-           (mm (decoded-time-month today))
-           (dd (decoded-time-day today))
-           (yy (decoded-time-year today))
-           (entries (mapcar #'cadr (diary-list-entries (list mm dd yy) 1 t))))
-      (message "Showing today's diary entries on splash screen")
-      (fancy-splash-insert
-       :face '(variable-pitch font-lock-string-face italic)
-       (condition-case entries
-           (if (not (seq-empty-p entries))
-               "Diary Entries for Today:\n"
-             "No diary entries for today\n")
-         (error "\n")))
-      (condition-case entries
-          (if (not (seq-empty-p entries))
-              (dolist (entry entries)
-                (fancy-splash-insert
-                 :face 'default
-                 (format "%s\n" entry)))
-            "\n")
-        (error "\n")))))
+  (if (and diary-file (file-exists-p diary-file))
+      (if (file-readable-p diary-file)
+          (let* ((today (decode-time nil nil 'integer))
+                 (mm (decoded-time-month today))
+                 (dd (decoded-time-day today))
+                 (yy (decoded-time-year today))
+                 (entries (mapcar #'cadr (diary-list-entries (list mm dd yy) 1 t))))
+            (message "Showing today's diary entries on splash screen")
+            (fancy-splash-insert
+             :face '(variable-pitch font-lock-string-face italic)
+             (condition-case entries
+                 (if (not (seq-empty-p entries))
+                     "Diary Entries for Today:\n"
+                   "No diary entries for today\n")
+               (error "\n")))
+            (condition-case entries
+                (if (not (seq-empty-p entries))
+                    (dolist (entry entries)
+                      (fancy-splash-insert
+                       :face 'default
+                       (format "%s\n" entry)))
+                  "\n")
+              (error "\n")))
+        (fancy-splash-insert
+         :face '(variable-pitch font-lock-string-face italic)
+         "Diary file is not readable\n"))
+    (fancy-splash-insert
+     :face '(variable-pitch font-lock-string-face italic)
+     "No diary file\n")))
 
 (defun crafted-startup-projects ()
   (require 'project nil :noerror)
