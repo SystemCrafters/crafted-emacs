@@ -21,15 +21,23 @@ points.
 The ~crafted-ide~ module sets up (and installs if necessary) functionality that
 makes Emacs act like a integrated development environment (IDE).
 
-It sets up project based buffer management ([[https://github.com/muffinmad/emacs-ibuffer-project][ibuffer-project]]) and a
-semi-automatic indentation ([[https://github.com/Malabarba/aggressive-indent-mode][aggressive-indent]]) for many programming and markup
-languages.
+This module includes:
 
-If you use [[https://editorconfig.org][EditorConfig]], this module provides support for that, too (see
-[[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]] for details).
+- Project-based buffer management ([[https://github.com/muffinmad/emacs-ibuffer-project][ibuffer-project]])
+- LSP client (Eglot)
+- Next-generation syntax parsing (Tree-Sitter)
+- [[https://editorconfig.org][EditorConfig]] support ([[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]]).
 
-Furthermore, it sets up Eglot (a LSP-client) and Tree-Sitter (a next generation
-syntax parser).
+*** Aggressive Indentation
+
+By default Emacs enables [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Indent-Convenience.html][Electric Indent]], a minor mode that
+automatically indents code after a RET key is pressed. ~crafted-ide~
+adds support for [[https://github.com/Malabarba/aggressive-indent-mode][Aggressive Indent]], which re-indents code as it is
+typed. You can enable it for programming modes with the following:
+
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook #'aggressive-indent-mode)
+#+end_src
 
 *** Eglot
 
