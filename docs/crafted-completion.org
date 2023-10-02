@@ -194,6 +194,24 @@ Use arrow keys or =C-n= and =C-p= to move the next or previous completion in the
 list. To read more of the documentation, use =M-n= or =M-p= to scroll the
 documentation overlay.
 
+**** Auto Completion Delay
+
+Some delay between keypress and auto completion is recommended,
+particularly when pairing Corfu with modules from
+~crafted-ide~. ~crafted-completion~ sticks with the Corfu default of
+0.2, but this is configurable via the ~corfu-auto-delay~ custom
+variable.
+
+It's worth reading Corfu's [[https://github.com/minad/corfu#auto-completion][recommendations on auto delay]] if you plan
+on configuring these parameters.
+
+#+begin_src emacs-lisp
+  ;; Quicker completion with cheaper filtering
+  (customize-set-variable 'corfu-auto-delay 0)
+  (customize-set-variable 'corfu-echo-delay 0.25)
+  (customize-set-variable 'completion-styles '(basic))
+#+end_src
+
 *** Cape
 
 A great addition to Corfu is Cape. Cape provides several completion backends
