@@ -30,9 +30,6 @@
   ;; modes, can install grammars, etc.
   (add-to-list 'package-selected-packages 'treesit-auto)
 
-  ;; code navigation using tree-sitter grammars.
-  (add-to-list 'package-selected-packages 'combobulate))
-
 ;; editorconfig is a cross-editor/ide configuration tool to control
 ;; indentation, spaces vs tabs, etc.
 (add-to-list 'package-selected-packages 'editorconfig)
