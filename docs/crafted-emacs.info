@@ -2062,20 +2062,28 @@ The ‘crafted-ide’ module sets up (and installs if necessary)
 functionality that makes Emacs act like a integrated development
 environment (IDE).
 
-   It sets up project based buffer management (ibuffer-project
-(https://github.com/muffinmad/emacs-ibuffer-project)) and a
-semi-automatic indentation (aggressive-indent
-(https://github.com/Malabarba/aggressive-indent-mode)) for many
-programming and markup languages.
+   This module includes:
 
-   If you use EditorConfig (https://editorconfig.org), this module
-provides support for that, too (see editorconfig-emacs
-(https://github.com/editorconfig/editorconfig-emacs) for details).
+   • Project-based buffer management (ibuffer-project
+     (https://github.com/muffinmad/emacs-ibuffer-project))
+   • LSP client (Eglot)
+   • Next-generation syntax parsing (Tree-Sitter)
+   • EditorConfig (https://editorconfig.org) support (editorconfig-emacs
+     (https://github.com/editorconfig/editorconfig-emacs)).
 
-   Furthermore, it sets up Eglot (a LSP-client) and Tree-Sitter (a next
-generation syntax parser).
+  1. Aggressive Indentation
 
-  1. Eglot
+     By default Emacs enables Electric Indent
+     (https://www.gnu.org/software/emacs/manual/html_node/emacs/Indent-Convenience.html),
+     a minor mode that automatically indents code after a RET key is
+     pressed.  ‘crafted-ide’ adds support for Aggressive Indent
+     (https://github.com/Malabarba/aggressive-indent-mode), which
+     re-indents code as it is typed.  You can enable it for programming
+     modes with the following:
+
+          (add-hook 'prog-mode-hook #'aggressive-indent-mode)
+
+  2. Eglot
 
      Eglot (https://github.com/joaotavora/eglot) is a client for the
      Language Server Protocol (LSP) built into Emacs (>=29).  For it to
@@ -2085,7 +2093,7 @@ generation syntax parser).
      (https://github.com/joaotavora/eglot#connecting-to-a-server) of
      servers that work with Eglot out of the box.
 
-  2. Tree-Sitter
+  3. Tree-Sitter
 
      Tree-Sitter support (built-in since Emacs 29) enables Emacs to
      better understand the syntax of your code, thus improving syntax
@@ -3272,64 +3280,65 @@ Node: Description (2)71951
 Node: Crafted Emacs IDE Module75758
 Node: Installation (3)76036
 Node: Description (3)76538
-Ref: Eglot77396
-Ref: Tree-Sitter77846
-Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78179
-Ref: Configuring Tree-Sitter (Emacs 29 or later)78611
-Ref: Combobulate79500
-Node: Crafted Emacs Lisp Module80309
-Node: Installation (4)80621
-Node: Description (4)81128
-Ref: Common Lisp81728
-Ref: Clojure82594
-Ref: Scheme and Racket83230
-Node: Additional packages geiser-*83826
-Node: Crafted Emacs Org Module84870
-Node: Installation (5)85180
-Node: Description (5)85682
-Node: Alternative package org-roam87699
-Node: Crafted Emacs OSX Module89503
-Node: Installation (6)89786
-Node: Description (6)90098
-Node: Crafted Emacs Screencast Module91132
-Node: Installation (7)91434
-Node: Description (7)91971
-Node: Crafted Emacs Speedbar Module92674
-Node: Installation (8)92976
-Node: Description (8)93447
-Node: Crafted Emacs Startup Module95954
-Node: Installation (9)96248
-Node: Description (9)96718
-Node: Crafted Emacs UI Module98130
-Node: Installation (10)98415
-Node: Description (10)98916
-Ref: Icons with all-the-icons99587
-Ref: Line numbers100102
-Node: Crafted Emacs Updates Module101393
-Node: Installation (11)101691
-Node: Description (11)102163
-Ref: Usage and Customization102743
-Ref: On Startup102894
-Ref: Regularly103611
-Ref: Manually104544
-Node: Crafted Emacs Workspaces Module105147
-Node: Installation (12)105456
-Node: Description (12)105997
-Node: Crafted Emacs Writing Module107550
-Node: Installation (13)107816
-Node: Description (13)108342
-Ref: Whitespace Mode108869
-Ref: Function crafted-writing-configure-whitespace109335
-Ref: Signature109403
-Ref: Parameters109570
-Ref: Examples110487
-Ref: Optional Package PDF-Tools111596
-Ref: Part 1 Installing the Emacs package pdf-tools111942
-Ref: Part 2 Installing the epdfinfo-server112360
-Ref: Configuration113082
-Node: Troubleshooting113564
-Node: A package (suddenly?) fails to work113800
-Node: MIT License117588
+Ref: Aggressive Indentation77193
+Ref: Eglot77728
+Ref: Tree-Sitter78178
+Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78511
+Ref: Configuring Tree-Sitter (Emacs 29 or later)78943
+Ref: Combobulate79832
+Node: Crafted Emacs Lisp Module80641
+Node: Installation (4)80953
+Node: Description (4)81460
+Ref: Common Lisp82060
+Ref: Clojure82926
+Ref: Scheme and Racket83562
+Node: Additional packages geiser-*84158
+Node: Crafted Emacs Org Module85202
+Node: Installation (5)85512
+Node: Description (5)86014
+Node: Alternative package org-roam88031
+Node: Crafted Emacs OSX Module89835
+Node: Installation (6)90118
+Node: Description (6)90430
+Node: Crafted Emacs Screencast Module91464
+Node: Installation (7)91766
+Node: Description (7)92303
+Node: Crafted Emacs Speedbar Module93006
+Node: Installation (8)93308
+Node: Description (8)93779
+Node: Crafted Emacs Startup Module96286
+Node: Installation (9)96580
+Node: Description (9)97050
+Node: Crafted Emacs UI Module98462
+Node: Installation (10)98747
+Node: Description (10)99248
+Ref: Icons with all-the-icons99919
+Ref: Line numbers100434
+Node: Crafted Emacs Updates Module101725
+Node: Installation (11)102023
+Node: Description (11)102495
+Ref: Usage and Customization103075
+Ref: On Startup103226
+Ref: Regularly103943
+Ref: Manually104876
+Node: Crafted Emacs Workspaces Module105479
+Node: Installation (12)105788
+Node: Description (12)106329
+Node: Crafted Emacs Writing Module107882
+Node: Installation (13)108148
+Node: Description (13)108674
+Ref: Whitespace Mode109201
+Ref: Function crafted-writing-configure-whitespace109667
+Ref: Signature109735
+Ref: Parameters109902
+Ref: Examples110819
+Ref: Optional Package PDF-Tools111928
+Ref: Part 1 Installing the Emacs package pdf-tools112274
+Ref: Part 2 Installing the epdfinfo-server112692
+Ref: Configuration113414
+Node: Troubleshooting113896
+Node: A package (suddenly?) fails to work114132
+Node: MIT License117920
 
 End Tag Table
 
