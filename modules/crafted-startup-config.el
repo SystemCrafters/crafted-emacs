@@ -27,6 +27,11 @@
   :type 'number
   :group 'crafted-startup)
 
+(defcustom crafted-startup-project-count 10
+  "The number of projects to display on the splash screen"
+  :type 'number
+  :group 'crafted-startup)
+
 (defconst crafted-startup-text
   `((:face (variable-pitch font-lock-comment-face (:height 1.5) bold)
            ,(let* ((welcome-text "Welcome to Crafted Emacs!\n\n")
@@ -44,6 +49,15 @@
   "A list of texts to show in the middle part of splash screens.
 Each element in the list should be a list of strings or pairs
 `:face FACE', like `fancy-splash-insert' accepts them.")
+
+(defcustom crafted-startup-module-list '(crafted-startup-recentf)
+  "List of functions to call to display \"modules\" on the splash
+screen.  Functions are called in the order listed.  See
+`crafted-startup-recentf' as an example.  Current list provided
+ by Crafted Emacs is `crafted-startup-diary',
+ `crafted-startup-projects', `crafted-startup-recentf'"
+  :type '(repeat function)
+  :group 'crafted-startup)
 
 (defvar crafted-startup-screen-inhibit-startup-screen nil)
 
@@ -88,29 +102,82 @@ Each element in the list should be a list of strings or pairs
                 (custom-save-all))
               (quit-windows-on "*Crafted Emacs*" t)))
    "  ")
-   (when custom-file
-     (let ((checked (create-image "checked.xpm"
-                                  nil nil :ascent 'center))
-           (unchecked (create-image "unchecked.xpm"
-                                    nil nil :ascent 'center)))
-       (insert-button
-        " "
-        :on-glyph checked
-        :off-glyph unchecked
-        'checked nil 'display unchecked 'follow-link t
-        'action (lambda (button)
-                  (if (overlay-get button 'checked)
-                      (progn (overlay-put button 'checked nil)
-                             (overlay-put button 'display
-                                          (overlay-get button :off-glyph))
-                             (setq crafted-startup-screen-inhibit-startup-screen
-                                   nil))
-                    (overlay-put button 'checked t)
-                    (overlay-put button 'display
-                                 (overlay-get button :on-glyph))
-                    (setq crafted-startup-screen-inhibit-startup-screen t))))))
+  (when custom-file
+    (let ((checked (create-image "checked.xpm"
+                                 nil nil :ascent 'center))
+          (unchecked (create-image "unchecked.xpm"
+                                   nil nil :ascent 'center)))
+      (insert-button
+       " "
+       :on-glyph checked
+       :off-glyph unchecked
+       'checked nil 'display unchecked 'follow-link t
+       'action (lambda (button)
+                 (if (overlay-get button 'checked)
+                     (progn (overlay-put button 'checked nil)
+                            (overlay-put button 'display
+                                         (overlay-get button :off-glyph))
+                            (setq crafted-startup-screen-inhibit-startup-screen
+                                  nil))
+                   (overlay-put button 'checked t)
+                   (overlay-put button 'display
+                                (overlay-get button :on-glyph))
+                   (setq crafted-startup-screen-inhibit-startup-screen t))))))
   (fancy-splash-insert :face '(variable-pitch (:height 0.9))
                        " Never show it again."))
+
+(defun crafted-startup-diary ()
+  (require 'diary-lib nil :noerror)
+  (if (and diary-file (file-exists-p diary-file))
+      (if (file-readable-p diary-file)
+          (let* ((today (decode-time nil nil 'integer))
+                 (mm (decoded-time-month today))
+                 (dd (decoded-time-day today))
+                 (yy (decoded-time-year today))
+                 (entries (mapcar #'cadr (diary-list-entries (list mm dd yy) 1 t))))
+            (message "Showing today's diary entries on splash screen")
+            (fancy-splash-insert
+             :face '(variable-pitch font-lock-string-face italic)
+             (condition-case entries
+                 (if (not (seq-empty-p entries))
+                     "Diary Entries for Today:\n"
+                   "No diary entries for today\n")
+               (error "\n")))
+            (condition-case entries
+                (if (not (seq-empty-p entries))
+                    (dolist (entry entries)
+                      (fancy-splash-insert
+                       :face 'default
+                       (format "%s\n" entry)))
+                  "\n")
+              (error "\n")))
+        (fancy-splash-insert
+         :face '(variable-pitch font-lock-string-face italic)
+         "Diary file is not readable\n"))
+    (fancy-splash-insert
+     :face '(variable-pitch font-lock-string-face italic)
+     "No diary file\n")))
+
+(defun crafted-startup-projects ()
+  (require 'project nil :noerror)
+  (when (file-exists-p project-list-file)
+    (project--read-project-list)
+    (message "Showing projects on splash screen")
+    (fancy-splash-insert
+     :face '(variable-pitch font-lock-string-face italic)
+     (condition-case project--list
+         (if (not (seq-empty-p project--list))
+             "Projects:\n"
+           "\n")
+       (error "\n")))
+    (condition-case project--list
+        (if (not (seq-empty-p project--list))
+            (dolist (proj (seq-take project--list crafted-startup-project-count))
+              (fancy-splash-insert
+               :link `(,(car proj) ,(lambda (_button) (project-switch-project (car proj))))
+               "\n"))
+          "\n")
+      (error "\n"))))
 
 (defun crafted-startup-recentf ()
   (message "Showing recents on splash screen")
@@ -125,7 +192,6 @@ Each element in the list should be a list of strings or pairs
       (if (not (seq-empty-p recentf-list))
           (dolist (file (seq-take recentf-list crafted-startup-recentf-count))
             (fancy-splash-insert
-             :face 'default
              :link `(,file ,(lambda (_button) (find-file file)))
              "\n"))
         "\n")
@@ -171,7 +237,13 @@ starts.  See the variable documenation for
                                 (crafted-updates-status-message)
                               (error "Crafted Emacs status could not be determined.")))))
           (insert "\n\n"))
-        (crafted-startup-recentf)
+        (mapc (lambda (f)
+                (insert "\n")
+                (funcall f)
+                (skip-chars-backward "\n")
+                (delete-region (point) (point-max))
+                (insert "\n"))
+              crafted-startup-module-list)
         (skip-chars-backward "\n")
         (delete-region (point) (point-max))
         (insert "\n")
