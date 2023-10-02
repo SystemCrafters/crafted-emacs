@@ -89,9 +89,9 @@ which explains the basic init and module structure of V2.
 ## V1 config files to V2 config files
 
 Follow the advice in section [Bootstrapping Crafted
-Emacs](https://github.com/SystemCrafters/crafted-emacs/docs/getting-started-guide.org#bootstrapping-crafted-emacs)to
-make sure you have the appropriate modules loaded for initializing the default
-package management system and the `load-path`.
+Emacs](https://github.com/SystemCrafters/crafted-emacs/docs/getting-started-guide.org#bootstrapping-crafted-emacs)
+to make sure you have the appropriate modules loaded for initializing
+the default package management system and the `load-path`.
 
 You can choose to take one of the following approaches:
 
@@ -163,8 +163,8 @@ For example, replace:
 with:
 ```elisp
 ;; V2 init.el
-(require 'crafted-completion-packages) ;; in the packages section
-(require 'crafted-completion-config)   ;; in the configuration section
+(require 'crafted-completion-packages) ; in the packages section
+(require 'crafted-completion-config)   ; in the configuration section
 ```
 
 ## Replace uses of `crafted-install-package`
@@ -180,5 +180,5 @@ like this:
 
 ```elisp
 ;; V2 init.el
-(add-to-list 'package-selected-packages 'foo) ;; in the packages section
+(add-to-list 'package-selected-packages 'foo) ; in the packages section
 ```
