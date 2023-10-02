@@ -180,6 +180,10 @@ Crafted Emacs Startup Module
 
 * Installation: Installation (9).
 * Description: Description (9).
+* Logo::
+* Updates::
+* Modules: Modules (1).
+* Turn off splash screen::
 
 Crafted Emacs UI Module
 
@@ -2628,6 +2632,10 @@ File: crafted-emacs.info,  Node: Crafted Emacs Startup Module,  Next: Crafted Em
 
 * Installation: Installation (9).
 * Description: Description (9).
+* Logo::
+* Updates::
+* Modules: Modules (1).
+* Turn off splash screen::
 
 
 File: crafted-emacs.info,  Node: Installation (9),  Next: Description (9),  Up: Crafted Emacs Startup Module
@@ -2647,7 +2655,7 @@ appropriate points.
      (require 'crafted-startup-config)
 
 
-File: crafted-emacs.info,  Node: Description (9),  Prev: Installation (9),  Up: Crafted Emacs Startup Module
+File: crafted-emacs.info,  Node: Description (9),  Next: Logo,  Prev: Installation (9),  Up: Crafted Emacs Startup Module
 
 7.10.2 Description
 ------------------
@@ -2655,28 +2663,111 @@ File: crafted-emacs.info,  Node: Description (9),  Prev: Installation (9),  Up: 
 The ‘crafted-startup’ module provides a fancy splash screen similar to
 the Emacs default splash screen or the Emacs about page.
 
-   If it is used together with the ‘crafted-updates’ module, it will
-also check for updates during startup and will display the options to
-preview and install updates on the splash screen.  To use this, simply
-require ‘crafted-updates-config’ alongside this module:
+
+File: crafted-emacs.info,  Node: Logo,  Next: Updates,  Prev: Description (9),  Up: Crafted Emacs Startup Module
+
+7.10.3 Logo
+-----------
+
+In graphical session, it will display the System Crafters logo.  In a
+terminal session, a ASCII rendering of the logo is displayed.
+
+   This behaviour can be modified by changing one or more of the
+variables:
+   • ‘fancy-splash-image’ (default: ‘system-crafters-logo.png’ in
+     ‘crafted-emacs-~home’)
+   • ‘crafted-startup-graphical-logo’ (default: "image")
+   • ‘crafted-startup-terminal-logo’ (default: ‘t’)
+
+   To display another image:
+     (customize-set-variable 'fancy-splash-image "/path/to/my/image.png")
+
+   To turn off the logo in a graphical session:
+     (customize-set-variable 'crafted-startup-graphical-logo nil)
+
+   To display the ASCII logo in a graphical session:
+     (customize-set-variable 'crafted-startup-graphical-logo "ascii")
+
+   By default, ‘crafted-startup-graphical-logo’ is set to "image".
+
+   To turn off the ASCII logo in a terminal session:
+     (customize-set-variable 'crafted-startup-terminal-logo nil)
+
+
+File: crafted-emacs.info,  Node: Updates,  Next: Modules (1),  Prev: Logo,  Up: Crafted Emacs Startup Module
+
+7.10.4 Updates
+--------------
+
+If it is used together with the ‘crafted-updates’ module, it will also
+check for updates during startup and will display the options to preview
+and install updates on the splash screen.  To use this, simply require
+‘crafted-updates-config’ alongside this module:
 
      (require 'crafted-startup-config)
      (require 'crafted-updates-config)
 
-   If the list ‘recentf-list’ is not empty, the splash screen will
-display the most recent entries of that list as links.  By default, the
-most recent 10 entries in that list are displayed.  You can modify this
-behaviour by setting ‘crafted-startup-recentf-count’ in your config, for
-example:
+
+File: crafted-emacs.info,  Node: Modules (1),  Next: Turn off splash screen,  Prev: Updates,  Up: Crafted Emacs Startup Module
 
-     (customize-set-variable 'crafted-startup-recentf-count 3)
+7.10.5 Modules
+--------------
 
-   See the documentation for ‘recentf-mode’ for details about the list.
+Crafted Startup provides startup modules that display additional
+information on the splash screen.
 
-   If you want to turn off the splash screen altogether, you can either
-choose not to load the module at all.  Or, e.g.  if you want to use the
-check for updates during startup but not the splash screen, you can set
-‘crafted-startup-inhibit-splash’ to non-nil.
+   Currently, the following startup modules are available:
+   • ‘crafted-startup-recentf’ (activated by default)
+   • ‘crafted-startup-diary’
+   • ‘crafted-startup-projects’
+
+   You can modify which modules are active (and in which order they are
+displayed) by setting the variable ‘crafted-startup-module-list’.  For
+example, to display first project module and next the recentf-module,
+but not the diary module:
+     (customize-set-variable '(crafted-startup-projects crafted-startup-recentf))
+
+   • ‘crafted-startup-recentf’ (activated by default)
+
+     If the list ‘recentf-list’ is not empty, the splash screen will
+     display the most recent entries of that list as links.  By default,
+     the most recent 10 entries in that list are displayed.  You can
+     modify this behaviour by setting ‘crafted-startup-recentf-count’ in
+     your config, for example:
+
+          (customize-set-variable 'crafted-startup-recentf-count 3)
+
+     See the documentation for ‘recentf-mode’ for details about the
+     list.
+
+   • ‘crafted-startup-diary’
+
+     If a diary file exists, today’s entries are displayed on the splash
+     screen.  See the Section The Diary File
+     (https://www.gnu.org/software/emacs/manual/html_node/emacs/Format-of-Diary-File.html)
+     in the Emacs documentation for details.
+
+   • ‘crafted-startup-projects’
+
+     If the file specified in the built-in variable ‘project-list-file’
+     exists, the splash screen will display links to the project
+     directories of the first 10 projects listed in that file.  You can
+     modify the number of links displayed by setting
+     ‘crafted-startup-project-count’ in your config, for example:
+
+          (customize-set-variable 'crafted-startup-project-count 3)
+
+
+File: crafted-emacs.info,  Node: Turn off splash screen,  Prev: Modules (1),  Up: Crafted Emacs Startup Module
+
+7.10.6 Turn off splash screen
+-----------------------------
+
+If you want to turn off the splash screen altogether, you can either
+choose not to load the module at all.  Or you can set
+‘crafted-startup-inhibit-splash’ to non-nil.  This may be useful if you
+want to use the check for updates during startup but not the splash
+screen.
 
      (customize-set-variable 'crafted-startup-inhibit-splash t)
 
@@ -3214,122 +3305,126 @@ Appendix A MIT License
 
 Tag Table:
 Node: Top1410
-Node: Goals5413
-Node: Principles6463
-Node: Minimal modular configuration6794
-Node: Prioritize built-in Emacs functionality7430
-Node: Can be integrated with a Guix configuration8224
-Node: Helps you learn Emacs Lisp8781
-Node: Reversible9316
-Node: Why use it?9587
-Node: Getting Started10264
-Node: Initial setup10866
-Node: Cleaning out your configuration directories11096
-Node: Cloning the repository12358
-Node: Bootstrapping Crafted Emacs13003
-Node: Early Emacs Initialization13370
-Node: Emacs Initialization17245
-Node: Crafted Emacs Modules19288
-Node: Installing packages19661
-Node: Using Crafted Emacs Modules21491
-Ref: Package definitions crafted-*-packages21967
-Ref: Configuration crafted-*-config22926
-Node: Example Configuration24104
-Node: To save or not to save customizations25364
-Node: Where to go from here28357
-Node: Customization29054
-Node: Using alternate package managers29286
-Node: The customel file31765
-Node: Simplified overview of how Emacs Customization works32158
-Node: Loading the customel file33876
-Ref: customel35049
-Node: Contributing35695
-Node: Modules36323
-Node: Crafted Emacs Completion Module37672
-Node: Installation37908
-Node: Description38437
-Ref: Vertico40825
-Ref: Orderless41535
-Ref: Marginalia42260
-Ref: Consult42625
-Ref: Embark45150
-Ref: Corfu46966
-Ref: Cape47749
-Node: Crafted Emacs Defaults Module48924
-Node: Installation (1)49344
-Node: Description (1)49814
-Node: Buffers50520
-Node: Completion54142
-Node: Editing57786
-Node: Navigation60750
-Node: Persistence61368
-Node: Windows63021
-Node: Miscellaneous68839
-Node: Acknowledgements70637
-Node: Crafted Emacs Evil Module71160
-Node: Installation (2)71444
-Node: Description (2)71951
-Node: Crafted Emacs IDE Module75758
-Node: Installation (3)76036
-Node: Description (3)76538
-Ref: Eglot77396
-Ref: Tree-Sitter77846
-Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78179
-Ref: Configuring Tree-Sitter (Emacs 29 or later)78611
-Ref: Combobulate79500
-Node: Crafted Emacs Lisp Module80309
-Node: Installation (4)80621
-Node: Description (4)81128
-Ref: Common Lisp81728
-Ref: Clojure82594
-Ref: Scheme and Racket83230
-Node: Additional packages geiser-*83826
-Node: Crafted Emacs Org Module84870
-Node: Installation (5)85180
-Node: Description (5)85682
-Node: Alternative package org-roam87699
-Node: Crafted Emacs OSX Module89503
-Node: Installation (6)89786
-Node: Description (6)90098
-Node: Crafted Emacs Screencast Module91132
-Node: Installation (7)91434
-Node: Description (7)91971
-Node: Crafted Emacs Speedbar Module92674
-Node: Installation (8)92976
-Node: Description (8)93447
-Node: Crafted Emacs Startup Module95954
-Node: Installation (9)96248
-Node: Description (9)96718
-Node: Crafted Emacs UI Module98130
-Node: Installation (10)98415
-Node: Description (10)98916
-Ref: Icons with all-the-icons99587
-Ref: Line numbers100102
-Node: Crafted Emacs Updates Module101393
-Node: Installation (11)101691
-Node: Description (11)102163
-Ref: Usage and Customization102743
-Ref: On Startup102894
-Ref: Regularly103611
-Ref: Manually104544
-Node: Crafted Emacs Workspaces Module105147
-Node: Installation (12)105456
-Node: Description (12)105997
-Node: Crafted Emacs Writing Module107550
-Node: Installation (13)107816
-Node: Description (13)108342
-Ref: Whitespace Mode108869
-Ref: Function crafted-writing-configure-whitespace109335
-Ref: Signature109403
-Ref: Parameters109570
-Ref: Examples110487
-Ref: Optional Package PDF-Tools111596
-Ref: Part 1 Installing the Emacs package pdf-tools111942
-Ref: Part 2 Installing the epdfinfo-server112360
-Ref: Configuration113082
-Node: Troubleshooting113564
-Node: A package (suddenly?) fails to work113800
-Node: MIT License117588
+Node: Goals5485
+Node: Principles6535
+Node: Minimal modular configuration6866
+Node: Prioritize built-in Emacs functionality7502
+Node: Can be integrated with a Guix configuration8296
+Node: Helps you learn Emacs Lisp8853
+Node: Reversible9388
+Node: Why use it?9659
+Node: Getting Started10336
+Node: Initial setup10938
+Node: Cleaning out your configuration directories11168
+Node: Cloning the repository12430
+Node: Bootstrapping Crafted Emacs13075
+Node: Early Emacs Initialization13442
+Node: Emacs Initialization17317
+Node: Crafted Emacs Modules19360
+Node: Installing packages19733
+Node: Using Crafted Emacs Modules21563
+Ref: Package definitions crafted-*-packages22039
+Ref: Configuration crafted-*-config22998
+Node: Example Configuration24176
+Node: To save or not to save customizations25436
+Node: Where to go from here28429
+Node: Customization29126
+Node: Using alternate package managers29358
+Node: The customel file31837
+Node: Simplified overview of how Emacs Customization works32230
+Node: Loading the customel file33948
+Ref: customel35121
+Node: Contributing35767
+Node: Modules36395
+Node: Crafted Emacs Completion Module37744
+Node: Installation37980
+Node: Description38509
+Ref: Vertico40897
+Ref: Orderless41607
+Ref: Marginalia42332
+Ref: Consult42697
+Ref: Embark45222
+Ref: Corfu47038
+Ref: Cape47821
+Node: Crafted Emacs Defaults Module48996
+Node: Installation (1)49416
+Node: Description (1)49886
+Node: Buffers50592
+Node: Completion54214
+Node: Editing57858
+Node: Navigation60822
+Node: Persistence61440
+Node: Windows63093
+Node: Miscellaneous68911
+Node: Acknowledgements70709
+Node: Crafted Emacs Evil Module71232
+Node: Installation (2)71516
+Node: Description (2)72023
+Node: Crafted Emacs IDE Module75830
+Node: Installation (3)76108
+Node: Description (3)76610
+Ref: Eglot77468
+Ref: Tree-Sitter77918
+Ref: Configuring Tree-Sitter (Emacs 28 or earlier)78251
+Ref: Configuring Tree-Sitter (Emacs 29 or later)78683
+Ref: Combobulate79572
+Node: Crafted Emacs Lisp Module80381
+Node: Installation (4)80693
+Node: Description (4)81200
+Ref: Common Lisp81800
+Ref: Clojure82666
+Ref: Scheme and Racket83302
+Node: Additional packages geiser-*83898
+Node: Crafted Emacs Org Module84942
+Node: Installation (5)85252
+Node: Description (5)85754
+Node: Alternative package org-roam87771
+Node: Crafted Emacs OSX Module89575
+Node: Installation (6)89858
+Node: Description (6)90170
+Node: Crafted Emacs Screencast Module91204
+Node: Installation (7)91506
+Node: Description (7)92043
+Node: Crafted Emacs Speedbar Module92746
+Node: Installation (8)93048
+Node: Description (8)93519
+Node: Crafted Emacs Startup Module96026
+Node: Installation (9)96392
+Node: Description (9)96862
+Node: Logo97159
+Node: Updates98277
+Node: Modules (1)98771
+Node: Turn off splash screen100827
+Node: Crafted Emacs UI Module101343
+Node: Installation (10)101628
+Node: Description (10)102129
+Ref: Icons with all-the-icons102800
+Ref: Line numbers103315
+Node: Crafted Emacs Updates Module104606
+Node: Installation (11)104904
+Node: Description (11)105376
+Ref: Usage and Customization105956
+Ref: On Startup106107
+Ref: Regularly106824
+Ref: Manually107757
+Node: Crafted Emacs Workspaces Module108360
+Node: Installation (12)108669
+Node: Description (12)109210
+Node: Crafted Emacs Writing Module110763
+Node: Installation (13)111029
+Node: Description (13)111555
+Ref: Whitespace Mode112082
+Ref: Function crafted-writing-configure-whitespace112548
+Ref: Signature112616
+Ref: Parameters112783
+Ref: Examples113700
+Ref: Optional Package PDF-Tools114809
+Ref: Part 1 Installing the Emacs package pdf-tools115155
+Ref: Part 2 Installing the epdfinfo-server115573
+Ref: Configuration116295
+Node: Troubleshooting116777
+Node: A package (suddenly?) fails to work117013
+Node: MIT License120801
 
 End Tag Table
 
