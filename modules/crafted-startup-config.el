@@ -85,13 +85,12 @@ line or the centering will by off.")
      (make-string (abs (- (/ line-width 2) str-mid)) ? ) ;;fill w/ spaces
      str)))
 
+(defconst crafted-welcome-text
+  "Welcome to Crafted Emacs!"
+  "First text on the splash screen.")
+
 (defconst crafted-startup-text
-  `((:face (crafted-greeting-face)
-           ,(crafted-startup--center-with-face
-             "Welcome to Crafted Emacs!"
-             'crafted-greeting-face)
-           "\n\n"
-           :face variable-pitch
+  `((:face variable-pitch
            :link ("View Crafted Emacs Manual"
                   ,(lambda (_button) (info "crafted-emacs")))
            "\tView the Crafted Emacs manual using Info\n"
@@ -309,8 +308,14 @@ starts.  See the variable documenation for
         (if pure-space-overflow
             (insert pure-space-overflow-message))
         (unless concise
-          (crafted-startup-splash-head))
-        (dolist (text crafted-startup-text)
+          (crafted-startup-splash-head))            ;; display the logo
+        (apply #'fancy-splash-insert                ;; insert welcome text
+               `(:face (crafted-greeting-face)
+                      ,(crafted-startup--center-with-face
+                        crafted-welcome-text
+                        'crafted-greeting-face)))
+        (insert "\n\n")
+        (dolist (text crafted-startup-text)         ;; the rest of the text
           (apply #'fancy-splash-insert text)
           (insert "\n"))
         (with-eval-after-load 'crafted-updates-config
