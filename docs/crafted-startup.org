@@ -20,6 +20,40 @@ points.
 The ~crafted-startup~ module provides a fancy splash screen similar to the Emacs
 default splash screen or the Emacs about page.
 
+** Logo
+
+In graphical session, it will display the System Crafters logo. In a terminal
+session, a ASCII rendering of the logo is displayed.
+
+This behaviour can be modified by changing one or more of the variables:
+- ~fancy-splash-image~ (default: ~system-crafters-logo.png~ in ~crafted-emacs-~home~)
+- ~crafted-startup-graphical-logo~ (default: "image")
+- ~crafted-startup-terminal-logo~ (default: =t=)
+
+To display another image:
+#+begin_src emacs-lisp
+  (customize-set-variable 'fancy-splash-image "/path/to/my/image.png")
+  #+end_src
+
+To turn off the logo in a graphical session:
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-startup-graphical-logo nil)
+#+end_src
+
+To display the ASCII logo in a graphical session:
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-startup-graphical-logo "ascii")
+#+end_src
+
+By default, ~crafted-startup-graphical-logo~ is set to "image".
+
+To turn off the ASCII logo in a terminal session:
+#+begin_src emacs-lisp
+  (customize-set-variable 'crafted-startup-terminal-logo nil)
+#+end_src
+
+** Updates
+
 If it is used together with the ~crafted-updates~ module, it will also check for
 updates during startup and will display the options to preview and install
 updates on the splash screen. To use this, simply require
@@ -30,21 +64,59 @@ updates on the splash screen. To use this, simply require
   (require 'crafted-updates-config)
   #+end_src
   
-If the list ~recentf-list~ is not empty, the splash screen will display the most
-recent entries of that list as links. By default, the most recent 10 entries
-in that list are displayed. You can modify this behaviour by setting
-~crafted-startup-recentf-count~ in your config, for example:
+** Modules
 
+Crafted Startup provides startup modules that display additional information on
+the splash screen.
+
+Currently, the following startup modules are available:
+- ~crafted-startup-recentf~ (activated by default)
+- ~crafted-startup-diary~
+- ~crafted-startup-projects~
+
+You can modify which modules are active (and in which order they are displayed)
+by setting the variable ~crafted-startup-module-list~.
+For example, to display first project module and next the recentf-module, but
+not the diary module:
 #+begin_src emacs-lisp
-  (customize-set-variable 'crafted-startup-recentf-count 3)
-#+end_src
+  (customize-set-variable '(crafted-startup-projects crafted-startup-recentf))
+  #+end_src
 
-See the documentation for ~recentf-mode~ for details about the list.
+- ~crafted-startup-recentf~ (activated by default)
 
-If you want to turn off the splash screen altogether, you can either choose
-not to load the module at all. Or, e.g. if you want to use the check for updates
-during startup but not the splash screen, you can set
-~crafted-startup-inhibit-splash~ to non-nil.
+  If the list ~recentf-list~ is not empty, the splash screen will display the most
+  recent entries of that list as links. By default, the most recent 10 entries
+  in that list are displayed. You can modify this behaviour by setting
+  ~crafted-startup-recentf-count~ in your config, for example:
+
+  #+begin_src emacs-lisp
+      (customize-set-variable 'crafted-startup-recentf-count 3)
+  #+end_src
+
+  See the documentation for ~recentf-mode~ for details about the list.
+
+- ~crafted-startup-diary~
+
+  If a diary file exists, today's entries are displayed on the splash screen.
+  See the Section [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Format-of-Diary-File.html][The Diary File]] in the Emacs documentation for details.   
+
+- ~crafted-startup-projects~
+
+  If the file specified in the built-in variable ~project-list-file~ exists, the
+  splash screen will display links to the project directories of the first 10
+  projects listed in that file. You can modify the number of links displayed by
+  setting ~crafted-startup-project-count~ in your config, for example:
+
+  #+begin_src emacs-lisp
+    (customize-set-variable 'crafted-startup-project-count 3)
+  #+end_src
+
+** Turn off splash screen
+
+If you want to turn off the splash screen altogether, you can either choose not
+to load the module at all. Or you can set ~crafted-startup-inhibit-splash~ to
+non-nil. This may be useful if you want to use the check for updates during
+startup but not the splash screen.
 
 #+begin_src emacs-lisp
   (customize-set-variable 'crafted-startup-inhibit-splash t)

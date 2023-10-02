@@ -26,8 +26,8 @@ where you clone to. If you are not sure where to clone to, you can use your home
 directory.
 
 #+begin_src shell
-  # N.B. As this is still a beta release, use the craftedv2beta branch
-  git clone https://github.com/SystemCrafters/crafted-emacs -b craftedv2beta
+  # N.B. As this is still a release candidate, use the craftedv2RC1 branch
+  git clone https://github.com/SystemCrafters/crafted-emacs -b craftedv2RC1
 #+end_src
 
 For the rest of this guide, the location where you cloned Crafted Emacs to will

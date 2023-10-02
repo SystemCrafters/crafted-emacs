@@ -1,6 +1,6 @@
 ;; crafted-ide-packages.el -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2022
+;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -28,10 +28,7 @@
 (when (version< "29" emacs-version)
   ;; automatically handles switching to tree-sitter versions of major
   ;; modes, can install grammars, etc.
-  (add-to-list 'package-selected-packages 'treesit-auto)
-
-  ;; code navigation using tree-sitter grammars.
-  (add-to-list 'package-selected-packages 'combobulate))
+  (add-to-list 'package-selected-packages 'treesit-auto))
 
 ;; editorconfig is a cross-editor/ide configuration tool to control
 ;; indentation, spaces vs tabs, etc.
