@@ -12,7 +12,7 @@
 ;; Load it in early-init.el like this:
 
 ;; (setq crafted-emacs-home "~/crafted-emacs")
-;; (load (expand-file-name "custom-modules/crafted-early-init-straight"
+;; (load (expand-file-name "custom-modules/crafted-early-init-elpaca"
 ;;                         user-emacs-directory))
 
 ;; on init.el you need to use crafted-package-install-selected-package 
