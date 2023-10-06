@@ -66,6 +66,8 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
+(load (expand-file-name "modules/crafted-package-config" crafted-emacs-home))
+
 (setq crafted-package-system 'elpaca)
 (setq crafted-package-installer #'elpaca-try)
 (setq crafted-package-installed-predicate #'elpaca-installed-p)
@@ -74,6 +76,8 @@
   (elpaca-use-package-mode))
 (elpaca-wait)
 
-(load (expand-file-name "modules/crafted-package-config" crafted-emacs-home))
+;; If on Windows, disable symlinks (Symlinks require admin permissions before Windows 11)
+(when (member system-type '(windows-nt ms-dos))
+  (elpaca-no-symlink-mode))
 
 ;;; crafted-early-init-elpaca.el ends here
