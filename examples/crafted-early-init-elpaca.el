@@ -23,6 +23,12 @@
 ;; (crafted-package-install-selected-packages)
 ;; (alpaca-wait)
 ;;
+;; on the same way if you use custom file
+;; you'll need to change the load of the file to the elpaca-after-init-hook
+;;
+;;(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+;;(add-hook 'elpaca-after-init-hook (lambda () (load custom-file 'noerror)))
+;;
 ;; Configuration phase
 
 ;;; Code:
