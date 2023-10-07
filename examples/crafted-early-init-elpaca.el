@@ -15,13 +15,13 @@
 ;; (load (expand-file-name "custom-modules/crafted-early-init-elpaca"
 ;;                         user-emacs-directory))
 
-;; on init.el you need to use crafted-package-install-selected-package 
+;; on init.el you need to use crafted-package-install-selected-packages
 ;; instead of package-install-selected-packages
 ;;
 ;; Packages phase
 ;; ....
 ;; (crafted-package-install-selected-packages)
-;; (alpaca-wait)
+;; (elpaca-wait)
 ;;
 ;; Configuration phase
 
