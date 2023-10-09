@@ -1,0 +1,33 @@
+name: docs-regenerate-info
+
+on:
+  push:
+    paths:
+      - docs/*.org
+    branches:
+      - craftedv2RC1
+
+jobs:
+  regenerate-info:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.head_ref }}
+
+    - name: Install Emacs
+      uses: purcell/setup-emacs@master
+      with:
+        version: 29.1
+
+    - name: Generate info
+      working-directory: ./docs
+      run: make
+
+    - uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Regenerate info file
