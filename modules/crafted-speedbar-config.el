@@ -51,33 +51,24 @@ Useful for quickly switching to an open buffer."
  (list
 ;;;; General Lisp Languages
   ".cl"
-  ".el"
-  ".scm"
-  ".lisp"
+  ".li?sp"
 ;;;; Lua/Fennel (Lisp that transpiles to lua)
   ".lua"
   ".fnl"
   ".fennel"
 ;;;; JVM languages (Java, Kotlin, Clojure)
-  ".java"
   ".kt"
   ".mvn"
   ".gradle"
   ".properties"
-  ".clj"
-;;;; C/C++
-  ".c"
-  ".cpp"
-  ".h"
+  ".cljs?"
 ;;;; shellscript
   ".sh"
   ".bash"
 ;;;; Web Languages and Markup/Styling
   ".php"
-  ".js"
   ".ts"
-  ".html"
-  ".htm"
+  ".html?"
   ".css"
   ".less"
   ".scss"
