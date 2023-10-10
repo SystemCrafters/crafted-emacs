@@ -84,11 +84,9 @@
       (corfu-terminal-mode +1)))
 
   ;; Setup corfu for popup like completion
-  (customize-set-variable 'corfu-cycle t)                 ; Allows cycling through candidates
-  (customize-set-variable 'corfu-auto t)                  ; Enable auto completion
-  (customize-set-variable 'corfu-auto-prefix 2)           ; Complete with less prefix keys
-  (customize-set-variable 'corfu-auto-delay 0.0)          ; No delay for completion
-  (customize-set-variable 'corfu-echo-documentation 0.25) ; Echo docs for current completion option
+  (customize-set-variable 'corfu-cycle t)        ; Allows cycling through candidates
+  (customize-set-variable 'corfu-auto t)         ; Enable auto completion
+  (customize-set-variable 'corfu-auto-prefix 2)  ; Complete with less prefix keys
 
   (global-corfu-mode 1)
   (when (require 'corfu-popupinfo nil :noerror)

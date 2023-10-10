@@ -78,53 +78,11 @@ OPT-OUT is a list of symbols of language grammars to opt out before auto-install
       (treesit-auto-install-all)
       ;; configure `auto-mode-alist' for tree-sitter modes relying on
       ;; `fundamental-mode'
-      (crafted-ide--configure-tree-sitter-modes))
+      (treesit-auto-add-to-auto-mode-alist))
     (when (locate-library "combobulate")
       ;; perhaps too gross of an application, but the *-ts-modes
       ;; eventually derive from this mode.
       (add-hook 'prog-mode-hook #'combobulate-mode))))
-
-(defvar crafted-ide-tree-sitter-auto-mode-alist
-  '((typescript . ("\\.ts\\'" . typescript-ts-mode))
-    (tsx . ("\\.tsx\\'" . tsx-ts-mode))
-    (rust . ("\\.rs\\'" . rust-ts-mode))
-    (go . ("\\.go\\'" . go-ts-mode))
-    (gomod . ("go.mod" . go-mod-ts-mode))
-    (yaml . ("\\.ya?ml\\'" . yaml-ts-mode))
-    (julia . ("\\.jl\\'" . julia-ts-mode))
-    (lua . ("\\.lua\\'" . lua-ts-mode))
-    (markdown . ("\\.md\\'" . markdown-ts-mode))
-    (dockerfile . ("Dockerfile\\'" . dockerfile-ts-mode)))
-  "Map of tree-sitter languages to `auto-mode-alist' entries.")
-
-(defun crafted-ide--configure-tree-sitter-modes ()
-  "Add tree-sitter modes to `auto-mode-alist'.
-
-`global-treesit-auto-mode' only remaps major modes to their
-tree-sitter equivalent if a prerequisite major mode is active.
-Oftentimes that major mode requires installing an additional
-package, since many languages are only supported by
-`fundamental-mode' out of the box.  This function registers
-`auto-mode-alist' entries for all tree-sitter parsers that are
-installed but lack the required remap mode."
-  (let ((recipes-lacking-modes
-         (seq-filter
-          (lambda (recipe)
-            (and
-             (treesit-ready-p (treesit-auto-recipe-lang recipe) t)
-             (not (crafted-ide--tree-sitter-recipe-bound-p recipe))))
-          treesit-auto-recipe-list)))
-    (dolist (recipe recipes-lacking-modes)
-      (when-let ((automode (alist-get (treesit-auto-recipe-lang recipe)
-                                      crafted-ide-tree-sitter-auto-mode-alist)))
-        (add-to-list 'auto-mode-alist automode)))))
-
-(defun crafted-ide--tree-sitter-recipe-bound-p (recipe)
-  "Return t if RECIPE remap function definition is not void."
-  (when-let ((remap (treesit-auto-recipe-remap recipe)))
-    (if (listp remap)
-        (seq-some (lambda (mode) (fboundp mode)) remap)
-      (fboundp remap))))
 
 (defun crafted-ide-configure-tree-sitter (&optional opt-out)
   "Configure tree-sitter.

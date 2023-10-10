@@ -250,6 +250,30 @@ for the code examples.
   free to open an issue prior to opening a pull request if you're not
   certain your idea is in the spirit of the [[Principles][Principles]].
 
+  Specific things we look for are:
+
+   + Prefer ~customize-set-variable~ instead of ~setq~ for ~defcustom~
+     values. This helps make sure constructors or setters attached to
+     the variable are run when the value is set.
+   + Provide ~defcustom~ variables for things we expect the user to
+     modify and make sure it is in the appropriate group.
+   + Provide verbose doc-strings for ~defvar~, ~defcustom~, ~defun~,
+     ~defmacro~, etc to clearly document what is going on.
+   + Make sure to follow doc-string guidelines (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html][Documentation Tips]]
+     or [[info:elisp#Documentation Tips][elisp#Documentation Tips]])
+   + Add comments for blocks of code, especially to describe /why/ the
+     code is present, or the intention. These comments serve as
+     documentation when reading the code where a doc-string is not an
+     option.
+   + Add or update documentation in the /docs/ folder. Especially for
+     new modules, please provide the info file with your PR. (see
+     [[file:docs/CONTRIBUTING.org][Contributing Documentation]])
+   + If your PR addresses an issue, whether it closes or fixes the
+     issue, or is just related to it, please add the issue number in
+     your commit message or the description of your PR so they can be
+     linked together.
+
+
   If you enjoy crafting your computing experience, join the
   [[https://systemcrafters.net/][SystemCrafters]] community!
 

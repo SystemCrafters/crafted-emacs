@@ -24,7 +24,7 @@
 ;; not needed if manage the installed packages with Guix or Nix.  It
 ;; is also not needed if you do not need Crafted Emacs to install
 ;; packages for a module, for example,
-;; `crafted-mastering-emacs-config' does not require any packages to
+;; `crafted-speedbar-config' does not require any packages to
 ;; be installed.
 (require 'crafted-completion-packages)  ; add completion packages to
                                         ; the
