@@ -1,0 +1,49 @@
+---
+name: Package Report
+description: Interactive Form for requesting packages added to Crafted Emacs
+title: "[Package Request] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    id: preface
+    attributes:
+      value: Please ensure that the package aligns with the Goals of Crafted Emacs before submitting a package request.
+  - type: input
+    id: package-name
+    attributes:
+      label: Package Name
+      description: Name of the package (potentially also how it's named on certain platforms)
+  - type: dropdown
+    id: package-origin
+    attributes:
+      label: Emacs Lisp Package Archive (ELPA)
+      description: Which package archive can this package be obtained from?
+      options:
+        - GNU ELPA
+        - NonGNU ELPA
+        - MELPA Stable
+        - MELPA
+      default: 0
+  - type: dropdown
+    id: emacs-version
+    attributes:
+      label: Emacs Version
+      description: What minimum version of Emacs is required for this package?
+      options:
+        - less than 27
+        - 27
+        - 28
+        - 29
+      default: 0
+    validations:
+      required: true
+  - type: textarea
+    id: additional-requirements
+    attributes:
+      label: Additional requirements
+      description: Are there additional requirements (C compiler, other programs, ...) to use the package?
+  - type: textarea
+    id: package-info
+    attributes:
+      label: Why should this package be included?
+      description: Please explain what the package brings to Crafted Emacs and how it fits into the current infrastructure.
