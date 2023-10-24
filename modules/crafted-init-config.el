@@ -69,11 +69,15 @@ explicitly."))
 (when (null crafted-emacs-home)
   (setq crafted-emacs-home
         (expand-file-name
-         (if (executable-find "git")
-             (project-root
-              (project-current nil (file-name-directory load-file-name)))
-           (vc-find-root load-file-name "modules")))))
+         (vc-find-root load-file-name "modules"))))
 
+;; we still don't have a `crafted-emacs-home' value, so we can't
+;; proceed, without it the `load-path' will not be set correctly and
+;; crafted-emacs modules will not be found.
+(unless crafted-emacs-home
+  (error "%s\n%s"
+         "The value for crafted-emacs-home is not set"
+         "Please set this value to the location where crafted-emacs is installed"))
 
 ;; update the `load-path' to include the Crafted Emacs modules path
 
@@ -101,8 +105,8 @@ explicitly."))
   ;; when the file is the `custom-file' and it is being created.
   (defun ignore-auto-insert-for-custom (orig-auto-insert &rest args)
     "Apply ORIG-AUTO-INSERT only when the file is not the
-`custom-file' to avoid confusion when that file doesn't exist on
-startup."
+         `custom-file' to avoid confusion when that file doesn't exist on
+         startup."
     (if (and custom-file buffer-file-name
              (string-match (file-name-nondirectory custom-file) buffer-file-name))
         (message "Skipping auto-insert for %s" custom-file)
@@ -113,9 +117,9 @@ startup."
           "Crafted Emacs Lisp Skeleton")
     '("Crafted Emacs Module Description: "
       ";;;; " (file-name-nondirectory (buffer-file-name)) " --- " str
-      (make-string (max 2 (- 80 (current-column) 27)) ?\s)
-      "-*- lexical-binding: t; -*-" '(setq lexical-binding t)
-      "
+         (make-string (max 2 (- 80 (current-column) 27)) ?\s)
+         "-*- lexical-binding: t; -*-" '(setq lexical-binding t)
+         "
 
 ;; Copyright (C) " (format-time-string "%Y") "
 ;; SPDX-License-Identifier: MIT
@@ -129,8 +133,8 @@ startup."
 ;;; Code:
 
 (provide '"
-      (file-name-base (buffer-file-name))
-      ")
+         (file-name-base (buffer-file-name))
+         ")
 ;;; " (file-name-nondirectory (buffer-file-name)) " ends here\n")))
 
 ;; Add the Crafted Emacs documentation to the info nodes
