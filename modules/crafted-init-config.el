@@ -152,9 +152,12 @@ bug: https://debbugs.gnu.org/cgi/bugreport.cgi?bug=21355, we need
 to save all customizations made during Emacs startup and then
 reload the custom-file.  This sets (or should set) all customized
 values to the \"SET and saved.\" state and (hopefully) avoid the
-bug above."
+bug above.  If the user never set a value for `custom-file' then
+we can't reload the file."
   (customize-save-customized)
-  (load custom-file :noerror))
+  ;; only load the `custom-file' if it is not `nil'. 
+  (unless custom-file
+    (load custom-file :noerror)))
 
 ;; Save all customizations to `custom-file', unless the user opted out.
 (when crafted-init-auto-save-customized
