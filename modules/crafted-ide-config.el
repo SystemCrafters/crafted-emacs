@@ -40,9 +40,28 @@ manually with something like this:
             (message "adding eglot to %s" hook-name)
             (add-hook (intern hook-name) #'eglot-ensure))))))))
 
-;; add eglot to existing programming modes when eglot is loaded.
-(with-eval-after-load "eglot"
-  (crafted-ide--add-eglot-hooks eglot-server-programs))
+(defun crafted-ide--lsp-bin-exists-p (mode-def)
+  "Return non-nil if LSP binary of MODE-DEF is found via `executable-find'."
+  (let ((lsp-program (cdr mode-def)))
+    ;; `lsp-program' is either a list of strings or a function object
+    ;; calling `eglot-alternatives'.
+    (if (functionp lsp-program)
+        (condition-case nil
+            (car (funcall lsp-program))
+          ;; When an error occurs it's because Eglot checked for a
+          ;; binary and didn't find one among alternatives.
+          (error nil))
+      (executable-find (car lsp-program)))))
+
+(defun crafted-ide-eglot-auto-ensure-all ()
+  "Add `eglot-ensure' to major modes that offer LSP support.
+
+Major modes are only selected if the major mode's associated LSP
+binary is detected on the system."
+  (when (require 'eglot nil :noerror)
+    (crafted-ide--add-eglot-hooks (seq-filter
+                                   #'crafted-ide--lsp-bin-exists-p
+                                   eglot-server-programs))))
 
 ;; Shutdown server when last managed buffer is killed
 (customize-set-variable 'eglot-autoshutdown t)
