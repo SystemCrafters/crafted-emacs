@@ -41,10 +41,25 @@ typed. You can enable it for programming modes with the following:
 
 *** Eglot
 
-[[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP) built into Emacs
-(>=29). For it to work, you have to have a LSP-Server installed for the
-language of your choice. Usually, these have to be installed through your
-operating system. See [[https://github.com/joaotavora/eglot#connecting-to-a-server][this list]] of servers that work with Eglot out of the box.
+[[https://github.com/joaotavora/eglot][Eglot]] is a client for the Language Server Protocol (LSP) built into
+Emacs (>=29). For it to work, you have to have a language server
+installed for the language of your choice. Usually, these have to be
+installed through your operating system. See [[https://github.com/joaotavora/eglot#connecting-to-a-server][this list]] of servers that
+work with Eglot out of the box.
+
+**** Automatically start Eglot when visiting language buffers
+
+It's convenient to add a call to ~eglot-ensure~ for major modes that
+have an accompanying language server so that Eglot automatically
+initializes when that major mode is activated. ~crafted-ide~ makes a
+function available that will automatically register such ~eglot-ensure~
+hooks for all major modes with a detected language server. You can
+enable this behavior with the following:
+
+#+begin_src emacs-lisp
+  (require 'crafted-ide-config)
+  (crafted-ide-eglot-auto-ensure-all)
+#+end_src
 
 *** Tree-Sitter
 
