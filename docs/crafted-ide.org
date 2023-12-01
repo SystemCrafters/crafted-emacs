@@ -52,9 +52,9 @@ work with Eglot out of the box.
 It's convenient to add a call to ~eglot-ensure~ for major modes that
 have an accompanying language server so that Eglot automatically
 initializes when that major mode is activated. ~crafted-ide~ makes a
-function available that will automatically register such ~eglot-ensure~
-hooks for all major modes with a detected language server. You can
-enable this behavior with the following:
+function available that will automatically add ~eglot-ensure~ to all
+major mode hooks for which a language server is installed and
+detected. You can enable this behavior with the following:
 
 #+begin_src emacs-lisp
   (require 'crafted-ide-config)
