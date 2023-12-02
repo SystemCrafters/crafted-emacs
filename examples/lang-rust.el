@@ -32,6 +32,13 @@
 (require 'crafted-completion-config)
 (require 'crafted-ide-config)
 
+;; Automatically register `eglot-ensure' hooks for relevant major
+;; modes. Note that you'll need rust-analyzer installed beforehand for
+;; Eglot to work properly.
+;;
+;; e.g. "rustup component add rust-analyzer"
+(crafted-ide-eglot-auto-ensure-all)
+
 ;; The first time you run Emacs with this enabled, the Rust tree
 ;; sitter parser will be installed for you automatically.
 (crafted-ide-configure-tree-sitter)
