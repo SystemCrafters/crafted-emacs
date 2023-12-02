@@ -3,6 +3,17 @@
 ;;; Commentary:
 
 ;; A starter config for editing Rust code.
+;;
+;; This configuration provides syntax highlighting via tree sitter
+;; (with rust-ts-mode), LSP code completion via Eglot and Corfu, and
+;; some helpful keybindings for Rust tooling.
+;;
+;; Prerequisites:
+;;
+;; - Emacs with Tree Sitter installed (this comes with Emacs 29).
+;;
+;; - A Rust language server (e.g. rust-analyzer).  You can install
+;;   rust-analyzer via "rustup component add rust-analyzer".
 
 ;;; Code:
 
@@ -33,10 +44,7 @@
 (require 'crafted-ide-config)
 
 ;; Automatically register `eglot-ensure' hooks for relevant major
-;; modes. Note that you'll need rust-analyzer installed beforehand for
-;; Eglot to work properly.
-;;
-;; e.g. "rustup component add rust-analyzer"
+;; modes (notably `rust-ts-mode').
 (crafted-ide-eglot-auto-ensure-all)
 
 ;; The first time you run Emacs with this enabled, the Rust tree
@@ -51,10 +59,10 @@
 ;; Reassign the rust-mode keybindings to the rust-ts-mode map.
 (with-eval-after-load 'rust-ts-mode
   (require 'rust-mode)
-  (define-key rust-ts-mode-map (kbd "C-c C-c C-u") #'rust-compile)
-  (define-key rust-ts-mode-map (kbd "C-c C-c C-k") #'rust-check)
-  (define-key rust-ts-mode-map (kbd "C-c C-c C-t") #'rust-test)
-  (define-key rust-ts-mode-map (kbd "C-c C-c C-r") #'rust-run)
-  (define-key rust-ts-mode-map (kbd "C-c C-c C-l") #'rust-run-clippy)
-  (define-key rust-ts-mode-map (kbd "C-c C-f") #'rust-format-buffer)
-  (define-key rust-ts-mode-map (kbd "C-c C-n") #'rust-goto-format-problem))
+  (keymap-set rust-ts-mode-map "C-c C-c C-u" #'rust-compile)
+  (keymap-set rust-ts-mode-map "C-c C-c C-k" #'rust-check)
+  (keymap-set rust-ts-mode-map "C-c C-c C-t" #'rust-test)
+  (keymap-set rust-ts-mode-map "C-c C-c C-r" #'rust-run)
+  (keymap-set rust-ts-mode-map "C-c C-c C-l" #'rust-run-clippy)
+  (keymap-set rust-ts-mode-map "C-c C-f" #'rust-format-buffer)
+  (keymap-set rust-ts-mode-map "C-c C-n" #'rust-goto-format-problem))
