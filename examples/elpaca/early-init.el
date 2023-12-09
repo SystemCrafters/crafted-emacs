@@ -1,4 +1,4 @@
-;;; crafted-early-init-elpaca.el --- Bootstrap elpaca  -*- lexical-binding: t; -*-
+;;; early-init.el --- Elpaca Example Config -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
@@ -7,26 +7,13 @@
 
 ;;; Commentary:
 
-;; Code to bootstrap elpaca package manager
-;;
-;; Load it in early-init.el like this:
-
-;; (setq crafted-emacs-home "~/crafted-emacs")
-;; (load (expand-file-name "custom-modules/crafted-early-init-elpaca"
-;;                         user-emacs-directory))
-
-;; on init.el you need to use crafted-package-install-selected-packages
-;; instead of package-install-selected-packages
-;;
-;; Packages phase
-;; ....
-;; (crafted-package-install-selected-packages)
-;; (elpaca-wait)
-;;
-;; Configuration phase
+;; Example early-init.el for using the Elpaca package manager.
+;; This does *not* load crafted-early-init-config
+;; (which would normally bootstrap package.el).
 
 ;;; Code:
 
+;;; Bootstrap elpaca
 (setq package-enable-at-startup nil)
 
 (defvar elpaca-installer-version 0.5)
@@ -37,6 +24,7 @@
                               :ref nil
                               :files (:defaults (:exclude "extensions"))
                               :build (:not elpaca--activate-package)))
+
 (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
        (build (expand-file-name "elpaca/" elpaca-builds-directory))
        (order (cdr elpaca-order))
@@ -66,18 +54,28 @@
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
 
-(load (expand-file-name "modules/crafted-package-config" crafted-emacs-home))
+;;; Set up crafted-package
+;; Configure crafted-emacs to use straight as package manager.
+;; See `(info "(crafted-emacs)Using alternate package managers")'
+(load (expand-file-name "../../modules/crafted-package-config"
+                        user-emacs-directory))
 
 (setq crafted-package-system 'elpaca)
 (setq crafted-package-installer #'elpaca-try)
 (setq crafted-package-installed-predicate #'elpaca-installed-p)
+
+;; Enable :elpaca use-package keyword.
 (elpaca elpaca-use-package
-  ;; Enable :elpaca use-package keyword.
-  (elpaca-use-package-mode))
+        (elpaca-use-package-mode))
+
+;; Wait for elpaca
 (elpaca-wait)
 
-;; If on Windows, disable symlinks (Symlinks require admin permissions before Windows 11)
+;; If on Windows, disable symlinks
+;; (Symlinks require admin permissions before Windows 11)
 (when (member system-type '(windows-nt ms-dos))
   (elpaca-no-symlink-mode))
 
-;;; crafted-early-init-elpaca.el ends here
+;;; _
+(provide 'early-init)
+;;; early-init.el ends here

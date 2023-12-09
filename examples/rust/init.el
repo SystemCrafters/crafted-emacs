@@ -1,4 +1,9 @@
-;;; init.el -*- lexical-binding: t; -*-
+;;; init.el --- Rust Example -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2023
+;; SPDX-License-Identifier: MIT
+
+;; Author: System Crafters Community
 
 ;;; Commentary:
 
@@ -17,12 +22,15 @@
 
 ;;; Code:
 
+
+;;; Bootstrap
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (and custom-file
 	   (file-exists-p custom-file))
   (load custom-file nil :nomessage))
 
-(load "~/crafted-emacs/modules/crafted-init-config")
+(load (expand-file-name "../../modules/crafted-init-config"
+                        user-emacs-directory))
 
 ;;; Packages phase
 
@@ -66,3 +74,7 @@
   (keymap-set rust-ts-mode-map "C-c C-c C-l" #'rust-run-clippy)
   (keymap-set rust-ts-mode-map "C-c C-f" #'rust-format-buffer)
   (keymap-set rust-ts-mode-map "C-c C-n" #'rust-goto-format-problem))
+
+;;; _
+(provide 'init)
+;;; init.el ends here
