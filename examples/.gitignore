@@ -1,0 +1,10 @@
+# Ignore everything in this directory and beyond
+*
+
+# Except gitignore and (early-)init.el files
+!.gitignore
+!init.el
+!early-init.el
+
+# Even if those are in directories
+!*/
