@@ -1,0 +1,50 @@
+* Crafted Emacs Contrib Module
+
+** Installation
+
+To use this module, simply require them in your =init.el= at the appropriate
+points.
+
+#+begin_src emacs-lisp
+;; Add crafted-contrib package definitions to selected packages list
+(require 'crafted-contrib-packages)
+
+;; Install the packages
+(package-install-selected-packages :noconfirm)
+
+;; Load crafted-contrib configuration
+(require 'crafted-contrib-config)
+#+end_src
+
+** Description
+The ~crafted-contrib~ module is aimed at lowering the barrier of entry
+for Emacs Lisp core/package contribution. It provides linting and
+indentation tools that help ensure your Emacs Lisp code follows style
+and documentation conventions. It also makes available the ~debbugs~
+package, which allows you to access the GNU Bug Tracker directly from
+Emacs.
+
+It's encouraged to enable Flymake in your configuration to take full advantage
+of the ~crafted-contrib~ linting tools:
+
+#+begin_src emacs-lisp
+(add-hook 'emacs-lisp-mode-hook #'package-lint-flymake-setup)
+#+end_src
+
+When Flymake is initialized in an Emacs Lisp buffer, it will use the following
+backends:
+
+- ~elisp-flymake-checkdoc~: Checks for documentation style errors.
+- ~elisp-flymake-byte-compile~: Checks for any warnings or errors that may occur
+  when byte-compiling the Emacs Lisp file.
+- ~package-lint-flymake~: Checks package headers/metadata to ensure the the Emacs
+  Lisp file is installable and usable for other users.
+
+Alternatively, you may lint the buffer on a per-use basis by running the
+command: ~package-lint-current-buffer~.
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:
