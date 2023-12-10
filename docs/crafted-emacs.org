@@ -308,6 +308,7 @@ for the code examples.
   #+include: crafted-updates.org
   #+include: crafted-workspaces.org
   #+include: crafted-writing.org
+  #+include: crafted-contrib.org
 
 * Troubleshooting
 
