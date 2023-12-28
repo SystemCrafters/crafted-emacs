@@ -12,12 +12,13 @@
 ;;; Code:
 
 ;; Indentation
-
 (add-to-list 'package-selected-packages 'aggressive-indent)
 
+;; Emacs Lisp
+(add-to-list 'package-selected-packages 'package-lint)
+(add-to-list 'package-selected-packages 'package-lint-flymake)
 
 ;; Common Lisp
-
 (add-to-list 'package-selected-packages 'sly)
 (add-to-list 'package-selected-packages 'sly-asdf)
 (add-to-list 'package-selected-packages 'sly-quicklisp)
