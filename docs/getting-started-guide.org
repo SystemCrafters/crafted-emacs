@@ -304,6 +304,40 @@ Example =init.el=:
 
 See the =examples= folder in the git-repo for more examples.
 
+* Tips and tricks
+
+** Loading modules
+
+You might prefer this handy helper function to requiring two sets of packages
+per crafted-emacs module. Add the following function to your ~init.el~:
+
+#+begin_src emacs-lisp
+  (defun crafted-emacs-load-modules (&optional modules)
+    "Initialize crafted-emacs modules.
+
+  If MODULES is non-nil, only initialize modules in the provided
+  list.  Otherwise, initialize every module."
+    (let ((mods (or modules '(defaults completion evil ide lisp org screencast
+                                       speedbar startup ui updates workspaces
+                                       writing))))
+      (dolist (m mods)
+        (require (intern (format "crafted-%s-packages" m)) nil :noerror))
+      (package-install-selected-packages :noconfirm)
+      (dolist (m mods)
+        (require (intern (format "crafted-%s-config" m)) nil :noerror))))
+#+end_src
+
+Then update your ~init.el~ to use ~crafted-emacs-load-modules~ in place of any
+crafted ~require~ statements.
+
+#+begin_src emacs-lisp
+  ;; Any extra packages on top of the ones added by crafted-emacs
+  ;; modules go here before we call `crafted-emacs-load-modules'.
+  (customize-set-variable 'package-selected-packages '(ef-themes magit))
+
+  (crafted-emacs-load-modules '(defaults completion ui ide))
+#+end_src
+
 * To save or not to save customizations
 
 As described previously, by default Crafted Emacs will save both the list
