@@ -156,7 +156,7 @@ bug above.  If the user never set a value for `custom-file' then
 we can't reload the file."
   (customize-save-customized)
   ;; only load the `custom-file' if it is not `nil'. 
-  (unless custom-file
+  (when custom-file
     (load custom-file :noerror)))
 
 ;; Save all customizations to `custom-file', unless the user opted out.
