@@ -25,10 +25,11 @@ It installs the packages
 - helpful :: An augmentation for the built-in Emacs help that provides more
              context.
 - elisp-demos :: Code examples that can be displayed by helpful.
+- breadcrumb :: File indicators at the top of the window.
 
 It further provides custom variables which can be used to turn on line
 numbers in certain major modes (i.e. ~prog-mode~ and ~conf-mode~) while leaving
-them turned off for others.   
+them turned off for others.
 
 *** Icons with ~all-the-icons~
 
@@ -47,7 +48,7 @@ If you want to turn on line numbers for some major modes but leave them
 off for others, set ~crafted-ui-display-line-numbers~ to non-nil in your
 init.el.
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (customize-set-variable 'crafted-ui-display-line-numbers t)
 #+end_src
 
@@ -57,7 +58,7 @@ By default, this turns *on* line numbers for:
 
 By default, it explicitly turns *off* line numbers for:
 - org-mode
-  
+
 You can change the default behaviour by customizing the variables
 ~crafted-ui-line-numbers-enabled-modes~ and
 ~crafted-ui-line-numbers-disabled-modes~ respectively.
