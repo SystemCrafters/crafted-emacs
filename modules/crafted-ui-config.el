@@ -121,5 +121,10 @@ Used as hook for modes which should not display line numebrs."
                    other-window))
   (advice-add command :after #'pulse-line))
 
+;;;; Breadcrumbs
+
+(when (require 'breadcrumb nil :noerror)
+  (breadcrumb-mode))
+
 (provide 'crafted-ui-config)
 ;;; crafted-ui-config.el ends here
