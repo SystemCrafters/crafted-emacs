@@ -29,14 +29,7 @@ using various Lisp and Scheme variants.
 *** Emacs Lisp
 
 Package lint helps ensure your Emacs Lisp code follows style conventions and
-best practices. It's recommended to enable Flymake in your configuration to take
-full advantage of the Emacs linting tools:
-
-#+begin_src emacs-lisp
-(add-hook 'emacs-lisp-mode-hook #'package-lint-flymake-setup)
-#+end_src
-
-This activates the following Flymake backends:
+best practices. By default, the following Flymake backends are enabled:
 
 - ~elisp-flymake-checkdoc~: Documentation verbiage and style conventions.
 - ~elisp-flymake-byte-compile~: Errors and warnings surfaced when byte compiling
@@ -44,8 +37,8 @@ This activates the following Flymake backends:
 - ~package-lint-flymake~: Package conventions to ensure your Emacs library can be
   installed by other users.
 
-Alternatively, you may lint the buffer on a per-use basis by invoking the
-commands: ~package-lint-current-buffer~, ~checkdoc~, or ~byte-compile-file~.
+You may lint the buffer on a per-use basis by invoking the commands:
+~package-lint-current-buffer~, ~checkdoc~, or ~byte-compile-file~.
 
 *** Common Lisp
 

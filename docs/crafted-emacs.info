@@ -2262,13 +2262,8 @@ development using various Lisp and Scheme variants.
   1. Emacs Lisp
 
      Package lint helps ensure your Emacs Lisp code follows style
-     conventions and best practices.  It's recommended to enable Flymake
-     in your configuration to take full advantage of the Emacs linting
-     tools:
-
-          (add-hook 'emacs-lisp-mode-hook #'package-lint-flymake-setup)
-
-     This activates the following Flymake backends:
+     conventions and best practices.  By default, the following Flymake
+     backends are enabled:
 
         • ‘elisp-flymake-checkdoc’: Documentation verbiage and style
           conventions.
@@ -2277,9 +2272,9 @@ development using various Lisp and Scheme variants.
         • ‘package-lint-flymake’: Package conventions to ensure your
           Emacs library can be installed by other users.
 
-     Alternatively, you may lint the buffer on a per-use basis by
-     invoking the commands: ‘package-lint-current-buffer’, ‘checkdoc’,
-     or ‘byte-compile-file’.
+     You may lint the buffer on a per-use basis by invoking the
+     commands: ‘package-lint-current-buffer’, ‘checkdoc’, or
+     ‘byte-compile-file’.
 
   2. Common Lisp
 
@@ -3459,60 +3454,60 @@ Node: Crafted Emacs Lisp Module83352
 Node: Installation (4)83664
 Node: Description (4)84171
 Ref: Emacs Lisp84771
-Ref: Common Lisp85681
-Ref: Clojure86547
-Ref: Scheme and Racket87183
-Node: Additional packages geiser-*87779
-Node: Crafted Emacs Org Module88823
-Node: Installation (5)89133
-Node: Description (5)89635
-Node: Alternative package org-roam91652
-Node: Crafted Emacs OSX Module93456
-Node: Installation (6)93739
-Node: Description (6)94051
-Node: Crafted Emacs Screencast Module95085
-Node: Installation (7)95387
-Node: Description (7)95924
-Node: Crafted Emacs Speedbar Module96625
-Node: Installation (8)96927
-Node: Description (8)97398
-Node: Crafted Emacs Startup Module99901
-Node: Installation (9)100267
-Node: Description (9)100737
-Node: Logo101034
-Node: Updates102152
-Node: Modules (1)102646
-Node: Turn off splash screen104700
-Node: Crafted Emacs UI Module105216
-Node: Installation (10)105501
-Node: Description (10)106002
-Ref: Icons with all-the-icons106731
-Ref: Line numbers107244
-Node: Crafted Emacs Updates Module108535
-Node: Installation (11)108833
-Node: Description (11)109305
-Ref: Usage and Customization109883
-Ref: On Startup110034
-Ref: Regularly110749
-Ref: Manually111682
-Node: Crafted Emacs Workspaces Module112281
-Node: Installation (12)112590
-Node: Description (12)113131
-Node: Crafted Emacs Writing Module114682
-Node: Installation (13)114948
-Node: Description (13)115474
-Ref: Whitespace Mode116001
-Ref: Function crafted-writing-configure-whitespace116467
-Ref: Signature116535
-Ref: Parameters116702
-Ref: Examples117619
-Ref: Optional Package PDF-Tools118728
-Ref: Part 1 Installing the Emacs package pdf-tools119074
-Ref: Part 2 Installing the epdfinfo-server119492
-Ref: Configuration120214
-Node: Troubleshooting120696
-Node: A package (suddenly?) fails to work120930
-Node: MIT License124702
+Ref: Common Lisp85483
+Ref: Clojure86349
+Ref: Scheme and Racket86985
+Node: Additional packages geiser-*87581
+Node: Crafted Emacs Org Module88625
+Node: Installation (5)88935
+Node: Description (5)89437
+Node: Alternative package org-roam91454
+Node: Crafted Emacs OSX Module93258
+Node: Installation (6)93541
+Node: Description (6)93853
+Node: Crafted Emacs Screencast Module94887
+Node: Installation (7)95189
+Node: Description (7)95726
+Node: Crafted Emacs Speedbar Module96427
+Node: Installation (8)96729
+Node: Description (8)97200
+Node: Crafted Emacs Startup Module99703
+Node: Installation (9)100069
+Node: Description (9)100539
+Node: Logo100836
+Node: Updates101954
+Node: Modules (1)102448
+Node: Turn off splash screen104502
+Node: Crafted Emacs UI Module105018
+Node: Installation (10)105303
+Node: Description (10)105804
+Ref: Icons with all-the-icons106533
+Ref: Line numbers107046
+Node: Crafted Emacs Updates Module108337
+Node: Installation (11)108635
+Node: Description (11)109107
+Ref: Usage and Customization109685
+Ref: On Startup109836
+Ref: Regularly110551
+Ref: Manually111484
+Node: Crafted Emacs Workspaces Module112083
+Node: Installation (12)112392
+Node: Description (12)112933
+Node: Crafted Emacs Writing Module114484
+Node: Installation (13)114750
+Node: Description (13)115276
+Ref: Whitespace Mode115803
+Ref: Function crafted-writing-configure-whitespace116269
+Ref: Signature116337
+Ref: Parameters116504
+Ref: Examples117421
+Ref: Optional Package PDF-Tools118530
+Ref: Part 1 Installing the Emacs package pdf-tools118876
+Ref: Part 2 Installing the epdfinfo-server119294
+Ref: Configuration120016
+Node: Troubleshooting120498
+Node: A package (suddenly?) fails to work120732
+Node: MIT License124504
 
 End Tag Table
 
