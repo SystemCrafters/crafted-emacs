@@ -304,6 +304,58 @@ Example =init.el=:
 
 See the =examples= folder in the git-repo for more examples.
 
+* Tips and tricks
+
+** Loading modules
+
+Crafted Emacs generally groups modules into pairs of files, one for
+enabling/installing helpful packages, and the other for applying
+configuration. If you want to use both the configuration file and packages file
+for every Crafted Emacs module, you end up with quite a few ~require~
+statements.
+
+You might instead prefer this handy helper function that requires both the
+config and packages files for every module:
+
+#+begin_src emacs-lisp
+  (defun crafted-emacs-load-modules (modules)
+    "Initialize crafted-emacs modules.
+
+  MODULES is a list of module names without the -packages or
+  -config suffixes.  Note that any user-provided packages should be
+  added to `package-install-selected-packages' before invoking this
+  function."
+    (dolist (m modules)
+      (require (intern (format "crafted-%s-packages" m)) nil :noerror))
+    (package-install-selected-packages :noconfirm)
+    (dolist (m mods)
+      (require (intern (format "crafted-%s-config" m)) nil :noerror)))
+#+end_src
+
+Drop this function into your ~init.el~ and then use it to require your Crafted
+Emacs modules. This replaces any existing ~(require 'crafted-...)~ statements that
+you may already have in your configuration:
+
+#+begin_src emacs-lisp
+  ;; Any extra packages in addition to the ones added by crafted-emacs
+  ;; modules go here before we call `crafted-emacs-load-modules'.
+  (customize-set-variable 'package-selected-packages '(ef-themes magit))
+
+  (crafted-emacs-load-modules '(defaults completion ui ide))
+#+end_src
+
+The function ~crafted-emacs-load-modules~ avoids the "-packages" and "-config"
+suffixes by using two tricks. The first is an alternative form of ~require~, using
+the fourth argument ~:noerror~ to avoid erroring when a module symbol isn't
+found. This is helpful when a Crafted Emacs module has one of "config" or
+"packages", but not both.
+
+The second trick takes a Crafted Emacs module name, like ~ide~, and expands it
+into its complete feature name, ~crafted-ide-config~. Format string handles
+interpolation for us, expanding the initial name into a string
+~"crafted-ide-config"~. However, ~require~ expects a symbol, so the string returned
+by ~format~ must be turned back into a symbol via the ~intern~ function.
+
 * To save or not to save customizations
 
 As described previously, by default Crafted Emacs will save both the list
