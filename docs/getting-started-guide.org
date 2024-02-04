@@ -328,7 +328,7 @@ config and packages files for every module:
     (dolist (m modules)
       (require (intern (format "crafted-%s-packages" m)) nil :noerror))
     (package-install-selected-packages :noconfirm)
-    (dolist (m mods)
+    (dolist (m modules)
       (require (intern (format "crafted-%s-config" m)) nil :noerror)))
 #+end_src
 
