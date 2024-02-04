@@ -1,0 +1,37 @@
+* Example Configurations
+
+Crafted Emacs comes with pre-built examples showcasing a range of possible
+configurations. Some of the examples additionally contain flags to further
+experiment without having to touch your current configuration.
+
+Note that the examples are to showcase parts of various setups for you to
+pick and choose sections out of. They are not intended to be run by themselves
+outside of experimentation or exploration.
+
+| Example     | Description                                                        |
+|-------------+--------------------------------------------------------------------|
+| base        | Extended Example from the Getting Started Guide with documentation |
+| evil        | Examples for setting up ~evil-mode~ using =crafted-evil= and beyond    |
+| elpaca      | Using the elpaca package manager with Crafted Emacs                |
+| straight-el | Using the straight.el package manager with Crafted Emacs           |
+| rust        | Example setup for Rust development with TreeSitter and Eglot       |
+
+** Running the examples
+Each example is self-contained in =examples/<example>/=.
+After navigating to the directory in a terminal, an Emacs session with
+the example configuration can be started by running:
+
+# @Cleanup Is there a nicer way?
+#+begin_src shell
+# Emacs 28 or earlier
+emacs -Q --eval '(setq user-emacs-directory ".")' -l early-init.el -l init.el
+
+# Emacs 29 or later
+emacs --init-directory .
+#+end_src
+
+-----
+# Local Variables:
+# fill-column: 80
+# eval: (auto-fill-mode 1)
+# End:

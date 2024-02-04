@@ -112,7 +112,11 @@ We'll approach this from the perspective of the brand new Emacs user.
 If you are already familiar with Emacs, you'll be able to skim this guide
 for the code examples.
 
+Additionally, Crafted Emacs contains runnable examples to experiment and
+explore different use-cases.
+
 #+include: getting-started-guide.org
+#+include: crafted-examples.org
 
 * Customization
 
@@ -148,14 +152,15 @@ for the code examples.
     (straight-use-package 'corfu)
   #+end_src
 
-  You find a full example [[file:../examples/crafted-early-init-straight.el][crafted-early-init-straight.el]] to bootstrap straight
-  in the examples directory. Merge it into your =early-init.el= or copy it to your
+  You find a full runnable example [[file:../examples/straight-el/early-init.el][early-init.el to bootstrap straight]] in
+  the examples directory. Merge it into your =early-init.el= or copy it to your
   =custom-modules= folder. In the later case =early-init.el= would look like
   this:
 
   #+begin_src emacs-lisp
   (setq crafted-emacs-home "~/crafted-emacs")
 
+  ;; Assumes you renamed the file to "crafted-early-init-straight.el"
   (load (expand-file-name "custom-modules/crafted-early-init-straight"
                           user-emacs-directory))
   #+end_src
