@@ -21,14 +21,19 @@ Each example is self-contained in =examples/<example>/=.
 After navigating to the directory in a terminal, an Emacs session with
 the example configuration can be started by running:
 
-# @Cleanup Is there a nicer way?
 #+begin_src shell
 # Emacs 28 or earlier
-emacs -Q --eval '(setq user-emacs-directory ".")' -l early-init.el -l init.el
+emacs -Q \
+      --eval '(setq user-emacs-directory (file-truename "."))' \
+      -l early-init.el \
+      -l init.el
 
 # Emacs 29 or later
 emacs --init-directory .
 #+end_src
+
+For Emacs 28 or earlier, you may also want to look at
+[[https://github.com/alphapapa/with-emacs.sh][alphapapa's with-emacs shell script]].
 
 -----
 # Local Variables:
