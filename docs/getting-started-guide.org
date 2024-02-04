@@ -272,7 +272,7 @@ The example assumes you have cloned crafted-emacs to your home directory.
 Example =early-init.el=:
 
 #+begin_src emacs-lisp
-  ;; Set up package archives
+  ;; Set up package archives (configuring `package.el')
   (load "~/crafted-emacs/modules/crafted-early-init-config")
 #+end_src
 
@@ -295,14 +295,14 @@ Example =init.el=:
   ;; Manually select "ef-themes" package
   (add-to-list 'package-selected-packages 'ef-themes)
 
-  ;; Install selected packages
+  ;; Install the packages listed in the `package-selected-packages' list.
   (package-install-selected-packages :noconfirm)
 
   ;; Load configuration for the completion module
   (require 'crafted-completion-config)
 #+end_src
 
-See the =examples= folder in the git-repo for more examples.
+For more detailed (and runnable) examples, see [[info:crafted-emacs.info#Example Configurations][Example Configurations]].
 
 * Tips and tricks
 
@@ -416,6 +416,7 @@ configuration.
 
 Here are some pointers to get you started:
 - For more details on Crafted Emacs Modules: [[info:crafted-emacs.info#Modules][Modules]]
+- Want to experiment or looking for something specific? See [[info:crafted-emacs.info#Example Configurations][Example Configurations]]
 - For more information and explanations on customizing Emacs: [[info:crafted-emacs.info#Customization][Customization]]
 - Want to use a different package manager? See [[info:crafted-emacs.info#Using alternative package managers][Using alternative package managers]]
 
