@@ -68,11 +68,11 @@
 ;;; Optional configuration
 
 ;; Profile emacs startup
-(defun crafted-startup-example/display-startup-time ()
+(defun ce-base-example/display-startup-time ()
   "Display the startup time after Emacs is fully initialized."
   (message "Crafted Emacs loaded in %s."
            (emacs-init-time)))
-(add-hook 'emacs-startup-hook #'crafted-startup-example/display-startup-time)
+(add-hook 'emacs-startup-hook #'ce-base-example/display-startup-time)
 
 ;; Set default coding system (especially for Windows)
 (set-default-coding-systems 'utf-8)

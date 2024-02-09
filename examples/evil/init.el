@@ -50,12 +50,12 @@
   (customize-set-variable 'evil-escape-delay 0.2)
 
   ;; Prevent "jj" from escaping any mode other than insert-mode.
-  (defun my/not-insert-state-p ()
+  (defun ce-evil-example/not-insert-state-p ()
     "Inverse of `evil-insert-state-p`"
     (not (evil-insert-state-p)))
 
   (customize-set-variable 'evil-escape-inhibit-functions
-                          (list #'my/not-insert-state-p))
+                          (list #'ce-evil-example/not-insert-state-p))
 
   (evil-escape-mode))
 
