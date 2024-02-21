@@ -106,8 +106,8 @@ Used as hook for modes which should not display line numebrs."
 ;;;; Elisp-Demos
 
 ;; also add some examples
-(require 'elisp-demos)
-(advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update)
+(when (require 'elisp-demos nil :noerror)
+  (advice-add 'helpful-update :after #'elisp-demos-advice-helpful-update))
 
 ;; add visual pulse when changing focus, like beacon but built-in
 ;; from from https://karthinks.com/software/batteries-included-with-emacs/
