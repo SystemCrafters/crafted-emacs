@@ -34,14 +34,18 @@
   (with-temp-buffer
     (let* ((default-directory crafted-emacs-home)
            (current-branch (car (vc-git-branches)))
-           (rev-list-path (concat current-branch "..origin/" current-branch)))
-      (string-to-number (crafted-updates--call-git "rev-list" "--count" rev-list-path)))))
+           (rev-list-path (concat current-branch "..origin/" current-branch))
+           (compare-remote (concat " origin/" current-branch)))
+      (if (member compare-remote (split-string (crafted-updates--call-git "branch" "-r")))
+          (string-to-number (crafted-updates--call-git "rev-list" "--count" rev-list-path))
+        -1))))
 
 (defun crafted-updates-status-message ()
   "Status message indicating availble updates or not."
-  (if (> (crafted-updates--get-new-commit-count) 0)
-      "Crafted Emacs updates are available!"
-    "Crafted Emacs is up to date!"))
+  (let ((commit-count (crafted-updates--get-new-commit-count)))
+    (cond ((> commit-count 0) "Crafted Emacs updates are available!")
+          ((= commit-count 0) "Crafted Emacs is up to date!")
+          ((< commit-count 0) "Current branch is local only!"))))
 
 (defun crafted-updates--notify-of-updates ()
   (message (crafted-updates-status-message)))
