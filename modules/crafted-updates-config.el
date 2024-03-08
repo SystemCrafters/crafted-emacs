@@ -35,7 +35,7 @@
     (let* ((default-directory crafted-emacs-home)
            (current-branch (car (vc-git-branches)))
            (rev-list-path (concat current-branch "..origin/" current-branch))
-           (compare-remote (concat " origin/" current-branch)))
+           (compare-remote (concat "origin/" current-branch)))
       (if (member compare-remote (split-string (crafted-updates--call-git "branch" "-r")))
           (string-to-number (crafted-updates--call-git "rev-list" "--count" rev-list-path))
         -1))))
