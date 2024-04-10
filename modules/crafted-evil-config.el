@@ -11,12 +11,13 @@
 
 ;;; Code:
 
-;; Turn on undo-tree globally for version older than 28.  Use
-;; undo-redo for Emacs 28+
+;;; Turn on undo-tree globally for version older than 28.
+;; Use undo-redo for Emacs 28+
 (when (and (version< emacs-version "28")
            (locate-library "undo-tree"))
   (global-undo-tree-mode))
 
+;;; Preload configuration
 ;; Set some variables that must be configured before loading the package
 (customize-set-variable 'evil-want-integration t)
 (customize-set-variable 'evil-want-keybinding nil)
@@ -32,27 +33,27 @@
   "Make a more familiar Vim experience.
 
 Take some of the default keybindings for evil mode."
-    (customize-set-variable 'evil-want-C-i-jump t)
-    (customize-set-variable 'evil-want-Y-yank-to-eol t)
-    (customize-set-variable 'evil-want-fine-undo t))
+  (customize-set-variable 'evil-want-C-i-jump t)
+  (customize-set-variable 'evil-want-Y-yank-to-eol t)
+  (customize-set-variable 'evil-want-fine-undo t))
 
-;; Load Evil and enable it globally
+;;; Load Evil and enable it globally
 (require 'evil)
 (evil-mode 1)
 
-;; Make evil search more like vim
+;;; Make evil search more like vim
 (evil-select-search-module 'evil-search-module 'evil-search)
 
-;; Turn on Evil Nerd Commenter
+;;; Turn on Evil Nerd Commenter
 (evilnc-default-hotkeys)
 
-;; Make C-g revert to normal state
+;;; Make C-g revert to normal state
 (keymap-set evil-insert-state-map "C-g" 'evil-normal-state)
 
-;; Rebind `universal-argument' to 'C-M-u' since 'C-u' now scrolls the buffer
+;;; Rebind `universal-argument' to 'C-M-u' since 'C-u' now scrolls the buffer
 (keymap-global-set "C-M-u" 'universal-argument)
 
-;; Use visual line motions even outside of visual-line-mode buffers
+;;; Use visual line motions even outside of visual-line-mode buffers
 (evil-global-set-key 'motion "j" 'evil-next-visual-line)
 (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
 
@@ -74,7 +75,7 @@ Rebinds the arrow keys to display a message instead."
   (evil-global-set-key 'motion      (kbd "<down>")  #'crafted-evil-discourage-arrow-keys)
   (evil-global-set-key 'motion      (kbd "<up>")    #'crafted-evil-discourage-arrow-keys))
 
-;; Make sure some modes start in Emacs state
+;;; Make sure some modes start in Emacs state
 ;; TODO: Split this out to other configuration modules?
 (dolist (mode '(custom-mode
                 eshell-mode

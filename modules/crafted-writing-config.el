@@ -1,4 +1,4 @@
-;;;; crafted-writing-config.el --- Configuration for writing text documents  -*- lexical-binding: t; -*-
+;;; crafted-writing-config.el --- Configuration for writing text documents  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
@@ -8,7 +8,7 @@
 ;;; Commentary:
 
 ;; Configuration for editing text or writing documents of different
-;; kinds. Markdown and LaTeX documents are supported, general text
+;; kinds.  Markdown and LaTeX documents are supported, general text
 ;; editing is also supported.  Not configured here are second brain /
 ;; Zettelkasten systems, those are found in the `crafted-org-config'
 ;; module.
@@ -83,7 +83,7 @@ Example usage:
   ;; cleanup whitespace
   (customize-set-variable 'whitespace-action '(cleanup auto-cleanup)))
 
-;;; parentheses
+;;; Parentheses
 (electric-pair-mode 1) ; auto-insert matching bracket
 (show-paren-mode 1)    ; turn on paren match highlighting
 
@@ -138,7 +138,7 @@ Depends on having `pdf-tools'."
     (customize-set-variable 'TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view)))
     (customize-set-variable 'TeX-source-correlate-start-server t)))
 
-;; message the user if the latex executable is not found
+;;;; Message the user if the latex executable is not found
 (defun crafted-writing-tex-warning-if-no-latex-executable ()
   "Print a message to the minibuffer if the \"latex\" executable cannot be found."
   (unless (executable-find "latex")

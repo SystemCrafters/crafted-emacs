@@ -1,4 +1,4 @@
-;;;; crafted-updates-config.el --- Provides automatic update behavior for the configuration.  -*- lexical-binding: t; -*-
+;;; crafted-updates-config.el --- Provides automatic update behavior for the configuration.  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
@@ -18,54 +18,29 @@
 
 ;;; Code:
 
+;;; Find where Crafted Emacs is located
 (unless (boundp 'crafted-emacs-home)
   (setq crafted-emacs-home (project-root (project-current nil (file-name-directory (buffer-file-name)))))
   (warn (format "crafted-emacs-home is not set.  Attempting to use %s" crafted-emacs-home)))
 
 (autoload 'vc-git--out-ok "vc-git")
-(defun crafted-updates--call-git (&rest args)
-  (let ((default-directory crafted-emacs-home))
-    (with-temp-buffer
-      (if (apply #'vc-git--out-ok args)
-          (buffer-string)
-        nil))))
 
-(defun crafted-updates--get-new-commit-count ()
-  (with-temp-buffer
-    (let* ((default-directory crafted-emacs-home)
-           (current-branch (car (vc-git-branches)))
-           (rev-list-path (concat current-branch "..origin/" current-branch))
-           (compare-remote (concat "origin/" current-branch)))
-      (if (member compare-remote (split-string (crafted-updates--call-git "branch" "-r")))
-          (string-to-number (crafted-updates--call-git "rev-list" "--count" rev-list-path))
-        -1))))
+;;; Public interface
 
-(defun crafted-updates-status-message ()
-  "Status message indicating availble updates or not."
-  (let ((commit-count (crafted-updates--get-new-commit-count)))
-    (cond ((> commit-count 0) "Crafted Emacs updates are available!")
-          ((= commit-count 0) "Crafted Emacs is up to date!")
-          ((< commit-count 0) "Current branch is local only!"))))
-
-(defun crafted-updates--notify-of-updates ()
-  (message (crafted-updates-status-message)))
-
-(defun crafted-updates--poll-git-fetch-status (process)
-  (if (eql (process-status process) 'exit)
-      (when (eql (process-exit-status process) 0)
-          )
-    (run-at-time 1 nil #'crafted-updates--poll-git-fetch-status process)))
-
+;;;; Commands
 (defun crafted-updates-check-for-latest ()
-  "Fetches the latest Crafted Emacs commits from GitHub and
-notifies you if there are any updates."
+  "Fetches the latest Crafted Emacs.
+
+Get commits from GitHub and notify you if there are any updates."
   (interactive)
   (message "Checking for Crafted Emacs updates...")
   (when (crafted-updates--call-git #' "fetch" "origin")
     (crafted-updates--notify-of-updates)))
 
 (defun crafted-updates-show-latest ()
-  "Shows a buffer containing a log of the latest commits to
+  "Get latest Crafted Emacs commits.
+
+Shows a buffer containing a log of the latest commits to
 Crafted Emacs."
   (interactive)
   (message "Fetching latest commit log for Crafted Emacs...")
@@ -73,13 +48,6 @@ Crafted Emacs."
                                             "README.org"
                                             crafted-emacs-home))
     (vc-log-incoming)))
-
-(defun crafted-updates--pull-commits ()
-  (message "Pulling latest commits to Crafted Emacs...")
-  (with-current-buffer (find-file-noselect
-                        (expand-file-name "README.org"
-                                          crafted-emacs-home))
-    (vc-pull)))
 
 (defun crafted-updates-pull-latest (do-pull)
   "Pull the latest Crafted Emacs version into the local repository.
@@ -103,6 +71,16 @@ and don't prompt for confirmation."
       (crafted-updates--pull-commits)
     (crafted-updates-show-latest)))
 
+;;;; Functions
+
+(defun crafted-updates-status-message ()
+  "Status message indicating availble updates or not."
+  (let ((commit-count (crafted-updates--get-new-commit-count)))
+    (cond ((> commit-count 0) "Crafted Emacs updates are available!")
+          ((= commit-count 0) "Crafted Emacs is up to date!")
+          ((< commit-count 0) "Current branch is local only!"))))
+
+;;; Customization options - See `M-x customize-group RET crafted-updates'
 (defgroup crafted-updates '()
   "Configuration for keeping Crafted Emacs up-to-date."
   :tag "Crafted Updates"
@@ -118,22 +96,75 @@ this variable must conform to a format accepted by
 `run-at-time'."
   :group 'crafted-updates)
 
-(defun crafted-updates--do-automatic-fetch ()
-  (when crafted-updates-mode
-    (crafted-updates-check-for-latest)
-    (crafted-updates--schedule-fetch)))
+;;; Private interface
+;; These functions are not intended to be called directly.
+
+(defun crafted-updates--call-git (&rest args)
+  "Call git with ARGS."
+  (let ((default-directory crafted-emacs-home))
+    (with-temp-buffer
+      (if (apply #'vc-git--out-ok args)
+          (buffer-string)
+        nil))))
+
+(defun crafted-updates--pull-commits ()
+  "Pull commits from Crafted Emacs repo."
+  (message "Pulling latest commits to Crafted Emacs...")
+  (with-current-buffer (find-file-noselect
+                        (expand-file-name "README.org"
+                                          crafted-emacs-home))
+    (vc-pull)))
+
+(defun crafted-updates--get-new-commit-count ()
+  "Count new commits.
+
+These are commits not currently pulled from the main repo."
+  (with-temp-buffer
+    (let* ((default-directory crafted-emacs-home)
+           (current-branch (car (vc-git-branches)))
+           (rev-list-path (concat current-branch "..origin/" current-branch))
+           (compare-remote (concat "origin/" current-branch)))
+      (if (member compare-remote (split-string (crafted-updates--call-git "branch" "-r")))
+          (string-to-number (crafted-updates--call-git "rev-list" "--count" rev-list-path))
+        -1))))
+
+(defun crafted-updates--notify-of-updates ()
+  "Show a message in *Message* buffer."
+  (message (crafted-updates-status-message)))
+
+(defun crafted-updates--poll-git-fetch-status (process)
+  "Check to see if the git PROCESS has completed."
+  (if (eql (process-status process) 'exit)
+      (when (eql (process-exit-status process) 0)
+        (message "crafted-updates: git fetch status completed successfully"))
+    (run-at-time 1 nil #'crafted-updates--poll-git-fetch-status process)))
+
 
 (defun crafted-updates--schedule-fetch ()
+  "Schedule pulling Crafted Emacs updates."
   (run-at-time crafted-updates-fetch-interval nil #'crafted-updates--do-automatic-fetch))
 
+;;; Minor mode
 (define-minor-mode crafted-updates-mode
-  "Provides an automatic update checking feature for Crafted
+  "Crafted Emacs updates minor mode.
+
+Provides an automatic update checking feature for Crafted
 Emacs.  When enabled, it will automatically check for updates at
 the specified `crafted-updates-fetch-interval'."
   :global t
   :group 'crafted-updates
   (when crafted-updates-mode
     (crafted-updates--schedule-fetch)))
+
+(defun crafted-updates--do-automatic-fetch ()
+  "Automatically fetch Crafted Emacs updates.
+
+Only runs when `crafted-updates-mode' is active."
+  (when crafted-updates-mode
+    (crafted-updates-check-for-latest)
+    (crafted-updates--schedule-fetch)))
+
+;;; _
 
 (provide 'crafted-updates-config)
 ;;; crafted-updates-config.el ends here

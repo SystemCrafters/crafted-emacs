@@ -12,6 +12,7 @@
 
 ;;; Code:
 
+;;; Customization Variables - See `M-x customize-group RET crafted-startup'
 (defgroup crafted-startup '()
   "Startup configuration for Crafted Emacs"
   :tag "Crafted Startup"
@@ -108,7 +109,10 @@ screen.  Functions are called in the order listed.  See
   :type '(repeat function)
   :group 'crafted-startup)
 
+;;; Functions for rendering the splash screen
+
 (defun crafted-startup-splash-head ()
+  "The top part of the splash screen."
   (if (display-graphic-p)
       (cond
        ((string= crafted-startup-graphical-logo
@@ -136,8 +140,10 @@ screen.  Functions are called in the order listed.  See
         (insert "\n\n")))))
 
 (defun crafted-startup--splash-head-ascii ()
-  "Insert the contents of `crafted-startup-ascii-logo' into the
- splash screen as a logo."
+  "Insert Crafted Emacs logo.
+
+Insert the contents of `crafted-startup-ascii-logo' into the
+splash screen as a logo."
   (let* ((logo-face 'fixed-pitch)
          (first-line (car crafted-startup-ascii-logo))
          (line-width (window-max-chars-per-line nil logo-face))
@@ -150,7 +156,7 @@ screen.  Functions are called in the order listed.  See
       (fancy-splash-insert :face logo-face (concat spaces line "\n")))
     (insert "\n")))
 
-(defun crafted-startup-tail (&optional concise)
+(defun crafted-startup-tail ()
   "Insert the tail part of the splash screen into the current buffer."
   (fancy-splash-insert
    :face 'variable-pitch
@@ -216,6 +222,7 @@ screen.  Functions are called in the order listed.  See
                        " Never show it again."))
 
 (defun crafted-startup-diary ()
+  "Insert diary entries."
   (require 'diary-lib nil :noerror)
   (if (and diary-file (file-exists-p diary-file))
       (if (file-readable-p diary-file)
@@ -248,6 +255,7 @@ screen.  Functions are called in the order listed.  See
      "No diary file\n")))
 
 (defun crafted-startup-projects ()
+  "Insert recent projects."
   (require 'project nil :noerror)
   (when (file-exists-p project-list-file)
     (project--read-project-list)
@@ -269,6 +277,7 @@ screen.  Functions are called in the order listed.  See
       (error "\n"))))
 
 (defun crafted-startup-recentf ()
+  "Insert recently opened files."
   (message "Showing recents on splash screen")
   (fancy-splash-insert
    :face '(variable-pitch font-lock-string-face italic)
@@ -287,7 +296,9 @@ screen.  Functions are called in the order listed.  See
     (error "\n")))
 
 (defun crafted-startup-screen ()
-  "Calls `crafted-startup--display-startup-screen' with
+  "Show splash screen.
+
+Calls `crafted-startup--display-startup-screen' with
 `crafted-startup-concise-splash'."
   (crafted-startup--display-startup-screen crafted-startup-concise-splash))
 

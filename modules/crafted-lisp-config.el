@@ -1,4 +1,4 @@
-;;;; crafted-lisp-config.el --- Lisp development configuration  -*- lexical-binding: t; -*-
+;;; crafted-lisp-config.el --- Lisp development configuration  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
@@ -35,7 +35,7 @@
 
 ;;; Code:
 
-;; Global defaults
+;;; Global defaults
 (require 'eldoc)
 
 ;; aggressive-indent-mode for all lisp modes

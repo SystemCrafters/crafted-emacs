@@ -34,14 +34,19 @@
 ;; the list before calling any processing occurs to install any packages
 
 ;;; Code:
+
+;;; Package
 (require 'package)
 
+;;;; Variables to control the package manager
 (defvar crafted-package-installer #'package-install
   "Function to use when installing packages")
 
 (defvar crafted-package-installed-predicate #'package-installed-p
   "Function to use when checking if a package is installed")
 
+;;; Crafted Emacs functions to generically install packages
+;; See (info "(crafted-emacs) Using alternate package managers")
 (defun crafted-package-install-package (package &optional installer-fn predicate-fn)
   "Install PACKAGE optionally using the INSTALLER-FN.
 

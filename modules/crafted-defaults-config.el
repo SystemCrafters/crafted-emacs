@@ -1,11 +1,11 @@
-;;; crafted-defaults.el -*- lexical-binding: t; -*-
+;;; crafted-defaults.el --- Crafted Emacs Defaults -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
 
-;; Commentary
+;;; Commentary:
 
 ;; General Crafted Emacs endorsed defaults
 ;;

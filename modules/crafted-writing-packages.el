@@ -1,4 +1,4 @@
-;;;; crafted-writing-packages.el --- Packages used for writing  -*- lexical-binding: t; -*-
+;;; crafted-writing-packages.el --- Packages used for writing  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
@@ -11,11 +11,11 @@
 
 ;;; Code:
 
-;; Markdown support
+;;; Markdown support
 (add-to-list 'package-selected-packages 'markdown-mode)
 (add-to-list 'package-selected-packages 'pandoc-mode)
 
-;; LaTeX support - uses Auctex
+;;; LaTeX support - uses Auctex
 ;; only install and load auctex when the latex executable is found,
 ;; otherwise it crashes when loading
 (when (executable-find "latex")

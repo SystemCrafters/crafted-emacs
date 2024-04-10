@@ -11,7 +11,7 @@
 
 ;;; Code:
 
-;; titlebar
+;;; Titlebar
 
 (defun crafted-osx-transparent-titlebar ()
   "Set the titlebar to be transparent."
@@ -19,13 +19,13 @@
   (customize-set-variable 'frame-resize-pixelwise t)
   (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
 
-;; Special keys
+;;; Special keys
 (when (featurep 'ns)
   (customize-set-variable mac-right-option-modifier nil)
   (customize-set-variable mac-command-modifier 'super)
   (customize-set-variable ns-function-modifier 'hyper))
 
-;; Keybinds
+;;; Keybinds
 
 (keymap-global-set "s-W" #'delete-frame) ; ⌘-W = Close window
 (keymap-global-set "s-}" #'tab-bar-switch-to-next-tab) ; ⌘-} = Next tab
@@ -36,7 +36,7 @@
 (unless (version< emacs-version "28")
   (keymap-global-set "s-Z" 'undo-redo)) ; ⌘-Z = Redo
 
-;; Better compatibility with osx based window managers
+;;; Better compatibility with osx based window managers
 
 (when (featurep 'ns)
   (defun ns-raise-emacs ()

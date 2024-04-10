@@ -18,8 +18,9 @@
 ;; including the template below used for writing Crafted Emacs
 ;; modules.
 
+;;; Customization variables - See `M-x customize-group RET crafted-init'
 (defgroup crafted-init '()
-  "Initialization configuration for Crafted Emacs"
+  "Initialization configuration for Crafted Emacs."
   :tag "Crafted Init"
   :group 'crafted)
 
@@ -39,6 +40,7 @@
   :type 'boolean
   :group 'crafted-init)
 
+;;; Emacs 29 compatibility for Emacs prior to release 29
 (when (version< emacs-version "29")
   ;; Get some Emacs 29 compatibility functions. Notably missing is
   ;; `setopt' which the `compat' library deliberately does not
@@ -155,7 +157,7 @@ values to the \"SET and saved.\" state and (hopefully) avoid the
 bug above.  If the user never set a value for `custom-file' then
 we can't reload the file."
   (customize-save-customized)
-  ;; only load the `custom-file' if it is not `nil'. 
+  ;; only load the `custom-file' if it is not `nil'.
   (when custom-file
     (load custom-file :noerror)))
 

@@ -1,4 +1,4 @@
-;;;; crafted-early-init-config.el --- Crafted early initialization  -*- lexical-binding: t; -*-
+;;; crafted-early-init-config.el --- Crafted early initialization  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
@@ -13,21 +13,31 @@
 
 (require 'package)
 
+;;; Setup Emacs Lisp Package Archives (ELPAs)
+;; where to get packages to install
 (when (version< emacs-version "28")
   (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 (add-to-list 'package-archives '("stable" . "https://stable.melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 
+;;; Configure ELPA priorities
+;; Prefer GNU sources and stable versions before development versions from MELPA.
 (customize-set-variable 'package-archive-priorities
                         '(("gnu"    . 99)   ; prefer GNU packages
                           ("nongnu" . 80)   ; use non-gnu packages if
-                                            ; not found in GNU elpa
+                                        ; not found in GNU elpa
                           ("stable" . 70)   ; prefer "released" versions
-                                            ; from melpa
+                                        ; from melpa
                           ("melpa"  . 0)))  ; if all else fails, get it
-                                            ; from melpa
+                                        ; from melpa
 
-;;; refresh package archive contents
+;;; Forms to refresh package archive contents
+;; These functions are available to use for deciding if
+;; `package-refresh-contents' needs to be run during startup.  As this
+;; can slow things down, it is only run if the archives are considered
+;; stale.  Archives are considered stale (by default) when they are 1
+;; day old.  Set the `crafted-package-update-days' to a larger value
+;; in your `early-init' file to changes this behavior
 (require 'time-date)
 
 (defvar crafted-package-perform-stale-archive-check t
@@ -88,8 +98,8 @@ Run this in the `before-init-hook'"
              (package-refresh-contents t))))
     (message "crafted-package-config: package system initialized!")))
 
-;; Initialize package system, refresh archives if necessary before
-;; init file runs.
+;;; Initialize package system
+;; Refresh archives if necessary before init file runs.
 (add-hook 'before-init-hook #'crafted-package-initialize)
 
 (provide 'crafted-early-init-config)

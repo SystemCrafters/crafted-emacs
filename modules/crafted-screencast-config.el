@@ -1,4 +1,4 @@
-;;; crafted-screencast.el -*- lexical-binding: t; -*-
+;;; crafted-screencast.el --- Crafted Emacs Screencast Config -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT

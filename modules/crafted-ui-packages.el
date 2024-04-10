@@ -1,4 +1,4 @@
-;;; crafted-ui-packages.el -*- lexical-binding: t; -*-
+;;; crafted-ui-packages.el --- Crafted UI Packages -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT

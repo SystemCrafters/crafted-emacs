@@ -1,4 +1,4 @@
-;;; crafted-ui-config.el -*- lexical-binding: t; -*-
+;;; crafted-ui-config.el --- Crafted UI Config -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2023
 ;; SPDX-License-Identifier: MIT
@@ -30,7 +30,7 @@
 
 ;;; Code:
 
-;;;; Help Buffers
+;;; Help Buffers
 
 ;; Make `describe-*' screens more helpful
 (when (require 'helpful nil :noerror)
@@ -45,7 +45,7 @@
 ;; Bind extra `describe-*' commands
 (keymap-global-set "C-h K" #'describe-keymap)
 
-;;;; Line Numbers
+;;; Line Numbers
 (defcustom crafted-ui-line-numbers-enabled-modes
   '(conf-mode prog-mode)
   "Modes which should display line numbers."
@@ -87,13 +87,13 @@ Used as hook for modes which should not display line numebrs."
          display-line-numbers-grow-only t
          display-line-numbers-type t
          display-line-numbers-width 2))
-     (progn
-       (dolist (mode crafted-ui-line-numbers-enabled-modes)
-         (remove-hook (intern (format "%s-hook" mode))
-                      #'crafted-ui--enable-line-numbers-mode))
-       (dolist (mode crafted-ui-line-numbers-disabled-modes)
-         (remove-hook (intern (format "%s-hook" mode))
-                      #'crafted-ui--disable-line-numbers-mode)))))
+    (progn
+      (dolist (mode crafted-ui-line-numbers-enabled-modes)
+        (remove-hook (intern (format "%s-hook" mode))
+                     #'crafted-ui--enable-line-numbers-mode))
+      (dolist (mode crafted-ui-line-numbers-disabled-modes)
+        (remove-hook (intern (format "%s-hook" mode))
+                     #'crafted-ui--disable-line-numbers-mode)))))
 
 (defcustom crafted-ui-display-line-numbers nil
   "Whether line numbers should be enabled."
@@ -103,7 +103,7 @@ Used as hook for modes which should not display line numebrs."
          (set-default sym val)
          (crafted-ui--update-line-numbers-display)))
 
-;;;; Elisp-Demos
+;;; Elisp-Demos
 
 ;; also add some examples
 (when (require 'elisp-demos nil :noerror)
@@ -121,7 +121,7 @@ Used as hook for modes which should not display line numebrs."
                    other-window))
   (advice-add command :after #'pulse-line))
 
-;;;; Breadcrumbs
+;;; Breadcrumbs
 
 (when (require 'breadcrumb nil :noerror)
   (breadcrumb-mode))

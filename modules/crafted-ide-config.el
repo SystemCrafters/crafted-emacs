@@ -124,11 +124,11 @@ installed."
       (crafted-ide--configure-tree-sitter-pre-29)
     (crafted-ide--configure-tree-sitter opt-in-only)))
 
-;; turn on editorconfig if it is available
+;;; turn on editorconfig if it is available
 (when (require 'editorconfig nil :noerror)
   (add-hook 'prog-mode-hook #'editorconfig-mode))
 
-;; enhance ibuffer with ibuffer-project if it is available.
+;;; enhance ibuffer with ibuffer-project if it is available.
 (when (require 'ibuffer-project nil :noerror)
   (defun crafted-ide-enhance-ibuffer-with-ibuffer-project ()
     "Set up integration for `ibuffer' with `ibuffer-project'."

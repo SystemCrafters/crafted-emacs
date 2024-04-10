@@ -1,15 +1,11 @@
-;;; crafted-speedbar-config.el --- Speedbar configuration -*- mode: emacs-lisp; mode: outline-minor; lexical-binding: t; -*-
+;;; crafted-speedbar-config.el --- Speedbar configuration -*- mode: emacs-lisp; lexical-binding: t; -*-
 
-;;; License
 ;; Copyright (C) 2022
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: Erik Lundstedt, System Crafters Community
 
 ;;; Commentary:
-
-;; This file was made with outline-minor-mode in mind
-;; and therefore have ";;;+"-comments as headders.
 
 ;; Configuration for speedbar, a file-tree (and more), that comes
 ;; builtin to Emacs it also has integration with some packages like
