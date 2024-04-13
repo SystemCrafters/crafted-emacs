@@ -156,7 +156,7 @@ splash screen as a logo."
       (fancy-splash-insert :face logo-face (concat spaces line "\n")))
     (insert "\n")))
 
-(defun crafted-startup-tail ()
+(defun crafted-startup-tail (&optional concise)
   "Insert the tail part of the splash screen into the current buffer."
   (fancy-splash-insert
    :face 'variable-pitch
