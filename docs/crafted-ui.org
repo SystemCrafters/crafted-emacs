@@ -79,11 +79,11 @@ For example:
 
 *** Breadcrumb
 
-The breadcrumb package uses information from =imenu.el= and =project.el= to display
-helpful to provide orientation within a file and/or project.
+The breadcrumb package displays helpful information from =imenu.el= and
+=project.el= to provide orientation within a file and/or project.
 
 By default, the global mode of the breadcrumb package is activated:
-~breadcrumb-mode~. The breadcrumbs ar displayed at the top of the window.
+~breadcrumb-mode~. The breadcrumbs are displayed at the top of the window.
 
 That behaviour can be tweaked in various ways, see the package's [[https://elpa.gnu.org/packages/breadcrumb.html][ELPA page]] or
 [[https://github.com/joaotavora/breadcrumb][GitHub repository]] for details.

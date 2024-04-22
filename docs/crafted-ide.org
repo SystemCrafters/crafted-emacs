@@ -97,7 +97,7 @@ This will install all known language grammars for Tree-Sitter.
 
 Instead, you can pass a list of languages to ~crafted-ide-configure-tree-sitter~,
 then it will only install those languages.
-This can be also be useful if if a certain language grammar doesn't
+This can be also be useful if a certain language grammar doesn't
 successfully build on your setup, as you would otherwise be re-prompted to
 install new grammars on every Emacs startup.
 

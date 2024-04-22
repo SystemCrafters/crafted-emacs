@@ -2313,7 +2313,7 @@ environment (IDE).
 
           Instead, you can pass a list of languages to
           ‘crafted-ide-configure-tree-sitter’, then it will only install
-          those languages.  This can be also be useful if if a certain
+          those languages.  This can be also be useful if a certain
           language grammar doesn't successfully build on your setup, as
           you would otherwise be re-prompted to install new grammars on
           every Emacs startup.
@@ -3083,12 +3083,12 @@ while leaving them turned off for others.
 
   3. Breadcrumb
 
-     The breadcrumb package uses information from ‘imenu.el’ and
-     ‘project.el’ to display helpful to provide orientation within a
-     file and/or project.
+     The breadcrumb package displays helpful information from ‘imenu.el’
+     and ‘project.el’ to provide orientation within a file and/or
+     project.
 
      By default, the global mode of the breadcrumb package is activated:
-     ‘breadcrumb-mode’.  The breadcrumbs ar displayed at the top of the
+     ‘breadcrumb-mode’.  The breadcrumbs are displayed at the top of the
      window.
 
      That behaviour can be tweaked in various ways, see the package's
@@ -3606,66 +3606,66 @@ Ref: Automatically start Eglot when visiting language buffers85280
 Ref: Tree-Sitter85917
 Ref: Configuring Tree-Sitter (Emacs 28 or earlier)86250
 Ref: Configuring Tree-Sitter (Emacs 29 or later)86682
-Ref: Combobulate87716
-Node: Crafted Emacs Lisp Module88523
-Node: Installation (4)88835
-Node: Description (4)89342
-Ref: Emacs Lisp89942
-Ref: Common Lisp90654
-Ref: Clojure91520
-Ref: Scheme and Racket92156
-Node: Additional packages geiser-*92752
-Node: Crafted Emacs Org Module93796
-Node: Installation (5)94106
-Node: Description (5)94608
-Node: Alternative package org-roam96625
-Node: Crafted Emacs OSX Module98429
-Node: Installation (6)98712
-Node: Description (6)99024
-Node: Crafted Emacs Screencast Module100058
-Node: Installation (7)100360
-Node: Description (7)100897
-Node: Crafted Emacs Speedbar Module101598
-Node: Installation (8)101900
-Node: Description (8)102371
-Node: Crafted Emacs Startup Module104874
-Node: Installation (9)105240
-Node: Description (9)105710
-Node: Logo106007
-Node: Updates107125
-Node: Modules (1)107619
-Node: Turn off splash screen109673
-Node: Crafted Emacs UI Module110189
-Node: Installation (10)110474
-Node: Description (10)110975
-Ref: Icons with all-the-icons111704
-Ref: Line numbers112217
-Ref: Breadcrumb113513
-Node: Crafted Emacs Updates Module114260
-Node: Installation (11)114558
-Node: Description (11)115030
-Ref: Usage and Customization115608
-Ref: On Startup115759
-Ref: Regularly116474
-Ref: Manually117407
-Node: Crafted Emacs Workspaces Module118006
-Node: Installation (12)118315
-Node: Description (12)118856
-Node: Crafted Emacs Writing Module120407
-Node: Installation (13)120673
-Node: Description (13)121199
-Ref: Whitespace Mode121726
-Ref: Function crafted-writing-configure-whitespace122192
-Ref: Signature122260
-Ref: Parameters122427
-Ref: Examples123344
-Ref: Optional Package PDF-Tools124453
-Ref: Part 1 Installing the Emacs package pdf-tools124799
-Ref: Part 2 Installing the epdfinfo-server125217
-Ref: Configuration125939
-Node: Troubleshooting126421
-Node: A package (suddenly?) fails to work126655
-Node: MIT License130427
+Ref: Combobulate87713
+Node: Crafted Emacs Lisp Module88520
+Node: Installation (4)88832
+Node: Description (4)89339
+Ref: Emacs Lisp89939
+Ref: Common Lisp90651
+Ref: Clojure91517
+Ref: Scheme and Racket92153
+Node: Additional packages geiser-*92749
+Node: Crafted Emacs Org Module93793
+Node: Installation (5)94103
+Node: Description (5)94605
+Node: Alternative package org-roam96622
+Node: Crafted Emacs OSX Module98426
+Node: Installation (6)98709
+Node: Description (6)99021
+Node: Crafted Emacs Screencast Module100055
+Node: Installation (7)100357
+Node: Description (7)100894
+Node: Crafted Emacs Speedbar Module101595
+Node: Installation (8)101897
+Node: Description (8)102368
+Node: Crafted Emacs Startup Module104871
+Node: Installation (9)105237
+Node: Description (9)105707
+Node: Logo106004
+Node: Updates107122
+Node: Modules (1)107616
+Node: Turn off splash screen109670
+Node: Crafted Emacs UI Module110186
+Node: Installation (10)110471
+Node: Description (10)110972
+Ref: Icons with all-the-icons111701
+Ref: Line numbers112214
+Ref: Breadcrumb113510
+Node: Crafted Emacs Updates Module114251
+Node: Installation (11)114549
+Node: Description (11)115021
+Ref: Usage and Customization115599
+Ref: On Startup115750
+Ref: Regularly116465
+Ref: Manually117398
+Node: Crafted Emacs Workspaces Module117997
+Node: Installation (12)118306
+Node: Description (12)118847
+Node: Crafted Emacs Writing Module120398
+Node: Installation (13)120664
+Node: Description (13)121190
+Ref: Whitespace Mode121717
+Ref: Function crafted-writing-configure-whitespace122183
+Ref: Signature122251
+Ref: Parameters122418
+Ref: Examples123335
+Ref: Optional Package PDF-Tools124444
+Ref: Part 1 Installing the Emacs package pdf-tools124790
+Ref: Part 2 Installing the epdfinfo-server125208
+Ref: Configuration125930
+Node: Troubleshooting126412
+Node: A package (suddenly?) fails to work126646
+Node: MIT License130418
 
 End Tag Table
 
