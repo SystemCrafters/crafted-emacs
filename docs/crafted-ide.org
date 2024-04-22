@@ -94,11 +94,14 @@ install language grammars.
 
 Call ~crafted-ide-configure-tree-sitter~ after requiring ~crafted-ide-config~.
 This will install all known language grammars for Tree-Sitter.
-To opt-out of one or more language grammars, pass them as a list
-to ~crafted-ide-configure-tree-sitter~.
-This can be useful if a language grammar doesn't build on your setup
-or you generally do not want a language grammar included as you would
-otherwise be re-prompted to install new grammars on every Emacs startup.
+
+Instead, you can pass a list of languages to ~crafted-ide-configure-tree-sitter~,
+then it will only install those languages.
+This can be also be useful if a certain language grammar doesn't
+successfully build on your setup, as you would otherwise be re-prompted to
+install new grammars on every Emacs startup.
+
+See the [[https://tree-sitter.github.io/tree-sitter/#parsers][tree-sitter website]] for a list of supported languages.
 
 #+begin_src emacs-lisp
 
@@ -107,8 +110,8 @@ otherwise be re-prompted to install new grammars on every Emacs startup.
 ;; install all language grammars
 (crafted-ide-configure-tree-sitter)
 
-;; install all language grammars, except protobuf
-(crafted-ide-configure-tree-sitter '(protobuf))
+;; install only css, html and python
+(crafted-ide-configure-tree-sitter '(css html python))
 
 #+end_src
 
