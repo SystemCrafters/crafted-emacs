@@ -22,10 +22,10 @@
 
 ;;; Special keys
 (when (eq system-type 'darwin)
-  (customize-set-variable mac-right-option-modifier nil)
-  (customize-set-variable mac-command-modifier 'super)
+  (customize-set-variable 'mac-right-option-modifier nil)
+  (customize-set-variable 'mac-command-modifier 'super)
   (when (featurep 'ns)
-    (customize-set-variable ns-function-modifier 'hyper))
+    (customize-set-variable 'ns-function-modifier 'hyper)))
 
 ;;; Keybinds
 
