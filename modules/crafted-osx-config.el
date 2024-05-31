@@ -15,15 +15,17 @@
 
 (defun crafted-osx-transparent-titlebar ()
   "Set the titlebar to be transparent."
-  (interactive)
-  (customize-set-variable 'frame-resize-pixelwise t)
-  (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t)))
+  (when (featurep 'ns)
+    (interactive)
+    (customize-set-variable 'frame-resize-pixelwise t)
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))))
 
 ;;; Special keys
-(when (featurep 'ns)
+(when (eq system-type 'darwin)
   (customize-set-variable mac-right-option-modifier nil)
   (customize-set-variable mac-command-modifier 'super)
-  (customize-set-variable ns-function-modifier 'hyper))
+  (when (featurep 'ns)
+    (customize-set-variable ns-function-modifier 'hyper))
 
 ;;; Keybinds
 
