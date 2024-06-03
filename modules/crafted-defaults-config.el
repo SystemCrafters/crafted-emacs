@@ -207,8 +207,7 @@ also enables undo functionality if the window layout changes."
 ;; Window configuration for special windows.
 (add-to-list 'display-buffer-alist
              '("\\*Help\\*"
-               (display-buffer-reuse-window display-buffer-pop-up-window)
-               (inhibit-same-window . t)))
+               (display-buffer-reuse-window display-buffer-pop-up-window)))
 
 (add-to-list 'display-buffer-alist
              '("\\*Completions\\*"
