@@ -418,7 +418,7 @@ Here are some pointers to get you started:
 - For more details on Crafted Emacs Modules: [[info:crafted-emacs.info#Modules][Modules]]
 - Want to experiment or looking for something specific? See [[info:crafted-emacs.info#Example Configurations][Example Configurations]]
 - For more information and explanations on customizing Emacs: [[info:crafted-emacs.info#Customization][Customization]]
-- Want to use a different package manager? See [[info:crafted-emacs.info#Using alternative package managers][Using alternative package managers]]
+- Want to use a different package manager? See [[info:crafted-emacs.info#Using alternate package managers][Using alternate package managers]]
 
 -----
 # Local Variables:
