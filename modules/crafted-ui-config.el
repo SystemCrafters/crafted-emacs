@@ -1,6 +1,6 @@
 ;;; crafted-ui-config.el --- Crafted UI Config -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023
+;; Copyright (C) 2024
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -30,6 +30,35 @@
 
 ;;; Code:
 
+;;; Customization Variables - See `M-x customize-group RET crafted-ui'
+(defgroup crafted-ui '()
+  "UI configuration for Crafted Emacs"
+  :tag "Crafted UI"
+  :group 'crafted)
+
+(defcustom crafted-ui-line-numbers-enabled-modes
+  '(conf-mode prog-mode)
+  "Modes which should display line numbers."
+  :type 'list
+  :group 'crafted-ui)
+
+(defcustom crafted-ui-line-numbers-disabled-modes
+  '(org-mode)
+  "Modes which should not display line numbers.
+
+Modes derived from the modes defined in
+`crafted-ui-line-number-enabled-modes', but should not display line numbers."
+  :type 'list
+  :group 'crafted-ui)
+
+(defcustom crafted-ui-display-line-numbers nil
+  "Whether line numbers should be enabled."
+  :type 'boolean
+  :group 'crafted-ui
+  :set (lambda (sym val)
+         (set-default sym val)
+         (crafted-ui--update-line-numbers-display)))
+
 ;;; Help Buffers
 
 ;; Make `describe-*' screens more helpful
@@ -46,21 +75,6 @@
 (keymap-global-set "C-h K" #'describe-keymap)
 
 ;;; Line Numbers
-(defcustom crafted-ui-line-numbers-enabled-modes
-  '(conf-mode prog-mode)
-  "Modes which should display line numbers."
-  :type 'list
-  :group 'crafted-ui)
-
-(defcustom crafted-ui-line-numbers-disabled-modes
-  '(org-mode)
-  "Modes which should not display line numbers.
-
-Modes derived from the modes defined in
-`crafted-ui-line-number-enabled-modes', but should not display line numbers."
-  :type 'list
-  :group 'crafted-ui)
-
 (defun crafted-ui--enable-line-numbers-mode ()
   "Turn on line numbers mode.
 
@@ -95,13 +109,6 @@ Used as hook for modes which should not display line numebrs."
         (remove-hook (intern (format "%s-hook" mode))
                      #'crafted-ui--disable-line-numbers-mode)))))
 
-(defcustom crafted-ui-display-line-numbers nil
-  "Whether line numbers should be enabled."
-  :type 'boolean
-  :group 'crafted-ui
-  :set (lambda (sym val)
-         (set-default sym val)
-         (crafted-ui--update-line-numbers-display)))
 
 ;;; Elisp-Demos
 

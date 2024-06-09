@@ -1,6 +1,6 @@
 ;;;; crafted-init-config.el --- Crafted Emacs initial configuration  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023
+;; Copyright (C) 2024
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -18,9 +18,15 @@
 ;; including the template below used for writing Crafted Emacs
 ;; modules.
 
+;;; A top level group containing subgroups like `crafted-init' -
+;;; - See `M-x customize-group RET crafted'
+(defgroup crafted '()
+  "Customization options for Crafted Emacs."
+  :tag "Crafted")
+
 ;;; Customization variables - See `M-x customize-group RET crafted-init'
 (defgroup crafted-init '()
-  "Initialization configuration for Crafted Emacs."
+  "Customizations for Crafted Emacs - Initialization."
   :tag "Crafted Init"
   :group 'crafted)
 
