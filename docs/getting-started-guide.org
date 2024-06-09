@@ -323,7 +323,7 @@ config and packages files for every module:
 
   MODULES is a list of module names without the -packages or
   -config suffixes.  Note that any user-provided packages should be
-  added to `package-install-selected-packages' before invoking this
+  added to `package-selected-packages' before invoking this
   function."
     (dolist (m modules)
       (require (intern (format "crafted-%s-packages" m)) nil :noerror))
@@ -346,7 +346,7 @@ you may already have in your configuration:
 
 The function ~crafted-emacs-load-modules~ avoids the "-packages" and "-config"
 suffixes by using two tricks. The first is an alternative form of ~require~, using
-the fourth argument ~:noerror~ to avoid erroring when a module symbol isn't
+the third argument ~:noerror~ to avoid erroring when a module symbol isn't
 found. This is helpful when a Crafted Emacs module has one of "config" or
 "packages", but not both.
 
@@ -418,7 +418,7 @@ Here are some pointers to get you started:
 - For more details on Crafted Emacs Modules: [[info:crafted-emacs.info#Modules][Modules]]
 - Want to experiment or looking for something specific? See [[info:crafted-emacs.info#Example Configurations][Example Configurations]]
 - For more information and explanations on customizing Emacs: [[info:crafted-emacs.info#Customization][Customization]]
-- Want to use a different package manager? See [[info:crafted-emacs.info#Using alternative package managers][Using alternative package managers]]
+- Want to use a different package manager? See [[info:crafted-emacs.info#Using alternate package managers][Using alternate package managers]]
 
 -----
 # Local Variables:
