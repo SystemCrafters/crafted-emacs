@@ -1,6 +1,6 @@
 ;;; crafted-startup-config.el --- Crafted Emacs splash screen on startup  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2023
+;; Copyright (C) 2024
 ;; SPDX-License-Identifier: MIT
 
 ;; Author: System Crafters Community
@@ -14,7 +14,7 @@
 
 ;;; Customization Variables - See `M-x customize-group RET crafted-startup'
 (defgroup crafted-startup '()
-  "Startup configuration for Crafted Emacs"
+  "Customizations for Crafted Emacs - Startup."
   :tag "Crafted Startup"
   :group 'crafted)
 
@@ -28,6 +28,8 @@
   :type 'boolean
   :group 'crafted-startup)
 
+;; A local variable used for the backend function. Users should rather
+;; modify the customization variable above.
 (defvar crafted-startup-screen-inhibit-startup-screen nil)
 
 (defcustom crafted-startup-graphical-logo "image"
@@ -53,7 +55,7 @@
 (defface crafted-greeting-face
   '((t (:inherit font-lock-comment-face :weight bold :height 1.5)))
   "Face for the welcoming message."
-  :group 'crafted-faces)
+  :group 'crafted-startup)
 
 (customize-set-variable 'fancy-splash-image
                         (expand-file-name

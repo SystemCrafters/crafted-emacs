@@ -261,7 +261,22 @@ explore different use-cases.
      values. This helps make sure constructors or setters attached to
      the variable are run when the value is set.
    + Provide ~defcustom~ variables for things we expect the user to
-     modify and make sure it is in the appropriate group.
+     modify.
+   + Think carefully whether introducing a new customization variable is a good
+     idea. Yes, customization is convenient for the user, but it also makes the
+     code more complex to read and understand. Our ultimate goal is to teach
+     users, not to make it easy to customize Emacs without reading and
+     understanding the code. See [[https://github.com/SystemCrafters/crafted-emacs/issues/337][this discussion]] for more detailed arguments.
+   + If you introduce a new customization variable, make sure it is in the
+     appropriate group.   
+   + If not already present, define an appropriate sub-group that corresponds to
+     the module name. Example for =crafted-foo=:
+     #+begin_src emacs-lisp
+       (defgroup crafted-foo '()
+         "Customizations for Crafted Emacs - Foo"
+         :tag "Crafted Foo"
+         :group 'crafted)
+     #+end_src 
    + Provide verbose doc-strings for ~defvar~, ~defcustom~, ~defun~,
      ~defmacro~, etc to clearly document what is going on.
    + Make sure to follow doc-string guidelines (see [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Documentation-Tips.html][Documentation Tips]]
@@ -320,7 +335,7 @@ explore different use-cases.
 
 ** A package (suddenly?) fails to work
 
-   This scenario happened frequently when upgading to Emacs 28. It also may
+   This scenario happened frequently when upgrading to Emacs 28. It also may
    occur in other scenarios as well. Usually, you will see some message
    indicating some symbol is void or some function or command does not
    exist. More often than not, the package maintainer is using a feature from
