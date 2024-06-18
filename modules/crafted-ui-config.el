@@ -51,13 +51,9 @@ Modes derived from the modes defined in
   :type 'list
   :group 'crafted-ui)
 
-(defcustom crafted-ui-display-line-numbers nil
-  "Whether line numbers should be enabled."
-  :type 'boolean
-  :group 'crafted-ui
-  :set (lambda (sym val)
-         (set-default sym val)
-         (crafted-ui--update-line-numbers-display)))
+;;; Note: There is one more customization variable
+;;; `crafted-ui-display-line-numbers', which is defined below because it
+;;; depends on further code.
 
 ;;; Help Buffers
 
@@ -109,6 +105,13 @@ Used as hook for modes which should not display line numebrs."
         (remove-hook (intern (format "%s-hook" mode))
                      #'crafted-ui--disable-line-numbers-mode)))))
 
+(defcustom crafted-ui-display-line-numbers nil
+  "Whether line numbers should be enabled."
+  :type 'boolean
+  :group 'crafted-ui
+  :set (lambda (sym val)
+         (set-default sym val)
+         (crafted-ui--update-line-numbers-display)))
 
 ;;; Elisp-Demos
 
