@@ -167,11 +167,18 @@ we can't reload the file."
   (when custom-file
     (load custom-file :noerror)))
 
+(defun crafted-save-selected-packages ()
+  "Save the list of selected packages.
+
+This saves the state of the variable `package-selected-packages` to the
+custom file after initialization."
+  (package--save-selected-packages package-selected-packages))
+
 ;; Save all customizations to `custom-file', unless the user opted out.
 (when crafted-init-auto-save-customized
   (add-hook 'after-init-hook #'crafted-save-customized))
 (when crafted-init-auto-save-selected-packages
-  (add-hook 'after-init-hook #'package--save-selected-packages))
+  (add-hook 'after-init-hook #'crafted-save-selected-packages))
 
 (provide 'crafted-init-config)
 ;;; crafted-init-config.el ends here
