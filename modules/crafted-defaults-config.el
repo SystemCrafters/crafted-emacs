@@ -89,6 +89,17 @@ also enables undo functionality if the window layout changes."
       (icomplete-mode 1))
   (fido-vertical-mode 1))
 
+;; Emacs version 30.1 introduced `global-completion-preview-mode'
+;; which provides completion previews in the editing buffer rather
+;; than in the minibuffer similar to other packages like `corfu'.
+(when (version< "30" emacs-version)
+  (global-completion-preview-mode 1)
+  ;; also bind M-n/M-p to next/previous completion
+  ;; by default C-i is bound to #'completion-preview-insert and
+  ;; M-i is bound to #'completion-preview-complete
+  (keymap-set completion-preview-active-mode-map "M-n" #'completion-preview-next-candidate)
+  (keymap-set completion-preview-active-mode-map "M-p" #'completion-preview-prev-candidate))
+
 ;; No matter which completion mode is used:
 (customize-set-variable 'tab-always-indent 'complete)
 (customize-set-variable 'completion-cycle-threshold 3)
