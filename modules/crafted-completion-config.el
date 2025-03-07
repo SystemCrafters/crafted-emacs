@@ -30,7 +30,11 @@
     (fido-mode -1)
     (fido-vertical-mode -1)
     (icomplete-mode -1)
-    (icomplete-vertical-mode -1)))
+    (icomplete-vertical-mode -1)
+    (when (version< "30" emacs-version)
+      ;; this mode is only available in Emacs version 30.1 and
+      ;; greater.
+      (global-completion-preview-mode -1))))
 
 
 ;;; Marginalia
