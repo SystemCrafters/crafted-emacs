@@ -30,11 +30,7 @@
     (fido-mode -1)
     (fido-vertical-mode -1)
     (icomplete-mode -1)
-    (icomplete-vertical-mode -1)
-    (when (version< "30" emacs-version)
-      ;; this mode is only available in Emacs version 30.1 and
-      ;; greater.
-      (global-completion-preview-mode -1))))
+    (icomplete-vertical-mode -1)))
 
 
 ;;; Marginalia
@@ -83,6 +79,11 @@
 ;;; Corfu
 (when (require 'corfu nil :noerror)
 
+  (when (version< "30" emacs-version)
+    ;; this mode is only available in Emacs version 30.1 and
+    ;; greater.
+    (global-completion-preview-mode -1))
+  
   (unless (display-graphic-p)
     (when (require 'corfu-terminal nil :noerror)
       (corfu-terminal-mode +1)))
