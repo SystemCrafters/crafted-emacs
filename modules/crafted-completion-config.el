@@ -35,11 +35,6 @@
 
 ;;; Marginalia
 (when (require 'marginalia nil :noerror)
-  ;; Configure Marginalia
-  (customize-set-variable 'marginalia-annotators
-                          '(marginalia-annotators-heavy
-                            marginalia-annotators-light
-                            nil))
   (marginalia-mode 1))
 
 
