@@ -103,7 +103,7 @@ Example configuration:
 (keymap-global-set "C-c r g" #'org-roam-graph)
 (keymap-global-set "C-c r i" #'org-roam-node-insert)
 (keymap-global-set "C-c r c" #'org-roam-capture)
-(keymap-global-set "C-c r j" . org-roam-dailies-capture-today)
+(keymap-global-set "C-c r j" #'org-roam-dailies-capture-today)
 
 ;; Enable automatic sync of the SQLite database
 (org-roam-db-autosync-mode)
