@@ -32,8 +32,9 @@
 
 ;;; Editorconfig
 ;; editorconfig is a cross-editor/ide configuration tool to control
-;; indentation, spaces vs tabs, etc.
-(add-to-list 'package-selected-packages 'editorconfig)
+;; indentation, spaces vs tabs, etc.  It is built-in since Emacs 30.
+(when (version< emacs-version "30")
+  (add-to-list 'package-selected-packages 'editorconfig))
 
 ;;; Aggressive Indent
 ;; a minor mode to always keep your code indented while editing blocks
