@@ -46,5 +46,13 @@
 ;; group project buffers together when listing buffers with ibuffer
 (add-to-list 'package-selected-packages 'ibuffer-project)
 
+;;; Environment-Variables Setup
+;; Emacs IDE features often rely on external tools (such as, LSP servers,
+;; interpreters, compilers, linters, etc).  This package ensures that Emacs
+;; knows where the executables of these tools are located.
+(when (or (display-graphic-p)
+          (daemonp))
+  (add-to-list 'package-selected-packages 'exec-path-from-shell))
+
 (provide 'crafted-ide-packages)
 ;;; crafted-ide-packages.el ends here
