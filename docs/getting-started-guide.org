@@ -271,7 +271,7 @@ If you no longer want to use a module provided by Crafted Emacs anymore, you can
  disable it by completing the following two steps
 
 1. Stop loading the module in your Emacs initialization file
-2. Uninstall the packages installed by the module
+2. If the module includes packages from a crafted-*-packages.el file, then uninstall the packages installed by the module
 
 For example, if you previously enabled the =crafted-completions-packages=
 and =crafted-completion-config= modules, find and remove the corresponding
