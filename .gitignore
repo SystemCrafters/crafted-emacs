@@ -10,3 +10,4 @@ bookmarks
 network-security.data
 quelpa/
 modules/.dir-locals.el
+.aider*

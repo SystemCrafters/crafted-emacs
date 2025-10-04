@@ -268,13 +268,13 @@ ls ./modules/*-config.el
 *** Disabling Crafted Emacs Modules
 
 If you no longer want to use a module provided by Crafted Emacs anymore, you can
- disable it by completing the following two steps
+ disable it as follows
 
 1. Stop loading the module in your Emacs initialization file
 2. If the module includes packages from a crafted-*-packages.el file, then uninstall the packages installed by the module
 
-For example, if you previously enabled the =crafted-completions-packages=
-and =crafted-completion-config= modules, find and remove the corresponding
+For example, if you previously enabled the =crafted-completions-packages.el=
+and =crafted-completion-config.el= modules, find and remove the corresponding
 =require= expressions from your Emacs initialization file:
 
 #+begin_src emacs-lisp
@@ -285,60 +285,42 @@ and =crafted-completion-config= modules, find and remove the corresponding
 
 Next, open the =crafted-completion-packages.el= file and note
 all packages specified in
-=(add-to-list 'package-selected-package ...)= expressions.
+~(add-to-list 'package-selected-package ...)~ expressions.
 
 Finally, uninstall these packages using either:
 
-- The command ~M-x package-delete~
-- Or the =pakage.el= UI (to open the UI type ~M-x list-packages~)
+- The command =M-x package-delete=
+- Or the =pakage.el= UI (to open the UI type =M-x list-packages=)
 
-**** Disabling Only Specific Packages from a Crafted Emacs Module
+**** Deleting Specific Packages Installed by a Crafted Emacs Module
 
-If you want to keep most of a module but exclude specific packages, follow these
-steps:
+Sometimes you want most packages from a packages module but need to exclude
+specific ones.  Rather than modifying the original module files, you can create
+a customized copy as follows
 
-1. Stop loading this package module
-2. Copy the =add-to-list= expressions from the modules code to you Emacs
-  initialization file,
-3. Remove the part that installs the unwanted package.
-4. Uninstall the unwanted package.
+1. Copy the module file from =crafted-emacs-home/modules/= to your =user-emacs-directory/custom-modules/= directory
+2. Edit the copy to remove unwanted ~add-to-list~ expressions  
+3. Uninstall the excluded packages using =M-x package-delete=
 
-For example, you previously enabled the =crafted-completion-packages= module,
-but you no longer want to use the =marginalia= package installed by this module.
+Emacs will load your custom copy of the module first, because the =custom-modules=
+directory appears earlier in the ~load-path~ variable than the Crafted Emacs
+=modules= directory.  Emacs will ignore the original module, because both modules
+provide the same feature (see ~provide~ function for more info) and ~require~ only
+loads each feature once.
 
-In this case, remove the corresponding =require= expression from you Emacs
-initialization file:
+For example, to exclude the =marginalia= package from
+=crafted-completion-packages= follow these steps:
 
-#+begin_src emacs-lisp
-(require 'crafted-completion-packages)
-#+end_src
+1. Copy =crafted-completion-packages.el= from =crafted-emacs-home/modules/= to
+   =user-emacs-directory/custom-modules/=
+2. Remove this line from your copy:
+   #+begin_src emacs-lisp
+   (add-to-list 'package-selected-packages 'marginalia)
+   #+end_src
+3. Delete the package:  =M-x package-delete RET marginalia RET=
 
-Now, copy the =add-to-list= expressions from =crafted-completion-packages.el= to
-your Emacs initialization file:
-
-#+begin_src emacs-lisp
-(add-to-list 'package-selected-packages 'cape)
-(add-to-list 'package-selected-packages 'consult)
-(add-to-list 'package-selected-packages 'corfu)
-(add-to-list 'package-selected-packages 'corfu-terminal)
-(add-to-list 'package-selected-packages 'embark)
-(add-to-list 'package-selected-packages 'embark-consult)
-(add-to-list 'package-selected-packages 'marginalia)
-(add-to-list 'package-selected-packages 'orderless)
-(add-to-list 'package-selected-packages 'vertico)
-#+end_src
-
-Remove the expression mentioning =marginalia=:
-
-#+begin_src emacs-lisp
-(add-to-list 'package-selected-packages 'marginalia)
-#+end_src
-
-Finally, uninstall the package by typing
-~M-x package-delete <RET> marginalia <RET>~.
-
-This approach gives you fine-grained control over which packages are installed
-while avoiding the need to modify the original module files.
+This approach gives you fine-grained control without modifying Crafted Emacs
+files directly.
 
 * Example Configuration
 
