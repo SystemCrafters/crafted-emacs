@@ -27,7 +27,8 @@ This module includes:
 - LSP client (Eglot)
 - Next-generation syntax parsing (Tree-Sitter)
 - [[https://editorconfig.org][EditorConfig]] support ([[https://github.com/editorconfig/editorconfig-emacs][editorconfig-emacs]]).
-
+- Environment-variables setup
+  
 *** Aggressive Indentation
 
 By default Emacs enables [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Indent-Convenience.html][Electric Indent]], a minor mode that
@@ -127,3 +128,21 @@ See [[https://github.com/mickeynp/combobulate][Combobulate]] for details.
 If you're interested in a more in-depth look at both Tree-Stitter and
 Combobulate, the author of the package has written an extensive blog post
 about it: [[https://www.masteringemacs.org/article/combobulate-structured-movement-editing-treesitter][Combobulate: Structured Movement and Editing with Tree-Sitter]].
+
+*** Environment-Variables Setup
+
+Many Emacs IDE features depend on external tools, such as, LSP servers,
+interpreters, compilers, and linters. To ensure Emacs can locate the
+executables for these tools, both the environment variables and the =exec-path=
+variable (see [[info:Emacs#Shell][info "(Emacs) Shell"]]) must be configured correctly.
+
+This setup is especially critical when Emacs is launched from a desktop
+environment using a launcher, rather than from a shell. In such cases, Emacs
+typically inherits a minimal set of environment variables, which may not
+include those available in a shell session. As a result, executables might not
+be found, and configurations relying on specific environment variables may
+fail.
+
+The =exec-path-from-shell= package (see [[https://github.com/purcell/exec-path-from-shell][Website]]) addresses this issue by setting
+=exec-path= and predefined environment variables as if Emacs were started from a
+shell.
