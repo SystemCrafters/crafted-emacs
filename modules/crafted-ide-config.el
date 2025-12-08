@@ -16,6 +16,23 @@
 
 ;;; Code:
 
+;;; exec-path-from-shell
+;; Ensure that environment variables inside Emacs look the same as in the
+;; user's shell.  This is especially useful when Emacs is launched with a
+;; desktop launcher (and not from a shell).  In this case, Emacs usually
+;; inherits a default minimal set of environment variables and not the set of
+;; environment variables that are available inside of a shell.  This can lead
+;; to executables not being found or configurations that rely on certain
+;; environment variables not working.  `exec-path-from-shell' prevents the
+;; problem by setting `exec-path' and predefined environment variables as if
+;; Emacs were started from shell.
+(when (require 'exec-path-from-shell nil :noerror)
+  ;; Specify environment variables that will be copied (note, "PATH" and
+  ;; "MANPATH" has been already added by default).
+  (dolist (var '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG"
+                 "LC_CTYPE" "GOPATH" "PYTHONPATH" "JAVA_HOME"))
+    (add-to-list 'exec-path-from-shell-variables var))
+  (exec-path-from-shell-initialize))
 
 ;;; Eglot
 (defun crafted-ide--add-eglot-hooks (mode-list)
