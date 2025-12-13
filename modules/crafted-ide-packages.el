@@ -50,8 +50,7 @@
 ;; Emacs IDE features often rely on external tools (such as, LSP servers,
 ;; interpreters, compilers, linters, etc).  This package ensures that Emacs
 ;; knows where the executables of these tools are located.
-(when (or (display-graphic-p)
-          (daemonp))
+(unless (member system-type '(ms-dos windows-nt cygwin haiku android))
   (add-to-list 'package-selected-packages 'exec-path-from-shell))
 
 (provide 'crafted-ide-packages)
