@@ -109,7 +109,9 @@ your entire =early-init.el= file.
 
 ** Emacs Initialization
 
-The =init.el= file is where most of the work of configuring Emacs will
+After making any needed modifications to your =early-init.el= file as described
+in the previous section, we now move on to =init.el=, which is where
+most of the work of configuring Emacs will
 occur. Let's start by creating the =init.el= file in your
 ~user-emacs-directory~ and add this code:
 
