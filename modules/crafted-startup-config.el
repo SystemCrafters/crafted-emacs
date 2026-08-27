@@ -318,8 +318,10 @@ starts.  See the variable documenation for
         (erase-buffer)
         (setq default-directory command-line-default-directory)
         (make-local-variable 'crafted-startup-screen-inhibit-startup-screen)
-        (if pure-space-overflow
-            (insert pure-space-overflow-message))
+        (when (version< emacs-version "31")
+          ;; Only before Emacs 31, variable removed in later versions
+          (if pure-space-overflow
+              (insert pure-space-overflow-message)))
         (unless concise
           (crafted-startup-splash-head))            ;; display the logo
         (apply #'fancy-splash-insert                ;; insert welcome text
