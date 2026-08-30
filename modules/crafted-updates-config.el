@@ -47,7 +47,10 @@ Crafted Emacs."
   (with-current-buffer (find-file-noselect (expand-file-name
                                             "README.org"
                                             crafted-emacs-home))
-    (vc-log-incoming)))
+    (call-interactively
+     (if (fboundp 'vc-root-log-incoming)
+         #'vc-root-log-incoming
+       #'vc-log-incoming))))
 
 (defun crafted-updates-pull-latest (do-pull)
   "Pull the latest Crafted Emacs version into the local repository.
