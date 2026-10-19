@@ -32,6 +32,10 @@ also enables undo functionality if the window layout changes."
   :group 'crafted-defaults
   :type 'string)
 
+
+;;; Appearance
+(customize-set-variable 'font-use-system-font t)
+(customize-set-variable 'mode-line-compact 'long)
 
 
 ;;; Buffers
@@ -118,6 +122,9 @@ also enables undo functionality if the window layout changes."
 ;; pressing delete or backspace deletes the selection.
 (delete-selection-mode)
 
+;; Show column numbers in the mode line.
+(column-number-mode t)
+
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
@@ -177,6 +184,9 @@ also enables undo functionality if the window layout changes."
 
 ;; Enable savehist-mode for command history
 (savehist-mode 1)
+
+;; Save the last place in the file visited
+(save-place-mode t)
 
 ;; save the bookmarks file every time a bookmark is made or deleted
 ;; rather than waiting for Emacs to be killed.  Useful especially when
@@ -248,6 +258,10 @@ also enables undo functionality if the window layout changes."
 (unless (version< emacs-version "28")
   (repeat-mode 1))
 
+;; Emacs 30 provided `which-key' as a built-in, so turn it on if
+;; possible.
+(when (version< "30" emacs-version)
+  (which-key-mode t))
 
 (provide 'crafted-defaults-config)
 ;;; crafted-defaults-config.el ends here
