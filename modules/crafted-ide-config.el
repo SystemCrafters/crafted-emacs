@@ -156,5 +156,11 @@ installed."
       (ibuffer-do-sort-by-project-file-relative)))
   (add-hook 'ibuffer-hook #'crafted-ide-enhance-ibuffer-with-ibuffer-project))
 
+;; Imenu should always rescan the buffers.
+(customize-set-variable 'imenu-auto-rescan t)
+
+;; Scroll the compilation buffer to the first error.
+(customize-set-variable 'compilation-scroll-output 'first-error)
+
 (provide 'crafted-ide-config)
 ;;; crafted-ide-config.el ends here
