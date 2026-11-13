@@ -86,8 +86,7 @@ example:
 
 - ~project.el~ instead of ~Projectile~
 - ~tab-bar-mode~ instead of ~Perspective.el~, ~persp-mode~, ~eyebrowse~, etc
-- ~eglot~ instead of ~lsp-mode~ (because ~eglot~ prioritizes built-in
-  functionality)
+- ~eglot~ instead of ~lsp-mode~
 
 *** Can be integrated with a Guix configuration
 
